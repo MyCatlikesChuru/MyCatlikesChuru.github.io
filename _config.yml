@@ -183,8 +183,8 @@ yat:
 # paginate: 5
 
 # Disqus comments
-# disqus:
-#   shortname: "Your Disqus username"
+disqus:
+shortname: "LeeJellan"
 
 # Gitment comments
 # gitment:
