@@ -177,14 +177,14 @@ yat:
 #   subheading_style: null  # Custom subheading style (e.g. color: gold)
 
 # Excerpt size setting
-# excerpt_size: 350
+# excerpt_size: 350`
 
 # Pagination setting
 # paginate: 5
 
 # Disqus comments
-disqus: gianthaema
-shortname: "LeeJellan"
+#disqus:
+#  shortname: "LeeJellan"
 
 # Gitment comments
 # gitment:
@@ -198,12 +198,12 @@ shortname: "LeeJellan"
 # See https://utteranc.es/
 # set follow_site_theme true to make utterances' theme follow the site's
 
-# utterances:
-#   repo: "owner/repo"
-#   issue_term: "title"
-#   label: "utterances comment"
-#   theme: "github-light"
-#   follow_site_theme: true
+utterances:
+  repo: "MyCatlikesChuru/blogComment"
+  issue_term: "pathname"
+  label: "utterances comment"
+  theme: "github-light"
+  follow_site_theme: true
 
 # Build settings
 # highlighter: none
