@@ -183,7 +183,7 @@ yat:
 # paginate: 5
 
 # Disqus comments
-disqus:
+disqus: gianthaema
 shortname: "LeeJellan"
 
 # Gitment comments
