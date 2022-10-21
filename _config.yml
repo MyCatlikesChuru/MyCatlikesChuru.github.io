@@ -217,3 +217,5 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-spaceship
+
+theme: jekyll-theme-yat
