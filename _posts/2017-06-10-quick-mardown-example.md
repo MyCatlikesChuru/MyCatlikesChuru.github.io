@@ -4,6 +4,7 @@ title: Quick markdown example
 subtitle: This is a quick markdown example
 categories: markdown
 tags: [example]
+published: false
 ---
 
 Paragraphs are separated by a blank line.

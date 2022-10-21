@@ -3,6 +3,7 @@ layout: post
 title: Plantuml example
 categories: example
 tags: [plantuml]
+published: false
 ---
 
 ## My First PlantUML
