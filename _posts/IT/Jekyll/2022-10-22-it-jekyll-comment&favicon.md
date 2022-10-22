@@ -2,7 +2,7 @@
 layout: post
 title: Jekyll GitHub Page 댓글, 파비콘 꾸미기
 subtitle: Jekyll yat 테마 적용 및 꾸미기
-categories: IT
+categories: Jekyll
 tags: [Jekyll, yat, 테마적용, GitHub Pages]
 comments: true
 published: true 

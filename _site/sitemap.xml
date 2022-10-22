@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/til/2022/10/20/til_bootcamp.html</loc>
+<loc>http://localhost:4000/til/2022/10/20/til.html</loc>
 <lastmod>2022-10-20T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/it/2022/10/22/it-jekyll-comment&amp;favicon.html</loc>
+<loc>http://localhost:4000/til/2022/10/21/til.html</loc>
+<lastmod>2022-10-21T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html</loc>
 <lastmod>2022-10-22T00:00:00+09:00</lastmod>
 </url>
 <url>

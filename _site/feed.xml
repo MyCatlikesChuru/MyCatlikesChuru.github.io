@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-22T17:10:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Jekyll GitHub Page 댓글, 파비콘 꾸미기</title><link href="http://localhost:4000/it/2022/10/22/it-jekyll-comment&favicon.html" rel="alternate" type="text/html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기" /><published>2022-10-22T00:00:00+09:00</published><updated>2022-10-22T00:00:00+09:00</updated><id>http://localhost:4000/it/2022/10/22/it-jekyll-comment&amp;favicon</id><content type="html" xml:base="http://localhost:4000/it/2022/10/22/it-jekyll-comment&amp;favicon.html"><![CDATA[<h1 id="jekyll-테마-적용">Jekyll 테마 적용</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-22T18:54:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Jekyll GitHub Page 댓글, 파비콘 꾸미기</title><link href="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&favicon.html" rel="alternate" type="text/html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기" /><published>2022-10-22T00:00:00+09:00</published><updated>2022-10-22T00:00:00+09:00</updated><id>http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon</id><content type="html" xml:base="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html"><![CDATA[<h1 id="jekyll-테마-적용">Jekyll 테마 적용</h1>
+
 <p><br /></p>
 
 <p><img src="https://jekyllrb.com/img/octojekyll.png" alt="example image" /></p>
@@ -14,7 +15,7 @@ MarkDown 문법도 어색하고 모든게 서툴지만 천천히 블로그 개�
 그 첫걸음을 하기위해 우선 다른 개발자분들이 만들어 놓은 테마를 이용할 생각이다.</p>
 
 <p>나는 그중에서 yat이라는 테마를 사용하기로 했다.<br />
-<a href="https://github.com/jeffreytse/jekyll-theme-yat">Jekyll yat 테마 사이트</a></p>
+( <a href="https://jekyll-themes.com/jekyll-theme-yat/">Jekyll yat 테마 사이트</a>, <a href="https://github.com/jeffreytse/jekyll-theme-yat">Jekyll yat 테마 제작자 github</a> )</p>
 
 <p>현재 내가 사용하고 있는 블로그의 테마다.<br />
 Jekyll관련 셋업이랑 테마를 Git Page에 적용하는 방법<br />
@@ -22,7 +23,7 @@ Jekyll관련 셋업이랑 테마를 Git Page에 적용하는 방법<br />
 
 <p><br /></p>
 
-<h2 id="jekyll-yat-테마-utterances-댓글-기능-추가">Jekyll yat 테마 Utterances 댓글 기능 추가</h2>
+<h3 id="jekyll-yat-테마-utterances-댓글-기능-추가">Jekyll yat 테마 Utterances 댓글 기능 추가</h3>
 
 <p><img src="https://ifh.cc/g/BpXV1h.png" alt="example image" /><br />
 위와 같은 댓글 기능을 추가하는 방법이다.</p>
@@ -93,7 +94,7 @@ utterances를 통해서 댓글 기능을 추가해보았다~</p>
 
 <p><br /></p>
 
-<h2 id="jekyll-yat-파비콘-추가">Jekyll yat 파비콘 추가</h2>
+<h3 id="jekyll-yat-파비콘-추가">Jekyll yat 파비콘 추가</h3>
 
 <p><img src="https://ifh.cc/g/pgWVFk.jpg" alt="example image" /><br />
 파비콘(favicon)은 우리가 웹사이트에서 보면</p>
@@ -122,8 +123,379 @@ _config.yml 파일에서 favicon: ““이라고 되어있는 부분에<br />
 글을 올려 보았다. 기존에 Tistory를 이용할 때는<br />
 그냥 이미지와 글,코드 올리는 것들이 간단했는데<br />
 아무래도 Markdown언어로 작성하다보니 확실히 시간소요가 더 되는 것 같다.<br />
-그래도 앞으로 사용하다보면 빨라질거라 생각하며 첫 포스팅을 마친다. 😃</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><summary type="html"><![CDATA[Jekyll 테마 적용]]></summary></entry><entry><title type="html">Spring MVC Controller</title><link href="http://localhost:4000/til/2022/10/20/til_bootcamp.html" rel="alternate" type="text/html" title="Spring MVC Controller" /><published>2022-10-20T00:00:00+09:00</published><updated>2022-10-20T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/20/til_bootcamp</id><content type="html" xml:base="http://localhost:4000/til/2022/10/20/til_bootcamp.html"><![CDATA[<h2 id="jekyll-yat-테마-꾸미기">Jekyll YAT 테마 꾸미기</h2>
+그래도 앞으로 사용하다보면 빨라질거라 생각하며 첫 포스팅을 마친다. 😃</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Jekyll" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><category term="GitHub Pages" /><summary type="html"><![CDATA[Jekyll 테마 적용]]></summary></entry><entry><title type="html">Spring DTO</title><link href="http://localhost:4000/til/2022/10/21/til.html" rel="alternate" type="text/html" title="Spring DTO" /><published>2022-10-21T00:00:00+09:00</published><updated>2022-10-21T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/21/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/21/til.html"><![CDATA[<p>section 3가 시간한 첫번째 금요일</p>
 
-<p><img src="https://ifh.cc/g/YV9G0L.png" alt="example image" /></p>
+<p><img src="https://ifh.cc/g/lfoBC7.gif" align="left" /></p>
 
-<p>#</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[Jekyll YAT 테마 꾸미기]]></summary></entry></feed>
+<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+
+<p>나태해지는 요일이랄까..?<br />
+주말에 공부는할건데 금요일이되면 그냥 설렌다<br />
+오늘은 예전부터 미뤄왔던 Github IO 블로그를 꾸미고있다…<br />
+아직 너무나 생소해 조금 시간이 걸릴 것 같다.<br />
+IT기술 블로그와 옛날부터 해온 여행블로그를 전부 옮기고 싶다.</p>
+
+<hr />
+
+<p>오늘은 DTO에 대해서 공부했다.<br />
+유효성 검증과 같이 공부한걸 적어보려한다.</p>
+
+<h3 id="dto"><strong>DTO</strong></h3>
+<p>Data Transfer Object의 약자로 <br />
+애플리케이션 아키텍처 패턴의 하나이다.</p>
+
+<pre><code class="language-Java">@PostMapping
+public ResponseEntity postMember(@RequestParam("age") int age,
+                                 @RequestParam("name") String name,
+                                 @RequestParam("sex") String sex) {
+     .
+     .
+     .
+	return ..
+ }
+</code></pre>
+
+<p>간단하게 위의 내용을 살펴보자<br />
+어제 배웠던 것을 생각해보면 우리는 @PostMapping을 통해<br />
+@RequestParam의 키로 값을 가져온다.<br />
+즉 POST 로 자원 요청시 키와 Value값을 보내게 되는데<br />
+그 값으로 우리가 사용할 수 있고, 서버에 저장도 하는 것이다.<br />
+현재는 3가지(나이,이름,성별)에 대해서 받아오지만<br />
+나중에 학교,전화번호 등등 여러가지 데이터가 많이 추가된다고 가정하면<br />
+Controller 클래스의 너무나 많은 RequsetParam을 사용해야한다.<br />
+그래서 나오게 된 것이 DTO 기술이다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">MemberDto</span> <span class="n">memberDto</span><span class="o">)</span> <span class="o">{</span>
+     <span class="o">.</span>
+     <span class="o">.</span>
+     <span class="o">.</span>
+    <span class="k">return</span> <span class="o">..</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>우선 위에서 사용한 @RequsetParam -&gt; @RequestBody로 변경한다.<br />
+그리고 MemberDto라는 클래스를 만들어 매개변수로 받아준다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberDto</span> <span class="o">{</span>
+ 
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nc">Name</span><span class="o">;</span>
+   
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">;</span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이렇게 될 경우에. 클라이언트 측에서 Json 형식으로 URI와 함께 요청을 한다면<br />
+Json의 있는 키값들이 MemberDto의 필드변수에 할당되어진다.</p>
+
+<p>*로컬환경에서 Postman으로 요청한다고 가정<br />
+POST http://localhost:8080/api/member<br />
+raw Json</p>
+
+<p>{<br />
+“age” : 22,<br />
+“Name” : “Lee”,<br />
+“sex” : “male”<br />
+}</p>
+
+<p>실제로 Json 형식으로 요청시 MemberDto 클래스의<br />
+age, Name, sex의 값이 22, Lee, male 이렇게<br />
+들어가는 것을 확인 할 수 있다.<br />
+확인 하는 방법은 getter를 메서드를 이용해 확인이 가능하다</p>
+
+<p><br /></p>
+
+<p><strong>유효성 검증</strong><br />
+그렇다면? 위의 Json객체로 보낼때 데이터를 이상하게 보내거나<br />
+안보내면 어떻게 되는 것인가?<br />
+예를들어 아래와 같이 입력했다고 가정하자<br />
+String타입의 sex를 입력하지 않고 요청을 보냈을 경우</p>
+
+<p><strong>case 1) String 타입을 안넣었을 경우</strong></p>
+
+<p>{<br />
+“age” : “22”,<br />
+“Name” : “Lee”<br />
+}</p>
+
+<p>age = 22<br />
+Name = Lee<br />
+sex = null<br />
+이렇게 값이 매칭된다. 즉, String타입은 값이 없을 때 null로 받는다</p>
+
+<p><strong>case 2) int 타입을 안넣었을 경우</strong></p>
+
+<p>{<br />
+“name”: “Lee”,<br />
+“sex”: “male”<br />
+}</p>
+
+<p>age = 0<br />
+Name = Lee<br />
+sex = male<br />
+이렇게 결과값이 나왔다. int타입은 0으로 받는 것 같다.</p>
+
+<p><strong>case 3) Integer 타입을 안넣었을 경우</strong><br />
+만약에 위에 처럼 Json 객체 요청시<br />
+age가 private Integer age; 라고 가정하였을 경우에는<br />
+500번 Internal Server Error가 발생하고<br />
+Spring 애플리케이션에서는 NullPointerException이 발생한다<br />
+무언가 타입에 따라 값이 있어도되고 없어도되는 무언가가 있는 것 같은데</p>
+
+<p>원시자료형과 참조자료형의 차이인지… <br />
+조금더 심도있는 공부가 필요해보인다..<br />
+우선은 위에 요청이 들어왔을때 기준으로 한번 가볍게 알아보았고<br />
+이제 유효성 검증을 통해 원하는 데이터가 들어오지 않을 경우<br />
+코드를 실행시키지 않을 수 있다.</p>
+
+<p>1). 우선 위에 예제 코드에서 @Vaild를 Dto 매개변수 앞에 달아주고</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@Vaild</span> <span class="nd">@RequestBody</span> <span class="nc">MemberDto</span> <span class="n">memberDto</span><span class="o">)</span> <span class="o">{</span>
+     <span class="o">.</span>
+     <span class="o">.</span>
+     <span class="o">.</span>
+    <span class="k">return</span> <span class="o">..</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br />
+2). Dto 클래스의 원하는 유효성 검증 애노테이션으로 조건을 설정한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberDto</span> <span class="o">{</span>
+    <span class="nd">@Min</span><span class="o">(</span><span class="mi">100</span><span class="o">)</span>
+    <span class="nd">@Max</span><span class="o">(</span><span class="mi">50000</span><span class="o">)</span> <span class="c1">// 100~50000사이에만 price 유혀성 검사 통과</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    
+    <span class="nd">@Pattern</span><span class="o">(</span><span class="n">regexp</span> <span class="o">=</span> <span class="s">"^([A-Za-z])(\\s?[A-Za-z])*$"</span><span class="o">,</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s">"글자사이의 공백이 1개가 초과하거나 ,알파벳이 아닌 글자가 들어왔습니다"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nc">Name</span><span class="o">;</span>
+    
+    <span class="nd">@NotBlank</span> <span class="c1">// 공백만으로 구성되있지 않아야한다.</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">;</span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+<p>@Vaild<br />
+-&gt; 유효성 검증을 적용해주는 애노테이션<br />
+DTO 앞에 @Vaild를 붙여 클래스를 유효성 검증해줌 만약 유효성검증에 실패하면 요청은 거부(reject)된다.</p>
+
+<p>implementation ‘org.springframework.boot:spring-boot-starter-validation’<br />
+-&gt; 그레이들 의존성주입</p>
+
+<p>@Validated<br />
+-&gt; @Vaild와 같이 유효성 검증하도록 해줌. 하지만 위치가 서로다름<br />
+-&gt; @Valid는 DTO 필드에서 검사하는데, @Valdated는 맵핑 매서드 매개변수에다 쓴다<br />
+ex) @PatchMapping(“/{coffee-id}”) public ResponseEntity patchCoffee(@PathVariable(“coffee-id”)</p>
+
+<p>@Min(1) long coffeeId) -&gt; @Min을 사용하는 예제.</p>
+
+<p><em>문자열관련</em><br />
+-&gt; @NotBlank : null, 공백, 스페이스 값 모두 허용하지 않음<br />
+-&gt; @NotSpace : 공백을 허용하지 않음<br />
+-&gt; @NotNull : null을 허용하지 않음<br />
+-&gt; @Null : Null만 가능<br />
+-&gt; @Size(min=1, max=3) : 문자열의 최소 길이, 최대 길이 제한</p>
+
+<p><em>숫자를 다룰때</em><br />
+-&gt; @Min(1) : 값이 최소 1이상이어야하는 유효성 검사 통과<br />
+-&gt; @Max(500) : 값이 최대 500이하로 값이 와야 유효성 검사 통과<br />
+-&gt; @Range(min=1, max=500) : 범위안에 값이 오면 유효성 검사 통과<br />
+-&gt; @Positive : 양수만 허용<br />
+-&gt; @PositiveOrZero : 양수와 0만 허용<br />
+-&gt; @Negative : 음수만 허용<br />
+-&gt; @NegativeOrZero : 음수와 0만 허용</p>
+
+<p><em>정규식 관련</em><br />
+-&gt;@Email: 이메일 정보가 비어있는지 검증<br />
+-&gt;@Pattern: 특정 패턴을 정규식으로 표현 (@Pattern(regex = “^010-\\d{3,4}-\\d{4}$”)</p>
+
+<hr />
+
+<p>오늘은 DTO의 쓰임새와<br />
+유효성 검증에 대한 프로그램을 간단하게 알아보았다.<br />
+그 중에서도 특히 Pattern의 정규식관련된 부분은<br />
+앞으로 지속적인 학습이 필요해보인다. 아직은 생소해서<br />
+어떻게 검사가되는지 각 해당하는 특수문자의 내용을 이해할 수 있도록<br />
+주말에 공부해보려한다</p>
+
+<p>오늘 공부는 끝!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 오징어 덮밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[section 3가 시간한 첫번째 금요일]]></summary></entry><entry><title type="html">Spring MVC , Controller</title><link href="http://localhost:4000/til/2022/10/20/til.html" rel="alternate" type="text/html" title="Spring MVC , Controller" /><published>2022-10-20T00:00:00+09:00</published><updated>2022-10-20T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/20/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/20/til.html"><![CDATA[<p>오랜만에 깊은 숙면을 했다.</p>
+
+<p><img src="https://ifh.cc/g/j3W1OJ.jpg" align="left" width="300px" height="300px" />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+
+<p>섹션2가 끝나고 섹션3이 시작되는 날이다.<br />
+드디어 Spring에 대한 여러 공부들이 이루어질 것 같다.<br />
+Spring MVC에 대해 주로 공부할 것 같다<br />
+오늘도 열심히 달려보자 !</p>
+
+<hr />
+
+<h2 id="spring-mvc"><strong>Spring MVC</strong></h2>
+
+<p>Spring Web MVC를 줄요서 Spring MVC라고 부른다.<br />
+MVC는 Model, View, Controller의 약자들이고<br />
+클라이언트의 요청을 편리하게 처리해주는 프레임워크들이다.<br />
+우리가 이제부터 만들게 될 샘플 애플리케이션은<br />
+Spring MVC가 제공해주는 기능을 이용해서 만들기 때문에 중요한 시간이라고 볼 수 있다.</p>
+
+<p><strong>Model</strong> : 작업의 처리 결과 데이터<br />
+<strong>View</strong> : Model 데이터를 이용해 웹브라우저 같은 클라이언트 애플리케이션의<br />
+화면의 보여지는 리소스를 제공하는 역할</p>
+
+<p><strong>Controller</strong> : 클라이언트 측의 요청을 직접적으로 전달 받는 엔드포인트로써<br />
+Model과 View의 중간에서 상호작용을 해주는 역할</p>
+
+<p><img src="https://ifh.cc/g/z1godo.jpg" alt="example image" /></p>
+
+<p>아래는 이전에 공부했던 계층형 아키텍처이다.<br />
+여기서 API계층을 Spring MVC 기반의 코드로 구현해보자</p>
+
+<p><img src="https://ifh.cc/g/WcnZXw.jpg" alt="example image" /></p>
+
+<p><strong>패키지 구조</strong></p>
+
+<p>1).기능 기반 패키지 구조<br />
+   -. 하나의 기능을 완성하기 위한 계층별 클래스들을 모아놓는 구조</p>
+
+<p><img src="https://ifh.cc/g/fvyThO.png" align="left" width="300px" height="200px" />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+
+<p>2). 계층 기반 패키지 구조<br />
+   -. 패키지를 하나의 계층으로 보고 클래스들을 계층별로 묶어서 관리하는 구조</p>
+
+<p><img src="https://ifh.cc/g/HXg2bo.png" alt="example image" /></p>
+
+<p><br /><br /></p>
+
+<p>Controller 관련 부분을 배워보자<br />
+현재 Postman을 통해 API를 요청중이다.</p>
+
+<p><img src="https://ifh.cc/g/X2Ql9J.jpg" alt="example image" /></p>
+
+<p>status : 404<br />
+Not Found 에러가 리턴되었는데<br />
+클라이언트의 요청을 처리할 핸들러 메서드가 아지 없기 때문이다.<br />
+간단하게 여러 애노테이션을 알아보고 사용해보자</p>
+
+<p><strong>핸들러 메서드(Handler Method)</strong><br />
+@RestController<br />
+-&gt; 클래스에 추가함으로써 해당 클래스를 REST API의 리소스를 <br />
+처리하기 위한 API 엔드포인트로 동작하게 해준다</p>
+
+<p>@RequestMapping<br />
+-&gt; Controller 클래스 레벨에 추가하여 클래스 전체에 사용되는 공통 Base URL을 설정할 수 있다.<br />
+-&gt; 방식을 명시하지 않을 경우, GET,POST사용</p>
+
+<p>@GetMapping<br />
+-&gt; 조회 맵핑<br />
+-&gt; {} 동적으로 바뀌는 값이되어짐</p>
+
+<p>@PostMapping<br />
+-&gt; 쓰기 맵핑<br />
+-&gt; {} 동적으로 바뀌는 값이되어짐</p>
+
+<p>@PathVariable<br />
+-&gt; 클라이언트 요청 URI에 패턴 형식으로 지정된 변수값을 파라미터로 전달받는다<br />
+-&gt; GetMapping의 괄호안에 문자열과 동일해야한다.<br />
+만약 다를경우 MissingPathVaribleException을 발생한다.</p>
+
+<p>@RequestParam<br />
+-&gt; 주로 클라이언트 쪽에서 전송하는 요청 데이터를 쿼리 파라미터(Query Parmeter 또는 Query String), <br />
+폼 데이터(form-data), x-www-form-urlencoded 형식으로 전송하면 <br />
+이를 서버 쪽에서 전달 받을 때 사용하는 애너테이션입니다.</p>
+
+<p><strong>ResponseEntity</strong></p>
+
+<p>ResponseEntity 타입의 객체로 map과 HTTP상태를 보냄<br />
+-&gt; Map&lt;String,String&gt; map = new HashMap&lt;&gt;(); 데이터를 담은 map<br />
+-&gt; HTTP상태, CREATE, OK 등등…<br />
+-&gt; Handler Method를 통해 ReponseEntity객체를 반환하면 ResponseBody로 전달됨</p>
+
+<p>HttpStatus<br />
+Eunm<HttpStatus>로 구성되어져있음.  
+HTTP 상태를 나타내는 여러 상수들이 있음  
+물론 더 있지만 우선 오늘 사용해본것들 위주로 예제프로그램을 작성해보자  
+기존에 값이 저장되어있는 Map에 데이터를 수정하는 프로그램이다.</HttpStatus></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v1/members"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberController</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">,</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="nd">@PostConstruct</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"memberId"</span><span class="o">,</span> <span class="n">memberId</span><span class="o">);</span>
+        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span> <span class="s">"dhfif718@naver.com"</span><span class="o">);</span>
+        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"이재혁"</span><span class="o">);</span>
+        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="s">"010-1111-5555"</span><span class="o">);</span>
+        <span class="n">members</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">memberId</span><span class="o">,</span> <span class="n">member1</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/phone/{memberId}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">changeCoffees</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"memberId"</span><span class="o">)</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">,</span>
+                                        <span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"phone"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">//저장되어있는 객체 조회</span>
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">chagnePhoneNumber</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt;Phone 번호 변경 로직 실행됨"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"변경전 : "</span> <span class="o">+</span> <span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">));</span>
+
+        <span class="c1">//해당 members 맵에 회원 id가 없을 경우 BAD_REQUSET 반환</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"해당 memberId에 데이터가 존재하지 않습니다"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">BAD_REQUEST</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">//핸드폰 번호 변경 로직</span>
+        <span class="c1">//얕은 복사로 같은 객체를 변경하는 것이기 때문에 members.put을 따로 해줄 필요는 없다.</span>
+        <span class="n">chagnePhoneNumber</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="n">phone</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"변경후 : "</span> <span class="o">+</span> <span class="n">chagnePhoneNumber</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">chagnePhoneNumber</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>POST에 해당하는 핸들러 메서드를 만들었다.<br />
+Postman을 통해 요청을 보냈더니<br />
+ResponseEntity를 통해 객체와 상태를 리턴해주었다.</p>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/GgtVZa.jpg" alt="example image" /></p>
+
+<p>API 요청시 인텔리제이의 System.out 프린트로 출력된 로그</p>
+
+<p>–&gt;Phone 번호 변경 로직 실행됨<br />
+변경전 : {phone=010-1111-5555, name=이재혁, email=dhfif718@naver.com, memberId=1}<br />
+변경후 : {phone=010-1111-6777, name=이재혁, email=dhfif718@naver.com, memberId=1}</p>
+
+<hr />
+
+<p>오늘은 정리가 조금 부실하다…<br />
+실습하기 바쁘기도했고, 오늘 저녁에<br />
+백엔드 현업개발자 친구를 만나 여러가지 얘기도나누고<br />
+공부방향이 잘되고있는 건지 등<br />
+여러 잡담을 나누다보니 집에 11시에 도착해버렸다…<br />
+부랴부랴 오늘 학습한 내용을 정리하는데,, 머릿속이 텅…<br />
+비어버려서 내일학습에 지장이 생기면안될 것 같아.<br />
+우선 간단하게만 정리하고 마무리해보려한다.<br />
+주말을 이용해 인프런강의와 오늘 배운 여러지식들을 다시 공부해봐야겠다.</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 오징어 덮밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오랜만에 깊은 숙면을 했다.]]></summary></entry></feed>
