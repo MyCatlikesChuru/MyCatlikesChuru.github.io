@@ -8,8 +8,7 @@ comments: true
 published: true 
 ---
 
-# Jekyll 테마 적용
-<br/>
+## Jekyll 테마 적용  
 
 ![example image](https://jekyllrb.com/img/octojekyll.png)  
 
@@ -25,8 +24,7 @@ Jekyll 이란?
 그 첫걸음을 하기위해 우선 다른 개발자분들이 만들어 놓은 테마를 이용할 생각이다.  
 
 나는 그중에서 yat이라는 테마를 사용하기로 했다.  
-[Jekyll yat 테마 사이트]  
-[Jekyll yat 테마 제작자 github]  
+( [Jekyll yat 테마 사이트], [Jekyll yat 테마 제작자 github] )
 
 현재 내가 사용하고 있는 블로그의 테마다.  
 Jekyll관련 셋업이랑 테마를 Git Page에 적용하는 방법  
@@ -38,7 +36,7 @@ Jekyll관련 셋업이랑 테마를 Git Page에 적용하는 방법
 
 <br/>
 
-## Jekyll yat 테마 Utterances 댓글 기능 추가
+### Jekyll yat 테마 Utterances 댓글 기능 추가
 
 ![example image](https://ifh.cc/g/BpXV1h.png)  
 위와 같은 댓글 기능을 추가하는 방법이다.  
@@ -112,7 +110,7 @@ utterances를 통해서 댓글 기능을 추가해보았다~
 
 <br/>
 
-## Jekyll yat 파비콘 추가
+### Jekyll yat 파비콘 추가
 
 ![example image](https://ifh.cc/g/pgWVFk.jpg)  
 파비콘(favicon)은 우리가 웹사이트에서 보면  
