@@ -1,0 +1,223 @@
+---
+layout: post
+title: Spring MVC Controller
+subtitle: 코드스테이츠 백엔드 부트캠프 TIL (22.10.21/금)
+categories: TIL
+tags: [TIL, 부트캠프, 코드스테이츠]
+comments: true
+published: true 
+---
+
+
+section 3가 시간한 첫번째 금요일
+
+![example image](https://ifh.cc/g/lfoBC7.gif)
+
+나태해지는 요일이랄까..?  
+주말에 공부는할건데 금요일이되면 그냥 설렌다  
+오늘은 예전부터 미뤄왔던 Github IO 블로그를 꾸미고있다...  
+아직 너무나 생소해 조금 시간이 걸릴 것 같다.  
+IT기술 블로그와 옛날부터 해온 여행블로그를 전부 옮기고 싶다.
+
+---
+
+오늘은 DTO에 대해서 공부했다.  
+유효성 검증과 같이 공부한걸 적어보려한다.
+
+### **DTO**  
+Data Transfer Object의 약자로   
+애플리케이션 아키텍처 패턴의 하나이다.
+
+``` Java
+@PostMapping
+public ResponseEntity postMember(@RequestParam("age") int age,
+                                 @RequestParam("name") String name,
+                                 @RequestParam("sex") String sex) {
+     .
+     .
+     .
+	return ..
+ }
+```
+
+간단하게 위의 내용을 살펴보자  
+어제 배웠던 것을 생각해보면 우리는 @PostMapping을 통해  
+@RequestParam의 키로 값을 가져온다.  
+즉 POST 로 자원 요청시 키와 Value값을 보내게 되는데  
+그 값으로 우리가 사용할 수 있고, 서버에 저장도 하는 것이다.  
+현재는 3가지(나이,이름,성별)에 대해서 받아오지만  
+나중에 학교,전화번호 등등 여러가지 데이터가 많이 추가된다고 가정하면  
+Controller 클래스의 너무나 많은 RequsetParam을 사용해야한다.  
+그래서 나오게 된 것이 DTO 기술이다.  
+```java
+@PostMapping
+public ResponseEntity postMember(@RequestBody MemberDto memberDto) {
+     .
+     .
+     .
+    return ..
+}
+```
+
+우선 위에서 사용한 @RequsetParam -> @RequestBody로 변경한다.  
+그리고 MemberDto라는 클래스를 만들어 매개변수로 받아준다.
+
+``` java
+@Getter
+public class MemberDto {
+ 
+    private int age;
+
+    private String Name;
+   
+    private String sex;
+    
+}
+```
+
+이렇게 될 경우에. 클라이언트 측에서 Json 형식으로 URI와 함께 요청을 한다면  
+Json의 있는 키값들이 MemberDto의 필드변수에 할당되어진다.
+<로컬환경에서 Postman으로 요청한다고 가정>  
+
+POST http://localhost:8080/api/member  
+raw Json
+
+{  
+"age" : 22,  
+"Name" : "Lee",  
+"sex" : "male"  
+}
+
+실제로 Json 형식으로 요청시 MemberDto 클래스의  
+age, Name, sex의 값이 22, Lee, male 이렇게  
+들어가는 것을 확인 할 수 있다.  
+확인 하는 방법은 getter를 메서드를 이용해 확인이 가능하다
+
+<br/>  
+
+**유효성 검증**  
+그렇다면? 위의 Json객체로 보낼때 데이터를 이상하게 보내거나  
+안보내면 어떻게 되는 것인가?  
+예를들어 아래와 같이 입력했다고 가정하자  
+String타입의 sex를 입력하지 않고 요청을 보냈을 경우
+
+**case 1) String 타입을 안넣었을 경우**
+
+{  
+"age" : "22",  
+"Name" : "Lee"  
+}
+
+age = 22  
+Name = Lee  
+sex = null  
+이렇게 값이 매칭된다. 즉, String타입은 값이 없을 때 null로 받는다
+
+**case 2) int 타입을 안넣었을 경우**
+
+{  
+"name": "Lee",  
+"sex": "male"  
+}
+
+age = 0  
+Name = Lee  
+sex = male  
+이렇게 결과값이 나왔다. int타입은 0으로 받는 것 같다.
+
+**case 3) Integer 타입을 안넣었을 경우**  
+만약에 위에 처럼 Json 객체 요청시  
+age가 private Integer age; 라고 가정하였을 경우에는  
+500번 Internal Server Error가 발생하고  
+Spring 애플리케이션에서는 NullPointerException이 발생한다  
+무언가 타입에 따라 값이 있어도되고 없어도되는 무언가가 있는 것 같은데  
+
+원시자료형과 참조자료형의 차이인지...   
+조금더 심도있는 공부가 필요해보인다..  
+우선은 위에 요청이 들어왔을때 기준으로 한번 가볍게 알아보았고  
+이제 유효성 검증을 통해 원하는 데이터가 들어오지 않을 경우  
+코드를 실행시키지 않을 수 있다.
+
+1). 우선 위에 예제 코드에서 @Vaild를 Dto 매개변수 앞에 달아주고
+
+```java
+@PostMapping
+public ResponseEntity postMember(@Vaild @RequestBody MemberDto memberDto) {
+     .
+     .
+     .
+    return ..
+}
+```
+<br/>
+2). Dto 클래스의 원하는 유효성 검증 애노테이션으로 조건을 설정한다.  
+
+```java
+@Getter
+public class MemberDto {
+    @Min(100)
+    @Max(50000) // 100~50000사이에만 price 유혀성 검사 통과
+    private int age;
+    
+    @Pattern(regexp = "^([A-Za-z])(\\s?[A-Za-z])*$",
+            message = "글자사이의 공백이 1개가 초과하거나 ,알파벳이 아닌 글자가 들어왔습니다")
+    private String Name;
+    
+    @NotBlank // 공백만으로 구성되있지 않아야한다.
+    private String sex;
+    
+}
+```
+
+@Vaild  
+-> 유효성 검증을 적용해주는 애노테이션  
+DTO 앞에 @Vaild를 붙여 클래스를 유효성 검증해줌  
+만약 유효성검증에 실패하면 요청은 거부(reject)된다.
+
+implementation 'org.springframework.boot:spring-boot-starter-validation'  
+-> 그레이들 의존성주입
+
+@Validated  
+-> @Vaild와 같이 유효성 검증하도록 해줌. 하지만 위치가 서로다름  
+-> @Valid는 DTO 필드에서 검사하는데, @Valdated는 맵핑 매서드 매개변수에다 쓴다  
+ex) @PatchMapping("/{coffee-id}")  
+    public ResponseEntity patchCoffee(@PathVariable("coffee-id") @Min(1) long coffeeId)  
+    -> @Min을 사용하는 예제.
+
+*문자열관련*  
+-> @NotBlank : null, 공백, 스페이스 값 모두 허용하지 않음  
+-> @NotSpace : 공백을 허용하지 않음  
+-> @NotNull : null을 허용하지 않음  
+-> @Null : Null만 가능  
+-> @Size(min=1, max=3) : 문자열의 최소 길이, 최대 길이 제한
+
+
+*숫자를 다룰때*  
+-> @Min(1) : 값이 최소 1이상이어야하는 유효성 검사 통과  
+-> @Max(500) : 값이 최대 500이하로 값이 와야 유효성 검사 통과  
+-> @Range(min=1, max=500) : 범위안에 값이 오면 유효성 검사 통과  
+-> @Positive : 양수만 허용  
+-> @PositiveOrZero : 양수와 0만 허용  
+-> @Negative : 음수만 허용  
+-> @NegativeOrZero : 음수와 0만 허용
+
+*정규식 관련*  
+->@Email: 이메일 정보가 비어있는지 검증  
+->@Pattern: 특정 패턴을 정규식으로 표현 (@Pattern(regex = "^010-\\d{3,4}-\\d{4}$")
+
+
+---
+
+오늘은 DTO의 쓰임새와  
+유효성 검증에 대한 프로그램을 간단하게 알아보았다.  
+그 중에서도 특히 Pattern의 정규식관련된 부분은  
+앞으로 지속적인 학습이 필요해보인다. 아직은 생소해서  
+어떻게 검사가되는지 각 해당하는 특수문자의 내용을 이해할 수 있도록  
+주말에 공부해보려한다  
+
+오늘 공부는 끝!
+
+<br/>  
+
+**오늘의 커피량**: ☕️ ☕️ ☕️ ☕️  
+**오늘의 점심**: 오징어 덮밥
