@@ -3,12 +3,14 @@ layout: post
 title: Jekyll GitHub Page 댓글, 파비콘 꾸미기
 subtitle: Jekyll yat 테마 적용 및 꾸미기
 categories: IT
-tags: [Jekyll, yat, 테마적용, ]
+tags: [Jekyll, yat, 테마적용, GitHub Pages]
 comments: true
 published: true 
 ---
 
-## Jekyll 테마 적용  
+# Jekyll 테마 적용  
+
+<br/>  
 
 ![example image](https://jekyllrb.com/img/octojekyll.png)  
 
@@ -32,7 +34,6 @@ Jekyll관련 셋업이랑 테마를 Git Page에 적용하는 방법
 
 [Jekyll yat 테마 사이트]: https://jekyll-themes.com/jekyll-theme-yat/
 [Jekyll yat 테마 제작자 github]: https://github.com/jeffreytse/jekyll-theme-yat
-[cell image]: https://jekyllrb.com/img/octojekyll.png
 
 <br/>
 
