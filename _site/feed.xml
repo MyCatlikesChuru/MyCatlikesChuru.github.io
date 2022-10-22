@@ -1,1 +1,129 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-22T15:23:17+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Spring MVC Controller</title><link href="http://localhost:4000/til/2022/10/20/til_bootcamp.html" rel="alternate" type="text/html" title="Spring MVC Controller" /><published>2022-10-20T00:00:00+09:00</published><updated>2022-10-20T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/20/til_bootcamp</id><content type="html" xml:base="http://localhost:4000/til/2022/10/20/til_bootcamp.html"><![CDATA[]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="example" /><category term="markdown" /><summary type="html"><![CDATA[]]></summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-22T17:10:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Jekyll GitHub Page 댓글, 파비콘 꾸미기</title><link href="http://localhost:4000/it/2022/10/22/it-jekyll-comment&favicon.html" rel="alternate" type="text/html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기" /><published>2022-10-22T00:00:00+09:00</published><updated>2022-10-22T00:00:00+09:00</updated><id>http://localhost:4000/it/2022/10/22/it-jekyll-comment&amp;favicon</id><content type="html" xml:base="http://localhost:4000/it/2022/10/22/it-jekyll-comment&amp;favicon.html"><![CDATA[<h1 id="jekyll-테마-적용">Jekyll 테마 적용</h1>
+<p><br /></p>
+
+<p><img src="https://jekyllrb.com/img/octojekyll.png" alt="example image" /></p>
+
+<p><br /></p>
+
+<p>오늘은 Github Page를 통해 첫번째로 하는 포스팅이다.<br />
+MarkDown 문법도 어색하고 모든게 서툴지만 천천히 블로그 개설 준비를 하려한다.</p>
+
+<p>Jekyll 이란?<br />
+텍스트 변환 엔진으로, 마크업 언어로 작성하면 미리 정의해놓은 규칙에따라 정적 웹사이트를 만들어준다.<br />
+우리가 직접 테마를 만들 수도 있지만,, 아직 초보 개발자인 나한테 모든게 어렵게 느껴진다.<br />
+그 첫걸음을 하기위해 우선 다른 개발자분들이 만들어 놓은 테마를 이용할 생각이다.</p>
+
+<p>나는 그중에서 yat이라는 테마를 사용하기로 했다.<br />
+<a href="https://github.com/jeffreytse/jekyll-theme-yat">Jekyll yat 테마 사이트</a></p>
+
+<p>현재 내가 사용하고 있는 블로그의 테마다.<br />
+Jekyll관련 셋업이랑 테마를 Git Page에 적용하는 방법<br />
+로컬 환경에서 작업하는법 등은 다른글을 통해 작성해 보겠다.</p>
+
+<p><br /></p>
+
+<h2 id="jekyll-yat-테마-utterances-댓글-기능-추가">Jekyll yat 테마 Utterances 댓글 기능 추가</h2>
+
+<p><img src="https://ifh.cc/g/BpXV1h.png" alt="example image" /><br />
+위와 같은 댓글 기능을 추가하는 방법이다.</p>
+
+<p>위에서 다운 받은 yat 테마는 기본적으로 댓글 기능이 따로 있지는 않는다.<br />
+하지만 개발자가 여러가지 기능을 사용할 수 있게 미리 개발을 해두어서 우리는<br />
+그 기능을 지원하는 것만 설정하면 댓글을 사용할 수 있다.</p>
+
+<p>Disqus comments, Gitment comments, Utterances comments<br />
+이렇게 3가지 댓글 기능을 지원해주고 있고, 이중에서 나는 Utterances 코맨트<br />
+기능을 사용하려한다. 아래를 쭉 따라해보자</p>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/YV9G0L.png" alt="example image" /><br />
+GitHub에 Repository를 하나 생성해야한다.<br />
+이름은 아무렇게나 지어도 상관없다. 중요한점은 public로 만들어야한다.</p>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/C0C4x3.png" alt="example image" /><br />
+Repository를 만들었으면, Quick Setup화면이 보여질 텐데<br />
+<span style="color:#0066CC"><strong>‘creating a new file’</strong></span>을 클릭 !</p>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/nskSGt.png" alt="example image" /><br />
+클릭을 하면 위와같은 화면을넘어오는데<br />
+빨간색 박스의 내용을 그대로 입력해준다.<br />
+origins의 주소에는 내가 댓글 기능을 추가할 blog를 추가하면된다.<br />
+나는 내 Github Page를 추가 !</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "origins": ["https://mycatlikeschuru.github.io"]
+}
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/HHFBBK.png" alt="example image" /><br />
+<a href="https://github.com/apps/utterances">utterances</a> 사이트를 접속해 install을 눌러 주면<br />
+위와 같은 화면이 나오게되는데 Only select repositories에서<br />
+아까 위에서 만들었던 Repository CommentTest를 선택해주고<br />
+Rquest를 눌러 주면 완료. 이 이후에 따로 페이지가 발생하게 되는데<br />
+무시해도 상관 없다.</p>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/Cbkygc.png" alt="example image" /><br />
+나는 IntelliJ를 통해서 MarkDown을 작성 중이고<br />
+대부분 VScode를 이용해서 작성하는 것 같다.<br />
+여하튼,, 작성 툴을 이용해 _config.yml 설정파일에서</p>
+
+<p>utterances 항목을 찾아주면된다.<br />
+아마 처음에 테마를 받으면 # 으로 주석처리가 되어있을 것이다.<br />
+주석 처리를 풀어준 다음에. 오른쪽의 네모박스와 같이 입력해주면 되는데<br />
+여기서 repo -&gt; 이부분만 아까 우리가 만들어준 repository로 적용하면<br />
+<span style="color:#F04965">(<em>주의: utterances 밑에 repo,issue_term 등등,, 맨앞을 공백으로 해야 적용됨</em>)</span></p>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/M2V3ps.png" alt="example image" /><br />
+그렇게되면 이렇게 ! GitHub처럼 댓글을 사용할 수 있는<br />
+기능이 이렇게 똭! 하고 사용이 가능합니다~<br />
+주로 우리가 올리는 글 위주가 IT관련이라 GitHub로그인이 필요한<br />
+utterances를 통해서 댓글 기능을 추가해보았다~</p>
+
+<p>참고로 disqus도 적용해 보았는데 별다른 오류 없이 잘동작되었었다.</p>
+
+<p><br /></p>
+
+<h2 id="jekyll-yat-파비콘-추가">Jekyll yat 파비콘 추가</h2>
+
+<p><img src="https://ifh.cc/g/pgWVFk.jpg" alt="example image" /><br />
+파비콘(favicon)은 우리가 웹사이트에서 보면</p>
+
+<p><img src="https://ifh.cc/g/xAF0Qj.png" align="left" />
+<br /></p>
+
+<p>위와 같이 웹사이트 홈페이지의 이름과 같이 나오는 사진이다.</p>
+
+<p>yat 테마는 favicon을 적용하면 우리 블로그 왼쪽 위에<br />
+프로필 사진 마냥 귀엽게 표시도되고 웹 TAB에서도 파비콘 아이콘이<br />
+적용되는 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p><img src="https://ifh.cc/g/L2lDHM.png" alt="example image" /><br />
+파비콘 적용 방법은 정말 매우 간단하다.<br />
+_config.yml 파일에서 favicon: ““이라고 되어있는 부분에<br />
+자원 경로를 넣어주면된다. 나와 같은 경우는 assets의 images 폴더에<br />
+내 파비콘 사진을 두었고 그 경로를 오른쪽과 같이 지정해서<br />
+파비콘이 정상적으로 적용된 모습을 확인 할 수 있었다.</p>
+
+<hr />
+
+<p>오늘은 Jekyll 테마 중 yat이라는 테마를 커스터 마이징하는<br />
+글을 올려 보았다. 기존에 Tistory를 이용할 때는<br />
+그냥 이미지와 글,코드 올리는 것들이 간단했는데<br />
+아무래도 Markdown언어로 작성하다보니 확실히 시간소요가 더 되는 것 같다.<br />
+그래도 앞으로 사용하다보면 빨라질거라 생각하며 첫 포스팅을 마친다. 😃</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><summary type="html"><![CDATA[Jekyll 테마 적용]]></summary></entry><entry><title type="html">Spring MVC Controller</title><link href="http://localhost:4000/til/2022/10/20/til_bootcamp.html" rel="alternate" type="text/html" title="Spring MVC Controller" /><published>2022-10-20T00:00:00+09:00</published><updated>2022-10-20T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/20/til_bootcamp</id><content type="html" xml:base="http://localhost:4000/til/2022/10/20/til_bootcamp.html"><![CDATA[<h2 id="jekyll-yat-테마-꾸미기">Jekyll YAT 테마 꾸미기</h2>
+
+<p><img src="https://ifh.cc/g/YV9G0L.png" alt="example image" /></p>
+
+<p>#</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[Jekyll YAT 테마 꾸미기]]></summary></entry></feed>
