@@ -75,6 +75,7 @@ yat:
 # lang: "en"  # default lang is en
 
 # Translate languges
+translate_langs: [] #언어 기능 제거 하는법
 # langs refer to https://cloud.google.com/translate/docs/languages
 # translate_langs:
 #   - lang: en

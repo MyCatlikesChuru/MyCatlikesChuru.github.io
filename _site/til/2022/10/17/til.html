@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Spring AOP 1 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Spring AOP 1">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="스펙타클한 주말이었다. 물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…">
+<meta property="og:description" content="스펙타클한 주말이었다. 물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/17/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/17/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-10-17T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Spring AOP 1">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-17T00:00:00+09:00","datePublished":"2022-10-17T00:00:00+09:00","description":"스펙타클한 주말이었다. 물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…","headline":"TIL) Spring AOP 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/17/til.html"},"url":"http://localhost:4000/til/2022/10/17/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring AOP 1</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+59</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-10-17T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 17, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>스펙타클한 주말이었다.<br>
+물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…</p>
+
+<p><img src="https://ifh.cc/g/DnZoyl.gif" align="left" width="350px" height="250px">
+<br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>화재로 인해 전기를 내려서 서버가 죽었고<br>
+장애가 생겨 거의 하루종일 서비스 이용이 안되고<br>
+어떤사람은 전동킥보드를 빌렸는데 서비스장애로<br>
+돈이 10만원 넘게 청구되었단다 ㅋㅋㅋㅋ</p>
+
+<p>뭔가 남일 같지만은 않은…<br>
+나중에 내가 어떤회사의 서비스를 맡고 저런일이 생긴다면<br>
+정말 힘든 나날이 될 것 같다…</p>
+
+<hr>
+
+<p>여하튼 오늘은 AOP에 대해 공부하는 날이다.<br>
+AOP는 이론은 정말 간단 한거 같은데<br>
+어떻게 스프링을 이용해 적용하는지가 가장 궁금하다.<br>
+공부를 시작해보자</p>
+
+<h3 id="aop"><strong>AOP</strong></h3>
+
+<p>Aspect Oriented Programming의 약자이다.<br>
+이전에도 알아보았지만 관심지향 프로그래밍으로<br>
+모듈화의 핵심 단위를 관점으로 작성하는 프로그래밍이다.<br>
+OOP방식의 불필요한 반복을 해결하기 위한 방법이다.</p>
+
+<p>간단하게 생각하자면<br>
+한가지의 기능을 여러가지 메소드에 쓰고싶을때<br>
+같은 코드를 여러번 작성하면 코드 길이가 길어지고<br>
+추후 수정이 필요할때 전부 수정하는 번거로움이 있기 때문에<br>
+하나의 관심기능으로 묶어 기존의 코드를 손대지 않고<br>
+그 기능들을 적용해서 사용할 수 있는 방식을 얘기하는 것이다.</p>
+
+<ol>
+  <li>
+    <p><strong>핵심 관심 사항 (core concern)</strong><br>
+-. 객체가 제공하는 고유의 기능이다. (업무 로직 등..)</p>
+  </li>
+  <li>
+    <p><strong>공통 관심 사항 (cross-cutting concern)</strong><br>
+-. 핵심 기능을 보조하기 위해 제공되는 기능이다.<br>
+-. 주로 로그 추적로직, 트랜잭션, 보안 기능 등이 있다.</p>
+  </li>
+</ol>
+
+<p>AOP 기술을 사용하기전에 용어에 익숙해지기위해<br>
+관련 용어에 대한 내용을 알아보자</p>
+
+<p><img src="https://ifh.cc/g/N89VNm.png" align="left" width="400px" height="250px">
+<br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p><strong>Aspect</strong><br>
+-. 여러 객체에 공통으로 적용되는 기능</p>
+
+<p><strong>Pointcut</strong><br>
+-. JoinPoint 중에서 Advice가 적용될 위치를 선별하는 기능<br>
+-. 관심 JoinPoint를 결정하므로, Advice가 실행되는 시기를 제어할 수 있다.</p>
+
+<p><strong>JoinPoint</strong><br>
+-. 애플리케이션 실행 흐름에서의 특정 포인트를 의미한다 (클래스 초기화, 메소드 호출 etc..)<br>
+-. Spring은 프록시 방식을 사용하여 JoinPoint는 항상 메소드 실행 지점으로 제한된다.</p>
+
+<p><strong>Advice</strong><br>
+-. JointPoint에서 수행되는 코드</p>
+
+<p>위 내용만 종합해보면<br>
+Advice라는 코드로 적용해야할 대상인 JoinPoint들에서<br>
+우리가 Pointcut으로 적용할 놈들만 지정해준다. 라고 이해를 했다.</p>
+
+<p>즉, 내가 생각하기엔<br>
+Advice : 공통 적용 코드<br>
+JoinPoint : 프로그램 내 모든 메소드<br>
+Pointcut : 모든 메소드에서 내가 적용하고 싶은 것만 선택<br>
+이라고 생각이 든달까나..?</p>
+
+<p>그 외에 다른 용어 들도 있다.</p>
+
+<p><strong>Weaving</strong><br>
+-. Pointcut으로 결정한 타겟의 JoinPoint에 Advice를 적용하는 것을 뜻함<br>
+-. 즉, 공통 적용 코드를 비지니스 로직에 적용한다는 의미<br>
+-. 간단하게 프록시 방식을 통해서 AOP가 구현되는 과정</p>
+
+<p><strong>AOP proxy</strong><br>
+-. AOP 기능을 구현하기 위해 만든 가짜 객체이다.<br>
+-. Spring에서 AOP proxy는 JDK동적 프록시, CGLIB 프록시 이다.</p>
+
+<h4 id="advice-종류"><strong>Advice 종류</strong></h4>
+<p>@Before, @AfterReturning, @Afterthrowing, @After, @Around …<br>
+위에 애노테이션정도가 종류에 포함되어있곡<br>
+가장 강력한 Advice는 @Around이다. 이것하나만 있어도 위에 모든 기능을 제공한다.<br>
+하지만 모든기능을 제공하는 만큼 개발자의 실수 유발이 가능하므로<br>
+상황에 맞는 Advice를 사용하자</p>
+
+<p>테스트를 위해 계산기 프로그램을 만들어 사용해보자</p>
+
+<p><strong>&lt;계산기 메인 프로그램, 빈등록해서 관리&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewCalculate</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">add</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Methode 실행 : add"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sub</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Methode 실행 : sub"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mul</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Methode 실행 : mul"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">div</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Methode 실행 : div"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>&lt;AOP 적용 프로그램, 빈등록해서 관리&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
+    <span class="c1">// 변경될 내용들 @Before, @After ~~</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>&lt;Test 실행 프로그램, Junit5&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCalcualte</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">NewCalculate</span> <span class="n">newCalculate</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">TestCalcualte</span><span class="o">(</span><span class="nc">NewCalculate</span> <span class="n">newCalculate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">newCalculate</span> <span class="o">=</span> <span class="n">newCalculate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addTest</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newCalculate</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">50</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">subTest</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newCalculate</span><span class="o">.</span><span class="na">sub</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">50</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">divTest</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newCalculate</span><span class="o">.</span><span class="na">div</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">50</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">mulTest</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newCalculate</span><span class="o">.</span><span class="na">mul</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">50</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>2개의 클래스는 java 폴더에<br>
+1개의 클래스는 test 폴더에 넣어 테스트용 프로그램을 만들었다.<br>
+4개의 메소드를 호출할때 AOP적용된 프로그램이<br>
+어떻게 동작하는지 보자</p>
+
+<p><em><strong>@Before</strong></em><br>
+1). 조인 포인트 실행 이전에 실행한다.<br>
+2). Advice를 구현한 메서드는 일반적으로 리턴타입이 void이다.<br>
+3). 메서드에서 예외를 발생시킬 경우 대상 객체의 메서드가 호출되지 않는다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
+    <span class="nd">@Before</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeLog</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 실행 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="mi">50</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="mi">150</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="mi">5000</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="mf">2.0</span>
+</code></pre></div></div>
+
+<p>보는 것과 같이 메서드가 실행되기전에<br>
+Aspect 실행 문구가 출력되는 것을 볼 수있다.</p>
+
+<p><em><strong>@After</strong></em><br>
+1). 조인 포인트의 메서드 예외나 정상과는 상관없이 실행한다.<br>
+2). 메서드 실행 완료 후 공통 기능 실행을 한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
+    <span class="nd">@After</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">AfterLog</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 실행 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="mi">50</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="mi">150</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="mi">5000</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="mf">2.0</span>
+</code></pre></div></div>
+
+<p>각 메서드들이 실행 완료된 후에<br>
+Aspect 실행 문구 출력되는 것을 볼 수 있다.</p>
+
+<p><strong>@AfterReturning</strong><br>
+1). 조인 포인트 실행 완료 후 실행한다.<br>
+2). 메서드가 예외 없이 실행된 이후 공통 기능을 실행</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
+    <span class="nd">@AfterReturning</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">,</span> <span class="n">returning</span> <span class="o">=</span> <span class="s">"value"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">AfterReturningLog</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 실행 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; returning = "</span> <span class="o">+</span> <span class="n">value</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="o">--&gt;</span> <span class="n">returning</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="mi">50</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="n">returning</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="mi">150</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="o">--&gt;</span> <span class="n">returning</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="mi">5000</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="o">--&gt;</span> <span class="n">returning</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="mf">2.0</span>
+</code></pre></div></div>
+
+<p>After와 다른점은 returning로 값을 활용할 수가 있다.<br>
+위에 예제에서 프린트문을 하나더 추가했고<br>
+value라는 변수에 담아 출력하였다.<br>
+메서드의 반환값을 출력한 모습을 볼 수 있다.</p>
+
+<p><strong>@AfterThrowing</strong><br>
+1). 메서드가 예외를 던지는 경우 실행한다.<br>
+2). 메서드를 실행하는 도중 예외가 발생한 경우 공통 기능을 실행한다.<br>
+이경우에는 강제로 예외처리를 만들어야한다.</p>
+
+<p>간단하게 add함수에다 만들어서 진행해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">add</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Methode 실행 : add"</span><span class="o">);</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">&gt;</span><span class="mi">101</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="o">(</span><span class="s">"예외"</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>기존 코드에서 예외처리만 추가했다 x+y값이 101보다 크면<br>
+“예외”를 던져주게 프로그램을 작성했다.<br>
+예외가 추가됨에따라 기존 Test 코드에도 임시로 throws Exception를<br>
+달아주면 정상적으로 테스트코드가 동작할 것이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newCalculate</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">50</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이제 준비는 되었으니 예외 발생시 받을 변수 ex를 설정하고 출력구문을 넣어<br>
+AfterThrowing를 적용하여 작동시켜보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
+    <span class="nd">@AfterThrowing</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">,</span> <span class="n">throwing</span> <span class="o">=</span> <span class="s">"ex"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">AfterThrowingLog</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">,</span> <span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 실행 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Exception = "</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="mi">50</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="nc">Exception</span> <span class="o">=</span> <span class="n">예외</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="mi">5000</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="mf">2.0</span>
+</code></pre></div></div>
+
+<p>위의 출력을 보면 알 수 있듯이<br>
+sub,mul,div 메서드들은 공통코드인 Aspect코드들이<br>
+적용되어 출력되지 않은 모습이다.</p>
+
+<p>오직 add 메서드에서만 예외라는 출력구문이 출력되었다.<br>
+즉 예외가 발생한 메서드의 값을 사용할 수 있다는 뜨읏~<br>
+그리고 메서드 실행 완료후 Aspect코드가 실행되었다는 점!</p>
+
+<p><strong>@Around</strong><br>
+1). 위에 얘기했듯이 이 문법하나로 위에 있는 것들 전부 동작이 가능하다.<br>
+호출 전후에 수행이 가능하며 조인 포인트 실행여부 선택, 반환 값 변환, 예외 변환 등이 가능하다.</p>
+
+<p>2). 메서드 실행 전,후, 예외 발생 시점에 공통 기능을 실행한다.<br>
+조인 포인트 실행 여부 - joinPoint.proceed()<br>
+전달 값 변환 - joinPoint.proceed(args[])<br>
+try ~ catch ~ finally 구문처리 가능<br>
+다른 얘들과는 다르게 ProceedingJoinPoint 타입을 사용해야한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
+    <span class="nd">@Around</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">AroundLog</span><span class="o">(</span><span class="nc">ProceedingJoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 실행 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">proceed</span><span class="o">();</span>
+        <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 종료 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">종료</span> <span class="o">:</span> <span class="n">sub</span>
+<span class="mi">50</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">add</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">종료</span> <span class="o">:</span> <span class="n">add</span>
+<span class="mi">150</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">종료</span> <span class="o">:</span> <span class="n">mul</span>
+<span class="mi">5000</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
+<span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">종료</span> <span class="o">:</span> <span class="n">div</span>
+<span class="mf">2.0</span>
+</code></pre></div></div>
+
+<p>위에 예제에서 볼 수 있듯이<br>
+joinPoint.procced(); 위,아래로 출력문을 넣어<br>
+실행과 종료시점을 적어 두었다.<br>
+그렇게 적어놓고 출력해본 결과…</p>
+
+<p>위와 같이 출력된 걸 볼 수 있다.</p>
+
+<p>즉, joinPoint.procced();의 흐름을 제어함에 따라<br>
+우리가 원하는 출력시점을 정할 수 있다는점?<br>
+이 예제는 하나의 메서드의 실행 시간을 측정하는 프로그램 같은<br>
+예제에서 조금 더 어울리는 것 같다는 생각이 든다.</p>
+
+<hr>
+
+<p>오늘 AOP 공부는 여기까지!!<br>
+정말 간단한 예제로 내가 직접 만들어서<br>
+테스트를 해보면서 이래저래 알아보는 시간을 가졌다.<br>
+내일은 다른 예제로 AOP사용법을 좀 더 익숙하게 적용을 해보자</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ <br>
+<strong>오늘의 점심</strong>: 제육볶음, 밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<span></span><a class="next" href="/til/2022/10/18/til.html" title="TIL) Spring AOP 2">TIL) Spring AOP 2</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/18/til.html" title="TIL) Spring AOP 2">TIL) Spring AOP 2</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="TIL) Spring AOP 2">TIL) Spring DTO</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="TIL) Spring AOP 2">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="TIL) Spring AOP 2">TIL) Spring AOP 1</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

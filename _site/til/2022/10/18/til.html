@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Spring AOP 2 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Spring AOP 2">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="올해 처음으로 늦잠을 자 지각을 해버렸다..">
+<meta property="og:description" content="올해 처음으로 늦잠을 자 지각을 해버렸다..">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/18/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/18/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-10-18T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Spring AOP 2">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-18T00:00:00+09:00","datePublished":"2022-10-18T00:00:00+09:00","description":"올해 처음으로 늦잠을 자 지각을 해버렸다..","headline":"TIL) Spring AOP 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/18/til.html"},"url":"http://localhost:4000/til/2022/10/18/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring AOP 2</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+60</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-10-18T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 18, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>올해 처음으로 늦잠을 자 지각을 해버렸다..</p>
+
+<p><img src="https://ifh.cc/g/VL0aYH.gif" align="left" width="350px" height="250px">
+<br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>해야할 일이 있거나 약속이 있으면 무조건<br>
+늦잠을 안자고 번뜩일어나는데<br>
+오늘은 알람소리를 못들었다…..<br>
+수면패턴이 조금 바뀌어서 그런가 싶기도하고</p>
+
+<p>구내염도 난 것 보면<br>
+스트레스관리와 수면관리좀 해야할 것 같다.</p>
+
+<hr>
+
+<p>어제는 AOP의 간단한 용어들과\<br>
+Advice의 타입별 사용방법을 알아보았었다.<br>
+오늘은 Pointcut 표현식과 JoinPoint 특징과</p>
+
+<p>자바코드로 예제를 직접짜보고 Spring 적용 변경해보는<br>
+실습을 혼자만들어서 해보자!</p>
+
+<p><br></p>
+
+<h3 id="pointcut-표현식"><strong>Pointcut 표현식</strong></h3>
+
+<p>Pointcut은 어제 알아보았듯이<br>
+우리가 JoinPoint에서 어느 부분을 쓸지 정해주는 부분이다<br>
+AspectJ 이용해 우리는 표현식을 사용할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.*</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>어제 보았던 예제를 보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Around</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">Object</span> <span class="nf">AroundLog</span><span class="o">(</span><span class="nc">ProceedingJoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 실행 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">proceed</span><span class="o">();</span>
+    <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 종료 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Adivce 타입은 @Around이고</p>
+
+<p>Pointcut 부분은 (“execution(* com.aop.section2aopcalculate..*(..))”)에<br>
+해당한다. 첫번째는 <strong>‘포인트컷 지시자(PCD)’</strong> 이고 뒤에는 내 패키지내 경로이다.</p>
+
+<p>execution : 포인트컷 지시자<br>
+com.aop.section2aopcalculate..*(..) : 패키지 경로, 클래스 메서드 명</p>
+
+<p>주로 execution을 가장 많이 사용한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>execution</td>
+      <td>메서드 실행 JoinPoint를 매칭한다.</td>
+    </tr>
+    <tr>
+      <td>within</td>
+      <td>특정 타입 내의 JoinPotin를 매칭한다.</td>
+    </tr>
+    <tr>
+      <td>args</td>
+      <td>인자가 주어진 타입의 인스턴스인 JoinPoint</td>
+    </tr>
+    <tr>
+      <td>this</td>
+      <td>Spring Bean을 대상으로 하는 JoinPoint</td>
+    </tr>
+    <tr>
+      <td>target</td>
+      <td>Target 객체를 대상으로 하는 JoinPoint</td>
+    </tr>
+    <tr>
+      <td>bean</td>
+      <td>Spring 전용 PCD이고 Bean의 이름으로 Pointcut을 지정한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>**&amp;&amp;, || , ! 같은 표현식**을 사용해 결합할 수 도 있다.<br>
+어제 예제를 가져와서 아래와 같은 경로에 있다고 가정하자.<br>
+<img src="https://ifh.cc/g/oD90th.png" align="left" width="650px" height="300px">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>NewCalculate라는 클래스는<br>
+com.aop.section2aopcalculate.calculate 패키지 안에 경로가 지정되어있다.</p>
+
+<p>예를 들어 하나의 클래스의 메서드만 동작시키고 싶을 경우 (우린 add메서드를 가정하자)<br>
+아래와 가은 방식으로 표현할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate.calculate.NewCalculate.add(..))"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>여기서 결합식을 사용해 우리가 add메서드와 sub메서드를 둘다 실행시킬 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate.calculate.NewCalculate.add(..)) || execution(* com.aop.section2aopcalculate.calculate.NewCalculate.sub(..))"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>|| 표현식으로 결합식을 사용하면 add,sub 메서드가 둘다 지정되어<br>
+실행되는 모습을 볼 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="joinpoint"><strong>JoinPoint</strong></h3>
+
+<p>JoinPoint는 우리가 포인트컷으로 지정한 곳이고<br>
+추상적인 개념으로 AOP를 적용할 수 있는 지점을 의미한다.</p>
+
+<ol>
+  <li>Advice가 적용될 수 있는 위치, 메소드 실행, 생성자 호출, 필드값 접근 같은 프로그램 실행 중 지점을 나타낸다.</li>
+  <li>AspectJ를 사용해서 컴파일 시점과 클래스 로딩 시점에 적용하는AOP는 바이트코드를 실제 조작하기 때문에 해당 기능을 모든 지점에 다 적용할 수 있다.</li>
+  <li>프록시 방식을 사용하는 Spring AOP는 메서드 실행 지점에만 AOP 적용이 가능하다.</li>
+  <li>프록시는 메서드 오러라이딩 개념으로 동작한다.</li>
+  <li>프록시를 사용하는 Spring AOP의 JoinPoint는 메서드 실행으로 제한된다.</li>
+</ol>
+
+<p><em><strong>JoinPoint 인터페이스 기능</strong></em><br>
+.getArgs() : 전달된 인자를 배열로 반환한다.<br>
+.getThis() : AOP 프록시 객체를 반환한다.<br>
+.getTarget() : AOP가 적용된 대상 객체를 반환한다. (비지니스 메소드를 포함하는 객체반환)<br>
+.toString() : 방법에 대한 유용한 설명을 인쇄한다.<br>
+.getSignature() : 메서드에 대한 설명을 반환한다. <br>
+-&gt; getSignature().getName() : 호출한 메서드의 이름을 반환한다. (String)<br>
+-&gt; getSignature().toLongString() : 호출한 메서드의 리턴타입, 이름, 매개변수를 패키지 경로까지 포함해서 반환한다. (String)<br>
+-&gt; getSignature().toShoryString() : 호출한 메서드 시그니처를 축약한 문자열로 반환한다. (String)</p>
+
+<p><em><strong>ProceedingJoinPoint 인터페이스 기능</strong></em><br>
+.proceed() : 다음 어드바이스나 타겟을 호출한다.</p>
+
+<p><br></p>
+
+<h3 id="java-코드로-aop-작성해보기"><strong>Java 코드로 AOP 작성해보기</strong></h3>
+<p>조금 더 AOP에 대해 심도있게 이해해보기 위해서<br>
+셀프과제를 만들었다.</p>
+
+<ol>
+  <li>Java 코드로 AOP를 작성해보는 시간을 가져보았다.</li>
+  <li>공통 관심 사항을 메서드 실행 시간 측정으로 두었고</li>
+  <li>핵심 로직은 점수 합산과 평균을 구하는 것으로 지정했다.</li>
+  <li>메서드 실행시 AOP가 동작하는지 확인</li>
+</ol>
+
+<p><img src="https://ifh.cc/g/t3Ym8R.png" align="left" width="300" height="150px">
+<br><br><br><br><br><br><br></p>
+
+<p>총 4개의 Class를 만들어 테스트를 해보았다.</p>
+
+<p><strong>&lt;Exam.interface / 메서드 인터페이스 추상화&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Exam</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">total</span><span class="o">();</span>
+    <span class="kt">float</span> <span class="nf">avg</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Score.class에서 구현하게 추상화를 해둔 Interface<br>
+가장 큰 이유는 아래에 Aop.class에서<br>
+Proxy.newProxyInstance의 매개변수로 인터페이스를 사용해야하기 때문</p>
+
+<p><strong>&lt;Score.class / 핵심 로직(합산,평균)&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.Setter</span><span class="o">;</span>
+
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Score</span> <span class="kd">implements</span> <span class="nc">Exam</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">kor</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">eng</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">math</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">com</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Score</span><span class="o">(</span><span class="kt">int</span> <span class="n">kor</span><span class="o">,</span> <span class="kt">int</span> <span class="n">eng</span><span class="o">,</span> <span class="kt">int</span> <span class="n">math</span><span class="o">,</span> <span class="kt">int</span> <span class="n">com</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">kor</span> <span class="o">=</span> <span class="n">kor</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">eng</span> <span class="o">=</span> <span class="n">eng</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">math</span> <span class="o">=</span> <span class="n">math</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">com</span> <span class="o">=</span> <span class="n">com</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">total</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; total method 시작"</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">kor</span><span class="o">+</span><span class="n">eng</span><span class="o">+</span><span class="n">math</span><span class="o">+</span><span class="n">com</span><span class="o">;</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">float</span> <span class="nf">avg</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; avg method 시작"</span><span class="o">);</span>
+        <span class="kt">float</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">kor</span><span class="o">+</span><span class="n">eng</span><span class="o">+</span><span class="n">math</span><span class="o">+</span><span class="n">com</span><span class="o">)</span> <span class="o">/</span> <span class="mf">4.0f</span><span class="o">;</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Lombok @Getter,@Setter를 사용하여<br>
+Getter,Setter의 긴 코드를 생략했습니다.</p>
+
+<p>메서드 시간측정을 위해 중간 중간에 Thread.sleep();을<br>
+이용해 메서드의 머무는 시간을 늘려주었습니다.</p>
+
+<p>각각메서드의 시작을 알리는 코멘트를 프린트하였고<br>
+메서드 실행 결과값을 출력하였습니다.</p>
+
+<p><strong>&lt;Aop.class / 공통관심사 코드&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.lang.reflect.InvocationHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Proxy</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Aop</span> <span class="o">{</span>
+        <span class="c1">// Proxy를 이용한 AOP 구현 방법</span>
+        <span class="kd">public</span> <span class="nc">Exam</span> <span class="nf">aopApply</span><span class="o">(</span><span class="nc">Exam</span> <span class="n">exam</span><span class="o">){</span>
+            <span class="nc">Exam</span> <span class="n">proxy</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Exam</span><span class="o">)</span> <span class="nc">Proxy</span><span class="o">.</span><span class="na">newProxyInstance</span><span class="o">(</span><span class="nc">Score</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">(),</span>
+                    <span class="k">new</span> <span class="nc">Class</span><span class="o">[]{</span><span class="nc">Exam</span><span class="o">.</span><span class="na">class</span><span class="o">},</span>
+                    <span class="k">new</span> <span class="nf">InvocationHandler</span><span class="o">()</span> <span class="o">{</span>
+                        <span class="nd">@Override</span>
+                        <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="nc">Object</span> <span class="n">proxy</span><span class="o">,</span> <span class="nc">Method</span> <span class="n">method</span><span class="o">,</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span> <span class="o">{</span>
+                            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"START: "</span> <span class="o">+</span> <span class="mi">0</span>  <span class="o">+</span> <span class="s">"ms"</span> <span class="o">+</span> <span class="s">" / "</span> <span class="o">+</span><span class="n">getClass</span><span class="o">());</span>
+
+                            <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+                            <span class="nc">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">exam</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+                            <span class="kt">long</span> <span class="n">end</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+
+                            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"END: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">)</span> <span class="o">+</span> <span class="s">"ms"</span> <span class="o">+</span> <span class="s">" / "</span> <span class="o">+</span><span class="n">getClass</span><span class="o">());</span>
+                            <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+                        <span class="o">}</span>
+                    <span class="o">});</span>
+            <span class="k">return</span> <span class="n">proxy</span><span class="o">;</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>동적 프록시(Dynamic Proxy)</strong>를 사용하여 코드를 작성했다.<br>
+동적프록시는 런타임 시점에 프록시 클래스를 만들어주는 방식이다.<br>
+사용하는 이유는 프록시 타겟코드의 수정없이 접근 제어 , 부가기능을 추가하려고 사용한다.<br>
+즉, 우리가 AOP를 사용하는 목적과 부합한다!!!<br>
+Proxy.newProxyInstance() 메서드로 Proxy를 생성하는데 3개의 파라미터를 가진다.</p>
+
+<ul>
+  <li>loader : 프록시 클래스를 정의하는 클래스 로더</li>
+  <li>interfaces : 프록시 클래스가 구현하는 인터페이스 리스트</li>
+  <li>h : 메서드 호출을 처리하는 핸들러</li>
+</ul>
+
+<ol>
+  <li>프록시 클래스를 지정 : Score.class.getClassLoader()</li>
+  <li>프록시 클래스가 구현하는 인터페이스를 지정 : new Class[]{Exam.class}</li>
+  <li>메서드 호출을 처리하는 핸들러 구현 : new InvocationHandler(){}<br>
+.invoke 메서드를 Override 하여 구현하기</li>
+</ol>
+
+<p>시작과 끝을 알리는 코멘트를 추가했으며<br>
+메서드 호출 전후로 시간을 측정하여 차액을 표시하게 해두었다.</p>
+
+<p><strong>&lt;Application.class / 클라이언트 요청부분&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Aop</span> <span class="n">aop</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Aop</span><span class="o">();</span>
+        <span class="nc">Exam</span> <span class="n">exam</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Score</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">80</span><span class="o">,</span><span class="mi">80</span><span class="o">,</span><span class="mi">90</span><span class="o">);</span>
+        <span class="nc">Exam</span> <span class="n">proxy</span> <span class="o">=</span> <span class="n">aop</span><span class="o">.</span><span class="na">aopApply</span><span class="o">(</span><span class="n">exam</span><span class="o">);</span>
+        
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======================="</span><span class="o">);</span>
+        <span class="n">proxy</span><span class="o">.</span><span class="na">total</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======================="</span><span class="o">);</span>
+        <span class="n">proxy</span><span class="o">.</span><span class="na">avg</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======================="</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="cm">/* 출력
+=======================
+START: 0ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+--&gt; total method 시작
+350
+END: 1049ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+=======================
+START: 0ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+--&gt; avg method 시작
+87.5
+END: 2004ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+=======================
+*/</span>
+</code></pre></div></div>
+
+<p>전부 구현을 완료했으니 동작을 해보자!<br>
+Application을 main메서드를 만들어 동작시킬 수 있게 해주었다.<br>
+먼저 각각 점수를 입력하기위해 Exam타입의 Score객체를 만들었다.</p>
+
+<p>만듣 객체는 Aop클래스의 aopApply 매개변수로 객체가 전달되어<br>
+해당 객체로 반환받은 Exam타입의 proxy 참조변수를 이용하여<br>
+.total(), .avg()를 호출 할 수 있다.</p>
+
+<p>출력 결과를 보면 알 수 있듯이 main 메서드에서<br>
+proxy.total() , proxy.avg()를 실행시켰는데<br>
+사이에 우리가 측정하고자하는 공통관심 코드가 적용된 것을 볼 수 있다.</p>
+
+<p>여기서 중요한점 !!<br>
+우리는 Score.class의 있는 코드를 전혀 수정하지 않아도<br>
+공통관심코드가 핵심코드 사이에 햄버거마냥<br>
+딱 끼워져서 동작하는 모습을 볼 수 있다는 점!! ★★</p>
+
+<p>우리가 수백개의 메서드를 추가하여도 공통관심코드를 통해<br>
+메서드가 호출되기때문에 AOP가 잘 적용되어졌다고 볼 수 있을 것 같다.</p>
+
+<h3 id="spring을-이용해-aop-작성해보기"><strong>Spring을 이용해 AOP 작성해보기</strong></h3>
+
+<p>조건은 위에서 작성한 것과 동일하다 이번에는 인터페이스를 이용하지 않고<br>
+Score의 내용을 분리한다음에 Spring의 @Aspect를 이용하여<br>
+위와 동일하게 동작하게 만들어보려한다.</p>
+
+<p><img src="https://ifh.cc/g/9PGsAz.png" align="left" width="400px" height="200px">
+<br><br><br><br><br><br><br><br><br></p>
+
+<p>총 4개의 클래스로 구성했고<br>
+패키지명은 위와 같이 경로를 지정했으니 아래코드에서 헷갈리지말자!<br>
+코드로 내용을 확인해보자.</p>
+
+<p><strong>&lt;Score.class / 점수 관리 객체&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.Setter</span><span class="o">;</span>
+
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Score</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">kor</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">eng</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">math</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">com</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Score</span><span class="o">(</span><span class="kt">int</span> <span class="n">kor</span><span class="o">,</span> <span class="kt">int</span> <span class="n">eng</span><span class="o">,</span> <span class="kt">int</span> <span class="n">math</span><span class="o">,</span> <span class="kt">int</span> <span class="n">com</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">kor</span> <span class="o">=</span> <span class="n">kor</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">eng</span> <span class="o">=</span> <span class="n">eng</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">math</span> <span class="o">=</span> <span class="n">math</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">com</span> <span class="o">=</span> <span class="n">com</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 동일하게 Lombok을 이용해<br>
+Getter,Setter를 만들고 후에 클라이언트에서 객체를 만들어<br>
+점수를 넣고 테스트하려고 만든 클래스이다.</p>
+
+<p><strong>&lt;NewlecService / 핵심 로직(합산,평균)&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewlecService</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">total</span><span class="o">(</span><span class="nc">Score</span> <span class="n">score</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; total method 시작"</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="na">getKor</span><span class="o">()</span>
+                <span class="o">+</span><span class="n">score</span><span class="o">.</span><span class="na">getEng</span><span class="o">()</span>
+                <span class="o">+</span><span class="n">score</span><span class="o">.</span><span class="na">getMath</span><span class="o">()</span>
+                <span class="o">+</span><span class="n">score</span><span class="o">.</span><span class="na">getCom</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">float</span> <span class="nf">avg</span><span class="o">(</span><span class="nc">Score</span> <span class="n">score</span><span class="o">){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; avg method 시작"</span><span class="o">);</span>
+        <span class="kt">float</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">score</span><span class="o">.</span><span class="na">getKor</span><span class="o">()</span>
+                <span class="o">+</span><span class="n">score</span><span class="o">.</span><span class="na">getEng</span><span class="o">()</span>
+                <span class="o">+</span><span class="n">score</span><span class="o">.</span><span class="na">getMath</span><span class="o">()</span>
+                <span class="o">+</span><span class="n">score</span><span class="o">.</span><span class="na">getCom</span><span class="o">())</span> <span class="o">/</span> <span class="mf">4.0f</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Java 코드로 작성한 Score.class와 동일한 부분이다.<br>
+메서드 실행시 코멘트로 알려주고 쓰레드 딜레이를 넣어<br>
+메서드 실행 시간을 늘려주었다.<br>
+@Service를 이용해 Bean에 등록해 스프링 컨테이너가 관리한다.</p>
+
+<p><strong>&lt;TimeTraceAop.class / 공통 관심 코드&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.aspectj.lang.ProceedingJoinPoint</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Around</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Aspect</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+<span class="nd">@Aspect</span> <span class="c1">// AOP</span>
+<span class="nd">@Component</span> <span class="c1">// Bean 등록</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TimeTraceAop</span> <span class="o">{</span>
+
+    <span class="nd">@Around</span><span class="o">(</span><span class="s">"execution(* com.AopExample.Aop_Example..*(..))"</span><span class="o">)</span>
+     <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">execute</span><span class="o">(</span><span class="nc">ProceedingJoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">{</span>
+        <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"START: "</span> <span class="o">+</span> <span class="mi">0</span>  <span class="o">+</span> <span class="s">"ms"</span> <span class="o">+</span> <span class="s">" / "</span> <span class="o">+</span><span class="n">getClass</span><span class="o">());</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">proceed</span><span class="o">();</span>
+        <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+
+            <span class="kt">long</span> <span class="n">end</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"END: "</span> <span class="o">+</span> <span class="o">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="o">)</span> <span class="o">+</span> <span class="s">"ms"</span> <span class="o">+</span> <span class="s">" / "</span> <span class="o">+</span> <span class="n">getClass</span><span class="o">());</span>
+        <span class="o">}</span>
+     <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>동일하게 시간을 측정하는 공통관심 클래스이다.<br>
+@Aspect 어노테이션으로 AOP 사용을 알려주고<br>
+@Component로 Bean을 등록했다.</p>
+
+<p>@Around Adive타입을 이용해 메서드를 만들었고<br>
+Pointcut은 Aop_Example 패키지 전체를 메서드로 지정했다.<br>
+joinPoint.proceed();를 이용해 메서드를 호출하고 있고<br>
+위 아래에 시간을 측정하는 코드를 두었다.</p>
+
+<p><strong>&lt;AopExampleApplication.class / 스프링 부트실행, 클라이언트코드&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.AopExample.Aop_Example.aopSpring.NewlecService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.AopExample.Aop_Example.aopSpring.Score</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.ApplicationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.AnnotationConfigApplicationContext</span><span class="o">;</span>
+
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AopExampleApplication</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">AopExampleApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+      <span class="nc">ApplicationContext</span> <span class="n">applicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">AopExampleApplication</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+      <span class="nc">NewlecService</span> <span class="n">newlecService</span> <span class="o">=</span> <span class="n">applicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"newlecService"</span><span class="o">,</span> <span class="nc">NewlecService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+      <span class="nc">Score</span> <span class="n">myScore</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Score</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">80</span><span class="o">,</span><span class="mi">80</span><span class="o">,</span><span class="mi">90</span><span class="o">);</span>
+
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======================="</span><span class="o">);</span>
+      <span class="n">newlecService</span><span class="o">.</span><span class="na">total</span><span class="o">(</span><span class="n">myScore</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======================="</span><span class="o">);</span>
+      <span class="n">newlecService</span><span class="o">.</span><span class="na">avg</span><span class="o">(</span><span class="n">myScore</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"======================="</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+<span class="cm">/* 출력
+=======================
+START: 0ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+--&gt; total method 시작
+350
+END: 1029ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+=======================
+START: 0ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+--&gt; avg method 시작
+87.5
+END: 2006ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
+=======================
+*/</span>
+</code></pre></div></div>
+
+<p>스프링 부트 실행 클래스 아래에 클라이언트 요청 코드도 같이두었다.<br>
+Java코드로 작성한 것과 다른점은 Java코드에선 proxy 객체를 이용했고<br>
+Spring은 스프링컨테이너(ApplicationContext)에서<br>
+.getBean으로 객체를 가져와 컨테이너에 있는 객체로 메서드를 호출했다.</p>
+
+<p>현재 스프링 컨테이너에 등록된 Bean은<br>
+com.AopExample.Aop_Example.AopExampleApplication$$EnhancerBySpringCGLIB$$62eea1e6@236ab296<br>
+com.AopExample.Aop_Example.aopSpring.NewlecService@5c84624f<br>
+com.AopExample.Aop_Example.aopSpring.TimeTraceAop@63034ed1<br>
+이렇게 3개로 확인해볼 수 있다.</p>
+
+<p>AopExampleApplication은 뒤에 EnhancerBy~~이렇게 붙여져있는데<br>
+스프링에 빈을 등록할때 바이트 코드를 조작한 객체가 스프링 컨테이너에 등록되기 때문이다.<br>
+AOP 기술과 싱글톤 보장의 이유기도하다.<br>
+@Configuration도 동일한 기능을 제공해주고<br>
+@SpringBootApplication을 사용하였기때문에 내부에<br>
+@SpringBootConfiguration이 있기 때문에 위와 같이 바이트 코드가 조작된 객체로 보이는 것이다.</p>
+
+<hr>
+
+<p>오늘은 이렇게 Pointcut 표현식과 JoinPoint에 대해 간단히 알아봤고<br>
+Java로 작성한 AOP기술을 이용한 예제와<br>
+Spring으로 작성한 AOP기술을 이용한 예제<br>
+이렇게 2개를 비교해서 알아보았다.<br>
+동일한 동작을 하는 코드로 작성하였고<br>
+이렇게 두개를 비교하면서 프로그램을 타이핑해보니<br>
+조금더 이해가 쏙쏙되는 느낌이다.</p>
+
+<p>오늘 공부는 여기서 끝!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 제육볶음, 밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/10/17/til.html" title="TIL) Spring AOP 1">TIL) Spring AOP 1</a><a class="next" href="/til/2022/10/19/til.html" title="TIL) 두달차 회고">TIL) 두달차 회고</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/18/til.html" title="TIL) 두달차 회고">TIL) Spring AOP 2</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="TIL) 두달차 회고">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+<li><a class="post-link" href="/til/2022/10/19/til.html" title="TIL) 두달차 회고">TIL) 두달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/10/20/til.html" title="TIL) 두달차 회고">TIL) Spring MVC , Controller</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

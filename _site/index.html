@@ -268,154 +268,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-
-
-
-
-
-<span class="page-link">
-
-
-
-<div id="google_translate_element" style="display: none;">
-</div>
-
-<span class="ct-language">
-  <ul class="list-unstyled ct-language-dropdown">
-    
-      <li>
-        <a href="#" class="lang-select" data-lang="en">
-          
-          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
-          
-        </a>
-      </li>
-    
-      <li>
-        <a href="#" class="lang-select" data-lang="fr">
-          
-          <img src="https://cdn.countryflags.com/thumbs/france/flag-400.png" title="French">
-          
-        </a>
-      </li>
-    
-      <li>
-        <a href="#" class="lang-select" data-lang="zh-CN">
-          
-          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese(Simple)">
-          
-        </a>
-      </li>
-    
-      <li>
-        <a href="#" class="lang-select" data-lang="ja">
-          
-          <img src="https://cdn.countryflags.com/thumbs/japan/flag-400.png" title="Japanese">
-          
-        </a>
-      </li>
-    
-      <li>
-        <a href="#" class="lang-select" data-lang="ko">
-          
-          <img src="https://cdn.countryflags.com/thumbs/south-korea/flag-400.png" title="Korean">
-          
-        </a>
-      </li>
-    
-      <li>
-        <a href="#" class="lang-select" data-lang="ru">
-          
-          <img src="https://cdn.countryflags.com/thumbs/russia/flag-400.png" title="Russian">
-          
-        </a>
-      </li>
-    
-  </ul>
-</span>
-
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    autoDisplay: false,
-    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
-  }, 'google_translate_element');
-
-  // Links to cross-origin destinations are unsafe
-  var gll = document.getElementsByClassName('goog-logo-link')[0];
-  if (gll) {
-    gll.setAttribute('rel', 'noopener');
-  }
-
-  function restoreLang() {
-    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
-    if (!iframe) return;
-
-    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-    var restore_el = innerDoc.getElementsByTagName("button");
-
-    for (var i = 0; i < restore_el.length; i++) {
-      if (restore_el[i].id.indexOf("restore") >= 0) {
-        restore_el[i].click();
-        var close_el = innerDoc.getElementsByClassName("goog-close-link");
-        close_el[0].click();
-        return;
-      }
-    }
-  }
-
-  function triggerHtmlEvent(element, eventName) {
-    var event;
-    if (document.createEvent) {
-      event = document.createEvent('HTMLEvents');
-      event.initEvent(eventName, true, true);
-      element.dispatchEvent(event);
-    } else {
-      event = document.createEventObject();
-      event.eventType = eventName;
-      element.fireEvent('on' + event.eventType, event);
-    }
-  }
-
-  var googleCombo = document.querySelector("select.goog-te-combo");
-  var langSelect = document.querySelector('.ct-language');
-  langSelect.addEventListener('click', function(event) {
-    if (!event.target) {
-      return;
-    }
-
-    var selected = document.querySelector('.ct-language .ct-language-selected');
-    if (selected) {
-      selected.classList.remove('ct-language-selected');
-    }
-
-    var target = event.target;
-    while (target && target !== langSelect ) {
-      if (target.matches('.lang-select')) {
-        break;
-      }
-      target = target.parentElement;
-    }
-
-    if (target && target.matches('.lang-select')) {
-      var lang = target.getAttribute('data-lang');
-      if (googleCombo.value == lang) {
-        restoreLang();
-      } else {
-        target.parentElement.classList.add('ct-language-selected');
-        googleCombo.value = lang;
-        triggerHtmlEvent(googleCombo, 'change');
-      }
-    }
-
-    event.preventDefault();
-  });
-}
-</script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</span>
 </div>
         </nav>
 </div>
@@ -956,7 +808,7 @@ Jekyll 이란?
 
 <h2 class="post-title">
         <a class="post-link" href="/til/2022/10/21/til.html">
-          Spring DTO
+          TIL) Spring DTO
         </a>
       </h2>
       <div class="post-meta">
@@ -1060,7 +912,7 @@ public ResponseEntity postMember(@RequestParam("age") int age,
 
 <h2 class="post-title">
         <a class="post-link" href="/til/2022/10/20/til.html">
-          Spring MVC , Controller
+          TIL) Spring MVC , Controller
         </a>
       </h2>
       <div class="post-meta">
@@ -1091,6 +943,326 @@ Spring MVC가 제공해주는 기능을 이용해서 만들기 때문에 중요�
 
 Model : 작업의 처리 결과 데이터
 View... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/19/til.html">
+          TIL) 두달차 회고
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 19, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/19/til.html">
+        <p>
+        학습의 학습 또 학습..
+매일매일 새로운 것들이 머릿속을 가득채우고있다.
+
+그래서 그런지 시간이 엄청 빨리가는 느낌이다.
+
+
+
+늘 생각한다 개발을 좀더 일찍 시작할껄..하는
+아쉬움이 조금씩 남아있다.
+한편으론 지금이라도 시작해서 다행인 것 같기도하고..
+
+코드스테이츠 부트캠프를 시작한지
+벌써 두달이나 지났다.
+학습에 불만족스러운 부분은 없는 것 같다.
+방치형이라든가 콘텐츠가 불친절하다든가.. 여러 얘기들이 있지만
+
+내가 가지고온 기준은 부트캠프를 통해서
+학습의 방향을 정하고, 내 스스로 학습의지를 높일 수 있도록 하려는 목표가 강했기 때문에
+지금 학습법에 상당한 만족감을 느끼고 있다.
+
+
+
+회고
+
+두달차의 나는?
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/18/til.html">
+          TIL) Spring AOP 2
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 18, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/18/til.html">
+        <p>
+        올해 처음으로 늦잠을 자 지각을 해버렸다..
+
+
+
+
+해야할 일이 있거나 약속이 있으면 무조건
+늦잠을 안자고 번뜩일어나는데
+오늘은 알람소리를 못들었다…..
+수면패턴이 조금 바뀌어서 그런가 싶기도하고
+
+구내염도 난 것 보면
+스트레스관리와 수면관리좀 해야할 것 같다.
+
+
+
+어제는 AOP의 간단한 용어들과\
+Advice의 타입별 사용방법을 알아보았었다.
+오늘은 Pointcut 표현식과 JoinPoint 특징과
+
+자바코드로 예제를 직접짜보고 Spring 적용 변경해보는
+실습을 혼자만들어서 해보자!
+
+
+
+Pointcut 표현식
+
+Pointcut은 어제 알아보았듯이
+우리가 JoinPoint에서 어느 부분을 쓸지 정해주는 부분이... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/17/til.html">
+          TIL) Spring AOP 1
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 17, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/17/til.html">
+        <p>
+        스펙타클한 주말이었다.
+물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…
+
+
+
+
+화재로 인해 전기를 내려서 서버가 죽었고
+장애가 생겨 거의 하루종일 서비스 이용이 안되고
+어떤사람은 전동킥보드를 빌렸는데 서비스장애로
+돈이 10만원 넘게 청구되었단다 ㅋㅋㅋㅋ
+
+뭔가 남일 같지만은 않은…
+나중에 내가 어떤회사의 서비스를 맡고 저런일이 생긴다면
+정말 힘든 나날이 될 것 같다…
+
+
+
+여하튼 오늘은 AOP에 대해 공부하는 날이다.
+AOP는 이론은 정말 간단 한거 같은데
+어떻게 스프링을 이용해 적용하는지가 가장 궁금하다.
+공부를 시작해보자
+
+AOP
+
+Aspect Oriented Programming의 약자이다.
+이전에... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1131,7 +1303,7 @@ View... <span class="read_more">Read More</span>
   <ul>
     <li>
       <a href="/index.html">
-        All<span>3</span>
+        All<span>6</span>
       </a>
     </li>
 
@@ -1144,7 +1316,7 @@ View... <span class="read_more">Read More</span>
     
       <li>
         <a href="/categories.html#h-TIL">
-          TIL <span>2</span>
+          TIL <span>5</span>
         </a>
       </li>
     
