@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Spring DI 2 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Spring DI 2">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="오늘도 스프링 공부를 시작하자 금요일이기 때문에 좀더 열심히 ㅎ…">
+<meta property="og:description" content="오늘도 스프링 공부를 시작하자 금요일이기 때문에 좀더 열심히 ㅎ…">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/14/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/14/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-10-14T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Spring DI 2">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-14T00:00:00+09:00","datePublished":"2022-10-14T00:00:00+09:00","description":"오늘도 스프링 공부를 시작하자 금요일이기 때문에 좀더 열심히 ㅎ…","headline":"TIL) Spring DI 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/14/til.html"},"url":"http://localhost:4000/til/2022/10/14/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring DI 2</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+56</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-10-14T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 14, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>오늘도 스프링 공부를 시작하자<br>
+금요일이기 때문에 좀더 열심히 ㅎ…</p>
+
+<p>주말에 개념공부 조금 더해서 다음주에 차질없도록해야겠다!</p>
+
+<p><img src="https://ifh.cc/g/XqWda2.gif" align="left" width="350px" height="200px">
+<br><br><br><br><br><br><br><br><br></p>
+
+<p>스프링이 나에게도 주입됐으면…</p>
+
+<hr>
+
+<h3 id="configuration"><strong>@Configuration</strong></h3>
+
+<p>이 어노테이션을 단 클래스는<br>
+빈 설정을 담당하는 클래스가 된다. 담당된 클래스 안에서<br>
+@Bean 어노테이션을 메소드에 선언해주면<br>
+그 매소드의 반환된 객체를 통해 빈을 정의하고 생명주기를 설정하게된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppConfig</span> <span class="o">{</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberRepository</span> <span class="nf">memberRepository</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>AppConfig라는 클래스를 빈 설정 담당 클래스로 정하고<br>
+안에 정의된 매소드를 @Bean 어노테이션을 달아<br>
+스프링 컨테이너에서 객체로 관리할 수 있다.</p>
+
+<h3 id="componentscan"><strong>@ComponentScan</strong></h3>
+
+<p>@Component가 붙은 모든 클래스를 스프링이 빈으로 자동등록해준다.<br>
+설정 정보와 같이 붙여주면되고, 의존관계를 자동주입해주는 @Autowired 기능을 제공해준다.<br>
+기본적으로 @Component가 붙으면 자동으로 스캔하면서 빈을 등록하고<br>
+이외에 부가기능을 수행하면서 스캔까지 하는<br>
+어노테이션들(@Service,@Controller, @Configuration, Reposiotry)이 있다.</p>
+
+<p><em><strong>컴포넌트 스캔 용도와 부가기능을 수행하는 애노테이션들</strong></em><br>
+@Service : 특별한처리는 하지 않음. 비지니스로직이 여기에 있구나라는 주석정도의 기능<br>
+@Controller : 스프링 MVC 컨트롤러로 인식<br>
+@Repository : 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환해줌.<br>
+@Configuration : 스프링 설정정보 인식, 스프링 빈이 싱글톤으로 유지하도록 추가 처리해줌</p>
+
+<p>1). 구성정보설정 + 컴포넌트스캔</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AutoAppConfig</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>현재는 탐색위치 default와 필터는 적용되지 않음 (아래에 설명)</p>
+
+<p><br></p>
+
+<p>2). 컴포넌트 + 오토와이어드</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span> <span class="c1">// getBean(MemberRepository memberRepository) 와 같은기능</span>
+    <span class="kd">public</span> <span class="nf">MemberserviceImpl</span><span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>@Autowired</strong>란?</p>
+
+<p>간단하게 스프링 컨테이너안에 우리가 등록해 놓은 Bean을<br>
+자동으로 같은 이름을 찾아서 불러와 주입해주는 것이다.<br>
+즉 우리가 getBean(MemberRepository memberRepository); 와 같은 형식으로<br>
+객체를 확인할 수 있었다면, 이 행위를 Autowired가 매개변수를 보고<br>
+자동으로 찾아서 값을 주입해주는 것이다.</p>
+
+<p><strong>ComponentScan의 기능들</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ComponentScan</span><span class="o">(</span>
+    <span class="n">basePackages</span> <span class="o">=</span> <span class="s">"hello.core.member"</span><span class="o">,</span>
+    <span class="n">basePackageClasses</span> <span class="o">=</span> <span class="nc">AutoConFig</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+    <span class="n">excludeFilters</span> <span class="o">=</span> <span class="nd">@ComponentScan</span><span class="o">.</span><span class="na">Filter</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="nc">FilterType</span><span class="o">.</span><span class="na">ANNOTATION</span><span class="o">,</span> <span class="n">classes</span> <span class="o">=</span> <span class="nc">Configuration</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="o">)</span> <span class="c1">// AppConfig의 수동으로 등록한 것을 제외시킴</span>
+</code></pre></div></div>
+
+<p><em><strong>basePackage</strong></em><br>
+탐색 시작위치를 정한다. 이패키지를 포함해서 하위 패키지를 모두 탐색함</p>
+
+<p><em><strong>basePackageClasses</strong></em><br>
+지정한 클래스의 패키지를 탐색 시작 위로 지 정한다.</p>
+
+<p><em><strong>default</strong></em><br>
+basePackage, basePackageClasses를 지정을안했을경우<br>
+ComponentScan이 붙은 설정 정보 클래스의 패키지가 시작 위치가 된다.</p>
+
+<p><span style="color:#F04965"> ** ComponentScan은 SpringBootApplication 안에 포함되어있어<br> 
+SpringBootApplication을 패키지 상위에 두는 것이 관례이다.<br>
+즉, 패키지 상위에 둘 경우 패키지 안에 있는 내용을 확인한다. </span></p>
+
+<p><em><strong>Filter</strong></em><br>
+위의 코드로만 보면 Configuration애노테이션이 붙은 클래스는<br>
+컴포넌트 스캔을 하지 않는 다는 뜻이다.<br>
+(기본적으로 Configureation도 @Component가 붙어있어 스캔대상이다.)</p>
+
+<p>includeFilters : 컴포넌트 스캔 대상을 추가로 지정<br>
+excludeFilters : 컴포넌트 스캔에서 제외할 대상을 지정</p>
+
+<p><strong><em>FilterType 옵션</em></strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>옵션</th>
+      <th>내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ANNOTATION</td>
+      <td>기본값, 애노테이션을 인식해 동작</td>
+    </tr>
+    <tr>
+      <td>ASSIGNABLE_TYPE</td>
+      <td>지정한 타입과 자식 타입을 인식해 동작</td>
+    </tr>
+    <tr>
+      <td>ASPECTJ</td>
+      <td>AspectJ 패턴 사용</td>
+    </tr>
+    <tr>
+      <td>REGEX</td>
+      <td>정규 표현 사용</td>
+    </tr>
+    <tr>
+      <td>CUSTOM</td>
+      <td>TypeFilter라는 인터페이스를 구현해서 처리</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<p><strong>자동 빈등록 vs 자동 빈등록 시 충돌 날 경우</strong></p>
+
+<p>Component 이름이 충돌날경우 ex) @Component(“memberService”) 두개가 존재할때<br>
+이름 변경외에는 충돌날일이 거의 없다.<br>
+만약 충돌이 날경우에 아래와 같은 런타임 에러가 발생한다.</p>
+
+<p><img src="https://ifh.cc/g/rX3OWM.png" align="left" width="300px" height="35px">
+<br><br><br><br></p>
+
+<p><strong>수동 빈 빈동록 vs 자동 빈등록 충돌 날 경우</strong><br>
+오버라이딩된다. 수동 빈이 자동빈을 오버라이딩해버린다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemoryMemberRepository</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AutoAppConfig</span> <span class="o">{</span>
+    <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"memoryMemberRepository"</span><span class="o">)</span>
+    <span class="nc">MemberRepositroy</span> <span class="nf">memberRepositroy</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemoryMemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>예를 들어 @Componet 애노테이션이 붙은<br>
+클래스 MemoryMemberRepository는 자동으로 빈등록이된다.<br>
+(name = memoryMemberRepository , 첫문자는 소문자로 저장됨)</p>
+
+<p>@Bean을 통해 수동으로 등록해준빈의 이름을<br>
+동일하게 memoryMemberRepository로 바꾸었을때</p>
+
+<p><img src="https://ifh.cc/g/8j7hBQ.png" align="left" width="500px" height="30px">
+<br><br><br></p>
+
+<p>위와 같이 오러라이딩 되었다고 하고 정상 실행된다.<br>
+하지만 스프링 프레임워크에서는 오류가 나질 않고 오버라이딩 되지만<br>
+스프링 부트로 실행 시킬 경우에는 에러가 발생하게끔 default로 설정되어있다.</p>
+
+<p>**&lt;스프링 부트를="" 실행시킬때="" 발생하는="" 에러=""&gt;**스프링&gt;</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The bean 'memoryMemberRepository', defined in class path resource [hello/core/AutoAppConfig.class], could not be registered. A bean with that name has already been defined in file [/Users/ljh/Desktop/Study/인프런_김영한/1. Spring 핵심 원리/1. 객체지향 설계와 스프링_자료/progrma_spring/core/build/classes/java/main/hello/core/member/MemoryMemberRepository.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+</code></pre></div></div>
+
+<p>위에서 명시하기로는 오버라이딩의 경우가 있어 에러가 발생한 것이다.<br>
+아래에서 spring.main.allow-bean-definition-overriding=trure 셋팅을 해주면<br>
+오버라이딩된채로 사용할 수 있다고 한다.</p>
+
+<p><img src="https://ifh.cc/g/x2VtKR.png" align="left" width="600px" height="150px">
+<br><br><br><br><br><br><br></p>
+
+<p>위 사진과 같이 애플리케이션 속성에 동일하게 설정하면<br>
+에러를 실행하지 않고 정상적으로 실행되는 모습을 볼 수 있다.</p>
+
+<p><br></p>
+
+<p><strong>@Bean 과 @Component의 차이점?</strong></p>
+
+<p>여기서 Bean과 Component의 중요한 차이점이 보이는데</p>
+
+<p>@Bean은 메서드 레벨에서 선언하며, 반환되는 객체를 개발자가<br>
+수동으로 등록하는 애노테이션이다.</p>
+
+<p>@Component는 클래스 레벨에서 선언함으로 스프링이 런타입시에<br>
+컴포넌트스캔을 하여 자동으로 빈을 찾고 등록하는 애노테이션이다.</p>
+
+<p>이말은 무슨말이냐.<br>
+만약 외부라이브러리를 사용한다고 가정할떄<br>
+@Component 애노테이션을 그 해당 외부라이브러리 클래스 위에<br>
+붙여주지 못한다. 우리가 건드릴 수 없기 때문이다.<br>
+그렇기에 @Bean을 이용해 외부라이브러리 클래스의<br>
+메소드로 반환되는 객체를 수동으로 Spring 컨테이너에 등록해주는 것이고</p>
+
+<p>@Component는 위에서 얘기했듯이<br>
+우리가 자바코드로 작성중인 클래스위에 붙여서 많이 쓴다.</p>
+
+<p>즉, Bean = 외부라이브러리 사용시 사용 / Component =  내부 클래스에서 사용</p>
+
+<p><br></p>
+
+<h3 id="여러-주입-방법"><strong>여러 주입 방법</strong></h3>
+
+<p>의존성을 주입하는 방법은 크게 4가지가있다<br>
+성자 주입, setter 주입, 필드 주입, 일반 메서드 주입</p>
+
+<p>그 중 우리가 계속 사용하게될거는 생성자 주입이다.<br>
+간단하게 3가지 정도를 알아보자</p>
+
+<p>1). 생성자 주입</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">MemberserviceImpl</span><span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 생성자를 통해서<br>
+참조변수에 객체를 넣어주는게 생성자 주입이다.</p>
+
+<p>2). setter 주입</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">setMemberRepositroy</span> <span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>생성자주입과 유사하지만 setter주입은<br>
+setter 메서드를 생성하여 의존 관계를 주입하게된다.</p>
+
+<p>3). 필드주입</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>필드 변수에 @Autowired 애노테이션을달아 주입하는 방법이다.<br>
+코드가 간결해지지만 외부에서 변경이 불가능하다.</p>
+
+<hr>
+
+<p>오늘은 의존성 주입에 여러 형태와<br>
+@ComponentScan 어노테이션에 대한 여러가지를 알아보았다.<br>
+어느정도 이해가간다. Componet를 이용해<br>
+클래스를 빈으로 만들고 컨테이너에서 관리함으로<br>
+@Autowired를 사용해 그 객체를 주입해준다!! 라는 흐름은 어느정도<br>
+이해한 것 같다. 공부하면서 여러가지 개념들과<br>
+심도있는 지식들이 나올때 집중력을 잃었지만<br>
+주말을 통해서 오늘까지 배웠던 내용을 좀더 정리를하고 다음주를 맞이해야겠다</p>
+
+<p>오늘 공부는 여기서 끝!!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️ <br>
+<strong>오늘의 점심</strong>: 삽겹살, 밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<span></span><a class="next" href="/til/2022/10/17/til.html" title="TIL) Spring AOP 1">TIL) Spring AOP 1</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/21/til.html" title="TIL) Spring AOP 1">TIL) Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/10/18/til.html" title="TIL) Spring AOP 1">TIL) Spring AOP 2</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="TIL) Spring AOP 1">TIL) Spring AOP 1</a></li>
+<li><a class="post-link" href="/til/2022/10/24/til.html" title="TIL) Spring AOP 1">TIL) Spring MVC Serivce 계층</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

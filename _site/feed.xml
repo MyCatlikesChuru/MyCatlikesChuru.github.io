@@ -1,4 +1,307 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-23T18:48:11+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Jekyll GitHub Page 댓글, 파비콘 꾸미기</title><link href="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&favicon.html" rel="alternate" type="text/html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기" /><published>2022-10-22T00:00:00+09:00</published><updated>2022-10-22T00:00:00+09:00</updated><id>http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon</id><content type="html" xml:base="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html"><![CDATA[<h1 id="jekyll-테마-적용">Jekyll 테마 적용</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-24T20:35:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring MVC Serivce 계층</title><link href="http://localhost:4000/til/2022/10/24/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC Serivce 계층" /><published>2022-10-24T00:00:00+09:00</published><updated>2022-10-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/24/til.html"><![CDATA[<p>주말이 지나고 월요일이 왔다.</p>
+
+<p><img src="https://ifh.cc/g/Sl0oOY.gif" align="left" width="250px" height="300px" />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+
+<p>주말동안 정규식 복습과 블로그 개설 준비를했다.<br />
+오늘 부터는 GitHub Page로 만든 블로그로 포스팅을 할려고한다.<br />
+하려고하려고 했는데, 드디어 개설할 수 있어서<br />
+포스팅하는 맛이 날 것 같다 ㅎㅎ</p>
+
+<hr />
+
+<h2 id="service">Service</h2>
+
+<p>저번주에 API 계층에 대해서 공부 했었다.<br />
+Controller의 핸들러 메서드를 통해서<br />
+클라이언트의 요청을 어떻게 전달 받을 수 있는지?까지 파악해보았고</p>
+
+<p>이번 시간부터는 Service 계층을 공부해볼 시간이다.</p>
+<ol>
+  <li>DI를 사용해 API 계층과 Service 계층을 연동하기</li>
+  <li>API 계층의 DTO클래스와 Service 계층의 Entity 클래스를 매핑하기</li>
+</ol>
+
+<p>Service 클래스는 애플리케이션에 있어<br />
+도메인 업무 영역을 구현하는 비지니스 로직과 관련이 있다.</p>
+
+<p><br /></p>
+
+<h3 id="lombok">lombok</h3>
+<p>시작에 앞서 <strong>lombok</strong>에서 지원하는 어노테이션<br />
+5가지정도 간단하게 알아보자</p>
+
+<p>1). @NoArgsConstructor : 파라미터가 없는 기본 생성자로 만들어줌</p>
+
+<p>2). @RequiredArgsConstructor : final, @NonNull로 붙은 멤버 변수를 파라미터로 가지는 생성자를 생성해줌 <br />
+   -&gt; 생성자를 만들어주기때문에 생성자가 하나일경우 자동으로 @Autowired가 된다.</p>
+
+<p>3). @AllArgsConstructor :해당 애노테이션이 붙은 클레스에 추가된 모든 멤버 변수를 파라미터로 가지는 생성자를 생성해줌</p>
+
+<p>4). @Getter : 멤버 변수의 Getter 메서드를 만들어줌</p>
+
+<p>5).@Setter : 멤버 변수의 Setter 메서드를 만들어줌</p>
+
+<p>말로 들으면 어려우니 코드로 확인해보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 코드가 lombok 어노테이션을 적용한 코드이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getMemberId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">memberId</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">email</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMemberId</span><span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberId</span> <span class="o">=</span> <span class="n">memberId</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">//NoArgsConstructor 애노테이션으로 만들어진 생성자</span>
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="c1">//AllArgsConstructor 애노테이션으로 만들어진 생성자</span>
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">email</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberId</span> <span class="o">=</span> <span class="n">memberId</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>해당 lombok 어노테이션을 build하면 위와 같이 코드가<br />
+자동으로 생성되서 빌드되게 되어진다.</p>
+
+<p>말그대로 우리가 코드를 직접 다 입력하지않아도<br />
+lomobk의 기능을 이용하면 어노테이션 하나로<br />
+어떤기능이 있는지 쉽게 유추가 가능하고 코드도 간결해진다.</p>
+
+<h3 id="service-계층---api-계층--dto---entity-맵핑">Service 계층 - API 계층 / DTO - Entity 맵핑</h3>
+
+<p>저번주에 공부했던 API 계층의 데이터를 받기위해<br />
+핸들러 메서드를 통해 JSON 객체 값을 DTO로 받아오는 것 까지 공부를 했었다.<br />
+이제 이렇게 받아온 데이터를 Service 계층과 어떻게<br />
+연동 시키고 코드를 작성해야 유연한지 공부해보자.</p>
+
+<p>우선 기본로직을 작성해보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Coffee</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Entity 클래스인 Coffee 클래스이다.<br />
+lombok을 이용해 Getter,Setter 메서드를 사용할 수 있게 해주고<br />
+생성자는 매개변수가 없는 생성자 1개 (NoArgsConstructor)<br />
+매개변수가 4개인 생성자 1개 (AllArgsConstructor)<br />
+해서 총 2개의 생성자가 만들어졌다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeePostDto</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그리고 API 계층에서 보내줄 데이터<br />
+3개를 멤버변수로 만들었다.</p>
+
+<p><br /></p>
+
+<p>역할과 기능을 나누기위해서<br />
+Controller에는 API 데이터를 가져오고 반환해주는 역할만 두고<br />
+Service 클래스를 만들어 비지니스로직을 만들고<br />
+Mapper를 이용해 Dto와 Entity클래스를 매핑하여 연동해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeService</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">createCoffee</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">){</span>
+        
+        <span class="c1">// coffee 객체는 추후 DB연결후 리턴받는 걸로 변경 필요.</span>
+        <span class="nc">Coffee</span> <span class="n">toss</span> <span class="o">=</span> <span class="n">coffee</span><span class="o">;</span>
+
+        <span class="k">return</span> <span class="n">toss</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>우선 Service 클래스를 Bean으로 등록해놓고<br />
+의존성 주입을 통행 createCoffee(); 메서드를<br />
+다른 클래스에서 사용할 수 있게 된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/api/coffees"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeController</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeService</span> <span class="n">coffeeService</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeMapper</span> <span class="n">coffeeMapper</span><span class="o">;</span>
+   
+   <span class="nd">@Autowired</span> <span class="c1">// 의존성 주입, 생성자가 1개라 생략가능함</span>
+   <span class="kd">public</span> <span class="nf">CoffeeController</span><span class="o">(</span><span class="nc">CoffeeService</span> <span class="n">coffeeService</span><span class="o">,</span> <span class="nc">CoffeeMapper</span> <span class="n">coffeeMapper</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">coffeeService</span> <span class="o">=</span> <span class="n">coffeeService</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">coffeeMapper</span> <span class="o">=</span> <span class="n">coffeeMapper</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="nd">@PostMapping</span>
+   <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postCoffee</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">CoffeePostDto</span> <span class="n">coffeePostDto</span><span class="o">)</span> <span class="o">{</span>
+
+      <span class="nc">Coffee</span> <span class="n">coffee</span> <span class="o">=</span> <span class="n">coffeeMapper</span><span class="o">.</span><span class="na">coffeePostDtoToCoffee</span><span class="o">(</span><span class="n">coffeePostDto</span><span class="o">);</span> <span class="c1">// DTO &lt;-&gt; Entity 변환</span>
+      <span class="nc">Coffee</span> <span class="n">response</span> <span class="o">=</span> <span class="n">coffeeService</span><span class="o">.</span><span class="na">createCoffee</span><span class="o">(</span><span class="n">coffee</span><span class="o">);</span> <span class="c1">// Coffee 생성</span>
+
+      <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">coffeeMapper</span><span class="o">.</span><span class="na">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="n">response</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Controller 클래스에서는 CoffeeService,CoffeeMapper 를 의존성 주입해놓고<br />
+Mapper 클래스인 coffeeMapper를 만들어 coffeePostDto를 &lt;-&gt; entity의 맵핑을 시켜주는<br />
+방법으로 프로그램을 작성했다. 최종적으로 맵핑시켜 받은 객체를<br />
+Service로직의 createCoffee로 객체를 만들어 반환받은 Coffee 클래스 참조 변수를<br />
+coffeeToCoffeeResponseDto라는 맵퍼를 이용해 Json 객체를 통해 반환해주는 모습이다.</p>
+
+<p><br /></p>
+
+<p>이제 @Mapper라는 어노테이션을 이용해<br />
+추상화 시켜 Mapper 클래스를 작성해보자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="nl">mapstruct:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
+<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="n">mapstruct</span><span class="o">-</span><span class="nl">processor:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
+</code></pre></div></div>
+<p>우선 gradle dependencies에 위의 코드를 추가해줘야 Mapper를 사용가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CoffeeMapper</span> <span class="o">{</span>
+    <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDto</span><span class="o">);</span>
+    <span class="nc">CoffeeResponseDto</span> <span class="nf">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이렇게 인터페이스를 통해 메서드를 추상화 시켜놓으면<br />
+Mapper 클래스가 자동으로 빌드과정에서 구현체를 만들어준다.<br />
+해당 구현체의 내용은 첫줄부터 보자면</p>
+
+<p>Coffee coffeePostDtoToCoffee(CoffeePostDto coffeePostDto);<br />
+coffeePostDto로 전달된 객체를 Coffee 타입의 변수로 값을 넣어준다.<br />
+넣을때는 생성자와 Setter로 넣어준다. 말그대로 @Mapper하나를<br />
+달아놓음으로서 자동으로 코드가 주입되는 것이다.<br />
+실제로 빌드해놓은 코드를 보면 아래와 같이 나온다.</p>
+
+<p><strong>&lt;@Mapper를 통해 자동으로 Build된 코드&gt;</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">coffeePostDtoo</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="nc">Coffee</span> <span class="n">coffee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Coffee</span><span class="o">();</span>
+      <span class="n">coffee</span><span class="o">.</span><span class="na">setKorName</span><span class="o">(</span><span class="n">coffeePostDtoo</span><span class="o">.</span><span class="na">getKorName</span><span class="o">());</span>
+      <span class="n">coffee</span><span class="o">.</span><span class="na">setEngName</span><span class="o">(</span><span class="n">coffeePostDtoo</span><span class="o">.</span><span class="na">getEngName</span><span class="o">());</span>
+      <span class="n">coffee</span><span class="o">.</span><span class="na">setPrice</span><span class="o">(</span><span class="n">coffeePostDtoo</span><span class="o">.</span><span class="na">getPrice</span><span class="o">());</span>
+      <span class="k">return</span> <span class="n">coffee</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>다른 부분들은 생략하고 coffeePostDto 부분만 보면<br />
+위처럼 coffeePostDto를 매개변수로 전달해<br />
+참조변수에 값이 있으면, Coffee 객체를 생성자를 통해 새로만들어<br />
+setter로 필드변수에 값을 넣어주는 모습이다.</p>
+
+<p>실제로 Coffee 클래스에는 @NoArgsConstructor가 있기 때문에<br />
+매개변수가 없는 생성자를 통해 객체가 만들어지고<br />
+@Sette가 있기에 필드변수에 값을 넣어 줄 수 있게되어진다.<br />
+실제로 @Setter를 지우게되면 다른 방법으로 값을 넣을 방법을 찾는다.</p>
+
+<p><strong>&lt;Coffee 클래스의 @Setter를 지운고 @Mapper를 통해 자동으로 Build한 코드 &gt;</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">coffeePostDtoo</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="nc">Coffee</span> <span class="n">coffee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Coffee</span><span class="o">();</span>
+      <span class="k">return</span> <span class="n">coffee</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>@Setter를 지웠을 경우에 위처럼 빌드과정에서 Mapper를 통해<br />
+값을 전달해주는 코드가 달라지게된다. 이렇게 되면<br />
+Setter가 없기때문에 객체만 만들어져서 전달될 뿐 Dto로 전달된 값이<br />
+새로운 객체로 저장되어지지 않으니 주의해야한다.</p>
+
+<p><br /></p>
+
+<p>마지막으로 응답을할 때 전달해준 Dto를 만들었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeResponseDto</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>해당 클래스도 생성자와, Getter,Setter를 만들어주고<br />
+Controller에서 return하여 값을 응답할 때<br />
+Coffee객체를 CoffeeMapper로 맵핑하여 다시 리턴하게될 수 있게<br />
+만들어준 클래스이다.</p>
+
+<p><br /></p>
+
+<p>이렇게 오늘 프로그램해본 내용을 정리해보자면</p>
+
+<ol>
+  <li>@Mapper 기능을 통해 핸들러메서드로 받은 값 DTO를 -&gt; Entity 객체생성 및 값을 맵핑함<br />
+ex) coffeePostDto -&gt; Coffee 필드변수의 값을 저장.</li>
+  <li>coffeeMapper 클래스를 통해 반환 받은 객체를 저장</li>
+  <li>2번에서 반환받은 Coffee객체를 Service 로직의 활용</li>
+  <li>Service 로직에서 반환 받은 객체를 coffeeMapper로 전달</li>
+  <li>전달받은 coffeeMapper에서 응답에 해당하는 객체를 ResponEntity 객체와 함께 반환<br />
+하여 Json 객체로 클라이언트에 전달</li>
+</ol>
+
+<hr />
+
+<p>오늘은 이렇게 @Mapper 기능을 이용해<br />
+자동으로 맵핑해주고 사용한는 방법을 배워 보았고<br />
+아직까지 어색하긴하지만 대략적으로 어떻게<br />
+전달되고 묶여지는지 감이 잡히기 시작하고 있다.</p>
+
+<p>아직 DataBase가 연결이안되 이해가 안가는 부분이 사실 있지만<br />
+차근차근 Step by Step으로 알아가보자</p>
+
+<p>오늘공부는 여기서 끝!!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 간짜장, 공기밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[주말이 지나고 월요일이 왔다.]]></summary></entry><entry><title type="html">Jekyll GitHub Page 댓글, 파비콘 꾸미기</title><link href="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&favicon.html" rel="alternate" type="text/html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기" /><published>2022-10-22T00:00:00+09:00</published><updated>2022-10-22T00:00:00+09:00</updated><id>http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon</id><content type="html" xml:base="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html"><![CDATA[<h1 id="jekyll-테마-적용">Jekyll 테마 적용</h1>
 
 <p><br /></p>
 
@@ -125,9 +428,8 @@ _config.yml 파일에서 favicon: ““이라고 되어있는 부분에<br />
 아무래도 Markdown언어로 작성하다보니 확실히 시간소요가 더 되는 것 같다.<br />
 그래도 앞으로 사용하다보면 빨라질거라 생각하며 첫 포스팅을 마친다. 😃</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Jekyll" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><category term="GitHub Pages" /><summary type="html"><![CDATA[Jekyll 테마 적용]]></summary></entry><entry><title type="html">TIL) Spring DTO</title><link href="http://localhost:4000/til/2022/10/21/til.html" rel="alternate" type="text/html" title="TIL) Spring DTO" /><published>2022-10-21T00:00:00+09:00</published><updated>2022-10-21T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/21/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/21/til.html"><![CDATA[<p>section 3가 시간한 첫번째 금요일</p>
 
-<p><img src="https://ifh.cc/g/lfoBC7.gif" align="left" /></p>
-
-<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+<p><img src="https://ifh.cc/g/lfoBC7.gif" align="left" width="350px" height="250px" />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
 
 <p>나태해지는 요일이랄까..?<br />
 주말에 공부는할건데 금요일이되면 그냥 설렌다<br />
@@ -327,7 +629,7 @@ ex) @PatchMapping(“/{coffee-id}”) public ResponseEntity patchCoffee(@PathVar
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 오징어 덮밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[section 3가 시간한 첫번째 금요일]]></summary></entry><entry><title type="html">TIL) Spring MVC , Controller</title><link href="http://localhost:4000/til/2022/10/20/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC , Controller" /><published>2022-10-20T00:00:00+09:00</published><updated>2022-10-20T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/20/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/20/til.html"><![CDATA[<p>오랜만에 깊은 숙면을 했다.</p>
+<strong>오늘의 점심</strong>: 오징어 덮밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[section 3가 시간한 첫번째 금요일]]></summary></entry><entry><title type="html">TIL) Spring MVC Controller 계층</title><link href="http://localhost:4000/til/2022/10/20/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC Controller 계층" /><published>2022-10-20T00:00:00+09:00</published><updated>2022-10-20T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/20/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/20/til.html"><![CDATA[<p>오랜만에 깊은 숙면을 했다.</p>
 
 <p><img src="https://ifh.cc/g/j3W1OJ.jpg" align="left" width="300px" height="300px" />
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
@@ -1595,4 +1897,308 @@ joinPoint.procced(); 위,아래로 출력문을 넣어<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ <br />
-<strong>오늘의 점심</strong>: 제육볶음, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[스펙타클한 주말이었다. 물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 제육볶음, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[스펙타클한 주말이었다. 물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…]]></summary></entry><entry><title type="html">TIL) Spring DI 2</title><link href="http://localhost:4000/til/2022/10/14/til.html" rel="alternate" type="text/html" title="TIL) Spring DI 2" /><published>2022-10-14T00:00:00+09:00</published><updated>2022-10-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/14/til.html"><![CDATA[<p>오늘도 스프링 공부를 시작하자<br />
+금요일이기 때문에 좀더 열심히 ㅎ…</p>
+
+<p>주말에 개념공부 조금 더해서 다음주에 차질없도록해야겠다!</p>
+
+<p><img src="https://ifh.cc/g/XqWda2.gif" align="left" width="350px" height="200px" />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+
+<p>스프링이 나에게도 주입됐으면…</p>
+
+<hr />
+
+<h3 id="configuration"><strong>@Configuration</strong></h3>
+
+<p>이 어노테이션을 단 클래스는<br />
+빈 설정을 담당하는 클래스가 된다. 담당된 클래스 안에서<br />
+@Bean 어노테이션을 메소드에 선언해주면<br />
+그 매소드의 반환된 객체를 통해 빈을 정의하고 생명주기를 설정하게된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppConfig</span> <span class="o">{</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberRepository</span> <span class="nf">memberRepository</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>AppConfig라는 클래스를 빈 설정 담당 클래스로 정하고<br />
+안에 정의된 매소드를 @Bean 어노테이션을 달아<br />
+스프링 컨테이너에서 객체로 관리할 수 있다.</p>
+
+<h3 id="componentscan"><strong>@ComponentScan</strong></h3>
+
+<p>@Component가 붙은 모든 클래스를 스프링이 빈으로 자동등록해준다.<br />
+설정 정보와 같이 붙여주면되고, 의존관계를 자동주입해주는 @Autowired 기능을 제공해준다.<br />
+기본적으로 @Component가 붙으면 자동으로 스캔하면서 빈을 등록하고<br />
+이외에 부가기능을 수행하면서 스캔까지 하는<br />
+어노테이션들(@Service,@Controller, @Configuration, Reposiotry)이 있다.</p>
+
+<p><em><strong>컴포넌트 스캔 용도와 부가기능을 수행하는 애노테이션들</strong></em><br />
+@Service : 특별한처리는 하지 않음. 비지니스로직이 여기에 있구나라는 주석정도의 기능<br />
+@Controller : 스프링 MVC 컨트롤러로 인식<br />
+@Repository : 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환해줌.<br />
+@Configuration : 스프링 설정정보 인식, 스프링 빈이 싱글톤으로 유지하도록 추가 처리해줌</p>
+
+<p>1). 구성정보설정 + 컴포넌트스캔</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AutoAppConfig</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>현재는 탐색위치 default와 필터는 적용되지 않음 (아래에 설명)</p>
+
+<p><br /></p>
+
+<p>2). 컴포넌트 + 오토와이어드</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span> <span class="c1">// getBean(MemberRepository memberRepository) 와 같은기능</span>
+    <span class="kd">public</span> <span class="nf">MemberserviceImpl</span><span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>@Autowired</strong>란?</p>
+
+<p>간단하게 스프링 컨테이너안에 우리가 등록해 놓은 Bean을<br />
+자동으로 같은 이름을 찾아서 불러와 주입해주는 것이다.<br />
+즉 우리가 getBean(MemberRepository memberRepository); 와 같은 형식으로<br />
+객체를 확인할 수 있었다면, 이 행위를 Autowired가 매개변수를 보고<br />
+자동으로 찾아서 값을 주입해주는 것이다.</p>
+
+<p><strong>ComponentScan의 기능들</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ComponentScan</span><span class="o">(</span>
+    <span class="n">basePackages</span> <span class="o">=</span> <span class="s">"hello.core.member"</span><span class="o">,</span>
+    <span class="n">basePackageClasses</span> <span class="o">=</span> <span class="nc">AutoConFig</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+    <span class="n">excludeFilters</span> <span class="o">=</span> <span class="nd">@ComponentScan</span><span class="o">.</span><span class="na">Filter</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="nc">FilterType</span><span class="o">.</span><span class="na">ANNOTATION</span><span class="o">,</span> <span class="n">classes</span> <span class="o">=</span> <span class="nc">Configuration</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="o">)</span> <span class="c1">// AppConfig의 수동으로 등록한 것을 제외시킴</span>
+</code></pre></div></div>
+
+<p><em><strong>basePackage</strong></em><br />
+탐색 시작위치를 정한다. 이패키지를 포함해서 하위 패키지를 모두 탐색함</p>
+
+<p><em><strong>basePackageClasses</strong></em><br />
+지정한 클래스의 패키지를 탐색 시작 위로 지 정한다.</p>
+
+<p><em><strong>default</strong></em><br />
+basePackage, basePackageClasses를 지정을안했을경우<br />
+ComponentScan이 붙은 설정 정보 클래스의 패키지가 시작 위치가 된다.</p>
+
+<p><span style="color:#F04965"> ** ComponentScan은 SpringBootApplication 안에 포함되어있어<br /> 
+SpringBootApplication을 패키지 상위에 두는 것이 관례이다.<br />
+즉, 패키지 상위에 둘 경우 패키지 안에 있는 내용을 확인한다. </span></p>
+
+<p><em><strong>Filter</strong></em><br />
+위의 코드로만 보면 Configuration애노테이션이 붙은 클래스는<br />
+컴포넌트 스캔을 하지 않는 다는 뜻이다.<br />
+(기본적으로 Configureation도 @Component가 붙어있어 스캔대상이다.)</p>
+
+<p>includeFilters : 컴포넌트 스캔 대상을 추가로 지정<br />
+excludeFilters : 컴포넌트 스캔에서 제외할 대상을 지정</p>
+
+<p><strong><em>FilterType 옵션</em></strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>옵션</th>
+      <th>내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ANNOTATION</td>
+      <td>기본값, 애노테이션을 인식해 동작</td>
+    </tr>
+    <tr>
+      <td>ASSIGNABLE_TYPE</td>
+      <td>지정한 타입과 자식 타입을 인식해 동작</td>
+    </tr>
+    <tr>
+      <td>ASPECTJ</td>
+      <td>AspectJ 패턴 사용</td>
+    </tr>
+    <tr>
+      <td>REGEX</td>
+      <td>정규 표현 사용</td>
+    </tr>
+    <tr>
+      <td>CUSTOM</td>
+      <td>TypeFilter라는 인터페이스를 구현해서 처리</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>자동 빈등록 vs 자동 빈등록 시 충돌 날 경우</strong></p>
+
+<p>Component 이름이 충돌날경우 ex) @Component(“memberService”) 두개가 존재할때<br />
+이름 변경외에는 충돌날일이 거의 없다.<br />
+만약 충돌이 날경우에 아래와 같은 런타임 에러가 발생한다.</p>
+
+<p><img src="https://ifh.cc/g/rX3OWM.png" align="left" width="300px" height="35px" />
+<br /><br /><br /><br /></p>
+
+<p><strong>수동 빈 빈동록 vs 자동 빈등록 충돌 날 경우</strong><br />
+오버라이딩된다. 수동 빈이 자동빈을 오버라이딩해버린다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemoryMemberRepository</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AutoAppConfig</span> <span class="o">{</span>
+    <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"memoryMemberRepository"</span><span class="o">)</span>
+    <span class="nc">MemberRepositroy</span> <span class="nf">memberRepositroy</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemoryMemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>예를 들어 @Componet 애노테이션이 붙은<br />
+클래스 MemoryMemberRepository는 자동으로 빈등록이된다.<br />
+(name = memoryMemberRepository , 첫문자는 소문자로 저장됨)</p>
+
+<p>@Bean을 통해 수동으로 등록해준빈의 이름을<br />
+동일하게 memoryMemberRepository로 바꾸었을때</p>
+
+<p><img src="https://ifh.cc/g/8j7hBQ.png" align="left" width="500px" height="30px" />
+<br /><br /><br /></p>
+
+<p>위와 같이 오러라이딩 되었다고 하고 정상 실행된다.<br />
+하지만 스프링 프레임워크에서는 오류가 나질 않고 오버라이딩 되지만<br />
+스프링 부트로 실행 시킬 경우에는 에러가 발생하게끔 default로 설정되어있다.</p>
+
+<p>**<스프링 부트를="" 실행시킬때="" 발생하는="" 에러="">**</스프링></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The bean 'memoryMemberRepository', defined in class path resource [hello/core/AutoAppConfig.class], could not be registered. A bean with that name has already been defined in file [/Users/ljh/Desktop/Study/인프런_김영한/1. Spring 핵심 원리/1. 객체지향 설계와 스프링_자료/progrma_spring/core/build/classes/java/main/hello/core/member/MemoryMemberRepository.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+</code></pre></div></div>
+
+<p>위에서 명시하기로는 오버라이딩의 경우가 있어 에러가 발생한 것이다.<br />
+아래에서 spring.main.allow-bean-definition-overriding=trure 셋팅을 해주면<br />
+오버라이딩된채로 사용할 수 있다고 한다.</p>
+
+<p><img src="https://ifh.cc/g/x2VtKR.png" align="left" width="600px" height="150px" />
+<br /><br /><br /><br /><br /><br /><br /></p>
+
+<p>위 사진과 같이 애플리케이션 속성에 동일하게 설정하면<br />
+에러를 실행하지 않고 정상적으로 실행되는 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>@Bean 과 @Component의 차이점?</strong></p>
+
+<p>여기서 Bean과 Component의 중요한 차이점이 보이는데</p>
+
+<p>@Bean은 메서드 레벨에서 선언하며, 반환되는 객체를 개발자가<br />
+수동으로 등록하는 애노테이션이다.</p>
+
+<p>@Component는 클래스 레벨에서 선언함으로 스프링이 런타입시에<br />
+컴포넌트스캔을 하여 자동으로 빈을 찾고 등록하는 애노테이션이다.</p>
+
+<p>이말은 무슨말이냐.<br />
+만약 외부라이브러리를 사용한다고 가정할떄<br />
+@Component 애노테이션을 그 해당 외부라이브러리 클래스 위에<br />
+붙여주지 못한다. 우리가 건드릴 수 없기 때문이다.<br />
+그렇기에 @Bean을 이용해 외부라이브러리 클래스의<br />
+메소드로 반환되는 객체를 수동으로 Spring 컨테이너에 등록해주는 것이고</p>
+
+<p>@Component는 위에서 얘기했듯이<br />
+우리가 자바코드로 작성중인 클래스위에 붙여서 많이 쓴다.</p>
+
+<p>즉, Bean = 외부라이브러리 사용시 사용 / Component =  내부 클래스에서 사용</p>
+
+<p><br /></p>
+
+<h3 id="여러-주입-방법"><strong>여러 주입 방법</strong></h3>
+
+<p>의존성을 주입하는 방법은 크게 4가지가있다<br />
+성자 주입, setter 주입, 필드 주입, 일반 메서드 주입</p>
+
+<p>그 중 우리가 계속 사용하게될거는 생성자 주입이다.<br />
+간단하게 3가지 정도를 알아보자</p>
+
+<p>1). 생성자 주입</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">MemberserviceImpl</span><span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 생성자를 통해서<br />
+참조변수에 객체를 넣어주는게 생성자 주입이다.</p>
+
+<p>2). setter 주입</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">public</span> <span class="nf">setMemberRepositroy</span> <span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>생성자주입과 유사하지만 setter주입은<br />
+setter 메서드를 생성하여 의존 관계를 주입하게된다.</p>
+
+<p>3). 필드주입</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>필드 변수에 @Autowired 애노테이션을달아 주입하는 방법이다.<br />
+코드가 간결해지지만 외부에서 변경이 불가능하다.</p>
+
+<hr />
+
+<p>오늘은 의존성 주입에 여러 형태와<br />
+@ComponentScan 어노테이션에 대한 여러가지를 알아보았다.<br />
+어느정도 이해가간다. Componet를 이용해<br />
+클래스를 빈으로 만들고 컨테이너에서 관리함으로<br />
+@Autowired를 사용해 그 객체를 주입해준다!! 라는 흐름은 어느정도<br />
+이해한 것 같다. 공부하면서 여러가지 개념들과<br />
+심도있는 지식들이 나올때 집중력을 잃었지만<br />
+주말을 통해서 오늘까지 배웠던 내용을 좀더 정리를하고 다음주를 맞이해야겠다</p>
+
+<p>오늘 공부는 여기서 끝!!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️ <br />
+<strong>오늘의 점심</strong>: 삽겹살, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘도 스프링 공부를 시작하자 금요일이기 때문에 좀더 열심히 ㅎ…]]></summary></entry></feed>

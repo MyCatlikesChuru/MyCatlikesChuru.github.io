@@ -709,6 +709,108 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/24/til.html">
+          TIL) Spring MVC Serivce 계층
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 24, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/24/til.html">
+        <p>
+        주말이 지나고 월요일이 왔다.
+
+
+
+
+주말동안 정규식 복습과 블로그 개설 준비를했다.
+오늘 부터는 GitHub Page로 만든 블로그로 포스팅을 할려고한다.
+하려고하려고 했는데, 드디어 개설할 수 있어서
+포스팅하는 맛이 날 것 같다 ㅎㅎ
+
+
+
+Service
+
+저번주에 API 계층에 대해서 공부 했었다.
+Controller의 핸들러 메서드를 통해서
+클라이언트의 요청을 어떻게 전달 받을 수 있는지?까지 파악해보았고
+
+이번 시간부터는 Service 계층을 공부해볼 시간이다.
+
+  DI를 사용해 API 계층과 Service 계층을 연동하기
+  API 계층의 DTO클래스와 Service 계층의 Entity 클래스를 매핑하기... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html">
           Jekyll GitHub Page 댓글, 파비콘 꾸미기
         </a>
@@ -822,7 +924,6 @@ Jekyll 이란?
 
 
 
-
 나태해지는 요일이랄까..?
 주말에 공부는할건데 금요일이되면 그냥 설렌다
 오늘은 예전부터 미뤄왔던 Github IO 블로그를 꾸미고있다…
@@ -840,7 +941,7 @@ Data Transfer Object의 약자로 
 
 @PostMapping
 public ResponseEntity postMember(@RequestParam("age") int age,
-   ... <span class="read_more">Read More</span>
+    ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -912,7 +1013,7 @@ public ResponseEntity postMember(@RequestParam("age") int age,
 
 <h2 class="post-title">
         <a class="post-link" href="/til/2022/10/20/til.html">
-          TIL) Spring MVC , Controller
+          TIL) Spring MVC Controller 계층
         </a>
       </h2>
       <div class="post-meta">
@@ -1269,6 +1370,110 @@ Aspect Oriented Programming의 약자이다.
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
 </div>
     </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/14/til.html">
+          TIL) Spring DI 2
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 14, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/14/til.html">
+        <p>
+        오늘도 스프링 공부를 시작하자
+금요일이기 때문에 좀더 열심히 ㅎ…
+
+주말에 개념공부 조금 더해서 다음주에 차질없도록해야겠다!
+
+
+
+
+스프링이 나에게도 주입됐으면…
+
+
+
+@Configuration
+
+이 어노테이션을 단 클래스는
+빈 설정을 담당하는 클래스가 된다. 담당된 클래스 안에서
+@Bean 어노테이션을 메소드에 선언해주면
+그 매소드의 반환된 객체를 통해 빈을 정의하고 생명주기를 설정하게된다.
+
+@Configuration
+public class AppConfig {
+    @Bean
+    public MemberService memberService (){
+        return new MemberServic... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1303,7 +1508,7 @@ Aspect Oriented Programming의 약자이다.
   <ul>
     <li>
       <a href="/index.html">
-        All<span>6</span>
+        All<span>8</span>
       </a>
     </li>
 
@@ -1316,7 +1521,7 @@ Aspect Oriented Programming의 약자이다.
     
       <li>
         <a href="/categories.html#h-TIL">
-          TIL <span>5</span>
+          TIL <span>7</span>
         </a>
       </li>
     
