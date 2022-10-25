@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-25T18:50:53+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">구글 드라이브로 이미지 url 적용하기</title><link href="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html" rel="alternate" type="text/html" title="구글 드라이브로 이미지 url 적용하기" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/it/2022/10/25/it-etc-imageurl</id><content type="html" xml:base="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html"><![CDATA[<h1 id="이미지-url-적용하기">이미지 url 적용하기</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-25T20:06:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">구글 드라이브로 이미지 url 적용하기</title><link href="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html" rel="alternate" type="text/html" title="구글 드라이브로 이미지 url 적용하기" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/it/2022/10/25/it-etc-imageurl</id><content type="html" xml:base="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html"><![CDATA[<h1 id="이미지-url-적용하기">이미지 url 적용하기</h1>
 <p>네이버 블로그나 Tistory 등…<br />
 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서<br />
 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.</p>
@@ -142,7 +142,7 @@ tip) 윈도우 단축키 : F12</strong></p>
 그리고 아이클라우드나, 구글드라이브같이 우리가 널리 사용하는<br />
 서비스이기 때문에  데이터가 날라갈 걱정을 할 필요는 없으니</p>
 
-<p>조금 안심된 블로그 이미지를 사용할 수 있을 듯한? 기분이다 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="IT" /><category term="이미지 url" /><category term="구글 드라이브" /><summary type="html"><![CDATA[이미지 url 적용하기 네이버 블로그나 Tistory 등… 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.]]></summary></entry><entry><title type="html">TIL) Spring Exception</title><link href="http://localhost:4000/til/2022/10/25/til.html" rel="alternate" type="text/html" title="TIL) Spring Exception" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/25/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/25/til.html"><![CDATA[<p>매일 매일 다짐하지만<br />
+<p>조금 안심된 블로그 이미지를 사용할 수 있을 듯한? 기분이다 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="IT" /><category term="이미지 url" /><category term="구글 드라이브" /><summary type="html"><![CDATA[이미지 url 적용하기 네이버 블로그나 Tistory 등… 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.]]></summary></entry><entry><title type="html">TIL) Spring Exception 1</title><link href="http://localhost:4000/til/2022/10/25/til.html" rel="alternate" type="text/html" title="TIL) Spring Exception 1" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/25/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/25/til.html"><![CDATA[<p>매일 매일 다짐하지만<br />
 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..</p>
 
 <p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmR0ojECPgvr59qNqcpS6o9lEXTD-ON7Y-v4gZAV7K5p1nohAe7rImugv-030uzKwua0HVAn6Sk=w3024-h1728" align="left" /><br />
@@ -157,7 +157,7 @@ tip) 윈도우 단축키 : F12</strong></p>
 
 <p>그래도 차근차근 학습해보자</p>
 
-<h1 id="spring-exception">Spring Exception</h1>
+<h2 id="spring-exception">Spring Exception</h2>
 
 <p>클라이언트가 전달 받는 Response Body는<br />
 애플리케이션에서 예외가 발생했을 때, 내부적으로 Spring에서<br />
@@ -170,7 +170,7 @@ tip) 윈도우 단축키 : F12</strong></p>
 <p>이제 클라이언트쪽에 에러메세지를 더 구체적으로 해줄 수 있는<br />
 방법에 대해 공부해보자</p>
 
-<h2 id="exceptionhandler">@ExceptionHandler</h2>
+<h3 id="exceptionhandler">@ExceptionHandler</h3>
 
 <p>Controller 레벨에서 하는 예외처리다.</p>
 
@@ -383,7 +383,7 @@ Json 객체로 반환하는 모습을 볼 수 있다.</p>
 
 <p><br /></p>
 
-<h2 id="restcontrolleradvice">@RestControllerAdvice</h2>
+<h3 id="restcontrolleradvice">@RestControllerAdvice</h3>
 <p>ExceptionHandler와 같이 사용하게 될 경우<br />
 위에서 학습했던 단점을 해결해주기위한 애노테이션이다 !</p>
 
@@ -450,7 +450,7 @@ ConstraintViolationErrors도 가져와야하는 프로그램을<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>:</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[매일 매일 다짐하지만 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..]]></summary></entry><entry><title type="html">TIL) Spring MVC Serivce 계층</title><link href="http://localhost:4000/til/2022/10/24/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC Serivce 계층" /><published>2022-10-24T00:00:00+09:00</published><updated>2022-10-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/24/til.html"><![CDATA[<p>주말이 지나고 월요일이 왔다.</p>
+<strong>오늘의 점심</strong>: 불고기 덮밥, 스팸, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[매일 매일 다짐하지만 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..]]></summary></entry><entry><title type="html">TIL) Spring MVC Serivce 계층</title><link href="http://localhost:4000/til/2022/10/24/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC Serivce 계층" /><published>2022-10-24T00:00:00+09:00</published><updated>2022-10-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/24/til.html"><![CDATA[<p>주말이 지나고 월요일이 왔다.</p>
 
 <p><img src="https://ifh.cc/g/Sl0oOY.gif" align="left" width="250px" height="300px" />
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>

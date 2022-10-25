@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Spring DI 1 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Spring DI 1">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="이번주 화요일 부터 오늘까지는 스프링과 친숙해지는 시간이 시작되었다.">
+<meta property="og:description" content="이번주 화요일 부터 오늘까지는 스프링과 친숙해지는 시간이 시작되었다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/13/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/13/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-10-13T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Spring DI 1">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-13T00:00:00+09:00","datePublished":"2022-10-13T00:00:00+09:00","description":"이번주 화요일 부터 오늘까지는 스프링과 친숙해지는 시간이 시작되었다.","headline":"TIL) Spring DI 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/13/til.html"},"url":"http://localhost:4000/til/2022/10/13/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring DI 1</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+55</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-10-13T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 13, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>이번주 화요일 부터 오늘까지는<br>
+스프링과 친숙해지는 시간이 시작되었다.</p>
+
+<p>프레임워크란? 라이브러리란? POJO 원칙에 대한 내용들<br>
+아키텍처란? 등등 여러가지 스프링 프레임워크를 사용하기 위한<br>
+내용에 대한 전반 적인 학습이 이루어졌다.</p>
+
+<p>이해했다고 하면 거짓말이고, 어느정도 이런 것이구나?<br>
+라는 개념은 잡혔다. 이제 본격적으로 맛보고 즐기면서<br>
+스프링에 대해 탐구해보자</p>
+
+<hr>
+
+<p>오늘은 어그제 배웠던 POJO의<br>
+DI 의존성 주입에 대한 내용을 좀 더 파고들어보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmR6EuH8fVTbnaI6ufNo1Lgr9sRaJ8_ETDMrRR5l85T6yl__BkTTq_nNsBM5i0LjSp_nuJswXcY=w3024-h1728" align="left"></p>
+
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<h2 id="di"><strong>DI</strong></h2>
+
+<p>Dependency Injection<br>
+의존성 주입. 어제 포스팅에서 간단하게 설명했기에 넘어가겠다.<br>
+객체간의 강한 결합 (new 키워드를 사용해 만든객체)들과 느슨한 결합 등이있다.<br>
+우리는 느슨한 결합을 통해 최대한 서비스코드 수정포인트를 줄여야한다.</p>
+
+<h3 id="의존성-주입예제"><strong>의존성 주입예제</strong></h3>
+
+<p><strong>1). 의존성 주입이 아닌경우</strong><br>
+-. 의존 관계이긴하나 DI적용이 안되어 강한 관계를 가짐</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberRepository</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같은 코드의 경우 MemberReposity의 메서드나 필드변수를 사용하기 위해서<br>
+MemberRepository 클래스를 참조해 객체를 만들었다.</p>
+
+<p><strong>2). 의존성 주입의 경우</strong><br>
+-. 의존 관계이면서 DI가 적용되어 관계가 느슨해짐</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">MemberService</span> <span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 코드 같은 경우는 동일하게 MemberRepository의 메서드나 필드변수를 사용하기 위해서<br>
+객체를 참조하게 만들었는데, 방법이 다르다.</p>
+
+<p>필드변수 memberRepository에 값을 할당하지 않고<br>
+생성자를 통해 받은 객체의 참조값을 this.memberRepository에 넣어주고있다.<br>
+그렇다는건 지금 현재 코드가 작성되어 있는 클래스가아닌<br>
+다른 클래스에서 MemberSerivce를 생성자를 통해 객체를 전달하면<br>
+그 전달된 객체를 받아 쓸 수 있는 것이다.</p>
+
+<p>여기서 중요한점은 1번의 프로그램 같은 경우에는 내가 직접 어떤 데이터를 넣을지 정해주고<br>
+2번과 같은 경우에는 저코드만봐서 어떤 객체가 들어오는지 모른다는 점이다.<br>
+1번,2번 둘다 동일한 코드고<br>
+memberRepository 객체를 참조해서<br>
+안에 있는 메서드와 필드변수를 사용할 수 있다.<br>
+위에까지는 의존성 주입의 방법이며<br>
+아래의 코드는 순수 자바코드로 외부에서 객체를 정해주는 코드라 볼 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">MemberRepository</span> <span class="nf">memberRepository</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">DependencyConfig</span> <span class="n">dependencyConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DependencyConfig</span><span class="o">();</span>
+        <span class="nc">MemberService</span> <span class="n">memberService</span> <span class="o">=</span> <span class="n">dependencyConfig</span><span class="o">.</span><span class="na">memberService</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>MemberService 쪽의 코드를 건들지 않아도<br>
+새로 추가되거나 변경되어도<br>
+외부에 있는 클래스(DependencyConfig, MemberTest)의 내용 만 변경해서<br>
+다른 객채를 넣어주면 MemeberService 변경된 객체안에서<br>
+동일하게 동작하게되어진다.</p>
+
+<h3 id="spring-container"><strong>Spring Container</strong></h3>
+
+<p>스프링 컨테이너, 이름만 보아도 무언가를 담고있는<br>
+통? 이라는 느낌이 드는 네이밍이다.</p>
+
+<p>스프링 컨테이너는 Bean 생성,관리, 제거 등의 역할을 담당한다.<br>
+즉, 내부에 존재하는 애플리케이션 빈의 생명주기를 관리한다.<br>
+객체간의 의존성을 낮추기 위해 사용한다고한다.</p>
+
+<p>위의 예제에서 DependencyConfig클래스의 역할을 한다 보면 될 것 같다.<br>
+스프링 컨테이너 의 빈을 넣는 방법이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ApplicationContext</span> <span class="n">ac</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">DependencyConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>ApplicationContext는 인터페이스이다. 일반적으로 스프링 컨테이너라고 부른다<br>
+AnnotationConfigApplicationContext는 ApplicationContext의 구현체 이다.<br>
+이름그대로 어노테이션 기반의 스프링컨테이너를 만들어주는거고<br>
+다형성에 의해 참조가 가능하다.</p>
+
+<p>우선 위의 코드를 적용시 아래와 같은 그림 형식을 띈다고 생각하면 될 것 같다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQfnIyJEMFPnf4oCUJX4g18ulDuOClgEm2HeoEsrFCY-hh397HP9_eiPk_OrwMXbw_H1FTbQ9I=w3024-h1728" align="left" width="500px">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>컨테이너 안에있는 Bean 객체에 대한 구성정보를 활용할 수 있다.<br>
+위의 예제로든 클래스를 이렇게 어노테이션을 붙여주면</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
+	
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberRepository</span> <span class="nf">memberRepository</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>스프링 컨테이너 안에 2개의 빈이 등록되는 것이다.</p>
+<ol>
+  <li>빈이름 : memberService / 빈객체 : 반환된 MemberService 객체</li>
+  <li>빈이름 : memberRepository / 빈객체 : 반환된 MemberRepository 객체</li>
+</ol>
+
+<p>위에서 얘기했듯이<br>
+ApplicationContext를 일반적으로 스프링 컨테이너라 부르는데<br>
+계층도를 이해할 필요가 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTNS-VfT3x5IvukZkl2LfWlEn9XPufCVgVUbwYtVe7aZH6GGBc0Mzq1-y9aUdAW64k3eW_oK9E=w3024-h1728" align="left" width="300px"><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>최상위에 BeanFactory를 상속 받고 있는 모습이다.</p>
+
+<p><strong>BeanFactory</strong></p>
+<ol>
+  <li>스프링 컨테이너의 최상위 인터페이스이다.</li>
+  <li>스프링 빈으 관리하고 조회하는 역할을 담당</li>
+  <li>getBean()을 제공한다.</li>
+  <li>위에서 사용했던 대부분의 기능이 BeanFactroy의 기능이다.</li>
+</ol>
+
+<p>ApplicationContext가 상속받아 BeanFactory의 기능을<br>
+확장하여 사용하고 있는 것이다.</p>
+
+<p>그것의 구현체인 AnnotationConfigApplicationContext를<br>
+하위 클래스로 참조하기때문에 우리는 getBean()으로 Bean값을 얻어올 수 있는 것이다.<br>
+AnnotationConfigApplicationContext 이외에도<br>
+XML파일로 스프링 컨테이너를 만들 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GenericXmlApplicationContext</span><span class="o">(</span><span class="s">"DependencyConfig.xml"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>똑같이 AppicationContext의 구현체이며 이전에는<br>
+어노테이션 기반이였으면, 위의 클래스는 XML파일을 기반으로한다.<br>
+최종적으로 상속도를 보면 이러한 식으로 전개된다</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQh9oMoaD0SihPNwL3J3qppeAMVPvzjG5kChk2iZMyOV0TTpSOq_lZsgB-dtD9S_xX2JJzch0c=w3024-h1728" align="left" width="800px"><br>
+<br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>ApplicationContext는 상위에 있는 기능들을 확장해서 쓰고<br>
+실제로 구현체인 하위 클래스들이 내용을 구현해준다.</p>
+
+<h3 id="bean"><strong>Bean</strong></h3>
+
+<p>우리의 콩. 빈이다.<br>
+인스턴스화된 객체라고 생각하면 쉬 울 것 같다.<br>
+위에서 얘기했던 스프링 컨테이너에 등록된 객체를 스프링 빈이라고 한다.<br>
+@Bean으로 적힌 메서드들을 저장한다.</p>
+
+<p>반대로 호출도 가능하다.<br>
+빈을 호출하는 방법이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ApplicationContext</span> <span class="n">applicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">AppConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="nc">MemberService</span> <span class="n">memberService</span> <span class="o">=</span> <span class="n">applicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"memberService"</span><span class="o">,</span><span class="nc">MemberService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>위에서 MemberService라는 메서드를 @Bean으로 지정 해주었기에<br>
+해당 이름으로 해당객체를 getBean(메서드이름, 클래스이름);<br>
+통해서 객체를 가져올 수 있다.</p>
+
+<p>즉, memberService로 해당 스프링컨테이너의 빈을 참조 할 수 있다.<br>
+(실제로는 getBean은 사용하지 않음)</p>
+
+<p><strong>BeanDefinition</strong><br>
+위의 코드처럼 XML, Java 코드를 구분해주고 다양하게 설정 형식을 지원하는<br>
+이유의 중심에는 BeanDefinition이라는 추상화가 있기 때문이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQMd9lF_8DOQRbyjTePXWQQ_ky7G7UJA8PC8YxSdt1T4W5F9ML5Kvrre9PSlSl1Z0aTJ0fZ494=w3024-h1728" align="left" width="500px"><br>
+<br><br><br><br><br><br></p>
+
+<p>스프링 컨테이너는 어떠한 형식의 파일이 오던<br>
+BeanDefinition만 알면된다.<br>
+그것을 기반으로 Bean을 관리하는 것이다.<br>
+이 BeanDefinition을 빈 설정 메타정보라고한다.</p>
+
+<p>스프링 컨테이너는 이 메타정보를 기반으로 스프링 빈을 생성한다.</p>
+
+<p><em><strong>빈 설정 메타 정보</strong></em></p>
+
+<ul>
+  <li>
+    <p>beanClassName : 빈 오브젝트의 클래스 이름. 빈 오브젝트는 이 클래스의 인스턴스가 된다.<br>
+                  -&gt; default : 없음. 필수항목</p>
+  </li>
+  <li>
+    <p>id/name : 빈의 식별<br>
+-&gt; default : 없음</p>
+  </li>
+  <li>
+    <p>parentName : 빈 메타정보를 상속받을 부모 BeanDefinition의 이름. 빈의 메타정보는 계층구조로 상속할 수 있다.<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>factoryBeanName : 팩토리 역할을 하는 빈을 이용해 빈 오브젝트를 생성하는 경우에 팩토리 빈의 이름을 지정한다.<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>factoryMethodName : 다른 빈 또는 클래스의 메소드를 통해 빈 오브젝트를 생성하는 경우 그 메소드 이름을 지정한다.<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>scope : 빈 오브젝트의 생명주기를 결정하는 스코프를 지정한다. 크게 싱글톤과 비싱글톤 스코프로 구분할 수 있다.<br>
+-&gt; default : 싱글톤.</p>
+  </li>
+  <li>
+    <p>lazyInit : 빈 오브젝트의 생성을 최대한 지연할 것인지를 지정한다. 이 값이 true이면 컨테이너는 빈 오브젝트의 생성을 꼭 필요한 시점까지 미룬다.<br>
+-&gt; default : false</p>
+  </li>
+  <li>
+    <p>dependsOn : 먼저 만들어져야 하는 빈을 지정할 수 있다. 빈 오브젝트의 생성 순서가 보장돼야 하는 경우 이용한다. 하나 이상의 빈 이름을 지정할 수 있다.<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>autowireCandidate : 명시적인 설정이 없어도 미리 정해진 규칙을 가지고 자동으로 DI 후보를 결정하는 자동와이어링의 대상으로 포함시킬지의 여부<br>
+-&gt; default : true</p>
+  </li>
+  <li>
+    <p>primary : 자동와이어링 작업 중에 DI 대상 후보가 여러 개가 발생하는 경우가 있다. 이때 최종 선택의 우선권을 부여할지 여부. primary가 지정된 빈이 없이 여러 개의 후보가 존재하면 자동와이어링 예외가 발생한다.<br>
+-&gt; default : false</p>
+  </li>
+  <li>
+    <p>abstract : 메타정보 상속에만 사용할 추상 빈으로 만들지의 여부. 추상 빈이 되면 그 자체는 오브젝트가 생성되지 않고 다른 빈의 부모 빈으로만 사용된다.<br>
+-&gt; default : false</p>
+  </li>
+  <li>
+    <p>autowireMode : 오토와이어링 전략. 이름,타입,생성자,자동인식 등의 방법이 있다.<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>dependencyCheck : 프로퍼티 값 또는 레퍼런스가 모두 설정되어 있는지 검증하는 작업의 종류<br>
+-&gt; default : 체크하지 않음.</p>
+  </li>
+  <li>
+    <p>initMethod : 빈이 생성되고 DI를 마친 뒤에 실행할 초기화 메소드의 이름<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>destroyMethod : 빈의 생명주기가 다 돼서 제거하기 전에 호출할 메소드의 이름<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>propertyValues : 프로퍼티의 이름과 설정 값 또는 레퍼런스. 수정자 메소드를 통한 DI작업에서 사용한다.<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>constructorArgumentValues : 생성자의 이름과 설정 값 또는 레퍼런스. 생성자를 통한 DI작업에서 사용한다.<br>
+-&gt; default : 없음.</p>
+  </li>
+  <li>
+    <p>annotationMetadata : 빈 클래스에 담긴 애노테이션과 그 애트리뷰트 값. 애노테이션을 이용하는 설정에서 활용한다.<br>
+-&gt; default : 없음.</p>
+  </li>
+</ul>
+
+<h3 id="singleton"><strong>Singleton</strong></h3>
+
+<p>스프링 프레임워크에서 Bean 스코프는 6개의 범위를 지원하고<br>
+위에서 알아본 ApplicationContext를 사용하는 경우에는 4개를 사용할 수 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>스코프</th>
+      <th>설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Singleton</td>
+      <td>각 Spring 컨테이너에 대한 단일 객체 인스턴스에 bean definition의 범위를 지정 (기본값임)</td>
+    </tr>
+    <tr>
+      <td>Prorotype</td>
+      <td>스프링 컨테이너는 프로토탕비 빈의 생성과 의존관계 주입까지만 관여함</td>
+    </tr>
+    <tr>
+      <td>Request</td>
+      <td>웹 요청이 들어오고 나갈때 까지 유지되는 스코프</td>
+    </tr>
+    <tr>
+      <td>Session</td>
+      <td>웹 세션이 생성되고 종료될 때 까지 유지되는 스코프</td>
+    </tr>
+    <tr>
+      <td>Application</td>
+      <td>웹 서블릿 컨텍스와 같은 범위로 유지되는 스코프</td>
+    </tr>
+    <tr>
+      <td>Websocket</td>
+      <td>단일 bean definition 범위를 Websocket의 라이프사이클까지 확장한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이중에서 우선은 싱글톤(Singleton) 스코프에 대해 알아보자.<br>
+싱글톤 스코프를 알아보기 전에<br>
+우리는 프로그램 작성시 여러가지 디자인 패턴들이 있다.</p>
+
+<p>그 중 싱글톤 패턴도 있는데<br>
+최초의 메모리를 한번만 할당하고 그 메모리로 인스턴스를 만들어 사용하는 패턴이다.</p>
+
+<p>즉, 여러가지 객체를 만들지 않고 한가지 객체로 돌려쓰는? 것 같은 느낌이다.<br>
+공유한다고하니 딱 static이라는 공유변수가 떠오른다<br>
+실제로도 싱글톤패턴으로 프로그래밍을 할 수 있다.</p>
+
+<p>위에서 했던 예제를 들어보자</p>
+
+<p><strong>기존 객체 만드는 패턴</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
+	
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">MemberRepository</span> <span class="nf">memberRepository</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">DependencyConfig</span> <span class="n">dependencyConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DependencyConfig</span><span class="o">();</span>
+        <span class="nc">MemberService</span> <span class="n">memberService1</span> <span class="o">=</span> <span class="n">dependencyConfig</span><span class="o">.</span><span class="na">memberService</span><span class="o">();</span>
+        <span class="nc">MemberService</span> <span class="n">memberService2</span> <span class="o">=</span> <span class="n">dependencyConfig</span><span class="o">.</span><span class="na">memberService</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">memberService1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">memberService2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>우리가 이렇게 코드가 있다고 가정할때<br>
+memberService1과 memberService2는 각각 새로운 객체가 생긴다.<br>
+출력하게되면</p>
+
+<p>MemberService@8bcc55f<br>
+MemberService@58644d46</p>
+
+<p>이런 상이한 객체로 출력되게 되어진다.<br>
+이렇게 될 경우에는 싱글톤패턴이아니게되고 클라이언트에서 요청할 때마다<br>
+새로운 객체를 계속 만들게 되는 셈이다.</p>
+
+<p><strong>싱글톤 패턴 적용</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">SingletonService</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SingletonService</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">SingletonService</span> <span class="nf">getInstance</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nf">SingletonService</span><span class="o">(){}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonTest</span> <span class="o">{</span>
+
+    <span class="nc">SingletonService</span> <span class="n">singletonService1</span> <span class="o">=</span> <span class="nc">SingletonService</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+    <span class="nc">SingletonService</span> <span class="n">singletonService2</span> <span class="o">=</span> <span class="nc">SingletonService</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"singletonService1 : "</span> <span class="o">+</span> <span class="n">singletonService1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"singletonService2 : "</span> <span class="o">+</span> <span class="n">singletonService2</span><span class="o">);</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>만약에 위와 같이 static공유 변수를 이용한다면<br>
+서로 다른 객체를 만들어도 동일한 객체를 사용하게 되어진다.<br>
+출력할 경우</p>
+
+<p>MemberService@8bcc55f<br>
+MemberService@8bcc55f</p>
+
+<p>와 같이 동일한 객체가 출력되는 모습을 볼 수 있다.</p>
+
+<p>즉, 처음 인스턴스 생성시에 객체가 만들어지고<br>
+해당하는 객체로 같이 쓰게 되어지는 것이다.<br>
+하지만 매번 메서드의 싱글톤 코드를 사용할 수 없을 뿐더러<br>
+여러가지 문제점이 존재한다.</p>
+
+<p>DIP를 위반하기도하고, 클라이언트가 구체 클래세 의존해서<br>
+OCP원칙을 위반할 가능성도 높다.<br>
+내부 속성을 변경하거나 초기화하기도 여렵고, private 생성자로 자식 클래스를<br>
+만들기도 어렵다. 즉, 유연성이 떨어진다.</p>
+
+<p>이러한 문제점들을 Spring은 보완해주고 있다.
+스프링 컨테이너 ApplicationContext를 이용하면<br>
+Default로 싱글톤을 지원하고 있다.</p>
+
+<p>**&lt;스프링 컨테이너를="" 이용한="" 싱글톤=""&gt;**스프링&gt;</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
+	
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberRepository</span> <span class="nf">memberRepository</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberApp</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ApplicationContext</span> <span class="n">applicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">DependencyConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="nc">MemberService</span> <span class="n">memberService1</span> <span class="o">=</span> <span class="n">applicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"memberService"</span><span class="o">,</span><span class="nc">MemberService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="nc">MemberService</span> <span class="n">memberService2</span> <span class="o">=</span> <span class="n">applicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"memberService"</span><span class="o">,</span><span class="nc">MemberService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">memberService1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">memberService2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위에서 얘기했듯이 기본적으로 스프링컨테이너는<br>
+싱글톤을 지원하기 때문에  getBean으로 얻은 객체인<br>
+memberService1 과 memberService2 각각 객체를 받아도<br>
+스프링 컨테이너 내부에서 하나의 객체로 사용하게되어<br>
+출력하게되면</p>
+
+<p>MemberService@8bcc55f<br>
+MemberService@8bcc55f</p>
+
+<p>이렇게 동일한 객체가 출력되는 것을 볼 수 있다.<br>
+싱글톤 방식을 쓸 때 주의할점은<br>
+같은 객체로 여러명의 클라이언트가 사용할 수 있기 때문에<br>
+객체는 상태를 유지하게 설계하면 안된다.</p>
+
+<p>즉! <strong>무상태(stateless)로 설계해야한다</strong><br>
+1). 특정 클라이언트에 의존적인 필드 x<br>
+2). 특정 클라이언트가 값을 변경할 수 있는 필드 x<br>
+3). 가급적 읽기만 가능해야한다.<br>
+4). 필드 대신에 자바에서 공유되지 않는, 지역변수, 파라미터, ThreadLocal 등을 사용해야한다.</p>
+
+<hr>
+
+<p>오늘은 많은 내용이라면 많은내용이지만<br>
+여러가지 유익한 내용들을 많이배웠다.<br>
+스프링 컨테이너와 빈에 대해 조금 더 이해한 느낌이고<br>
+이제 이렇게 관리를하면서 어떻게 프로그램을 설계하고 활용하는지?가<br>
+조금 궁금하다. 오늘 했던것 스프링 컨테이너에 빈을 등록해 해당 빈을 호출하<br>
+그 객체로 의존성주입이되고, 호출한 객체로 여러가지 확인해보고<br>
+작업해보는 시간이었다. 이제 웹서비스 전반적으로<br>
+어떤것을 스프링컨테이너에 담는지? 담아놓고 어떻게 서비스를 구축하는지?에<br>
+대해서 여러가지 물음이 생기지만 차차 지식을 쌓아가면서<br>
+알아가는 것으로 해보자</p>
+
+<p>오늘 공부는 여기서 끝!!!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 라면</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/10/12/til.html" title="TIL) Spring Basic 2">TIL) Spring Basic 2</a><a class="next" href="/til/2022/10/14/til.html" title="TIL) Spring DI 2">TIL) Spring DI 2</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/20/til.html" title="TIL) Spring DI 2">TIL) Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/it/2022/10/25/it-etc-imageurl.html" title="TIL) Spring DI 2">구글 드라이브로 이미지 url 적용하기</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="TIL) Spring DI 2">TIL) Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/10/12/til.html" title="TIL) Spring DI 2">TIL) Spring Basic 2</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
