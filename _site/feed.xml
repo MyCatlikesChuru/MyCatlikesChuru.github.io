@@ -1,148 +1,157 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-25T20:06:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">구글 드라이브로 이미지 url 적용하기</title><link href="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html" rel="alternate" type="text/html" title="구글 드라이브로 이미지 url 적용하기" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/it/2022/10/25/it-etc-imageurl</id><content type="html" xml:base="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html"><![CDATA[<h1 id="이미지-url-적용하기">이미지 url 적용하기</h1>
-<p>네이버 블로그나 Tistory 등…<br />
-타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서<br />
-올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-26T18:06:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Exception 2</title><link href="http://localhost:4000/til/2022/10/26/til.html" rel="alternate" type="text/html" title="TIL) Spring Exception 2" /><published>2022-10-26T00:00:00+09:00</published><updated>2022-10-26T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/26/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/26/til.html"><![CDATA[<p>요즘 스프링 공부하는게 너무 재밌다.</p>
 
-<p>하지만… 나와 같이 GitHub Page를 사용한다거나<br />
-개인 블로그를 운영중인 분들은<br />
-이미지를 올리기 위해 다른 방법을 찾아야한다.</p>
+<p>처음에 이해가 가지않았을 때는 이게 뭔가 싶기도하고,,<br />
+학습의지가 떨어졌는데 어느 순간 깨달음을 얻고 나서는<br />
+다음 학습이 기대되고 얼른 더 다른걸 해보고 싶다.</p>
 
-<ol>
-  <li>GitHub에 사진을 같이 올리고 , 경로로 사진표시<br />
--&gt; 해당 방법은 GitHub 저장소가 초과하면 애매해진다..</li>
-  <li>이미지를 url로 변경 시켜 관리하기<br />
--&gt; 이미지를 url로 변경시키고 저장을 유지시켜주는 안전한 플랫폼이 필요</li>
-</ol>
+<p>어제는 클라이언트에서 받은 데이터를 예외처리하는<br />
+여러가지 방법을 알아보았다.</p>
 
-<p>이렇게 떠올리게되어 나는 <strong>2번</strong>을 선택하게 되었고</p>
+<p>오늘은 예외 던지기에 대해 공부해 보는 날이다.</p>
 
-<p>처음에는 다른 사람들이 올려놓은 <a href="https://ifh.cc/">iFH 이미지 호스팅</a>과 같은<br />
-홈페이지를 이용해 정리를 하였었는데 ….</p>
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSQnaE21aVigm3UisbtYcpIDvy2dUTKPe9eBRofjjG5-ECCzS8FRO0Md_pXQkLTbl23ajRuf_s=w1920-h921" align="left" width="400px" /></p>
 
-<p>불현듯 현재는 이 사이트에서 내사진을 저장해 관리하고 있는데<br />
-이 사이트의 서비스를 종료한다던가? 사라지게된다면<br />
-내가 여태까지 저장해놓은 모든 사진들은 허공속으로 가버리는 것이다..</p>
-
-<p><br /></p>
-
-<h3 id="안전하게-저장하는-방법은-"><span style="color:#0066CC">안전하게 저장하는 방법은 ?</span></h3>
-
-<p>다른 변경 호스팅 페이지를 이용하면 위에서 말했던 문제가 생길 수도 있기 때문에<br />
-비교적으로 안전한 <strong>“구글 드라이브를 통해 이미지 url 바꾸는 방법</strong>을 설명하려한다.</p>
-
-<p><strong>1). 내가 변경하고자하는 이미지를 구글드라이브에 넣는다.</strong><br />
--&gt; 넣은 이미지 파일을 마우스 오른쪽 클릭 !<br />
--&gt; 필자는 스크린샷 2022-10~~ 뭐시기로된 프로그램 캡처사진을 넣었다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQVcLiSu-ykhVbtab_etZPl1pHZEPtUPerbz_EIPeek-aTWiCg0enyE5L2b7We-d3nOX4bJC_o=w3024-h1728" align="left" /></p>
-
-<p><strong>2). 링크가 있는 모든 사용자로 바꿔준다.</strong><br />
--&gt; 바꾼후 완료 클릭<br />
--&gt; 링크 복사를 한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRWQGDSjQWsBm5kM9hE4Iulyr7vj2dHkp2XFx-LXxMuJbTHffLKx-B79RdD7llp3yh8fiIZ9LU=w3024-h1728" align="left" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p><strong>3). 내가 작성중인 블로그에 해당 링크를 붙여넣는다.</strong><br />
--&gt; 보통 GitHub page를 작성하는 분들은 MarkDown 언어로 포스팅을 하기에</p>
-
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">example image</span><span class="p">](</span><span class="sx">링크주소</span><span class="p">)</span>
-</code></pre></div></div>
-<p>와 같은 방법으로 주소를 넣어 이미지를 넣거나</p>
-
-<p>크기 조절이나 정령을 하고 싶으신 분들은</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"링크주소"</span> <span class="na">align=</span><span class="s">"left"</span><span class="nt">&gt;</span>
-</code></pre></div></div>
-<p>html 문법으로 링크 주소를 넣어 작성하여 이미지를 넣어도 무방하다.</p>
-
-<p><br /></p>
-
-<h3 id="파일이-로딩되지-않아요-"><span style="color:#0066CC">파일이 로딩되지 않아요 !</span></h3>
-
-<p>여기서 만약 위에 1),2)번을 따라했지만 아래와 같이 사진 이미지가<br />
-보이지 않고 파일로 나올경우?</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTFm2_anq_vjKEzlpnDEC5kFnBj5i_vYGIALa0GC8bH4NstmFC88WmthnmEf-glizCiNxdObFA=w3024-h1728" align="left" /></p>
-
-<p><br /><br /><br /><br /><br /><br /></p>
-
-<p>이렇게 이미지를 사용하지 못하는 경우는<br />
-아래와 같은 방법으로 사진 주소를 다시 검색 할 수 있다.</p>
-
-<p><br /></p>
-
-<p>먼저 아까 위에서 복사했던 주소를<br />
-Google Chrome 브라우저에서 <strong>새탭</strong>으로 열어주면<br />
-아래와 같이 구글드라이브로 연동된 사진이 나오게 될 것이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQY7wKQYjWRwh8o6PanbsXgp_0EbT97NG5HgCB1bLfSPI0ljEjzN6uT_BQfnsukgdH81SCmJ7E=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p>위에 사진이 나왔다면 아래의 순서대로 진행하면 된다.</p>
-
-<ol>
-  <li>브라우저에 사진이 나온다.</li>
-  <li>
-    <p>크롬 브라우저 개발자 도구를 연다<br />
--&gt; 경로 : 크롬 브라우저 상단 우측 <strong>⫶</strong> 로된 버튼 클릭 -&gt; 도구 더보기 -&gt; 개발자 도구<br />
-<strong>tip) 맥북 단축키 : ⌥ + ⌘ + i<br />
-tip) 윈도우 단축키 : F12</strong></p>
-  </li>
-  <li>개발자 도구에서 <strong>찾기 기능</strong>(맥북:⌘+F, 윈도우:Ctrl+F)를 연다.</li>
-  <li>찾기 기능이 열리면 위 사진과 같이 중간에 타이핑을 할 수 있는 창이 생긴다.<br />
-<strong>img</strong> 라고 <strong>입력</strong> 엔터를 눌러 위치를 찾는다.</li>
-  <li>엔터를 누르다보면 위에 사진과 같이 url 주소가 나온다.<br />
--&gt; 해당 주소에 마우스를 가져다대면 사진에 하늘색으로 표시가됨</li>
-  <li>해당 주소를 복사해서 사용하면 된다!</li>
-</ol>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQau70WaZx0XThiMXSN914-WF8Y-TVNlWxtTuLmQWoXqyTii9qeT4G6COxAN1CXH-PL4eHE0Lg=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p>위의 내용을 따라하면 된다. 따라하면서 위에 사진과 동일하게 <br />
-주소를 찾아주면 그 주소가 이미지 url 주소이다.</p>
-
-<p>그 주소를 가지고 이제 블로그나 내가 사용하려는 곳에<br />
-이용하면 되는 것이다!!</p>
-
-<p><br /></p>
-
-<h3 id="폴더를-공유로-설정-"><span style="color:#0066CC">폴더를 공유로 설정 !</span></h3>
-
-<p>참고로 해당하는 사진마다 일일히 공유를 눌러줄 수는 없으니까<br />
-내가 관리하려는 폴더에 위에서 공유를 하면 하위 데이터는<br />
-전부 공유로 바뀌게된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRzYYtAjIhzT6vvIjHZ-tIrBxLgSBHbHCqwqwrUIuA4MchYwWltF7PFaz0ROvRlBCXXEvOCadA=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQK6pfkh96AtgcxVx4TR0g7yWopx7nBubGMiNLL7BtjHnPKAVOTyw8ROJreFSNHeF7ilHIKSIk=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p>이렇게 내가 블로그에 작성하려는 이미지를<br />
-폴더 별로 잘 모아놓았다가<br />
-전체를 공유로 바꾸든, 일부분만 바꾸든 적용해서<br />
-그 이미지를 개발자도구를 통해 주소로 꺼낼 수 있다.</p>
+<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
 
 <hr />
 
 <p><br /></p>
 
-<p>이상 구글 드라이브를 통해<br />
-이미지를 url로 가져올 수 있는 방법을 설명 드렸다.</p>
+<p>어제는 @Vaild, @Vaildated 유효설 실패에 대한<br />
+예외처리를 하는 프로그램을 공부 했다.<br />
+오늘은 다른 예외들의 예외처리하는 프로그램을 공부해 보자.</p>
 
-<p>사실 추후에 이렇게 사용하는 부분을 막을지? 아닐지는 잘 모르겠다.<br />
-하지만 구글이라는 대형 플랫폼을 통해서 관리를 한는 측면.<br />
-그리고 아이클라우드나, 구글드라이브같이 우리가 널리 사용하는<br />
-서비스이기 때문에  데이터가 날라갈 걱정을 할 필요는 없으니</p>
+<p><strong>1). 예외처리를 매개변수로 받기</strong></p>
 
-<p>조금 안심된 블로그 이미지를 사용할 수 있을 듯한? 기분이다 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="IT" /><category term="이미지 url" /><category term="구글 드라이브" /><summary type="html"><![CDATA[이미지 url 적용하기 네이버 블로그나 Tistory 등… 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.]]></summary></entry><entry><title type="html">TIL) Spring Exception 1</title><link href="http://localhost:4000/til/2022/10/25/til.html" rel="alternate" type="text/html" title="TIL) Spring Exception 1" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/25/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/25/til.html"><![CDATA[<p>매일 매일 다짐하지만<br />
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">ErrorResponse</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">RuntimeException</span> <span class="n">error</span><span class="o">){</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>@ExceptionHandler로 에러를 감지하게 해주고<br />
+에러가 감지되었는데 RuntimeException에러가 발생하면<br />
+RuntimeException 클래스로 객체를 받아서<br />
+에러의 정보들을 객체를 통해 확인할 수 있다.</p>
+
+<p>여기서 getMessage(); 메서드는<br />
+<strong>Throwalbe</strong>의 메서드를 <strong>상속</strong>받아 사용하고 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"Not found"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>만약 다른 메서드에서 위와 같이 강제로 RuntimeException을 발생시키고<br />
+Message로 “Not found”라고 적어두었을 경우.<br />
+생성자로 RuntimeException의 String 값을 넣을 경우<br />
+최상위 클래스인 Throwable의 message가 저장되게된다.</p>
+
+<p>해당 메서드가 실행 되면, @ExceptionHandler에 의해<br />
+RuntimeException 객체가 매개변수를 통해 전달된다.</p>
+
+<p>문제점은 위의 예외상황은 RuntimeException만 작성했을 뿐<br />
+의도적으로 발생 시킬 예외 상황이 더 있을 수 있다.<br />
+그리고 예외 의도가 명확하지 않다는 점.</p>
+
+<p><br /></p>
+
+<p><strong>2). 개선된 예외 상황 처리</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
+    <span class="no">MEMBER_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span> <span class="s">"Member Not Found"</span><span class="o">);</span>
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
+
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
+
+    <span class="nc">ExceptionCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">status</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">){</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">exceptionCode</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">BusinessLogicException</span> <span class="n">e</span><span class="o">){</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">()));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위에 클래스를 3가지로 나누어서<br />
+BusinessLogicException 클래스를 통해<br />
+객체를 받는 방법이다.</p>
+
+<p>먼저 enum 클래스를 통해서<br />
+사용할 생성자의 데이터를 맵핑해주고</p>
+
+<p>BusinessLogicException 클래스를 만들어<br />
+RuntimeException을 상속해 spuer(); 생성자를 통해<br />
+Throawble까지 메세지를 올려주고, 객체를 저장하게 작성했다.<br />
+해당 객체는 @Getter를 이용해 가져올 수 있고<br />
+그 객체를 통해서 Enum의 Status값과 Message를 가져오는 모습이다.</p>
+
+<p><br /></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>최종적으로 예외를 강제로 위와 같이<br />
+MEMBER_NOT_FOUND로 던졌을 경우</p>
+
+<p>BusinessLogicException 클래스와 ExceptionCode 클래스를<br />
+이용해 객체츨 만들고 예외처리로 흐름을 넘겨<br />
+우리가 커스터 마이징한 값을 출력하는 것 까지 보았다.</p>
+
+<p>그럼 우리가 이제 이 기반으로<br />
+응답하는 객체를 새로 정리해서 보낸다든지?<br />
+커스터마이징이 가능하게 되는 것이다.</p>
+
+<p>중요한 점은 에러가 강제로 발생 되었을 경우<br />
+우리가 흐름을 가져와 제어할 수있다는 점을 얻어간 것 같다.</p>
+
+<p><br /></p>
+
+<p>어제 공부했던거와 더불어 다시 정리해보자면</p>
+<ol>
+  <li>
+    <p>MethodArgumentNotValidException<br />
+-&gt;@Vaild 유효성 검증 실패한 예외잡기</p>
+  </li>
+  <li>
+    <p>ConstraintViolationException <br />
+-&gt;@Vaildated 유효성 검증 실패한 예외잡기</p>
+  </li>
+  <li>
+    <p>HttpRequestMethodNotSupportedException<br />
+-&gt; 해당 핸들러 메서드에 정의된 메서드와 호출한 메서드가 잘못되었을때 예외잡기</p>
+  </li>
+  <li>
+    <p>NullPointerException : NullPoint 예외처리 발생한 것 잡기</p>
+  </li>
+  <li>
+    <p>RuntimeException 클래스를 상속받아 클래스를 만들어<br />
+제어흐름을 가져올 수 있음.</p>
+  </li>
+</ol>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>:</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[요즘 스프링 공부하는게 너무 재밌다.]]></summary></entry><entry><title type="html">TIL) Spring Exception 1</title><link href="http://localhost:4000/til/2022/10/25/til.html" rel="alternate" type="text/html" title="TIL) Spring Exception 1" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/25/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/25/til.html"><![CDATA[<p>매일 매일 다짐하지만<br />
 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..</p>
 
 <p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmR0ojECPgvr59qNqcpS6o9lEXTD-ON7Y-v4gZAV7K5p1nohAe7rImugv-030uzKwua0HVAn6Sk=w3024-h1728" align="left" /><br />
@@ -450,7 +459,151 @@ ConstraintViolationErrors도 가져와야하는 프로그램을<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 불고기 덮밥, 스팸, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[매일 매일 다짐하지만 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..]]></summary></entry><entry><title type="html">TIL) Spring MVC Serivce 계층</title><link href="http://localhost:4000/til/2022/10/24/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC Serivce 계층" /><published>2022-10-24T00:00:00+09:00</published><updated>2022-10-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/24/til.html"><![CDATA[<p>주말이 지나고 월요일이 왔다.</p>
+<strong>오늘의 점심</strong>: 불고기 덮밥, 스팸, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[매일 매일 다짐하지만 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..]]></summary></entry><entry><title type="html">구글 드라이브로 이미지 url 적용하기</title><link href="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html" rel="alternate" type="text/html" title="구글 드라이브로 이미지 url 적용하기" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/it/2022/10/25/it-etc-imageurl</id><content type="html" xml:base="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html"><![CDATA[<h1 id="이미지-url-적용하기">이미지 url 적용하기</h1>
+<p>네이버 블로그나 Tistory 등…<br />
+타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서<br />
+올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.</p>
+
+<p>하지만… 나와 같이 GitHub Page를 사용한다거나<br />
+개인 블로그를 운영중인 분들은<br />
+이미지를 올리기 위해 다른 방법을 찾아야한다.</p>
+
+<ol>
+  <li>GitHub에 사진을 같이 올리고 , 경로로 사진표시<br />
+-&gt; 해당 방법은 GitHub 저장소가 초과하면 애매해진다..</li>
+  <li>이미지를 url로 변경 시켜 관리하기<br />
+-&gt; 이미지를 url로 변경시키고 저장을 유지시켜주는 안전한 플랫폼이 필요</li>
+</ol>
+
+<p>이렇게 떠올리게되어 나는 <strong>2번</strong>을 선택하게 되었고</p>
+
+<p>처음에는 다른 사람들이 올려놓은 <a href="https://ifh.cc/">iFH 이미지 호스팅</a>과 같은<br />
+홈페이지를 이용해 정리를 하였었는데 ….</p>
+
+<p>불현듯 현재는 이 사이트에서 내사진을 저장해 관리하고 있는데<br />
+이 사이트의 서비스를 종료한다던가? 사라지게된다면<br />
+내가 여태까지 저장해놓은 모든 사진들은 허공속으로 가버리는 것이다..</p>
+
+<p><br /></p>
+
+<h3 id="안전하게-저장하는-방법은-"><span style="color:#0066CC">안전하게 저장하는 방법은 ?</span></h3>
+
+<p>다른 변경 호스팅 페이지를 이용하면 위에서 말했던 문제가 생길 수도 있기 때문에<br />
+비교적으로 안전한 <strong>“구글 드라이브를 통해 이미지 url 바꾸는 방법</strong>을 설명하려한다.</p>
+
+<p><strong>1). 내가 변경하고자하는 이미지를 구글드라이브에 넣는다.</strong><br />
+-&gt; 넣은 이미지 파일을 마우스 오른쪽 클릭 !<br />
+-&gt; 필자는 스크린샷 2022-10~~ 뭐시기로된 프로그램 캡처사진을 넣었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQVcLiSu-ykhVbtab_etZPl1pHZEPtUPerbz_EIPeek-aTWiCg0enyE5L2b7We-d3nOX4bJC_o=w3024-h1728" align="left" /></p>
+
+<p><strong>2). 링크가 있는 모든 사용자로 바꿔준다.</strong><br />
+-&gt; 바꾼후 완료 클릭<br />
+-&gt; 링크 복사를 한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRWQGDSjQWsBm5kM9hE4Iulyr7vj2dHkp2XFx-LXxMuJbTHffLKx-B79RdD7llp3yh8fiIZ9LU=w3024-h1728" align="left" />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+
+<p><strong>3). 내가 작성중인 블로그에 해당 링크를 붙여넣는다.</strong><br />
+-&gt; 보통 GitHub page를 작성하는 분들은 MarkDown 언어로 포스팅을 하기에</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">example image</span><span class="p">](</span><span class="sx">링크주소</span><span class="p">)</span>
+</code></pre></div></div>
+<p>와 같은 방법으로 주소를 넣어 이미지를 넣거나</p>
+
+<p>크기 조절이나 정령을 하고 싶으신 분들은</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"링크주소"</span> <span class="na">align=</span><span class="s">"left"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+<p>html 문법으로 링크 주소를 넣어 작성하여 이미지를 넣어도 무방하다.</p>
+
+<p><br /></p>
+
+<h3 id="파일이-로딩되지-않아요-"><span style="color:#0066CC">파일이 로딩되지 않아요 !</span></h3>
+
+<p>여기서 만약 위에 1),2)번을 따라했지만 아래와 같이 사진 이미지가<br />
+보이지 않고 파일로 나올경우?</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTFm2_anq_vjKEzlpnDEC5kFnBj5i_vYGIALa0GC8bH4NstmFC88WmthnmEf-glizCiNxdObFA=w3024-h1728" align="left" /></p>
+
+<p><br /><br /><br /><br /><br /><br /></p>
+
+<p>이렇게 이미지를 사용하지 못하는 경우는<br />
+아래와 같은 방법으로 사진 주소를 다시 검색 할 수 있다.</p>
+
+<p><br /></p>
+
+<p>먼저 아까 위에서 복사했던 주소를<br />
+Google Chrome 브라우저에서 <strong>새탭</strong>으로 열어주면<br />
+아래와 같이 구글드라이브로 연동된 사진이 나오게 될 것이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQY7wKQYjWRwh8o6PanbsXgp_0EbT97NG5HgCB1bLfSPI0ljEjzN6uT_BQfnsukgdH81SCmJ7E=w3024-h1728" align="left" /></p>
+
+<p><br /></p>
+
+<p>위에 사진이 나왔다면 아래의 순서대로 진행하면 된다.</p>
+
+<ol>
+  <li>브라우저에 사진이 나온다.</li>
+  <li>
+    <p>크롬 브라우저 개발자 도구를 연다<br />
+-&gt; 경로 : 크롬 브라우저 상단 우측 <strong>⫶</strong> 로된 버튼 클릭 -&gt; 도구 더보기 -&gt; 개발자 도구<br />
+<strong>tip) 맥북 단축키 : ⌥ + ⌘ + i<br />
+tip) 윈도우 단축키 : F12</strong></p>
+  </li>
+  <li>개발자 도구에서 <strong>찾기 기능</strong>(맥북:⌘+F, 윈도우:Ctrl+F)를 연다.</li>
+  <li>찾기 기능이 열리면 위 사진과 같이 중간에 타이핑을 할 수 있는 창이 생긴다.<br />
+<strong>img</strong> 라고 <strong>입력</strong> 엔터를 눌러 위치를 찾는다.</li>
+  <li>엔터를 누르다보면 위에 사진과 같이 url 주소가 나온다.<br />
+-&gt; 해당 주소에 마우스를 가져다대면 사진에 하늘색으로 표시가됨</li>
+  <li>해당 주소를 복사해서 사용하면 된다!</li>
+</ol>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQau70WaZx0XThiMXSN914-WF8Y-TVNlWxtTuLmQWoXqyTii9qeT4G6COxAN1CXH-PL4eHE0Lg=w3024-h1728" align="left" /></p>
+
+<p><br /></p>
+
+<p>위의 내용을 따라하면 된다. 따라하면서 위에 사진과 동일하게 <br />
+주소를 찾아주면 그 주소가 이미지 url 주소이다.</p>
+
+<p>그 주소를 가지고 이제 블로그나 내가 사용하려는 곳에<br />
+이용하면 되는 것이다!!</p>
+
+<p><br /></p>
+
+<h3 id="폴더를-공유로-설정-"><span style="color:#0066CC">폴더를 공유로 설정 !</span></h3>
+
+<p>참고로 해당하는 사진마다 일일히 공유를 눌러줄 수는 없으니까<br />
+내가 관리하려는 폴더에 위에서 공유를 하면 하위 데이터는<br />
+전부 공유로 바뀌게된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRzYYtAjIhzT6vvIjHZ-tIrBxLgSBHbHCqwqwrUIuA4MchYwWltF7PFaz0ROvRlBCXXEvOCadA=w3024-h1728" align="left" /></p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQK6pfkh96AtgcxVx4TR0g7yWopx7nBubGMiNLL7BtjHnPKAVOTyw8ROJreFSNHeF7ilHIKSIk=w3024-h1728" align="left" /></p>
+
+<p><br /></p>
+
+<p>이렇게 내가 블로그에 작성하려는 이미지를<br />
+폴더 별로 잘 모아놓았다가<br />
+전체를 공유로 바꾸든, 일부분만 바꾸든 적용해서<br />
+그 이미지를 개발자도구를 통해 주소로 꺼낼 수 있다.</p>
+
+<hr />
+
+<p><br /></p>
+
+<p>이상 구글 드라이브를 통해<br />
+이미지를 url로 가져올 수 있는 방법을 설명 드렸다.</p>
+
+<p>사실 추후에 이렇게 사용하는 부분을 막을지? 아닐지는 잘 모르겠다.<br />
+하지만 구글이라는 대형 플랫폼을 통해서 관리를 한는 측면.<br />
+그리고 아이클라우드나, 구글드라이브같이 우리가 널리 사용하는<br />
+서비스이기 때문에  데이터가 날라갈 걱정을 할 필요는 없으니</p>
+
+<p>조금 안심된 블로그 이미지를 사용할 수 있을 듯한? 기분이다 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="IT" /><category term="이미지 url" /><category term="구글 드라이브" /><summary type="html"><![CDATA[이미지 url 적용하기 네이버 블로그나 Tistory 등… 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.]]></summary></entry><entry><title type="html">TIL) Spring MVC Serivce 계층</title><link href="http://localhost:4000/til/2022/10/24/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC Serivce 계층" /><published>2022-10-24T00:00:00+09:00</published><updated>2022-10-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/24/til.html"><![CDATA[<p>주말이 지나고 월요일이 왔다.</p>
 
 <p><img src="https://ifh.cc/g/Sl0oOY.gif" align="left" width="250px" height="300px" />
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
@@ -1127,8 +1280,6 @@ Model과 View의 중간에서 상호작용을 해주는 역할</p>
    -. 패키지를 하나의 계층으로 보고 클래스들을 계층별로 묶어서 관리하는 구조</p>
 
 <p><img src="https://ifh.cc/g/HXg2bo.png" alt="example image" /></p>
-
-<p><br /><br /></p>
 
 <p>Controller 관련 부분을 배워보자<br />
 현재 Postman을 통해 API를 요청중이다.</p>
@@ -2349,308 +2500,4 @@ joinPoint.procced(); 위,아래로 출력문을 넣어<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ <br />
-<strong>오늘의 점심</strong>: 제육볶음, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[스펙타클한 주말이었다. 물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…]]></summary></entry><entry><title type="html">TIL) Spring DI 2</title><link href="http://localhost:4000/til/2022/10/14/til.html" rel="alternate" type="text/html" title="TIL) Spring DI 2" /><published>2022-10-14T00:00:00+09:00</published><updated>2022-10-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/14/til.html"><![CDATA[<p>오늘도 스프링 공부를 시작하자<br />
-금요일이기 때문에 좀더 열심히 ㅎ…</p>
-
-<p>주말에 개념공부 조금 더해서 다음주에 차질없도록해야겠다!</p>
-
-<p><img src="https://ifh.cc/g/XqWda2.gif" align="left" width="350px" height="200px" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>스프링이 나에게도 주입됐으면…</p>
-
-<hr />
-
-<h3 id="configuration"><strong>@Configuration</strong></h3>
-
-<p>이 어노테이션을 단 클래스는<br />
-빈 설정을 담당하는 클래스가 된다. 담당된 클래스 안에서<br />
-@Bean 어노테이션을 메소드에 선언해주면<br />
-그 매소드의 반환된 객체를 통해 빈을 정의하고 생명주기를 설정하게된다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AppConfig</span> <span class="o">{</span>
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
-    <span class="o">}</span>
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">MemberRepository</span> <span class="nf">memberRepository</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>AppConfig라는 클래스를 빈 설정 담당 클래스로 정하고<br />
-안에 정의된 매소드를 @Bean 어노테이션을 달아<br />
-스프링 컨테이너에서 객체로 관리할 수 있다.</p>
-
-<h3 id="componentscan"><strong>@ComponentScan</strong></h3>
-
-<p>@Component가 붙은 모든 클래스를 스프링이 빈으로 자동등록해준다.<br />
-설정 정보와 같이 붙여주면되고, 의존관계를 자동주입해주는 @Autowired 기능을 제공해준다.<br />
-기본적으로 @Component가 붙으면 자동으로 스캔하면서 빈을 등록하고<br />
-이외에 부가기능을 수행하면서 스캔까지 하는<br />
-어노테이션들(@Service,@Controller, @Configuration, Reposiotry)이 있다.</p>
-
-<p><em><strong>컴포넌트 스캔 용도와 부가기능을 수행하는 애노테이션들</strong></em><br />
-@Service : 특별한처리는 하지 않음. 비지니스로직이 여기에 있구나라는 주석정도의 기능<br />
-@Controller : 스프링 MVC 컨트롤러로 인식<br />
-@Repository : 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환해줌.<br />
-@Configuration : 스프링 설정정보 인식, 스프링 빈이 싱글톤으로 유지하도록 추가 처리해줌</p>
-
-<p>1). 구성정보설정 + 컴포넌트스캔</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="nd">@ComponentScan</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AutoAppConfig</span> <span class="o">{</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>현재는 탐색위치 default와 필터는 적용되지 않음 (아래에 설명)</p>
-
-<p><br /></p>
-
-<p>2). 컴포넌트 + 오토와이어드</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
-
-    <span class="nd">@Autowired</span> <span class="c1">// getBean(MemberRepository memberRepository) 와 같은기능</span>
-    <span class="kd">public</span> <span class="nf">MemberserviceImpl</span><span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><strong>@Autowired</strong>란?</p>
-
-<p>간단하게 스프링 컨테이너안에 우리가 등록해 놓은 Bean을<br />
-자동으로 같은 이름을 찾아서 불러와 주입해주는 것이다.<br />
-즉 우리가 getBean(MemberRepository memberRepository); 와 같은 형식으로<br />
-객체를 확인할 수 있었다면, 이 행위를 Autowired가 매개변수를 보고<br />
-자동으로 찾아서 값을 주입해주는 것이다.</p>
-
-<p><strong>ComponentScan의 기능들</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ComponentScan</span><span class="o">(</span>
-    <span class="n">basePackages</span> <span class="o">=</span> <span class="s">"hello.core.member"</span><span class="o">,</span>
-    <span class="n">basePackageClasses</span> <span class="o">=</span> <span class="nc">AutoConFig</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
-    <span class="n">excludeFilters</span> <span class="o">=</span> <span class="nd">@ComponentScan</span><span class="o">.</span><span class="na">Filter</span><span class="o">(</span><span class="n">type</span> <span class="o">=</span> <span class="nc">FilterType</span><span class="o">.</span><span class="na">ANNOTATION</span><span class="o">,</span> <span class="n">classes</span> <span class="o">=</span> <span class="nc">Configuration</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-<span class="o">)</span> <span class="c1">// AppConfig의 수동으로 등록한 것을 제외시킴</span>
-</code></pre></div></div>
-
-<p><em><strong>basePackage</strong></em><br />
-탐색 시작위치를 정한다. 이패키지를 포함해서 하위 패키지를 모두 탐색함</p>
-
-<p><em><strong>basePackageClasses</strong></em><br />
-지정한 클래스의 패키지를 탐색 시작 위로 지 정한다.</p>
-
-<p><em><strong>default</strong></em><br />
-basePackage, basePackageClasses를 지정을안했을경우<br />
-ComponentScan이 붙은 설정 정보 클래스의 패키지가 시작 위치가 된다.</p>
-
-<p><span style="color:#F04965"> ** ComponentScan은 SpringBootApplication 안에 포함되어있어<br /> 
-SpringBootApplication을 패키지 상위에 두는 것이 관례이다.<br />
-즉, 패키지 상위에 둘 경우 패키지 안에 있는 내용을 확인한다. </span></p>
-
-<p><em><strong>Filter</strong></em><br />
-위의 코드로만 보면 Configuration애노테이션이 붙은 클래스는<br />
-컴포넌트 스캔을 하지 않는 다는 뜻이다.<br />
-(기본적으로 Configureation도 @Component가 붙어있어 스캔대상이다.)</p>
-
-<p>includeFilters : 컴포넌트 스캔 대상을 추가로 지정<br />
-excludeFilters : 컴포넌트 스캔에서 제외할 대상을 지정</p>
-
-<p><strong><em>FilterType 옵션</em></strong></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>옵션</th>
-      <th>내용</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ANNOTATION</td>
-      <td>기본값, 애노테이션을 인식해 동작</td>
-    </tr>
-    <tr>
-      <td>ASSIGNABLE_TYPE</td>
-      <td>지정한 타입과 자식 타입을 인식해 동작</td>
-    </tr>
-    <tr>
-      <td>ASPECTJ</td>
-      <td>AspectJ 패턴 사용</td>
-    </tr>
-    <tr>
-      <td>REGEX</td>
-      <td>정규 표현 사용</td>
-    </tr>
-    <tr>
-      <td>CUSTOM</td>
-      <td>TypeFilter라는 인터페이스를 구현해서 처리</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><br /></p>
-
-<p><strong>자동 빈등록 vs 자동 빈등록 시 충돌 날 경우</strong></p>
-
-<p>Component 이름이 충돌날경우 ex) @Component(“memberService”) 두개가 존재할때<br />
-이름 변경외에는 충돌날일이 거의 없다.<br />
-만약 충돌이 날경우에 아래와 같은 런타임 에러가 발생한다.</p>
-
-<p><img src="https://ifh.cc/g/rX3OWM.png" align="left" width="300px" height="35px" />
-<br /><br /><br /><br /></p>
-
-<p><strong>수동 빈 빈동록 vs 자동 빈등록 충돌 날 경우</strong><br />
-오버라이딩된다. 수동 빈이 자동빈을 오버라이딩해버린다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemoryMemberRepository</span> <span class="o">{</span>
-
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="nd">@ComponentScan</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AutoAppConfig</span> <span class="o">{</span>
-    <span class="nd">@Bean</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"memoryMemberRepository"</span><span class="o">)</span>
-    <span class="nc">MemberRepositroy</span> <span class="nf">memberRepositroy</span><span class="o">(){</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">MemoryMemberRepository</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>예를 들어 @Componet 애노테이션이 붙은<br />
-클래스 MemoryMemberRepository는 자동으로 빈등록이된다.<br />
-(name = memoryMemberRepository , 첫문자는 소문자로 저장됨)</p>
-
-<p>@Bean을 통해 수동으로 등록해준빈의 이름을<br />
-동일하게 memoryMemberRepository로 바꾸었을때</p>
-
-<p><img src="https://ifh.cc/g/8j7hBQ.png" align="left" width="500px" height="30px" />
-<br /><br /><br /></p>
-
-<p>위와 같이 오러라이딩 되었다고 하고 정상 실행된다.<br />
-하지만 스프링 프레임워크에서는 오류가 나질 않고 오버라이딩 되지만<br />
-스프링 부트로 실행 시킬 경우에는 에러가 발생하게끔 default로 설정되어있다.</p>
-
-<p>**<스프링 부트를="" 실행시킬때="" 발생하는="" 에러="">**</스프링></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The bean 'memoryMemberRepository', defined in class path resource [hello/core/AutoAppConfig.class], could not be registered. A bean with that name has already been defined in file [/Users/ljh/Desktop/Study/인프런_김영한/1. Spring 핵심 원리/1. 객체지향 설계와 스프링_자료/progrma_spring/core/build/classes/java/main/hello/core/member/MemoryMemberRepository.class] and overriding is disabled.
-
-Action:
-
-Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
-</code></pre></div></div>
-
-<p>위에서 명시하기로는 오버라이딩의 경우가 있어 에러가 발생한 것이다.<br />
-아래에서 spring.main.allow-bean-definition-overriding=trure 셋팅을 해주면<br />
-오버라이딩된채로 사용할 수 있다고 한다.</p>
-
-<p><img src="https://ifh.cc/g/x2VtKR.png" align="left" width="600px" height="150px" />
-<br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>위 사진과 같이 애플리케이션 속성에 동일하게 설정하면<br />
-에러를 실행하지 않고 정상적으로 실행되는 모습을 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>@Bean 과 @Component의 차이점?</strong></p>
-
-<p>여기서 Bean과 Component의 중요한 차이점이 보이는데</p>
-
-<p>@Bean은 메서드 레벨에서 선언하며, 반환되는 객체를 개발자가<br />
-수동으로 등록하는 애노테이션이다.</p>
-
-<p>@Component는 클래스 레벨에서 선언함으로 스프링이 런타입시에<br />
-컴포넌트스캔을 하여 자동으로 빈을 찾고 등록하는 애노테이션이다.</p>
-
-<p>이말은 무슨말이냐.<br />
-만약 외부라이브러리를 사용한다고 가정할떄<br />
-@Component 애노테이션을 그 해당 외부라이브러리 클래스 위에<br />
-붙여주지 못한다. 우리가 건드릴 수 없기 때문이다.<br />
-그렇기에 @Bean을 이용해 외부라이브러리 클래스의<br />
-메소드로 반환되는 객체를 수동으로 Spring 컨테이너에 등록해주는 것이고</p>
-
-<p>@Component는 위에서 얘기했듯이<br />
-우리가 자바코드로 작성중인 클래스위에 붙여서 많이 쓴다.</p>
-
-<p>즉, Bean = 외부라이브러리 사용시 사용 / Component =  내부 클래스에서 사용</p>
-
-<p><br /></p>
-
-<h3 id="여러-주입-방법"><strong>여러 주입 방법</strong></h3>
-
-<p>의존성을 주입하는 방법은 크게 4가지가있다<br />
-성자 주입, setter 주입, 필드 주입, 일반 메서드 주입</p>
-
-<p>그 중 우리가 계속 사용하게될거는 생성자 주입이다.<br />
-간단하게 3가지 정도를 알아보자</p>
-
-<p>1). 생성자 주입</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
-
-    <span class="nd">@Autowired</span>
-    <span class="kd">public</span> <span class="nf">MemberserviceImpl</span><span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>위와 같이 생성자를 통해서<br />
-참조변수에 객체를 넣어주는게 생성자 주입이다.</p>
-
-<p>2). setter 주입</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
-
-    <span class="nd">@Autowired</span>
-    <span class="kd">public</span> <span class="nf">setMemberRepositroy</span> <span class="o">(</span><span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberRepositroy</span> <span class="o">=</span> <span class="n">memberRepositroy</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>생성자주입과 유사하지만 setter주입은<br />
-setter 메서드를 생성하여 의존 관계를 주입하게된다.</p>
-
-<p>3). 필드주입</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberserviceImpl</span><span class="o">{</span>
-	<span class="nd">@Autowired</span>
-	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepositroy</span> <span class="n">memberRepositroy</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>필드 변수에 @Autowired 애노테이션을달아 주입하는 방법이다.<br />
-코드가 간결해지지만 외부에서 변경이 불가능하다.</p>
-
-<hr />
-
-<p>오늘은 의존성 주입에 여러 형태와<br />
-@ComponentScan 어노테이션에 대한 여러가지를 알아보았다.<br />
-어느정도 이해가간다. Componet를 이용해<br />
-클래스를 빈으로 만들고 컨테이너에서 관리함으로<br />
-@Autowired를 사용해 그 객체를 주입해준다!! 라는 흐름은 어느정도<br />
-이해한 것 같다. 공부하면서 여러가지 개념들과<br />
-심도있는 지식들이 나올때 집중력을 잃었지만<br />
-주말을 통해서 오늘까지 배웠던 내용을 좀더 정리를하고 다음주를 맞이해야겠다</p>
-
-<p>오늘 공부는 여기서 끝!!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️ <br />
-<strong>오늘의 점심</strong>: 삽겹살, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘도 스프링 공부를 시작하자 금요일이기 때문에 좀더 열심히 ㅎ…]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 제육볶음, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[스펙타클한 주말이었다. 물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…]]></summary></entry></feed>
