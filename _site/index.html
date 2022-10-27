@@ -2202,6 +2202,324 @@ Framework vs Library
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
 </div>
     </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html">
+          macOs) neofetch를 활용하여 terminal 커스터마이징
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 26, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/macos/2022/08/26/OS-macOs-3.html">
+        <p>
+        오늘은 맥북 터미널을 꾸며보려고한다
+이전에 oh my zsh를 통해서 터미널을 이쁘게 꾸며보았다.
+오늘은 neofetch를 이용하여 꾸며보려고한다
+
+neofetch란 아래의 이미지와 같이 CLI에서 사용자의 정보를 알 수 있도록 하는 것이다.
+또한 아래의 사과모양에 사진도 넣을 수 있고 커스터마이징이 가능하다!
+
+
+
+
+
+
+우선 homebrew가 설치 환경이 되어있어야한다.
+설치되어있다 가정하고 진행해보자
+
+
+
+brew install neofetch
+
+
+brew를 통해 neofetch를 설치하고
+
+
+
+brew list
+
+
+brew list를 통해 neofetch가 잘 설치되었는지 확인하자.
+
+
+
+
+
+
+
+
+neofet... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#macOs">#macOs</a><a class="post-tag" href="/tags.html#IT">#IT</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html">
+          맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 23, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/macos/2022/08/23/OS-macOs-2.html">
+        <p>
+        문득 작업을 하다보니까…..
+
+나도 모르게 zsh에서 사용중이던 Git언어들이 한글로 바뀌어있었다!!
+
+
+
+
+
+사실 한글을 사용하는 것보다 영어를 사용하는게 좋다고 생각들어 바꾸려고 검색하다보니
+
+zsh에서 git 언어가 갑자기 한글로 바뀌었다면?(다시 영어로 바꾸기) 
+위와 같은 좋은 해결글이 있었다. 내용을 참조해서 조치해보려한다.
+
+
+
+현재 설정되어 있는 언어를 확인해보자
+
+echo $LANG
+
+
+입력할 경우 아래와 같이 표시된다.
+
+
+
+
+언어는 ko KR.UTF-8
+
+그래서 이렇게 변하는 이유를 찾아보니 git설정에서 gettext로 OS에서
+사용하는 언어를 가져온 뒤 직접 해당 언어를 사용하도록 설정을 업... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#macOs">#macOs</a><a class="post-tag" href="/tags.html#IT">#IT</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html">
+          맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 03, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/macos/2022/08/03/OS-macOs-1.html">
+        <p>
+        오늘은 Git Fork에서 Clone하다가 발생한
+
+xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+
+에러에 대해 조치한 내용을 적어보려한다.
+
+서론)
+
+새로운 맥북을 샀다.
+맥북 에어 8GB에서는 도저히 spring 구동시키기에 너무 버겁다는 생각이
+너무 많이 들었고… 드디어 큰 결심을해서 맥북프로 M1 10코어, GUP 16코어, 메모리32GB를
+구매하게되었다. 맥북을 바꾸면서 마이그레이션으로... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#macOs">#macOs</a><a class="post-tag" href="/tags.html#IT">#IT</a>
+</div>
+    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -2236,7 +2554,7 @@ Framework vs Library
   <ul>
     <li>
       <a href="/index.html">
-        All<span>15</span>
+        All<span>18</span>
       </a>
     </li>
 
@@ -2256,6 +2574,12 @@ Framework vs Library
       <li>
         <a href="/categories.html#h-TIL">
           TIL <span>13</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-macOs">
+          macOs <span>3</span>
         </a>
       </li>
     
