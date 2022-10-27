@@ -207,8 +207,9 @@ utterances:
 # Build settings
 # highlighter: none
 markdown: kramdown
-kmarkdown:
+kramdown:
   input: GFM
+#  syntax_highlighter: rouge
 
 plugins:
   - jekyll-feed

@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring Exception 2 | LeeJellan</title>
+<title>TIL) Spring JDBC 기반 액세스 계층 1 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring Exception 2">
+<meta property="og:title" content="TIL) Spring JDBC 기반 액세스 계층 1">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="요즘 스프링 공부하는게 너무 재밌다.">
-<meta property="og:description" content="요즘 스프링 공부하는게 너무 재밌다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/26/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/26/til.html">
+<meta name="description" content="한주 한주가 정말 빠르게 지나간다. 생각보다 공부를 많이한 것 같지만 복습하면서 뒤돌아보면 그렇게 많은 양을 공부한 것도 아니다.">
+<meta property="og:description" content="한주 한주가 정말 빠르게 지나간다. 생각보다 공부를 많이한 것 같지만 복습하면서 뒤돌아보면 그렇게 많은 양을 공부한 것도 아니다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/27/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/27/til.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-26T00:00:00+09:00">
+<meta property="article:published_time" content="2022-10-27T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring Exception 2">
+<meta property="twitter:title" content="TIL) Spring JDBC 기반 액세스 계층 1">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-26T00:00:00+09:00","datePublished":"2022-10-26T00:00:00+09:00","description":"요즘 스프링 공부하는게 너무 재밌다.","headline":"TIL) Spring Exception 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/26/til.html"},"url":"http://localhost:4000/til/2022/10/26/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-27T00:00:00+09:00","datePublished":"2022-10-27T00:00:00+09:00","description":"한주 한주가 정말 빠르게 지나간다. 생각보다 공부를 많이한 것 같지만 복습하면서 뒤돌아보면 그렇게 많은 양을 공부한 것도 아니다.","headline":"TIL) Spring JDBC 기반 액세스 계층 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/27/til.html"},"url":"http://localhost:4000/til/2022/10/27/til.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -634,11 +634,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring Exception 2</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+68</h2>
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring JDBC 기반 액세스 계층 1</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+69</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-26T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 26, 2022
+    <time class="dt-published" datetime="2022-10-27T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 27, 2022
     </time>
 
     
@@ -675,7 +675,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -684,175 +684,242 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>요즘 스프링 공부하는게 너무 재밌다.</p>
+      <p>한주 한주가 정말 빠르게 지나간다.<br>
+생각보다 공부를 많이한 것 같지만 복습하면서 뒤돌아보면<br>
+그렇게 많은 양을 공부한 것도 아니다.</p>
 
-<p>처음에 이해가 가지않았을 때는 이게 뭔가 싶기도하고,,<br>
-학습의지가 떨어졌는데 어느 순간 깨달음을 얻고 나서는<br>
-다음 학습이 기대되고 얼른 더 다른걸 해보고 싶다.</p>
+<p>얼른 지식을 익히고 프로젝트를 해보고 싶다 ㅠㅠ<br>
+그날을 위해서 열심히 지식 축척을 !!</p>
 
-<p>어제는 클라이언트에서 받은 데이터를 예외처리하는<br>
-여러가지 방법을 알아보았다.</p>
-
-<p>오늘은 예외 던지기에 대해 공부해 보는 날이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSQnaE21aVigm3UisbtYcpIDvy2dUTKPe9eBRofjjG5-ECCzS8FRO0Md_pXQkLTbl23ajRuf_s=w1920-h921" align="left" width="400px"></p>
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSXU951Um_58x0b3_0a2GfPEYsLXEs-jRIv8ABUveSo7Iw5c_T-fB_Qq0joTmnrxVKOQF2vwPY=w1512-h753" align="left"></p>
 
 <p><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
 
 <hr>
 
-<p><br></p>
+<h2 id="spring-jdbc-기반-액세스-계층">Spring JDBC 기반 액세스 계층</h2>
 
-<p>어제는 @Vaild, @Vaildated 유효설 실패에 대한<br>
-예외처리를 하는 프로그램을 공부 했다.<br>
-오늘은 다른 예외들의 예외처리하는 프로그램을 공부해 보자.</p>
+<h3 id="jdbc">JDBC</h3>
 
-<p><strong>1). 예외처리를 매개변수로 받기</strong></p>
+<p>JDBC는 Java Database Connectivity 약자로<br>
+Java 레벨에서 데이터를 데이터베이스에 저장 및 업데이트 하거나<br>
+데이터베이스에 저장된 데이터를 Java 레벨에서 사용할 수 있도록<br>
+Java에서 제공해주는 표준 사양 이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
-<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nc">ErrorResponse</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">RuntimeException</span> <span class="n">error</span><span class="o">){</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<p>JDBC의 API를 우리가 직접 사용할 일은 없다고한다.<br>
+후에 Spring Data JDBC,JPA 같은 기술로 로직을 구현할 것이고<br>
+위와 같은 기술이 내부적으로는 JDBC를 이용하기 때문에<br>
+동작 흐름정도 파악하려고 이번 챕터를 배운다고 생각하면 될 것 같다.</p>
 
-<p>@ExceptionHandler로 에러를 감지하게 해주고<br>
-에러가 감지되었는데 RuntimeException에러가 발생하면<br>
-RuntimeException 클래스로 객체를 받아서<br>
-에러의 정보들을 객체를 통해 확인할 수 있다.</p>
+<h3 id="jdbc-동작-흐름">JDBC 동작 흐름</h3>
 
-<p>여기서 getMessage(); 메서드는<br>
-<strong>Throwalbe</strong>의 메서드를 <strong>상속</strong>받아 사용하고 있다.</p>
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSdBYjY4b6XPdkagpwC70Pqeh7vCehwy-RxI8ijRSwEJfSex_hSMNp9kqyn8Ecs__d_A4XcBU0=w1920-h921" align="left" width="500px"></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"Not found"</span><span class="o">);</span>
-</code></pre></div></div>
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
 
-<p>만약 다른 메서드에서 위와 같이 강제로 RuntimeException을 발생시키고<br>
-Message로 “Not found”라고 적어두었을 경우.<br>
-생성자로 RuntimeException의 String 값을 넣을 경우<br>
-최상위 클래스인 Throwable의 message가 저장되게된다.</p>
+<p>JDBC API를 사용하기 위해서는<br>
+JDBC 드라이브를 먼저 로딩한 후에 데이터베이스와 연결한다.</p>
 
-<p>해당 메서드가 실행 되면, @ExceptionHandler에 의해<br>
-RuntimeException 객체가 매개변수를 통해 전달된다.</p>
-
-<p>문제점은 위의 예외상황은 RuntimeException만 작성했을 뿐<br>
-의도적으로 발생 시킬 예외 상황이 더 있을 수 있다.<br>
-그리고 예외 의도가 명확하지 않다는 점.</p>
+<p>드라이버는 그림과 같이 데이터베이스와 통신을 담당하는 인터페이스다.<br>
+여러 데이터베이스 회사에 맞게 드라이버를 구현해서 제공해준다.</p>
 
 <p><br></p>
 
-<p><strong>2). 개선된 예외 상황 처리</strong></p>
+<h3 id="data-access-기술-유형">Data Access 기술 유형</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
-    <span class="no">MEMBER_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span> <span class="s">"Member Not Found"</span><span class="o">);</span>
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
+<p>Spring에서 사용할 수 있는 대표적인 액세스 기술에는<br>
+mybatis, Spring JDBC, Spring Data JDBC, JPA, Spring Data JPA 등이 있다고한다.<br>
+어디선가 한번씩 들어본적있는 이름들이다..</p>
 
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
+<p>과거에는 SQL 쿼리문을 직접 포함하고 있는 방식을 많이 사용했다고한다.<br>
+하지만 현재 Java 진영에서는 SQL중심이 아니라 <strong>객체중심의 기술</strong>로<br>
+지속적으로 이전하고 있는 추세라고한다.  즉, SQL중심의 학습보다는 현재<br>
+많이 사용하고 있는 추세의 객체중심의 기술을 학습하는 방향이 좋을 것 같다.</p>
 
-    <span class="nc">ExceptionCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">status</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+<p><strong>객체중심 기술?</strong><br>
+SQL 쿼리문을 직접 다루기보단, 객체를 SQL 쿼리문으로 변환해주고<br>
+접근하는 방법을 말한다고 한다. 이러한 데이터 액세스 기술을<br>
+기술을 ORM(Object Relational Mapping)라고 한다.<br>
+이후에 우리가 배울 JPA가 Java에서 대표적인 ORM 기술이라고한다.</p>
+
+<h3 id="spring-data-jdbc">Spring Data JDBC</h3>
+
+<p>JPA의 기술적인 난이도에 비해 심플하다.<br>
+우선 Spring data JDBC를 이용하기 위해서는</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+</code></pre></div></div>
+
+<p>이전에 우리가 의존 라이브러리 추가했던 것 처럼<br>
+build.gradle 의존 라이브러리 코드를 추가해줘야 된다.</p>
+
+<p><br></p>
+
+<p>데이터 베이스는 인메모리를 이용하는 DB H2를 사용하여 실습해보자</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'com.h2database:h2'
+</code></pre></div></div>
+<p>동일하게 build.gradle에 h2를 사용가능하게<br>
+의존성 라이브러리를 추가해주자</p>
+
+<p>스프링 부트를 실행시키면 콘솔에 아래와 같이 노출되는 것을 볼 수 있는데</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:48abebe3-424c-4a03-a74b-8d1ff2ebc750'
+</code></pre></div></div>
+<p>이말은, /h2-consle 주소로 접속후 연결하기 위한<br>
+JDBC URL: jdbc:h2:mem:48abebe3-424c-4a03-a74b-8d1ff2ebc750 를<br>
+입력하라는 의미이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRZqftCtzQKEaQYKgtzjp9fZAuex8V7dMaxWx4cCGm2lyPXTDljumo3m-BK-BaD9qgz7kZ9Q4s=w1920-h921" align="left" width="500px"></p>
+
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br></p>
+
+<p>위와 같이 입력하면 H2 DB에 접속이 가능하다.<br>
+여기서 JDBC URL은 부트실행시킬시 랜덤으로 변경되므로 간편하게 이용하기위해선</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">h2</span><span class="pi">:</span>
+    <span class="na">console</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">path</span><span class="pi">:</span> <span class="s">/h2 (1)</span> <span class="c1">#Context path 변경</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:h2:mem:test</span> <span class="c1">#(2) #JDBC URL 변경</span>
+</code></pre></div></div>
+<p>resources -&gt; application.yml에서 위와 같이 설정을하면<br>
+주소를 h2, JDBC URL을 간단하게 입력해<br>
+접속이 가능하므로 참고하자!<br>
+(application.properties를 application.yml로 이름을 바꾸면 사용가능)</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQBCkbEd80Pbqc1LNcCwAqu6urror_D1lOoRgCqj5Eq7UEgpjduEBaq9Jx1XifABSU5eWY7kIg=w1920-h921" align="left" width="500px"></p>
+
+<p><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br></p>
+
+<p>접속에 성공할 경우 위와 같은 화면으로 들어와진다.<br>
+(왼쪽의 테이블은 현재 만들어둔 것이라 생성되어 있지만 처음엔 없음)</p>
+
+<p>여기까지가 build.gradle에 사용할 라이브러리들을 의존주입해주었고<br>
+application.yml 파일에 사용할 DB를 연동했다.<br>
+이제 우리가 Spring Data JDBC 사용하기 위해선 다음과 같은 순서를 진행해야한다.</p>
+
+<p><br></p>
+
+<p>1). .sql 파일에 필요한 Table Script를 작성한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE IF NOT EXISTS BABO (
+    BABO_ID bigint NOT NULL AUTO_INCREMENT,
+    MESSAGE varchar(100) NOT NULL,
+    PRIMARY KEY (BABO_ID)
+);
+</code></pre></div></div>
+<p>resources 경로에서 -&gt; 새로 만들기 -&gt; 파일 -&gt; 이름.sql <br>
+로 입력하면 .sql 파일이 생길 것이다.</p>
+
+<p>그리고 파일 내용에는 테이블을 생성하고 안에 BABO_ID라는 <br>
+Primary key를 만들고  MESSAGE라는 column도 생성하는 쿼리문을<br>
+작성한 파일을 넣어두면 된다.</p>
+
+<p>2). 작성한 sql파일을 읽어서 테이블을 생성할 수 있도록 application.yml파일에 초기화 설정을 추가한다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">h2</span><span class="pi">:</span>
+    <span class="na">console</span><span class="pi">:</span>
+      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">path</span><span class="pi">:</span> <span class="s">/h2</span>     
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:h2:mem:test</span>    
+  <span class="na">sql</span><span class="pi">:</span>
+    <span class="na">init</span><span class="pi">:</span>
+      <span class="na">schema-locations</span><span class="pi">:</span> <span class="s">classpath*:schema.sql</span> <span class="c1"># 경로 추가</span>
+</code></pre></div></div>
+<p>이제 우리가 만든 sql파일의 경로를 설정해주는 방법인데.<br>
+파일이름을 schema.sql이라고 지정했고 해당 파일을<br>
+위의 코드 처럼 경로를 지정했다.<br>
+예를들어 패키지 구조를 만든다면  루트 디렉토리 위치를 적어 주면된다.<br>
+ex) db라는 폴더안에 파일있을 경우 = classpath*:db/schema.sql</p>
+
+<p>이렇게 위와 같이 두 가지 준비를 해주고<br>
+애플리케이션 실행시, h2 DB에 우리가 작성한<br>
+sql 구문대로 테이블이 자동으로 생성이된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQiNzJHU9VaYPm33r-cPauTJm_nL3OsrQbCKTRWufcWP5grpuUIlwe76hRUcyzxILSR53g764I=w1920-h921" align="left" width="500px"></p>
+
+<p><br><br><br><br></p>
+
+<p>이렇게 H2 DB에 들어가서 확인해보면 우리가 만든<br>
+테이블의 이름대로 Column들이 생성되는  것을 볼 수 있다.</p>
+
+<p>여기서 이제 우리는 레코드값(행값)을 여태까지 배운 방법을 통해서<br>
+DB에 저장을 해줄 수 있다.</p>
+
+<p><strong>맨처음에 JDBC는 자바레벨에서 데이터베이스에 데이터를 업데이트하거나<br>
+반대로 받을 수 있다고 맨처음에 얘기를 했습니다.</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+</code></pre></div></div>
+<p>맨처음에 의존라이브러리를 우리가 추가했었는데<br>
+이 라이브러리 안에 기능중 CrudRepository라는 클래스로<br>
+데이터베이스에 접근이 가능하다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MessageRepository</span> <span class="kd">extends</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="nc">Babo</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{}</span>
+</code></pre></div></div>
+<p>인터페이스로 Repository를 만들고 CrudRepository를 상속해준 다음에<br>
+&lt;클래스, PrimaryKey 타입&gt;을 입력해주면 우리는 다형성에 의해<br>
+CrudRepository에 있는 기능들을 사용할 수 있게 되어진다.</p>
+
+<p><em>(CrudRepository를 사용하기위해서 위에 import가 필요하며<br>
+import가 되려면 의존라이브러리를 추가해야한다 !!)</em></p>
+
+<p>위에 코드로 이제 우리는 infterface MessageRepository를 사용해<br>
+Service 클래스에서 Overriding하여 사용하면<br>
+데이터가 H2 DB에 저장이되는 아주 신비로운 일을 겪을 수 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MessageRepository</span> <span class="n">messageRepository</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MessageService</span><span class="o">(</span><span class="nc">MessageRepository</span> <span class="n">messageRepository</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">messageRepository</span> <span class="o">=</span> <span class="n">messageRepository</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">Babo</span> <span class="nf">createMessage</span><span class="o">(</span><span class="nc">Babo</span> <span class="n">message</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
+<p>스프링 컨테이너를 통한 의존성 주입 후<br>
+해당 객체의 .save(); 메서드를 구현하면<br>
+Entity의 맞는 데이터가 들어왔을 때, 데이터가 맵핑되어 자동으로<br>
+DB에 저장되게 되어진다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">){</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">exceptionCode</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<hr>
+<p>이렇게 오늘은 JDBC에 내용을 알아 보았고<br>
+그 중에서도 Spring data JDBC를 사용해보았다.<br>
+앞으로도 많은 DB접근 기술을 접할 텐데<br>
+설렘반 걱정반인 느낌이다..</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
-<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">BusinessLogicException</span> <span class="n">e</span><span class="o">){</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">());</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">()));</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<p>최대한 많은 기술을 배울수 있도록 구글링해보면서<br>
+공부해볼 생각이다</p>
 
-<p>위에 클래스를 3가지로 나누어서<br>
-BusinessLogicException 클래스를 통해<br>
-객체를 받는 방법이다.</p>
-
-<p>먼저 enum 클래스를 통해서<br>
-사용할 생성자의 데이터를 맵핑해주고</p>
-
-<p>BusinessLogicException 클래스를 만들어<br>
-RuntimeException을 상속해 spuer(); 생성자를 통해<br>
-Throawble까지 메세지를 올려주고, 객체를 저장하게 작성했다.<br>
-해당 객체는 @Getter를 이용해 가져올 수 있고<br>
-그 객체를 통해서 Enum의 Status값과 Message를 가져오는 모습이다.</p>
-
-<p><br></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">);</span>
-</code></pre></div></div>
-
-<p>최종적으로 예외를 강제로 위와 같이<br>
-MEMBER_NOT_FOUND로 던졌을 경우</p>
-
-<p>BusinessLogicException 클래스와 ExceptionCode 클래스를<br>
-이용해 객체츨 만들고 예외처리로 흐름을 넘겨<br>
-우리가 커스터 마이징한 값을 출력하는 것 까지 보았다.</p>
-
-<p>그럼 우리가 이제 이 기반으로<br>
-응답하는 객체를 새로 정리해서 보낸다든지?<br>
-커스터마이징이 가능하게 되는 것이다.</p>
-
-<p>중요한 점은 에러가 강제로 발생 되었을 경우<br>
-우리가 흐름을 가져와 제어할 수있다는 점을 얻어간 것 같다.</p>
-
-<p><br></p>
-
-<p>어제 공부했던거와 더불어 다시 정리해보자면</p>
-<ol>
-  <li>
-    <p>MethodArgumentNotValidException<br>
--&gt;@Vaild 유효성 검증 실패한 예외잡기</p>
-  </li>
-  <li>
-    <p>ConstraintViolationException <br>
--&gt;@Vaildated 유효성 검증 실패한 예외잡기</p>
-  </li>
-  <li>
-    <p>HttpRequestMethodNotSupportedException<br>
--&gt; 해당 핸들러 메서드에 정의된 메서드와 호출한 메서드가 잘못되었을때 예외잡기</p>
-  </li>
-  <li>
-    <p>NullPointerException : NullPoint 예외처리 발생한 것 잡기</p>
-  </li>
-  <li>
-    <p>RuntimeException 클래스를 상속받아 클래스를 만들어<br>
-제어흐름을 가져올 수 있음.</p>
-  </li>
-</ol>
+<p>오늘 공부는 여기서 끝!!</p>
 
 <p><br></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 라면, 불고기, 밥</p>
+<strong>오늘의 점심</strong>: 불고기, 라면, 밥</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/25/til.html" title="TIL) Spring Exception 1">TIL) Spring Exception 1</a><a class="next" href="/til/2022/10/27/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring JDBC 기반 액세스 계층...</a>
+<a class="previous" href="/til/2022/10/26/til.html" title="TIL) Spring Exception 2">TIL) Spring Exception 2</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/12/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring Basic 2</a></li>
-<li><a class="post-link" href="/til/2022/10/13/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring DI 1</a></li>
-<li><a class="post-link" href="/til/2022/10/18/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring AOP 2</a></li>
-<li><a class="post-link" href="/til/2022/10/19/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) 두달차 회고</a></li>
+        <li><a class="post-link" href="/til/2022/10/20/til.html" title="">TIL) Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/til/2022/10/18/til.html" title="">TIL) Spring AOP 2</a></li>
+<li><a class="post-link" href="/til/2022/10/19/til.html" title="">TIL) 두달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="">TIL) Spring Exception 2</a></li>
 </ul>
     </div>
 <div class="post-comments">
