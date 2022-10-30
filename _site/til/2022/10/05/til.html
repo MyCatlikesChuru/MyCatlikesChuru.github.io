@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring MVC Controller 계층 | LeeJellan</title>
+<title>TIL) DB RDMBS 1 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring MVC Controller 계층">
+<meta property="og:title" content="TIL) DB RDMBS 1">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오랜만에 깊은 숙면을 했다.">
-<meta property="og:description" content="오랜만에 깊은 숙면을 했다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/20/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/20/til.html">
+<meta name="description" content="요즘들어 안좋은 얘기들 많으 들어서 그런지 조금 우울한 하루들이 계속 되고있다.">
+<meta property="og:description" content="요즘들어 안좋은 얘기들 많으 들어서 그런지 조금 우울한 하루들이 계속 되고있다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/05/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/05/til.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-20T00:00:00+09:00">
+<meta property="article:published_time" content="2022-10-05T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring MVC Controller 계층">
+<meta property="twitter:title" content="TIL) DB RDMBS 1">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-20T00:00:00+09:00","datePublished":"2022-10-20T00:00:00+09:00","description":"오랜만에 깊은 숙면을 했다.","headline":"TIL) Spring MVC Controller 계층","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/20/til.html"},"url":"http://localhost:4000/til/2022/10/20/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-05T00:00:00+09:00","datePublished":"2022-10-05T00:00:00+09:00","description":"요즘들어 안좋은 얘기들 많으 들어서 그런지 조금 우울한 하루들이 계속 되고있다.","headline":"TIL) DB RDMBS 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/05/til.html"},"url":"http://localhost:4000/til/2022/10/05/til.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -634,11 +634,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring MVC Controller 계층</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+62</h2>
+  <h1 class="post-title p-name" itemprop="name headline">TIL) DB RDMBS 1</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+47</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-20T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 20, 2022
+    <time class="dt-published" datetime="2022-10-05T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 05, 2022
     </time>
 
     
@@ -675,7 +675,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -684,191 +684,250 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오랜만에 깊은 숙면을 했다.</p>
+      <p>요즘들어 안좋은 얘기들 많으 들어서 그런지<br>
+조금 우울한 하루들이 계속 되고있다.</p>
 
-<p><img src="https://ifh.cc/g/j3W1OJ.jpg" align="left" width="300px" height="300px">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p>아무래도 정신적인 문제는 공부에 집중에 저하가 되는 것 같다.<br>
+당분간은 속이 괜찮아질때까지 쉬엄쉬엄<br>
+페이스조절하면서 공부를 해보려한다.<br>
+처음 설정했던 목표를 위해서, 오늘도 화이팅!</p>
 
-<p>섹션2가 끝나고 섹션3이 시작되는 날이다.<br>
-드디어 Spring에 대한 여러 공부들이 이루어질 것 같다.<br>
-Spring MVC에 대해 주로 공부할 것 같다<br>
-오늘도 열심히 달려보자 !</p>
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRXTZFmBFma1RrhwTSTlIfBqLe1hWM4_QZ7c9SF_CA127t9J5em33IqLafC6aX7LhxOMJT47Cg=w1920-h921" align="left" width="350px"></p>
 
-<hr>
-
-<h2 id="spring-mvc"><strong>Spring MVC</strong></h2>
-
-<p>Spring Web MVC를 줄요서 Spring MVC라고 부른다.<br>
-MVC는 Model, View, Controller의 약자들이고<br>
-클라이언트의 요청을 편리하게 처리해주는 프레임워크들이다.<br>
-우리가 이제부터 만들게 될 샘플 애플리케이션은<br>
-Spring MVC가 제공해주는 기능을 이용해서 만들기 때문에 중요한 시간이라고 볼 수 있다.</p>
-
-<p><strong>Model</strong> : 작업의 처리 결과 데이터<br>
-<strong>View</strong> : Model 데이터를 이용해 웹브라우저 같은 클라이언트 애플리케이션의<br>
-화면의 보여지는 리소스를 제공하는 역할</p>
-
-<p><strong>Controller</strong> : 클라이언트 측의 요청을 직접적으로 전달 받는 엔드포인트로써<br>
-Model과 View의 중간에서 상호작용을 해주는 역할</p>
-
-<p><img src="https://ifh.cc/g/z1godo.jpg" alt="example image"></p>
-
-<p>아래는 이전에 공부했던 계층형 아키텍처이다.<br>
-여기서 API계층을 Spring MVC 기반의 코드로 구현해보자</p>
-
-<p><img src="https://ifh.cc/g/WcnZXw.jpg" alt="example image"></p>
-
-<p><strong>패키지 구조</strong></p>
-
-<p>1).기능 기반 패키지 구조<br>
-   -. 하나의 기능을 완성하기 위한 계층별 클래스들을 모아놓는 구조</p>
-
-<p><img src="https://ifh.cc/g/fvyThO.png" align="left" width="300px" height="200px">
-<br><br><br><br><br><br><br><br><br></p>
-
-<p>2). 계층 기반 패키지 구조<br>
-   -. 패키지를 하나의 계층으로 보고 클래스들을 계층별로 묶어서 관리하는 구조</p>
-
-<p><img src="https://ifh.cc/g/HXg2bo.png" alt="example image"></p>
-
-<p>Controller 관련 부분을 배워보자<br>
-현재 Postman을 통해 API를 요청중이다.</p>
-
-<p><img src="https://ifh.cc/g/X2Ql9J.jpg" alt="example image"></p>
-
-<p>status : 404<br>
-Not Found 에러가 리턴되었는데<br>
-클라이언트의 요청을 처리할 핸들러 메서드가 아지 없기 때문이다.<br>
-간단하게 여러 애노테이션을 알아보고 사용해보자</p>
-
-<p><strong>핸들러 메서드(Handler Method)</strong><br>
-@RestController<br>
--&gt; 클래스에 추가함으로써 해당 클래스를 REST API의 리소스를 <br>
-처리하기 위한 API 엔드포인트로 동작하게 해준다</p>
-
-<p>@RequestMapping<br>
--&gt; Controller 클래스 레벨에 추가하여 클래스 전체에 사용되는 공통 Base URL을 설정할 수 있다.<br>
--&gt; 방식을 명시하지 않을 경우, GET,POST사용</p>
-
-<p>@GetMapping<br>
--&gt; 조회 맵핑<br>
--&gt; {} 동적으로 바뀌는 값이되어짐</p>
-
-<p>@PostMapping<br>
--&gt; 쓰기 맵핑<br>
--&gt; {} 동적으로 바뀌는 값이되어짐</p>
-
-<p>@PathVariable<br>
--&gt; 클라이언트 요청 URI에 패턴 형식으로 지정된 변수값을 파라미터로 전달받는다<br>
--&gt; GetMapping의 괄호안에 문자열과 동일해야한다.<br>
-만약 다를경우 MissingPathVaribleException을 발생한다.</p>
-
-<p>@RequestParam<br>
--&gt; 주로 클라이언트 쪽에서 전송하는 요청 데이터를 쿼리 파라미터(Query Parmeter 또는 Query String), <br>
-폼 데이터(form-data), x-www-form-urlencoded 형식으로 전송하면 <br>
-이를 서버 쪽에서 전달 받을 때 사용하는 애너테이션입니다.</p>
-
-<p><strong>ResponseEntity</strong></p>
-
-<p>ResponseEntity 타입의 객체로 map과 HTTP상태를 보냄<br>
--&gt; Map&lt;String,String&gt; map = new HashMap&lt;&gt;(); 데이터를 담은 map<br>
--&gt; HTTP상태, CREATE, OK 등등…<br>
--&gt; Handler Method를 통해 ReponseEntity객체를 반환하면 ResponseBody로 전달됨</p>
-
-<p>HttpStatus<br>
-Eunm<httpstatus>로 구성되어져있음.  
-HTTP 상태를 나타내는 여러 상수들이 있음  
-물론 더 있지만 우선 오늘 사용해본것들 위주로 예제프로그램을 작성해보자  
-기존에 값이 저장되어있는 Map에 데이터를 수정하는 프로그램이다.</httpstatus></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v1/members"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberController</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">,</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-
-    <span class="nd">@PostConstruct</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-        <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"memberId"</span><span class="o">,</span> <span class="n">memberId</span><span class="o">);</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span> <span class="s">"dhfif718@naver.com"</span><span class="o">);</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"이재혁"</span><span class="o">);</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="s">"010-1111-5555"</span><span class="o">);</span>
-        <span class="n">members</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">memberId</span><span class="o">,</span> <span class="n">member1</span><span class="o">);</span>
-    <span class="o">}</span>
-    
-    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/phone/{memberId}"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">changeCoffees</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"memberId"</span><span class="o">)</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">,</span>
-                                        <span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"phone"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="c1">//저장되어있는 객체 조회</span>
-        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">chagnePhoneNumber</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">);</span>
-
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt;Phone 번호 변경 로직 실행됨"</span><span class="o">);</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"변경전 : "</span> <span class="o">+</span> <span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">));</span>
-
-        <span class="c1">//해당 members 맵에 회원 id가 없을 경우 BAD_REQUSET 반환</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"해당 memberId에 데이터가 존재하지 않습니다"</span><span class="o">);</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">BAD_REQUEST</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="c1">//핸드폰 번호 변경 로직</span>
-        <span class="c1">//얕은 복사로 같은 객체를 변경하는 것이기 때문에 members.put을 따로 해줄 필요는 없다.</span>
-        <span class="n">chagnePhoneNumber</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="n">phone</span><span class="o">);</span>
-
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"변경후 : "</span> <span class="o">+</span> <span class="n">chagnePhoneNumber</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">chagnePhoneNumber</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>POST에 해당하는 핸들러 메서드를 만들었다.<br>
-Postman을 통해 요청을 보냈더니<br>
-ResponseEntity를 통해 객체와 상태를 리턴해주었다.</p>
-
-<p><br></p>
-
-<p><img src="https://ifh.cc/g/GgtVZa.jpg" alt="example image"></p>
-
-<p>API 요청시 인텔리제이의 System.out 프린트로 출력된 로그</p>
-
-<p>–&gt;Phone 번호 변경 로직 실행됨<br>
-변경전 : {phone=010-1111-5555, name=이재혁, email=dhfif718@naver.com, memberId=1}<br>
-변경후 : {phone=010-1111-6777, name=이재혁, email=dhfif718@naver.com, memberId=1}</p>
+<p><br><br><br><br><br><br><br><br><br><br><br><br></p>
 
 <hr>
 
-<p>오늘은 정리가 조금 부실하다…<br>
-실습하기 바쁘기도했고, 오늘 저녁에<br>
-백엔드 현업개발자 친구를 만나 여러가지 얘기도나누고<br>
-공부방향이 잘되고있는 건지 등<br>
-여러 잡담을 나누다보니 집에 11시에 도착해버렸다…<br>
-부랴부랴 오늘 학습한 내용을 정리하는데,, 머릿속이 텅…<br>
-비어버려서 내일학습에 지장이 생기면안될 것 같아.<br>
-우선 간단하게만 정리하고 마무리해보려한다.<br>
-주말을 이용해 인프런강의와 오늘 배운 여러지식들을 다시 공부해봐야겠다.</p>
+<p>오늘은 데이터 베이스에 관련된 내용을 공부했다.<br>
+크게보면 RDBMS(관계형 데이터베이스)의 주제로<br>
+안에 있는 내용들을 들여다 보려한다.</p>
+
+<h3 id="db의-필요성"><strong>DB의 필요성</strong></h3>
+<p>DB는 DataBase의 약자로 줄여서 부른다.<br>
+우리는 데이터베이스가 왜 필요한지 생각해봐야한다.</p>
+
+<p><strong>In-Memory</strong><br>
+-&gt; 우리가 프로그램 내에 데이터를 저장하려면, 프로그램이 실행되는 동안에만 값을 유지하고<br>
+종료되면 데이터는 사라지게된다. 즉, 프로그램 실행에 의존되어진다.</p>
+
+<p><strong>File I/O</strong><br>
+엑셀 시트 CSV와 같은 파일형태로 저장할 수도 있다.<br>
+나도 이전 직종에서 프로그램 로그를 남길때나 데이터 검사를 위해 잠시 테스트로 데이터를 남길때<br>
+주로 CSV에 남겼다. 하지만 웹은 내가 사용했던 CPU랑은 다르고 구조도다르다.<br>
+만약 웹상에 이와 같이 CSV파일 같은 경우로 남기게되면 데이터가 필요할 때마다 전체파일을<br>
+매번 읽어야하고, 파일이 커지면 커질수록 작업이 버거워서 매우 비효율 적이다.</p>
+
+<h3 id="sql"><strong>SQL</strong></h3>
+<p>SQL의 약자는 Structured Query Language이며, 직역하면 구조화 쿼리 언어이다.<br>
+주로 관계형 데이터 베이스에 사용한다. (MySQL, Oracle etc…)</p>
+
+<p>즉, SQL을 사용하기 위해서는 데이터 구조가 고정되어 있어야한다.<br>
+사전에 구조와 데이터 타입 등을 사전 정의하고<br>
+테이블에 정의된 내용에 알맞은 형태의 데이터만 삽을 할 수 있다.</p>
+
+<p>행과 열로 구성된 테이블에 데이터를 저장하고<br>
+각 역은 하나의 속성, 행에는 각 열의 데이터 형식에 맞는 데이터가 저장된다.<br>
+엑셀과 비슷한 형태의 느낌으로 생각하면된다.</p>
+
+<p>여기서 Q에 해당하는 Query가 무엇인지 알아보자.</p>
+
+<p><strong>Query</strong><br>
+데이터베이스 용 프로그래밍 언어이다.<br>
+쿼리를 보내 원하는 데이터를 가져오거나 삽입할 수 있다.<br>
+오늘은 <a href="https://www.w3schools.com/sql/sql_exercises.asp">w3schools</a> 웹사이트를 통해<br>
+간단한 SQL 문법에 대해서 공부했고</p>
+
+<p>오늘 공부해본 SQL을 사용하기위한 기본 문법을 아래 적어본다.</p>
+
+<p><strong>1). SELECT</strong> <br>
+SELECT 컬럼명 FROM 테이블<br>
+-&gt; 테이블로부터 컬럼의 데이터를 가져오기<br>
+-&gt; ex) SELECT City FROM Customers;<br>
+-&gt; ex) SELECT * FROM Customers;</p>
+
+<p><strong>2). DISTINTCT</strong><br>
+DISTINTCT<br>
+-&gt; 유니크한 값 찾기</p>
+
+<p><strong>3). WHERE</strong><br>
+WHERE 컬럼명 = 찾을값<br>
+-&gt; 특정값을 찾을때 (조건)<br>
+-&gt; ex) WHERE City = ‘Oslo’;<br>
+-&gt; 다중으로 쓸때 ex) WHERE City = ‘Oslo’ AND City = ‘London’;</p>
+
+<p><strong>4). IN</strong><br>
+SELECT * FROM Customers<br>
+WHERE Country IN (‘Norway’, ‘France’);<br>
+-&gt; Where 뒤에 사용, 둥중하나라도 있을 경우 필터링</p>
+
+<p><strong>5) ORDER</strong><br>
+ORDER BY<br>
+-&gt; 오름차순정렬,<br>
+-&gt; ESC 내림차순<br>
+-&gt; 여러개 정렬할때 / ORDER BY 요소, 요소</p>
+
+<p><strong>6). INSERT</strong><br>
+INSERT INTO 테이블 ( 컬럼명1,컬럼명2 ) VALUES ( 값1,값2 );<br>
+-&gt; 해당 테이블 안에 컬럼에 해당하는 값을 넣은<br>
+-&gt; ex) INSERT INTO Customers (Name, age) VALUES (‘LEE’,’28’);</p>
+
+<p><strong>7). UPDATE</strong>
+UPDATE 테이블 SET 컬럼명 = 데이터<br>
+-&gt; 해당 테이블의 컬럼에 데이터를 업데이트<br>
+-&gt; ex) UPDATE Customers SET City = ‘Oslo’;</p>
+
+<p><strong>8). DELETE</strong><br>
+DELETE FROM 테이블명;<br>
+-&gt; 해당 테이블 행을 모두 삭제<br>
+-&gt; WHERE절을 붙일경우 해당하는 내용의 행만 삭제<br>
+-&gt; ex) DELETE FROM Customers;<br>
+-&gt; ex) DELETE FROM Customers WHERE Country = ’Norway’;</p>
+
+<p><strong>9). BETWEEN</strong><br>
+BETWEEN 값 AND 값<br>
+-&gt; 해당 컬럼에서 사이에 해당하는 값을 추출<br>
+-&gt; ex) SELECT * FROM Products WHERE Price BETWEEN 10 AND 20;</p>
+
+<p><strong>10). ALIAS</strong><br>
+AS 별칭</p>
+
+<p>-&gt; 해당 테이블이나 컬러명의 별칭을 붙임  <br>
+-&gt; SELECT * FROM Customers AS c;</p>
+
+<p><strong>11). JOIN ON</strong><br>
+FROM 기존 테이블명 JOIN 연결 테이블명 ON 테이블값 비교</p>
+
+<p>LEFT JOIN<br>
+-&gt; 왼쪽집합만<br>
+-&gt; SELECT * FROM Orders LEFT JOIN Customers ON Orders.CustomerID = Customers.CustomerID;</p>
+
+<p>INNER JOIN<br>
+-&gt; 교집합<br>
+-&gt; SELECT * FROM Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;</p>
+
+<p>RIGHT JOIN<br>
+-&gt; 오른쪽 집합만<br>
+-&gt; SELECT * FROM Orders RIGHT JOIN Customers ON Orders.CustomerID = Customers.CustomerID;</p>
+
+<p><strong>12). LIKE</strong><br>
+LIKE ‘문자열%’<br>
+*와일드카드*<br>
+‘문자열%’ -&gt; 맨앞에만찾기<br>
+‘%문자열’ -&gt; 맨뒤에만찾기<br>
+‘%문자열%’ -&gt; 전체 찾기<br>
+‘_문자열%’ -&gt; 두번째 글짜찾기<br>
+‘[문자열]’ -&gt; 문자열 안에 OR찾기 <br>
+‘[문자열1-문자열2]%’ -&gt; 첫번째 문자열의 문자열1 부터 문자열2까지찾기</p>
+
+<p><strong>13). GROUP BY</strong></p>
+
+<p>GROUP BY<br>
+-&gt; 그룹별 집계<br>
+-&gt; ex) SELECT COUNT(CustomerID), Country FROM Customers GROUP BY Country;</p>
+
+<p><strong>14). Function 관련</strong></p>
+
+<p>MIN(열) -&gt; 열중에 가장 작은값<br>
+MAX(열) -&gt; 열중에 가장 큰값 찾기<br>
+Count(*) -&gt; 전체 행의 숫자 가져오기<br>
+AVG(열) -&gt; 열의 평균값<br>
+SUM(열) -&gt; 열의 합산값</p>
+
+<p><strong>15). Data Base 관련</strong><br>
+CREATE DATABASE 이름 <br>
+-&gt; 데이터베이스 생성</p>
+
+<p>DROP DATABASE 이름<br>
+-&gt; 데이터베이스 삭제</p>
+
+<p>CREATE TABLE 이름<br>
+-&gt; 이름에 해당하는 테이블 생성</p>
+
+<p>DROP TABLE 이름<br>
+-&gt; 이름에 해당하는 테이블 완전삭제</p>
+
+<p>TRUNCATE TABLE 테이블 이름<br>
+-&gt; 테이블 내용만삭제</p>
+
+<p>ALTER TABLE 테이블명 ADD 컬럼명 데이터 타입<br>
+-&gt; 테이블의 컬럼 추가<br>
+ex) ALTER TABLE Country add USA VARCHAR(25)</p>
+
+<p>ALTER TABLE 테이블명 DROP COLUMN 컬럼명<br>
+-&gt; 테이블의 컬럼 삭제</p>
+
+<h3 id="acid"><strong>ACID</strong></h3>
+<p>ACID는 데이터 베이스 내에서 일어나는 하나의 트랜잭션의 안정성을<br>
+보장하기 위해 필요한 성질이다.<br>
+여기서 <strong>트랜잭션(Transaction)</strong>이란?<br>
+여러 개의 작업을 하나로 묶은 실행 유닛이다.</p>
+
+<p>즉, 각 트랜잭션은 하나의 특정 작업으로 시작을 해 묶여 있는<br>
+모든 작업들은 다 완료해야 정상적으로 종료한다.</p>
+
+<p><strong><span style="color:#F04965">A</span>tomicity (원자성)</strong><br>
+하나의 트랜잭션에 속해있는 모든 작업이 전부 성공하거나<br>
+전부 실패해서 결과를 예측할 수 있어야한다.</p>
+
+<p><strong><span style="color:#F04965">C</span>onsistency (일관성)</strong><br>
+데이터베이스의 상태가 일관되어야한다는 성질<br>
+만약 이름과 나이라는 데이터를 가지게끔 규약해놓은 테이블이 있을때<br>
+이름을 삭제한다거나, 이름을 안넣고 추가한다거나<br>
+이렇게 되면 데이터베이스의 상태가 인관되지않고 변하게된다.</p>
+
+<p><strong><span style="color:#F04965">I</span>solation (격리성)</strong><br>
+모든 트랜잭션은 다른 트랜잭션으로부터 독립되어야한다.<br>
+실제 여러개의 트랜잭션이 수행될 때, 각 트랜젝션은 고립되어<br>
+연속으로 실행된 것과 동일한 결과를 나타낸다.</p>
+
+<p><strong><span style="color:#F04965">D</span>urability (조속성)</strong><br>
+하나의 트랜잭션이 성공적으로 수행되었다면<br>
+해당 트랜잭션에 대한 로그가 남아야한다. 만약 시스템 오류가 발생하더라도<br>
+해당 기록은 영구적이어야한다는 뜻이다.</p>
+
+<h3 id="nosql"><strong>NoSQL</strong></h3>
+
+<p>SQL앞에 No가 붙은 형태로 비관계형 데이터 베이스를 가르킨다. (MonggoDB, Casandra etc..)<br>
+NoSQL은 데이터가 고정되어 있지 않은 데이터베이스를 가르킨다.<br>
+관계형 데이터베이스는 데이터를 입력할 때 스키마에 맞게 입력해야하는 반면<br>
+비관계형 데이터베이스는 데이터를 읽어올 때 스키마에 따라 데이터를 읽어온다.<br>
+이런 방식을 schema on read라고 한다.</p>
+
+<p>즉, 데이터를 입력하는 방식에 따라 데이터를 읽어올 때 영향을 미친다.</p>
+
+<p>비관계형 데이터베이스 타입</p>
+<ol>
+  <li>Key-Value (Redis, Dynamo)</li>
+  <li>문서형 (MongoDB)</li>
+  <li>Wide-Column (Cassandra, HBase)</li>
+  <li>그래프 (Neo4J, InfiniteGraph)</li>
+</ol>
+
+<p>위와 같이 4가지 타입이 있고<br>
+이번학습에서는 주로 관계형 데이터베이스를 다룰 것 같고<br>
+비관계형 데이터베이스는 우선 있다 정도만 알아둬야할 것 같다.<br>
+관계형 데이터베이스 공부를 어느정도 마친후<br>
+이후에 추가학습을 통해 공부가 필요해보인다.</p>
 
 <p><br></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 오징어 덮밥, 계란 부침</p>
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️  <br>
+<strong>오늘의 점심</strong>: 김밥</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/19/til.html" title="TIL) 두달차 회고">TIL) 두달차 회고</a><a class="next" href="/til/2022/10/21/til.html" title="TIL) Spring DTO">TIL) Spring DTO</a>
+<a class="previous" href="/macos/2022/08/26/OS-macOs-3.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">macOs) neofetch를 활용하여 terminal 커스터마이징</a><a class="next" href="/til/2022/10/06/til.html" title="TIL) DB RDMBS 2">TIL) DB RDMBS 2</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="TIL) Spring DTO">macOs) neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/til/2022/10/11/til.html" title="TIL) Spring DTO">TIL) Spring Basic 1</a></li>
-<li><a class="post-link" href="/til/2022/10/20/til.html" title="TIL) Spring DTO">TIL) Spring MVC Controller 계층</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="TIL) Spring DTO">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
+        <li><a class="post-link" href="/til/2022/10/24/til.html" title="TIL) DB RDMBS 2">TIL) Spring MVC Serivce 계층</a></li>
+<li><a class="post-link" href="/til/2022/10/05/til.html" title="TIL) DB RDMBS 2">TIL) DB RDMBS 1</a></li>
+<li><a class="post-link" href="/til/2022/10/27/til.html" title="TIL) DB RDMBS 2">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="TIL) DB RDMBS 2">TIL) Spring DTO</a></li>
 </ul>
     </div>
 <div class="post-comments">

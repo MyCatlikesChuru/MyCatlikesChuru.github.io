@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring MVC Controller 계층 | LeeJellan</title>
+<title>TIL) Spring JDBC 기반 액세스 계층 2 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring MVC Controller 계층">
+<meta property="og:title" content="TIL) Spring JDBC 기반 액세스 계층 2">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오랜만에 깊은 숙면을 했다.">
-<meta property="og:description" content="오랜만에 깊은 숙면을 했다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/20/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/20/til.html">
+<meta name="description" content="어느새 벌써 한주가 끝났다.">
+<meta property="og:description" content="어느새 벌써 한주가 끝났다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/28/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/28/til.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-20T00:00:00+09:00">
+<meta property="article:published_time" content="2022-10-28T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring MVC Controller 계층">
+<meta property="twitter:title" content="TIL) Spring JDBC 기반 액세스 계층 2">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-20T00:00:00+09:00","datePublished":"2022-10-20T00:00:00+09:00","description":"오랜만에 깊은 숙면을 했다.","headline":"TIL) Spring MVC Controller 계층","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/20/til.html"},"url":"http://localhost:4000/til/2022/10/20/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-28T00:00:00+09:00","datePublished":"2022-10-28T00:00:00+09:00","description":"어느새 벌써 한주가 끝났다.","headline":"TIL) Spring JDBC 기반 액세스 계층 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/28/til.html"},"url":"http://localhost:4000/til/2022/10/28/til.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -634,11 +634,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring MVC Controller 계층</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+62</h2>
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring JDBC 기반 액세스 계층 2</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+70</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-20T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 20, 2022
+    <time class="dt-published" datetime="2022-10-28T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 28, 2022
     </time>
 
     
@@ -675,7 +675,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -684,191 +684,182 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오랜만에 깊은 숙면을 했다.</p>
+      <p>어느새 벌써 한주가 끝났다.</p>
 
-<p><img src="https://ifh.cc/g/j3W1OJ.jpg" align="left" width="300px" height="300px">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p>코드스테이츠 시작 전부터 5개월 동안<br>
+제대로 쉬지 못하고 공부를 지속하다보니 살짝 번아웃이<br>
+오긴하는 것 같다.. 공부는 즐겁고 얼른 이 기술을 습득해<br>
+적용하고 싶지만,, 너무 오랫동안 여행을 가지 못해서<br>
+어디론가 훌쩍 떠나고 싶다.</p>
 
-<p>섹션2가 끝나고 섹션3이 시작되는 날이다.<br>
-드디어 Spring에 대한 여러 공부들이 이루어질 것 같다.<br>
-Spring MVC에 대해 주로 공부할 것 같다<br>
-오늘도 열심히 달려보자 !</p>
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSBGqdkMkYbzBmUzeLdSEzgYHBaRbLNMmENQpr1mjJdIXzRObuGsIxR3g7G770hOSSAJTkT3Gc=w1512-h810" align="left"></p>
+
+<p><br><br><br><br><br><br><br><br><br><br><br></p>
+
+<p>그래도 목표에 도달하기위해 열심히 해보자 !!</p>
 
 <hr>
 
-<h2 id="spring-mvc"><strong>Spring MVC</strong></h2>
+<p>어제는 Spring data JDBC를 사용하는 연습을 해보았다.</p>
 
-<p>Spring Web MVC를 줄요서 Spring MVC라고 부른다.<br>
-MVC는 Model, View, Controller의 약자들이고<br>
-클라이언트의 요청을 편리하게 처리해주는 프레임워크들이다.<br>
-우리가 이제부터 만들게 될 샘플 애플리케이션은<br>
-Spring MVC가 제공해주는 기능을 이용해서 만들기 때문에 중요한 시간이라고 볼 수 있다.</p>
+<p>몇일전까지는 이해가 되서 재밌었는데,,<br>
+급격한 난이도 상승으로 인한  즐거움과 어지러움이 공존했다.</p>
 
-<p><strong>Model</strong> : 작업의 처리 결과 데이터<br>
-<strong>View</strong> : Model 데이터를 이용해 웹브라우저 같은 클라이언트 애플리케이션의<br>
-화면의 보여지는 리소스를 제공하는 역할</p>
+<p>요는 JDBC 사용법이 어려웠던 것 보다는<br>
+Database, Service, Dto, Mapper, Controller의 연동과<br>
+데이터 전달흐름을 정확히 캐치하기가 어려운게 너무 컷었다.</p>
 
-<p><strong>Controller</strong> : 클라이언트 측의 요청을 직접적으로 전달 받는 엔드포인트로써<br>
-Model과 View의 중간에서 상호작용을 해주는 역할</p>
+<p>그도 그럴 것이 이 모든 내용을 일주일안에<br>
+전부 학습한 내용이라 그런 것 같다는 생각이 들었다.</p>
 
-<p><img src="https://ifh.cc/g/z1godo.jpg" alt="example image"></p>
-
-<p>아래는 이전에 공부했던 계층형 아키텍처이다.<br>
-여기서 API계층을 Spring MVC 기반의 코드로 구현해보자</p>
-
-<p><img src="https://ifh.cc/g/WcnZXw.jpg" alt="example image"></p>
-
-<p><strong>패키지 구조</strong></p>
-
-<p>1).기능 기반 패키지 구조<br>
-   -. 하나의 기능을 완성하기 위한 계층별 클래스들을 모아놓는 구조</p>
-
-<p><img src="https://ifh.cc/g/fvyThO.png" align="left" width="300px" height="200px">
-<br><br><br><br><br><br><br><br><br></p>
-
-<p>2). 계층 기반 패키지 구조<br>
-   -. 패키지를 하나의 계층으로 보고 클래스들을 계층별로 묶어서 관리하는 구조</p>
-
-<p><img src="https://ifh.cc/g/HXg2bo.png" alt="example image"></p>
-
-<p>Controller 관련 부분을 배워보자<br>
-현재 Postman을 통해 API를 요청중이다.</p>
-
-<p><img src="https://ifh.cc/g/X2Ql9J.jpg" alt="example image"></p>
-
-<p>status : 404<br>
-Not Found 에러가 리턴되었는데<br>
-클라이언트의 요청을 처리할 핸들러 메서드가 아지 없기 때문이다.<br>
-간단하게 여러 애노테이션을 알아보고 사용해보자</p>
-
-<p><strong>핸들러 메서드(Handler Method)</strong><br>
-@RestController<br>
--&gt; 클래스에 추가함으로써 해당 클래스를 REST API의 리소스를 <br>
-처리하기 위한 API 엔드포인트로 동작하게 해준다</p>
-
-<p>@RequestMapping<br>
--&gt; Controller 클래스 레벨에 추가하여 클래스 전체에 사용되는 공통 Base URL을 설정할 수 있다.<br>
--&gt; 방식을 명시하지 않을 경우, GET,POST사용</p>
-
-<p>@GetMapping<br>
--&gt; 조회 맵핑<br>
--&gt; {} 동적으로 바뀌는 값이되어짐</p>
-
-<p>@PostMapping<br>
--&gt; 쓰기 맵핑<br>
--&gt; {} 동적으로 바뀌는 값이되어짐</p>
-
-<p>@PathVariable<br>
--&gt; 클라이언트 요청 URI에 패턴 형식으로 지정된 변수값을 파라미터로 전달받는다<br>
--&gt; GetMapping의 괄호안에 문자열과 동일해야한다.<br>
-만약 다를경우 MissingPathVaribleException을 발생한다.</p>
-
-<p>@RequestParam<br>
--&gt; 주로 클라이언트 쪽에서 전송하는 요청 데이터를 쿼리 파라미터(Query Parmeter 또는 Query String), <br>
-폼 데이터(form-data), x-www-form-urlencoded 형식으로 전송하면 <br>
-이를 서버 쪽에서 전달 받을 때 사용하는 애너테이션입니다.</p>
-
-<p><strong>ResponseEntity</strong></p>
-
-<p>ResponseEntity 타입의 객체로 map과 HTTP상태를 보냄<br>
--&gt; Map&lt;String,String&gt; map = new HashMap&lt;&gt;(); 데이터를 담은 map<br>
--&gt; HTTP상태, CREATE, OK 등등…<br>
--&gt; Handler Method를 통해 ReponseEntity객체를 반환하면 ResponseBody로 전달됨</p>
-
-<p>HttpStatus<br>
-Eunm<httpstatus>로 구성되어져있음.  
-HTTP 상태를 나타내는 여러 상수들이 있음  
-물론 더 있지만 우선 오늘 사용해본것들 위주로 예제프로그램을 작성해보자  
-기존에 값이 저장되어있는 Map에 데이터를 수정하는 프로그램이다.</httpstatus></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v1/members"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberController</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">,</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-
-    <span class="nd">@PostConstruct</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-        <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"memberId"</span><span class="o">,</span> <span class="n">memberId</span><span class="o">);</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span> <span class="s">"dhfif718@naver.com"</span><span class="o">);</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="s">"이재혁"</span><span class="o">);</span>
-        <span class="n">member1</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="s">"010-1111-5555"</span><span class="o">);</span>
-        <span class="n">members</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">memberId</span><span class="o">,</span> <span class="n">member1</span><span class="o">);</span>
-    <span class="o">}</span>
-    
-    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/phone/{memberId}"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">changeCoffees</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"memberId"</span><span class="o">)</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">,</span>
-                                        <span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"phone"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="c1">//저장되어있는 객체 조회</span>
-        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">chagnePhoneNumber</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">);</span>
-
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt;Phone 번호 변경 로직 실행됨"</span><span class="o">);</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"변경전 : "</span> <span class="o">+</span> <span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">));</span>
-
-        <span class="c1">//해당 members 맵에 회원 id가 없을 경우 BAD_REQUSET 반환</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">memberId</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"해당 memberId에 데이터가 존재하지 않습니다"</span><span class="o">);</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">BAD_REQUEST</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="c1">//핸드폰 번호 변경 로직</span>
-        <span class="c1">//얕은 복사로 같은 객체를 변경하는 것이기 때문에 members.put을 따로 해줄 필요는 없다.</span>
-        <span class="n">chagnePhoneNumber</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"phone"</span><span class="o">,</span> <span class="n">phone</span><span class="o">);</span>
-
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"변경후 : "</span> <span class="o">+</span> <span class="n">chagnePhoneNumber</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">chagnePhoneNumber</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>POST에 해당하는 핸들러 메서드를 만들었다.<br>
-Postman을 통해 요청을 보냈더니<br>
-ResponseEntity를 통해 객체와 상태를 리턴해주었다.</p>
+<p>그래도 오늘 배운 것을 차근차근 정리해보자</p>
 
 <p><br></p>
 
-<p><img src="https://ifh.cc/g/GgtVZa.jpg" alt="example image"></p>
+<h3 id="domain-driven-design">Domain Driven Design</h3>
 
-<p>API 요청시 인텔리제이의 System.out 프린트로 출력된 로그</p>
+<p>Domain Driven Design는 DDD라고 줄여 불른다.<br>
+우리말로 도메인 주도 설계 정도로 해석할 수 있는데<br>
+용어의 의미 그대로 도메인 위주의 설계 기법을 의미한다.</p>
 
-<p>–&gt;Phone 번호 변경 로직 실행됨<br>
-변경전 : {phone=010-1111-5555, name=이재혁, email=dhfif718@naver.com, memberId=1}<br>
-변경후 : {phone=010-1111-6777, name=이재혁, email=dhfif718@naver.com, memberId=1}</p>
+<p><strong>Aggregate란?</strong><br>
+관련 도메인을 하나의 군집으로 묶은 것을 의미한다.<br>
+예를들어 커피주문을 앱으로 만든다고 가정하 였을 경우</p>
+
+<p>회원 (회원Id, 회원이름, 회원이메일 등..)<br>
+주문 (주문Id, 주문시간, 주문상태 등..)<br>
+음료 (음료Id, 음료종류, 음료가격, 음료조리시간 등..)</p>
+
+<p>이렇게 3개의 군집(회원,주문,음료)로 나는 것을 Aggregate라고 한다.</p>
+
+<p><strong>Aggregate route란?</strong><br>
+Aggregate route는 말그대로 군집중에 기준이 되는 뿌리. 즉 정보다<br>
+객체를 참조하기 위한 기준이되는 값이라고 생각하면 간단할 것 같다.<br>
+말 뜻에서 오듯이 변경이되지 않는 값으로 잡아야한다. (ex: id)</p>
+
+<p>한마디 정리 : Aggregate의 대표다 !</p>
+
+<p><br></p>
+
+<h3 id="entity-설계">Entity 설계</h3>
+<p>이전에 학습했던 RDBMS 챕터에서<br>
+ERD(Entity Relationship Diagram) 설계할때 잠깐 공부했었다.<br>
+1:1, 1:N, N:N 관계를 정의하고, 외래키(foreign key)로<br>
+다른 Entity를 Join해 값을 참조가 가능했었다.</p>
+
+<p>우리가 예제로 만들 애플리케이션의 Entity의 관계를 정의하고<br>
+프로그램을 시작하는게 좋을 것 같다.</p>
+
+<h3 id="오늘-배운-것을-적어보자-">오늘 배운 것을 적어보자 !</h3>
+
+<p><strong>1). AggregateReference</strong><br>
+-. JDBC 라이브러리 안에 들어있는 인터페이스이다.<br>
+-. Table 왜래키처럼 다른 클래스의 Aggregate Route를 참조할 수 있는 방법이다.</p>
+
+<p><strong>2). @Table</strong><br>
+-. Table의 이름을 정의하는 어노테이션이다.<br>
+-. .sql 파일에 정의된 테이블의 이름과 연결해준다고 생각하면 될 것 같다.<br>
+-. @Table이 설정이 안되어 있을 경우 클래스이름과 동일한 테이블을 연결해준다.</p>
+
+<p><strong>3). @MappedCollection</strong><br>
+-. Entity 클래스 간의 연관 관계를 맺어주는 어노테이션이다.</p>
+
+<p>1,2,3번에 대한 예제를 프로그램으로 살펴보자</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE IF NOT EXISTS ORDERS (
+    ORDER_ID bigint NOT NULL AUTO_INCREMENT,
+    MEMBER_ID bigint NOT NULL,
+    PRIMARY KEY (ORDER_ID),
+    FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER(MEMBER_ID)
+);
+</code></pre></div></div>
+<p>SQL구문으로 ORDERS 테이블을 만들었고<br>
+내부의 ORDER_ID, MEMBER_ID를 컬럼을 만들었다.<br>
+각각 기본키와 외래키로 등록하였다.</p>
+
+<p><br></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="s">"ORDERS"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderId</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">AggregateReference</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="n">memberId</span><span class="o">;</span>
+
+    <span class="nd">@MappedCollection</span><span class="o">(</span><span class="n">idColumn</span> <span class="o">=</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">CoffeeRef</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>우리가 DB와 연결하기위해 Repository 인터페이스를 만들었고<br>
+Spring data JDBC 기술을 이용하는 CrudRepository 인터페이스를 상속받아<br>
+DB에 접근하여 CRUD를 사용했었다.</p>
+
+<p>Order 클래스는 우리가 객체를 만들어<br>
+값을 저장해둔다음. 해당 객체를 CrudRepository의<br>
+메서드를 이용해 .save();를하여 객체를 넘겨주면<br>
+우리가 위에서 정의해둔 테이블에 값이 저장되게 되어진다.</p>
+
+<p>1).
+여기서 @Table의 역할을 알 수 있다. 
+.save();를 진행할떄, 어느 테이블에 저장을해야할지<br>
+알수가 없다. 그것을 지정해주는 애노테이션으로
+Table이 ORDERS로 지정된 테이블을 연결해준다.<br>
+@Table을 안붙여줬을 경우 자동으로 클래스이름의 테이블을 찾아간다.</p>
+
+<p>2). AggregateReference 타입으로 만든 memberId라는 값은<br>
+Member 클래스의 Long으로 지정된 Id값을 참조할 수 있게된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">AggregateReference</span><span class="o">.</span><span class="na">IdOnlyAggregateReference</span><span class="o">();</span>
+</code></pre></div></div>
+<p>위의 코드를 이용해 Order 객체를 생성할 때, 어떤 Member가 선택했는지<br>
+전달받은 Id를 위의 메서드 안에 넣어 준 객체를 이용해서 만들어주면된다.</p>
+
+<p>그렇게 만들어진 order클래스 객체의 memberId값으로<br>
+memberRepository에 접근해 Id를 이용해 객체를 찾고<br>
+다른 값들도 가져올 수 있게 되는 것이다.</p>
+
+<p>3). @MappedCollection
+N:N 관계의 경우 중간 Entity 클래스가 하나 필요하다.<br>
+Order - OrderCoffee - Coffee (1 : N : 1)과 같은 그림이다.<br>
+그 중간 클래스는 CoffeeRef고 테이블은 ORDER_COFFEE로 정했다.</p>
+
+<p>idColumn, keyColumn에 대한 설정이 필요하고
+List를 사용할 경우 2개다 지정해야하며, Set을 싸용할 경우 IdColumn만 지정해도 사용가능하다.</p>
+
+<p>idColumn은 CoffeeRef에서 사용할 외래키를 적어주면된다.<br>
+CoffeeRef(N): Order(1)이기 때문에<br>
+ORDER_ID를 참조하게 적어주면된다.</p>
+
+<p>keyColumn은 외래키를 포함하고 있는 테이블의 기본키를 컬럼명을 지정하면된다.<br>
+현재 같은 경우 keyColumn = “ORDER_COFFEE_ID”로 적어주면 되는 것이다.</p>
 
 <hr>
 
-<p>오늘은 정리가 조금 부실하다…<br>
-실습하기 바쁘기도했고, 오늘 저녁에<br>
-백엔드 현업개발자 친구를 만나 여러가지 얘기도나누고<br>
-공부방향이 잘되고있는 건지 등<br>
-여러 잡담을 나누다보니 집에 11시에 도착해버렸다…<br>
-부랴부랴 오늘 학습한 내용을 정리하는데,, 머릿속이 텅…<br>
-비어버려서 내일학습에 지장이 생기면안될 것 같아.<br>
-우선 간단하게만 정리하고 마무리해보려한다.<br>
-주말을 이용해 인프런강의와 오늘 배운 여러지식들을 다시 공부해봐야겠다.</p>
+<p>이렇게 오늘은 Spring data JDBC에 대해 알아보았다.<br>
+사실 몇개는 간단하게 느껴졌는데<br>
+연관 관계 Mapping은 아직 익숙치않아서 그런지<br>
+조금 많이 어렵게 느껴졌다.<br>
+다음주에 실습이 또 있는데 실습을 통해서 익숙해지도록 노력해야겠다.</p>
 
 <p><br></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 오징어 덮밥, 계란 부침</p>
+<strong>오늘의 점심</strong>: 불고기, 계란부침, 밥</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/19/til.html" title="TIL) 두달차 회고">TIL) 두달차 회고</a><a class="next" href="/til/2022/10/21/til.html" title="TIL) Spring DTO">TIL) Spring DTO</a>
+<a class="previous" href="/til/2022/10/27/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring JDBC 기반 액세스 계층...</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="TIL) Spring DTO">macOs) neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/til/2022/10/11/til.html" title="TIL) Spring DTO">TIL) Spring Basic 1</a></li>
-<li><a class="post-link" href="/til/2022/10/20/til.html" title="TIL) Spring DTO">TIL) Spring MVC Controller 계층</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="TIL) Spring DTO">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
+        <li><a class="post-link" href="/til/2022/10/19/til.html" title="">TIL) 두달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/10/07/til.html" title="">TIL) DB RDMBS 3</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="">TIL) Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="">TIL) Spring Exception 2</a></li>
 </ul>
     </div>
 <div class="post-comments">
