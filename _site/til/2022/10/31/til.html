@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Spring Data JDBC Pagination | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Spring Data JDBC Pagination">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="한 주가 지나고 새로운 주가 찾아왔다. 내가 공부하고 있는 와중에도 세상은 돌아가고 있다.">
+<meta property="og:description" content="한 주가 지나고 새로운 주가 찾아왔다. 내가 공부하고 있는 와중에도 세상은 돌아가고 있다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/10/31/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/10/31/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-10-31T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Spring Data JDBC Pagination">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-31T00:00:00+09:00","datePublished":"2022-10-31T00:00:00+09:00","description":"한 주가 지나고 새로운 주가 찾아왔다. 내가 공부하고 있는 와중에도 세상은 돌아가고 있다.","headline":"TIL) Spring Data JDBC Pagination","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/31/til.html"},"url":"http://localhost:4000/til/2022/10/31/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring Data JDBC Pagination</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+73</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-10-31T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 31, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>한 주가 지나고 새로운 주가 찾아왔다.<br>
+내가 공부하고 있는 와중에도<br>
+세상은 돌아가고 있다.</p>
+
+<p>누군가의 시간은 느리게 가고 누군가의 시간은 빠르게 갈 것 같다.<br>
+시간을 어떻게 써야 잘 썻지? 라는 물음이 요즘 자꾸 생긴다.</p>
+
+<p>공부를 효율적으로 하기에는 의지가 가장 중요한 것 같다.<br>
+주말동안 여러가지 자극을 받으면서, 다시한번 공부에 대한 의지와<br>
+내가 목표로가진 내용을 상기하면서 이번주부터 다시 임해보려한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQXIC8mWHwkvUJVmPkxrKAdOzOu1PCHFrLIQEOAjT3mrp4fwj0NsNUw2Pfv6Ju2EYysMjkR0rU=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<hr>
+
+<p>오늘도 Spring data JDBC를 연습해보는 날이다.<br>
+마지막으로 연습해보는 날이고<br>
+내일부터는 본격적으로 JPA에 대해 공부해보는 시간이다.</p>
+
+<p>사실 JDBC사용 방법보다는 객체간 이동<br>
+Mapper, DTO, Service 등 로직 구현을 주로 연습한 것 같다.</p>
+
+<h2 id="pagination">Pagination</h2>
+<p>오늘 구현해볼 내용은 Pagination을 구현할 것이다.<br>
+한글로 페이지네이션이라 부른다.<br>
+페이시네이션이란?</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQ8Zaxag8YR_XCL1ZHlXct3gU2Ai1QnIiP0-1fEbT8ol69R3RStfVwuhswGxDBKzTPMB6nfwAM=w1512-h864" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>간단한 예제로 구글을 통해 검색할 경우<br>
+우리는 해당 검색어에 대한 내용이 쭉나오고, 다음 내용은<br>
+페이지로 다음을 눌러 넘어가서 확인한다.</p>
+
+<p>이에 해당하는 프로그램을 구현할 것이다.</p>
+
+<h2 id="구현">구현</h2>
+
+<p>문제1. RequsetParam를 통해 page, size값을 받는다<br>
+-&gt; page: 몇번 페이지, size: 표시 수량</p>
+
+<p>문제2. 아래와 같이 데이터가 담긴 Json 객체를 반환<br>
+-&gt; 조회한 데이터는 memberId 내림차순으로 정렬할 것</p>
+
+<p>참고</p>
+<ol>
+  <li>DB에는 20개의 데이터가 저장되어있다.</li>
+</ol>
+
+<p>Page = 1, Size = 10 일 때의 예제</p>
+
+<pre><code class="language-JSON">{
+    "data": [
+        {
+            "memberId": 20,
+            "email": "hgd20@gmail.com",
+            "name": "홍길동20",
+            "phone": "010-2020-2020"
+        },
+        {
+            "memberId": 19,
+            "email": "hgd19@gmail.com",
+            "name": "홍길동19",
+            "phone": "010-1919-1919"
+        },
+        {
+            "memberId": 18,
+            "email": "hgd18@gmail.com",
+            "name": "홍길동18",
+            "phone": "010-1818-1818"
+        },
+        {
+            "memberId": 17,
+            "email": "hgd17@gmail.com",
+            "name": "홍길동17",
+            "phone": "010-1717-1717"
+        },
+        {
+            "memberId": 16,
+            "email": "hgd16@gmail.com",
+            "name": "홍길동16",
+            "phone": "010-1616-1616"
+        },
+        {
+            "memberId": 15,
+            "email": "hgd15@gmail.com",
+            "name": "홍길동15",
+            "phone": "010-1515-1515"
+        },
+        {
+            "memberId": 14,
+            "email": "hgd14@gmail.com",
+            "name": "홍길동14",
+            "phone": "010-1414-1414"
+        },
+        {
+            "memberId": 13,
+            "email": "hgd13@gmail.com",
+            "name": "홍길동13",
+            "phone": "010-1313-1313"
+        },
+        {
+            "memberId": 12,
+            "email": "hgd12@gmail.com",
+            "name": "홍길동12",
+            "phone": "010-1212-1212"
+        },
+        {
+            "memberId": 11,
+            "email": "hgd11@gmail.com",
+            "name": "홍길동11",
+            "phone": "010-1111-1111"
+        }
+    ],
+    "pageInfo": {
+        "page": 1,
+        "size": 10,
+        "totalElements": 20,
+        "totalPages": 2
+    }
+}
+</code></pre>
+
+<p>DB에 20개의 데이터가 MEMBER Table에 저장이 되어있고<br>
+우리가 해야하는 것은 page, size의 값을 받아<br>
+해당 객체를 조립하여 JSON으로 반환해주어야한다.</p>
+
+<p>그렇게 생각하여 나는 크게 6가지 과정으로 프로그램을 진행했다.</p>
+
+<ol>
+  <li>클라이언트 측 에서 데이터 요청 받은데이터를 맵핑한 객체를 만듬</li>
+  <li>Service에서 Member 전체 조회한 후 필요한 데이터만 정리해 객체로 만듬</li>
+  <li>1,2번에서 만든 객체로 ResponseDto 맵핑함.</li>
+  <li>3번에서 맵핑하여 만든 전체 List 데이터를 JSON으로 응답</li>
+</ol>
+
+<p>해당 과정을 통해서 프로그램을 작성했고,  실제로 Pagination을 하기위해<br>
+Spring에서 도움음 주는 클래스 Page, Pageable, PageRequest를 이용해<br>
+자동으로 Pagination을 해줄 수 도 있다.</p>
+
+<p>우선 나는 위방법을 안쓰고 직접 코드로 정리해서 보내는 방법을 택했다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@GetMapping</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getMembers</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"page"</span><span class="o">)</span> <span class="nd">@Positive</span> <span class="kt">int</span> <span class="n">page</span><span class="o">,</span>
+                                 <span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"size"</span><span class="o">)</span> <span class="nd">@Positive</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//PageInfo 데이터 맵핑</span>
+    <span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">dataToMemberPageInfoDto</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+
+    <span class="c1">//Member 전체조회 서비스 로직 실행</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findMembers</span><span class="o">(</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
+
+    <span class="c1">//객체들 ResponsePageDto Mapping</span>
+    <span class="nc">MemberResponsePageDto</span> <span class="n">response</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">membersToMemberResponsePageDto</span><span class="o">(</span><span class="n">members</span><span class="o">,</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">response</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>우선 Controller의 getMembers를 작성.<br>
+0이아닌 양의정수만 포함한 데이터로 page,size를 받을 수 있다.</p>
+
+<p>여기서 첫번째 줄 PageInfo에 데이터 맵핑 하는 클래스를 만들고<br>
+Mapper를 구현하여 데이터를 전달했다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="nc">MemberPageInfoDto</span> <span class="nf">dataToMemberPageInfoDto</span><span class="o">(</span><span class="kt">int</span> <span class="n">page</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberPageInfoDto</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+<span class="o">};</span>
+<span class="k">default</span> <span class="nc">MemberResponsePageDto</span> <span class="nf">membersToMemberResponsePageDto</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">,</span> <span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span><span class="o">){</span>
+    <span class="nc">MemberResponsePageDto</span> <span class="n">memberResponsePageDtos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberResponsePageDto</span><span class="o">(</span><span class="n">members</span><span class="o">,</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">memberResponsePageDtos</span><span class="o">;</span>
+<span class="o">};</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberPageInfoDto</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">page</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">totalElements</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">totalPages</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>page, size를 이용해 나머지 값이 0인 객체를 만들었다.<br>
+그리고 아래있는 메서드는 응답할때 조립을 해주는 메서드이다.<br>
+인자로는 Member를 List화한 데이터와 방금 위에서 전달한<br>
+MemberPageInfoDto객체를 받는다.<br>
+이 두개의 데이터를 받아 최종적으로</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberResponsePageDto</span> <span class="o">{</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">;</span>
+    <span class="nc">MemberPageInfoDto</span> <span class="n">pageInfo</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이 응답클래스에 데이터를 담아서 반환하게 되어진다.</p>
+
+<p>이렇게 Mapper와 응답데이터 클래스를 만들었고<br>
+이제 데이터베이스에서 Member 클래스의 데이터를 조회해<br>
+우리가 원하는 page, size의 맞춰서 Member List를 반환해줘야한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">findMembers</span><span class="o">(</span><span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// member 전체 내림차순 정렬 조회</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span>  <span class="n">memberRepository</span><span class="o">.</span><span class="na">findAllByOrderByMemberIdDesc</span><span class="o">();</span>
+
+    <span class="c1">// Pagenation Service 로직, 정리된 Member List만 반환</span>
+    <span class="k">return</span> <span class="nf">executionPagenation</span><span class="o">(</span><span class="n">members</span><span class="o">,</span> <span class="n">memberPageInfoDto</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">executionPagenation</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">,</span> <span class="nc">MemberPageInfoDto</span> <span class="n">pageInfo</span><span class="o">){</span>
+    <span class="c1">// page, size 가져오기</span>
+    <span class="kt">int</span> <span class="n">page</span> <span class="o">=</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getPage</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span>
+
+    <span class="c1">// members 수량 파악 후 TotalElements, TotalPages Data 추가</span>
+    <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalElements</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()&lt;=</span><span class="n">size</span><span class="o">){</span>
+        <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalPages</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">memberSize</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()/</span><span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">memberLeft</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()%</span><span class="n">size</span><span class="o">;</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">memberLeft</span><span class="o">!=</span><span class="mi">0</span><span class="o">)</span> <span class="n">memberSize</span><span class="o">++;</span>
+        <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalPages</span><span class="o">(</span><span class="n">memberSize</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// page, size만큼의 Data만 담은 List 반환</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">membersMakeUp</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kt">int</span> <span class="n">remainPage</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">%</span> <span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">from</span> <span class="o">=</span> <span class="o">(</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="o">)*</span><span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">to</span> <span class="o">=</span> <span class="o">(</span><span class="n">remainPage</span><span class="o">!=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getTotalPages</span><span class="o">()==</span><span class="n">page</span><span class="o">)</span> <span class="o">?</span> <span class="n">from</span><span class="o">+</span><span class="n">remainPage</span> <span class="o">:</span> <span class="n">from</span><span class="o">+</span><span class="n">size</span><span class="o">;</span>
+
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">from</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">to</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+        <span class="n">membersMakeUp</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+    <span class="o">}</span>
+    
+    <span class="k">return</span> <span class="n">membersMakeUp</span><span class="o">;</span>
+<span class="o">}</span>
+        
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MemberRepository</span> <span class="kd">extends</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">findAllByOrderByMemberIdDesc</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이렇게 Service 로직을 구현했다.<br>
+처음에 맵핑했던 PageInfo 객체에 나머지 값을을<br>
+setter를 통해서 데이터를 입력해준 다음에</p>
+
+<p>Member 테이블의 데이터를 내림차순으로 조회하여<br>
+받은 데이터를 page와 size값으로 원하는 페이지에<br>
+수량별로 표시가 될 수 있게끔 프로그래밍하여<br>
+Member List를 최종적으로 반환하게 해주었다.</p>
+
+<p>이렇게 되면 최종적으로 페이지에 맞는 Member List 객체와<br>
+PageInfo 객체를 가지고 있기 때문에 최종적으로<br>
+MemberResponsePageDto 클래스 타입으로 맵핑해서 응답데이터를<br>
+ResponseEntity를 통해 반환하도록 하면 !!</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQULqdlINeqzZ_bz-zE7r0uUK9OxGxwpQRGjmUuF-O8-xqZcIe1swGHu0Z2JgvVykvTYEut4aI=w1512-h864" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>page=1, size=2 로 하였을 경우의 반환된 Json의 모습.<br>
+totalElements = 20개의 데이터<br>
+totalPages = 10개의 페이지.</p>
+
+<p>정상적으로 작동하는 모습이 확인 가능하다.<br>
+<a href="https://velog.io/@bagt/0704-Spring-Pagination-API-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98">Spring Pagination API</a>를 이용해 작성하는 방법을 참고해보자<br>
+해당 방법은 선배기수에서 Spring API를 이용해 간단하게 구현한 모습이다.</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ <br>
+<strong>오늘의 점심</strong>: 라면</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/10/28/til.html" title="TIL) Spring JDBC 기반 액세스 계층 2">TIL) Spring JDBC 기반 액세스 계층...</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/26/til.html" title="">TIL) Spring Exception 2</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="">TIL) Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/til/2022/10/25/til.html" title="">TIL) Spring Exception 1</a></li>
+<li><a class="post-link" href="/til/2022/10/13/til.html" title="">TIL) Spring DI 1</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

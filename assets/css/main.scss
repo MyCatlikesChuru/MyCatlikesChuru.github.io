@@ -35,4 +35,9 @@ $brand-color: map-get($brand-colors, "orangered");
 
 $content-width: {{ site.content_width | default: '920px' }};
 
+/* 금비님이 추가해준 css 프로그램 (사진 왼쪽 정렬) */
+.main .post .post-content img.align-left{
+    display:inline-block
+}
+
 @import "yat";

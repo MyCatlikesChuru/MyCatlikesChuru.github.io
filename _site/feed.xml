@@ -1,4 +1,274 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-30T19:14:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring JDBC 기반 액세스 계층 2</title><link href="http://localhost:4000/til/2022/10/28/til.html" rel="alternate" type="text/html" title="TIL) Spring JDBC 기반 액세스 계층 2" /><published>2022-10-28T00:00:00+09:00</published><updated>2022-10-28T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/28/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/28/til.html"><![CDATA[<p>어느새 벌써 한주가 끝났다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-31T17:45:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Data JDBC Pagination</title><link href="http://localhost:4000/til/2022/10/31/til.html" rel="alternate" type="text/html" title="TIL) Spring Data JDBC Pagination" /><published>2022-10-31T00:00:00+09:00</published><updated>2022-10-31T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/31/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/31/til.html"><![CDATA[<p>한 주가 지나고 새로운 주가 찾아왔다.<br />
+내가 공부하고 있는 와중에도<br />
+세상은 돌아가고 있다.</p>
+
+<p>누군가의 시간은 느리게 가고 누군가의 시간은 빠르게 갈 것 같다.<br />
+시간을 어떻게 써야 잘 썻지? 라는 물음이 요즘 자꾸 생긴다.</p>
+
+<p>공부를 효율적으로 하기에는 의지가 가장 중요한 것 같다.<br />
+주말동안 여러가지 자극을 받으면서, 다시한번 공부에 대한 의지와<br />
+내가 목표로가진 내용을 상기하면서 이번주부터 다시 임해보려한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQXIC8mWHwkvUJVmPkxrKAdOzOu1PCHFrLIQEOAjT3mrp4fwj0NsNUw2Pfv6Ju2EYysMjkR0rU=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<hr />
+
+<p>오늘도 Spring data JDBC를 연습해보는 날이다.<br />
+마지막으로 연습해보는 날이고<br />
+내일부터는 본격적으로 JPA에 대해 공부해보는 시간이다.</p>
+
+<p>사실 JDBC사용 방법보다는 객체간 이동<br />
+Mapper, DTO, Service 등 로직 구현을 주로 연습한 것 같다.</p>
+
+<h2 id="pagination">Pagination</h2>
+<p>오늘 구현해볼 내용은 Pagination을 구현할 것이다.<br />
+한글로 페이지네이션이라 부른다.<br />
+페이시네이션이란?</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQ8Zaxag8YR_XCL1ZHlXct3gU2Ai1QnIiP0-1fEbT8ol69R3RStfVwuhswGxDBKzTPMB6nfwAM=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>간단한 예제로 구글을 통해 검색할 경우<br />
+우리는 해당 검색어에 대한 내용이 쭉나오고, 다음 내용은<br />
+페이지로 다음을 눌러 넘어가서 확인한다.</p>
+
+<p>이에 해당하는 프로그램을 구현할 것이다.</p>
+
+<h2 id="구현">구현</h2>
+
+<p>문제1. RequsetParam를 통해 page, size값을 받는다<br />
+-&gt; page: 몇번 페이지, size: 표시 수량</p>
+
+<p>문제2. 아래와 같이 데이터가 담긴 Json 객체를 반환<br />
+-&gt; 조회한 데이터는 memberId 내림차순으로 정렬할 것</p>
+
+<p>참고</p>
+<ol>
+  <li>DB에는 20개의 데이터가 저장되어있다.</li>
+</ol>
+
+<p>Page = 1, Size = 10 일 때의 예제</p>
+
+<pre><code class="language-JSON">{
+    "data": [
+        {
+            "memberId": 20,
+            "email": "hgd20@gmail.com",
+            "name": "홍길동20",
+            "phone": "010-2020-2020"
+        },
+        {
+            "memberId": 19,
+            "email": "hgd19@gmail.com",
+            "name": "홍길동19",
+            "phone": "010-1919-1919"
+        },
+        {
+            "memberId": 18,
+            "email": "hgd18@gmail.com",
+            "name": "홍길동18",
+            "phone": "010-1818-1818"
+        },
+        {
+            "memberId": 17,
+            "email": "hgd17@gmail.com",
+            "name": "홍길동17",
+            "phone": "010-1717-1717"
+        },
+        {
+            "memberId": 16,
+            "email": "hgd16@gmail.com",
+            "name": "홍길동16",
+            "phone": "010-1616-1616"
+        },
+        {
+            "memberId": 15,
+            "email": "hgd15@gmail.com",
+            "name": "홍길동15",
+            "phone": "010-1515-1515"
+        },
+        {
+            "memberId": 14,
+            "email": "hgd14@gmail.com",
+            "name": "홍길동14",
+            "phone": "010-1414-1414"
+        },
+        {
+            "memberId": 13,
+            "email": "hgd13@gmail.com",
+            "name": "홍길동13",
+            "phone": "010-1313-1313"
+        },
+        {
+            "memberId": 12,
+            "email": "hgd12@gmail.com",
+            "name": "홍길동12",
+            "phone": "010-1212-1212"
+        },
+        {
+            "memberId": 11,
+            "email": "hgd11@gmail.com",
+            "name": "홍길동11",
+            "phone": "010-1111-1111"
+        }
+    ],
+    "pageInfo": {
+        "page": 1,
+        "size": 10,
+        "totalElements": 20,
+        "totalPages": 2
+    }
+}
+</code></pre>
+
+<p>DB에 20개의 데이터가 MEMBER Table에 저장이 되어있고<br />
+우리가 해야하는 것은 page, size의 값을 받아<br />
+해당 객체를 조립하여 JSON으로 반환해주어야한다.</p>
+
+<p>그렇게 생각하여 나는 크게 6가지 과정으로 프로그램을 진행했다.</p>
+
+<ol>
+  <li>클라이언트 측 에서 데이터 요청 받은데이터를 맵핑한 객체를 만듬</li>
+  <li>Service에서 Member 전체 조회한 후 필요한 데이터만 정리해 객체로 만듬</li>
+  <li>1,2번에서 만든 객체로 ResponseDto 맵핑함.</li>
+  <li>3번에서 맵핑하여 만든 전체 List 데이터를 JSON으로 응답</li>
+</ol>
+
+<p>해당 과정을 통해서 프로그램을 작성했고,  실제로 Pagination을 하기위해<br />
+Spring에서 도움음 주는 클래스 Page, Pageable, PageRequest를 이용해<br />
+자동으로 Pagination을 해줄 수 도 있다.</p>
+
+<p>우선 나는 위방법을 안쓰고 직접 코드로 정리해서 보내는 방법을 택했다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@GetMapping</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getMembers</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"page"</span><span class="o">)</span> <span class="nd">@Positive</span> <span class="kt">int</span> <span class="n">page</span><span class="o">,</span>
+                                 <span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"size"</span><span class="o">)</span> <span class="nd">@Positive</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">//PageInfo 데이터 맵핑</span>
+    <span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">dataToMemberPageInfoDto</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+
+    <span class="c1">//Member 전체조회 서비스 로직 실행</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findMembers</span><span class="o">(</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
+
+    <span class="c1">//객체들 ResponsePageDto Mapping</span>
+    <span class="nc">MemberResponsePageDto</span> <span class="n">response</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">membersToMemberResponsePageDto</span><span class="o">(</span><span class="n">members</span><span class="o">,</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">response</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>우선 Controller의 getMembers를 작성.<br />
+0이아닌 양의정수만 포함한 데이터로 page,size를 받을 수 있다.</p>
+
+<p>여기서 첫번째 줄 PageInfo에 데이터 맵핑 하는 클래스를 만들고<br />
+Mapper를 구현하여 데이터를 전달했다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="nc">MemberPageInfoDto</span> <span class="nf">dataToMemberPageInfoDto</span><span class="o">(</span><span class="kt">int</span> <span class="n">page</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberPageInfoDto</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
+<span class="o">};</span>
+<span class="k">default</span> <span class="nc">MemberResponsePageDto</span> <span class="nf">membersToMemberResponsePageDto</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">,</span> <span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span><span class="o">){</span>
+    <span class="nc">MemberResponsePageDto</span> <span class="n">memberResponsePageDtos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberResponsePageDto</span><span class="o">(</span><span class="n">members</span><span class="o">,</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
+
+    <span class="k">return</span> <span class="n">memberResponsePageDtos</span><span class="o">;</span>
+<span class="o">};</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberPageInfoDto</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">page</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">totalElements</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">totalPages</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>page, size를 이용해 나머지 값이 0인 객체를 만들었다.<br />
+그리고 아래있는 메서드는 응답할때 조립을 해주는 메서드이다.<br />
+인자로는 Member를 List화한 데이터와 방금 위에서 전달한<br />
+MemberPageInfoDto객체를 받는다.<br />
+이 두개의 데이터를 받아 최종적으로</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberResponsePageDto</span> <span class="o">{</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">;</span>
+    <span class="nc">MemberPageInfoDto</span> <span class="n">pageInfo</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이 응답클래스에 데이터를 담아서 반환하게 되어진다.</p>
+
+<p>이렇게 Mapper와 응답데이터 클래스를 만들었고<br />
+이제 데이터베이스에서 Member 클래스의 데이터를 조회해<br />
+우리가 원하는 page, size의 맞춰서 Member List를 반환해줘야한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">findMembers</span><span class="o">(</span><span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// member 전체 내림차순 정렬 조회</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span>  <span class="n">memberRepository</span><span class="o">.</span><span class="na">findAllByOrderByMemberIdDesc</span><span class="o">();</span>
+
+    <span class="c1">// Pagenation Service 로직, 정리된 Member List만 반환</span>
+    <span class="k">return</span> <span class="nf">executionPagenation</span><span class="o">(</span><span class="n">members</span><span class="o">,</span> <span class="n">memberPageInfoDto</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">executionPagenation</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">,</span> <span class="nc">MemberPageInfoDto</span> <span class="n">pageInfo</span><span class="o">){</span>
+    <span class="c1">// page, size 가져오기</span>
+    <span class="kt">int</span> <span class="n">page</span> <span class="o">=</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getPage</span><span class="o">();</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span>
+
+    <span class="c1">// members 수량 파악 후 TotalElements, TotalPages Data 추가</span>
+    <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalElements</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()&lt;=</span><span class="n">size</span><span class="o">){</span>
+        <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalPages</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">memberSize</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()/</span><span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">memberLeft</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()%</span><span class="n">size</span><span class="o">;</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">memberLeft</span><span class="o">!=</span><span class="mi">0</span><span class="o">)</span> <span class="n">memberSize</span><span class="o">++;</span>
+        <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalPages</span><span class="o">(</span><span class="n">memberSize</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// page, size만큼의 Data만 담은 List 반환</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">membersMakeUp</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kt">int</span> <span class="n">remainPage</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">%</span> <span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">from</span> <span class="o">=</span> <span class="o">(</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="o">)*</span><span class="n">size</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">to</span> <span class="o">=</span> <span class="o">(</span><span class="n">remainPage</span><span class="o">!=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getTotalPages</span><span class="o">()==</span><span class="n">page</span><span class="o">)</span> <span class="o">?</span> <span class="n">from</span><span class="o">+</span><span class="n">remainPage</span> <span class="o">:</span> <span class="n">from</span><span class="o">+</span><span class="n">size</span><span class="o">;</span>
+
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">from</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">to</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+        <span class="n">membersMakeUp</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+    <span class="o">}</span>
+    
+    <span class="k">return</span> <span class="n">membersMakeUp</span><span class="o">;</span>
+<span class="o">}</span>
+        
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MemberRepository</span> <span class="kd">extends</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">findAllByOrderByMemberIdDesc</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이렇게 Service 로직을 구현했다.<br />
+처음에 맵핑했던 PageInfo 객체에 나머지 값을을<br />
+setter를 통해서 데이터를 입력해준 다음에</p>
+
+<p>Member 테이블의 데이터를 내림차순으로 조회하여<br />
+받은 데이터를 page와 size값으로 원하는 페이지에<br />
+수량별로 표시가 될 수 있게끔 프로그래밍하여<br />
+Member List를 최종적으로 반환하게 해주었다.</p>
+
+<p>이렇게 되면 최종적으로 페이지에 맞는 Member List 객체와<br />
+PageInfo 객체를 가지고 있기 때문에 최종적으로<br />
+MemberResponsePageDto 클래스 타입으로 맵핑해서 응답데이터를<br />
+ResponseEntity를 통해 반환하도록 하면 !!</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQULqdlINeqzZ_bz-zE7r0uUK9OxGxwpQRGjmUuF-O8-xqZcIe1swGHu0Z2JgvVykvTYEut4aI=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>page=1, size=2 로 하였을 경우의 반환된 Json의 모습.<br />
+totalElements = 20개의 데이터<br />
+totalPages = 10개의 페이지.</p>
+
+<p>정상적으로 작동하는 모습이 확인 가능하다.<br />
+<a href="https://velog.io/@bagt/0704-Spring-Pagination-API-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98">Spring Pagination API</a>를 이용해 작성하는 방법을 참고해보자<br />
+해당 방법은 선배기수에서 Spring API를 이용해 간단하게 구현한 모습이다.</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ <br />
+<strong>오늘의 점심</strong>: 라면</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[한 주가 지나고 새로운 주가 찾아왔다. 내가 공부하고 있는 와중에도 세상은 돌아가고 있다.]]></summary></entry><entry><title type="html">TIL) Spring JDBC 기반 액세스 계층 2</title><link href="http://localhost:4000/til/2022/10/28/til.html" rel="alternate" type="text/html" title="TIL) Spring JDBC 기반 액세스 계층 2" /><published>2022-10-28T00:00:00+09:00</published><updated>2022-10-28T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/28/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/28/til.html"><![CDATA[<p>어느새 벌써 한주가 끝났다.</p>
 
 <p>코드스테이츠 시작 전부터 5개월 동안<br />
 제대로 쉬지 못하고 공부를 지속하다보니 살짝 번아웃이<br />
@@ -1783,194 +2053,4 @@ ResponseEntity를 통해 객체와 상태를 리턴해주었다.</p>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 오징어 덮밥, 계란 부침</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오랜만에 깊은 숙면을 했다.]]></summary></entry><entry><title type="html">TIL) 두달차 회고</title><link href="http://localhost:4000/til/2022/10/19/til.html" rel="alternate" type="text/html" title="TIL) 두달차 회고" /><published>2022-10-19T00:00:00+09:00</published><updated>2022-10-19T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/19/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/19/til.html"><![CDATA[<p>학습의 학습 또 학습..<br />
-매일매일 새로운 것들이 머릿속을 가득채우고있다.</p>
-
-<p>그래서 그런지 시간이 엄청 빨리가는 느낌이다.<br />
-<img src="https://ifh.cc/g/9pvkkd.gif" align="left" width="350px" height="200px" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>늘 생각한다 개발을 좀더 일찍 시작할껄..하는<br />
-아쉬움이 조금씩 남아있다.<br />
-한편으론 지금이라도 시작해서 다행인 것 같기도하고..</p>
-
-<p>코드스테이츠 부트캠프를 시작한지<br />
-벌써 두달이나 지났다.<br />
-학습에 불만족스러운 부분은 없는 것 같다.<br />
-방치형이라든가 콘텐츠가 불친절하다든가.. 여러 얘기들이 있지만</p>
-
-<p>내가 가지고온 기준은 부트캠프를 통해서<br />
-학습의 방향을 정하고, 내 스스로 학습의지를 높일 수 있도록 하려는 목표가 강했기 때문에<br />
-지금 학습법에 상당한 만족감을 느끼고 있다.</p>
-
-<hr />
-
-<h2 id="회고"><strong>회고</strong></h2>
-
-<h4 id="두달차의-나는"><strong>두달차의 나는?</strong></h4>
-
-<p>첫달차에는 아무래도 Java라는 언어에 대해 친숙하지 않다보니까<br />
-Java 문법과 기초적인 컴퓨터 CS지식에 대해 공부했다면</p>
-
-<p>두달차에는 하루에한번씩 알고리즘 풀이를 통한<br />
-언어의 친숙함과 문제해결 능력을 길르고<br />
-알고리즘의 관한 살짝 깊은내용들 (재귀,자료구조,Greedy, 순열 … 등)에 대한<br />
-문제 풀이와 공부 그리고 본격적으로 세달차에 다루게될 Spring에 대한<br />
-아주 기초적인 지식과 찍먹을 해보았다.</p>
-
-<p>그래도 지속적인 학습을 통해<br />
-어느정도 Java문법 사용에 있어서는 익숙해진 것 같다.<br />
-하지만 알고리즘은 당혹 그 자체였다.</p>
-
-<p><img src="https://ifh.cc/g/GNSW2H.jpg" align="left" width="300px" height="250px" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>마치 위가 안보이는 벽을 두드리는 심정이었다.</p>
-
-<p>재귀, 탐욕알고리즘, 가지각색의 탐색 알고리즘…<br />
-이 것들은 내 머리를 쥐어짜는 것도 모잘라 너무 혼란스럽게 했다.<br />
-이런 혼란스러움 마음을 가지고 스프링 기초 학습을 진행하니<br />
-집중도도 떨어지고 어려운 벽에 부딪히니 약간의 그로기상태가 온 것 같다.<br />
-내가 궁극적을 원하는 목표를 달리기위해 다시 재정비를 해보려고 한다.</p>
-
-<p><br /></p>
-
-<h4 id="재정비"><strong>재정비</strong></h4>
-
-<p>내가 부트캠프를 시작했던 가장 큰 목표는 사실 ‘취업’이라고 말할 수 있다.
-근데 그 이전에 취업을 하기위한 조건?을 만들기위해<br />
-코드스테이츠 백엔드 코스에 합류한 것이고, 그 조건을 만들기위해선<br />
-절대적으론 프로그래밍 실력을 향상시키는 것에 있다고 생각한다.</p>
-
-<p>즉 내가 원하는 목표를 도달하기위해선<br />
-컴퓨터에 대한 이해와 프로그래밍 실력을 늘리는 것이다.<br />
-내가 학습에 집중하고 문제풀이에 유연해질 수 있도록 재정비하는<br />
-시간을 가지는게 중요한 것 같다.</p>
-
-<p>내가 이루고자하는 ‘프로그램을 잘하는 것’은 사실상 신입인 내게<br />
-무리한 요구이며, 그렇게 되는것도 터무니없는 요청이다.<br />
-나는 취업이라는 전략에 맞게 그에 해당하는 실력을 우선적으로 만들고<br />
-계속발전해나가야한다는 필요성을 느꼈다.<br />
-그렇게 하기위해선 현재 하루 공부 템포를 조절하는 것, 마인드 관리하는 것<br />
-등 효과적인 공부 방법을 강구해볼 필요가 있는 것 같다.</p>
-
-<p>지금 나의 공부 계획중 가져가는 것과 문제되는 것을 파악해 정리해보자</p>
-
-<p><br /></p>
-
-<h4 id="keep--problem"><strong>Keep , Problem</strong></h4>
-
-<p>첫달차에서 정한 나만의 룰 4가지가 있었다.</p>
-<ol>
-  <li>매일매일 Commit 하기</li>
-  <li>알고리즘 하루 1회 풀기</li>
-  <li>블로그 TIL 포스팅하기</li>
-  <li>운동 꾸준히나가기</li>
-</ol>
-
-<p>학습량이 늘어남에따라 위에 4가지를 전부 지키기에는 시간적 정신적<br />
-부담감이 강하다는걸 느끼고 있었다.<br />
-2달간 매일 실천하면서 가장 압박이 심했던 것은 알고리즘이다.<br />
-알고리즘 학습 스프링 학습을 하는데 물론 하루만에 이해가 안될 뿐더러<br />
-공부하다보면 어느새 10시가 넘어버린다..</p>
-
-<p>그 상황에서 백준알고리즘을 풀고 운동을나가거나, 포스팅까지 하려고하면<br />
-새벽이 넘어야만 잠을 청할 수 있다. 이렇게 몇일 반복되다보니<br />
-압박감을 느끼게되었고, 개선할 필요가 있다고 느꼈다.</p>
-
-<ol>
-  <li>
-    <p>하루에 한번씩 Commit하기<br />
--&gt; 크게 압박을 느끼는 것은 없고, 내가 공부한 내용을 커밋하는 것이기때문에<br />
-계속 유지해서 할 생각이다.</p>
-  </li>
-  <li>
-    <p>알고리즘 하루 1회 풀기<br />
--&gt; 학습량에 따라 조절이 필요할 것 같다.<br />
-목표는 1개를 푸는것으로 두는것으로하고, 반드시 지키려는 압박은 버리려고한다.<br />
-그날 학습에 대한 이해가 충분하다고 판단되어질때 알고리즘 공부를 하려한다.<br />
-하지만 스프링 학습이 어느정도 이루어지고 프로젝트 진행할때 라든가<br />
-4개월차 이후에는 필수적으로 알고리즘을 깊이 공부하는 시간을 주기적으로 가져야할 것 같다고<br />
-판단되고 그렇게 할 생각이다.</p>
-  </li>
-  <li>
-    <p>블로그 TIL 포스팅하기<br />
--&gt; 포스팅에 대한 시간 투자는 많이 하는편이긴한데, 정리하면서 내가 배운 것들을 점검하고<br />
-글로만 보던 것을 예제로 만들고 적으려고하니 더블체크도 하는 좋은 순기능 같아<br />
-계속 유지할 생각이다.</p>
-  </li>
-  <li>
-    <p>운동 꾸준히나가기<br />
--&gt; 운동을 1시간 정도 나갔다가 돌아와서 공부를 하고있는데<br />
-최근에 알고리즘,스프링 학습하면서 그 시간도 아깝다는 생각이 들었다.<br />
-목적은 리프레쉬하거나 머리를 식히고 공부의 집중도를 늘리기위한 목적이었는데<br />
-그 목적을 이루어지지 않는 느낌이라 그시간 동안 공부에 집중할 수 있는 대채제를<br />
-찾는게 좋을 것 같다. 휴식을 취하면 확실히 공부의욕이 생겨서<br />
-당분간은 30분 휴식후 공부를 다시시작하는 방식으로 변경하려한다.</p>
-  </li>
-</ol>
-
-<p><br /></p>
-
-<p>당분간 학습루틴을 이렇게 변경 해보았다.<br />
-1,3번은 하루에 한번씩 필수<br />
-2,4번은 학습량에 따른 선택적 실행<br />
-어떻게 보면 게을러진 것 같은 생각이들어 4가지를 다 무조건 지키려고했지만<br />
-좋은 학습은 온전히 내가 집중하는 것에서 부터 발휘되는 것 같아서<br />
-조금은 변경적용해 너프하게 압박을 덜 느끼면서 공부해보려한다.</p>
-
-<p>학습에 가장 큰 방해 요소들도 존재한다.<br />
-<img src="https://ifh.cc/g/6oZ6XV.jpg" align="left" width="450px" height="250px" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>대부분 비슷하다고 생각이든다ㅎㅎ….<br />
-의지박약일까? 작심삼일일까… 나란사람은 왜이렇게 나태할까 ㅋㅋㅋㅋ<br />
-유튜브를 한번보면 머리 텅빈채로 보다보니 계속 보게되고<br />
-수업 집중도가 확 떨어지는걸 느낄 수 있었다.</p>
-
-<p>그래서 수업중에는 왠만하면 핸드폰을 키지 않는다.<br />
-그 순간 해야될 것들은 전부 이해하기전까지는 딴짓을 안하려고 노력중이다.</p>
-
-<p>가장 좋은 해결책은 Java 프로그램을 하는 것 자체를<br />
-게임과 같은 기분으로 하는게 모든 집중요소를 해결할 수 있는 비책인 것 같다.<br />
-한동안 알고리즘 간단한 문제풀때는 그런느낌이 들었었다…<br />
-너무 재밌어서 쉴때도 문제 하나씩풀고 유튜브보다가도 옆에 노트북놓고 풀고..<br />
-하지만 벽을느끼고 사그라들었지만…</p>
-
-<p><br /></p>
-
-<h4 id="그래도-해야지-"><strong>그래도 해야지 !</strong></h4>
-
-<p>내가 선택한길이고 정말 잘하고 싶기도하고<br />
-앞으로 프로그램을하면서 밥벌어먹고 싶기 때문에<br />
-이왕 발을 담궜으니 최대한 노력할 수 있는 만큼해보고<br />
-다른 유혹에 빠지지 않고 집중해서 공부해보자!!</p>
-
-<p>마지막으로 정리해보자면</p>
-<ol>
-  <li>
-    <p>학습에 집중하기
--&gt; 학습에 대한 압박, 기타 유흥거리에 대한 유혹 등을 이겨내고<br />
-온전히 배우고 있는 것을 흡수해 적용할 수 있게 집중하기.</p>
-  </li>
-  <li>
-    <p>프로그램 실력 늘리기<br />
--&gt; 알고리즘 공부 열심히하기 , 단 현재 학습단계에선 조절이 필요. <br />
-이렇게 우선순위를 정해 공부할 수 있도록 방향을 조정해봐야겠다!</p>
-  </li>
-</ol>
-
-<p><br /></p>
-
-<p>2개월째 공부를하고 있고<br />
-4개월을 더 공부해야한다. 터무니없이 부족한 시간인 것도 맞고<br />
-내가 열심히 공부해 수료를 마치더라도 취업에 성공할 수 있을지도 불확실하다</p>
-
-<p><img src="https://ifh.cc/g/0v9YZK.jpg" align="left" width="280px" height="300px" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>그래도 한번 크게먹은 마음인 만큼<br />
-도전에 대한 후회는 남지 않도록 회고를 쓰면서<br />
-다시한번 마음을 다잡아본다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[학습의 학습 또 학습.. 매일매일 새로운 것들이 머릿속을 가득채우고있다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 오징어 덮밥, 계란 부침</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오랜만에 깊은 숙면을 했다.]]></summary></entry></feed>
