@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Java Algorithm 3 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Java Algorithm 3">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
+<meta property="og:description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
+<link rel="canonical" href="http://localhost:4000/til/2022/09/29/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/09/29/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-09-29T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Java Algorithm 3">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-09-29T00:00:00+09:00","datePublished":"2022-09-29T00:00:00+09:00","description":"안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !","headline":"TIL) Java Algorithm 3","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/09/29/til.html"},"url":"http://localhost:4000/til/2022/09/29/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/archives.html">ARCHIVES</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a><a class="page-link" href="/tags.html">TAGS</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Java Algorithm 3</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+41</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-09-29T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 29, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRAkSAZd7nD8HcPWg_AgHLZjYDkWRDrc3OxS_NSFZ9wani5yNxA2zgWkFb9PE6dLZNZil3to0E=w3024-h1728" alt="image" class="align-left" style="max-width: 40%"></p>
+
+<p>드디어!! 알고리즘 섹션이 끝났다.<br>
+길고 길었다… 9월 20일 부터 9일간 코딩테스트를 준비하는 방법과<br>
+여러 알고리즘의 형태들을 공부했다.</p>
+
+<p>너무 어려운 내용이 한꺼번에 많이 머리에 입력되서 과부하가 온 상태였다.<br>
+사실 알고리즘 문제 푸는 것에 대한 성취감도 있고<br>
+재미를 느끼는 편이긴한데, 단기간에 여러가지 내용을 배우다보니<br>
+커다란 벽에 막힌 느낌이었다. 하나하나 해결하면서<br>
+겨우 마지막 알고리즘 풀이 시간까지 왔다.</p>
+
+<p>웹 서비스 지식을 배운후 추후에 알고리즘 공부를 다시해보자!!</p>
+
+<hr>
+
+<p>오늘은 수열과 조합에 대한<br>
+알고리즘 공부를 했다.<br>
+비교적으로 탐욕 알고리즘이나, DP같은 알고리즘보다는<br>
+조금 이해하기가 더 편했던 것 같다.</p>
+
+<p>for문과 재귀함수를 이용해 중복수열, 조합 등<br>
+기초적인 문제들을 프로그래밍을 해보았고 정리해보려한다.</p>
+
+<p><br></p>
+
+<h2 id="순열permutation"><strong>순열(Permutation)</strong></h2>
+<p>순열, 요소 n개 중에 m개를 선택하여 순서에 상관 있게 뽑는 경우의 수<br>
+예를 들어 5장의 카드 A, B, C, D, E 중 순서를 생각하며 3장의 카드를 뽑아서<br>
+나열해보면 5 x 4 x 3 x 2 x 1 / 2 x 1 = 60 이렇게 경우의 수가 60개가 뽑히게 된다.<br>
+즉, 5 x 4 x 3 의 값이다.</p>
+
+<p>nPr 이라고 표시도 한다. 여기서 n=5 , r=3 이된다. 즉, ₅P₃<br>
+전체요소의 값에서 나열해야하는 수만큼 팩토리얼로 곱해주면된다</p>
+
+<p>5장 중 3장 나열 = 5 x 4 x 3<br>
+7장중 2장 나열 = 7 x 6<br>
+6장중 5장 나열 = 6 x 5 x 4 x 3 x 2</p>
+
+<p>간단하게 다시 정리하면<br>
+수열이란 A,B,C 와 A,C,B를 다른 경우로 판단하며<br>
+순서를 중요하게 생각하여 나열하는 방법이다.</p>
+
+<p>만약 [A,B,C,D,E] 배열 5장중<br>
+3장을 나열할때 [A,B,C] / [C,B,A] 와 같이 중복된 단어의<br>
+배열이 존재하는 경우까지 포함한다는 뜻이다.</p>
+
+<p>이것과 반대되는 개념은 아래에 조합에서 다뤄보고<br>
+코드로 예제를 확인해보자</p>
+
+<p><strong>수열 문제</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">N06_Permutation</span> <span class="n">exmple</span> <span class="o">=</span> <span class="k">new</span> <span class="n">N06_Permutation</span><span class="o">();</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">exmple</span><span class="o">.</span><span class="na">newChickenRecipe</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">10010</span><span class="o">,</span><span class="mi">10</span><span class="o">,</span><span class="mi">110</span><span class="o">,</span><span class="mi">111100</span><span class="o">,</span><span class="mi">101010</span><span class="o">},</span><span class="mi">3</span><span class="o">));</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">[]&gt;</span> <span class="nf">newChickenRecipe</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">stuffArr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">choiceNum</span><span class="o">)</span> <span class="o">{</span>  
+    <span class="c1">// 1. 예외상황</span>
+    <span class="c1">// choiceNum숫자가 배열값보다 클경우 null로 반환</span>
+    <span class="c1">// 주어진 재료가 모두 사용하지 못할 경우 null로 반환</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">choiceNum</span> <span class="o">&gt;</span> <span class="n">stuffArr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+
+    <span class="c1">// 2. 모든 경우의 수를 찾는 문제.</span>
+    <span class="c1">// stuffArr에서 choiceNum 개수 만큼의 경우의 수를 찾는문제 즉, stuffArr P choiceNum의 수만큼 찾기</span>
+    <span class="c1">// int 배열을 String 배열로 변경한다.</span>
+    <span class="nc">String</span><span class="o">[]</span> <span class="n">strArray</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">stuffArr</span><span class="o">).</span><span class="na">mapToObj</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">valueOf</span><span class="o">).</span><span class="na">toArray</span><span class="o">(</span><span class="nc">String</span><span class="o">[]::</span><span class="k">new</span><span class="o">);</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">deepToString</span><span class="o">(</span><span class="n">strArray</span><span class="o">));</span>
+    <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">overlapCheck</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="c1">// 0이 3개 이상은 레시피는 배열에서 제외한다.</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">strArray</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">str</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">zeroCount</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">str</span><span class="o">).</span><span class="na">filter</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"0"</span><span class="o">)).</span><span class="na">count</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">zeroCount</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="n">overlapCheck</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+    <span class="o">}</span>
+    <span class="c1">// 객체를 정렬합니다.</span>
+    <span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">overlapCheck</span><span class="o">);</span>
+
+    <span class="c1">// 리스트로 담은 재료들을 배열로 변환</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">ingredient</span> <span class="o">=</span> <span class="n">overlapCheck</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span><span class="o">-&gt;</span><span class="n">i</span><span class="o">).</span><span class="na">toArray</span><span class="o">();</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">check</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">ingredient</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+    <span class="c1">// abnormal) 사용할 수 있는 재료가 choice보다 작다면 null 반환</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">choiceNum</span><span class="o">&gt;</span><span class="n">ingredient</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="c1">// abnormal) 주어진 재료 모두 사용할 수 없다면 null 반환</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">ingredient</span><span class="o">.</span><span class="na">length</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="c1">// 2. 순열의 길이가 달라지기 때문에 재귀함수로 문제를 푼다</span>
+    <span class="k">return</span> <span class="nf">repeat</span><span class="o">(</span><span class="n">choiceNum</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(),</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">[]{},</span> <span class="n">ingredient</span><span class="o">,</span> <span class="n">check</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">[]&gt;</span> <span class="nf">repeat</span><span class="o">(</span><span class="kt">int</span> <span class="n">choiceNum</span><span class="o">,</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">[]&gt;</span> <span class="n">arrayList</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">ingredient</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">check</span><span class="o">){</span>
+    <span class="c1">// choiceNum만큼 진행후 탈출조건</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">choiceNum</span><span class="o">==</span><span class="mi">0</span><span class="o">){</span>
+        <span class="n">arrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">arr</span><span class="o">));</span>
+        <span class="k">return</span> <span class="n">arrayList</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 재료를 순회하여 재귀하여 합쳐 경우의 수를 구하기</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">ingredient</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">check</span><span class="o">[</span><span class="n">i</span><span class="o">]==</span><span class="mi">0</span><span class="o">){</span>
+            <span class="n">check</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>  <span class="c1">// {1,0,0} -&gt;</span>
+            <span class="nc">Integer</span><span class="o">[]</span> <span class="n">copyArr</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+            <span class="n">copyArr</span><span class="o">[</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">]</span> <span class="o">=</span> <span class="n">ingredient</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">arrayList</span> <span class="o">=</span> <span class="n">repeat</span><span class="o">(</span><span class="n">choiceNum</span><span class="o">-</span><span class="mi">1</span><span class="o">,</span> <span class="n">arrayList</span><span class="o">,</span> <span class="n">copyArr</span> <span class="o">,</span><span class="n">ingredient</span><span class="o">,</span> <span class="n">check</span><span class="o">);</span>
+            <span class="n">check</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">arrayList</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위 문제는 1,0이 포함된 숫자형태의 요소들의 수열을 나열하는 문제다.<br>
+문제의 제약사항중 0이 3개이상 포함된 요소들은 제거해서<br>
+나열해야한다. 위의 예제로 {10010,10,110,111100,101010} 값이란 배열이 들어왔을때<br>
+10010, 101010을 제거한 후 {10,110,111100} 이란 숫자의 수열을 구하는 것이다.</p>
+
+<p>여기서 우리가 알 수 있는 것은 3가지 경우의 수열을 구하는 것이고<br>
+재귀함수를 통해 수열을 풀이해볼 수 있다.</p>
+
+<p>for문으로도 가능한데 위의 처럼 수열의 요소들이 달라지게될 경우<br>
+다른 값을 출력해야하기 때문에 재귀함수로 문제를 풀면 간단하게 풀 수 있다.<br>
+여기서 경우의 수를 먼저 구해보자면<br>
+₃P₃ 즉 (3 x 2 x 1)의 경우의 수를 구하면 되는 문제다.</p>
+
+<p>[10, 110, 111100]<br>
+[10, 111100, 110]<br>
+[110, 10, 111100]<br>
+[110, 111100, 10]<br>
+[111100, 10, 110]<br>
+[111100, 110, 10]</p>
+
+<p>수기로 나열해보아도<br>
+이렇게 6개로 유추해 볼 수 있다.</p>
+
+<p>여기서 중요한점은 무엇인가? 중복된 값도 배열에 담기는 모습이다.<br>
+중복된 값이라는 의미는 10,110,11100이란 숫자들이 동일하게 담긴 배열들이 있는 것을 뜻한다.<br>
+여기서 이런 중복된 값들을 얘기해보면 전부다 중복된 값의 배열이다.</p>
+
+<p>이런 중복된값을 제거하고 정렬하는 방법이 조합이다.<br>
+여기서 한가지 봐야할 점은 [10, 10, 10] 이러한 방법으로는<br>
+체크가 되지 않는 모습이다. 왜냐하면 int[] check라는 배열을 통해<br>
+이미 방문한 숫자를 체크해주고 있기 때문이다.</p>
+
+<p>여기서 만약 체크해주는 조건문이 없을 경우에는</p>
+
+<p>[10, 10, 10]<br>
+[10, 10, 110]<br>
+[10, 10, 111100]<br>
+[10, 110, 10]<br>
+[10, 110, 110]<br>
+[10, 110, 111100]<br>
+[10, 111100, 10]<br>
+[10, 111100, 110]<br>
+[10, 111100, 111100]<br>
+[110, 10, 10]<br>
+[110, 10, 110]<br>
+[110, 10, 111100]<br>
+[110, 110, 10]<br>
+[110, 110, 110]<br>
+[110, 110, 111100]<br>
+[110, 111100, 10]<br>
+[110, 111100, 110]<br>
+[110, 111100, 111100]<br>
+[111100, 10, 10]<br>
+[111100, 10, 110]<br>
+[111100, 10, 111100]<br>
+[111100, 110, 10]<br>
+[111100, 110, 110]<br>
+[111100, 110, 111100]<br>
+[111100, 111100, 10]<br>
+[111100, 111100, 110]<br>
+[111100, 111100, 111100]</p>
+
+<p>3 x 3 x 3의 경우의 수인 27가지의 경우가 나오게된다.<br>
+위와 같은 경우는 한배열안에 같은 값의 중복을 허용하는 차이점이 있다.</p>
+
+<p><br></p>
+
+<h2 id="조합combination"><strong>조합(Combination)</strong></h2>
+
+<p>조합은 위에서 계속 설명했듯이<br>
+순서를 생각하지 않고 선택할 때의 모든 경우의 수이다.</p>
+
+<p>위의 예제와 같이 카드 5장 [A,B,C,D,E]가 있을 경우 3장을<br>
+순서를 생각하지 않고 나열한다고 가정하면</p>
+
+<p>5 x 4 x 3 x 2 x 1 / (3 x 2 x 1) x (2 x 1) = 10</p>
+
+<p>10가지의 경우의 수가 나오게 된다.<br>
+₅C₃ 이라고도 표시한다. 중복값을 제거한다고 생각하면 간단하다.<br>
+즉, [A,B,C]와 [C,B,A]를 동일한 경우로 취급하여<br>
+경우의 수로 체크하지 않는다는 뜻이다. 위에 수열에서는 이런 경우도<br>
+체크했는데 말이다.</p>
+
+<p>그렇다는건 우리가 구하고자하는 값이<br>
+동일한 객체가 필요없는 경우의 수를 구할 때 조합이라는 나열법을<br>
+사용하여 알고리즘을 풀이하면 좋다는 것이다<br>
+오늘 풀어본 코드로 간단한 예제를 봐보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">N07_Combination</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="n">N07_Combination</span><span class="o">();</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">boringBlackjack</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">13</span><span class="o">}));</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">boringBlackjack</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">cards</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">arrayList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="c1">// 카드개수는 정해져 있지 않음</span>
+    <span class="c1">// 중복되는 값은 List에서 제외</span>
+    <span class="c1">// 여러장의 카드의 3장만 골랐을때의 경우의 수의 합을구해 배열로 변환.</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">first</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">first</span><span class="o">&lt;</span><span class="n">cards</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">first</span><span class="o">++){</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">secound</span><span class="o">=</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">secound</span><span class="o">&lt;</span><span class="n">cards</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">secound</span><span class="o">++){</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">third</span><span class="o">=</span><span class="n">secound</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="n">third</span><span class="o">&lt;</span><span class="n">cards</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">third</span><span class="o">++){</span>
+                <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">cards</span><span class="o">[</span><span class="n">first</span><span class="o">]</span> <span class="o">+</span> <span class="n">cards</span><span class="o">[</span><span class="n">secound</span><span class="o">]</span> <span class="o">+</span> <span class="n">cards</span><span class="o">[</span><span class="n">third</span><span class="o">];</span>
+                <span class="n">arrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">sum</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="c1">// 배열 요소중 소수의 개수를 찾기</span>
+    <span class="kt">int</span> <span class="n">primeCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">arrayList</span><span class="o">);</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">arrayList</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+        <span class="kt">int</span> <span class="n">check</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">arrayList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)==</span><span class="mi">1</span><span class="o">)</span> <span class="k">continue</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">arrayList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)==</span><span class="mi">2</span><span class="o">)</span> <span class="n">primeCount</span><span class="o">++;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">arrayList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="k">continue</span><span class="o">;</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">3</span><span class="o">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">arrayList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span> <span class="n">j</span><span class="o">+=</span><span class="mi">1</span><span class="o">){</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">arrayList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">)%</span><span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">check</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">arrayList</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">check</span><span class="o">==</span><span class="mi">1</span><span class="o">)</span> <span class="k">continue</span><span class="o">;</span>
+        <span class="n">primeCount</span><span class="o">++;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">primeCount</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 문제는 배열에 나열된 카드 중에<br>
+순서를 생각하지 않고 3장을 골라 합을 구한뒤<br>
+구한 값에서 소수를 포함하는 수량을 반환하는 문제다. 위에서는 재귀로 풀지않고 <br>
+For문으로 문제를 풀었다. 이유는 3장이라는 명확한 반복 수량이 정해졌기 때문이다.<br>
+여기서 중요한점은 순서를 생각하지 않고 3장을 고른다는 말이다.</p>
+
+<p>이말은 즉, 중복된 값은 제거하고 3장을 고른다는 말이다.<br>
+예를들어 [1,2,3,4,5]의 카드가 있을 경우 [1,2,3]과 [3,2,1]은 순서를 생각하고<br>
+뽑은 것이기 때문에 위의 케이스중 하나만 존재해야한다는 것이다.<br>
+고로[1,2,3]을 포함한 경우의 수는 단 하나만 존재한다는 것이다.</p>
+
+<p>위의 테스트 케이스에서 주어진 [2,3,4,8,13]이라는 5장중 3장을 고르는 것이니<br>
+조합의 식에 의해 ₅C₃ 즉, 10가지의 경우만 도출해내면된다는 이야기이다.<br>
+경우의 수를 수기로 계산해보자면</p>
+
+<p>[2,3,4]<br>
+[2,3,8]<br>
+[2,3,13]<br>
+[2,4,8]<br>
+[2,4,13]<br>
+[2,8,13]<br>
+[3,4,8]<br>
+[3,4,13]<br>
+[3,8,13]<br>
+[4,8,13]</p>
+
+<p>이렇게 10가지로 나누어 볼 수 있다.<br>
+즉, 중복되는 요소값이 없는셈이다! 이말은 순서를 생각하지 않고 골랐다!<br>
+라고 직역을 할 수 있다.</p>
+
+<hr>
+
+<p>이렇게 수열과 조합에 대한 문제들을 오늘 풀어봤고<br>
+최대공약수와 같은 문제들도 훑어봤다.</p>
+
+<p>문제의 난이도는 재귀가 들어가는 순간<br>
+머리가 어지러워진다~~ IDE 없이 프로그램을 어떻게 짜나 싶을 정도로<br>
+IDE를 사용하지 않으면 오류가 엄청 발생한다.</p>
+
+<p>문법오류부터 오탈자까지…<br>
+나중에 코딩테스트할때는 IDE를 사용하지 않는 곳이 많다고하니<br>
+차근차근 문법도 정확히 쓰는법과 IDE에 의존하지 않고<br>
+코드를 작성하도록 연습 많이해야겠다.</p>
+
+<p>오늘까지 알고리즘 공부 섹션을 끝냈고<br>
+이제 부터는 정말 본격적인 웹에 대해 공부하는 시간이 다가왔다.<br>
+기대되고 설렌다. Spring을 배우고 서버에 데이터도 담아보고<br>
+서비스가 어떻게 운용되는지 얼른 공부해보고싶다.</p>
+
+<p>알고리즘 공부는 우선 잠깐 내려놓고<br>
+(물론 하루에 한문제 이상은 풀 예정!)<br>
+다음을 위해 집중해보려한다.</p>
+
+<p>오늘 공부는 여기까지 끝!!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️  <br>
+<strong>오늘의 점심</strong>: 라면, 총무김밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/09/28/til.html" title="TIL) Java Algorithm 2">TIL) Java Algorithm 2</a><a class="next" href="/til/2022/09/30/til.html" title="TIL) Network Basic">TIL) Network Basic</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/it/2022/10/25/it-etc-imageurl.html" title="TIL) Network Basic">구글 드라이브로 이미지 url 적용하기</a></li>
+<li><a class="post-link" href="/til/2022/10/07/til.html" title="TIL) Network Basic">TIL) DB RDMBS 3</a></li>
+<li><a class="post-link" href="/til/2022/10/28/til.html" title="TIL) Network Basic">TIL) Spring JDBC 기반 액세스 계층 2</a></li>
+<li><a class="post-link" href="/til/2022/10/27/til.html" title="TIL) Network Basic">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

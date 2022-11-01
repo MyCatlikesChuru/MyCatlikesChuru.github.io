@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치 | LeeJellan</title>
+<title>TIL) Json | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">
+<meta property="og:title" content="TIL) Json">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오늘은 Git Fork에서 Clone하다가 발생한">
-<meta property="og:description" content="오늘은 Git Fork에서 Clone하다가 발생한">
-<link rel="canonical" href="http://localhost:4000/macos/2022/08/03/OS-macOs-1.html">
-<meta property="og:url" content="http://localhost:4000/macos/2022/08/03/OS-macOs-1.html">
+<meta name="description" content="어제 재귀 공부를 하면서 조금은 깨우친 것 같아서 조금 다행이었다. 너무 전부다 이해해야한다는 압박감이 조금 있는 것 같은데 그런 부담감을 좀 덜어내고 할 수 있는 만큼 습득하며 공부하는 방향으로가야겠다.">
+<meta property="og:description" content="어제 재귀 공부를 하면서 조금은 깨우친 것 같아서 조금 다행이었다. 너무 전부다 이해해야한다는 압박감이 조금 있는 것 같은데 그런 부담감을 좀 덜어내고 할 수 있는 만큼 습득하며 공부하는 방향으로가야겠다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/09/21/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/09/21/til.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-08-03T00:00:00+09:00">
+<meta property="article:published_time" content="2022-09-21T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">
+<meta property="twitter:title" content="TIL) Json">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-08-03T00:00:00+09:00","datePublished":"2022-08-03T00:00:00+09:00","description":"오늘은 Git Fork에서 Clone하다가 발생한","headline":"맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/macos/2022/08/03/OS-macOs-1.html"},"url":"http://localhost:4000/macos/2022/08/03/OS-macOs-1.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-09-21T00:00:00+09:00","datePublished":"2022-09-21T00:00:00+09:00","description":"어제 재귀 공부를 하면서 조금은 깨우친 것 같아서 조금 다행이었다. 너무 전부다 이해해야한다는 압박감이 조금 있는 것 같은데 그런 부담감을 좀 덜어내고 할 수 있는 만큼 습득하며 공부하는 방향으로가야겠다.","headline":"TIL) Json","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/09/21/til.html"},"url":"http://localhost:4000/til/2022/09/21/til.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -634,11 +634,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치</h1>
-  <h2 class="post-subtitle"></h2>
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Json</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+33</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-08-03T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 03, 2022
+    <time class="dt-published" datetime="2022-09-21T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 21, 2022
     </time>
 
     
@@ -675,92 +675,164 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#macOs">#macOs</a><a class="post-tag" href="/tags.html#IT">#IT</a>
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오늘은 Git Fork에서 Clone하다가 발생한</p>
+      <p>어제 재귀 공부를 하면서 조금은 깨우친 것 같아서<br>
+조금 다행이었다. 너무 전부다 이해해야한다는<br>
+압박감이 조금 있는 것 같은데 그런 부담감을 좀 덜어내고<br>
+할 수 있는 만큼 습득하며 공부하는 방향으로가야겠다.</p>
 
-<p>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</p>
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQeYxavVgeZee296CheAadkV3zFtIoqPsQtkfgq7fJb61NtlX5jpR_DsZnAIURtH7tF95w3h1w=w3024-h1728" alt="image" class="align-left" style="max-width: 60%"></p>
 
-<p>에러에 대해 조치한 내용을 적어보려한다.</p>
+<hr>
 
-<p><strong>서론)</strong></p>
+<p>어제는 재귀에대한 공부와 간단한 예제들을 풀었다.<br>
+오늘은 Json에 대해 간단히 배워 볼 것 같다.</p>
 
-<p>새로운 맥북을 샀다.<br>
-맥북 에어 8GB에서는 도저히 spring 구동시키기에 너무 버겁다는 생각이<br>
-너무 많이 들었고… 드디어 큰 결심을해서 맥북프로 M1 10코어, GUP 16코어, 메모리32GB를<br>
-구매하게되었다. 맥북을 바꾸면서 마이그레이션으로 프로그램이랑 파일을 전부 옮기고나서</p>
+<h2 id="json"><strong>Json</strong></h2>
 
-<p>Fork로 Git clone을하니까 갑자기 xcrun missing 알람이 발생해버린것</p>
+<p>JavaScript Object Notation의 줄일말이다.<br>
+말그대로 자바스크립트 객체 표기법이란 뜻이다.<br>
+우리는 Java언어를 쓰고 화면을 표현해주는 프론트엔드의 역할에서는<br>
+JavaScript문법을 사용하니 우리는 프로그램 데이터를 주고 받을때<br>
+서로의 규약이 필요하다. 그래서 만들어진 것 같다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRJsrUmwNmFv57WKixIzlIyoZdtTJWfToJc83BYtUoErmPkBXHwwq0zr2pFVdvAiAti6hDW_FI=w3024-h1728" alt="image" class="align-left" style="max-width: 80%"></p>
+
+<p>간단한 Json 객체를 이용할 수 있게하는 Jackson 라이브러리에서 제공하는<br>
+ObjectMapper 클래스가 있다.<br>
+간단하게 알아보자.</p>
+
+<p>우선 Jackson 라이브러리를 사용하려면<br>
+bulid.gradle에 의존성 주임을 해줘야한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+</code></pre></div></div>
+
+<p>간단한 Json 형태의 파일을 만들어주는 프로그램을 작성해보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="c1">//Json의 직렬화 (Serialized)</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleJson</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">JsonProcessingException</span> <span class="o">{</span>
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+        <span class="nc">ObjectMapper</span> <span class="n">mapper</span>  <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
+        <span class="nc">String</span> <span class="n">json</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">json</span><span class="o">);</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">{</span><span class="s">"createdAt"</span><span class="o">:</span><span class="s">"2022-09-21,10:10:10"</span><span class="o">,</span><span class="s">"name"</span><span class="o">:</span><span class="s">"이재혁"</span><span class="o">,</span><span class="s">"age"</span><span class="o">:</span><span class="s">"28"</span><span class="o">,</span><span class="s">"hobby"</span><span class="o">:</span><span class="s">"코딩하기"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>출력하게될 경우 아래와 같이<br>
+HashMap에있는 Key와 Value를 직렬화시켜준다.<br>
+ObjectMapper의 writeValueAsString이라는 메서드를 이용해 만들어줄 수 있다.<br>
+반대로 Json 데이터를<br>
+Map으로 받아올 수도 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="c1">//Json객체 맵으로 가져오기</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleJsonToMap</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">JsonProcessingException</span> <span class="o">{</span>
+        <span class="nc">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
+        <span class="nc">String</span> <span class="n">json</span> <span class="o">=</span> <span class="s">"{\"createdAt\":\"2022-09-21,10:10:10\",\"name\":\"이재혁\",\"age\":\"28\",\"hobby\":\"코딩하기\"}"</span><span class="o">;</span>
+
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">deserializedData</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">json</span><span class="o">,</span> <span class="nc">Map</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">deserializedData</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//출력</span>
+<span class="o">{</span><span class="n">createdAt</span><span class="o">=</span><span class="mi">2022</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">21</span><span class="o">,</span><span class="mi">10</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">10</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="n">이재혁</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">28</span><span class="o">,</span> <span class="n">hobby</span><span class="o">=</span><span class="n">코딩하기</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>어디선가 온다고 가상의 json 데이터를<br>
+String 타입으로 만들어준 참조변수 json을<br>
+ObjectMapper.readValue 메서드를 이용해<br>
+데이터를 가져올 수 있다.</p>
+
+<p>여기까지 보면<br>
+우리는 이미 만들어져있는 클래스의 메서드를 이용해<br>
+아주 간단하게 Json객체를 다루는법을 배웠는데<br>
+이 과정, 여러가지 데이터 타입과 구조의 배열,Map,Set,List 등이<br>
+들어왔을때 Json 객체가 없을 경우 어떻게 우리가 표현할 수 있을지?<br>
+에 대한 과제가 오늘 주된 공부 시간이였다.</p>
+
+<p>여러 타입의 데이터를 ObjectMapper와 동일하게<br>
+동작하도록 문자열의 데이터를 조작하고<br>
+맞춰주는 프로그램을 작성해보자!!<br>
+과제를 공유할 수 가 없어 따로 작성해두진 않겠다.</p>
+
+<p>과제에는 테스트 케이스로 Mapper와 내가 만든 클래스의 기능들을<br>
+비교하여 테스트 케이스에 통과하는 것이 과제였다.<br>
+여기서 어제 배운 재귀를 활용해 작성하는 것이 포인트였다.</p>
+
+<p>Object[] example = new Object[] {1,”예제 입니다,ture};<br>
+라고 가정해 toString(); 메서드로 출력하였을 경우</p>
+
+<p>[1, 예제 입니다., true]<br>
+이러한 형태로 출력되어진다.<br>
+하지만 ObjectMapper로 가져오게되면</p>
+
+<p>[1,”예제 입니다.”,true]<br>
+위와 같은 형태로 출력되어진다.</p>
+
+<p>다른점은 Object의 String타입의 데이터에는 ““로 감싸져있어야하며<br>
+공백도 없어야하고, 또 더나아가 Key와 Map같은 경우에도<br>
+처리방법이 다르며, Object의 배열안에 배열도 처리해야하는<br>
+여러가지 문제점들이 발견되어진다.</p>
+
+<p>이러한 일을들 ObjectMapper 클래스에서 자동으로 작업해주지만<br>
+이번시간에는 이러한 동작원리를 이해하기위해서<br>
+여러가지 과제의 테스트케이스를 보면서 나만의 문제풀이도해보고<br>
+다른 사람의 풀이도보면서<br>
+아주 유익한 시간을 가졌고, Json이라는 개념이 조금<br>
+어떤 것인지 알게된? 느낌이다.</p>
+
+<p>추후에 데이터를 넘겨주거나 받을때 많이 사용한다는데 <br>
+더 공부해보면서 여러가지 코딩방법에 익숙해져야겠다.</p>
 
 <p><br></p>
 
-<p><strong>본론)</strong></p>
-
-<p>나는 Git GUI는 Fork를 사용한다.<br>
-클론시 원하는 레파지토리 주소를 넣어주고<br>
-Test Connection을 누르면 정상적으로 연결이 되어야하지만</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSCC4OQv0Huev_vNoSey-3fGR5hYnZ7m9AZMLUCoxvhkhf2mMxSsE-noWwujuGwvcRFO8MnvKE=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
-
-<p><br><br></p>
-
-<p>아래와 같이</p>
-
-<p>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun<br>
-요로코롬한 문제가 발생한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQx2zdslAXwt_dKgOxR3SJYEvJFAB_Z3Pr9HHdJKF4rcqSeWvXGs9FY1YKFy4BIwbTBU2tlYQ0=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>그럴때는 xcode를 인스톨해주면된다<br>
-Spotligh를(⌘ Command + Space Bar) 열어주시고<br>
-터미널을 열어주신후에 아래의 코드를 입력하면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select <span class="nt">--install</span>
-</code></pre></div></div>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTwJ7yZzdsui07dOawLKFcMTyqD9fAP5Q2jJMjlB1s-3U3bcxzzbQDHhrSSzT5NdaN8EaxUKhE=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
-
-<p><br><br></p>
-
-<p>설치하라고 하나가 팝업이 발생할텐데<br>
-그것을 설치 완료해주면 문제는 해결된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQwnDBz9s9zKkw59OwYf667JWayboYq4raw2E5E5jBJJq9MkxlyP9YXACOocbqtYLkRwMvdfjk=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br></p>
-
-<p>설치완료후 Git Clone Test Connection을 눌렀더니<br>
-이번엔 성공!</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSHi5445hNxgf9rQCOcjWr9kE8SY7BUVC_BGClb3hi8mdIwCAe_VGqFAqaOPfgDfRLxvBTDNuw=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>혹여나 궁금한분들이 있을까봐 올려본다.</p>
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️ ☕️️️<br>
+<strong>오늘의 점심</strong>: 계란부침, 카레</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<span></span><a class="next" href="/macos/2022/08/23/OS-macOs-2.html" title="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">맥북 터미널 git언어를 한글에서 영어로 바꾸는...</a>
+<a class="previous" href="/til/2022/09/20/til.html" title="TIL) Java 재귀">TIL) Java 재귀</a><a class="next" href="/til/2022/09/22/til.html" title="TIL) Java 자료구조 Stack, Queue">TIL) Java 자료구조 Stack, Queue</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/31/til.html" title="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">TIL) Spring Data JDBC Pagination</a></li>
-<li><a class="post-link" href="/til/2022/10/06/til.html" title="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">TIL) DB RDMBS 2</a></li>
-<li><a class="post-link" href="/til/2022/10/28/til.html" title="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">TIL) Spring JDBC 기반 액세스 계층 2</a></li>
-<li><a class="post-link" href="/til/2022/10/05/til.html" title="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">TIL) DB RDMBS 1</a></li>
+        <li><a class="post-link" href="/til/2022/09/28/til.html" title="TIL) Java 자료구조 Stack, Queue">TIL) Java Algorithm 2</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="TIL) Java 자료구조 Stack, Queue">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="TIL) Java 자료구조 Stack, Queue">TIL) Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/09/21/til.html" title="TIL) Java 자료구조 Stack, Queue">TIL) Json</a></li>
 </ul>
     </div>
 <div class="post-comments">
