@@ -1,6 +1,415 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-02T10:34:31+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring JPA 2</title><link href="http://localhost:4000/til/2022/11/02/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 2" /><published>2022-11-02T00:00:00+09:00</published><updated>2022-11-02T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/02/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/02/til.html"><![CDATA[<p><img src="" alt="image" class="align-left" style="max-width: 100%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-03T22:45:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</title><link href="http://localhost:4000/til/2022/11/03/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)" /><published>2022-11-03T00:00:00+09:00</published><updated>2022-11-03T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/03/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/03/til.html"><![CDATA[<p><img src="" alt="image" class="align-left" style="max-width: 100%" /></p>
 
-<p>일어났는데 날씨가 화창하다 !<br />
+<p>오랜만에 시간가는지 모르고 공부한 것 같다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTXh7B366xpO46r-jW9QXzgykyRRJY1uS1iFupj0wgGjVU6tOw0-_zdw_jjWyNyLnQdZ12IU54jq9ltbiYTPW-gWDxxmw=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>어제 다대다 관계에 대한<br />
+서로의 객체 참조가 이해가지 않아 새벽 3시까지<br />
+밤을 새워가며 공부를 했다.<br />
+졸리기도 했지만 알고자하는 마음에 집중이 오랜만에 엄청 된 것 같다.</p>
+
+<p>어제 공부했더 다대다(N:M) 관계에 대해 공부해보자</p>
+
+<hr />
+
+<h3 id="다대다-관계-nm">다대다 관계 (N:M)</h3>
+<p>다대다 관계는 N:N관계라고 한다.<br />
+예젠에 RDBMS에서 공부 했던 것 처럼 중간에 테이블을 한개<br />
+더 만들어서 1 : N : 1 로 만들어주는 방법이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQR036vsqkAgtZouiUTcGK0jsHDhCHVUlwfI1dt3W4yY7Z-B7XgMRN-YpiyiMZ6p2eYOlql4ec=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 간단한 예제로 손님과, 주문을 다대다 관계로 맵핑하고 싶을 경우<br />
+중간에 Customer_Order라는 테이블에 각자의 외래키를 두어<br />
+참조할 수 있게 하는 것이다.</p>
+
+<p>위에 그림처럼 중간에 테이블 클래스를 하나 만들어<br />
+두 테이블의 ID값을 참조하면 되는 방법이다.</p>
+
+<p><br /></p>
+
+<p>예를 들기 위해<br />
+Coffee와 Order 클래스를 만들어서 진행 하려한다.<br />
+고객이라는 클래스는 빠졌지만 간단하게 하기위해<br />
+두가지만 만들고 진행해보자</p>
+
+<h3 id="manytoone-단방향">@ManyToOne 단방향</h3>
+
+<p>Coffee는 커피의 등록정보라고하자 (커피이름,가격 등)<br />
+Order은 사용자가 주문한 정보라고하자 (주문시간, 고객이름 등)<br />
+서로 다대다 관계를 맺어 중간테이블을 통해 객체 참조를 해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"COFFEE"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Coffee</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">coffeeName</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"ORDERS"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderId</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdAt</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+
+    <span class="nd">@Column</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">personName</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCoffee</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderCoffeeId</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span>
+    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"COFFEE_ID"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span>
+    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Order</span> <span class="n">order</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Order - OrderCoffee - Coffee (1:N:1)으로<br />
+이루어진 관계이다. 현재 OrderCoffee에서만<br />
+@ManyToOne으로 다대일로 연관관계를 맺고 있다.</p>
+
+<p>이렇게 설정을 할 경우 <br />
+OrderCoffee 테이블애서 coffee,order의 참조가 가능하지만<br />
+Order와 Coffee는 서로 참조를 하지 못한다.</p>
+
+<p>위와 같은 경우에는 OrderCoffee 객체 타입으로<br />
+Repository를 만들어 저장해주어야한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">OrderCoffeeRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">OrderCoffee</span><span class="o">,</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCoffeeService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">OrderCoffeeRepository</span> <span class="n">orderCoffeeRepository</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">OrderCoffeeService</span><span class="o">(</span><span class="nc">OrderCoffeeRepository</span> <span class="n">orderCoffeeRepository</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">orderCoffeeRepository</span> <span class="o">=</span> <span class="n">orderCoffeeRepository</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">OrderCoffee</span> <span class="nf">createOrderCoffee</span><span class="o">(</span><span class="nc">OrderCoffee</span> <span class="n">orderCoffee</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">orderCoffeeRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">orderCoffee</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>OrderCoffee 클래스 타입으로 만든 객체에<br />
+coffee,order 객체를 setter로 주입시켜준 다음<br />
+해당 객체를 매개변수로 가진  createOrderCoffee 메서드를 호출하면<br />
+JpaRepository로 인해 DB에 값이 저장되게 되어진다.</p>
+
+<p>이렇게되면 OrderCoffee 테이블에는 order,coffe의 ID값으로 외래키로<br />
+지정되어 각각 객체를 참조하여 사용이 가능하다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSJE-aVzmVTrpdk2WiyCL7gk_eHKfofUIocw4kesvHn-RHofW9VVbBlVPoSn16R7f76yyYRKwKKoPyBtNPZriEfNJwe=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<h3 id="manytoone-onetomany-양방향">@ManyToOne @OneToMany 양방향</h3>
+
+<p><strong>하지만 !!</strong><br />
+우리는 Order와 Coffee의 다대다 관계를 보고 있는데<br />
+위와 같이 사용할 경우 Order에서 Coffee를 참조하지 못하게 되는 상황이다.</p>
+
+<p>서로 참조가 가능하도록 코드를 수정해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"ORDERS"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderId</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdAt</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+
+    <span class="nd">@Column</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">personName</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"order"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderCoffee</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"COFFEE"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Coffee</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">coffeeName</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"coffee"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderCoffee</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Order과 Coffee를 @OneToMany를 이용해<br />
+양방향으로 참조가 가능하도록 설정해 주었다.</p>
+
+<p>이렇게 설정할 경우 Order가 OrderCoffee 참조가 가능하고<br />
+그로인해 OrderCoffee에서 Coffee로 참조가 가능해진다.</p>
+
+<p>예를 들어 우리가<br />
+매장에 커피가 3개가 등록되어있다고해보자 (아메리카노,카페라떼,헤이즐넛라떼)</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQqkAYU_59TIa660ZzyHtDhni-i-ZA6mBu5nz1OJ6KA6ESnFmopbQw8yfMIr85KE2cK10_Q6k6hGGFMOnu54JzpzpE5OQ=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Coffee Repository를 이용해 DB에 저장한 모습이다.</p>
+
+<p>나라는 사람이 1개의 주문을 했는데 등록된 커피중 아메리카노를 주문했다고 가정해보자<br />
+그러면 Order Controller 핸들러메서드를 통해 POST 주문을 해야할 것이다.<br />
+나라는 사람의 정보과 어떤 커피인지만 알면 된다.<br />
+즉, 주문(Order)을 하면 OrderCoffee 테이블까지 맵핑을 시켜줘야한다.</p>
+
+<p>위의 내용을 토대로<br />
+주문 Controller,Service를 만들었다.<br />
+차근차근 아래에서 확인해보자</p>
+
+<p>우선 핸들러 메서드를 맵핑해줄 Dto를 만들자<br />
+위에서 얘기했듯이 <strong>주문하는 사람이름</strong>과, <strong>커피 목록의 번호</strong>만 알면 된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderPostDto</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">personName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderCoffeeDto</span><span class="o">&gt;</span> <span class="n">orderCoffees</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCoffeeDto</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 Dto를 작성했고</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQTzfqAsa2VbELiYL8VSeeVlzwfyBQO5EJfFNLAmYtp3oWyq9Z09m9MMoRQPlPdPK1nXySnEstsVlb5h3y1PvMGQQ_q=w1512-h807" alt="image" class="align-left" style="max-width: 90%" /></p>
+
+<p>Postman을 통해 API 요청을 위와 같이 보내면 된다.<br />
+이렇게 보내주었을 경우 우리는 coffeeId 1번 즉, 아메리카노라는 것을<br />
+알 수 있고, 주문한사람은 “이재혁”이 되는 것이다.</p>
+
+<p>이어서 Controller을 작성해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/api/orders"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderController</span> <span class="o">{</span>
+    
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">OrderService</span> <span class="n">orderService</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">OrderController</span><span class="o">(</span><span class="nc">OrderService</span> <span class="n">orderService</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">orderService</span> <span class="o">=</span> <span class="n">orderService</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PostMapping</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postOrder</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">OrderPostDto</span> <span class="n">orderPostDto</span><span class="o">){</span>
+
+        <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderCoffee</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="n">orderPostDto</span><span class="o">.</span><span class="na">getOrderCoffees</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">object</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="nc">OrderCoffee</span> <span class="n">orderCoffee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrderCoffee</span><span class="o">();</span>
+                    <span class="nc">Coffee</span> <span class="n">coffee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Coffee</span><span class="o">();</span>
+                    <span class="n">coffee</span><span class="o">.</span><span class="na">setCoffeeId</span><span class="o">(</span><span class="n">object</span><span class="o">.</span><span class="na">getCoffeeId</span><span class="o">());</span>
+                    <span class="n">orderCoffee</span><span class="o">.</span><span class="na">setOrder</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+                    <span class="n">orderCoffee</span><span class="o">.</span><span class="na">setCoffee</span><span class="o">(</span><span class="n">coffee</span><span class="o">);</span>
+                    <span class="n">order</span><span class="o">.</span><span class="na">getOrderCoffees</span><span class="o">();</span>
+                    <span class="k">return</span> <span class="n">orderCoffee</span><span class="o">;</span>
+                <span class="o">})</span>
+                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+
+        <span class="n">order</span><span class="o">.</span><span class="na">setPersonName</span><span class="o">(</span><span class="n">orderPostDto</span><span class="o">.</span><span class="na">getPersonName</span><span class="o">());</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">setOrderCoffees</span><span class="o">(</span><span class="n">orderCoffees</span><span class="o">);</span>
+
+        <span class="nc">Order</span> <span class="n">result</span> <span class="o">=</span> <span class="n">orderService</span><span class="o">.</span><span class="na">createOrder</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Mapper를 이용하지 않고 Controller에다가 프로그램을 작성했다.<br />
+연습용으로만 하는 것이기에 참고 부탁바란다.</p>
+
+<p>내용을 보면</p>
+<ol>
+  <li>
+    <p>Order,Coffee 객체로 새로 만들어 주고 있다.</p>
+  </li>
+  <li>
+    <p>OrderCoffee 객체를 만들어 order,coffee 객체를 setter로 주입하고 있다.<br />
+-&gt; 그중 Coffee객체는 Dto로 받은 coffeeId를 넣어서 만든다.</p>
+  </li>
+  <li>
+    <p>OrderCoffee 객체를 List로 반환해준다.</p>
+  </li>
+  <li>
+    <p>Order 객체의 필드변수에 값을 주입하고있다. <br />
+-&gt; 반환한 객체를 Order 객체의 필드변수 orderCoffees에 주입해주고 있다.<br />
+-&gt; Dto로 받은 값을 personName에 주입해주고 있다.</p>
+  </li>
+  <li>
+    <p>최종 적으로 값이 주입된 Order 객체를 Service 로직으로 전달한다.</p>
+  </li>
+</ol>
+
+<p>여기서 알 수 있는 점은<br />
+우리가 Order 클래스에 양방향으로 지정한
+@OneToMany List<OrderCoffee> orderCoffees  
+객체에 OrderCoffee 클래스의 값들이 List형태로 존재하게 된다.</OrderCoffee></p>
+
+<p>Order 클래스에서 별도의 findOrderCoffee 쿼리를 작성하지 않더라고<br />
+OrderCoffee의 List화 되어있는 객체를 참조하여 Coffee를 조회할 수 있다.</p>
+
+<p><br /></p>
+
+<p>이제 Service와 Repository 코드를 작성해보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeRepository</span> <span class="n">coffeeRepository</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">CoffeeService</span><span class="o">(</span><span class="nc">CoffeeRepository</span> <span class="n">coffeeRepository</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">coffeeRepository</span> <span class="o">=</span> <span class="n">coffeeRepository</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">createCoffee</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">coffeeRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">coffee</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">OrderRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">Order</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>간단하게 JpaRepository를 상속받아 JDBC와 같이<br />
+쿼리문을 작성할 수도있고 정해진 규약대로 쿼리를 날릴 수도 있다.<br />
+그중 .save();를 이용해 Order 객체를 DB에 저장하게 해주었다.</p>
+
+<p>이제 주문을 Postman으로 실행하게 될 경우</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRnmNA4pymt_R759dyUt72jbf_Bms7zIM2lE2plqvJz05MFJIva97SO1RguJ4L9t5tVnCO3iyNdwKkoftNs1xOhfqgpUQ=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 주문이 잘 DB에 저장된 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p>하지만 ! 여기서 OrderCoffee의 테이블에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSrJSyX1h6jXCz0y0gt23p43O_gRw39Bl5G2Iqgx1reIWlR5YTZflQ3Y5cqCmK0ffMEd5izw4EkHZfAgEFYr0PMe6LKYQ=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>값이 저장되지 않는 모습을 볼 수 있다.</p>
+
+<p>왜냐하면 우리는 Order Entity에 JPA기술을 이용해<br />
+ORDER TABLE에만 값을 .save(); 해주었기 때문이다.</p>
+
+<p>여기서 @ManyToOne, @OneToMany의 속성중<br />
+Cascade라는 것으로 간단하게 해결할 수 있다.</p>
+
+<p>Order 클래스의 Cascade 속성을 추가해주면된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@Table</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"ORDERS"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderId</span><span class="o">;</span>
+
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdAt</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+
+    <span class="nd">@Column</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">personName</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"order"</span><span class="o">,</span><span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">PERSIST</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">OrderCoffee</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위와 같이 CascadeType.PERSIST 속성을 사용하면<br />
+Order객체가 .save();되어질때 ORDER_COFFEE 테이블에도<br />
+값이 같이 맵핑되게 되어진다.</p>
+
+<p><strong>Cascade란?</strong><br />
+cascade 옵션이란 @OneToMany 나 @ManyToOne에 옵션으로 줄 수 있는 값이다.<br />
+Entity의 상태 변화를 전파시키는 옵션이다.   <br />
+만약 Entity의 상태 변화가 있으면 연관되어 있는(ex. @OneToMany, @ManyToOne)<br />
+Entity에도 상태 변화를 전이시켜준다.</p>
+
+<ol>
+  <li>
+    <p>Persistent: 저장을 하고나서, JPA가 아는 상태(관리하는 상태)가 된다.<br />
+그러나 .save()를 했다고 해서, 이 순간 바로 DB에 이 객체에 대한 데이터가 들어가는 것은 아니다. <br />
+JPA가 persistent 상태로 관리하고 있다가, 후에 데이터를 저장한다.<br />
+(1차 캐시, Dirty Checking(변경사항 감지), Write Behind(최대한 늦게, 필요한 시점에 DB에 적용) 등의 기능을 제공한다)</p>
+  </li>
+  <li>
+    <p>Removed: JPA가 관리하는 상태이긴 하지만, 실제 commit이 일어날 때, 삭제가 일어난다.</p>
+  </li>
+</ol>
+
+<p>Order 클래스의 코드를 수정 후<br />
+다시 Postman을 통해 주문요청을 보낼 경우</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTvAacgrE_bydZh1uUd4Y6Y1N3G477EgDw3NkdPKUeGJ3cCF4jZbLGJvWQj63OQtnOEMac5K7JDTIxk9XAgWAwdl6uA=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>비로소 ORDER_COFFEE 테이블에 외래키로<br />
+값들이 저장되어지는 모습을 볼 수 있다.<br />
+이렇게 연관관계를 통해 DB에 맵핑과 서로 객체 참조가 가능하다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>이렇게 오늘은 다대다에 대해 정리해보았다.<br />
+@ManyToMany는 실무에 잘사용하지 않는다 들어서<br />
+아직 공부하지 못한 상태이긴하다..<br />
+사실 위의 방법으로 연관관계 맵핑하는 것은 간단하다고 생각한데<br />
+서로 객체를 참조한다는? 의미가 잘 와닿지않기는한다.</p>
+
+<p>계속 사용해보면서 익숙해질 수 밖에 !!</p>
+
+<p>오늘 공부는 여기까지</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 김치찌개라면</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</title><link href="http://localhost:4000/til/2022/11/02/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)" /><published>2022-11-02T00:00:00+09:00</published><updated>2022-11-02T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/02/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/02/til.html"><![CDATA[<p>일어났는데 날씨가 화창하다 !<br />
 공부하기 딱 좋은 날이다.<br />
 바람도 선선하니 창문을 보니 기분도 좋아지고</p>
 
@@ -15,12 +424,215 @@
 영속성 컨텍스트와 Entity 맵핑에 대해 알아보았고<br />
 오늘은 Entity의 연관관계를 맵핑하는 방법을 알아보자 !</p>
 
-<h3 id="연관-관계-mapping">연관 관계 Mapping</h3>
+<h2 id="연관-관계-mapping">연관 관계 Mapping</h2>
+
+<p>연관 관계 맵핑은 이전에 Spring data JDBC 학습을 했을 때<br />
+사용해봤던 경험이 있다. 그리고 RDBMS 공부 할 떄 1:1, 1:N, N:N 등<br />
+Entity간의 연관관계를 정해 데이터를 참조할 수 있었다.</p>
+
+<p>테스트를 위한 간단한 정의를 해보았다.<br />
+Member : memberId, email, name, phone, createdAt, modifiedAt<br />
+Order : orderId, orderStatus, createdAt, modifiedAt<br />
+해당 엔티티에 위와 같은 Column을 가지는 클래스는 존재한다고 가정하겠다.</p>
+
+<p>Member - Order의 연관관계를 맵핑을 연습해볼 것이다.</p>
 
 <p><br /></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>:</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) Spring JPA 1</title><link href="http://localhost:4000/til/2022/11/01/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 1" /><published>2022-11-01T00:00:00+09:00</published><updated>2022-11-01T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/01/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/01/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRPFpJbXFca8pZtK4Y_xhMzczsg_7cF9aFFcOtM7nJMxG4Ts-Fz1MwFPufqbEyhDJgrM-zMotc=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+<h3 id="다대일-관계-n1">다대일 관계 (N:1)</h3>
+<p>위에서 가정한 테이블과 클래스가 이다고 가정하고<br />
+다대일 관계를 정의해보겠다.</p>
+
+<p>한명의 손님당 여러개의 주문을 할 수 있으니  Order(N) : Member(1) <br />
+관계가 정의되어질 수 있다. 즉, Order Column에서 Member를 참조할 수 있게<br />
+만들어주어야한다. 마치 SQL로 JOIN을 하듯이</p>
+
+<p><strong>@ManyToOne</strong><br />
+다대일관계를 정의해주는 어노테이션이다.<br />
+이름부터 직관적이라 기억하기 쉬울 것 같다.</p>
+
+<p>사용방법을 코드로 알아보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ManyToOne</span>
+<span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"MEMBER_ID"</span><span class="o">)</span>
+<span class="kd">private</span> <span class="nc">Member</span> <span class="n">member</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addOrder</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">){</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">orders</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>해당 클래스는 Order Entity 클래스에서 추가한 모습이다.</p>
+
+<p>기존에 Order : orderId, orderStatus, createdAt, modifiedAt <br />
+총 4개의 Column을 정의 했었는데 여기에 member Column을 추가한 것이다.</p>
+
+<p>그리고 해당 컬럼에 @ManyToOne 어노테이션과<br />
+Member 타입의 객체를 만들고, @JoinColumn으로 해당 Column을 참조할<br />
+외래키 Column을 적어주면 우리는 member 객체를 통해<br />
+각 Order객체의 member 객체를 조회할 수 있게 되는 것이다.</p>
+
+<p>테스트를 위해 DB에 Member 2명과, Order 1건을 만들어 테스트해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JpaTest</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">EntityTransaction</span> <span class="n">tx</span><span class="o">;</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">CommandLineRunner</span> <span class="nf">testJpaSingleMappingRunner</span><span class="o">(</span><span class="nc">EntityManagerFactory</span> <span class="n">entityManagerFactory</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">em</span> <span class="o">=</span> <span class="n">entityManagerFactory</span><span class="o">.</span><span class="na">createEntityManager</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">tx</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">args</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">test</span><span class="o">();</span>
+
+        <span class="o">};</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">(){</span>
+        <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+        <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">,</span><span class="s">"이재혁"</span><span class="o">,</span><span class="s">"010-7894-1234"</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"tmdghwlq@naver.com"</span><span class="o">,</span><span class="s">"염승호"</span><span class="o">,</span><span class="s">"010-1234-5623"</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+
+        <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">addMember</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+        <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+
+        <span class="nc">Order</span> <span class="n">findOrder</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Order</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"findOrder: "</span> <span class="o">+</span> <span class="n">findOrder</span><span class="o">.</span><span class="na">getMember</span><span class="o">().</span><span class="na">getMemberId</span><span class="o">()</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">findOrder</span><span class="o">.</span><span class="na">getMember</span><span class="o">().</span><span class="na">getEmail</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// 출력</span>
+<span class="nl">findOrder:</span> <span class="mi">2</span><span class="o">,</span> <span class="n">tmdghwlq</span><span class="nd">@naver</span><span class="o">.</span><span class="na">com</span>
+</code></pre></div></div>
+<p>member 객체 2개(member1,member2)와<br />
+Order 객체 1개를 만들었다. Order 객체에는 Setter를 이용하여<br />
+member2 객체를 member 참조변수에 참조하도록 코드를 추가했다.</p>
+
+<p>만든 객체들을 영속성 컨텍스트의 등록후<br />
+commit();을 진행하여 DB에 등록했다.</p>
+
+<p>객체를 한번 DB에서 조회해보자</p>
+
+<p>Order Table 조회</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRKidG95kInTT4bELfZ7GDduH3EsU_XuozzuawHn0_ZWIHVc2FQJOfOu0v9IM-CUr0uStNbAu4=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Member Table 조회
+<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmR_NXQMR6J6A7xoKPr9nv4fuFdKlFBR7Ou740yNkH2VR81uYW-aTwIpXw1daN23U3UADsI7L7g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Table 이름은 ORDERS와 USERS로 변경해서 작업했다.<br />
+실제로 조회해본 결과  member 객체 2개에 대한 데이터가 <br />
+잘 저장되어있는 모습과 order 또한 잘 맵핑되어있다.</p>
+
+<p>여기서 @JoinColumn으로 외래키를 적었는데<br />
+해당 외래키가 DB Table에 적용된 모습이 확인 가능하다</p>
+
+<p>마지막으로 코드 마지막 구문에 출력으로<br />
+해당 객체를 getter를 이용해 값을 조회해보았을때도<br />
+정상적으로 member2의 객체 값을 가져오는 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>@OneToMany</strong><br />
+만약 N:1이 아닌 일대다(1:N)관계를 표현할때는 어떻게해야할까?<br />
+일대다 단방향 맵핑은 왜래키를 포함하지 않기때문에
+사실 많이 사용하는 방법이 아니라고 들었다.</p>
+
+<p>위에 예제로 들면 Order가 아닌 Member가 Order를 참조할 수 있어야한다.<br />
+현재 상태에서는 알수 있는 정보는<br />
+-&gt; 주문에서 어떤 고객이 주문했는지 알 수 있다.</p>
+
+<p>주문을 통한 확인이 아닌<br />
+어떤 고객이 무슨 주문들을 했는지를 알고 싶을때<br />
+일대다 매핑을 추가해주면 <strong>양방향 관계</strong>를 만들어 줄 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"member"</span><span class="o">)</span>
+<span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Order</span><span class="o">&gt;</span> <span class="n">orders</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addOrder</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">){</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">orders</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Member Entity 클래스에 추가된 코드다</p>
+
+<p>OneToMany같은 경우에는 @JoinColumn을 사용하지 않았고<br />
+속성중 mappedBy를 사용했다.<br />
+안에 있는 member는 우리가 @ManyToOne으로 N:1로 연결 시켜놓은<br />
+필드 변수명과 동일하게 설정하면 된다.</p>
+
+<p>양방 연관 관계 맵핑을 끝냈으니<br />
+(다대다와는 다른내용이다.)</p>
+
+<p>위에서 보았던 예제에서 test 메서드 내용만 바꾸어 보고<br />
+테스트를 진행해보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
+    <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">,</span> <span class="s">"이재혁"</span><span class="o">,</span> <span class="s">"010-1234-5678"</span><span class="o">);</span>
+    <span class="nc">Order</span> <span class="n">order1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
+    <span class="nc">Order</span> <span class="n">order2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
+
+    <span class="n">member</span><span class="o">.</span><span class="na">addOrder</span><span class="o">(</span><span class="n">order1</span><span class="o">);</span>
+    <span class="n">member</span><span class="o">.</span><span class="na">addOrder</span><span class="o">(</span><span class="n">order2</span><span class="o">);</span>
+    <span class="n">order1</span><span class="o">.</span><span class="na">addMember</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
+    <span class="n">order2</span><span class="o">.</span><span class="na">addMember</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
+
+    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">order1</span><span class="o">);</span>
+    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">order2</span><span class="o">);</span>
+
+    <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
+
+    <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
+
+    <span class="n">findMember</span><span class="o">.</span><span class="na">getOrders</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">findOrder</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"findOrder: "</span> <span class="o">+</span> <span class="n">findOrder</span><span class="o">.</span><span class="na">getOrderId</span><span class="o">()</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">findOrder</span><span class="o">.</span><span class="na">getOrderStatus</span><span class="o">());</span>
+    <span class="o">});</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="nl">findOrder:</span> <span class="mi">1</span><span class="o">,</span> <span class="no">ORDER_REQUEST</span>
+<span class="nl">findOrder:</span> <span class="mi">2</span><span class="o">,</span> <span class="no">ORDER_REQUEST</span>
+</code></pre></div></div>
+<p>test 메서드의 내용만 변경되었고 확인해보면<br />
+Member는 1개, Order는 2개를 생성하였고</p>
+
+<p>Member 객체의 addOrder 메서드를 통해 Order객체를 2개를<br />
+List에 add 시켜 정리해주었다.</p>
+
+<p>3개의 객체를 영속성 컨텍스트에 올린 후 commit();하여<br />
+DB에 최종적으로 저장하게되어진다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRKidG95kInTT4bELfZ7GDduH3EsU_XuozzuawHn0_ZWIHVc2FQJOfOu0v9IM-CUr0uStNbAu4=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmR_NXQMR6J6A7xoKPr9nv4fuFdKlFBR7Ou740yNkH2VR81uYW-aTwIpXw1daN23U3UADsI7L7g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>야기서 양방향이라는 것을 확인 할 수 있는 점은</p>
+<ol>
+  <li>Order 클래스의 member 객체를 통해 주문의 고객을 알 수 있다.</li>
+  <li>Member 클래스의 orders 객체를 통해서 고객이 무슨 주문들을 했는지 알 수 있다.<br />
+이렇게 연관관계 맵핑을 통해 서로 데이터를 조회할 수 있는<br />
+양방향 연관관계가 형성되었다는 것을 검증해 볼 수 있다.</li>
+</ol>
+
+<p>한 가지 더 얘기해보자면 Member 클래스의 DB USERS<br />
+DB의 List&lt;/Order/&gt; orders 객체는 Column으로 표시되지 않는다는 것이다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 다대일과 일대다에 대한
+어노테이션 사용 방법을 공부했다.</p>
+
+<p>다대다 관계에 대해서는 내일 이어서 정리해보려고 한다.</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 김치찌개, 계란말이, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[일어났는데 날씨가 화창하다 ! 공부하기 딱 좋은 날이다. 바람도 선선하니 창문을 보니 기분도 좋아지고]]></summary></entry><entry><title type="html">TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)</title><link href="http://localhost:4000/til/2022/11/01/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)" /><published>2022-11-01T00:00:00+09:00</published><updated>2022-11-01T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/01/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/01/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRPFpJbXFca8pZtK4Y_xhMzczsg_7cF9aFFcOtM7nJMxG4Ts-Fz1MwFPufqbEyhDJgrM-zMotc=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
 
 <p>날씨가 벌써 쌀쌀해졌다.<br />
 아침에 일어나면 으슬으슬하다…<br />
@@ -1964,129 +2576,4 @@ ex) coffeePostDto -&gt; Coffee 필드변수의 값을 저장.</li>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 간짜장, 공기밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[주말이 지나고 월요일이 왔다.]]></summary></entry><entry><title type="html">Jekyll GitHub Page 댓글, 파비콘 꾸미기</title><link href="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&favicon.html" rel="alternate" type="text/html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기" /><published>2022-10-22T00:00:00+09:00</published><updated>2022-10-22T00:00:00+09:00</updated><id>http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon</id><content type="html" xml:base="http://localhost:4000/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html"><![CDATA[<h1 id="jekyll-테마-적용">Jekyll 테마 적용</h1>
-
-<p><br /></p>
-
-<p><img src="https://jekyllrb.com/img/octojekyll.png" alt="example image" /></p>
-
-<p><br /></p>
-
-<p>오늘은 Github Page를 통해 첫번째로 하는 포스팅이다.<br />
-MarkDown 문법도 어색하고 모든게 서툴지만 천천히 블로그 개설 준비를 하려한다.</p>
-
-<p>Jekyll 이란?<br />
-텍스트 변환 엔진으로, 마크업 언어로 작성하면 미리 정의해놓은 규칙에따라 정적 웹사이트를 만들어준다.<br />
-우리가 직접 테마를 만들 수도 있지만,, 아직 초보 개발자인 나한테 모든게 어렵게 느껴진다.<br />
-그 첫걸음을 하기위해 우선 다른 개발자분들이 만들어 놓은 테마를 이용할 생각이다.</p>
-
-<p>나는 그중에서 yat이라는 테마를 사용하기로 했다.<br />
-( <a href="https://jekyll-themes.com/jekyll-theme-yat/">Jekyll yat 테마 사이트</a>, <a href="https://github.com/jeffreytse/jekyll-theme-yat">Jekyll yat 테마 제작자 github</a> )</p>
-
-<p>현재 내가 사용하고 있는 블로그의 테마다.<br />
-Jekyll관련 셋업이랑 테마를 Git Page에 적용하는 방법<br />
-로컬 환경에서 작업하는법 등은 다른글을 통해 작성해 보겠다.</p>
-
-<p><br /></p>
-
-<h3 id="jekyll-yat-테마-utterances-댓글-기능-추가">Jekyll yat 테마 Utterances 댓글 기능 추가</h3>
-
-<p><img src="https://ifh.cc/g/BpXV1h.png" alt="example image" /><br />
-위와 같은 댓글 기능을 추가하는 방법이다.</p>
-
-<p>위에서 다운 받은 yat 테마는 기본적으로 댓글 기능이 따로 있지는 않는다.<br />
-하지만 개발자가 여러가지 기능을 사용할 수 있게 미리 개발을 해두어서 우리는<br />
-그 기능을 지원하는 것만 설정하면 댓글을 사용할 수 있다.</p>
-
-<p>Disqus comments, Gitment comments, Utterances comments<br />
-이렇게 3가지 댓글 기능을 지원해주고 있고, 이중에서 나는 Utterances 코맨트<br />
-기능을 사용하려한다. 아래를 쭉 따라해보자</p>
-
-<p><br /></p>
-
-<p><img src="https://ifh.cc/g/YV9G0L.png" alt="example image" /><br />
-GitHub에 Repository를 하나 생성해야한다.<br />
-이름은 아무렇게나 지어도 상관없다. 중요한점은 public로 만들어야한다.</p>
-
-<p><br /></p>
-
-<p><img src="https://ifh.cc/g/C0C4x3.png" alt="example image" /><br />
-Repository를 만들었으면, Quick Setup화면이 보여질 텐데<br />
-<span style="color:#0066CC"><strong>‘creating a new file’</strong></span>을 클릭 !</p>
-
-<p><br /></p>
-
-<p><img src="https://ifh.cc/g/nskSGt.png" alt="example image" /><br />
-클릭을 하면 위와같은 화면을넘어오는데<br />
-빨간색 박스의 내용을 그대로 입력해준다.<br />
-origins의 주소에는 내가 댓글 기능을 추가할 blog를 추가하면된다.<br />
-나는 내 Github Page를 추가 !</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "origins": ["https://mycatlikeschuru.github.io"]
-}
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><img src="https://ifh.cc/g/HHFBBK.png" alt="example image" /><br />
-<a href="https://github.com/apps/utterances">utterances</a> 사이트를 접속해 install을 눌러 주면<br />
-위와 같은 화면이 나오게되는데 Only select repositories에서<br />
-아까 위에서 만들었던 Repository CommentTest를 선택해주고<br />
-Rquest를 눌러 주면 완료. 이 이후에 따로 페이지가 발생하게 되는데<br />
-무시해도 상관 없다.</p>
-
-<p><br /></p>
-
-<p><img src="https://ifh.cc/g/Cbkygc.png" alt="example image" /><br />
-나는 IntelliJ를 통해서 MarkDown을 작성 중이고<br />
-대부분 VScode를 이용해서 작성하는 것 같다.<br />
-여하튼,, 작성 툴을 이용해 _config.yml 설정파일에서</p>
-
-<p>utterances 항목을 찾아주면된다.<br />
-아마 처음에 테마를 받으면 # 으로 주석처리가 되어있을 것이다.<br />
-주석 처리를 풀어준 다음에. 오른쪽의 네모박스와 같이 입력해주면 되는데<br />
-여기서 repo -&gt; 이부분만 아까 우리가 만들어준 repository로 적용하면<br />
-<span style="color:#F04965">(<em>주의: utterances 밑에 repo,issue_term 등등,, 맨앞을 공백으로 해야 적용됨</em>)</span></p>
-
-<p><br /></p>
-
-<p><img src="https://ifh.cc/g/M2V3ps.png" alt="example image" /><br />
-그렇게되면 이렇게 ! GitHub처럼 댓글을 사용할 수 있는<br />
-기능이 이렇게 똭! 하고 사용이 가능합니다~<br />
-주로 우리가 올리는 글 위주가 IT관련이라 GitHub로그인이 필요한<br />
-utterances를 통해서 댓글 기능을 추가해보았다~</p>
-
-<p>참고로 disqus도 적용해 보았는데 별다른 오류 없이 잘동작되었었다.</p>
-
-<p><br /></p>
-
-<h3 id="jekyll-yat-파비콘-추가">Jekyll yat 파비콘 추가</h3>
-
-<p><img src="https://ifh.cc/g/pgWVFk.jpg" alt="example image" /><br />
-파비콘(favicon)은 우리가 웹사이트에서 보면</p>
-
-<p><img src="https://ifh.cc/g/xAF0Qj.png" align="left" />
-<br /></p>
-
-<p>위와 같이 웹사이트 홈페이지의 이름과 같이 나오는 사진이다.</p>
-
-<p>yat 테마는 favicon을 적용하면 우리 블로그 왼쪽 위에<br />
-프로필 사진 마냥 귀엽게 표시도되고 웹 TAB에서도 파비콘 아이콘이<br />
-적용되는 모습을 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p><img src="https://ifh.cc/g/L2lDHM.png" alt="example image" /><br />
-파비콘 적용 방법은 정말 매우 간단하다.<br />
-_config.yml 파일에서 favicon: ““이라고 되어있는 부분에<br />
-자원 경로를 넣어주면된다. 나와 같은 경우는 assets의 images 폴더에<br />
-내 파비콘 사진을 두었고 그 경로를 오른쪽과 같이 지정해서<br />
-파비콘이 정상적으로 적용된 모습을 확인 할 수 있었다.</p>
-
-<hr />
-
-<p>오늘은 Jekyll 테마 중 yat이라는 테마를 커스터 마이징하는<br />
-글을 올려 보았다. 기존에 Tistory를 이용할 때는<br />
-그냥 이미지와 글,코드 올리는 것들이 간단했는데<br />
-아무래도 Markdown언어로 작성하다보니 확실히 시간소요가 더 되는 것 같다.<br />
-그래도 앞으로 사용하다보면 빨라질거라 생각하며 첫 포스팅을 마친다. 😃</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Jekyll" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><category term="GitHub Pages" /><summary type="html"><![CDATA[Jekyll 테마 적용]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 간짜장, 공기밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[주말이 지나고 월요일이 왔다.]]></summary></entry></feed>

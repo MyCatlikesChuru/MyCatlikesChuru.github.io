@@ -709,19 +709,122 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/til/2022/11/03/til.html">
+          TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 03, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/11/03/til.html">
+        <p>
+        
+
+오랜만에 시간가는지 모르고 공부한 것 같다.
+
+
+
+어제 다대다 관계에 대한
+서로의 객체 참조가 이해가지 않아 새벽 3시까지
+밤을 새워가며 공부를 했다.
+졸리기도 했지만 알고자하는 마음에 집중이 오랜만에 엄청 된 것 같다.
+
+어제 공부했더 다대다(N:M) 관계에 대해 공부해보자
+
+
+
+다대다 관계 (N:M)
+다대다 관계는 N:N관계라고 한다.
+예젠에 RDBMS에서 공부 했던 것 처럼 중간에 테이블을 한개
+더 만들어서 1 : N : 1 로 만들어주는 방법이다.
+
+
+
+위와 같이 간단한 예제로 손님과, 주문을 다대다 관계로 맵핑하고 싶을 경우
+중간에 Customer_Order라는 테이블에 각자의 외래키를 두어
+참조할 수... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/til/2022/11/02/til.html">
-          TIL) Spring JPA 2
+          TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)
         </a>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 02, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/02/til.html">
         <p>
-        
-
-일어났는데 날씨가 화창하다 !
+        일어났는데 날씨가 화창하다 !
 공부하기 딱 좋은 날이다.
 바람도 선선하니 창문을 보니 기분도 좋아지고
 
@@ -738,11 +841,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 연관 관계 Mapping
 
+연관 관계 맵핑은 이전에 Spring data JDBC 학습을 했을 때
+사용해봤던 경험이 있다. 그리고 RDBMS 공부 할 떄 1:1, 1:N, N:N 등
+Entity간의 연관관계를 정해 데이터를 참조할 수 있었다.
 
-
-오늘의 커피량: ☕️ ☕️ ☕️ ☕️
-오늘의 점심:
- <span class="read_more">Read More</span>
+테스트를 위한 간단한 정의를 해보았... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -814,7 +917,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h2 class="post-title">
         <a class="post-link" href="/til/2022/11/01/til.html">
-          TIL) Spring JPA 1
+          TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)
         </a>
       </h2>
       <div class="post-meta">
@@ -4422,7 +4525,7 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
   <ul>
     <li>
       <a href="/index.html">
-        All<span>36</span>
+        All<span>37</span>
       </a>
     </li>
 
@@ -4441,7 +4544,7 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
     
       <li>
         <a href="/categories.html#h-TIL">
-          TIL <span>31</span>
+          TIL <span>32</span>
         </a>
       </li>
     
