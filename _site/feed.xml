@@ -1,6 +1,192 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-03T22:45:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</title><link href="http://localhost:4000/til/2022/11/03/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)" /><published>2022-11-03T00:00:00+09:00</published><updated>2022-11-03T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/03/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/03/til.html"><![CDATA[<p><img src="" alt="image" class="align-left" style="max-width: 100%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-06T20:07:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Transaction 1</title><link href="http://localhost:4000/til/2022/11/04/til.html" rel="alternate" type="text/html" title="TIL) Spring Transaction 1" /><published>2022-11-04T00:00:00+09:00</published><updated>2022-11-04T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/04/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/04/til.html"><![CDATA[<p>드디어 금요일이다 !!</p>
 
-<p>오랜만에 시간가는지 모르고 공부한 것 같다.</p>
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTMURddp7eS9p4eU_B_kWlUW2OZXswDZohNbNZsQyulns7guaGsjqClS9QHbeeZNzRPUp9PL-pgI6FXT-9PQEqibl_29Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>주말이 되어도 공부를할 것이기 때문에<br />
+월요일까지 순삭당할 것 같다.</p>
+
+<p>하나한 알아갈 수록 좀더 알고 싶은 마성의 기능들…<br />
+너무 재밌다. 계속해서 공부하게된다.</p>
+
+<hr />
+
+<p>오늘은 트랜잭션에 대해 공부해보는 시간이다.<br />
+여러번 들어봤고 아직 어떤 의미인지를<br />
+정확히 알지못하니 공부해보도록하자</p>
+
+<p><br /></p>
+
+<h2 id="transaction">Transaction</h2>
+
+<h3 id="transaction-이란">Transaction 이란?</h3>
+<p>트랜잭션은 여러개의 작업들을 하나의 그룹으로<br />
+묶어서 처리하는 처리 단위로, 물리적으로는 여러개의 작업이지만<br />
+논리적으론 마치 하나의 작업으로 인식해서<br />
+전부 성공 or 실패 의 결과로 하나로만 처리되어야하는 의미를 가진다.</p>
+
+<p>예를 들어서, 계좌이체를 한다고 가정하였을 경우<br />
+A라는 사람이 B라는 사람에게 계좌이체를 했을때<br />
+A는 송금을 했지만 오류로인해 B가 받지 못했을 경우<br />
+A의 돈만 빠지고 B는 받지못하는 상황이 생긴다. 이런 경우가 생긴다면<br />
+서비스를 하지못할 정도의 큰 일이 나기때문에 송금이라는 작업단위가 있으면<br />
+최종적으로 송금완료까지 하나의 트랜잭션으로 봐야하는 것이다.</p>
+
+<p>트랜잭션을 얘기할때는 ACID 원칙을 이용한다.</p>
+
+<h3 id="acid-원칙">ACID 원칙</h3>
+<ol>
+  <li>원자성: 트랜잭션 내에서 실행한 작업들은 마치 하나의 작업인 것처럼 모두 성공 하거나 모두 실패해야 한다.</li>
+  <li>일관성: 모든 트랜잭션은 일관성 있는 데이터베이스 상태를 유지해야 한다. 예를 들어 데이터베이스에서 정한 무결성 제약 조건을 항상 만족해야 한다.</li>
+  <li>격리성: 동시에 실행되는 트랜잭션들이 서로에게 영향을 미치지 않도록 격리한다. 예를 들어 동시에 같은 데이터를 수정하지 못하도록 해야 한다. 격리성은 동시성과 관련된 성능 이슈로 인해 트랜잭션 격리 수준 (Isolation level)을 선택할 수 있다.</li>
+  <li>지속성: 트랜잭션을 성공적으로 끝내면 그 결과가 항상 기록되어야 한다. 중간에 시스템에 문제가 발생해도 데이터베이스 로그 등을 사용해서 성공한 트랜잭션 내용을 복구해야 한다.</li>
+</ol>
+
+<h3 id="db로-확인하는-예제">DB로 확인하는 예제</h3>
+<p>우선 DataBase를 통해 개념을 확인해 볼 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQSexoFyUMZWpDWivlRkoPtfcQ3EoLXbMdi9AvRnh8SV8ty8-one4e3UBrV9O3-6YBbptYiajuOe45fpQfUQ_9wPMjh=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>간단한 예제를 위해 H2 데이터베이스를 사용했고<br />
+쿼리로 각자 memberA, memberB에게 10000원을 넣어두었다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTdKis6NrWIeBPyfuYe62wOBUart4GIDHJxWqR8I5AnKeGNfAzgKf7ZUzlaqBP809jTGi3lWHsipeS_Oh5wCkFc7OjBww=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>예를 들어 가정해보자, memberA라는 사람이<br />
+2000원을 B에게 준다고 가정하기위해 쿼리를 이용해 <br />
+왼쪽 세션의 memberA라는 사람의 돈을 2000원 차감 시켰다.<br />
+<em>(자동 커밋을 꺼주는 쿼리도 같이 넣었다.)</em></p>
+
+<p>여기서 중요한점은 왼쪽과 오른쪽은 세션으로 나타낸 것이며<br />
+총 두 개의 세션으로 테스트를 하였다. <br />
+세션이란 우리가 DB에 접근을 할 떄, 클라이언트와 Connection을 맺게되는데  <br />
+데이터 베이스 서버는 내부에 세션이란 것을 만들어 해당 커넥션을 통한 모든 <br />
+요청은 이 세션을 통해서 실행하게 된다.</p>
+
+<p><strong>한 마디로 SQL을 전달 받으면 현재 커넥션에 연결된 세션이 SQL을 실행한다.</strong></p>
+
+<p>이 얘기를 토대로 위를 살펴보자면, 커밋이 이루어 지지 않은 상태이고<br />
+왼쪽 세션을 조회 쿼리를 날렸을때는 정상적으로 2000원이 차감되었지만<br />
+오른쪽 세션에서는 조회를해도 기존의 10000원이 표시되는 것을 볼 수 있다.</p>
+
+<p>이 말은 즉, 왼쪽 세션이 commit();되지 않아<br />
+오른쪽 세션과 다르게 보이는 모습이다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSAT0SVkFQRFSs83afh0wemUypXU-0AxB9UgUTQ_nXJ2xMQ_SWhKlueIx5wVXyuV7Z-Lp2pAuv2Otk9W-yQBG81MMnGXQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이 상황에서 왼쪽 세션에 commit(); 명령을 보낸 후<br />
+왼쪽 오른쪽 세션을 조회해보면<br />
+위와 같이 동일해진 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQSexoFyUMZWpDWivlRkoPtfcQ3EoLXbMdi9AvRnh8SV8ty8-one4e3UBrV9O3-6YBbptYiajuOe45fpQfUQ_9wPMjh=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>반대로 왼쪽 세션에서 rollback(); 명령을 보냈을 경우에는<br />
+위와 같이 원래상태로 돌아간 모습을 볼 수 있다.</p>
+
+<p>여기서 우리는 알아야할 것이 세션에 따라<br />
+서로 상태가 다르게 보이는 문제가 발생한다.<br />
+그럼 수많은 사람이 이용하는 클라이언트에서 여러 요청이와<br />
+쿼리가 수도 없이 날라왔을 경우에 DB조작에 있어 어려움이 생긴다.</p>
+
+<p>그래서 트랜잭션으로 작업단위를 하나로 묶어<br />
+해당 세션이 실행되었을 때 예외발생하지 않고 전부 성공했을 경우<br />
+다른 세션이 이용이 가능하도록 구현할 필요가 있다.</p>
+
+<p><br /></p>
+
+<h3 id="db-lock">DB Lock</h3>
+
+<p>위에서 commit();과 rollback();에 대해서 알아보았다.<br />
+내가 수행하는 비지니스 로직과 쿼리가 정상적으로 모두 수행되었을때<br />
+commit();을 진행하고 도중에 예외가 생기면 rollback();을 해주면된다.</p>
+
+<p>여기서 한가지 생각해보아야할 것이 우리가 commit();을 하기전에<br />
+다른 세션에서는 기존의 상태가 보여지게되어진다.</p>
+
+<p>이러한 상태에서 다른세션에서 해당부분을 수정하는 쿼리를 보냈을 경우에는<br />
+어떻게 동작이 되어지는가? 하는 의문이생긴다.</p>
+
+<p>데이터베이스는 이런 문제를 해결하기위해<br />
+DB Lock이라는 개념을 제공해준다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTXbqbmqrTNq4gTfLkWf9gIJXW9eWn5HcHqjCdyoOV_OqscxzZOTWG29-j0iGltlzppk2c_rsWgRkU_IpsJvYsXvwDtfw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>memberA라는 사람의 돈을 10000으로 셋팅해두고<br />
+왼쪽 세션에는 500으로 변경(commit 하지않음), 오른쪽 세션에는 기존과 동일<br />
+상태로 둔다음 오른쪽 세션에서 memberA의 돈을 1000으로 바꾸었을 때</p>
+
+<p>어떠한 일이 발생하느냐? 라는게 우리의 초점이다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTIXyEljH6kJA5qPQ9z19u5CL3sddOYEaiCJ9TFDKrv-tNNWb90ILvae9qEluwWPvwyeMvOwCfjKKnetibuOWXBRxRm=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>결과는 위와 같이 오른쪽 세션에서는 수행할 수 있는 쿼리를 실행한다.<br />
+오른쪽 세션을 보면 아래에 실행된 쿼리의 로그를 볼 수 있다.</p>
+
+<p>SET LOCK_TIMEOUT 60000; -&gt; 락 타임아웃을 60초로 설정<br />
+set autocommit false; -&gt; 수동커밋으로 변경<br />
+이 두가지가 실행 되었고, 궁극적으로 1000원으로 변경하는<br />
+update 쿼리문이 실행되지 않은 모습이다.</p>
+
+<p>그 말은 즉, DB에서 Lock이라는 개념을 제공해<br />
+변경을 강제로 막아주고 있는 모습이다.</p>
+
+<p>왼쪽 트랜잭션이 실행되어질 때 락을 획득하여 <br />
+commit();을 하기전까지 다른 세션의 접근을 막고있는 것이다.</p>
+
+<p>하지만 첫번쨰 쿼리로 타임아웃을 설정했기 때문에<br />
+해당 트랜잭션은 60초 후에 아래와 같은<br />
+알람이 발생하면서 세션이 자동적으로 종료하게된다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Timeout trying to lock table {0}; SQL statement:
+    update member set money=10000 - 2000 where member_id = 'memberA' [50200-200]
+    HYT00/50200
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQpgfd4MHVjIet62g9TxKlmVw0jeVCINrpP4pRD2xp6UdS5EnMW2uhWA9zz8uNjxKyp2cSFOriSBRFKGXI8zqUib6As1A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>반대로 60초가 지나기 전에 왼쪽 세션에서<br />
+commit();하여 락을 반납하였을 경우에는<br />
+오른쪽세션에서 락을 획득하여 update 쿼리를 진행한 모습을<br />
+위위 사진과 같이 확인해 볼 수 있다.</p>
+
+<p>한 마디로 정리해보자면</p>
+<ol>
+  <li>세션이 실행되면 락을 획득</li>
+  <li>해당 락이 반납되기 전까진 다른 세션에서는 수정 불가능</li>
+  <li>락을 획득한 세션이 commit(); rollback();을 수행해야 락을 반납한다.</li>
+</ol>
+
+<hr />
+<p>이렇게 오늘은 트랜잭션과 DB락에 대해 공부했다. <br />
+DB락을 알기전까지는 항상 궁금해해왔다.</p>
+
+<p>동시에 하나의 DB 레코드에 변경할때는 누가 우선권을 가지는거지?라는<br />
+물음이 항상있었다. 그 이유는 이전에 PLC 프로그래밍을 하였을 때도<br />
+하나의 공정에 동시작업이 물려있으면 우선순위를 처리해줘야하는<br />
+로직을 작성해주어야했기 때문이다.</p>
+
+<p>오늘 그 질문에 대한 물음은 어느정도 해결 된 것 같고<br />
+최종적으로 궁금한점은 그럼 이 트랜잭션을<br />
+Java코드로 어떻게 적용하는게 알맞는 것인지?라는<br />
+질문이 생기지만 이후에 학습할 과정에 포함되어있는 것 같으니<br />
+공부하면서 다시 깨달아봐야할 것 같다.</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 짜장면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[드디어 금요일이다 !!]]></summary></entry><entry><title type="html">TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</title><link href="http://localhost:4000/til/2022/11/03/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)" /><published>2022-11-03T00:00:00+09:00</published><updated>2022-11-03T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/03/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/03/til.html"><![CDATA[<p>오랜만에 시간가는지 모르고 공부한 것 같다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTXh7B366xpO46r-jW9QXzgykyRRJY1uS1iFupj0wgGjVU6tOw0-_zdw_jjWyNyLnQdZ12IU54jq9ltbiYTPW-gWDxxmw=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
 
@@ -409,7 +595,7 @@ JPA가 persistent 상태로 관리하고 있다가, 후에 데이터를 저장�
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개라면</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</title><link href="http://localhost:4000/til/2022/11/02/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)" /><published>2022-11-02T00:00:00+09:00</published><updated>2022-11-02T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/02/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/02/til.html"><![CDATA[<p>일어났는데 날씨가 화창하다 !<br />
+<strong>오늘의 점심</strong>: 김치찌개라면</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오랜만에 시간가는지 모르고 공부한 것 같다.]]></summary></entry><entry><title type="html">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</title><link href="http://localhost:4000/til/2022/11/02/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)" /><published>2022-11-02T00:00:00+09:00</published><updated>2022-11-02T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/02/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/02/til.html"><![CDATA[<p>일어났는데 날씨가 화창하다 !<br />
 공부하기 딱 좋은 날이다.<br />
 바람도 선선하니 창문을 보니 기분도 좋아지고</p>
 
@@ -2273,307 +2459,4 @@ tip) 윈도우 단축키 : F12</strong></p>
 그리고 아이클라우드나, 구글드라이브같이 우리가 널리 사용하는<br />
 서비스이기 때문에  데이터가 날라갈 걱정을 할 필요는 없으니</p>
 
-<p>조금 안심된 블로그 이미지를 사용할 수 있을 듯한? 기분이다 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="IT" /><category term="이미지 url" /><category term="구글 드라이브" /><summary type="html"><![CDATA[이미지 url 적용하기 네이버 블로그나 Tistory 등… 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.]]></summary></entry><entry><title type="html">TIL) Spring MVC Serivce 계층</title><link href="http://localhost:4000/til/2022/10/24/til.html" rel="alternate" type="text/html" title="TIL) Spring MVC Serivce 계층" /><published>2022-10-24T00:00:00+09:00</published><updated>2022-10-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/24/til.html"><![CDATA[<p>주말이 지나고 월요일이 왔다.</p>
-
-<p><img src="https://ifh.cc/g/Sl0oOY.gif" align="left" width="250px" height="300px" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>주말동안 정규식 복습과 블로그 개설 준비를했다.<br />
-오늘 부터는 GitHub Page로 만든 블로그로 포스팅을 할려고한다.<br />
-하려고하려고 했는데, 드디어 개설할 수 있어서<br />
-포스팅하는 맛이 날 것 같다 ㅎㅎ</p>
-
-<hr />
-
-<h2 id="service">Service</h2>
-
-<p>저번주에 API 계층에 대해서 공부 했었다.<br />
-Controller의 핸들러 메서드를 통해서<br />
-클라이언트의 요청을 어떻게 전달 받을 수 있는지?까지 파악해보았고</p>
-
-<p>이번 시간부터는 Service 계층을 공부해볼 시간이다.</p>
-<ol>
-  <li>DI를 사용해 API 계층과 Service 계층을 연동하기</li>
-  <li>API 계층의 DTO클래스와 Service 계층의 Entity 클래스를 매핑하기</li>
-</ol>
-
-<p>Service 클래스는 애플리케이션에 있어<br />
-도메인 업무 영역을 구현하는 비지니스 로직과 관련이 있다.</p>
-
-<p><br /></p>
-
-<h3 id="lombok">lombok</h3>
-<p>시작에 앞서 <strong>lombok</strong>에서 지원하는 어노테이션<br />
-5가지정도 간단하게 알아보자</p>
-
-<p>1). @NoArgsConstructor : 파라미터가 없는 기본 생성자로 만들어줌</p>
-
-<p>2). @RequiredArgsConstructor : final, @NonNull로 붙은 멤버 변수를 파라미터로 가지는 생성자를 생성해줌 <br />
-   -&gt; 생성자를 만들어주기때문에 생성자가 하나일경우 자동으로 @Autowired가 된다.</p>
-
-<p>3). @AllArgsConstructor :해당 애노테이션이 붙은 클레스에 추가된 모든 멤버 변수를 파라미터로 가지는 생성자를 생성해줌</p>
-
-<p>4). @Getter : 멤버 변수의 Getter 메서드를 만들어줌</p>
-
-<p>5).@Setter : 멤버 변수의 Setter 메서드를 만들어줌</p>
-
-<p>말로 들으면 어려우니 코드로 확인해보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@NoArgsConstructor</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>위의 코드가 lombok 어노테이션을 적용한 코드이다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getMemberId</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">memberId</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">email</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
-    <span class="o">}</span>
-    
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMemberId</span><span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberId</span> <span class="o">=</span> <span class="n">memberId</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="c1">//NoArgsConstructor 애노테이션으로 만들어진 생성자</span>
-    <span class="kd">public</span> <span class="nf">Member</span><span class="o">()</span> <span class="o">{</span>
-    <span class="o">}</span>
-    <span class="c1">//AllArgsConstructor 애노테이션으로 만들어진 생성자</span>
-    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">email</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">phone</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberId</span> <span class="o">=</span> <span class="n">memberId</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>해당 lombok 어노테이션을 build하면 위와 같이 코드가<br />
-자동으로 생성되서 빌드되게 되어진다.</p>
-
-<p>말그대로 우리가 코드를 직접 다 입력하지않아도<br />
-lomobk의 기능을 이용하면 어노테이션 하나로<br />
-어떤기능이 있는지 쉽게 유추가 가능하고 코드도 간결해진다.</p>
-
-<h3 id="service-계층---api-계층--dto---entity-맵핑">Service 계층 - API 계층 / DTO - Entity 맵핑</h3>
-
-<p>저번주에 공부했던 API 계층의 데이터를 받기위해<br />
-핸들러 메서드를 통해 JSON 객체 값을 DTO로 받아오는 것 까지 공부를 했었다.<br />
-이제 이렇게 받아온 데이터를 Service 계층과 어떻게<br />
-연동 시키고 코드를 작성해야 유연한지 공부해보자.</p>
-
-<p>우선 기본로직을 작성해보자.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@NoArgsConstructor</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Coffee</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>Entity 클래스인 Coffee 클래스이다.<br />
-lombok을 이용해 Getter,Setter 메서드를 사용할 수 있게 해주고<br />
-생성자는 매개변수가 없는 생성자 1개 (NoArgsConstructor)<br />
-매개변수가 4개인 생성자 1개 (AllArgsConstructor)<br />
-해서 총 2개의 생성자가 만들어졌다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeePostDto</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>그리고 API 계층에서 보내줄 데이터<br />
-3개를 멤버변수로 만들었다.</p>
-
-<p><br /></p>
-
-<p>역할과 기능을 나누기위해서<br />
-Controller에는 API 데이터를 가져오고 반환해주는 역할만 두고<br />
-Service 클래스를 만들어 비지니스로직을 만들고<br />
-Mapper를 이용해 Dto와 Entity클래스를 매핑하여 연동해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeService</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">createCoffee</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">){</span>
-        
-        <span class="c1">// coffee 객체는 추후 DB연결후 리턴받는 걸로 변경 필요.</span>
-        <span class="nc">Coffee</span> <span class="n">toss</span> <span class="o">=</span> <span class="n">coffee</span><span class="o">;</span>
-
-        <span class="k">return</span> <span class="n">toss</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>우선 Service 클래스를 Bean으로 등록해놓고<br />
-의존성 주입을 통행 createCoffee(); 메서드를<br />
-다른 클래스에서 사용할 수 있게 된다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/api/coffees"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeController</span> <span class="o">{</span>
-   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeService</span> <span class="n">coffeeService</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeMapper</span> <span class="n">coffeeMapper</span><span class="o">;</span>
-   
-   <span class="nd">@Autowired</span> <span class="c1">// 의존성 주입, 생성자가 1개라 생략가능함</span>
-   <span class="kd">public</span> <span class="nf">CoffeeController</span><span class="o">(</span><span class="nc">CoffeeService</span> <span class="n">coffeeService</span><span class="o">,</span> <span class="nc">CoffeeMapper</span> <span class="n">coffeeMapper</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">this</span><span class="o">.</span><span class="na">coffeeService</span> <span class="o">=</span> <span class="n">coffeeService</span><span class="o">;</span>
-      <span class="k">this</span><span class="o">.</span><span class="na">coffeeMapper</span> <span class="o">=</span> <span class="n">coffeeMapper</span><span class="o">;</span>
-   <span class="o">}</span>
-
-   <span class="nd">@PostMapping</span>
-   <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postCoffee</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">CoffeePostDto</span> <span class="n">coffeePostDto</span><span class="o">)</span> <span class="o">{</span>
-
-      <span class="nc">Coffee</span> <span class="n">coffee</span> <span class="o">=</span> <span class="n">coffeeMapper</span><span class="o">.</span><span class="na">coffeePostDtoToCoffee</span><span class="o">(</span><span class="n">coffeePostDto</span><span class="o">);</span> <span class="c1">// DTO &lt;-&gt; Entity 변환</span>
-      <span class="nc">Coffee</span> <span class="n">response</span> <span class="o">=</span> <span class="n">coffeeService</span><span class="o">.</span><span class="na">createCoffee</span><span class="o">(</span><span class="n">coffee</span><span class="o">);</span> <span class="c1">// Coffee 생성</span>
-
-      <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">coffeeMapper</span><span class="o">.</span><span class="na">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="n">response</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>Controller 클래스에서는 CoffeeService,CoffeeMapper 를 의존성 주입해놓고<br />
-Mapper 클래스인 coffeeMapper를 만들어 coffeePostDto를 &lt;-&gt; entity의 맵핑을 시켜주는<br />
-방법으로 프로그램을 작성했다. 최종적으로 맵핑시켜 받은 객체를<br />
-Service로직의 createCoffee로 객체를 만들어 반환받은 Coffee 클래스 참조 변수를<br />
-coffeeToCoffeeResponseDto라는 맵퍼를 이용해 Json 객체를 통해 반환해주는 모습이다.</p>
-
-<p><br /></p>
-
-<p>이제 @Mapper라는 어노테이션을 이용해<br />
-추상화 시켜 Mapper 클래스를 작성해보자.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="nl">mapstruct:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
-<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="n">mapstruct</span><span class="o">-</span><span class="nl">processor:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
-</code></pre></div></div>
-<p>우선 gradle dependencies에 위의 코드를 추가해줘야 Mapper를 사용가능하다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CoffeeMapper</span> <span class="o">{</span>
-    <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDto</span><span class="o">);</span>
-    <span class="nc">CoffeeResponseDto</span> <span class="nf">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>이렇게 인터페이스를 통해 메서드를 추상화 시켜놓으면<br />
-Mapper 클래스가 자동으로 빌드과정에서 구현체를 만들어준다.<br />
-해당 구현체의 내용은 첫줄부터 보자면</p>
-
-<p>Coffee coffeePostDtoToCoffee(CoffeePostDto coffeePostDto);<br />
-coffeePostDto로 전달된 객체를 Coffee 타입의 변수로 값을 넣어준다.<br />
-넣을때는 생성자와 Setter로 넣어준다. 말그대로 @Mapper하나를<br />
-달아놓음으로서 자동으로 코드가 주입되는 것이다.<br />
-실제로 빌드해놓은 코드를 보면 아래와 같이 나온다.</p>
-
-<p><strong>&lt;@Mapper를 통해 자동으로 Build된 코드&gt;</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">coffeePostDtoo</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="nc">Coffee</span> <span class="n">coffee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Coffee</span><span class="o">();</span>
-      <span class="n">coffee</span><span class="o">.</span><span class="na">setKorName</span><span class="o">(</span><span class="n">coffeePostDtoo</span><span class="o">.</span><span class="na">getKorName</span><span class="o">());</span>
-      <span class="n">coffee</span><span class="o">.</span><span class="na">setEngName</span><span class="o">(</span><span class="n">coffeePostDtoo</span><span class="o">.</span><span class="na">getEngName</span><span class="o">());</span>
-      <span class="n">coffee</span><span class="o">.</span><span class="na">setPrice</span><span class="o">(</span><span class="n">coffeePostDtoo</span><span class="o">.</span><span class="na">getPrice</span><span class="o">());</span>
-      <span class="k">return</span> <span class="n">coffee</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>다른 부분들은 생략하고 coffeePostDto 부분만 보면<br />
-위처럼 coffeePostDto를 매개변수로 전달해<br />
-참조변수에 값이 있으면, Coffee 객체를 생성자를 통해 새로만들어<br />
-setter로 필드변수에 값을 넣어주는 모습이다.</p>
-
-<p>실제로 Coffee 클래스에는 @NoArgsConstructor가 있기 때문에<br />
-매개변수가 없는 생성자를 통해 객체가 만들어지고<br />
-@Sette가 있기에 필드변수에 값을 넣어 줄 수 있게되어진다.<br />
-실제로 @Setter를 지우게되면 다른 방법으로 값을 넣을 방법을 찾는다.</p>
-
-<p><strong>&lt;Coffee 클래스의 @Setter를 지운고 @Mapper를 통해 자동으로 Build한 코드 &gt;</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">coffeePostDtoo</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="nc">Coffee</span> <span class="n">coffee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Coffee</span><span class="o">();</span>
-      <span class="k">return</span> <span class="n">coffee</span><span class="o">;</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>@Setter를 지웠을 경우에 위처럼 빌드과정에서 Mapper를 통해<br />
-값을 전달해주는 코드가 달라지게된다. 이렇게 되면<br />
-Setter가 없기때문에 객체만 만들어져서 전달될 뿐 Dto로 전달된 값이<br />
-새로운 객체로 저장되어지지 않으니 주의해야한다.</p>
-
-<p><br /></p>
-
-<p>마지막으로 응답을할 때 전달해준 Dto를 만들었다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeResponseDto</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>해당 클래스도 생성자와, Getter,Setter를 만들어주고<br />
-Controller에서 return하여 값을 응답할 때<br />
-Coffee객체를 CoffeeMapper로 맵핑하여 다시 리턴하게될 수 있게<br />
-만들어준 클래스이다.</p>
-
-<p><br /></p>
-
-<p>이렇게 오늘 프로그램해본 내용을 정리해보자면</p>
-
-<ol>
-  <li>@Mapper 기능을 통해 핸들러메서드로 받은 값 DTO를 -&gt; Entity 객체생성 및 값을 맵핑함<br />
-ex) coffeePostDto -&gt; Coffee 필드변수의 값을 저장.</li>
-  <li>coffeeMapper 클래스를 통해 반환 받은 객체를 저장</li>
-  <li>2번에서 반환받은 Coffee객체를 Service 로직의 활용</li>
-  <li>Service 로직에서 반환 받은 객체를 coffeeMapper로 전달</li>
-  <li>전달받은 coffeeMapper에서 응답에 해당하는 객체를 ResponEntity 객체와 함께 반환<br />
-하여 Json 객체로 클라이언트에 전달</li>
-</ol>
-
-<hr />
-
-<p>오늘은 이렇게 @Mapper 기능을 이용해<br />
-자동으로 맵핑해주고 사용한는 방법을 배워 보았고<br />
-아직까지 어색하긴하지만 대략적으로 어떻게<br />
-전달되고 묶여지는지 감이 잡히기 시작하고 있다.</p>
-
-<p>아직 DataBase가 연결이안되 이해가 안가는 부분이 사실 있지만<br />
-차근차근 Step by Step으로 알아가보자</p>
-
-<p>오늘공부는 여기서 끝!!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 간짜장, 공기밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[주말이 지나고 월요일이 왔다.]]></summary></entry></feed>
+<p>조금 안심된 블로그 이미지를 사용할 수 있을 듯한? 기분이다 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="IT" /><category term="이미지 url" /><category term="구글 드라이브" /><summary type="html"><![CDATA[이미지 url 적용하기 네이버 블로그나 Tistory 등… 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.]]></summary></entry></feed>
