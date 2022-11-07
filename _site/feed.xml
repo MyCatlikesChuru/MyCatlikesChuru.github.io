@@ -1,4 +1,337 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-06T23:28:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Transaction 1</title><link href="http://localhost:4000/til/2022/11/04/til.html" rel="alternate" type="text/html" title="TIL) Spring Transaction 1" /><published>2022-11-04T00:00:00+09:00</published><updated>2022-11-04T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/04/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/04/til.html"><![CDATA[<p>드디어 금요일이다 !!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-07T19:59:47+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Transaction 2 , Event 비동기 적용</title><link href="http://localhost:4000/til/2022/11/07/til.html" rel="alternate" type="text/html" title="TIL) Spring Transaction 2 , Event 비동기 적용" /><published>2022-11-07T00:00:00+09:00</published><updated>2022-11-07T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/07/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/07/til.html"><![CDATA[<p>날씨도 선선하니 기분좋은 월요일 시작이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRr5ZBvzQfDcRqVd7ewr_sKrKf_aakwdPGUG0DNrGrEVbVty1HB4i1wRBumj0m52CTkK1XwtsJG106ORwGHwywrqfZjUg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>주말에 공부하는게 습관이 되어지다보니<br />
+게임을하는 빈도수가 부쩍 줄었다.<br />
+하루도 빠짐없이하던 내가 주말에 아주 잠깐정도만 하는 쾌거를 이뤘다.</p>
+
+<p>오늘 공부한 것도 정리하고 이외 공부도 해보자 !!</p>
+
+<hr />
+<p>오늘은 트랜잭션의 마지막 시간이다.<br />
+트랜잭션의 개념자체는 어렵게 느껴지지 않는데<br />
+그 안에 있는 커넥션이 어떻게 연결되어지는지..<br />
+등등 DB의 접근 방법에 대해 구조를 명확히 파악하지 못했던 점이<br />
+가장 힘들었던 것 같다.</p>
+
+<p>어제는 DB를 이용해 commit(); rollback(); 쿼리를 보내<br />
+실제로 세션마다 다르게 보이고 동작하는걸 확인해 볼 수 있었다.<br />
+오늘은 실제 코드에 적용해서 하는법을 배워보자</p>
+
+<h2 id="transactional">@Transactional</h2>
+
+<h3 id="사용방법">사용방법</h3>
+
+<p>해당 어노테이션으로 말할 것 같으면<br />
+AOP 기능까지 추가된 트랜잭션이라고 보면 될 것 같다.</p>
+
+<p>Serivce 로직, 즉 비지니스 로직에서 트랜잭션을 적용해<br />
+하나의 그룹으로 묶어 최종적으로 완료하면 commit();<br />
+예외가 발생하면 rollback();을 시켜주어야한다.</p>
+
+<p>하나의 비지니스 로직 메서드에는 여러종류의 쿼리가 들어갈 수도있다.<br />
+조회(findAll) 후 생성(save)을 할 수 도 있는 것이고<br />
+로직에 따라 DB에 접근 수가 늘어날 수도 있다.<br />
+이 모든걸 하나의 트랜잭션으로 묶어 모두성공=commit, 실패=rollback<br />
+이라고 생각하면 간단할 것 같다.</p>
+
+<p>옛날에는 트랜잭션 매니저를 이용해 직접 작성했다고한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTUoJ37QEpejnf7c71VPSO_r3ZdbX7CNXRfzh0MNJMn-ooo0Lib8xwQrmY6RS-ZDopydl6GyJi4FTwb9ZWRKx8BfBYKUA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>DB접근 방법에따라 트랜잭션매니저 구현체를 이용해<br />
+트랜잭션을 커밋하고 롤백하며 관리했었다고 한다.</p>
+
+<p><strong>예제)</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">accountTransfer</span><span class="o">(</span><span class="nc">String</span> <span class="n">fromId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">toId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">money</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+    <span class="c1">// 트랜잭션 시작</span>
+    <span class="nc">TransactionStatus</span> <span class="n">status</span> <span class="o">=</span> <span class="n">transactionManager</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">(</span><span class="k">new</span> <span class="nc">DefaultTransactionDefinition</span><span class="o">());</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="c1">//비지니스 로직</span>
+        <span class="n">bizLogic</span><span class="o">(</span><span class="n">fromId</span><span class="o">,</span> <span class="n">toId</span><span class="o">,</span> <span class="n">money</span><span class="o">);</span>
+        <span class="n">transactionManager</span><span class="o">.</span><span class="na">commit</span><span class="o">(</span><span class="n">status</span><span class="o">);</span><span class="c1">// 성공시 커밋</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">transactionManager</span><span class="o">.</span><span class="na">rollback</span><span class="o">(</span><span class="n">status</span><span class="o">);</span> <span class="c1">// 실패시 롤백</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>하지만 이렇게될 경우 try, catch문이나<br />
+트랜잭션 매니저부분의 commit,rollback 등 반복적인 코드와<br />
+트랜잭션 매니저를 사용하기위한 객체를 얻어야해야해서<br />
+순수한 비지니스로직의 코드만 남지 못하게되어진다.</p>
+
+<p>이러한 배경에서 Spring AOP를 적용을 할 수도 있지만<br />
+@Transactional 애노테이션을 붙여주면 AOP까지 <br />
+적용되어 깔금한 코드로 변경할 수 있다.</p>
+
+<p><strong>예제)</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">accountTransfer</span><span class="o">(</span><span class="nc">String</span> <span class="n">fromId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">toId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">money</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+    <span class="n">bizLogic</span><span class="o">(</span><span class="n">fromId</span><span class="o">,</span> <span class="n">toId</span><span class="o">,</span> <span class="n">money</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 애노테이션을 붙여 트랜잭션을 적용하는 방법을<br />
+<strong>선언형 방식의 트랜잭션 적용</strong>이라고한다.</p>
+
+<p>클래스 레벨에 적용하는 방법과 매서드 레벨에 적용할 수 있고<br />
+레벨에따른 적용범위가 결정되어진다.<br />
+해당 애노테이션이 붙은 메서드와 클래스는<br />
+자동적으로 트랜잭션 기능이 적용되어 서비스 로직 실행중<br />
+Exception이 발생하게되어진다면 rollback();을 실행하게되어진다.</p>
+
+<p><br /></p>
+
+<h3 id="예외에-따른-처리">예외에 따른 처리</h3>
+
+<p>하지만 Checked 예외와, Unchecked 예외가 서로 다르게 동작한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTSLAOChGCHoy9NNwgmdECsc71qVVgUeTBzTSdKGAlH5tqp6IU6uhn2g81ChpPO6kV-uUGZ2-9bBermAPtxxrtbxdvTXw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>rollback();에 대한 차이가 있고<br />
+Checked 에외는 반드시 예외처리를 해주어야한다.</p>
+
+<p><br /></p>
+
+<h3 id="transaction-전파">Transaction 전파</h3>
+
+<p>트랜잭션 전파는 트랜잭션 경계에서 진행중인<br />
+트랜잭션이 존재할때 또는 존재하지 않을 때<br />
+어떻게 동작할 것인지를 결정하는 방식을 의미한다.</p>
+
+<p>ex) @Transactional(propagation = Propagation.REQUIRED)</p>
+
+<ol>
+  <li>
+    <p>Propagation.REQUIRED<br />
+-&gt; 현재 진행 중인 트랜잭션이 존재하면 해당 트랜잭션을 사용하고<br />
+존재하지 않으면 새 트랜잭션을 생성하도록 해준는 속성이다<br />
+즉,서로 다른 서비스에서 다른 트랜잭션을 실행시키지 않게해주는 역할</p>
+  </li>
+  <li>
+    <p>Propagation.REQUIRES_NEW <br />
+-&gt; 이미 진행중인 트랜잭션과 무관하게 새로운 트랜잭션이 시작된다.<br />
+기존에 진행중이던 트랜잭션은 새로운 시작된 트랙잭션이 종료할 때까지 중지된다.</p>
+  </li>
+  <li>
+    <p>Propagation.MANDATORY<br />
+-&gt; 진행중인 트랜잭션이 없으면 예외를 발생시킨다.</p>
+  </li>
+  <li>
+    <p>Propagation.NOT_SUPPORTED<br />
+-&gt; 트랜잭션을 필요로 하지않음을 의미한다.<br />
+-&gt; 트랜잭션이 있으면 메서드 실행이 종료될때까지 진행중인 트랜잭션은 중지되며<br />
+메서드 실행이 종료되면 트랜잭션을 계속 진행한다.</p>
+  </li>
+  <li>
+    <p>Propagation.NEVER<br />
+-&gt; 트랜잭션을 필요로하지 않음을 의미한다.<br />
+-&gt; 진행 중인 트랜잭션이 존재할 경우에는 예외를 발생시킨다.</p>
+  </li>
+</ol>
+
+<h3 id="transaction-격리-수준">Transaction 격리 수준</h3>
+<ol>
+  <li>
+    <p>UNCOMMITED  <br />
+-&gt; 커밋되지 않은 읽기<br />
+-&gt; 다른 트랜잭션에서 커밋하지 않은 데이터를 읽는 것을 허용</p>
+  </li>
+  <li>
+    <p>READ COMMITTED<br />
+-&gt; 커밋된 읽기  <br />
+-&gt; 다른 트랜잭션에 의해 커밋된 데이터를 읽는 것을 허용합니다.</p>
+  </li>
+  <li>
+    <p>REPEATABLE READ<br />
+-&gt; 반복 가능한 읽기 <br />
+-&gt; 트랜잭션 내에서 한 번 조회한 데이터를 반복해서 조회해도 같은 데이터가 조회되도록 합니다.</p>
+  </li>
+  <li>
+    <p>SERIALIZABLE<br />
+-&gt; 직렬화 가능<br />
+-&gt; 동일한 데이터에 대해서 동시에 두 개 이상의 트랜잭션이 수행되지 못하도록 합니다.</p>
+  </li>
+</ol>
+
+<p><br /></p>
+
+<h2 id="event">Event</h2>
+<h3 id="event-란">Event 란?</h3>
+<p>Spring 내부에는 Evnet라는 매커니즘을 가지고 있다고한다.<br />
+<strong>Bean과 Bean사이에 데이터를 전달하는 방법</strong>중 하나이다.</p>
+
+<p>일반적으로는 스프링컨테이너의 빈을 주입할때 DI를 이용한다<br />
+Evnet를 이용해 객체를 넘겨줄 수도 있다는 말이다.</p>
+
+<p><br /></p>
+
+<h3 id="evnet-사용방법">Evnet 사용방법</h3>
+<p>사용방법은 간단하다</p>
+<ol>
+  <li>publisher(발행)로 이벤트를 발생시킨다</li>
+  <li>listener로 이벤트를 받는다.</li>
+</ol>
+
+<p>publisher로 발행시키는 방법은 <br />
+ApplicationEventPublisher 클래스의 .publishEvent();<br />
+메서드를 통해서 발행시킬 수 있다.</p>
+
+<p>트랜잭션과 연동시켜 한번 예제를 만들어보자</p>
+
+<p>간단한 예제로 Member 클래스에는 여러가지 정보가 있다고 가정하고<br />
+회원가입을 눌러 POST매서드를 통해 Service로직이 호출된다 가정해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@Transactional</span>
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ApplicationEventPublisher</span> <span class="n">publisher</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">createMember</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Member</span> <span class="n">savedMember</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
+        <span class="n">publisher</span><span class="o">.</span><span class="na">publishEvent</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberCreatedEvent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">savedMember</span><span class="o">));</span> <span class="c1">// 이벤트 발생시키기</span>
+        <span class="k">return</span> <span class="n">savedMember</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+<p>간단한 코드로 ApplicationEventPublisher 객체를 스프링컨테이너를 통해<br />
+주입받은 객체 publisher로 이벤트를 발생시키는 메서드를 실행시킨다.<br />
+해당 객체에는 Event 정보를 담은 객체가 들어있어야한다.</p>
+
+<p>정보를 담은 객체를 따로 만들기위해 클래스를 만들었다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberCreatedEvent</span> <span class="kd">extends</span> <span class="nc">ApplicationEvent</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Member</span> <span class="n">member</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">MemberCreatedEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">,</span> <span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>MemberCreatedEvent라는 객체를 Event하여<br />
+우리는 이제 Listenr를 통해 객체를 받을 수 있다.</p>
+
+<p>Listener 클래스를 만들어보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberCreatedEventListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">EmailSender</span> <span class="n">emailSender</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
+    
+    <span class="nd">@EventListener</span> <span class="c1">// EventListener로 Event 객체 가져옴</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">listener</span><span class="o">(</span><span class="nc">MemberCreatedEvent</span> <span class="n">event</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"message test"</span><span class="o">;</span>
+            <span class="n">emailSender</span><span class="o">.</span><span class="na">sendEmail</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">MailSendException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"MailSendException, rollback"</span><span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>@EventListener 어노테이션을 사용한<br />
+메서드는 Event로 발행한 객체를 가져올 수 있다.</p>
+
+<p>Service 로직이 실행되어질때 Evnet 메서드를 만나는 순간<br />
+제어의 흐름이 Listener 클래스로 넘어오게 되어진다.</p>
+
+<p>위에 예제는 간단하게 email을 보내는 예제로 작성하였고<br />
+메서드를 실행하면 5초뒤에 MailSendException이라는<br />
+Checked Exception을 발생하게 코드를 작성하였다.</p>
+
+<p>실제 로직을 실행할 경우</p>
+<ol>
+  <li>Service로직에서 Event 발행하여 Listener 호출</li>
+  <li>Listener 클래스에서 Event 타입과 맞는객체를 찾아 객체를 주입</li>
+  <li>.sendEmail(message)에서 Checked Exception 발생</li>
+  <li>Checked Exception은 rollback이 안되기때문에 Unchecked <br />
+Exception으로 다시 예외처리(RuntimeException)</li>
+  <li>최종적으로 rollback하여 기존에 처리되어진 작업 종료</li>
+</ol>
+
+<p>위와 같이 동작하는 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<h2 id="async">@Async</h2>
+<p>스프링 프레임워크에서 지원하는 비동기 처리 방식이다.<br />
+해당 어노테이션을 이해하기 위해선 멀티쓰레드, 동기, 비동기에<br />
+이해가 필요하다.</p>
+
+<p>정말 간단하게 정리하자면<br />
+동기 - 하나의 쓰레드에서 같은 제어흐름을 가짐<br />
+비동기 - 멀티쓰레드로 서로 다르게 제어흐름을가짐</p>
+
+<p>이라고 생각해볼 수 있을 것 같다.</p>
+
+<p>간단하게 위에서 보았던 코드 예제로 본다면<br />
+MemberService에서 하나의 쓰레드로<br />
+Event를 발행시키고 Listener 메서드로 호출되게 되어<br />
+최종적으로 Unchecked Exception이 발생하여<br />
+rollback(); 되어지는 모습을 확인할 수 있다.</p>
+
+<p>만약 위에 코드에서 @Async를 적용하여<br />
+해당 메서드를 비동기로 가져갈 수가 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@Slf4j</span>
+<span class="nd">@EnableAsync</span> <span class="c1">// 비동기 사용가능하도록 설정</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberCreatedEventListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">EmailSender</span> <span class="n">emailSender</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
+
+    <span class="nd">@Async</span> <span class="c1">// 비동기로 이메일 전달하도록 변경</span>
+    <span class="nd">@EventListener</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">listener</span><span class="o">(</span><span class="nc">MemberCreatedEvent</span> <span class="n">event</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"message test"</span><span class="o">;</span>
+            <span class="n">emailSender</span><span class="o">.</span><span class="na">sendEmail</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">MailSendException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"MailSendException, rollback"</span><span class="o">);</span>
+            <span class="n">memberService</span><span class="o">.</span><span class="na">deleteMember</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getMember</span><span class="o">().</span><span class="na">getMemberId</span><span class="o">());</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>@EnableAsync , @Async 어노테이션을 이용해<br />
+listenr라는 메서드는 비동기상태가 되었다.<br />
+즉, MemberSerivce 로직에서 호출하여도 제어의 흐름은<br />
+MemberSerivce는 본인 쓰레드대로 진행하고</p>
+
+<p>listenr 메서드는 별도의 쓰레드가 생겨 진행하게된다.</p>
+
+<hr />
+<p>오늘은 이렇게 Evnet와 Transaction에 대해<br />
+조금 더 알아보는 시간을 가졌다.</p>
+
+<p>대략적인 내용과 이해는 어느정도 된 것 같다.<br />
+하지만 트랜잭션 어노테이션이 해주는 기능이 너무 풍부하기때문에<br />
+오히려 내지식의 한계가 보여지는 것 같다.</p>
+
+<p>실제 내부에서 어떻게 동작하는지를 알아야<br />
+트래잭션에 대해 완벽히 이해했다고 할 수 있을 것 같다.<br />
+지금은 대략 적인 그림으로만 머릿속에서 그려지지만<br />
+후에 어드밴스한 공부를 통해 트랜잭션을 다시 정복해보자</p>
+
+<p>오늘 공부는 여기서 끝!!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 카레, 김치찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨도 선선하니 기분좋은 월요일 시작이다.]]></summary></entry><entry><title type="html">TIL) Spring Transaction 1</title><link href="http://localhost:4000/til/2022/11/04/til.html" rel="alternate" type="text/html" title="TIL) Spring Transaction 1" /><published>2022-11-04T00:00:00+09:00</published><updated>2022-11-04T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/04/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/04/til.html"><![CDATA[<p>드디어 금요일이다 !!</p>
 
 <p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTMURddp7eS9p4eU_B_kWlUW2OZXswDZohNbNZsQyulns7guaGsjqClS9QHbeeZNzRPUp9PL-pgI6FXT-9PQEqibl_29Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
 
@@ -2315,148 +2648,4 @@ ConstraintViolationErrors도 가져와야하는 프로그램을<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 불고기 덮밥, 스팸, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[매일 매일 다짐하지만 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..]]></summary></entry><entry><title type="html">구글 드라이브로 이미지 url 적용하기</title><link href="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html" rel="alternate" type="text/html" title="구글 드라이브로 이미지 url 적용하기" /><published>2022-10-25T00:00:00+09:00</published><updated>2022-10-25T00:00:00+09:00</updated><id>http://localhost:4000/it/2022/10/25/it-etc-imageurl</id><content type="html" xml:base="http://localhost:4000/it/2022/10/25/it-etc-imageurl.html"><![CDATA[<h1 id="이미지-url-적용하기">이미지 url 적용하기</h1>
-<p>네이버 블로그나 Tistory 등…<br />
-타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서<br />
-올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.</p>
-
-<p>하지만… 나와 같이 GitHub Page를 사용한다거나<br />
-개인 블로그를 운영중인 분들은<br />
-이미지를 올리기 위해 다른 방법을 찾아야한다.</p>
-
-<ol>
-  <li>GitHub에 사진을 같이 올리고 , 경로로 사진표시<br />
--&gt; 해당 방법은 GitHub 저장소가 초과하면 애매해진다..</li>
-  <li>이미지를 url로 변경 시켜 관리하기<br />
--&gt; 이미지를 url로 변경시키고 저장을 유지시켜주는 안전한 플랫폼이 필요</li>
-</ol>
-
-<p>이렇게 떠올리게되어 나는 <strong>2번</strong>을 선택하게 되었고</p>
-
-<p>처음에는 다른 사람들이 올려놓은 <a href="https://ifh.cc/">iFH 이미지 호스팅</a>과 같은<br />
-홈페이지를 이용해 정리를 하였었는데 ….</p>
-
-<p>불현듯 현재는 이 사이트에서 내사진을 저장해 관리하고 있는데<br />
-이 사이트의 서비스를 종료한다던가? 사라지게된다면<br />
-내가 여태까지 저장해놓은 모든 사진들은 허공속으로 가버리는 것이다..</p>
-
-<p><br /></p>
-
-<h3 id="안전하게-저장하는-방법은-"><span style="color:#0066CC">안전하게 저장하는 방법은 ?</span></h3>
-
-<p>다른 변경 호스팅 페이지를 이용하면 위에서 말했던 문제가 생길 수도 있기 때문에<br />
-비교적으로 안전한 <strong>“구글 드라이브를 통해 이미지 url 바꾸는 방법</strong>을 설명하려한다.</p>
-
-<p><strong>1). 내가 변경하고자하는 이미지를 구글드라이브에 넣는다.</strong><br />
--&gt; 넣은 이미지 파일을 마우스 오른쪽 클릭 !<br />
--&gt; 필자는 스크린샷 2022-10~~ 뭐시기로된 프로그램 캡처사진을 넣었다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQVcLiSu-ykhVbtab_etZPl1pHZEPtUPerbz_EIPeek-aTWiCg0enyE5L2b7We-d3nOX4bJC_o=w3024-h1728" align="left" /></p>
-
-<p><strong>2). 링크가 있는 모든 사용자로 바꿔준다.</strong><br />
--&gt; 바꾼후 완료 클릭<br />
--&gt; 링크 복사를 한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRWQGDSjQWsBm5kM9hE4Iulyr7vj2dHkp2XFx-LXxMuJbTHffLKx-B79RdD7llp3yh8fiIZ9LU=w3024-h1728" align="left" />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p><strong>3). 내가 작성중인 블로그에 해당 링크를 붙여넣는다.</strong><br />
--&gt; 보통 GitHub page를 작성하는 분들은 MarkDown 언어로 포스팅을 하기에</p>
-
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">example image</span><span class="p">](</span><span class="sx">링크주소</span><span class="p">)</span>
-</code></pre></div></div>
-<p>와 같은 방법으로 주소를 넣어 이미지를 넣거나</p>
-
-<p>크기 조절이나 정령을 하고 싶으신 분들은</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"링크주소"</span> <span class="na">align=</span><span class="s">"left"</span><span class="nt">&gt;</span>
-</code></pre></div></div>
-<p>html 문법으로 링크 주소를 넣어 작성하여 이미지를 넣어도 무방하다.</p>
-
-<p><br /></p>
-
-<h3 id="파일이-로딩되지-않아요-"><span style="color:#0066CC">파일이 로딩되지 않아요 !</span></h3>
-
-<p>여기서 만약 위에 1),2)번을 따라했지만 아래와 같이 사진 이미지가<br />
-보이지 않고 파일로 나올경우?</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTFm2_anq_vjKEzlpnDEC5kFnBj5i_vYGIALa0GC8bH4NstmFC88WmthnmEf-glizCiNxdObFA=w3024-h1728" align="left" /></p>
-
-<p><br /><br /><br /><br /><br /><br /></p>
-
-<p>이렇게 이미지를 사용하지 못하는 경우는<br />
-아래와 같은 방법으로 사진 주소를 다시 검색 할 수 있다.</p>
-
-<p><br /></p>
-
-<p>먼저 아까 위에서 복사했던 주소를<br />
-Google Chrome 브라우저에서 <strong>새탭</strong>으로 열어주면<br />
-아래와 같이 구글드라이브로 연동된 사진이 나오게 될 것이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQY7wKQYjWRwh8o6PanbsXgp_0EbT97NG5HgCB1bLfSPI0ljEjzN6uT_BQfnsukgdH81SCmJ7E=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p>위에 사진이 나왔다면 아래의 순서대로 진행하면 된다.</p>
-
-<ol>
-  <li>브라우저에 사진이 나온다.</li>
-  <li>
-    <p>크롬 브라우저 개발자 도구를 연다<br />
--&gt; 경로 : 크롬 브라우저 상단 우측 <strong>⫶</strong> 로된 버튼 클릭 -&gt; 도구 더보기 -&gt; 개발자 도구<br />
-<strong>tip) 맥북 단축키 : ⌥ + ⌘ + i<br />
-tip) 윈도우 단축키 : F12</strong></p>
-  </li>
-  <li>개발자 도구에서 <strong>찾기 기능</strong>(맥북:⌘+F, 윈도우:Ctrl+F)를 연다.</li>
-  <li>찾기 기능이 열리면 위 사진과 같이 중간에 타이핑을 할 수 있는 창이 생긴다.<br />
-<strong>img</strong> 라고 <strong>입력</strong> 엔터를 눌러 위치를 찾는다.</li>
-  <li>엔터를 누르다보면 위에 사진과 같이 url 주소가 나온다.<br />
--&gt; 해당 주소에 마우스를 가져다대면 사진에 하늘색으로 표시가됨</li>
-  <li>해당 주소를 복사해서 사용하면 된다!</li>
-</ol>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQau70WaZx0XThiMXSN914-WF8Y-TVNlWxtTuLmQWoXqyTii9qeT4G6COxAN1CXH-PL4eHE0Lg=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p>위의 내용을 따라하면 된다. 따라하면서 위에 사진과 동일하게 <br />
-주소를 찾아주면 그 주소가 이미지 url 주소이다.</p>
-
-<p>그 주소를 가지고 이제 블로그나 내가 사용하려는 곳에<br />
-이용하면 되는 것이다!!</p>
-
-<p><br /></p>
-
-<h3 id="폴더를-공유로-설정-"><span style="color:#0066CC">폴더를 공유로 설정 !</span></h3>
-
-<p>참고로 해당하는 사진마다 일일히 공유를 눌러줄 수는 없으니까<br />
-내가 관리하려는 폴더에 위에서 공유를 하면 하위 데이터는<br />
-전부 공유로 바뀌게된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRzYYtAjIhzT6vvIjHZ-tIrBxLgSBHbHCqwqwrUIuA4MchYwWltF7PFaz0ROvRlBCXXEvOCadA=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQK6pfkh96AtgcxVx4TR0g7yWopx7nBubGMiNLL7BtjHnPKAVOTyw8ROJreFSNHeF7ilHIKSIk=w3024-h1728" align="left" /></p>
-
-<p><br /></p>
-
-<p>이렇게 내가 블로그에 작성하려는 이미지를<br />
-폴더 별로 잘 모아놓았다가<br />
-전체를 공유로 바꾸든, 일부분만 바꾸든 적용해서<br />
-그 이미지를 개발자도구를 통해 주소로 꺼낼 수 있다.</p>
-
-<hr />
-
-<p><br /></p>
-
-<p>이상 구글 드라이브를 통해<br />
-이미지를 url로 가져올 수 있는 방법을 설명 드렸다.</p>
-
-<p>사실 추후에 이렇게 사용하는 부분을 막을지? 아닐지는 잘 모르겠다.<br />
-하지만 구글이라는 대형 플랫폼을 통해서 관리를 한는 측면.<br />
-그리고 아이클라우드나, 구글드라이브같이 우리가 널리 사용하는<br />
-서비스이기 때문에  데이터가 날라갈 걱정을 할 필요는 없으니</p>
-
-<p>조금 안심된 블로그 이미지를 사용할 수 있을 듯한? 기분이다 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="IT" /><category term="IT" /><category term="이미지 url" /><category term="구글 드라이브" /><summary type="html"><![CDATA[이미지 url 적용하기 네이버 블로그나 Tistory 등… 타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서 올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 불고기 덮밥, 스팸, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[매일 매일 다짐하지만 잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..]]></summary></entry></feed>
