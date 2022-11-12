@@ -1,4 +1,294 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-10T20:00:40+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) JUnit 3</title><link href="http://localhost:4000/til/2022/11/10/til.html" rel="alternate" type="text/html" title="TIL) JUnit 3" /><published>2022-11-10T00:00:00+09:00</published><updated>2022-11-10T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/10/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/10/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPEtAIsYVHYZngjJKd7DhE7QvwO4nT5RQrbx3n7Hgtx83b5wSHcAK9fgNs42_a12-wjBXSB7EmmaORw8NUf4CEwXDJY2g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-12T17:17:22+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) API Documentation 1</title><link href="http://localhost:4000/til/2022/11/11/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 1" /><published>2022-11-11T00:00:00+09:00</published><updated>2022-11-11T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/11/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/11/til.html"><![CDATA[<p>요번주도 한주가 지나간다.<br />
+얼마 공부한 것 같은느낌이 아닌데 벌써<br />
+월요일이지나 금요일이 되었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmQk4K8CSftTVVdvYx3CCxrYZD4T2BrAhtXL4imWit5EO503BT7GHs58m2U-u9Ff8-jqsP6WkToRyaKKm_g388y_S6IT=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>저번주에 본 리그오브레전드 월즈 결승전을 감명깊게 보아서 그런지  <br />
+내 마음 한켠에 불안하고 안정적이지 못한 지금의 삶에<br />
+많이 지쳐하고 있었는데, 많은 위로가 되었다.</p>
+
+<p>‘중요한건 꺽이지 않는 마음’ 참 잘 만든 문구인 것 같다.<br />
+나도 꺽이지 않고 나아가는 모습을 발견할 수있도록<br />
+더욱더 노력해보아야겠다.</p>
+
+<hr />
+<p>3일간 JUnit에 대한 공부를 했다. <br />
+여러 API를 사용해보면서 계층별로 단독으로<br />
+테스트할 수 있는 Mockito라는 좋은 API를 배웠다.</p>
+
+<p>오늘은 이것에 연장선상인 API 문서화에 대해 공부해보는 날이다.</p>
+
+<p><br /></p>
+
+<h2 id="spring-rest-docs">Spring Rest Docs</h2>
+
+<p>API 문서화라고하면<br />
+클라이언트에서 REST API 백엔드 애플리케이에<br />
+요청을 전송하기 위해서 알아 되는 요청 정를 문서로 정리한 것이다.<br />
+(URI, request body, query parameter 등..)</p>
+
+<p>Spring Rest Docs는 이 문서를 자동으로 만들어주는 API이다.<br />
+기존에는 Swagger 오픈 API를 많이 이용하였다고 한다.</p>
+
+<p>Spring Rest Docs 문서 생성 흐름<br />
+테스트 코드 작성</p>
+<ol>
+  <li>test 테스크 실행</li>
+  <li>테스트 결과 Passed / Failed 1번으로 복귀</li>
+  <li>API 문서 스니펫 생성(.adoc)</li>
+  <li>API 문서 생성(.adoc)</li>
+  <li>API 문서 -&gt; HTML로 변환</li>
+</ol>
+
+<p>위와 같은 흐름으로 API 문서가 생성되며<br />
+테스트 케이스에 통과한 테스트의 API 문서 <strong>스니핏</strong>이 생성된다.<br />
+*스니핏: 문서의 일부 조각이라 생각하면 된다.</p>
+
+<p>Spring Rest Docs를 사용하기 위해 사전 작업을 하여야한다.<br />
+build.gradle의 설정해주자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plugins</span> <span class="o">{</span>
+	<span class="n">id</span> <span class="s">"org.asciidoctor.jvm.convert"</span> <span class="n">version</span> <span class="s">"3.3.2"</span>
+        <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="o">...</span>
+
+<span class="n">ext</span> <span class="o">{</span>
+	<span class="n">set</span><span class="o">(</span><span class="err">'</span><span class="n">snippetsDir</span><span class="err">'</span><span class="o">,</span> <span class="n">file</span><span class="o">(</span><span class="s">"build/generated-snippets"</span><span class="o">))</span>    <span class="c1">// 스니펫 생성 경로 설정</span>
+<span class="o">}</span>
+
+<span class="n">configurations</span> <span class="o">{</span>
+	<span class="n">asciidoctorExtensions</span> <span class="c1">// AsciiDoctor 의존그룹 지정            </span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="c1">// 의존라이브러리 추가 </span>
+	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">restdocs</span><span class="o">-</span><span class="n">mockmvc</span><span class="err">'</span>                         
+	<span class="n">asciidoctorExtensions</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">restdocs</span><span class="o">-</span><span class="n">asciidoctor</span><span class="err">'</span>
+        <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="c1">// test task실행 시, API 문서 생성 스니핏 경로를 설정</span>
+<span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="err">'</span><span class="n">test</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">outputs</span><span class="o">.</span><span class="na">dir</span> <span class="n">snippetsDir</span>
+	<span class="nf">useJUnitPlatform</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="c1">// Asciidoctor 기능을 사용하기 위한 설정</span>
+<span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="err">'</span><span class="n">asciidoctor</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">configurations</span> <span class="s">"asciidoctorExtensions"</span>
+	<span class="n">inputs</span><span class="o">.</span><span class="na">dir</span> <span class="n">snippetsDir</span>
+	<span class="n">dependsOn</span> <span class="n">test</span>
+<span class="o">}</span>
+
+<span class="c1">// index.html copy</span>
+<span class="n">task</span> <span class="nf">copyDocument</span><span class="o">(</span><span class="nl">type:</span> <span class="nc">Copy</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">dependsOn</span> <span class="n">asciidoctor</span>         
+	<span class="n">from</span> <span class="nf">file</span><span class="o">(</span><span class="s">"${asciidoctor.outputDir}"</span><span class="o">)</span>  
+	<span class="n">into</span> <span class="nf">file</span><span class="o">(</span><span class="s">"src/main/resources/static/docs"</span><span class="o">)</span>  
+<span class="o">}</span>
+
+<span class="c1">// copyDocument가 먼저 실행되도록 설정</span>
+<span class="n">build</span> <span class="o">{</span>
+	<span class="n">dependsOn</span> <span class="n">copyDocument</span> 
+<span class="o">}</span>
+
+<span class="c1">// bootJar task 설정</span>
+<span class="n">bootJar</span> <span class="o">{</span>
+	<span class="n">dependsOn</span> <span class="n">copyDocument</span>   
+	<span class="nf">from</span> <span class="o">(</span><span class="s">"${asciidoctor.outputDir}"</span><span class="o">)</span> <span class="o">{</span> 
+		<span class="n">into</span> <span class="err">'</span><span class="kd">static</span><span class="o">/</span><span class="n">docs</span><span class="err">'</span>    
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>build.gradle 설정이 끝났다면 이제 코드를 작성해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@WebMvcTest</span><span class="o">(</span><span class="nc">MemberController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="c1">//@Transactional</span>
+<span class="c1">//@SpringBootTest</span>
+<span class="c1">//@AutoConfigureMockMvc</span>
+<span class="nd">@AutoConfigureRestDocs</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberControllerRestDocsTest</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberMapper</span> <span class="n">mapper</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">Gson</span> <span class="n">gson</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">postMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">,</span> <span class="s">"이재혁"</span><span class="o">,</span> <span class="s">"010-1234-5678"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">post</span><span class="o">);</span>
+
+        <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span> <span class="n">responseDto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span><span class="o">(</span>
+                <span class="mi">1L</span><span class="o">,</span>
+                <span class="s">"dhfif718@naver.com"</span><span class="o">,</span>
+                <span class="s">"이재혁"</span><span class="o">,</span>
+                <span class="s">"010-1234-5678"</span><span class="o">,</span>
+                <span class="nc">Member</span><span class="o">.</span><span class="na">MemberStatus</span><span class="o">.</span><span class="na">MEMBER_ACTIVE</span><span class="o">,</span>
+                <span class="k">new</span> <span class="nf">Stamp</span><span class="o">()</span>
+        <span class="o">);</span>
+
+        <span class="n">given</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">memberPostToMember</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">willReturn</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">());</span>
+        <span class="n">given</span><span class="o">(</span><span class="n">memberService</span><span class="o">.</span><span class="na">createMember</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">willReturn</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">());</span>
+        <span class="n">given</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">memberToMemberResponse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">responseDto</span><span class="o">);</span>
+
+        <span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>
+                <span class="n">post</span><span class="o">(</span><span class="s">"/api/members"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">content</span><span class="o">(</span><span class="n">content</span><span class="o">)</span>
+        <span class="o">);</span>
+
+
+        <span class="n">actions</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isCreated</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.email"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getEmail</span><span class="o">()))</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.name"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getName</span><span class="o">()))</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.phone"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getPhone</span><span class="o">()))</span>
+
+                <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">document</span><span class="o">(</span>
+                        <span class="s">"post-member"</span><span class="o">,</span>
+                        <span class="n">getRequestPreProcessor</span><span class="o">(),</span>
+                        <span class="n">getResponsePreProcessor</span><span class="o">(),</span>
+                        <span class="n">requestFields</span><span class="o">(</span>
+                                <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"휴대폰 번호"</span><span class="o">)</span>
+                                <span class="o">)</span>
+                        <span class="o">),</span>
+                        <span class="n">responseFields</span><span class="o">(</span>
+                                <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">OBJECT</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"결과 데이터"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"휴대폰 번호"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">)</span>
+                                <span class="o">)</span>
+                        <span class="o">)</span>
+                <span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>기존 코드와 달라진점은 
+@WebMvcTest(MemberController.class)          <br />
+@MockBean(JpaMetamodelMappingContext.class)  <br />
+어노테이션으로 변경하였다는 점이다.<br />
+이전에 SpringBootTest와 AutoConfigureMockMvc를 사용했던 부분을<br />
+변경하였다. WebMveTest로 변경 함으로써 Controller 계층에 사용하는<br />
+Bean만 등록하기때문에 상대적으로 속도가 빠르다고 한다.</p>
+
+<p>또한, @AutoConfigureRestDocs 어노테이션을 붙여주었고<br />
+.andDo(docment())를 이용해 Rest Docs에 필요한 정보를 보내주었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">payload</span><span class="o">.</span><span class="na">PayloadDocumentation</span><span class="o">.*;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">MockMvcRestDocumentation</span><span class="o">.</span><span class="na">document</span><span class="o">;</span>
+</code></pre></div></div>
+<p>document(), fieldWithPath(), requestFields() <br />
+필요한 정보를 만드는 과정에서 위 api를 사용하기위해선<br />
+PayloadDocumentation, MockMvcRestDocumentation을 import 해주어야한다.</p>
+
+<p>그리고 patch 핸들러 메서드에 대해 path parameter를 이용할 경우</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">pathParameters</span><span class="o">;</span>
+</code></pre></div></div>
+<p>를 스태틱으로 import 해주면 사용이 가능하다.</p>
+
+<p><br /></p>
+
+<p>Document()의 매개변수로 전달하기위해 <br />
+OperationRequestPreprocessor<br />
+OperationResponsePreprocessor<br />
+클래스를 이용해 인터페이스안에 정적 메서드를 만들어 구현하였다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApiDocumentUtils</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="nc">OperationRequestPreprocessor</span> <span class="nf">getRequestPreProcessor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">preprocessRequest</span><span class="o">(</span><span class="n">prettyPrint</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="nc">OperationResponsePreprocessor</span> <span class="nf">getResponsePreProcessor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">preprocessResponse</span><span class="o">(</span><span class="n">prettyPrint</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>getRequestPreProcessor() <br />
+getResponsePreProcessor()<br />
+아리는 메서드를 만들었고 해당 내용엔 OperationPreprocessor 클래스의<br />
+메서드인 prettyPrint()로 객체를 주입해주었다.</p>
+
+<p>API 문서를 생성 전 전처리를 수행하는 기능이라는데<br />
+해당 내용에 대해서는 조금더 깊은 학습이 필요해 보인다.</p>
+
+<p>또한 Document() 매개변수인<br />
+requestFields와 responseFields를 List.of로 <br />
+문서화 시킬 내용을 설명과 함께 담아 전달하도록<br />
+내용을 작성하였다.</p>
+
+<p><br /></p>
+
+<p>여기까지 작성후 테스트 케이스를 실행하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmQkvJ4wiPE1h_7rk6WxVw-45PCgHTiM7tPBoXPQp9BI9-0QNhkyLJ9dvyFDgh1FIcoc9NAzwN1MqviHV234SBgKq-Fudw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우리가 build.gralde에서 ext로 설정해놓은 경로<br />
+build/generated-snippets 안에 스니핏 식별자로<br />
+post-member로 지정해여 해당 폴더안에 .adoc 파일이 생긴 모습을 볼 수 있다.</p>
+
+<p>실제 내용을 확인해보면 우리가 원하는<br />
+API 내용들이 담겨져있다.</p>
+
+<p>그리고 Gradle 프로젝트의 경우<br />
+src/docs/asciidoc 폴더 경로에서 index.adoc 파일을 생성한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSP6yS5JEcQYvdmCiJBkQnCg6AjwPkGkEPL4LLA99PvGdapaJxSgq3S0yUGWaItGJc-VGK1hETfSnrBJQuxYueo82_6=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>index.adoc파일에 Asciidoc 문법으로<br />
+템플릿 코드를 넣어 Gradle의 :build, :bootJar을  <br />
+실행시켜주면 index.html</p>
+
+<p>gradle의 설정했던 task copyDocument의 경로인<br />
+src/main/resources/static/docs 안에 index.html 파일로  <br />
+우리의 API문서가 변환된 모습을 볼 수 있다.</p>
+
+<p>그리고 최종적으로 Spring Boot를 실행시켜<br />
+index.html에 접근해보면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmRVSbop-au0zBS7T5VYwEbIIprDpuG7rQJQI3FpLPJncTS0N-xC6MLCi11JQdcFK3cWv2I50pjxUYkTgLFp5FArYVMaog=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우리가 원하는 모습대로 API 문서가 작성된 모습을 확인해 볼 수 있다.<br />
+(해당 템플릿 코드는 코드스테이츠 교육자료로 제공된 템플릿이므로<br />
+템플릿 코드는 따로 올리지 않겠습니다!)</p>
+
+<hr />
+
+<p>이렇게 오늘은 간단한 것 같으면서도 어려운…<br />
+SpringRestDocs를 사용하는 법을 알아보았고</p>
+
+<p>초기 셋팅만 gradle에 잘 해놓고 템플릿 코드만 준비되어있다면<br />
+크게 어려운점은 없었던 것 같다.</p>
+
+<p>매우 유익했던 Test케이스를 이용한 API 자동화 작업.<br />
+엄청 신기하고 재밌었다.</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 핫도그, 빵</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[요번주도 한주가 지나간다. 얼마 공부한 것 같은느낌이 아닌데 벌써 월요일이지나 금요일이 되었다.]]></summary></entry><entry><title type="html">TIL) JUnit 3</title><link href="http://localhost:4000/til/2022/11/10/til.html" rel="alternate" type="text/html" title="TIL) JUnit 3" /><published>2022-11-10T00:00:00+09:00</published><updated>2022-11-10T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/10/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/10/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPEtAIsYVHYZngjJKd7DhE7QvwO4nT5RQrbx3n7Hgtx83b5wSHcAK9fgNs42_a12-wjBXSB7EmmaORw8NUf4CEwXDJY2g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
 
 <p>드이어 JUnit 관련해서 마지막 시간이다.<br />
 테스트 프로그램을 작성하는 연습도 틈틈히 해둬야<br />
@@ -2543,164 +2833,4 @@ totalPages = 10개의 페이지.</p>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ <br />
-<strong>오늘의 점심</strong>: 라면</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[한 주가 지나고 새로운 주가 찾아왔다. 내가 공부하고 있는 와중에도 세상은 돌아가고 있다.]]></summary></entry><entry><title type="html">TIL) Spring JDBC 기반 액세스 계층 2</title><link href="http://localhost:4000/til/2022/10/28/til.html" rel="alternate" type="text/html" title="TIL) Spring JDBC 기반 액세스 계층 2" /><published>2022-10-28T00:00:00+09:00</published><updated>2022-10-28T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/28/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/28/til.html"><![CDATA[<p>어느새 벌써 한주가 끝났다.</p>
-
-<p>코드스테이츠 시작 전부터 5개월 동안<br />
-제대로 쉬지 못하고 공부를 지속하다보니 살짝 번아웃이<br />
-오긴하는 것 같다.. 공부는 즐겁고 얼른 이 기술을 습득해<br />
-적용하고 싶지만,, 너무 오랫동안 여행을 가지 못해서<br />
-어디론가 훌쩍 떠나고 싶다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSBGqdkMkYbzBmUzeLdSEzgYHBaRbLNMmENQpr1mjJdIXzRObuGsIxR3g7G770hOSSAJTkT3Gc=w1512-h810" align="left" /></p>
-
-<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
-
-<p>그래도 목표에 도달하기위해 열심히 해보자 !!</p>
-
-<hr />
-
-<p>어제는 Spring data JDBC를 사용하는 연습을 해보았다.</p>
-
-<p>몇일전까지는 이해가 되서 재밌었는데,,<br />
-급격한 난이도 상승으로 인한  즐거움과 어지러움이 공존했다.</p>
-
-<p>요는 JDBC 사용법이 어려웠던 것 보다는<br />
-Database, Service, Dto, Mapper, Controller의 연동과<br />
-데이터 전달흐름을 정확히 캐치하기가 어려운게 너무 컷었다.</p>
-
-<p>그도 그럴 것이 이 모든 내용을 일주일안에<br />
-전부 학습한 내용이라 그런 것 같다는 생각이 들었다.</p>
-
-<p>그래도 오늘 배운 것을 차근차근 정리해보자</p>
-
-<p><br /></p>
-
-<h3 id="domain-driven-design">Domain Driven Design</h3>
-
-<p>Domain Driven Design는 DDD라고 줄여 불른다.<br />
-우리말로 도메인 주도 설계 정도로 해석할 수 있는데<br />
-용어의 의미 그대로 도메인 위주의 설계 기법을 의미한다.</p>
-
-<p><strong>Aggregate란?</strong><br />
-관련 도메인을 하나의 군집으로 묶은 것을 의미한다.<br />
-예를들어 커피주문을 앱으로 만든다고 가정하 였을 경우</p>
-
-<p>회원 (회원Id, 회원이름, 회원이메일 등..)<br />
-주문 (주문Id, 주문시간, 주문상태 등..)<br />
-음료 (음료Id, 음료종류, 음료가격, 음료조리시간 등..)</p>
-
-<p>이렇게 3개의 군집(회원,주문,음료)로 나는 것을 Aggregate라고 한다.</p>
-
-<p><strong>Aggregate route란?</strong><br />
-Aggregate route는 말그대로 군집중에 기준이 되는 뿌리. 즉 정보다<br />
-객체를 참조하기 위한 기준이되는 값이라고 생각하면 간단할 것 같다.<br />
-말 뜻에서 오듯이 변경이되지 않는 값으로 잡아야한다. (ex: id)</p>
-
-<p>한마디 정리 : Aggregate의 대표다 !</p>
-
-<p><br /></p>
-
-<h3 id="entity-설계">Entity 설계</h3>
-<p>이전에 학습했던 RDBMS 챕터에서<br />
-ERD(Entity Relationship Diagram) 설계할때 잠깐 공부했었다.<br />
-1:1, 1:N, N:N 관계를 정의하고, 외래키(foreign key)로<br />
-다른 Entity를 Join해 값을 참조가 가능했었다.</p>
-
-<p>우리가 예제로 만들 애플리케이션의 Entity의 관계를 정의하고<br />
-프로그램을 시작하는게 좋을 것 같다.</p>
-
-<h3 id="오늘-배운-것을-적어보자-">오늘 배운 것을 적어보자 !</h3>
-
-<p><strong>1). AggregateReference</strong><br />
--. JDBC 라이브러리 안에 들어있는 인터페이스이다.<br />
--. Table 왜래키처럼 다른 클래스의 Aggregate Route를 참조할 수 있는 방법이다.</p>
-
-<p><strong>2). @Table</strong><br />
--. Table의 이름을 정의하는 어노테이션이다.<br />
--. .sql 파일에 정의된 테이블의 이름과 연결해준다고 생각하면 될 것 같다.<br />
--. @Table이 설정이 안되어 있을 경우 클래스이름과 동일한 테이블을 연결해준다.</p>
-
-<p><strong>3). @MappedCollection</strong><br />
--. Entity 클래스 간의 연관 관계를 맺어주는 어노테이션이다.</p>
-
-<p>1,2,3번에 대한 예제를 프로그램으로 살펴보자</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE IF NOT EXISTS ORDERS (
-    ORDER_ID bigint NOT NULL AUTO_INCREMENT,
-    MEMBER_ID bigint NOT NULL,
-    PRIMARY KEY (ORDER_ID),
-    FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER(MEMBER_ID)
-);
-</code></pre></div></div>
-<p>SQL구문으로 ORDERS 테이블을 만들었고<br />
-내부의 ORDER_ID, MEMBER_ID를 컬럼을 만들었다.<br />
-각각 기본키와 외래키로 등록하였다.</p>
-
-<p><br /></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@Table</span><span class="o">(</span><span class="s">"ORDERS"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
-    <span class="nd">@Id</span>
-    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderId</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nc">AggregateReference</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="n">memberId</span><span class="o">;</span>
-
-    <span class="nd">@MappedCollection</span><span class="o">(</span><span class="n">idColumn</span> <span class="o">=</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">CoffeeRef</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>우리가 DB와 연결하기위해 Repository 인터페이스를 만들었고<br />
-Spring data JDBC 기술을 이용하는 CrudRepository 인터페이스를 상속받아<br />
-DB에 접근하여 CRUD를 사용했었다.</p>
-
-<p>Order 클래스는 우리가 객체를 만들어<br />
-값을 저장해둔다음. 해당 객체를 CrudRepository의<br />
-메서드를 이용해 .save();를하여 객체를 넘겨주면<br />
-우리가 위에서 정의해둔 테이블에 값이 저장되게 되어진다.</p>
-
-<p>1).
-여기서 @Table의 역할을 알 수 있다. 
-.save();를 진행할떄, 어느 테이블에 저장을해야할지<br />
-알수가 없다. 그것을 지정해주는 애노테이션으로
-Table이 ORDERS로 지정된 테이블을 연결해준다.<br />
-@Table을 안붙여줬을 경우 자동으로 클래스이름의 테이블을 찾아간다.</p>
-
-<p>2). AggregateReference 타입으로 만든 memberId라는 값은<br />
-Member 클래스의 Long으로 지정된 Id값을 참조할 수 있게된다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">AggregateReference</span><span class="o">.</span><span class="na">IdOnlyAggregateReference</span><span class="o">();</span>
-</code></pre></div></div>
-<p>위의 코드를 이용해 Order 객체를 생성할 때, 어떤 Member가 선택했는지<br />
-전달받은 Id를 위의 메서드 안에 넣어 준 객체를 이용해서 만들어주면된다.</p>
-
-<p>그렇게 만들어진 order클래스 객체의 memberId값으로<br />
-memberRepository에 접근해 Id를 이용해 객체를 찾고<br />
-다른 값들도 가져올 수 있게 되는 것이다.</p>
-
-<p>3). @MappedCollection
-N:N 관계의 경우 중간 Entity 클래스가 하나 필요하다.<br />
-Order - OrderCoffee - Coffee (1 : N : 1)과 같은 그림이다.<br />
-그 중간 클래스는 CoffeeRef고 테이블은 ORDER_COFFEE로 정했다.</p>
-
-<p>idColumn, keyColumn에 대한 설정이 필요하고
-List를 사용할 경우 2개다 지정해야하며, Set을 싸용할 경우 IdColumn만 지정해도 사용가능하다.</p>
-
-<p>idColumn은 CoffeeRef에서 사용할 외래키를 적어주면된다.<br />
-CoffeeRef(N): Order(1)이기 때문에<br />
-ORDER_ID를 참조하게 적어주면된다.</p>
-
-<p>keyColumn은 외래키를 포함하고 있는 테이블의 기본키를 컬럼명을 지정하면된다.<br />
-현재 같은 경우 keyColumn = “ORDER_COFFEE_ID”로 적어주면 되는 것이다.</p>
-
-<hr />
-
-<p>이렇게 오늘은 Spring data JDBC에 대해 알아보았다.<br />
-사실 몇개는 간단하게 느껴졌는데<br />
-연관 관계 Mapping은 아직 익숙치않아서 그런지<br />
-조금 많이 어렵게 느껴졌다.<br />
-다음주에 실습이 또 있는데 실습을 통해서 익숙해지도록 노력해야겠다.</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 불고기, 계란부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느새 벌써 한주가 끝났다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 라면</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[한 주가 지나고 새로운 주가 찾아왔다. 내가 공부하고 있는 와중에도 세상은 돌아가고 있다.]]></summary></entry></feed>

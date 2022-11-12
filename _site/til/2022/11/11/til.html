@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) API Documentation 1 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) API Documentation 1">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="요번주도 한주가 지나간다. 얼마 공부한 것 같은느낌이 아닌데 벌써 월요일이지나 금요일이 되었다.">
+<meta property="og:description" content="요번주도 한주가 지나간다. 얼마 공부한 것 같은느낌이 아닌데 벌써 월요일이지나 금요일이 되었다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/11/11/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/11/11/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-11-11T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) API Documentation 1">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-11T00:00:00+09:00","datePublished":"2022-11-11T00:00:00+09:00","description":"요번주도 한주가 지나간다. 얼마 공부한 것 같은느낌이 아닌데 벌써 월요일이지나 금요일이 되었다.","headline":"TIL) API Documentation 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/11/til.html"},"url":"http://localhost:4000/til/2022/11/11/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) API Documentation 1</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+84</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-11-11T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 11, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>요번주도 한주가 지나간다.<br>
+얼마 공부한 것 같은느낌이 아닌데 벌써<br>
+월요일이지나 금요일이 되었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmQk4K8CSftTVVdvYx3CCxrYZD4T2BrAhtXL4imWit5EO503BT7GHs58m2U-u9Ff8-jqsP6WkToRyaKKm_g388y_S6IT=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>저번주에 본 리그오브레전드 월즈 결승전을 감명깊게 보아서 그런지  <br>
+내 마음 한켠에 불안하고 안정적이지 못한 지금의 삶에<br>
+많이 지쳐하고 있었는데, 많은 위로가 되었다.</p>
+
+<p>‘중요한건 꺽이지 않는 마음’ 참 잘 만든 문구인 것 같다.<br>
+나도 꺽이지 않고 나아가는 모습을 발견할 수있도록<br>
+더욱더 노력해보아야겠다.</p>
+
+<hr>
+<p>3일간 JUnit에 대한 공부를 했다. <br>
+여러 API를 사용해보면서 계층별로 단독으로<br>
+테스트할 수 있는 Mockito라는 좋은 API를 배웠다.</p>
+
+<p>오늘은 이것에 연장선상인 API 문서화에 대해 공부해보는 날이다.</p>
+
+<p><br></p>
+
+<h2 id="spring-rest-docs">Spring Rest Docs</h2>
+
+<p>API 문서화라고하면<br>
+클라이언트에서 REST API 백엔드 애플리케이에<br>
+요청을 전송하기 위해서 알아 되는 요청 정를 문서로 정리한 것이다.<br>
+(URI, request body, query parameter 등..)</p>
+
+<p>Spring Rest Docs는 이 문서를 자동으로 만들어주는 API이다.<br>
+기존에는 Swagger 오픈 API를 많이 이용하였다고 한다.</p>
+
+<p>Spring Rest Docs 문서 생성 흐름<br>
+테스트 코드 작성</p>
+<ol>
+  <li>test 테스크 실행</li>
+  <li>테스트 결과 Passed / Failed 1번으로 복귀</li>
+  <li>API 문서 스니펫 생성(.adoc)</li>
+  <li>API 문서 생성(.adoc)</li>
+  <li>API 문서 -&gt; HTML로 변환</li>
+</ol>
+
+<p>위와 같은 흐름으로 API 문서가 생성되며<br>
+테스트 케이스에 통과한 테스트의 API 문서 <strong>스니핏</strong>이 생성된다.<br>
+*스니핏: 문서의 일부 조각이라 생각하면 된다.</p>
+
+<p>Spring Rest Docs를 사용하기 위해 사전 작업을 하여야한다.<br>
+build.gradle의 설정해주자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plugins</span> <span class="o">{</span>
+	<span class="n">id</span> <span class="s">"org.asciidoctor.jvm.convert"</span> <span class="n">version</span> <span class="s">"3.3.2"</span>
+        <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="o">...</span>
+
+<span class="n">ext</span> <span class="o">{</span>
+	<span class="n">set</span><span class="o">(</span><span class="err">'</span><span class="n">snippetsDir</span><span class="err">'</span><span class="o">,</span> <span class="n">file</span><span class="o">(</span><span class="s">"build/generated-snippets"</span><span class="o">))</span>    <span class="c1">// 스니펫 생성 경로 설정</span>
+<span class="o">}</span>
+
+<span class="n">configurations</span> <span class="o">{</span>
+	<span class="n">asciidoctorExtensions</span> <span class="c1">// AsciiDoctor 의존그룹 지정            </span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+    <span class="c1">// 의존라이브러리 추가 </span>
+	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">restdocs</span><span class="o">-</span><span class="n">mockmvc</span><span class="err">'</span>                         
+	<span class="n">asciidoctorExtensions</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">restdocs</span><span class="o">-</span><span class="n">asciidoctor</span><span class="err">'</span>
+        <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="c1">// test task실행 시, API 문서 생성 스니핏 경로를 설정</span>
+<span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="err">'</span><span class="n">test</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">outputs</span><span class="o">.</span><span class="na">dir</span> <span class="n">snippetsDir</span>
+	<span class="nf">useJUnitPlatform</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="c1">// Asciidoctor 기능을 사용하기 위한 설정</span>
+<span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="err">'</span><span class="n">asciidoctor</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">configurations</span> <span class="s">"asciidoctorExtensions"</span>
+	<span class="n">inputs</span><span class="o">.</span><span class="na">dir</span> <span class="n">snippetsDir</span>
+	<span class="n">dependsOn</span> <span class="n">test</span>
+<span class="o">}</span>
+
+<span class="c1">// index.html copy</span>
+<span class="n">task</span> <span class="nf">copyDocument</span><span class="o">(</span><span class="nl">type:</span> <span class="nc">Copy</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">dependsOn</span> <span class="n">asciidoctor</span>         
+	<span class="n">from</span> <span class="nf">file</span><span class="o">(</span><span class="s">"${asciidoctor.outputDir}"</span><span class="o">)</span>  
+	<span class="n">into</span> <span class="nf">file</span><span class="o">(</span><span class="s">"src/main/resources/static/docs"</span><span class="o">)</span>  
+<span class="o">}</span>
+
+<span class="c1">// copyDocument가 먼저 실행되도록 설정</span>
+<span class="n">build</span> <span class="o">{</span>
+	<span class="n">dependsOn</span> <span class="n">copyDocument</span> 
+<span class="o">}</span>
+
+<span class="c1">// bootJar task 설정</span>
+<span class="n">bootJar</span> <span class="o">{</span>
+	<span class="n">dependsOn</span> <span class="n">copyDocument</span>   
+	<span class="nf">from</span> <span class="o">(</span><span class="s">"${asciidoctor.outputDir}"</span><span class="o">)</span> <span class="o">{</span> 
+		<span class="n">into</span> <span class="err">'</span><span class="kd">static</span><span class="o">/</span><span class="n">docs</span><span class="err">'</span>    
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>build.gradle 설정이 끝났다면 이제 코드를 작성해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@WebMvcTest</span><span class="o">(</span><span class="nc">MemberController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="c1">//@Transactional</span>
+<span class="c1">//@SpringBootTest</span>
+<span class="c1">//@AutoConfigureMockMvc</span>
+<span class="nd">@AutoConfigureRestDocs</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberControllerRestDocsTest</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberMapper</span> <span class="n">mapper</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">Gson</span> <span class="n">gson</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">postMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">,</span> <span class="s">"이재혁"</span><span class="o">,</span> <span class="s">"010-1234-5678"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">post</span><span class="o">);</span>
+
+        <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span> <span class="n">responseDto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span><span class="o">(</span>
+                <span class="mi">1L</span><span class="o">,</span>
+                <span class="s">"dhfif718@naver.com"</span><span class="o">,</span>
+                <span class="s">"이재혁"</span><span class="o">,</span>
+                <span class="s">"010-1234-5678"</span><span class="o">,</span>
+                <span class="nc">Member</span><span class="o">.</span><span class="na">MemberStatus</span><span class="o">.</span><span class="na">MEMBER_ACTIVE</span><span class="o">,</span>
+                <span class="k">new</span> <span class="nf">Stamp</span><span class="o">()</span>
+        <span class="o">);</span>
+
+        <span class="n">given</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">memberPostToMember</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">willReturn</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">());</span>
+        <span class="n">given</span><span class="o">(</span><span class="n">memberService</span><span class="o">.</span><span class="na">createMember</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">willReturn</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">());</span>
+        <span class="n">given</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">memberToMemberResponse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">responseDto</span><span class="o">);</span>
+
+        <span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>
+                <span class="n">post</span><span class="o">(</span><span class="s">"/api/members"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">content</span><span class="o">(</span><span class="n">content</span><span class="o">)</span>
+        <span class="o">);</span>
+
+
+        <span class="n">actions</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isCreated</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.email"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getEmail</span><span class="o">()))</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.name"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getName</span><span class="o">()))</span>
+                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.phone"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getPhone</span><span class="o">()))</span>
+
+                <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">document</span><span class="o">(</span>
+                        <span class="s">"post-member"</span><span class="o">,</span>
+                        <span class="n">getRequestPreProcessor</span><span class="o">(),</span>
+                        <span class="n">getResponsePreProcessor</span><span class="o">(),</span>
+                        <span class="n">requestFields</span><span class="o">(</span>
+                                <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"휴대폰 번호"</span><span class="o">)</span>
+                                <span class="o">)</span>
+                        <span class="o">),</span>
+                        <span class="n">responseFields</span><span class="o">(</span>
+                                <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">OBJECT</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"결과 데이터"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"휴대폰 번호"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태"</span><span class="o">),</span>
+                                        <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">)</span>
+                                <span class="o">)</span>
+                        <span class="o">)</span>
+                <span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>기존 코드와 달라진점은 
+@WebMvcTest(MemberController.class)          <br>
+@MockBean(JpaMetamodelMappingContext.class)  <br>
+어노테이션으로 변경하였다는 점이다.<br>
+이전에 SpringBootTest와 AutoConfigureMockMvc를 사용했던 부분을<br>
+변경하였다. WebMveTest로 변경 함으로써 Controller 계층에 사용하는<br>
+Bean만 등록하기때문에 상대적으로 속도가 빠르다고 한다.</p>
+
+<p>또한, @AutoConfigureRestDocs 어노테이션을 붙여주었고<br>
+.andDo(docment())를 이용해 Rest Docs에 필요한 정보를 보내주었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">payload</span><span class="o">.</span><span class="na">PayloadDocumentation</span><span class="o">.*;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">MockMvcRestDocumentation</span><span class="o">.</span><span class="na">document</span><span class="o">;</span>
+</code></pre></div></div>
+<p>document(), fieldWithPath(), requestFields() <br>
+필요한 정보를 만드는 과정에서 위 api를 사용하기위해선<br>
+PayloadDocumentation, MockMvcRestDocumentation을 import 해주어야한다.</p>
+
+<p>그리고 patch 핸들러 메서드에 대해 path parameter를 이용할 경우</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">pathParameters</span><span class="o">;</span>
+</code></pre></div></div>
+<p>를 스태틱으로 import 해주면 사용이 가능하다.</p>
+
+<p><br></p>
+
+<p>Document()의 매개변수로 전달하기위해 <br>
+OperationRequestPreprocessor<br>
+OperationResponsePreprocessor<br>
+클래스를 이용해 인터페이스안에 정적 메서드를 만들어 구현하였다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApiDocumentUtils</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="nc">OperationRequestPreprocessor</span> <span class="nf">getRequestPreProcessor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">preprocessRequest</span><span class="o">(</span><span class="n">prettyPrint</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="nc">OperationResponsePreprocessor</span> <span class="nf">getResponsePreProcessor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">preprocessResponse</span><span class="o">(</span><span class="n">prettyPrint</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>getRequestPreProcessor() <br>
+getResponsePreProcessor()<br>
+아리는 메서드를 만들었고 해당 내용엔 OperationPreprocessor 클래스의<br>
+메서드인 prettyPrint()로 객체를 주입해주었다.</p>
+
+<p>API 문서를 생성 전 전처리를 수행하는 기능이라는데<br>
+해당 내용에 대해서는 조금더 깊은 학습이 필요해 보인다.</p>
+
+<p>또한 Document() 매개변수인<br>
+requestFields와 responseFields를 List.of로 <br>
+문서화 시킬 내용을 설명과 함께 담아 전달하도록<br>
+내용을 작성하였다.</p>
+
+<p><br></p>
+
+<p>여기까지 작성후 테스트 케이스를 실행하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmQkvJ4wiPE1h_7rk6WxVw-45PCgHTiM7tPBoXPQp9BI9-0QNhkyLJ9dvyFDgh1FIcoc9NAzwN1MqviHV234SBgKq-Fudw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>우리가 build.gralde에서 ext로 설정해놓은 경로<br>
+build/generated-snippets 안에 스니핏 식별자로<br>
+post-member로 지정해여 해당 폴더안에 .adoc 파일이 생긴 모습을 볼 수 있다.</p>
+
+<p>실제 내용을 확인해보면 우리가 원하는<br>
+API 내용들이 담겨져있다.</p>
+
+<p>그리고 Gradle 프로젝트의 경우<br>
+src/docs/asciidoc 폴더 경로에서 index.adoc 파일을 생성한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSP6yS5JEcQYvdmCiJBkQnCg6AjwPkGkEPL4LLA99PvGdapaJxSgq3S0yUGWaItGJc-VGK1hETfSnrBJQuxYueo82_6=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>index.adoc파일에 Asciidoc 문법으로<br>
+템플릿 코드를 넣어 Gradle의 :build, :bootJar을  <br>
+실행시켜주면 index.html</p>
+
+<p>gradle의 설정했던 task copyDocument의 경로인<br>
+src/main/resources/static/docs 안에 index.html 파일로  <br>
+우리의 API문서가 변환된 모습을 볼 수 있다.</p>
+
+<p>그리고 최종적으로 Spring Boot를 실행시켜<br>
+index.html에 접근해보면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmRVSbop-au0zBS7T5VYwEbIIprDpuG7rQJQI3FpLPJncTS0N-xC6MLCi11JQdcFK3cWv2I50pjxUYkTgLFp5FArYVMaog=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>우리가 원하는 모습대로 API 문서가 작성된 모습을 확인해 볼 수 있다.<br>
+(해당 템플릿 코드는 코드스테이츠 교육자료로 제공된 템플릿이므로<br>
+템플릿 코드는 따로 올리지 않겠습니다!)</p>
+
+<hr>
+
+<p>이렇게 오늘은 간단한 것 같으면서도 어려운…<br>
+SpringRestDocs를 사용하는 법을 알아보았고</p>
+
+<p>초기 셋팅만 gradle에 잘 해놓고 템플릿 코드만 준비되어있다면<br>
+크게 어려운점은 없었던 것 같다.</p>
+
+<p>매우 유익했던 Test케이스를 이용한 API 자동화 작업.<br>
+엄청 신기하고 재밌었다.</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 핫도그, 빵</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/11/10/til.html" title="TIL) JUnit 3">TIL) JUnit 3</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/11/til.html" title="">TIL) Spring Basic 1</a></li>
+<li><a class="post-link" href="/til/2022/10/24/til.html" title="">TIL) Spring MVC Serivce 계층</a></li>
+<li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="">맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="">TIL) Spring Exception 2</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
