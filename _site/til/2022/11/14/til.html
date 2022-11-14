@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) API Documentation 2 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) API Documentation 2">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="한 주가 끝나고 새로운 주가 시작되었다.">
+<meta property="og:description" content="한 주가 끝나고 새로운 주가 시작되었다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/11/14/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/11/14/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-11-14T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) API Documentation 2">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-14T00:00:00+09:00","datePublished":"2022-11-14T00:00:00+09:00","description":"한 주가 끝나고 새로운 주가 시작되었다.","headline":"TIL) API Documentation 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/14/til.html"},"url":"http://localhost:4000/til/2022/11/14/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) API Documentation 2</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+87</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-11-14T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 14, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>한 주가 끝나고 새로운 주가 시작되었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOXnXDoCRH7AtlOncucaI0nI7RqC9GMkm0ZG-VhgIXazy7m5tTSccABV_f-3G5RjFSfN1ojWWOJzPxeYeKp4Ycs2Ykj=w1920-h921" alt="image" class="align-left" style="max-width: 65%"></p>
+
+<p>Spring 핵심 기술을 배우는 섹션이 거의 막바지로 다가왔다.<br>
+내가 사용할 수 있는 기술은 정말 적은 것 같은데</p>
+
+<p>벌써 어느덧 섹션 끝에 다다르다니…<br>
+시간이 진짜 빠르다고 느끼는 반면, 좀 더 열심히해서 <br>
+지식을 채워 넣어야 내 목적지까지 도달할 수 있을 것 같다는 생각이 든다.</p>
+
+<hr>
+
+<p>오늘은 Spring Rest Docs를 활용해보는 시간이다.</p>
+
+<p>저번주에 간단하게 사용방법을 배웠고<br>
+오늘은 Controller의 모든 API를 문서화 시켜보려한다.</p>
+
+<h2 id="api-자동-문서화-연습">API 자동 문서화 연습</h2>
+
+<p>저번주에는 POST와 PACTH에 대한<br>
+자동 문서화를 진행했다.</p>
+
+<p>지금 만들고 있는 애플리케이션에서는 GET, DELETE<br>
+API만 자동화 시켜주면 마무리가 된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">BDDMockito</span><span class="o">.</span><span class="na">given</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">doNothing</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">RestDocumentationRequestBuilders</span><span class="o">.*;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">parameterWithName</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">result</span><span class="o">.</span><span class="na">MockMvcResultMatchers</span><span class="o">.</span><span class="na">jsonPath</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">result</span><span class="o">.</span><span class="na">MockMvcResultMatchers</span><span class="o">.</span><span class="na">status</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">payload</span><span class="o">.</span><span class="na">PayloadDocumentation</span><span class="o">.*;</span> <span class="c1">//responseFields(); , fieldWithPath() 사용</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">MockMvcRestDocumentation</span><span class="o">.</span><span class="na">document</span><span class="o">;</span> <span class="c1">// document();</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">pathParameters</span><span class="o">;</span> <span class="c1">// pathParameters();</span>
+</code></pre></div></div>
+<p>시작 전 우리가 사용하기 위한 기술에 대한<br>
+import를 진행해준다.</p>
+
+<p>유의 깊게 볼 것은 RestDocs 구성을 위한 API들이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nd">@AutoConfigureRestDocs</span>
+<span class="nd">@WebMvcTest</span><span class="o">(</span><span class="nc">MemberController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocumentationTest</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberMapper</span> <span class="n">mapper</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">Gson</span> <span class="n">gson</span><span class="o">;</span>
+    
+    <span class="o">...</span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+<p>기본적인 위존성 주입과 Class 애노테이션을 셋팅 한 다음<br>
+Test 코드를 작성해 API 자동화하여 만들어 줄 수 있다.</p>
+
+<p>@Test 코드 작성 시 우리가 이전 부터 학습해왔던<br>
+Mockito를 이용해 Slice 계층별 테스트를 만들어 줄 수가 있다.</p>
+
+<p>Controller의 계층 별 테스트를 위해<br>
+Service영역과의 연결된 부분을 Mock 객체를 반환시켜<br>
+실제 데이터가 들어간 것 처럼 테스트하는 방법이다.</p>
+
+<p>내가 총 만들어야할 API는 3개이고<br>
+멤버 조회, 멤버 전체조회, 멤버 삭제 이렇게 된다.</p>
+
+<p>1). GET</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">StubData</span><span class="o">.</span><span class="na">MockMember</span><span class="o">.</span><span class="na">getSingleResponseBody</span><span class="o">();</span>
+    <span class="kt">long</span> <span class="n">memberid</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getMemberId</span><span class="o">();</span>
+
+    <span class="c1">// findMember(); Mock 처리하기 , 반환 필요x (새로운 객체)</span>
+    <span class="n">given</span><span class="o">(</span><span class="n">memberService</span><span class="o">.</span><span class="na">findMember</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">anyLong</span><span class="o">())).</span><span class="na">willReturn</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">());</span>
+
+    <span class="c1">// memberToMemberResponse(); Mock 처리하기 , 반수필수 타입 = MemberDto.response</span>
+    <span class="n">given</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">memberToMemberResponse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">())).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+    <span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>
+            <span class="n">get</span><span class="o">(</span><span class="s">"/v11/members/{member-id}"</span><span class="o">,</span> <span class="n">memberid</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+    <span class="o">);</span>
+
+    <span class="n">actions</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isOk</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.memberId"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"1"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.email"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"dhfif718@gmail.com"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.name"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.phone"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"010-1234-5678"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">document</span><span class="o">(</span><span class="s">"get-findMember"</span><span class="o">,</span>
+                    <span class="n">getRequestPreProcessor</span><span class="o">(),</span>
+                    <span class="n">getResponsePreProcessor</span><span class="o">(),</span>
+                    <span class="n">pathParameters</span><span class="o">(</span>
+                            <span class="n">parameterWithName</span><span class="o">(</span><span class="s">"member-id"</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">)</span>
+                    <span class="o">),</span>
+                    <span class="n">responseFields</span><span class="o">(</span>
+                            <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">OBJECT</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"결과 데이터"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"전화 번호"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태: 활동중/휴면상태/탈퇴상태"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">)</span>
+                            <span class="o">)</span>
+                    <span class="o">)</span>
+            <span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>크게 달라진점은 없다.<br>
+andDo를 통해 검증과 동시에 API 자동화를 위한<br>
+여러가지 파라미터들을 넘겨주고 있다.</p>
+
+<p>GET 요청이기때문에 requestFields();에 대한<br>
+작성은 따로하지 않았다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dhfif718@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"이재혁"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-1234-5678"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>최종 적으로 responseFields의 Json 형태는 위와 같이 이루어진다.<br>
+현재는 data라는 Object안에 한종류의 데이터가 들어가 있다.</p>
+
+<p><br></p>
+
+<p>만약 전체조회를 위해<br>
+data안에 배열로 데이터가 존재한다면 어떻게<br>
+표시를 해주어야할까?</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">responseFields</span><span class="o">(</span>
+        <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"전화 번호"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태: 활동중/휴면상태/탈퇴상태"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">),</span>
+        <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+<p>responseFields의 위와 같이 data.[].을 이용해<br>
+배열에 해당하는 내용을 표시해줄 수 있다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dhfif718@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"이재혁"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-1234-5678"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"tmdghwlq@naver.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"염승호"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-2000-4000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dragonwon@nate.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"정용원"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-7777-4587"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>실제로 build하여 생성된 response-body를 확인해보면<br>
+우리가 최종적으로 반환한 데이터에 따른 배열이<br>
+위와 같이 잘표시되는 모습을 확인해 볼 수 있다.</p>
+
+<p>이렇게 복잡한 구조의 Json형태일지라도<br>
+배열에 대한 위치만 잘 지정해주면 @Test 컴파일시 정상적으로<br>
+실행되어 스니핏이 잘 만들어 지는 것을 확인할 수 있다.</p>
+
+<p><br></p>
+
+<p>2). DELETE</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+
+    <span class="c1">// deleteMember(); Mock 처리하기, 반환타입 = void</span>
+    <span class="n">doNothing</span><span class="o">().</span><span class="na">when</span><span class="o">(</span><span class="n">memberService</span><span class="o">).</span><span class="na">deleteMember</span><span class="o">(</span><span class="n">memberId</span><span class="o">);</span>
+
+    <span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>
+            <span class="n">delete</span><span class="o">(</span><span class="s">"/v11/members/{member-id}"</span><span class="o">,</span> <span class="n">memberId</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+    <span class="o">);</span>
+
+    <span class="n">actions</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isNoContent</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">document</span><span class="o">(</span>
+                    <span class="s">"delete-member"</span><span class="o">,</span>
+                    <span class="n">getRequestPreProcessor</span><span class="o">(),</span>
+                    <span class="n">getResponsePreProcessor</span><span class="o">(),</span>
+                    <span class="n">pathParameters</span><span class="o">(</span>
+                            <span class="n">parameterWithName</span><span class="o">(</span><span class="s">"member-id"</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">)</span>
+                    <span class="o">)</span>
+            <span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Delete는 사실 더욱더 간단하다.<br>
+requestFields와 responseFields의 따로 만들어줄<br>
+필요가 없기 때문에 parameter에 대한 API 내용만 적어주면된다..</p>
+
+<p>이렇게 오늘은 GET,DELETE에 대한<br>
+API 문서 자동화를 진행했다.</p>
+
+<p><br></p>
+
+<h2 id="오늘-마주한-error">오늘 마주한 ERROR</h2>
+
+<p>1). 문제 확인<br>
+GET, DELETE에 대한 테스트케이스는 통과한 상태로<br>
+gradle build하는 과정 중 문제가 발생했다.</p>
+
+<p>첫번째는 아래와 같은 오류 코드가 발생</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">There</span> <span class="n">were</span> <span class="n">failing</span> <span class="n">tests</span><span class="o">.</span> <span class="nc">See</span> <span class="n">the</span> <span class="n">report</span> <span class="nl">at:</span> <span class="nl">file:</span><span class="c1">///Users/ljh/Desktop/myprogram/CodeStates/be-homework-api-documentation/build/reports/tests/test/index.html</span>
+</code></pre></div></div>
+
+<p>두번째는 resources의 index.html 파일이 생기지 않았다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMjr35Sq1Q_a5w8FeW6-h0MrJhp27At6mtmeNDPdy7Vt_Ypfia_OLvp8OjFswdwaRI3nxa-Cvww99s3zBMEEy_jQBxi=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>첫번째 문제로 인해 파일 생성이 되지 않은 듯 했다.</p>
+
+<p><br></p>
+
+<p>2). 문제 해결<br>
+첫번째 오류 코드를 천천히 보니  테스트를 실패했으니<br>
+해당경로에 들어가서 보라는 것 같았다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNEdF_s4q2MG1_Td-VloiVybdGvYGUqHewVUU_L9Rbbqq45xouzGpvldtATTmL0KjTJ9V_ds1JEsC8_UclbIK5tZVMOgg=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>해당 경로에 들어가서 index.html 파일을 열어보았다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMAh6qcJXhFrBUv5fVdmlay6LC7TIDSpP9naAOl97GCFV9bR5kjFhWtyExFHdc_m0yiA8zkbZYSHda_SyeuxH_TbW84=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>열어보았더니 Test Summary라는<br>
+테스트 결과에 대한 요약을 나타내주는 화면이 있었고</p>
+
+<p>MemberControllerTest4의 getMembersTest() 메서드가<br>
+테스트를 통과하지 못했구나라고 알아차렸다.</p>
+
+<p>해당 문제는 내가 GET, DELETE를 추가하면서<br>
+기존에 둔 테스트코드에 영향이 갔었고<br>
+오류를 수정하고 다시 gradle build를 하니</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMIqLDdClsJaEodvMjJXyFMOE1Ats6JM6us5Nwq8nB--Jr620vXRnfWD_RaqptDSvECTD2WLT4H7bNj9_9dGzzC7tDn=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>index.hmtl 파일이 생성된 모습을 확인할 수 있다 !!</p>
+
+<hr>
+
+<p>오늘은 API 자동화를 위한<br>
+Spring Rest Docs를 연습해보는 시간을 가졌다.<br>
+이런식으로 테스트코드와 연결해<br>
+API 문서를 만들 수 있다는게 너무 좋은 기술인 것 같다는 생각이든다.</p>
+
+<p>사실 이전까지만해도 수동으로 사람이 다적어서 관리하는 줄 알았는데<br>
+이렇게 좋은 방법으로 관리를 할 수 있다는 점에서<br>
+좋은 기술을 배운 것 같아 뿌듯한 느낌이 들었다.</p>
+
+<p>오늘 공부도 여기서 끝 !!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 삼겹살, 라면, 밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/11/11/til.html" title="TIL) API Documentation 1">TIL) API Documentation 1</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/11/01/til.html" title="">TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
+<li><a class="post-link" href="/til/2022/11/14/til.html" title="">TIL) API Documentation 2</a></li>
+<li><a class="post-link" href="/til/2022/10/05/til.html" title="">TIL) DB RDMBS 1</a></li>
+<li><a class="post-link" href="/til/2022/10/25/til.html" title="">TIL) Spring Exception 1</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

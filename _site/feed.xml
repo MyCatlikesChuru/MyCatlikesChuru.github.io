@@ -1,4 +1,292 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-13T19:08:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) API Documentation 1</title><link href="http://localhost:4000/til/2022/11/11/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 1" /><published>2022-11-11T00:00:00+09:00</published><updated>2022-11-11T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/11/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/11/til.html"><![CDATA[<p>요번주도 한주가 지나간다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-14T15:52:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOXnXDoCRH7AtlOncucaI0nI7RqC9GMkm0ZG-VhgIXazy7m5tTSccABV_f-3G5RjFSfN1ojWWOJzPxeYeKp4Ycs2Ykj=w1920-h921" alt="image" class="align-left" style="max-width: 65%" /></p>
+
+<p>Spring 핵심 기술을 배우는 섹션이 거의 막바지로 다가왔다.<br />
+내가 사용할 수 있는 기술은 정말 적은 것 같은데</p>
+
+<p>벌써 어느덧 섹션 끝에 다다르다니…<br />
+시간이 진짜 빠르다고 느끼는 반면, 좀 더 열심히해서 <br />
+지식을 채워 넣어야 내 목적지까지 도달할 수 있을 것 같다는 생각이 든다.</p>
+
+<hr />
+
+<p>오늘은 Spring Rest Docs를 활용해보는 시간이다.</p>
+
+<p>저번주에 간단하게 사용방법을 배웠고<br />
+오늘은 Controller의 모든 API를 문서화 시켜보려한다.</p>
+
+<h2 id="api-자동-문서화-연습">API 자동 문서화 연습</h2>
+
+<p>저번주에는 POST와 PACTH에 대한<br />
+자동 문서화를 진행했다.</p>
+
+<p>지금 만들고 있는 애플리케이션에서는 GET, DELETE<br />
+API만 자동화 시켜주면 마무리가 된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">BDDMockito</span><span class="o">.</span><span class="na">given</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">doNothing</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">RestDocumentationRequestBuilders</span><span class="o">.*;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">parameterWithName</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">result</span><span class="o">.</span><span class="na">MockMvcResultMatchers</span><span class="o">.</span><span class="na">jsonPath</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">result</span><span class="o">.</span><span class="na">MockMvcResultMatchers</span><span class="o">.</span><span class="na">status</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">payload</span><span class="o">.</span><span class="na">PayloadDocumentation</span><span class="o">.*;</span> <span class="c1">//responseFields(); , fieldWithPath() 사용</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">MockMvcRestDocumentation</span><span class="o">.</span><span class="na">document</span><span class="o">;</span> <span class="c1">// document();</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">pathParameters</span><span class="o">;</span> <span class="c1">// pathParameters();</span>
+</code></pre></div></div>
+<p>시작 전 우리가 사용하기 위한 기술에 대한<br />
+import를 진행해준다.</p>
+
+<p>유의 깊게 볼 것은 RestDocs 구성을 위한 API들이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nd">@AutoConfigureRestDocs</span>
+<span class="nd">@WebMvcTest</span><span class="o">(</span><span class="nc">MemberController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocumentationTest</span> <span class="o">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
+
+    <span class="nd">@MockBean</span>
+    <span class="kd">private</span> <span class="nc">MemberMapper</span> <span class="n">mapper</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">Gson</span> <span class="n">gson</span><span class="o">;</span>
+    
+    <span class="o">...</span>
+    
+<span class="o">}</span>
+</code></pre></div></div>
+<p>기본적인 위존성 주입과 Class 애노테이션을 셋팅 한 다음<br />
+Test 코드를 작성해 API 자동화하여 만들어 줄 수 있다.</p>
+
+<p>@Test 코드 작성 시 우리가 이전 부터 학습해왔던<br />
+Mockito를 이용해 Slice 계층별 테스트를 만들어 줄 수가 있다.</p>
+
+<p>Controller의 계층 별 테스트를 위해<br />
+Service영역과의 연결된 부분을 Mock 객체를 반환시켜<br />
+실제 데이터가 들어간 것 처럼 테스트하는 방법이다.</p>
+
+<p>내가 총 만들어야할 API는 3개이고<br />
+멤버 조회, 멤버 전체조회, 멤버 삭제 이렇게 된다.</p>
+
+<p>1). GET</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">StubData</span><span class="o">.</span><span class="na">MockMember</span><span class="o">.</span><span class="na">getSingleResponseBody</span><span class="o">();</span>
+    <span class="kt">long</span> <span class="n">memberid</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getMemberId</span><span class="o">();</span>
+
+    <span class="c1">// findMember(); Mock 처리하기 , 반환 필요x (새로운 객체)</span>
+    <span class="n">given</span><span class="o">(</span><span class="n">memberService</span><span class="o">.</span><span class="na">findMember</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">anyLong</span><span class="o">())).</span><span class="na">willReturn</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">());</span>
+
+    <span class="c1">// memberToMemberResponse(); Mock 처리하기 , 반수필수 타입 = MemberDto.response</span>
+    <span class="n">given</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">memberToMemberResponse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">())).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+
+    <span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>
+            <span class="n">get</span><span class="o">(</span><span class="s">"/v11/members/{member-id}"</span><span class="o">,</span> <span class="n">memberid</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+    <span class="o">);</span>
+
+    <span class="n">actions</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isOk</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.memberId"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"1"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.email"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"dhfif718@gmail.com"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.name"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.phone"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="s">"010-1234-5678"</span><span class="o">))</span>
+            <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">document</span><span class="o">(</span><span class="s">"get-findMember"</span><span class="o">,</span>
+                    <span class="n">getRequestPreProcessor</span><span class="o">(),</span>
+                    <span class="n">getResponsePreProcessor</span><span class="o">(),</span>
+                    <span class="n">pathParameters</span><span class="o">(</span>
+                            <span class="n">parameterWithName</span><span class="o">(</span><span class="s">"member-id"</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">)</span>
+                    <span class="o">),</span>
+                    <span class="n">responseFields</span><span class="o">(</span>
+                            <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">OBJECT</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"결과 데이터"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"전화 번호"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태: 활동중/휴면상태/탈퇴상태"</span><span class="o">),</span>
+                                    <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">)</span>
+                            <span class="o">)</span>
+                    <span class="o">)</span>
+            <span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>크게 달라진점은 없다.<br />
+andDo를 통해 검증과 동시에 API 자동화를 위한<br />
+여러가지 파라미터들을 넘겨주고 있다.</p>
+
+<p>GET 요청이기때문에 requestFields();에 대한<br />
+작성은 따로하지 않았다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dhfif718@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"이재혁"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-1234-5678"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>최종 적으로 responseFields의 Json 형태는 위와 같이 이루어진다.<br />
+현재는 data라는 Object안에 한종류의 데이터가 들어가 있다.</p>
+
+<p><br /></p>
+
+<p>만약 전체조회를 위해<br />
+data안에 배열로 데이터가 존재한다면 어떻게<br />
+표시를 해주어야할까?</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">responseFields</span><span class="o">(</span>
+        <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"전화 번호"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태: 활동중/휴면상태/탈퇴상태"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">),</span>
+        <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+<p>responseFields의 위와 같이 data.[].을 이용해<br />
+배열에 해당하는 내용을 표시해줄 수 있다.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dhfif718@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"이재혁"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-1234-5678"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"tmdghwlq@naver.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"염승호"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-2000-4000"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dragonwon@nate.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"정용원"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"010-7777-4587"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memberStatus"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"활동중"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>실제로 build하여 생성된 response-body를 확인해보면<br />
+우리가 최종적으로 반환한 데이터에 따른 배열이<br />
+위와 같이 잘표시되는 모습을 확인해 볼 수 있다.</p>
+
+<p>이렇게 복잡한 구조의 Json형태일지라도<br />
+배열에 대한 위치만 잘 지정해주면 @Test 컴파일시 정상적으로<br />
+실행되어 스니핏이 잘 만들어 지는 것을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<p>2). DELETE</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+    <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
+
+    <span class="c1">// deleteMember(); Mock 처리하기, 반환타입 = void</span>
+    <span class="n">doNothing</span><span class="o">().</span><span class="na">when</span><span class="o">(</span><span class="n">memberService</span><span class="o">).</span><span class="na">deleteMember</span><span class="o">(</span><span class="n">memberId</span><span class="o">);</span>
+
+    <span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>
+            <span class="n">delete</span><span class="o">(</span><span class="s">"/v11/members/{member-id}"</span><span class="o">,</span> <span class="n">memberId</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+    <span class="o">);</span>
+
+    <span class="n">actions</span>
+            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isNoContent</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">document</span><span class="o">(</span>
+                    <span class="s">"delete-member"</span><span class="o">,</span>
+                    <span class="n">getRequestPreProcessor</span><span class="o">(),</span>
+                    <span class="n">getResponsePreProcessor</span><span class="o">(),</span>
+                    <span class="n">pathParameters</span><span class="o">(</span>
+                            <span class="n">parameterWithName</span><span class="o">(</span><span class="s">"member-id"</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">)</span>
+                    <span class="o">)</span>
+            <span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Delete는 사실 더욱더 간단하다.<br />
+requestFields와 responseFields의 따로 만들어줄<br />
+필요가 없기 때문에 parameter에 대한 API 내용만 적어주면된다..</p>
+
+<p>이렇게 오늘은 GET,DELETE에 대한<br />
+API 문서 자동화를 진행했다.</p>
+
+<p><br /></p>
+
+<h2 id="오늘-마주한-error">오늘 마주한 ERROR</h2>
+
+<p>1). 문제 확인<br />
+GET, DELETE에 대한 테스트케이스는 통과한 상태로<br />
+gradle build하는 과정 중 문제가 발생했다.</p>
+
+<p>첫번째는 아래와 같은 오류 코드가 발생</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">There</span> <span class="n">were</span> <span class="n">failing</span> <span class="n">tests</span><span class="o">.</span> <span class="nc">See</span> <span class="n">the</span> <span class="n">report</span> <span class="nl">at:</span> <span class="nl">file:</span><span class="c1">///Users/ljh/Desktop/myprogram/CodeStates/be-homework-api-documentation/build/reports/tests/test/index.html</span>
+</code></pre></div></div>
+
+<p>두번째는 resources의 index.html 파일이 생기지 않았다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMjr35Sq1Q_a5w8FeW6-h0MrJhp27At6mtmeNDPdy7Vt_Ypfia_OLvp8OjFswdwaRI3nxa-Cvww99s3zBMEEy_jQBxi=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>첫번째 문제로 인해 파일 생성이 되지 않은 듯 했다.</p>
+
+<p><br /></p>
+
+<p>2). 문제 해결<br />
+첫번째 오류 코드를 천천히 보니  테스트를 실패했으니<br />
+해당경로에 들어가서 보라는 것 같았다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNEdF_s4q2MG1_Td-VloiVybdGvYGUqHewVUU_L9Rbbqq45xouzGpvldtATTmL0KjTJ9V_ds1JEsC8_UclbIK5tZVMOgg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>해당 경로에 들어가서 index.html 파일을 열어보았다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMAh6qcJXhFrBUv5fVdmlay6LC7TIDSpP9naAOl97GCFV9bR5kjFhWtyExFHdc_m0yiA8zkbZYSHda_SyeuxH_TbW84=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>열어보았더니 Test Summary라는<br />
+테스트 결과에 대한 요약을 나타내주는 화면이 있었고</p>
+
+<p>MemberControllerTest4의 getMembersTest() 메서드가<br />
+테스트를 통과하지 못했구나라고 알아차렸다.</p>
+
+<p>해당 문제는 내가 GET, DELETE를 추가하면서<br />
+기존에 둔 테스트코드에 영향이 갔었고<br />
+오류를 수정하고 다시 gradle build를 하니</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMIqLDdClsJaEodvMjJXyFMOE1Ats6JM6us5Nwq8nB--Jr620vXRnfWD_RaqptDSvECTD2WLT4H7bNj9_9dGzzC7tDn=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>index.hmtl 파일이 생성된 모습을 확인할 수 있다 !!</p>
+
+<hr />
+
+<p>오늘은 API 자동화를 위한<br />
+Spring Rest Docs를 연습해보는 시간을 가졌다.<br />
+이런식으로 테스트코드와 연결해<br />
+API 문서를 만들 수 있다는게 너무 좋은 기술인 것 같다는 생각이든다.</p>
+
+<p>사실 이전까지만해도 수동으로 사람이 다적어서 관리하는 줄 알았는데<br />
+이렇게 좋은 방법으로 관리를 할 수 있다는 점에서<br />
+좋은 기술을 배운 것 같아 뿌듯한 느낌이 들었다.</p>
+
+<p>오늘 공부도 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 삼겹살, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[한 주가 끝나고 새로운 주가 시작되었다.]]></summary></entry><entry><title type="html">TIL) API Documentation 1</title><link href="http://localhost:4000/til/2022/11/11/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 1" /><published>2022-11-11T00:00:00+09:00</published><updated>2022-11-11T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/11/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/11/til.html"><![CDATA[<p>요번주도 한주가 지나간다.<br />
 얼마 공부한 것 같은느낌이 아닌데 벌써<br />
 월요일이지나 금요일이 되었다.</p>
 
@@ -2563,274 +2851,4 @@ Setter를 사용할 일이 없다고 한다 ! 예제를 위한 프로그램이�
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 짜장면 곱뺴기</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /></entry><entry><title type="html">TIL) Spring Data JDBC Pagination</title><link href="http://localhost:4000/til/2022/10/31/til.html" rel="alternate" type="text/html" title="TIL) Spring Data JDBC Pagination" /><published>2022-10-31T00:00:00+09:00</published><updated>2022-10-31T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/10/31/til</id><content type="html" xml:base="http://localhost:4000/til/2022/10/31/til.html"><![CDATA[<p>한 주가 지나고 새로운 주가 찾아왔다.<br />
-내가 공부하고 있는 와중에도<br />
-세상은 돌아가고 있다.</p>
-
-<p>누군가의 시간은 느리게 가고 누군가의 시간은 빠르게 갈 것 같다.<br />
-시간을 어떻게 써야 잘 썻지? 라는 물음이 요즘 자꾸 생긴다.</p>
-
-<p>공부를 효율적으로 하기에는 의지가 가장 중요한 것 같다.<br />
-주말동안 여러가지 자극을 받으면서, 다시한번 공부에 대한 의지와<br />
-내가 목표로가진 내용을 상기하면서 이번주부터 다시 임해보려한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQXIC8mWHwkvUJVmPkxrKAdOzOu1PCHFrLIQEOAjT3mrp4fwj0NsNUw2Pfv6Ju2EYysMjkR0rU=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<hr />
-
-<p>오늘도 Spring data JDBC를 연습해보는 날이다.<br />
-마지막으로 연습해보는 날이고<br />
-내일부터는 본격적으로 JPA에 대해 공부해보는 시간이다.</p>
-
-<p>사실 JDBC사용 방법보다는 객체간 이동<br />
-Mapper, DTO, Service 등 로직 구현을 주로 연습한 것 같다.</p>
-
-<h2 id="pagination">Pagination</h2>
-<p>오늘 구현해볼 내용은 Pagination을 구현할 것이다.<br />
-한글로 페이지네이션이라 부른다.<br />
-페이시네이션이란?</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQ8Zaxag8YR_XCL1ZHlXct3gU2Ai1QnIiP0-1fEbT8ol69R3RStfVwuhswGxDBKzTPMB6nfwAM=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>간단한 예제로 구글을 통해 검색할 경우<br />
-우리는 해당 검색어에 대한 내용이 쭉나오고, 다음 내용은<br />
-페이지로 다음을 눌러 넘어가서 확인한다.</p>
-
-<p>이에 해당하는 프로그램을 구현할 것이다.</p>
-
-<h2 id="구현">구현</h2>
-
-<p>문제1. RequsetParam를 통해 page, size값을 받는다<br />
--&gt; page: 몇번 페이지, size: 표시 수량</p>
-
-<p>문제2. 아래와 같이 데이터가 담긴 Json 객체를 반환<br />
--&gt; 조회한 데이터는 memberId 내림차순으로 정렬할 것</p>
-
-<p>참고</p>
-<ol>
-  <li>DB에는 20개의 데이터가 저장되어있다.</li>
-</ol>
-
-<p>Page = 1, Size = 10 일 때의 예제</p>
-
-<pre><code class="language-JSON">{
-    "data": [
-        {
-            "memberId": 20,
-            "email": "hgd20@gmail.com",
-            "name": "홍길동20",
-            "phone": "010-2020-2020"
-        },
-        {
-            "memberId": 19,
-            "email": "hgd19@gmail.com",
-            "name": "홍길동19",
-            "phone": "010-1919-1919"
-        },
-        {
-            "memberId": 18,
-            "email": "hgd18@gmail.com",
-            "name": "홍길동18",
-            "phone": "010-1818-1818"
-        },
-        {
-            "memberId": 17,
-            "email": "hgd17@gmail.com",
-            "name": "홍길동17",
-            "phone": "010-1717-1717"
-        },
-        {
-            "memberId": 16,
-            "email": "hgd16@gmail.com",
-            "name": "홍길동16",
-            "phone": "010-1616-1616"
-        },
-        {
-            "memberId": 15,
-            "email": "hgd15@gmail.com",
-            "name": "홍길동15",
-            "phone": "010-1515-1515"
-        },
-        {
-            "memberId": 14,
-            "email": "hgd14@gmail.com",
-            "name": "홍길동14",
-            "phone": "010-1414-1414"
-        },
-        {
-            "memberId": 13,
-            "email": "hgd13@gmail.com",
-            "name": "홍길동13",
-            "phone": "010-1313-1313"
-        },
-        {
-            "memberId": 12,
-            "email": "hgd12@gmail.com",
-            "name": "홍길동12",
-            "phone": "010-1212-1212"
-        },
-        {
-            "memberId": 11,
-            "email": "hgd11@gmail.com",
-            "name": "홍길동11",
-            "phone": "010-1111-1111"
-        }
-    ],
-    "pageInfo": {
-        "page": 1,
-        "size": 10,
-        "totalElements": 20,
-        "totalPages": 2
-    }
-}
-</code></pre>
-
-<p>DB에 20개의 데이터가 MEMBER Table에 저장이 되어있고<br />
-우리가 해야하는 것은 page, size의 값을 받아<br />
-해당 객체를 조립하여 JSON으로 반환해주어야한다.</p>
-
-<p>그렇게 생각하여 나는 크게 6가지 과정으로 프로그램을 진행했다.</p>
-
-<ol>
-  <li>클라이언트 측 에서 데이터 요청 받은데이터를 맵핑한 객체를 만듬</li>
-  <li>Service에서 Member 전체 조회한 후 필요한 데이터만 정리해 객체로 만듬</li>
-  <li>1,2번에서 만든 객체로 ResponseDto 맵핑함.</li>
-  <li>3번에서 맵핑하여 만든 전체 List 데이터를 JSON으로 응답</li>
-</ol>
-
-<p>해당 과정을 통해서 프로그램을 작성했고,  실제로 Pagination을 하기위해<br />
-Spring에서 도움음 주는 클래스 Page, Pageable, PageRequest를 이용해<br />
-자동으로 Pagination을 해줄 수 도 있다.</p>
-
-<p>우선 나는 위방법을 안쓰고 직접 코드로 정리해서 보내는 방법을 택했다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@GetMapping</span>
-<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getMembers</span><span class="o">(</span><span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"page"</span><span class="o">)</span> <span class="nd">@Positive</span> <span class="kt">int</span> <span class="n">page</span><span class="o">,</span>
-                                 <span class="nd">@RequestParam</span><span class="o">(</span><span class="s">"size"</span><span class="o">)</span> <span class="nd">@Positive</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">//PageInfo 데이터 맵핑</span>
-    <span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">dataToMemberPageInfoDto</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
-
-    <span class="c1">//Member 전체조회 서비스 로직 실행</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findMembers</span><span class="o">(</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
-
-    <span class="c1">//객체들 ResponsePageDto Mapping</span>
-    <span class="nc">MemberResponsePageDto</span> <span class="n">response</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">membersToMemberResponsePageDto</span><span class="o">(</span><span class="n">members</span><span class="o">,</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">response</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>우선 Controller의 getMembers를 작성.<br />
-0이아닌 양의정수만 포함한 데이터로 page,size를 받을 수 있다.</p>
-
-<p>여기서 첫번째 줄 PageInfo에 데이터 맵핑 하는 클래스를 만들고<br />
-Mapper를 구현하여 데이터를 전달했다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="nc">MemberPageInfoDto</span> <span class="nf">dataToMemberPageInfoDto</span><span class="o">(</span><span class="kt">int</span> <span class="n">page</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">){</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberPageInfoDto</span><span class="o">(</span><span class="n">page</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">0</span><span class="o">);</span>
-<span class="o">};</span>
-<span class="k">default</span> <span class="nc">MemberResponsePageDto</span> <span class="nf">membersToMemberResponsePageDto</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">,</span> <span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span><span class="o">){</span>
-    <span class="nc">MemberResponsePageDto</span> <span class="n">memberResponsePageDtos</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberResponsePageDto</span><span class="o">(</span><span class="n">members</span><span class="o">,</span><span class="n">memberPageInfoDto</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">memberResponsePageDtos</span><span class="o">;</span>
-<span class="o">};</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberPageInfoDto</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">page</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">totalElements</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">totalPages</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>page, size를 이용해 나머지 값이 0인 객체를 만들었다.<br />
-그리고 아래있는 메서드는 응답할때 조립을 해주는 메서드이다.<br />
-인자로는 Member를 List화한 데이터와 방금 위에서 전달한<br />
-MemberPageInfoDto객체를 받는다.<br />
-이 두개의 데이터를 받아 최종적으로</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberResponsePageDto</span> <span class="o">{</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">;</span>
-    <span class="nc">MemberPageInfoDto</span> <span class="n">pageInfo</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>이 응답클래스에 데이터를 담아서 반환하게 되어진다.</p>
-
-<p>이렇게 Mapper와 응답데이터 클래스를 만들었고<br />
-이제 데이터베이스에서 Member 클래스의 데이터를 조회해<br />
-우리가 원하는 page, size의 맞춰서 Member List를 반환해줘야한다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">findMembers</span><span class="o">(</span><span class="nc">MemberPageInfoDto</span> <span class="n">memberPageInfoDto</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// member 전체 내림차순 정렬 조회</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span>  <span class="n">memberRepository</span><span class="o">.</span><span class="na">findAllByOrderByMemberIdDesc</span><span class="o">();</span>
-
-    <span class="c1">// Pagenation Service 로직, 정리된 Member List만 반환</span>
-    <span class="k">return</span> <span class="nf">executionPagenation</span><span class="o">(</span><span class="n">members</span><span class="o">,</span> <span class="n">memberPageInfoDto</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">executionPagenation</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">,</span> <span class="nc">MemberPageInfoDto</span> <span class="n">pageInfo</span><span class="o">){</span>
-    <span class="c1">// page, size 가져오기</span>
-    <span class="kt">int</span> <span class="n">page</span> <span class="o">=</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getPage</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span>
-
-    <span class="c1">// members 수량 파악 후 TotalElements, TotalPages Data 추가</span>
-    <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalElements</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()&lt;=</span><span class="n">size</span><span class="o">){</span>
-        <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalPages</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">memberSize</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()/</span><span class="n">size</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">memberLeft</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()%</span><span class="n">size</span><span class="o">;</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">memberLeft</span><span class="o">!=</span><span class="mi">0</span><span class="o">)</span> <span class="n">memberSize</span><span class="o">++;</span>
-        <span class="n">pageInfo</span><span class="o">.</span><span class="na">setTotalPages</span><span class="o">(</span><span class="n">memberSize</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// page, size만큼의 Data만 담은 List 반환</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">membersMakeUp</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="kt">int</span> <span class="n">remainPage</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">%</span> <span class="n">size</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">from</span> <span class="o">=</span> <span class="o">(</span><span class="n">page</span><span class="o">-</span><span class="mi">1</span><span class="o">)*</span><span class="n">size</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">to</span> <span class="o">=</span> <span class="o">(</span><span class="n">remainPage</span><span class="o">!=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pageInfo</span><span class="o">.</span><span class="na">getTotalPages</span><span class="o">()==</span><span class="n">page</span><span class="o">)</span> <span class="o">?</span> <span class="n">from</span><span class="o">+</span><span class="n">remainPage</span> <span class="o">:</span> <span class="n">from</span><span class="o">+</span><span class="n">size</span><span class="o">;</span>
-
-    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">from</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">to</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
-        <span class="n">membersMakeUp</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">members</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
-    <span class="o">}</span>
-    
-    <span class="k">return</span> <span class="n">membersMakeUp</span><span class="o">;</span>
-<span class="o">}</span>
-        
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MemberRepository</span> <span class="kd">extends</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">findAllByOrderByMemberIdDesc</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>이렇게 Service 로직을 구현했다.<br />
-처음에 맵핑했던 PageInfo 객체에 나머지 값을을<br />
-setter를 통해서 데이터를 입력해준 다음에</p>
-
-<p>Member 테이블의 데이터를 내림차순으로 조회하여<br />
-받은 데이터를 page와 size값으로 원하는 페이지에<br />
-수량별로 표시가 될 수 있게끔 프로그래밍하여<br />
-Member List를 최종적으로 반환하게 해주었다.</p>
-
-<p>이렇게 되면 최종적으로 페이지에 맞는 Member List 객체와<br />
-PageInfo 객체를 가지고 있기 때문에 최종적으로<br />
-MemberResponsePageDto 클래스 타입으로 맵핑해서 응답데이터를<br />
-ResponseEntity를 통해 반환하도록 하면 !!</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQULqdlINeqzZ_bz-zE7r0uUK9OxGxwpQRGjmUuF-O8-xqZcIe1swGHu0Z2JgvVykvTYEut4aI=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>page=1, size=2 로 하였을 경우의 반환된 Json의 모습.<br />
-totalElements = 20개의 데이터<br />
-totalPages = 10개의 페이지.</p>
-
-<p>정상적으로 작동하는 모습이 확인 가능하다.<br />
-<a href="https://velog.io/@bagt/0704-Spring-Pagination-API-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98">Spring Pagination API</a>를 이용해 작성하는 방법을 참고해보자<br />
-해당 방법은 선배기수에서 Spring API를 이용해 간단하게 구현한 모습이다.</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ <br />
-<strong>오늘의 점심</strong>: 라면</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[한 주가 지나고 새로운 주가 찾아왔다. 내가 공부하고 있는 와중에도 세상은 돌아가고 있다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 짜장면 곱뺴기</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /></entry></feed>
