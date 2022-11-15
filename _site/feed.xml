@@ -1,4 +1,246 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-14T15:52:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-15T18:04:47+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Application 빌드, 실행</title><link href="http://localhost:4000/til/2022/11/15/til.html" rel="alternate" type="text/html" title="TIL) Application 빌드, 실행" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/15/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNq0VcIEmAZMz_1paQl-4m8_fIqcR-XIxlvy4GrezxEOvY6tzpT_1uI3JJK_XNFFzX3gFipA7DgprUqDMmQVqM19rSf8Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>오늘은 섹션 마지막날이다. <br />
+벌써 3달째를 달리고 있는 부트캠프</p>
+
+<p>확실히 혼자 공부하는 것보다 가이드라인이 제시되니<br />
+스텝바이스텝으로 성장하는 모습이 눈에 보이니</p>
+
+<p>만족스러운 나날을 보내고 있다.<br />
+그럼에도 아직 새발의 피 정도만 공부했기에<br />
+오늘도 공부를 시작해보자</p>
+
+<hr />
+
+<p>오늘은 애플리케이션 빌드하는 법을 알아보려한다.<br />
+실제로 나중에 서버에 배포를 해야하기에 ..</p>
+
+<h2 id="애플리케이션-빌드실행">애플리케이션 빌드/실행</h2>
+
+<p>우리는 여태까지 IntelliJ IDE의 도움을 받아서<br />
+빌드를 진행했었다.</p>
+
+<p>IDE를 사용하지않고 로컬 환경이 아닌 서버환경에서 실행<br />
+가능하게 하려면 Gradle이나 Maven같은 빌드 툴을 이용해서 Spring Boot<br />
+기반의 애플리케이션 소스 코드를 빌드하는 기본적인 방법을 알고있어야한다.</p>
+
+<p>우선 IDE를 이용해 빌드하는 방법을 알아보자<br />
+(우리가 만든 프로젝트는 Gradle이다)</p>
+
+<p><br /></p>
+
+<h3 id="빌드">빌드</h3>
+
+<p><strong>1). IDE를 통한 build</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNkvOHRKiADoB4F8uygjnopOf4yqKRcMFN3Y0F47e49WVx74nLU_L3f20JxUX0AQCXTBFVgFD6JOgB04D4H2SxJJebxAw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>내가 만든 프로젝트 이름 -&gt; Taske -&gt; bootJar or build 를<br />
+더블 클릭해서 빌드해줄 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSjKwMt-ckmZXkOIp-tqZfr2mCjaNKgrTC6qMK0HNni9P8v92vYxD8qYjRGYLi0wIHQy-4Tf-ysvMVxchljPxkJPytO=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>빌드가 완료되면 Jar 파일이 생기는데<br />
+여기서 plain.jar 파일은 build task를 실행하면 생기는 파일이다.<br />
+우리는 실행 가능한 Jar 파일인 plain이 안붙은 파일을 실행시키면 된다.</p>
+
+<p><br /></p>
+
+<p><strong>2). 터미널로 build</strong></p>
+
+<p>첫번째로 Gradle이 설치되어 있는지 확인해보자</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gradle <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>만약에 버젼이 안뜨고 zsh: command not found: gradle<br />
+찾을 수 없다고 한다면, homebrew를 통해 gradle을 다운 받는다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>gradle
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">==&gt;</span> Downloading https://ghcr.io/v2/homebrew/core/openjdk/17/manifests/17.0.5
+<span class="c">######################################################################## 100.0%</span>
+<span class="o">==&gt;</span> Downloading https://ghcr.io/v2/homebrew/core/openjdk/17/blobs/sha256:0e2244e35a350256474b6eb6e03d11af5c0270ab7ca4e6bc71
+<span class="o">==&gt;</span> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:0e2244e35a350256474b6eb6e03d11af5c0270
+<span class="c">######################################################################## 100.0%</span>
+<span class="o">==&gt;</span> Downloading https://ghcr.io/v2/homebrew/core/gradle/manifests/7.5.1_1
+<span class="c">######################################################################## 100.0%</span>
+<span class="o">==&gt;</span> Downloading https://ghcr.io/v2/homebrew/core/gradle/blobs/sha256:b8a590221ce177514ddff10c925b892ee856b9a23cc28dc623124b
+<span class="o">==&gt;</span> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:b8a590221ce177514ddff10c925b892ee856b9
+<span class="c">######################################################################## 100.0%</span>
+<span class="o">==&gt;</span> Installing dependencies <span class="k">for </span>gradle: openjdk@17
+<span class="o">==&gt;</span> Installing gradle dependency: openjdk@17
+<span class="o">==&gt;</span> Pouring openjdk@17--17.0.5.arm64_monterey.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/openjdk@17/17.0.5: 642 files, 307MB
+<span class="o">==&gt;</span> Installing gradle
+<span class="o">==&gt;</span> Pouring gradle--7.5.1_1.all.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/gradle/7.5.1_1: 11,340 files, 276.1MB
+<span class="o">==&gt;</span> Running <span class="sb">`</span>brew cleanup gradle<span class="sb">`</span>...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS <span class="o">(</span>see <span class="sb">`</span>man brew<span class="sb">`</span><span class="o">)</span><span class="nb">.</span>
+<span class="o">==&gt;</span> <span class="sb">`</span>brew cleanup<span class="sb">`</span> has not been run <span class="k">in </span>the last 30 days, running now...
+</code></pre></div></div>
+
+<p>이렇게 다운 받고 난뒤에 다시<br />
+버젼을 체크해보면 설치된 모습을 확인해 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p>이제 Gradle이 설치되었으니<br />
+우리가 만든 애플리케이션 폴더에 들어가서<br />
+아래와 같이 빌드 명령어를 입력해 주면 빌드가 되어진다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew build
+</code></pre></div></div>
+
+<p><strong>zsh: permission denied: ./gradlew</strong><br />
+만약 명령어 입력시 위에처럼 권한 문제가 발생한다면</p>
+
+<p>gradlew의 권한을 644 -&gt; 755로 변경해주어야한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ll
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-rwxr-xr-x</span>   1 ljh  staff   7.9K 11 15 10:44 gradlew
+</code></pre></div></div>
+<p>현재 경로에서를 ll을 입력하여 권한 상태를 확인할 수 있다.<br />
+ls -l 을 입력하여도 확인이 가능하다</p>
+
+<p>rwx : 7<br />
+r-x : 5<br />
+r-x : 5<br />
+와 같이 권한을 변경해주어야 하며</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>755 gradlew
+</code></pre></div></div>
+<p>권한 변경 명령어인 chmod로 권한을 변경해주면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew build
+</code></pre></div></div>
+<p>명령어가 정상적으로 빌드되어지는 모습을 확인할 수 있다.</p>
+
+<p>빌드가 되어지면 위에 IDE를 통해 빌드했던 것 처럼<br />
+build &gt; libs 폴더에 .jar 파일이 생기는 것을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<h3 id="실행">실행</h3>
+
+<p><strong>터미널로 Jar 파일 실행시키기</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> section3-week3-template-build-0.0.1-SNAPSHOT.jar
+</code></pre></div></div>
+<p>기본적으로 .jar파일을 실행시키려면<br />
+java -jar을 입력후 파일이름을 넣어주면<br />
+애플리케이션이 IDE에서 실행되는 것 처럼 실행되는 모습을<br />
+터미널에서 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>프로파일(Profile) 적용</strong></p>
+
+<p>프로파일 적용이란.<br />
+우리는 로컬환경에서 테스트하기위해 H2 DataBase를 주로 사용해왔다.<br />
+하지만 서버에 배포하거나 실제 애플리케이션을 적용하는 DataBase는<br />
+다른 DataBase가 올 수 있다. 그렇자고 기존에 설정한 H2 관련<br />
+데이터를 서버에 올릴때 일일이 지워서 하기에는 불편함이 있어<br />
+동시에 사용할 수 있도록 Spring에서는 프로파일(Profile)이라는 기능을 제공해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNVRhs0fF44pgVaBPKUdF2aVOB9HWNny4_gw6wyvlz5td8IXIw3uhTQZuQhQJkFevEKtgvFCnFhwKgV9SJsZdlar03AUA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우선 .yml 파일을 분리해주어야한다.</p>
+
+<p>application.yml<br />
+application-local.yml<br />
+application-server.yml</p>
+
+<p>이렇게 세개로 분리해주었고 기존에 빌드시 사용하는 yml 파일은<br />
+application.yml 파일이다.   해당 파일에는 아무런 코드도 넣지 않았고</p>
+
+<p>우리는 애플리케이션을 실행할 때 설정에 따라 local.yml, server.yml로<br />
+변경해가면서 사용이 가능하다.</p>
+
+<p>local.yml -&gt; h2 정보<br />
+server.yml -&gt; mysql 정보<br />
+나는 위와 같이 등록해놓고 사용하였다.</p>
+
+<p>mysql을 사용한다고 가정하고 설정을 진행해보자</p>
+
+<p><strong>1). yml 설정 변경</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">profiles</span><span class="pi">:</span>
+    <span class="na">active</span><span class="pi">:</span> <span class="s">server</span>
+</code></pre></div></div>
+<p>application.yml 파일에 위와 같이 설정해주면 된다.</p>
+
+<p><br /></p>
+
+<p><strong>2). 구성 편집</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTrEQ-vD2xirlKWhVpEcb96S87oR1s3Wjb2F_-Xup3XvpXxN0yvNE4Mbe2s79htd5-npeN9wfiVaA8Fow_bGjK8Q1yE=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>IDE의 구성 편집에서도 수정할 수 있다.<br />
+애플리케이션을 선택 후</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--spring.profiles.active=server
+</code></pre></div></div>
+
+<p>위와 같이 입력해주면 된다.</p>
+
+<p><br /></p>
+
+<p>설정을 끝냈으면 이제 .jar 파일을 실행시키면 된다.<br />
+기존과 동일하게 실행 시키는데 뒤에<br />
+–spring.profiles.active=server 를 추가해주고 실행시키면된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> section3-week3-homework-build-0.0.1-SNAPSHOT.jar <span class="nt">--spring</span>.profiles.active<span class="o">=</span>server
+</code></pre></div></div>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPsLVoNTpjR8xJLJAwP4xyDmw8zjaz0XeAdt4QomyJV1uM0dEzTKpcIzikSqw5TAHr1AJt4hrgO47p_ZBfQ-nSK6-9L=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>실행 시킬 경우</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The following 1 profile is active: "server"
+</code></pre></div></div>
+
+<p>위와 같은 profile 문구가 발생한다면<br />
+정상적으로 연결이 되어졌다는걸 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<h3 id="오늘-만난-error">오늘 만난 ERROR</h3>
+
+<p>오늘 만난 에러중 dataSource 관련 에러가 발생했었다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource 
+[org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception 
+is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' 
+threw exception; nested exception is java.lang.IllegalStateException: Cannot load driver class: com.mysql.cj.jdbc.Driver
+</code></pre></div></div>
+
+<p>해당 내용은 의존라이브러리가 제대로 추가되어있지 않아<br />
+읽어오지 못하는 현상 같았고</p>
+
+<p>mysql 과 연동하기 때문에 msql 의존라이브러리를 추가하였고</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// mysql 의존라이브러리 추가
+runtimeOnly 'mysql:mysql-connector-java'
+</code></pre></div></div>
+
+<p>의존 라이브러리 추가후</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMae5HizPF6syR7eBuQLmncWHLBOE-0y7fGS6RiuafbOdpIvYrLsxbcRv0EYY1bWe3X9WHdhj0HgRifbnEzk-a7Q04Z=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 라이브러리 패키지가 생기면<br />
+해당 오류는 해결이 가능할 것 이다.</p>
+
+<hr />
+
+<p>오늘은 이렇게 터미널로 build 하는 법과 execution 하는<br />
+방법을 알아 보았다. 아마도 나중에 서버에 이런식으로<br />
+애플리케이션을 실행 시켜놓고 운영하는게 아닐까? 라는 생각을 해본다.</p>
+
+<p>오늘 공부도 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 김치찌개, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOXnXDoCRH7AtlOncucaI0nI7RqC9GMkm0ZG-VhgIXazy7m5tTSccABV_f-3G5RjFSfN1ojWWOJzPxeYeKp4Ycs2Ykj=w1920-h921" alt="image" class="align-left" style="max-width: 65%" /></p>
 
@@ -74,7 +316,7 @@ Service영역과의 연결된 부분을 Mock 객체를 반환시켜<br />
 <p>내가 총 만들어야할 API는 3개이고<br />
 멤버 조회, 멤버 전체조회, 멤버 삭제 이렇게 된다.</p>
 
-<p>1). GET</p>
+<p><strong>1). GET</strong></p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">getMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">StubData</span><span class="o">.</span><span class="na">MockMember</span><span class="o">.</span><span class="na">getSingleResponseBody</span><span class="o">();</span>
@@ -154,8 +396,31 @@ data안에 배열로 데이터가 존재한다면 어떻게<br />
         <span class="o">)</span>
 <span class="o">)</span>
 </code></pre></div></div>
-<p>responseFields의 위와 같이 data.[].을 이용해<br />
+<p>responseFields의 위와 같이 data.[].을 이용해  <br />
 배열에 해당하는 내용을 표시해줄 수 있다.</p>
+
+<p>또한</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">responseFields</span><span class="o">(</span>
+        <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">ARRAY</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"결과 데이터"</span><span class="o">).</span><span class="na">optional</span><span class="o">(),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"전화 번호"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태: 활동중/휴면상태/탈퇴상태"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">),</span>
+        <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+<p>위와 같이도 표기할 수 있다.</p>
+
+<p>여기서 한가지 참고해야할 점은
+JsonFieldType.OBJECT = data : {}<br />
+JsonFieldType.ARRAY = data : []  <br />
+과 같이 표기할 때 사용한다는 점이다.</p>
+
+<p>하나의 멤버만 조회했을때 OBJECT를 사용한 이유와<br />
+여러 멤버를 조회했을때 ARRAY를 사용한 이유이다.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -193,7 +458,7 @@ data안에 배열로 데이터가 존재한다면 어떻게<br />
 
 <p><br /></p>
 
-<p>2). DELETE</p>
+<p><strong>2). DELETE</strong></p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
@@ -2465,390 +2730,4 @@ DB의 List&lt;/Order/&gt; orders 객체는 Column으로 표시되지 않는다�
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개, 계란말이, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[일어났는데 날씨가 화창하다 ! 공부하기 딱 좋은 날이다. 바람도 선선하니 창문을 보니 기분도 좋아지고]]></summary></entry><entry><title type="html">TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)</title><link href="http://localhost:4000/til/2022/11/01/til.html" rel="alternate" type="text/html" title="TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)" /><published>2022-11-01T00:00:00+09:00</published><updated>2022-11-01T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/01/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/01/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRPFpJbXFca8pZtK4Y_xhMzczsg_7cF9aFFcOtM7nJMxG4Ts-Fz1MwFPufqbEyhDJgrM-zMotc=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>날씨가 벌써 쌀쌀해졌다.<br />
-아침에 일어나면 으슬으슬하다…<br />
-이제 진짜 가을은 얼마 없고 바로 겨울이되는 느낌</p>
-
-<p>어제는 처음으로 게임을 한번도안했다.<br />
-나에게는 엄청난 성과다 그 시간에 공부를 했으니..</p>
-
-<p>이 마음가짐으로 쭉 열심히 공부해보자 !</p>
-
-<hr />
-
-<h2 id="jpa">JPA</h2>
-
-<p>Java Persistence API의 약자다. <br />
-현재는 Jakarta Persistence 라고도 부른다고한다.</p>
-
-<p>JPA는 Java 진영에서 사용하는<br />
-ORM(Object-Relational Mapping) 기술의 표준 사양이다.<br />
-즉, JPA는 Java의 인터페이스로 사양이 정의가 되어있어<br />
-구현하는 구현체가 따로 있다.</p>
-
-<h3 id="hibernate-orm">Hibernate ORM</h3>
-<p>JPA의 구현체의 하나로 EclipseLink, DataNucleus 등이 있다.<br />
-우리가 주로 배우게될 JPA 구현체는 Hibernate ORM이다.</p>
-
-<p>JPA와 Hibernate ORM은<br />
-웹 애플리케이션 3계층에서 데이터 엑세스 계층에 위치한다.</p>
-
-<h3 id="persistence-context">Persistence Context</h3>
-<p>직역을하자면, 영속성 컨텍스트라고 부른다.<br />
-JPA에서 P에 해당하는 부분이고, 지속한다는 의미를 가진다.</p>
-
-<p>위에서 얘기했듯이 ORM은 객체와 DB 테이블의 맵핑을 통해 <br />
-Entity 클래스 객체 안에 포함된 정보를 테이블에 저장하는 기술이다.<br />
-JPA에서는 테이블과 맵팽되는 Entity 객체 정보를  <br />
-영속성 컨텍스트라는 곳에 보관해서 애플리케이션 내에서 오래 지속되도록 한다.</p>
-
-<p>그리고 보관된 Entity 정보는 DB 테이블에<br />
-데이터를 CRUD하는데 사용하게된다.</p>
-
-<ol>
-  <li>Entity를 영구 저장하는 환경</li>
-  <li>애플리케이션과 DB 사이에서 객체를 보관하는 논리적 개념</li>
-</ol>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT9olJAYm5HH_eKR9vzv5l7odFjODUl6jMaG1OAq2mTDBsJbcJCW4UNxMFDXlxdJ1DT4iQ9738=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>영속성 컨텍스트을 그림을 표현한 모습이다.<br />
-보는 것과 같이 <strong>1차 캐시</strong> ,<strong>쓰기 지연 SQL 저장소</strong>가 있다.</p>
-
-<p>프로그램으로 문법과 1차캐시, 쓰기 지연 SQL 저장소가 어떻게<br />
-운영되는지 알아보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@NoArgsConstructor</span>
-<span class="nd">@Entity</span> 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
-    <span class="nd">@Id</span> 
-    <span class="nd">@GeneratedValue</span>  
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">memberId</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JpaExample</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">EntityTransaction</span> <span class="n">tx</span><span class="o">;</span>
-
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">CommandLineRunner</span> <span class="nf">testJpaBasicRunner</span><span class="o">(</span><span class="nc">EntityManagerFactory</span> <span class="n">emFactory</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// (1)</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">em</span> <span class="o">=</span> <span class="n">emFactory</span><span class="o">.</span><span class="na">createEntityManager</span><span class="o">();</span>  <span class="c1">// (2)</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">tx</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">();</span>
-        
-        <span class="k">return</span> <span class="n">args</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">jpatest</span><span class="o">();</span>
-        <span class="o">};</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">jpatest</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@gmail.com"</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-        <span class="nc">Member</span> <span class="n">resultMember</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-
-</code></pre></div></div>
-<p><strong>첫번째 코드 블럭</strong>은 Member라는 데이터를<br />
-우리가 데이터베이스와 연동하기위해 만들어둔 클래스이다.<br />
-@Entity로 엔티티클래스를 지정하고 @Id로 기본키를 지정했다.<br />
-할당전략은 GenerateValue로 값이 자동적으로 증가하게된다</p>
-
-<p><br /></p>
-
-<p><strong>두번째 코드 블럭</strong>부터 중요하다.</p>
-
-<p><span style="color:#F04965"><strong>EntityManager 클래스</strong></span><br />
--&gt; JPA의 영속성 컨텍스트를 관리함.<br />
--&gt; EntityManagerFactory 클래스 객체를 DI 받을 수 있다.<br />
--&gt; 주입 받은 객체를 통해서 JPA의 API 메서드를 사용할 수 있다.</p>
-
-<p>.persist();<br />
--&gt; 해당객체를 넣으면 영속석 컨텍스트에서 객체의 정보들이 저장된다.<br />
--&gt; 객체는 1차 캐시에 저장되고, 이 객체는 쓰기 지연 SQL 저장소에 INSERT 쿼리 형태로 등록된다</p>
-
-<p>.find();<br />
--&gt; 컨텍스트 안의 조회할 엔티티를 불러오는 방법 (클래스타입, 식별자값)</p>
-
-<p>.getTransaction();<br />
--&gt; EntityTransaction 클래스 타입을 반환함<br />
--&gt; JPA에서는 Transcation 객체를 기준으로 DB의 Table에 데이터를 저장한다.<br />
--&gt; EntityManger 객체에서 가져올 수 있다.</p>
-
-<p>.getTransaction().begin();<br />
--&gt; transaction 시작하기 위한 메서드</p>
-
-<p>.getTransaction().commit();<br />
--&gt; 메서드 호출시점에 영속성 컨텍스트에 저장되어있는 객체를 DB의 테이블에 저장함<br />
--&gt; 쓰기 지연 SQL 저장소에 INSERT 쿼리가 실행되어 저장소에서 사라진다.<br />
--&gt; 내부적으로 flush(); 메서드가 호출되어 영속성 컨택스트의 변경 내용을 반영한다.</p>
-
-<p><span style="color:#F04965"><strong>EntityManagerFactory 클래스</strong></span><br />
-.createEntityManager(); <br />
--&gt; EntityManager 타입의 변수에 해당 메서드로 만든 객체를 넣어줘야함<br />
--&gt; 만들어진 영속성 컨텍스트로 EntityManager 클래스의 기능 사용가능</p>
-
-<p>이상 간단한 구문들만 먼저 정리해 보았고 두번째 코드블럭을 분석해보면</p>
-
-<p>Member 클래스 타입의 객체인 member 라는 새로운 객체를 <br />
-EntityManager 클래스 타입의  em이라는 참조변수의 메서드인 <br />
-em.persist(member);를 실행 시켜 1차 캐시에 객체를 저장하고<br />
-쓰기 지연 SQL 저장소에 INSET 쿼리 형태로 등록한다.</p>
-
-<p>영속성 컨택스트 안에 객체가 등록되었기 때문에<br />
-DB애 데이터가 저장되지 않았어도<br />
-.find();라는 메서드를 이용해 객채를 찾을 수 있는 것이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTcXQePwbhv3jAMqEYgQFX5pommI1oXMrrIrqAFqKw6rnCzs6waOCx3Egza2_4IGpXKU2h_lEI=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><strong>결과: 영속성 컨텍스트 저장 O, 데이터베이스 저장 X</strong></p>
-
-<p><br /></p>
-
-<p>이제 영속성 컨택스트에 등록하는 법을 알았다.<br />
-그러면 DB에는 어떻게 저장할까?</p>
-
-<p>우선 우리는 Transaction 객체를 기준으로 데이터베이스의<br />
-테이블에 데이터를 저장해야되서 .begin(); .commit();로<br />
-시작과 데이터를 써줄 수 있게되어진다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">jpatest</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
-    <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@gmail.com"</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-    <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
-    
-    <span class="nc">Member</span> <span class="n">resultMember</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>위에서 얘기했듯이 .commit();라는 메서드를 호출해주면<br />
-영속성 컨텍스트의 변경 사항을 테이블에 반영해주는 메서드 flush();가<br />
-내부적으로 호출되어 DataBase에 데이터가 저장되고<br />
-기존에 있던 <strong>쓰기 지연 SQL 저장소</strong>에는 데이터가 지워지게된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQ-OUrKd41tUZrh_rjR1V75byfLrXEb-MLOYiZe0UAHxzD3mrTib4P50B0QHyf_O2Aq19x7qVI=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><strong>결과: 쓰기 지연 SQL 저장소 삭제, 데이터베이스 저장 O</strong></p>
-
-<p><br /></p>
-
-<p>만약 여러개 의 데이터를 .persist() 하여 .commit();을 하게된다면</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">jpatest</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
-    <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@gmail.com"</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"tmdghwlq@naver.com"</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"bomjin128@gmail.com"</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
-    <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
-    
-    <span class="nc">Member</span> <span class="n">resultMember1</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">resultMember2</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">2L</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">resultMember3</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">3L</span><span class="o">);</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">resultMember1</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">resultMember2</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">resultMember3</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>아래와 같이 쓰기 지연 SQL 저장소의 데이터는 모두 지워진다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRTieUDGVyS8Av0JyHvMlowRR3_abVmLSiqndX0tShgpS4TYJ-XcPNM3zXTI66cPgI0LTT_sVs=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그리고 시스템 출력으로 찍어보 았을때<br />
-<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSne7XgebEuiijpzBtS8cxs5NfzsFdUg8W-82Pq220xUsF9neETnQaJr269uLYp266sOO_h5FM=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>여전히 영속성 컨택스트 안에 객체의 값을 가져올 수 있었고</p>
-
-<p>아래와 같이 데이터 베이스에서도 값이 저장된 모습을 확인할 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRPzF0h7qZkMllMrAs-VxRG_WymmcOoFcXCAZDWlU7vmwOqv-X0-54n4TxWISMZq2v3rzSCd7k=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<p>추가하는법과 DB에 데이터를 저장하는 법까지 알았으니<br />
-영속성 컨텍스트안에 객체를 삭제한는 방법도 있다.</p>
-
-<p>.remove(); 메서드를 이용하면 된다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">jpatest</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
-    <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@gmail.com"</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"tmdghwlq@naver.com"</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"bomjin128@gmail.com"</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
-    <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
-    
-    <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
-    <span class="nc">Member</span> <span class="n">resultMember1</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">resultMember2</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">2L</span><span class="o">);</span>
-    <span class="nc">Member</span> <span class="n">resultMember3</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">3L</span><span class="o">);</span>
-    <span class="n">em</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">resultMember1</span><span class="o">);</span>
-    <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>이렇게 트랜젝션을 두개로 나눠 진행해보자.<br />
-첫번째는 우리가 위에서 배웠던 persist(); 메서드로 영속성 컨택스트의 등록 <br />
-commit(); 메서드로 데이터 베이스에 저장 후 쓰기 지연 SQL 저장소에서 삭제.</p>
-
-<p>여기서 두번째 트랜잭션은<br />
-영속성 컨텍스트의 Member타입의 클래스 객체를 가져오고<br />
-그 중에서 Id가 1에 해당하는 객체를 .remove((); 메서드에 담아주었다.</p>
-
-<p>여기서 메서드를 호출하는 순간 1차 캐시에 있는 엔티티를 제거 요청을하여<br />
-쓰기 지연 SQL 저장소에 DLETE 쿼리 형태로 저장하게된다.<br />
-.commit();을 실행하면, 1차 캐시에 있는 엔티티를 제거하고, 쓰기 지연 SQL 저장소에<br />
-등록된 DELETE 쿼리가 실행 된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmR_ZOK3YntMqeZLhBczY47sWmQmsPC95mmw8X5FlmZAqjTiH1gWRQrqfk0PANOFuS2nNDWleU8=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같은 그림으로 실행이 이루어진다 생각하면 될 것 같고</p>
-
-<p>그리고 DELETE 쿼리를 실행했기 때문에<br />
-데이터 베이스의 해당 엔티티의<br />
-레코드 값도 삭제되게 되어진다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQnbbsdDBC5VjJ19Bec6S5Ctv26CfpeA-yqaIO2xPygMKxlmn-uyU8JzEE6SKwwhUIRnLB1nrA=w1512-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<h3 id="entity-mapping">Entity Mapping</h3>
-
-<p><strong>@Id</strong></p>
-
-<p>우선 @Id 우리가 기본키(Primary Key)로 사용하는<br />
-데이터의 여러가지 전략을 알아보자</p>
-
-<ol>
-  <li>IDENTITY : 기본키 생성을 DB한테 위임함, 대표적으로 AUTO_INCREMENT</li>
-  <li>SEQUENCE : DB에서 제공하는 시퀀스를 사용해서 기본키를 생성</li>
-  <li>TABLE : 별도의 키 생성 테이블을 사용하는 전략임</li>
-</ol>
-
-<p>애플리케이션 코드 상에서 기본키를 직접 할당해주는 방식을 제외 하고는<br />
-위와 같은 3가지 전략을 가지고 기본키를 할당한다.</p>
-
-<p>@GenerateValue 애노테이션이 할당하는 법을 도와주며<br />
-아래와 같이 사용할 수 있다.</p>
-
-<p>1). @GeneratedValue(strategy = GenerationType.IDENTITY)<br />
--&gt; IDENTITY 전략으로 객체를 생성하면서 별도의 기본키 값을 전달하지 않았다.<br />
--&gt; 예를들어 @Id만 있을 경우에는 기본적으로 해달 컬럼에 데이터를 우리가 직접 넣어줘야한다.<br />
-하지만 이놈과 같이 사용한다면 자동으로 값이 증가됨</p>
-
-<p>2). @GeneratedValue(strategy = GenerationType.SEQUENCE)<br />
--&gt; SEQUENCE 전략으로 객체를 생성하면서 별도의 기본키 값을 전달하지 않았다.<br />
--&gt; DB에서 제공하는 시퀀스를 이용한 키가 생성됨</p>
-
-<p>3). @GeneratedValue(strategy = GenerationType.AUTO)<br />
--&gt; 데이터베이스의 Dialect에 따라서 적절한 전략을 자동으로 선택한다.</p>
-
-<p><br /></p>
-
-<p><strong>@Column</strong></p>
-
-<p>그리고 <strong>@Column</strong>에 대해서 알아 보았다.<br />
--&gt; 엔티티 클래스의 컬럼(열)을 맵핑해주는 애노테이션이다.
--&gt; 해당 애노테이션이 없어도, 필드의 변수가 있다면 자동적으로 컬럼과 맵핑되는 필드라 간주한다.
--&gt; 속성의 기본 값은 nullable = true , updatable = true, unique = false;
--&gt; length 속성으로 문자 길이 지정가능 / default 255</p>
-
-<p>특징은 위와 같고 default 설정을 다시 보면<br />
-nullable : false = null 값 불허용 / true = null 값 허용함
-updatable : false = 컬럼의 값 변경 불허용 / true = 컬럼의 값 변경 허용
-unique : false = 유니크 미사용 / true = 유니크 사용, 중복 데이터 컬럼에 들어올 경우 알람발생<br />
-이렇게 정리해 볼 수 있을 것 같다.</p>
-
-<p>nullable은 간단하니 패스하고 updatable과 unique를 비교해보자</p>
-
-<p><strong>1). 업데이트가 불가능한 설정</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">updatable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">unique</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">jpatest</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">));</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">));</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">));</span>
-        <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
-
-        <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
-        <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">,</span><span class="mi">1L</span><span class="o">);</span>
-        <span class="n">member</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="s">"ddd@gmail.com"</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-        <span class="n">tx</span><span class="o">.</span><span class="na">commit</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>위의 처럼 1번째 엔티티의 객체를 가져와<br />
-setter로 수정 후 다시 등록하여도, DB에는 수정된 값이 반영되지 않는다.<br />
-하지만 영속석 컨텍스트의 객체를 조회해보면<br />
-변경된 객체는 persist되어있기 때문에 ddd@gmail.com 값을 가진<br />
-Member 객체가 존재한다는 것을 확인해 볼 수 있다…</p>
-
-<p>그러면 이렇게 서로 상이할경우엔..? 어떻게 해결해야하지?? 라는 의문이든다..<br />
-이 부분은 오늘 아고라 스테이츠에 질문을 올려놓았다.</p>
-
-<p><strong><em>다음날 답변 : updatable = false이라는 뜻이 읽기전용 컬럼이기 때문에<br />
-Setter를 사용할 일이 없다고 한다 ! 예제를 위한 프로그램이었으니 참고 !</em></strong></p>
-
-<p><strong>2). 유니크값 허용 설정</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Column</span><span class="o">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">,</span> <span class="n">updatable</span> <span class="o">=</span> <span class="kc">true</span><span class="o">,</span> <span class="n">unique</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
-<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
-</code></pre></div></div>
-<p>만약 동일한 값을 해당 email 컬럼에 저장을 하게된다면 <br />
-아래와 같은 알람이 컴파일 중 발생할 것이다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Unique index or primary key violation: "PUBLIC.UK_6DOTKOTT2KJSP8VW4D0M25FB7_INDEX_4 ON PUBLIC.USERS(EMAIL NULLS FIRST) VALUES ( /* 1 */ 'dhfif718@naver.com' )"; SQL statement:
-</code></pre></div></div>
-
-<p><br /><br /><br /></p>
-
-<p>이 외에 Mapping을 하기 위한 어노테이션들 몇 가지들을<br />
-더 공부해보았다.</p>
-
-<p><strong>@Temporal</strong><br />
--&gt; 날짜를 맵핑하기위한 필드에 달아주는 애노테이션<br />
--&gt; LocalDataTime 타입일 경우 생략이 가능하다.</p>
-
-<p><strong>@Transient</strong><br />
--&gt; 이 애노테이션을 필드에 추가하면 테이블 컬럼과 매핑하지 않겠다는 의미로 JPA가 인식한다.<br />
--&gt; 따라서 데이터베이스에 저장도 하지않고, 조회할 때 역시 매핑되지 않는다.<br />
--&gt; 주로 임시 데이터를 메모리에서 사용하기위한 용도<br />
--&gt; 즉, DB에는 저장하고 싶지 않은데, 더미로 데이터 사용할 경우 이용하기 가능!</p>
-
-<p><strong>@Enumerated</strong><br />
--&gt; enum 타입과 매핑할 때 사용하는 애너테이션이다.<br />
--&gt; 두가지 타입을 가질 수 있다.  <br />
-1). EnumType.ORDINAL : enum의 순서를 나타내는 숫자를 테이블에 저장<br />
-2). EnumType.STRING : enum의 이름을 테이블에 저장<br />
--&gt; ex) @Enumerated(EnumType.STRING)</p>
-
-<hr />
-
-<p>오늘의 JPA공부는 여기까지!<br />
-확살하 JDBC를 조금 공부하고 와서 JPA를 보니까<br />
-훨씬 이해가 빠르고 잘되는 것 같다.</p>
-
-<p>아직 연관 관계 맵핑에 대해서는 배우지 않았지만<br />
-기본적인 테이블과 연결되어지는 과정이라든가<br />
-기본적인 개념들을 배우고 인텔리제이로 테스트해보는 과정들이<br />
-너무 재밌어서 시간이 훅훅 지나간 것 같다.</p>
-
-<p>오늘 공부는 여기서 끝!!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 짜장면 곱뺴기</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /></entry></feed>
+<strong>오늘의 점심</strong>: 김치찌개, 계란말이, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[일어났는데 날씨가 화창하다 ! 공부하기 딱 좋은 날이다. 바람도 선선하니 창문을 보니 기분도 좋아지고]]></summary></entry></feed>

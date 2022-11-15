@@ -675,7 +675,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -760,7 +760,7 @@ Service영역과의 연결된 부분을 Mock 객체를 반환시켜<br>
 <p>내가 총 만들어야할 API는 3개이고<br>
 멤버 조회, 멤버 전체조회, 멤버 삭제 이렇게 된다.</p>
 
-<p>1). GET</p>
+<p><strong>1). GET</strong></p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">getMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">StubData</span><span class="o">.</span><span class="na">MockMember</span><span class="o">.</span><span class="na">getSingleResponseBody</span><span class="o">();</span>
@@ -840,8 +840,31 @@ data안에 배열로 데이터가 존재한다면 어떻게<br>
         <span class="o">)</span>
 <span class="o">)</span>
 </code></pre></div></div>
-<p>responseFields의 위와 같이 data.[].을 이용해<br>
+<p>responseFields의 위와 같이 data.[].을 이용해  <br>
 배열에 해당하는 내용을 표시해줄 수 있다.</p>
+
+<p>또한</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">responseFields</span><span class="o">(</span>
+        <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">ARRAY</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"결과 데이터"</span><span class="o">).</span><span class="na">optional</span><span class="o">(),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].name"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이름"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].phone"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"전화 번호"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].memberStatus"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 상태: 활동중/휴면상태/탈퇴상태"</span><span class="o">),</span>
+                <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">),</span>
+        <span class="o">)</span>
+<span class="o">)</span>
+</code></pre></div></div>
+<p>위와 같이도 표기할 수 있다.</p>
+
+<p>여기서 한가지 참고해야할 점은
+JsonFieldType.OBJECT = data : {}<br>
+JsonFieldType.ARRAY = data : []  <br>
+과 같이 표기할 때 사용한다는 점이다.</p>
+
+<p>하나의 멤버만 조회했을때 OBJECT를 사용한 이유와<br>
+여러 멤버를 조회했을때 ARRAY를 사용한 이유이다.</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -879,7 +902,7 @@ data안에 배열로 데이터가 존재한다면 어떻게<br>
 
 <p><br></p>
 
-<p>2). DELETE</p>
+<p><strong>2). DELETE</strong></p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
@@ -979,15 +1002,15 @@ API 문서를 만들 수 있다는게 너무 좋은 기술인 것 같다는 생�
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/11/11/til.html" title="TIL) API Documentation 1">TIL) API Documentation 1</a><span></span>
+<a class="previous" href="/til/2022/11/11/til.html" title="TIL) API Documentation 1">TIL) API Documentation 1</a><a class="next" href="/til/2022/11/15/til.html" title="TIL) Application 빌드, 실행">TIL) Application 빌드, 실행</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/01/til.html" title="">TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
-<li><a class="post-link" href="/til/2022/11/14/til.html" title="">TIL) API Documentation 2</a></li>
-<li><a class="post-link" href="/til/2022/10/05/til.html" title="">TIL) DB RDMBS 1</a></li>
-<li><a class="post-link" href="/til/2022/10/25/til.html" title="">TIL) Spring Exception 1</a></li>
+        <li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="TIL) Application 빌드, 실행">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+<li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="TIL) Application 빌드, 실행">맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
+<li><a class="post-link" href="/til/2022/10/13/til.html" title="TIL) Application 빌드, 실행">TIL) Spring DI 1</a></li>
+<li><a class="post-link" href="/til/2022/11/04/til.html" title="TIL) Application 빌드, 실행">TIL) Spring Transaction 1</a></li>
 </ul>
     </div>
 <div class="post-comments">
