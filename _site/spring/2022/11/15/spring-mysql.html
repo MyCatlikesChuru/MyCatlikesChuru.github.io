@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법 | LeeJellan</title>
+<title>Spring) MySQL Local 연동 하기 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">
+<meta property="og:title" content="Spring) MySQL Local 연동 하기">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="문득 작업을 하다보니까…..">
-<meta property="og:description" content="문득 작업을 하다보니까…..">
-<link rel="canonical" href="http://localhost:4000/macos/2022/08/23/OS-macOs-2.html">
-<meta property="og:url" content="http://localhost:4000/macos/2022/08/23/OS-macOs-2.html">
+<meta name="description" content="오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.">
+<meta property="og:description" content="오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.">
+<link rel="canonical" href="http://localhost:4000/spring/2022/11/15/spring-mysql.html">
+<meta property="og:url" content="http://localhost:4000/spring/2022/11/15/spring-mysql.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-08-23T00:00:00+09:00">
+<meta property="article:published_time" content="2022-11-15T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">
+<meta property="twitter:title" content="Spring) MySQL Local 연동 하기">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-08-23T00:00:00+09:00","datePublished":"2022-08-23T00:00:00+09:00","description":"문득 작업을 하다보니까…..","headline":"맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/macos/2022/08/23/OS-macOs-2.html"},"url":"http://localhost:4000/macos/2022/08/23/OS-macOs-2.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-15T00:00:00+09:00","datePublished":"2022-11-15T00:00:00+09:00","description":"오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.","headline":"Spring) MySQL Local 연동 하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2022/11/15/spring-mysql.html"},"url":"http://localhost:4000/spring/2022/11/15/spring-mysql.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -634,11 +634,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</h1>
-  <h2 class="post-subtitle"></h2>
+  <h1 class="post-title p-name" itemprop="name headline">Spring) MySQL Local 연동 하기</h1>
+  <h2 class="post-subtitle">yml 파일 설정</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-08-23T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 23, 2022
+    <time class="dt-published" datetime="2022-11-15T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 15, 2022
     </time>
 
     
@@ -675,147 +675,145 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#macOs">#macOs</a><a class="post-tag" href="/tags.html#IT">#IT</a>
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#mysql">#mysql</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>문득 작업을 하다보니까…..</p>
+      <p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br>
+연결하여 사용해보려고한다.</p>
 
-<p>나도 모르게 zsh에서 사용중이던 Git언어들이 한글로 바뀌어있었다!!</p>
+<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br>
+저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTfxzPaLhYjly3znGKTlDTtJQVikhK-cNyrV7y0salnbQMCBcDn1QFlpYkDXqhFaj8KpkOq04s=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br></p>
+<p>MySQL WorkBench GUI로 작업하였고<br>
+리소스는 .yml 파일을 사용했다.</p>
 
-<p>사실 한글을 사용하는 것보다 영어를 사용하는게 좋다고 생각들어 바꾸려고 검색하다보니</p>
+<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
 
-<p><a href="https://jaime-note.tistory.com/92">zsh에서 git 언어가 갑자기 한글로 바뀌었다면?(다시 영어로 바꾸기)</a> <br>
-위와 같은 좋은 해결글이 있었다. 내용을 참조해서 조치해보려한다.</p>
+<p><br></p>
 
-<hr>
+<p>1). bulid.gradle 설정</p>
 
-<p>현재 설정되어 있는 언어를 확인해보자</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$LANG</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
 </code></pre></div></div>
 
-<p>입력할 경우 아래와 같이 표시된다.</p>
+<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSATDQ7qAIrnA9a4VqqaJZ59wo8AXVXxQBFe1z3bG3P6lX8ovehnNePSHBJ09Uct6VUhCH_vQY=w3024-h1620" align="left" width="600px">
-<br><br></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>언어는 ko KR.UTF-8</p>
+<p>추가하고 Gradle Reload를 할 경우 위와 같이<br>
+라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
 
-<p>그래서 이렇게 변하는 이유를 찾아보니 git설정에서 gettext로 OS에서<br>
-사용하는 언어를 가져온 뒤 직접 해당 언어를 사용하도록 설정을 업데이트하기 때문이라고 한다.</p>
+<p><br></p>
 
-<p>자세한 내용은 맨위에 참조한 하이퍼링크를 참고하자!<br>
-이제 한글로된 것을 영어로 바꾸기위해 zsh 편집을 실행한다.</p>
+<p>2). .yml 파일 설정</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.zshrc
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="na">hibernate</span><span class="pi">:</span>
+      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
+    <span class="na">properties</span><span class="pi">:</span>
+      <span class="na">hibernate</span><span class="pi">:</span>
+        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
+    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
+    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
 </code></pre></div></div>
 
-<p>위와 같이 터미널에 입력할 경우</p>
+<p>두번째로 연결을위한 .yml파일 설정이다.<br>
+프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br>
+properties 확장자를 application.yml로 변경하였다.</p>
 
-<p><br></p>
+<p>spring : <br>
+jpa : <br>
+에 해당하는 부분은 jpa관련 설정이다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRMuwUDM4upCboaSxJUm4RbUWwzbIcoUCYaoLvJWY2NhI6vKHl-7LLQXoKkLjY8fkSMa8s5y4Y=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br></p>
+<p>우리가 봐야할 부분은<br>
+spring :<br>
+datasource :<br>
+이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
 
-<p>위와 같은 편집창이 나올 것이고<br>
-마우스 휠을 아래로 내리면 문서 마지막까지 표시될 거다.</p>
+<p>넣어줘야할 정보는 4가지 이다.</p>
+<ol>
+  <li>포트넘버</li>
+  <li>스키마 이름</li>
+  <li>유저네임</li>
+  <li>비밀번호</li>
+</ol>
 
-<p>맨아래까지 왔으면<br>
-i 를 눌르면<br>
-하단에 – INSERT – 로 바뀔 것이고</p>
+<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br>
+아래에 어디서 찾는지 적어보겠다.</p>
 
-<p>키보드의 상하좌우 키를 이용해 맨아래줄로 이동한후에</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p><br></p>
+<p>워크밴치(MySQL WorkBench)를 열어보면<br>
+커넥션에 관한 정보가 나온다.<br>
+없으면 연결을 한번도 하지 않은 것이기에<br>
+커넥션을 만들어주면 된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">git</span><span class="o">=</span><span class="s2">"LANG=en_US.UTF-8 git"</span>
+<p>커넥션을 더블클릭 해보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br>
+여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br>
+비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
+
+<p>여기서 알 수 있는 정보는</p>
+
+<p><strong>포트넘버 = 3306<br>
+유저네임 = root<br>
+비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
+
+<p>이렇게 알 수 있다.</p>
+
+<p>그리고 접속을 한 다음에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br>
+스키마를 생성해주면 된다.</p>
+
+<p>생성한 스키마가 스키마이름이 되는 것이다.<br>
+나는 example로 설정했고<br>
+이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
+
+<p>이렇게 정리해서 정보를 적어보자면</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
+  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
 </code></pre></div></div>
 
-<p>해당 코드를 맨아래에 입력하면된다.</p>
+<p>이렇게 설정할 수 있을 것이다.</p>
 
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmR5lR5SMpHD6p-BeHNSy_wLpThx9rlaDxVBIeTK60-mBPzY2Qd4OufGN7SWKJtOcK-imGQ3KLQ=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br></p>
-
-<p>입력을 마친 후 에는 ESC룰 누르고 :wq 타이핑하면 저장될 것이다.<br>
-참고로 #은 주석이기 때문에 앞에 alias 앞에 #을 붙인다면 동작되지 않을 것이다.<br>
-터미널을 재실행하거나 아래의 명령어를 입력하면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.zshrc
-</code></pre></div></div>
-
-<p><br></p>
-
-<p>이제 부터 git이라고 입력되는 모든 명령들은 영어로 바뀔 것이다!<br>
-그리고 나서 다시 git명령어를 입력해 확인해보면</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTeqytmu8wiMUJU4XeSiX9XF-wh92uloSkL7PGvpHI0GL9cbr07LwdxB1xeC3nrB_7Fl5sA_Ig=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br></p>
-
-<p>이렇게 영어로 바뀐 모습을 볼 수 있다!!!<br>
-이와 관련된 참고로 알아두면 좋은 팁이</p>
-
-<p><em><strong>alias로 커스터 마이징이 가능한 점이다!!!</strong></em></p>
-
-<p>예를 한가지 들어서 내가 현재 사용중인 포트를 전부 확인하는 명령어는 아래와같다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lsof <span class="nt">-PiTCP</span> <span class="nt">-sTCP</span>:LISTEN
-</code></pre></div></div>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTdt60EHwPrl_Pc6RN1Xw0tgkeB9-IbmQecZOclKUAczvYl7Mb2yXH08EmeAwUADipmZnM4BWg=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br></p>
-
-<p>위에 alias git을 추가했던 것처럼<br>
-내가 기억해내기 편한 약자로 아래와 같이 커스터 마이징을 할 수있다.</p>
-
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTPElLO3jKW-4YGYji7tM2XNVGiJypPBGwaBaZXyrCLcCIgrZ6OLBuApuojjA8-7XNF_L3I0ps=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br></p>
-
-<p>alias lt = “lsof -PiTCP -sTCP:LISTEN”<br>
-나와 같은경우는 lt라는 약자로 위에 명령어를 대체 했고</p>
-
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQHzaNVmE3Va-CB8YzwougQ-cc6kG94CCx-nq3xZBfn6x8MsCYdTn6B8fQGWlWWlnGJJv1oiCY=w3024-h1620" align="left" width="600px">
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br></p>
-
-<p>실제로 터미널에 lt라고 입력을하면 lsof -PiTCP -sTCP:LISTEN와 동일한 효과를<br>
-볼 수 있다는걸 알아보았다.</p>
-
+<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br>
+처음에 mysql를 다운받고 설정한 비밀번호다.<br>
+인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/macos/2022/08/03/OS-macOs-1.html" title="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">맥북 업데이트 후 xcrun error invalid...</a><a class="next" href="/macos/2022/08/26/OS-macOs-3.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">macOs) neofetch를 활용하여 terminal 커스터마이징</a>
+<a class="previous" href="/til/2022/11/14/til.html" title="TIL) API Documentation 2">TIL) API Documentation 2</a><a class="next" href="/til/2022/11/15/til.html" title="TIL) Application 빌드, 실행">TIL) Application 빌드, 실행</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/21/til.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">TIL) Spring DTO</a></li>
-<li><a class="post-link" href="/til/2022/09/22/til.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">TIL) Java 자료구조 Stack, Queue</a></li>
-<li><a class="post-link" href="/til/2022/10/19/til.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">TIL) 두달차 회고</a></li>
-<li><a class="post-link" href="/til/2022/11/04/til.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">TIL) Spring Transaction 1</a></li>
+        <li><a class="post-link" href="/til/2022/11/11/til.html" title="TIL) Application 빌드, 실행">TIL) API Documentation 1</a></li>
+<li><a class="post-link" href="/til/2022/11/10/til.html" title="TIL) Application 빌드, 실행">TIL) JUnit 3</a></li>
+<li><a class="post-link" href="/til/2022/09/20/til.html" title="TIL) Application 빌드, 실행">TIL) Java 재귀</a></li>
+<li><a class="post-link" href="/til/2022/09/30/til.html" title="TIL) Application 빌드, 실행">TIL) Network Basic</a></li>
 </ul>
     </div>
 <div class="post-comments">

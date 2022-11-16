@@ -1,33 +1,128 @@
 ---
 layout: post
-title: Spring) mysql 연동 하기
+title: Spring) MySQL Local 연동 하기
 subtitle: yml 파일 설정
 categories: Spring
 tags: [Spring, mysql]
 comments: true
-published: false
+published: true
 ---
 
+오늘은 Spring을 이용해 MySQL을 Local 환경에서  
+연결하여 사용해보려고한다.
 
-![image](){: .align-left style="max-width: 100%"}
+기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에    
+저장소만 바꿔주는 테스트를 해보려는 것이다.  
+
+MySQL WorkBench GUI로 작업하였고  
+리소스는 .yml 파일을 사용했다.  
+
+개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.
+
+<br/>
+
+1). bulid.gradle 설정
+
 
 ```
 runtimeOnly 'mysql:mysql-connector-java'
 ```
 
+첫번째로 의존라이브러리를 추가해줘야한다.
+
+
+![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614){: .align-left style="max-width: 100%"}
+
+추가하고 Gradle Reload를 할 경우 위와 같이  
+라이브러리 패키지가 생기는 것을 확인할 수 있다.  
+
+<br/>
+
+2). .yml 파일 설정
 
 ```yaml
 spring:
   jpa:
     hibernate:
-      ddl-auto: create-drop  # (1) 스키마 자동 생성
-    show-sql: true      # (2) SQL 쿼리 출력
+      ddl-auto: create-drop  # 스키마 자동 생성
+    show-sql: true      # SQL 쿼리 출력
     properties:
       hibernate:
-        format_sql: true  # (3) SQL pretty print
+        format_sql: true  # SQL pretty print
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:(포트넘버)/(스키마 이름)?serverTimezone=Asia/Seoul # 포트:3306 , 스키마:example
+    url: jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul # 포트넘버, 스키마이름
     username:  # 유저네임
     password:  # 비밀번호
 ```
+
+두번째로 연결을위한 .yml파일 설정이다.  
+프로젝트 이름 > main > resources 에서 확인이 가능하고  
+properties 확장자를 application.yml로 변경하였다.  
+
+spring :   
+jpa :   
+에 해당하는 부분은 jpa관련 설정이다.  
+
+우리가 봐야할 부분은  
+spring :  
+datasource :  
+이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.  
+
+넣어줘야할 정보는 4가지 이다.  
+1. 포트넘버
+2. 스키마 이름
+3. 유저네임
+4. 비밀번호
+
+이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해  
+아래에 어디서 찾는지 적어보겠다.
+
+![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807){: .align-left style="max-width: 100%"}
+
+워크밴치(MySQL WorkBench)를 열어보면  
+커넥션에 관한 정보가 나온다.  
+없으면 연결을 한번도 하지 않은 것이기에  
+커넥션을 만들어주면 된다.  
+
+커넥션을 더블클릭 해보자
+
+![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614){: .align-left style="max-width: 100%"}
+
+더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.  
+여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고  
+비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.  
+
+여기서 알 수 있는 정보는 
+
+**포트넘버 = 3306  
+유저네임 = root  
+비밀번호 = 본인이 설정한 해당 비밀번호**
+
+이렇게 알 수 있다.  
+
+그리고 접속을 한 다음에는
+
+![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614){: .align-left style="max-width: 100%"}
+
+전체적인 화면을 볼 수 있는 Schemas에 들어가  
+스키마를 생성해주면 된다.  
+
+생성한 스키마가 스키마이름이 되는 것이다.  
+나는 example로 설정했고  
+이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.  
+
+이렇게 정리해서 정보를 적어보자면  
+```yaml
+datasource:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul # 포트:3306 , 스키마:example
+  username: root  # 유저네임
+  password: 내 비밀번호 # 비밀번호
+```
+
+이렇게 설정할 수 있을 것이다.  
+
+여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자  
+처음에 mysql를 다운받고 설정한 비밀번호다.  
+인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자
