@@ -205,11 +205,15 @@ utterances:
   follow_site_theme: true
 
 # Build settings
-# highlighter: none
+#highlighter: rouge
+
 markdown: kramdown
 kramdown:
   input: GFM
 #  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+#      line_numbers: true # 라인 줄 수 추가하는법
 
 plugins:
   - jekyll-feed

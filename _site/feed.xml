@@ -1,4 +1,243 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-16T15:14:46+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) 세달차 회고</title><link href="http://localhost:4000/til/2022/11/16/til.html" rel="alternate" type="text/html" title="TIL) 세달차 회고" /><published>2022-11-16T00:00:00+09:00</published><updated>2022-11-16T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/16/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/16/til.html"><![CDATA[<p>어느덧 가을을 지나 겨울을 향해 달리고있다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-17T21:40:05+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) 인증, 보안 기초</title><link href="http://localhost:4000/til/2022/11/17/til.html" rel="alternate" type="text/html" title="TIL) 인증, 보안 기초" /><published>2022-11-17T00:00:00+09:00</published><updated>2022-11-17T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/17/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/17/til.html"><![CDATA[<p>오늘은 드디어<br />
+인증과 보안관련된 공부가 시작되었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSK7Vlbd6P-ZA2TpRO9yTFxz9gH-OdxjYebZ6-r_KUFyGQiml5Hx8m6WodAQFCprhzYPGAg5SXnE-TkysLMqq-BedG44A=w1920-h864" alt="image" class="align-left" style="max-width: 50%" /></p>
+
+<p>Spring Security, JWT, OAuth2 등<br />
+여러가지를 배울 예정이고</p>
+
+<p>가장 고전하는 영역이지 않을까 생각한다.</p>
+
+<hr />
+
+<p>오늘은 인증, 보안에 대한 기초를 먼저 파악하고<br />
+내일부터 본격적인 Spring Security 사용법을 알아볼 것 같다.<br />
+오늘은 기초인 HTTPS와 Hashing, Cookie, Session에 대해 알아보자</p>
+
+<p><br /></p>
+
+<h3 id="https">HTTPS</h3>
+
+<p>우리가 여태까지 배웠기를 HTTP 프로토콜을 이용해<br />
+TCP/IP 통신으로 서버와 연결할 수 있다고 공부를 했었다.<br />
+HTTP Message를 통해 Json 객체를 받아보기도 하였다.</p>
+
+<p>HTTPS의 Hyper Text Transfer Protocol Secure Socket layer의 약자다. <br />
+보면 알 수 있듯이 기존의 <strong>HTTP + Secure Socket layer</strong>가 붙은 모습이다.<br />
+HTTP 프로토콜을 보다 안전하게 요청을 주고 받기위해 SSL, TLS라는 알고리즘을 이용해 <br />
+HTTP 통신을 하는 과정에서 데이터를 암호화하여 전송하는 방법이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmQ7kg8wBa9J9dzD10tI68mzIX9M97wYHvAyH-tNw-vTeDL5V8vTsTeX3a_QiO7FnYOL0DMp_w7JRIh9Jt27wXdEgUoDiw=w1510-h1614" alt="image" class="align-left" style="max-width: 100%" /><br />
+HTTPS TLS HandShake (출처: <a href="https://www.cloudflare.com/ko-kr/learning/ssl/what-happens-in-a-tls-handshake">CLOUDFLARE 사이트 참조</a> )</p>
+
+<p>해당 그림은 HTTPS의 통신 핸드쉐이크이다. <br />
+클라이언트에서 접속요청이 왔을 때, 내부적으로 통신이되어지는 순서이다.</p>
+
+<p>TCP 연결이 완료후 TLS 핸드쉐이크가 동작하는 모습을 볼 수 있고<br />
+TLS 핸드쉐이크 내에서는 인증서, 대칭키, 비대칭키와 같은 암복호를 통해<br />
+인증된 서버에 접속을 할 수 있게 확인을 해준다.</p>
+
+<p>정말 간단하게 정리해보자면</p>
+
+<p><strong><span style="color:#F04965">대칭키 </span>: 키 한개로 암복호를 한다.</strong><br />
+<strong><span style="color:#F04965">비대칭키</span> : 암호화한 키와 복호화한키가 다르다.</strong></p>
+
+<p>키의 종류로는 <strong>공개키(Public Key)</strong>와 <strong>개인키(Private Key)</strong>가 존재하고</p>
+
+<p>대칭키 같은경우에는 공개키-공개키, 개인키-개인키로 암호화 복호화를 할 수 있고<br />
+비대칭키 같은 경우에는 공개키-개인키, 개인키-공개키로 암호화 복호화를 할 수 있다.<br />
+HTTPS TLS 핸드쉐이크는 대칭키,비대칭키를 둘다 사용한다.</p>
+
+<p>여기서 비대칭키 같은 경우에는<br />
+개인키로 암호화한것을 공개키로 복호화할 수 있는데, 목적은 인증서같은 누구나 볼 수 있는 정보고<br />
+공개키로 암호화한것을 개인키로 복호화할 수 있는데, 목적은 정보보호와 외부의 탈취방지를 위한 것이다.</p>
+
+<p>여기서 <strong>인증서</strong>라는 개념이나오는데<br />
+이러한 인증서의 역할은 서버에서 인증서를 브라우저에게 보내주는데<br />
+클라이언트에 접속한 곳이 정말 해당 서버와 일치하는지 보증해주는 장치이다.<br />
+이러한 인증서를 관리해주는 공인된 기관들을<br />
+Certificate Authority 라고하며 대표적으로 AWS가 있다.</p>
+
+<p>TLS 핸드쉐이크를 정리해보자면</p>
+
+<ol>
+  <li>Client -&gt; Server에게 헬로 요청</li>
+  <li>Server -&gt; Client 인증서를 포함해서 헬로 응답 (개인키로 암호화하여 전달)</li>
+  <li>Client는 내장된 CA 리스트를 보고 인증서를 확인한다. (개인키-&gt;공개키 복호화)</li>
+  <li>Client가 CA의 공개키로 복호화를 통해 인증서를 검증했다면 Client는 대칭키를 만든다.</li>
+  <li>이 대칭키를 서버의 공개키로 암호화해서 Client -&gt; Server에 전달한다.</li>
+  <li>그럼 Server는 서버의 개인키로 복호화하여 클라이언트의 대칭키를 확인한다. (공개키-&gt;개인키 복호화)</li>
+  <li>Server -&gt; Client의 대칭키로 샘플 데이터를 암호화해서 클라이언트에게 보내서 확인한다.</li>
+  <li>Client는 서버에게 받은 데이터를 대칭키로 복호화해서 서로 대칭키를 잘 가지고 있는지 확인한다</li>
+  <li>이 후에는 Client와 Server는 서로 대칭키로 암호화와 복호화를 진행하여 데이터를 전송한다</li>
+</ol>
+
+<p>사실 이런 일련의 과정들은<br />
+브라우저와 서버가 해당 과정을 대신 처리해주기 때문에<br />
+개념과 순서정도만 이해하면 좋을 것 같다.</p>
+
+<p><br /></p>
+
+<h4 id="로컬-환경에서-테스트">로컬 환경에서 테스트</h4>
+<p>그럼 로컬환경에서 인증서 발급과 <br />
+Https 서버를 구현하는 간단한 예제를 살펴보자</p>
+
+<p>우선 Tomcat WAS를 사용하기위해<br />
+스프링부트로 프로젝트를 만들었고</p>
+
+<p>로컬환경에서 인증서를 만들기위해 터미널로 mkcert를 설치해야한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>mkcert
+</code></pre></div></div>
+<p>homebrew를 이용해 mkcert 설치</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkcert <span class="nt">-install</span>
+</code></pre></div></div>
+<p>PKCS12 형식 인증서를 생성할 수 있도록 설치</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkcert <span class="nt">-pkcs12</span> localhost
+</code></pre></div></div>
+<p>내가 만든 프로젝트 resources 경로에서<br />
+위의 명령어를 실행시켜 PKCS12 인증서를 생성해주면</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSGGxmFhNDI5InKLm5xBczg_DBOgwK4OJj_PGLONuWvOCIyDPyNnQBHZR2LmGmp5KEwzXwK3MxI2-ryG8RDepbN8HRYxw=w3024-h1614" alt="image" class="align-left" style="max-width: 50%" /></p>
+
+<p>위와 같이 resources에 <br />
+localhost.p12 인증서가 생긴다.</p>
+
+<p>인증서가 생겼다면 application.properties 안에</p>
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">server.ssl.key-store</span><span class="p">=</span><span class="s">classpath:localhost.p12</span>
+<span class="py">server.ssl.key-store-type</span><span class="p">=</span><span class="s">PKCS12</span>
+<span class="py">server.ssl.key-store-password</span><span class="p">=</span><span class="s">changeit</span>
+</code></pre></div></div>
+<p>와 같이 입력해주면 https로 서버를 사용가능하다.<br />
+여기서 비밀번호는 초기해 셋팅을 하지않으면 changeit으로 입력하면된다.</p>
+
+<p>그리고 스프링 애플리케이션을 실행시키면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmThmekJqkRGtjmJemxwLYuP9uTAyLwsOWuvrxTqsdCdOtk4pnyAXTjmlQ8MrR_5PaU4rYOu8DZll_u-Qvzy1E2s4UGW7A=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>사진과 같이 https로 서버 구현된 것을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<h3 id="hasing">Hasing</h3>
+<p>어떤한 문자열에 임의의 연상을 적용하여 <br />
+다른 문자열로 변환하는 것을 Hasing이라고 한다.</p>
+
+<p>즉, 해싱한다는 의미는 어떠한 값을 암호화해준다 생각하면 될 것 같다.<br />
+여기서 해싱의 특징을 적어보자면</p>
+
+<ol>
+  <li>모든 값에 대한 해시값을 계산하는데 오래걸리지 않아야한다.</li>
+  <li>최대한 해시값을 피해야 하며, 모든 값은 고유한 해시값을 가진다.</li>
+  <li>아죽 작은 단위의 변경이라도 완전히 다른 해시값을 가져야한다.</li>
+</ol>
+
+<h3 id="salt">Salt</h3>
+<p>암호화해야 하는 값에 어떤 별도의 값을 추가하여 결과를 변형하는 것이다.<br />
+영어로 소금이라는 뜻과 걸맞게 무언가 간을치는 느낌이라 생각하면 될 것 같다.</p>
+
+<p>Salt의 큰 특징을 4가지 살펴보면</p>
+
+<ol>
+  <li>유저와 패스워드 별로 유일한 값을 가져야 한다.</li>
+  <li>사용자 계정을 생성할 때와 비밀번호를 변경할 때 마다 새로운 임의의 Salt를 사용해서 해싱해야 한다.</li>
+  <li>절대 재사용하지 말아야한다.</li>
+  <li>DB의 유저테이블에 같이 저장 되어야한다.</li>
+</ol>
+
+<h3 id="cookie">Cookie</h3>
+
+<p>쿠키는 서버가 웹 브라우저에 정보를 저장하고 불러올 수 있는 수단<br />
+이라고 생각하면 간단할 것 같다.</p>
+
+<p>우리가 이전에 배운 Http 프로토콜은<br />
+무상태성(stateless)은 이전에 했던 작업에 대해 기억하지 않는 특성을 가지는데<br />
+검색을 하려는데 검색목록이 아래 표시된다든지<br />
+로그인 기억버튼을 눌러놓았는데 다음에 열어도 눌려져있다든지<br />
+우리는 요청을 보낼때 무상태성으로 동작하기때문에 이러한 내용들을 기억하지 못 하는데<br />
+브라우저에서 쿠키라는 것을 이용해 이러한 내용들을 저장해 사용할 수 있는 것이다.</p>
+
+<p>한마디로 서버가 클라이언트에서 요청을 받고<br />
+클라이언트쪽에 응답할때 쿠키에 데이터를 싦어서 보내면<br />
+브라우저에서 쿠키값을 유지시키고 사용한다고 보면될 것 같다.</p>
+
+<p>쿠키의 옵션으로는</p>
+
+<p>domain - 서버와 요청의 도메인이 일치하는 경우 쿠키 전송<br />
+path - 서버의 요청의 세부 경로가 일치하는 경우 쿠키 전송<br />
+maxage/expires - 쿠키의 유효기간 설정<br />
+httpOnly - 스크립트의 쿠키 접근 가능 여부 설정<br />
+secure - HTTPS 에서만 쿠키 전송 여부 설정<br />
+sameSite - 같은 사이트에서만 쿠키를 사용할 수 있게 하는 설정</p>
+
+<h3 id="session">Session</h3>
+
+<p>세션은 인증해주는 방법으로<br />
+여러 페이지에 걸쳐 사용되는 사용자 정보를 저장하는 방법이다.</p>
+
+<p>세션은 중요한 데이터를 서버에 저장하고 암호화된<br />
+세션id를 쿠키에 담아 클라이언트에 전달하고<br />
+세션id가 부여된 브라우저는 신분증같이 이를 이 유저는 인증에 성공했다고 알리며<br />
+다른 요청을 보낼때 마다 해당 세선id로 인증을 거치며 사용할 수 있게된다.</p>
+
+<p><br />
+<br /></p>
+
+<p><strong>쿠키와 세션의 비교</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th style="text-align: center">Cookie</th>
+      <th style="text-align: center">Seesion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>설명</td>
+      <td style="text-align: center">쿠키는 그저 http의 stateless<br />한 것을 보완해주는 도구</td>
+      <td style="text-align: center">접속 상태를 서버가 가짐<br /> 접속 상태와 권환 부여를 위해<br />세션아이디를 쿠키로 전송</td>
+    </tr>
+    <tr>
+      <td>접속 상태<br />저장 경로</td>
+      <td style="text-align: center">클라이언트</td>
+      <td style="text-align: center">서버</td>
+    </tr>
+    <tr>
+      <td>장점</td>
+      <td style="text-align: center">서버에 부담을 덜어줌</td>
+      <td style="text-align: center">신뢰할 수 있는 유저인지 서버에서 확인</td>
+    </tr>
+    <tr>
+      <td>단점</td>
+      <td style="text-align: center">쿠키 그자체는 인증이 아님</td>
+      <td style="text-align: center">하나의 서버에서만 접속 상태를 가지므로 <br />서버분산에 불리</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 이렇게 인증, 보안에 관한 <br />
+간단한 CS 지식들을 공부해보았는데<br />
+사실 처음 듣는 개념들이라 아직 어떻게 쓰이는지 감을 잡기가 어렵다.</p>
+
+<p>이러한 것들이 있고 후에 학습하면서<br />
+이렇게 사용하는구나를 깨닫고 내것으로 체득을 해야할 것 같다.</p>
+
+<p>오늘 공부는 여기서 끝 !</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 라면, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 드디어 인증과 보안관련된 공부가 시작되었다.]]></summary></entry><entry><title type="html">TIL) 세달차 회고</title><link href="http://localhost:4000/til/2022/11/16/til.html" rel="alternate" type="text/html" title="TIL) 세달차 회고" /><published>2022-11-16T00:00:00+09:00</published><updated>2022-11-16T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/16/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/16/til.html"><![CDATA[<p>어느덧 가을을 지나 겨울을 향해 달리고있다.<br />
 시간은 멈추지 않는다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmR16i01UpPNroUzNknMVxn4tsIkhDV6gkngKajpEaMzj2xJ4E5Vyez__5rtpW5xjh_1Acwk1IZjAcZmfys0znB7kYUlsA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
@@ -160,7 +399,7 @@ Spring JDBC,JPA,Transaction, JUnit, APi 문서 자동화 등<br />
 결승하는 과정도 진짜 순탄치않았고, 나는 그과정들을 다챙겨 보았었다.</p>
 
 <p>올라가는 과정 중 데프트 선수가 했던 얘기가 기사화 되어<br />
-가시의 작명으로 <strong>‘중요한건 꺽이지 않는 마음’</strong> 이라는 말이 밈이되었고 명언이되었다.</p>
+기사의 작명으로 <strong>‘중요한건 꺽이지 않는 마음’</strong> 이라는 말이 밈이되었고 명언이되었다.</p>
 
 <p>누구에겐 장난처럼들리고 별 것 아닌 것 처럼 들릴 수 있겠지만<br />
 지금 개발자로 커리어 전환하려는 나의 마음이 가볍지 않았기 때문에<br />
@@ -177,121 +416,7 @@ Spring JDBC,JPA,Transaction, JUnit, APi 문서 자동화 등<br />
 <p>이상 세달차 공부 중인 <br />
 나란 사람의 회고를 적어본다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry><entry><title type="html">Spring) MySQL Local 연동 하기</title><link href="http://localhost:4000/spring/2022/11/15/spring-mysql.html" rel="alternate" type="text/html" title="Spring) MySQL Local 연동 하기" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/15/spring-mysql</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/15/spring-mysql.html"><![CDATA[<p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br />
-연결하여 사용해보려고한다.</p>
-
-<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br />
-저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
-
-<p>MySQL WorkBench GUI로 작업하였고<br />
-리소스는 .yml 파일을 사용했다.</p>
-
-<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
-
-<p><br /></p>
-
-<p>1). bulid.gradle 설정</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
-</code></pre></div></div>
-
-<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>추가하고 Gradle Reload를 할 경우 위와 같이<br />
-라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<p>2). .yml 파일 설정</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">jpa</span><span class="pi">:</span>
-    <span class="na">hibernate</span><span class="pi">:</span>
-      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
-    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
-    <span class="na">properties</span><span class="pi">:</span>
-      <span class="na">hibernate</span><span class="pi">:</span>
-        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
-  <span class="na">datasource</span><span class="pi">:</span>
-    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
-    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
-    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>두번째로 연결을위한 .yml파일 설정이다.<br />
-프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br />
-properties 확장자를 application.yml로 변경하였다.</p>
-
-<p>spring : <br />
-jpa : <br />
-에 해당하는 부분은 jpa관련 설정이다.</p>
-
-<p>우리가 봐야할 부분은<br />
-spring :<br />
-datasource :<br />
-이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
-
-<p>넣어줘야할 정보는 4가지 이다.</p>
-<ol>
-  <li>포트넘버</li>
-  <li>스키마 이름</li>
-  <li>유저네임</li>
-  <li>비밀번호</li>
-</ol>
-
-<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br />
-아래에 어디서 찾는지 적어보겠다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>워크밴치(MySQL WorkBench)를 열어보면<br />
-커넥션에 관한 정보가 나온다.<br />
-없으면 연결을 한번도 하지 않은 것이기에<br />
-커넥션을 만들어주면 된다.</p>
-
-<p>커넥션을 더블클릭 해보자</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br />
-여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br />
-비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
-
-<p>여기서 알 수 있는 정보는</p>
-
-<p><strong>포트넘버 = 3306<br />
-유저네임 = root<br />
-비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
-
-<p>이렇게 알 수 있다.</p>
-
-<p>그리고 접속을 한 다음에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br />
-스키마를 생성해주면 된다.</p>
-
-<p>생성한 스키마가 스키마이름이 되는 것이다.<br />
-나는 example로 설정했고<br />
-이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
-
-<p>이렇게 정리해서 정보를 적어보자면</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
-  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
-  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
-  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>이렇게 설정할 수 있을 것이다.</p>
-
-<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br />
-처음에 mysql를 다운받고 설정한 비밀번호다.<br />
-인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="mysql" /><summary type="html"><![CDATA[오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.]]></summary></entry><entry><title type="html">TIL) Application 빌드, 실행</title><link href="http://localhost:4000/til/2022/11/15/til.html" rel="alternate" type="text/html" title="TIL) Application 빌드, 실행" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/15/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNq0VcIEmAZMz_1paQl-4m8_fIqcR-XIxlvy4GrezxEOvY6tzpT_1uI3JJK_XNFFzX3gFipA7DgprUqDMmQVqM19rSf8Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry><entry><title type="html">TIL) Application 빌드, 실행</title><link href="http://localhost:4000/til/2022/11/15/til.html" rel="alternate" type="text/html" title="TIL) Application 빌드, 실행" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/15/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNq0VcIEmAZMz_1paQl-4m8_fIqcR-XIxlvy4GrezxEOvY6tzpT_1uI3JJK_XNFFzX3gFipA7DgprUqDMmQVqM19rSf8Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
 
 <p>오늘은 섹션 마지막날이다. <br />
 벌써 3달째를 달리고 있는 부트캠프</p>
@@ -533,7 +658,121 @@ runtimeOnly 'mysql:mysql-connector-java'
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
+<strong>오늘의 점심</strong>: 김치찌개, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Spring) MySQL Local 연동 하기</title><link href="http://localhost:4000/spring/2022/11/15/spring-mysql.html" rel="alternate" type="text/html" title="Spring) MySQL Local 연동 하기" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/15/spring-mysql</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/15/spring-mysql.html"><![CDATA[<p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br />
+연결하여 사용해보려고한다.</p>
+
+<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br />
+저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
+
+<p>MySQL WorkBench GUI로 작업하였고<br />
+리소스는 .yml 파일을 사용했다.</p>
+
+<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
+
+<p><br /></p>
+
+<p>1). bulid.gradle 설정</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
+</code></pre></div></div>
+
+<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>추가하고 Gradle Reload를 할 경우 위와 같이<br />
+라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<p>2). .yml 파일 설정</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="na">hibernate</span><span class="pi">:</span>
+      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
+    <span class="na">properties</span><span class="pi">:</span>
+      <span class="na">hibernate</span><span class="pi">:</span>
+        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
+    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
+    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>두번째로 연결을위한 .yml파일 설정이다.<br />
+프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br />
+properties 확장자를 application.yml로 변경하였다.</p>
+
+<p>spring : <br />
+jpa : <br />
+에 해당하는 부분은 jpa관련 설정이다.</p>
+
+<p>우리가 봐야할 부분은<br />
+spring :<br />
+datasource :<br />
+이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
+
+<p>넣어줘야할 정보는 4가지 이다.</p>
+<ol>
+  <li>포트넘버</li>
+  <li>스키마 이름</li>
+  <li>유저네임</li>
+  <li>비밀번호</li>
+</ol>
+
+<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br />
+아래에 어디서 찾는지 적어보겠다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>워크밴치(MySQL WorkBench)를 열어보면<br />
+커넥션에 관한 정보가 나온다.<br />
+없으면 연결을 한번도 하지 않은 것이기에<br />
+커넥션을 만들어주면 된다.</p>
+
+<p>커넥션을 더블클릭 해보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br />
+여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br />
+비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
+
+<p>여기서 알 수 있는 정보는</p>
+
+<p><strong>포트넘버 = 3306<br />
+유저네임 = root<br />
+비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
+
+<p>이렇게 알 수 있다.</p>
+
+<p>그리고 접속을 한 다음에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br />
+스키마를 생성해주면 된다.</p>
+
+<p>생성한 스키마가 스키마이름이 되는 것이다.<br />
+나는 example로 설정했고<br />
+이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
+
+<p>이렇게 정리해서 정보를 적어보자면</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
+  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>이렇게 설정할 수 있을 것이다.</p>
+
+<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br />
+처음에 mysql를 다운받고 설정한 비밀번호다.<br />
+인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="mysql" /><summary type="html"><![CDATA[오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.]]></summary></entry><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOXnXDoCRH7AtlOncucaI0nI7RqC9GMkm0ZG-VhgIXazy7m5tTSccABV_f-3G5RjFSfN1ojWWOJzPxeYeKp4Ycs2Ykj=w1920-h921" alt="image" class="align-left" style="max-width: 65%" /></p>
 
@@ -2203,192 +2442,4 @@ MemberSerivce는 본인 쓰레드대로 진행하고</p>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 카레, 김치찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨도 선선하니 기분좋은 월요일 시작이다.]]></summary></entry><entry><title type="html">TIL) Spring Transaction 1</title><link href="http://localhost:4000/til/2022/11/04/til.html" rel="alternate" type="text/html" title="TIL) Spring Transaction 1" /><published>2022-11-04T00:00:00+09:00</published><updated>2022-11-04T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/04/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/04/til.html"><![CDATA[<p>드디어 금요일이다 !!</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTMURddp7eS9p4eU_B_kWlUW2OZXswDZohNbNZsQyulns7guaGsjqClS9QHbeeZNzRPUp9PL-pgI6FXT-9PQEqibl_29Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>주말이 되어도 공부를할 것이기 때문에<br />
-월요일까지 순삭당할 것 같다.</p>
-
-<p>하나한 알아갈 수록 좀더 알고 싶은 마성의 기능들…<br />
-너무 재밌다. 계속해서 공부하게된다.</p>
-
-<hr />
-
-<p>오늘은 트랜잭션에 대해 공부해보는 시간이다.<br />
-여러번 들어봤고 아직 어떤 의미인지를<br />
-정확히 알지못하니 공부해보도록하자</p>
-
-<p><br /></p>
-
-<h2 id="transaction">Transaction</h2>
-
-<h3 id="transaction-이란">Transaction 이란?</h3>
-<p>트랜잭션은 여러개의 작업들을 하나의 그룹으로<br />
-묶어서 처리하는 처리 단위로, 물리적으로는 여러개의 작업이지만<br />
-논리적으론 마치 하나의 작업으로 인식해서<br />
-전부 성공 or 실패 의 결과로 하나로만 처리되어야하는 의미를 가진다.</p>
-
-<p>예를 들어서, 계좌이체를 한다고 가정하였을 경우<br />
-A라는 사람이 B라는 사람에게 계좌이체를 했을때<br />
-A는 송금을 했지만 오류로인해 B가 받지 못했을 경우<br />
-A의 돈만 빠지고 B는 받지못하는 상황이 생긴다. 이런 경우가 생긴다면<br />
-서비스를 하지못할 정도의 큰 일이 나기때문에 송금이라는 작업단위가 있으면<br />
-최종적으로 송금완료까지 하나의 트랜잭션으로 봐야하는 것이다.</p>
-
-<p>트랜잭션을 얘기할때는 ACID 원칙을 이용한다.</p>
-
-<h3 id="acid-원칙">ACID 원칙</h3>
-<ol>
-  <li>원자성: 트랜잭션 내에서 실행한 작업들은 마치 하나의 작업인 것처럼 모두 성공 하거나 모두 실패해야 한다.</li>
-  <li>일관성: 모든 트랜잭션은 일관성 있는 데이터베이스 상태를 유지해야 한다. 예를 들어 데이터베이스에서 정한 무결성 제약 조건을 항상 만족해야 한다.</li>
-  <li>격리성: 동시에 실행되는 트랜잭션들이 서로에게 영향을 미치지 않도록 격리한다. 예를 들어 동시에 같은 데이터를 수정하지 못하도록 해야 한다. 격리성은 동시성과 관련된 성능 이슈로 인해 트랜잭션 격리 수준 (Isolation level)을 선택할 수 있다.</li>
-  <li>지속성: 트랜잭션을 성공적으로 끝내면 그 결과가 항상 기록되어야 한다. 중간에 시스템에 문제가 발생해도 데이터베이스 로그 등을 사용해서 성공한 트랜잭션 내용을 복구해야 한다.</li>
-</ol>
-
-<h3 id="db로-확인하는-예제">DB로 확인하는 예제</h3>
-<p>우선 DataBase를 통해 개념을 확인해 볼 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQSexoFyUMZWpDWivlRkoPtfcQ3EoLXbMdi9AvRnh8SV8ty8-one4e3UBrV9O3-6YBbptYiajuOe45fpQfUQ_9wPMjh=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>간단한 예제를 위해 H2 데이터베이스를 사용했고<br />
-쿼리로 각자 memberA, memberB에게 10000원을 넣어두었다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTdKis6NrWIeBPyfuYe62wOBUart4GIDHJxWqR8I5AnKeGNfAzgKf7ZUzlaqBP809jTGi3lWHsipeS_Oh5wCkFc7OjBww=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>예를 들어 가정해보자, memberA라는 사람이<br />
-2000원을 B에게 준다고 가정하기위해 쿼리를 이용해 <br />
-왼쪽 세션의 memberA라는 사람의 돈을 2000원 차감 시켰다.<br />
-<em>(자동 커밋을 꺼주는 쿼리도 같이 넣었다.)</em></p>
-
-<p>여기서 중요한점은 왼쪽과 오른쪽은 세션으로 나타낸 것이며<br />
-총 두 개의 세션으로 테스트를 하였다. <br />
-세션이란 우리가 DB에 접근을 할 떄, 클라이언트와 Connection을 맺게되는데  <br />
-데이터 베이스 서버는 내부에 세션이란 것을 만들어 해당 커넥션을 통한 모든 <br />
-요청은 이 세션을 통해서 실행하게 된다.</p>
-
-<p><strong>한 마디로 SQL을 전달 받으면 현재 커넥션에 연결된 세션이 SQL을 실행한다.</strong></p>
-
-<p>이 얘기를 토대로 위를 살펴보자면, 커밋이 이루어 지지 않은 상태이고<br />
-왼쪽 세션을 조회 쿼리를 날렸을때는 정상적으로 2000원이 차감되었지만<br />
-오른쪽 세션에서는 조회를해도 기존의 10000원이 표시되는 것을 볼 수 있다.</p>
-
-<p>이 말은 즉, 왼쪽 세션이 commit();되지 않아<br />
-오른쪽 세션과 다르게 보이는 모습이다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSAT0SVkFQRFSs83afh0wemUypXU-0AxB9UgUTQ_nXJ2xMQ_SWhKlueIx5wVXyuV7Z-Lp2pAuv2Otk9W-yQBG81MMnGXQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>이 상황에서 왼쪽 세션에 commit(); 명령을 보낸 후<br />
-왼쪽 오른쪽 세션을 조회해보면<br />
-위와 같이 동일해진 모습을 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQSexoFyUMZWpDWivlRkoPtfcQ3EoLXbMdi9AvRnh8SV8ty8-one4e3UBrV9O3-6YBbptYiajuOe45fpQfUQ_9wPMjh=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>반대로 왼쪽 세션에서 rollback(); 명령을 보냈을 경우에는<br />
-위와 같이 원래상태로 돌아간 모습을 볼 수 있다.</p>
-
-<p>여기서 우리는 알아야할 것이 세션에 따라<br />
-서로 상태가 다르게 보이는 문제가 발생한다.<br />
-그럼 수많은 사람이 이용하는 클라이언트에서 여러 요청이와<br />
-쿼리가 수도 없이 날라왔을 경우에 DB조작에 있어 어려움이 생긴다.</p>
-
-<p>그래서 트랜잭션으로 작업단위를 하나로 묶어<br />
-해당 세션이 실행되었을 때 예외발생하지 않고 전부 성공했을 경우<br />
-다른 세션이 이용이 가능하도록 구현할 필요가 있다.</p>
-
-<p><br /></p>
-
-<h3 id="db-lock">DB Lock</h3>
-
-<p>위에서 commit();과 rollback();에 대해서 알아보았다.<br />
-내가 수행하는 비지니스 로직과 쿼리가 정상적으로 모두 수행되었을때<br />
-commit();을 진행하고 도중에 예외가 생기면 rollback();을 해주면된다.</p>
-
-<p>여기서 한가지 생각해보아야할 것이 우리가 commit();을 하기전에<br />
-다른 세션에서는 기존의 상태가 보여지게되어진다.</p>
-
-<p>이러한 상태에서 다른세션에서 해당부분을 수정하는 쿼리를 보냈을 경우에는<br />
-어떻게 동작이 되어지는가? 하는 의문이생긴다.</p>
-
-<p>데이터베이스는 이런 문제를 해결하기위해<br />
-DB Lock이라는 개념을 제공해준다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTXbqbmqrTNq4gTfLkWf9gIJXW9eWn5HcHqjCdyoOV_OqscxzZOTWG29-j0iGltlzppk2c_rsWgRkU_IpsJvYsXvwDtfw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>memberA라는 사람의 돈을 10000으로 셋팅해두고<br />
-왼쪽 세션에는 500으로 변경(commit 하지않음), 오른쪽 세션에는 기존과 동일<br />
-상태로 둔다음 오른쪽 세션에서 memberA의 돈을 1000으로 바꾸었을 때</p>
-
-<p>어떠한 일이 발생하느냐? 라는게 우리의 초점이다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTIXyEljH6kJA5qPQ9z19u5CL3sddOYEaiCJ9TFDKrv-tNNWb90ILvae9qEluwWPvwyeMvOwCfjKKnetibuOWXBRxRm=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>결과는 위와 같이 오른쪽 세션에서는 수행할 수 있는 쿼리를 실행한다.<br />
-오른쪽 세션을 보면 아래에 실행된 쿼리의 로그를 볼 수 있다.</p>
-
-<p>SET LOCK_TIMEOUT 60000; -&gt; 락 타임아웃을 60초로 설정<br />
-set autocommit false; -&gt; 수동커밋으로 변경<br />
-이 두가지가 실행 되었고, 궁극적으로 1000원으로 변경하는<br />
-update 쿼리문이 실행되지 않은 모습이다.</p>
-
-<p>그 말은 즉, DB에서 Lock이라는 개념을 제공해<br />
-변경을 강제로 막아주고 있는 모습이다.</p>
-
-<p>왼쪽 트랜잭션이 실행되어질 때 락을 획득하여 <br />
-commit();을 하기전까지 다른 세션의 접근을 막고있는 것이다.</p>
-
-<p>하지만 첫번쨰 쿼리로 타임아웃을 설정했기 때문에<br />
-해당 트랜잭션은 60초 후에 아래와 같은<br />
-알람이 발생하면서 세션이 자동적으로 종료하게된다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Timeout trying to lock table {0}; SQL statement:
-    update member set money=10000 - 2000 where member_id = 'memberA' [50200-200]
-    HYT00/50200
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQpgfd4MHVjIet62g9TxKlmVw0jeVCINrpP4pRD2xp6UdS5EnMW2uhWA9zz8uNjxKyp2cSFOriSBRFKGXI8zqUib6As1A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>반대로 60초가 지나기 전에 왼쪽 세션에서<br />
-commit();하여 락을 반납하였을 경우에는<br />
-오른쪽세션에서 락을 획득하여 update 쿼리를 진행한 모습을<br />
-위위 사진과 같이 확인해 볼 수 있다.</p>
-
-<p>한 마디로 정리해보자면</p>
-<ol>
-  <li>세션이 실행되면 락을 획득</li>
-  <li>해당 락이 반납되기 전까진 다른 세션에서는 수정 불가능</li>
-  <li>락을 획득한 세션이 commit(); rollback();을 수행해야 락을 반납한다.</li>
-</ol>
-
-<hr />
-<p>이렇게 오늘은 트랜잭션과 DB락에 대해 공부했다. <br />
-DB락을 알기전까지는 항상 궁금해해왔다.</p>
-
-<p>동시에 하나의 DB 레코드에 변경할때는 누가 우선권을 가지는거지?라는<br />
-물음이 항상있었다. 그 이유는 이전에 PLC 프로그래밍을 하였을 때도<br />
-하나의 공정에 동시작업이 물려있으면 우선순위를 처리해줘야하는<br />
-로직을 작성해주어야했기 때문이다.</p>
-
-<p>오늘 그 질문에 대한 물음은 어느정도 해결 된 것 같고<br />
-최종적으로 궁금한점은 그럼 이 트랜잭션을<br />
-Java코드로 어떻게 적용하는게 알맞는 것인지?라는<br />
-질문이 생기지만 이후에 학습할 과정에 포함되어있는 것 같으니<br />
-공부하면서 다시 깨달아봐야할 것 같다.</p>
-
-<p>오늘 공부는 여기서 끝 !!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 짜장면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[드디어 금요일이다 !!]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 카레, 김치찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨도 선선하니 기분좋은 월요일 시작이다.]]></summary></entry></feed>

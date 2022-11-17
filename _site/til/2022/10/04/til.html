@@ -31,6 +31,7 @@
   <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
 <!-- and it's easy to individually load additional languages -->
 <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
 
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 
   function addBadge(block) {
-    var enabled = ('true' || 'true').toLowerCase();
+    var enabled = ('false' || 'true').toLowerCase();
     if (enabled == 'true') {
       var pre = block.parentElement;
       pre.classList.add('badge');
@@ -824,10 +825,10 @@ API 활성요청을 보내고 승인이 되면  해당하는 API사용법과 키
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="TIL) DB RDMBS 1">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
-<li><a class="post-link" href="/til/2022/09/23/til.html" title="TIL) DB RDMBS 1">TIL) Java 자료구조 Graph, Tree, BST</a></li>
-<li><a class="post-link" href="/til/2022/10/17/til.html" title="TIL) DB RDMBS 1">TIL) Spring AOP 1</a></li>
-<li><a class="post-link" href="/til/2022/11/07/til.html" title="TIL) DB RDMBS 1">TIL) Spring Transaction 2 , Event 비동기 적용</a></li>
+        <li><a class="post-link" href="/til/2022/11/17/til.html" title="TIL) DB RDMBS 1">TIL) 인증, 보안 기초</a></li>
+<li><a class="post-link" href="/til/2022/10/20/til.html" title="TIL) DB RDMBS 1">TIL) Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/til/2022/11/02/til.html" title="TIL) DB RDMBS 1">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/til/2022/09/29/til.html" title="TIL) DB RDMBS 1">TIL) Java Algorithm 3</a></li>
 </ul>
     </div>
 <div class="post-comments">
