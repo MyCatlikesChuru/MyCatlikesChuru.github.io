@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Spring Security 1 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Spring Security 1">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
+<meta property="og:description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
+<link rel="canonical" href="http://localhost:4000/til/2022/11/18/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/11/18/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-11-18T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Spring Security 1">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-18T00:00:00+09:00","datePublished":"2022-11-18T00:00:00+09:00","description":"안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !","headline":"TIL) Spring Security 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/18/til.html"},"url":"http://localhost:4000/til/2022/11/18/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring Security 1</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+91</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-11-18T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 18, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 21 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMbi5KBKT2qUujSToFzrlGZ8riZgXZWFRWl1il4pHA0AlwRLqDL1ROTXlmdEytfEfxx0rpCo3VI8iZTbovSWK60aVBtSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>예전보다 월-금 시간이 정말 빨리간다.<br>
+그만큼 공부하는 시간을 즐기고 있으니 시간도 빨리가는 것 같다.</p>
+
+<p>오늘도 이번주의 마지막이니 만큼<br>
+더 집중해서 공부해보자 !</p>
+
+<hr>
+
+<p>오늘은 Spring Security에 대해 공부하는 날이다.<br>
+다음주에도 계속 공부할 것 같고<br>
+오늘은 기본 구조와 웹 요청 처리 흐름에대해 공부해보려한다.</p>
+
+<h2 id="spring-security">Spring Security</h2>
+
+<p><strong>Spring Security란 ?</strong><br>
+Spring MVC 기반 애플리케이션의 인증,인가 기능을<br>
+지원하는 보안 프레임워크이다.</p>
+
+<p>Interceptor나 Servlet Filter과 같은 보안 기능을<br>
+직접 구현할 수 있지만 Spring Security에서 안정적으로 지원하고 있기 때문에<br>
+Spring MVC를 기반으로한다면 Spring Security를 이용하는게 안전한 선택이라 할 수 있다.</p>
+
+<p><strong>스프링 시큐리티를 이용한다면 ?</strong></p>
+<ol>
+  <li>다양한 유형의 사용자 인증 기능 적용 가능 (폼 로그인, 토큰, OAuth 2기반 인증)</li>
+  <li>애플리케이션 사용자의 역할에 따른 권한 레벨 적용</li>
+  <li>애플리케이션에서 제공하는 리소스 대한 접근 제어</li>
+  <li>민감한 정보에 대한 데이터 암호화</li>
+  <li>일반적으로 알려진 웹 보안 공격 차단</li>
+</ol>
+
+<p>스프링 시큐리티 관련 용어를 미리 숙지하고 <br>
+본격적인 내용을 살펴보면 도움이 될 것이다.</p>
+<ol>
+  <li>
+<strong>Principal (주체)</strong><br>
+-&gt; 애플리케이션에서 작업을 수행할 수 있는 사용자,디바이스,시스템 등이 될 수 있다.<br>
+인증 프로세스가 성공적으로 수행된 사용자의 계정 정보를 의미함.</li>
+  <li>
+<strong>Authentication (인증)</strong><br>
+-&gt; 애플리케이션을 사용하는 사용자가 본인이 맞음을 증명하는 절차</li>
+  <li>
+<strong>Authorization (인가)</strong><br>
+-&gt; 인증이 정상적으로 수행된 사용자에게 하나 이상의 권한을 부여함.<br>
+특정 애플리케이션에 특정 리소스에 접근할 수 있게 허가하는 과정을 의미한다.</li>
+  <li>
+<strong>Access Control (접근제어)</strong><br>
+-&gt; 사용자가 애플리케이션의 리소스에 접근하는 행위를 제어하는 것을 의미한다.</li>
+  <li>
+<strong>Credential (신원 증명정보)</strong><br>
+-&gt; 인증을 정상적으로 수행하기 위해서 식별하기 위한 정보.</li>
+</ol>
+
+<p><br></p>
+
+<h3 id="spring-security-흐름">Spring Security 흐름</h3>
+
+<p>사용해보기에 앞서<br>
+SSR방식으로 테스트를 진행할 예정이다.<br>
+별도의 html을 만들어서 테스트를 진행했고<br>
+Form Login 방식으로 테스트를 진행했다.</p>
+
+<p>간단한 스프링 시큐리티의 보안 적용 흐름을 알고 넘어가보자.<br>
+우리는 보통 웹에서 요청을 보내면 EndPoint를 거쳐 리소스에 접근을 한다.</p>
+
+<p>Servlet 기반의 애플리케이션일 경우 EndPoint에 요청이 도달하기전에 요청을 가로챈 후  <br>
+어떤 처리를 할 수 있는 적절한 포인트를 제공해줄 수 있는 API가 있다.<br>
+그것은 바로 Servlet Filter이다.</p>
+
+<p>Servlet Filter를 잠깐 정리하자면</p>
+<ol>
+  <li>Java에서 Interface형태로 제공하는 API이다.</li>
+  <li>웹요청을 가로채 전처리, 응답을 전달하기전 후처리를 할 수 있다.</li>
+</ol>
+
+<p>이러한 Servlet Filter는 하나 이상의 필터들을 연결해<br>
+Filter Chain을 구성할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOgZKwDg4Q2Nju5ltzUyuDISAyDNnWwDlA-x9U3zTRmZq0JpKZx5Q6Qg95NA9nMQoOQuuyyURwFi0LI-XHIUlnGlFw3Ew=w3024-h1620" alt="image" class="align-left" style="max-width: 40%"><br>
+출처 - <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security 레퍼런스</a></p>
+
+<p><br></p>
+
+<p>Filter Chain의 Filter들은 우리가 구현한 작업들을 실행한 후에<br>
+HttpServlet을 거쳐 DispatcherServlet에 요청이 전달되어진다.</p>
+
+<p>DispatcherServlet은 Spring MVC 계층구조할때 많이 보았을 것이다.<br>
+클라이언트에서 받은 모든 요청을 적합한 컨트롤러에 위임해주는<br>
+Spring MVC에서 아주 중요한 역할을 가지고 있는 녀석이였다.</p>
+
+<p>여하튼 우리가 알아야할 핵심은 DispatcherServlet에 도달하기 전에<br>
+Servlet Filter가 가로챈다는 것이다.</p>
+
+<p><br></p>
+
+<p>그럼 Spring Security와 Servlet Filter와 어떠한 관계가 있냐?</p>
+
+<p>Spring Security에서는 보안과 관련된 Filter를 이용해 <br>
+클라이언트에 요청을 중간에 가로챈 뒤 추가적으로 작업을 할 수 있도록 도와준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMdhZrHIw8wm0G_zG7eQgHqqNnxZhifIy-8Y1taID3Id73Ik4ScIIQt6oclNltVUbpDmsfKO-prb1xGOdVcuLX7eJCA7A=w3024-h1620" alt="image" class="align-left" style="max-width: 70%"><br>
+출처 - <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security 레퍼런스</a></p>
+
+<p><br></p>
+
+<p>그것을 도와주는 클래스들이 바로 위에있는 아키텍쳐에서 보는<br>
+DelegatingFilterProxy와 FilterChainProxy이다. <br>
+해당 클래스들은 Filter 인터페이스를 구현하고 있어<br>
+Servlet Filter로써의 역할을 수행해한다.</p>
+
+<p>DelegatingFilterProxy는 Servlet Container 영의 Filter와<br>
+ApplicationContext에 Bean으로 등록된 Filter들을 연결해주는 역할을 가진다.</p>
+
+<p>FilterChainProxy는 Spring Security를 사용하기 위한 진입점이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNcZKkvVUXMS9csndq0ceE71GN1u2pu7EDH5twxx0Grcg4f36ZzPqvVnHu73GrKupyuIf_iKM3qR7WVa328iuXmCWqZjQ=w3024-h1620" alt="image" class="align-left" style="max-width: 80%"><br>
+출처 - <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security 레퍼런스</a></p>
+
+<p><br></p>
+
+<p>위의 그림에서 보듯이 Spring Security의 Filter Chain으로 <br>
+보안을 위한 작업을 처리하는 필터의 모음을 만들면 <br>
+FilterChainProxy로 부터 해당 Filter들을 시작할 수 있게되어진다.</p>
+
+<p>한마디로 FilterChainProxy부터 Spring Security에서 제공하는<br>
+보안 Filter들이 필요한 작업을 수행해주게 도와주는 클래스라 보면된다.</p>
+
+<p><br></p>
+
+<h3 id="spring-security-연습해보기">Spring Security 연습해보기</h3>
+
+<p>위의 Spring Security 요청 흐름에 대해 어느정도<br>
+이해가 되었다면, 아래 코드들을 보고<br>
+어느 부분인지 정확히는 몰라도 흐름은 파악이 가능하다.</p>
+
+<p>우선 Spring Security를 사용하기 위한 의존라이브러리를 추가해야한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">security</span><span class="err">'</span>
+</code></pre></div></div>
+<p>build.gradle에 의존라이브러를 추가시켜 놓으면 준비 끝이다.</p>
+
+<p>처음으로 우선 위에서 보았던<br>
+SecurityFilterChain을 구성해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfiguration</span> <span class="o">{</span>
+    
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// csrf 공격에 대한 설정 비활성화</span>
+                <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span><span class="c1">// Form 로그인 인증 방법</span>
+                <span class="o">.</span><span class="na">loginPage</span><span class="o">(</span><span class="s">"/auths/login-form"</span><span class="o">)</span> <span class="c1">// 로그인 커스텀 페이지 설정 (우리가만든 경로설정)</span>
+                <span class="o">.</span><span class="na">loginProcessingUrl</span><span class="o">(</span><span class="s">"/process_login"</span><span class="o">)</span><span class="c1">// 인증요청을 수행할 요청 URL 설정 (html form태그에서 요청)</span>
+                <span class="o">.</span><span class="na">failureUrl</span><span class="o">(</span><span class="s">"/auths/login-form?error"</span><span class="o">)</span><span class="c1">// 실패시 리다이렉트할 URL 지정</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
+                <span class="o">.</span><span class="na">logout</span><span class="o">()</span> <span class="c1">// 로그아웃 설정위한 LogoutConfigurer를 리턴해줌</span>
+                <span class="o">.</span><span class="na">logoutUrl</span><span class="o">(</span><span class="s">"/logout"</span><span class="o">)</span> <span class="c1">// 로그아웃 요청 url 설정 (html form태그에서 요청)</span>
+                <span class="o">.</span><span class="na">logoutSuccessUrl</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="c1">// 성공시 리다이렉트할 장소</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
+                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">().</span><span class="na">accessDeniedPage</span><span class="o">(</span><span class="s">"/auths/access-denied"</span><span class="o">)</span> <span class="c1">// 권한이 없을때 보낼 요청</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorize</span> <span class="o">-&gt;</span>
+                        <span class="n">authorize</span><span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/orders/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span> <span class="c1">// 해당 경로에 ADMIN 권한만 접근가능</span>
+                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/members/my-page"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span> <span class="c1">// 해당 경로에 USER 권한만 접근가능</span>
+                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span> <span class="c1">// 앞에지정한 URL을 제외한것 접근 모두가능</span>
+                <span class="o">);</span>
+<span class="c1">//                .authorizeHttpRequests() // 클라이언트의 요청이 들어오면 접근권한을 확인하겠다고 정의</span>
+<span class="c1">//                .anyRequest() // 클라이언트의 모든 요청에 대해 접근을 허용</span>
+<span class="c1">//                .permitAll(); // 클라이언트의 모든 요청에 대해 접근을 허용</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>기본적인 구성방법은 SecurityFilterChain 클래스 타입을 반환하는<br>
+메서드를 하나 만들어 filter의 정보를 넣어주는 것이다.<br>
+그리고 해당 메서드를 Spring Container에 Bean으로 담아주면된다.</p>
+
+<p>빈으로 담아주면 아까 위에서 얘기했던<br>
+DelegatingFilterProxy 클래스에 의해<br>
+서블릿 컨테이너 영역의 필터와 스프링 컨테이너의 빈으로 등록된 필터를<br>
+연결해주는 브릿가 생긴다고 예상해볼 수 있을 것 같다.</p>
+
+<p>그리고 SSR방식의 FormLogin을 사용한다고 가정했으니<br>
+첫번째 필터로는 로그인에 해당하는 내용들  <br>
+두번째 필터로는 로그아웃에 해당하는 내용들 <br>
+세번째로는 권한이 없을때 처리하는 내용<br>
+네번째로는 클라이언트 요청에따른 권한 설정에 대한 내용<br>
+이렇게 각각 필터들을 하나의 필터체인으로 .build(); 하여 반환하면<br>
+해당 내용에 따라 인증과 권한 부여가 이루어질 수 있다.</p>
+
+<p><br></p>
+
+<h4 id="in-memory로-인증-해보기">In Memory로 인증 해보기</h4>
+
+<p>DB를 이용하지 않는 인증방법을 한번 연습해보자</p>
+
+<p><strong><span style="color:#F04965"> 1). 단순하게 고정해서 등록해 인증과 권한을 주는 방식 </span></strong></p>
+
+<p>SecurityConfiguration 클래스 아래에 <br>
+UserDetailsManager 반환하는 Bean 객체를 만들어주었다.</p>
+
+<p>UserDetailsManager 라는 인터페이스를 <br>
+구현한 객체를 Bean으로 등록해주면 해당 정보로 등록된<br>
+사용자들은 정보에 해당하는 인증과 권한을 가지게 된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Bean</span>
+ <span class="kd">public</span> <span class="nc">UserDetailsManager</span> <span class="nf">userDetailsService</span><span class="o">(){</span>
+     <span class="nc">UserDetails</span> <span class="n">user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">.</span><span class="na">withDefaultPasswordEncoder</span><span class="o">()</span> <span class="c1">// password 암호화</span>
+             <span class="o">.</span><span class="na">username</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">)</span> <span class="c1">// 식별하는 사용자 아이디 값</span>
+             <span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="s">"1111"</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">roles</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span> <span class="c1">// 권한지정</span>
+             <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+     <span class="nc">UserDetails</span> <span class="n">admin</span> <span class="o">=</span> <span class="nc">User</span><span class="o">.</span><span class="na">withDefaultPasswordEncoder</span><span class="o">()</span>
+             <span class="o">.</span><span class="na">username</span><span class="o">(</span><span class="s">"admin@naver.com"</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="s">"2222"</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">roles</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+     <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryUserDetailsManager</span><span class="o">(</span><span class="n">user</span><span class="o">,</span><span class="n">admin</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+<p>InMemoryUserDetailsManager 구현체로 구성 정보를 넘겨주면 된다.<br>
+구성 정보를 만드는 방법은 UserDetails 인터페이스를 상속받는<br>
+User 클래스를 이용해 만들 수있다.</p>
+
+<p>만약 클라이언트에서 form login 방식으로 로그인 요청이 온다면<br>
+해당 구성정보를 가진 사용자는 로그인이 되며<br>
+권한을 각각 USER, ADMIN으로 부여받게 되어진다.</p>
+
+<p>위에 있는 정보는 DB를 이용한 것도 아니며<br>
+단순하게 UserDetailsManager 타입의 Bean을 만들어 주 었을 뿐인데<br>
+Spring Security는 해당 정보를 가진 사용자가 로그인을 하면<br>
+인증을 해주고 권한을 부여해줄 수 있는 것이다.</p>
+
+<p>여기서 <strong>User.withDefaultPasswordEncoder()</strong> 메서드를 사용하면<br>
+bcrypt 방식으로 password를 암호화해준다. 즉, 1111,2222로 들어온 값을<br>
+암호화하여 관리를 한다는 의미이다.</p>
+
+<p>만약 코드로 치게된다면 <strong>Deprecated</strong> 상태로 변하는데 (가운데줄 쳐짐)<br>
+해당 API는 권장하지 않는다는 뜻이다. 이 경우에는 고정으로 사용하고 있기에<br>
+고정해서 사용하지 말라는 의미에서 Deprecated로 변한 것을 볼 수 있다.</p>
+
+<p><br></p>
+
+<p><strong><span style="color:#F04965"> 2). 회원 가입을 이용해 등록하기 </span></strong></p>
+
+<p>기본적으로 password를 암호화를 해야한다.<br>
+암호화를 하기위해 위에서 이용했던 bcrpty 방식으로 암호화를 <br>
+도와주는 API가 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cm">/*
+ * PasswordEncoder Bean 등록
+ * 암호화를 해야한다. Spring Security에서 지원하는 Default = bcrypt
+ * */</span>
+ <span class="nd">@Bean</span>
+ <span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">(){</span>
+     <span class="k">return</span> <span class="nc">PasswordEncoderFactories</span><span class="o">.</span><span class="na">createDelegatingPasswordEncoder</span><span class="o">();</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+<p>SecurityConfiguration 클래스에<br>
+PasswordEncoder 인터페이스 타입 객체를 Bean으로 등록해주고<br>
+회원가입시 사용할 수있다.</p>
+
+<p>회원가입할 경우 Controller는 구성되어 있다고 가정하고<br>
+Service 코드를 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+*  InMemory 사용을 위한 빈주입
+* */</span>
+<span class="c1">//@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV1</span> <span class="o">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">inMemoryMemberService</span><span class="o">(</span><span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="n">userDetailsManager</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>MemberService라는 인터페이스 타입으로 객체를 Bean으로 등록해준다.</p>
+
+<p>InMemoryMemberSerivce에 우리가 이용해야할<br>
+UserDetailsManager와 PasswordEncoder를 매개변수로 넣어<br>
+생성자로 반환하게 되어진다.</p>
+
+<p>그럼 Bean으로 InMemoryMemberService을 구현체로<br>
+의존성 주입하여 Controller에서 이용이 가능하다..</p>
+
+<p><br></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InMemoryMemberService</span> <span class="kd">implements</span> <span class="nc">MemberService</span> <span class="o">{</span>
+
+   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">;</span>
+
+   <span class="kd">public</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">userDetailsManager</span> <span class="o">=</span> <span class="n">userDetailsManager</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">passwordEncoder</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">createMember</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
+
+      <span class="nc">List</span><span class="o">&lt;</span><span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="n">createAuthorities</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">MemberRole</span><span class="o">.</span><span class="na">ROLE_USER</span><span class="o">.</span><span class="na">name</span><span class="o">());</span> <span class="c1">// 권한 USER로 설정</span>
+
+      <span class="nc">String</span> <span class="n">encryptedPassword</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span> <span class="c1">// 비밀번호 암호화 진행</span>
+
+      <span class="nc">UserDetails</span> <span class="n">userDetails</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span> <span class="n">encryptedPassword</span><span class="o">,</span> <span class="n">authorities</span><span class="o">);</span> <span class="c1">// username, password, 권한 정보로 유저 생성</span>
+      <span class="n">userDetailsManager</span><span class="o">.</span><span class="na">createUser</span><span class="o">(</span><span class="n">userDetails</span><span class="o">);</span> <span class="c1">// 생성한 유저정보 등록</span>
+
+      <span class="k">return</span> <span class="n">member</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="nf">createAuthorities</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">roles</span><span class="o">)</span> <span class="o">{</span>
+
+      <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">roles</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">role</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">SimpleGrantedAuthority</span><span class="o">(</span><span class="n">role</span><span class="o">))</span>
+              <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>여기서 회원가입을 위한 서비스 로직 createMember <br>
+안의 내용을 들여다보면된다.</p>
+
+<p>첫번째로 권한에 대한 내용을 설정하기위해<br>
+new SimpleGrantedAuthority();을 이용해 객체를<br>
+List 형태로 담아둔 authorities를 만들었다.</p>
+
+<p>두번째로 암호화를 위해 DI받은 passwordEncoder의 메서드인<br>
+.encode();를 이용해 비밀번호를 넘겨줘<br>
+bcrypt 방식으로 암호화하여 String 타입으로 받아두었다.</p>
+
+<p>마지막으로 new User();를 이용해<br>
+위에서 고정으로 구성정보를 구성한 것 처럼</p>
+
+<p>username, password, roles를 생성자로 넘겨<br>
+UserDetails 타입의 객체로 만들어<br>
+위에서 DI 받은 userDetailsManger의 메서드<br>
+createUser();의 매개변수로 넘겨주게 되면<br>
+회원 가입을 할때 해당 정보를 가진 Member가 인증과 권한정보를<br>
+가지게되어 로그인할때 해당 정보를 가진 사용자가 로그인을 한다면<br>
+인증이되어 설정한 ROLE_USER 권한으로 이용이 가능하게되어진다.</p>
+
+<p><br>
+<br></p>
+
+<p><strong><span style="color:#0066CC"> 위의 1,2번을 한마디로 정리 해보자면 !! </span></strong></p>
+
+<p>UserDetails 객체를 만들어 줘야한다.<br>
+그리고 그 객체를 이용해 UserDetailsManager의 구현체인<br>
+InMemoryUserDetailsManager .createUser(); 메서드에<br>
+매개변수로 UserDetails 객체를 넘겨주는게 끝이다 !</p>
+
+<p><br></p>
+
+<h4 id="h2-db로-인증-해보기">H2 DB로 인증 해보기</h4>
+
+<p>위에서 UserDetailsManager를 이용해 인증과 권한을 가졌다면</p>
+
+<p>DB를 이용하기 위해서는 UserDetailsService 인터페이스를 이용해야한다.<br>
+UserDetailsManager가 UserDetailsService를 상속받은 관계이다.</p>
+
+<p>우선 H2 DB 설정과 관련된 부분은 되어있다고 가정하겠다. <br>
+문제없이 H2 DataBase를 사용하기 위해서는<br>
+기존에 설정했던 SecurityFilterChain에서 한가지 Filter를 추가해줘야한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfiguration</span> <span class="o">{</span>
+    
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">headers</span><span class="o">().</span><span class="na">frameOptions</span><span class="o">().</span><span class="na">sameOrigin</span><span class="o">()</span>  <span class="c1">// &lt;frame&gt; 태그등 렌더링여부 설정, 동일 출처로부터 들어오는 request만 렌더링허용 , H2 사용을 위함</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
+                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// csrf 공격에 대한 설정 비활성화</span>
+                <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span><span class="c1">// Form 로그인 인증 방법</span>
+                <span class="o">.</span><span class="na">loginPage</span><span class="o">(</span><span class="s">"/auths/login-form"</span><span class="o">)</span> <span class="c1">// 로그인 커스텀 페이지 설정 (우리가만든 경로설정)</span>
+                <span class="o">.</span><span class="na">loginProcessingUrl</span><span class="o">(</span><span class="s">"/process_login"</span><span class="o">)</span><span class="c1">// 인증요청을 수행할 요청 URL 설정 (html form태그에서 요청)</span>
+                <span class="o">.</span><span class="na">failureUrl</span><span class="o">(</span><span class="s">"/auths/login-form?error"</span><span class="o">)</span><span class="c1">// 실패시 리다이렉트할 URL 지정</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
+                <span class="o">.</span><span class="na">logout</span><span class="o">()</span> <span class="c1">// 로그아웃 설정위한 LogoutConfigurer를 리턴해줌</span>
+                <span class="o">.</span><span class="na">logoutUrl</span><span class="o">(</span><span class="s">"/logout"</span><span class="o">)</span> <span class="c1">// 로그아웃 요청 url 설정 (html form태그에서 요청)</span>
+                <span class="o">.</span><span class="na">logoutSuccessUrl</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="c1">// 성공시 리다이렉트할 장소</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
+                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">().</span><span class="na">accessDeniedPage</span><span class="o">(</span><span class="s">"/auths/access-denied"</span><span class="o">)</span> <span class="c1">// 권한이 없을때 보낼 요청</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorize</span> <span class="o">-&gt;</span>
+                        <span class="n">authorize</span><span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/orders/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span> <span class="c1">// 해당 경로에 ADMIN 권한만 접근가능</span>
+                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/members/my-page"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span> <span class="c1">// 해당 경로에 USER 권한만 접근가능</span>
+                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span> <span class="c1">// 앞에지정한 URL을 제외한것 접근 모두가능</span>
+                <span class="o">);</span>
+<span class="c1">//                .authorizeHttpRequests() // 클라이언트의 요청이 들어오면 접근권한을 확인하겠다고 정의</span>
+<span class="c1">//                .anyRequest() // 클라이언트의 모든 요청에 대해 접근을 허용</span>
+<span class="c1">//                .permitAll(); // 클라이언트의 모든 요청에 대해 접근을 허용</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>.headers().frameOptions().sameOrigin()<br>
+메서드들이 추가되었고, 추가하지 않으면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPof1RAUkqFj1p0icu1y0Y1G_-q79XgeRnNvxsgf4sahOYXm9S9UNHjL3dST2DYsW76e9J9ZS_C961EXzBBqNjpKuygEg=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>위의 화면과 같이 정상적으로 H2 DataBase가 표시되지 않을 수 있다.</p>
+
+<p><br></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+*  DB 사용을 위한 빈주입
+* */</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV2</span> <span class="o">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">dbMemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberServiceV1</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>기존에 InMemory를 사용하기 위해 설정했던 구성정보를 지우고<br>
+새로운 구성정보를 설정. DBMemberService가 적용되도록 스프링 빈으로 등록했다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBMemberServiceV1</span> <span class="kd">implements</span> <span class="nc">MemberService</span> <span class="o">{</span>
+
+   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">;</span>
+
+   <span class="kd">public</span> <span class="nf">DBMemberServiceV1</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">passwordEncoder</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">createMember</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">verifyExistsEmail</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+      <span class="nc">String</span> <span class="n">encryptedPassword</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span> <span class="c1">// 비밀번호 암호화</span>
+      <span class="n">member</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">encryptedPassword</span><span class="o">);</span> <span class="c1">// 암호화된 비밀번호 객체에 맵핑</span>
+
+      <span class="nc">Member</span> <span class="n">saveMember</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">member</span><span class="o">);</span> <span class="c1">// DB에 저장</span>
+
+      <span class="k">return</span> <span class="n">saveMember</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="kd">private</span> <span class="kt">void</span> <span class="nf">verifyExistsEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="n">email</span><span class="o">);</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span>
+         <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_EXISTS</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>DBMemberService에서는<br>
+비밀번호 암호화를 한 것을 member 객체에 담아<br>
+Repository에 저장하게만 구성해주면 끝난다.</p>
+
+<p>인메모리 사용할때에는 UserDetailsManager에다가 저장했지만<br>
+이제는 DBMemberService는 회원가입이라는<br>
+서비스 로직만 남게 된 것이다.</p>
+
+<p>이제 회원가입을하였고<br>
+로그인을 하였을때 UserDetailsManager와 같은 역할을 구현해줘야한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+* DB사용했을때 인증 처리 적용하기 (인메모리 사용시 기존 UserDetailManager를 사용했었음)
+* UserDetailsService는 User정보를 로드하는 핵심적인 인터페이스다.
+* UserDetailManager는 UserDetailsService를 상속하고있음
+* */</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloUserDetailsServiceV1</span> <span class="kd">implements</span> <span class="nc">UserDetailsService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">HelloAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">HelloUserDetailsServiceV1</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">HelloAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorityUtils</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    * UserDetailService 오버라이딩하여 UserDetails 객채를 만들어 반환하기
+    * 이후는 스프링시큐리티가 인증처리를 대신해준다
+    * */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">UserDetails</span> <span class="nf">loadUserByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">UsernameNotFoundException</span> <span class="o">{</span>
+        <span class="c1">// 해당 메서드 호출 시점은, login.html에서 로그인 버튼 누를떄이다.</span>
+        <span class="c1">// 즉, &lt;form action="/process_login" method="post"&gt; 가 실행될떄 호출됨</span>
+        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">optionalMember</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="n">username</span><span class="o">);</span> <span class="c1">// 이메일로 멤버찾기</span>
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">optionalMember</span><span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">));</span> <span class="c1">// 멤버 찾기 예외 처리</span>
+        <span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">.</span><span class="na">createAuthorities</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span> <span class="c1">// 이메일 비교후 권한 처리</span>
+        <span class="nc">UserDetails</span> <span class="n">user1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span> <span class="n">findMember</span><span class="o">.</span><span class="na">getPassword</span><span class="o">(),</span> <span class="n">authorities</span><span class="o">);</span> <span class="c1">// 해당 정보로 User생성자로 UserDetails 만들기</span>
+        <span class="k">return</span> <span class="n">user1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>우리는 UserDetailsService를 구현할 클래스를 만들어<br>
+상속을 받게 만들어준다음. loadUserByUsername 오버라이딩해<br>
+재정의를 해서 반환을 UserDetails 객체로 만들어 반환을 해주면된다.</p>
+
+<p>회원가입은 이미 되어있고, 암호화까지해 놓은 상태로 DB에 저장되어있다.<br>
+우리가 로그인 페이지에서 form login으로 post 메서드 /process_login을 호출하게되면<br>
+우리가 위에서 봤던 흐름대로 EndPoint까지 가기전에<br>
+Servlet Filter가 흐름을 가로채서 실행하게 되고<br>
+우리는 Spring Security를 사용하고 있기때문에 인증 절차를 가지게된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOFEpthgmY3S8CBykz2TudWwacXHEngWxFMzuqUbbRWjNwnV379_0wvzLGpOM0t0X18sB8nTpumplyiCwlc5r_PjdIZfg=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>인증 절차는 실제로 이러한 흐름을 진행된다고한다.</p>
+
+<ol>
+  <li>
+    <p>사용자가 로그인 정보와 함께 인증 요청을 한다.(Http Request)</p>
+  </li>
+  <li>
+    <p>AuthenticationFilter가 요청을 가로채고, 가로챈 정보를 통해<br>
+UsernamePasswordAuthenticationToken의 인증용 객체를 생성한다.</p>
+  </li>
+  <li>
+    <p>AuthenticationManager의 구현체인 ProviderManager에게 생성한 <br>
+UsernamePasswordToken 객체를 전달한다.</p>
+  </li>
+  <li>
+    <p>AuthenticationManager는 등록된 AuthenticationProvider(들)을 조회하여 인증을 요구한다.</p>
+  </li>
+  <li>
+    <p>실제 DB에서 사용자 인증정보를 가져오는 UserDetailsService에 사용자 정보를 넘겨준다.</p>
+  </li>
+  <li>
+    <p>넘겨받은 사용자 정보를 통해 DB에서 찾은 사용자 정보인 UserDetails 객체를 만든다.</p>
+  </li>
+  <li>
+    <p>AuthenticationProvider(들)은 UserDetails를 넘겨받고 사용자 정보를 비교한다.</p>
+  </li>
+  <li>
+    <p>인증이 완료되면 권한 등의 사용자 정보를 담은 Authentication 객체를 반환한다.</p>
+  </li>
+  <li>
+    <p>다시 최초의 AuthenticationFilter에 Authentication 객체가 반환된다.</p>
+  </li>
+  <li>
+    <p>Authenticaton 객체를 SecurityContext에 저장한다.</p>
+  </li>
+</ol>
+
+<p><a href="https://dev-coco.tistory.com/174">출처 - 슬기로운 개발생활</a></p>
+
+<p><br></p>
+
+<p>즉, 우리가 구현해줘야할 부분은<br>
+5번에서 사용자 정보를 받는 것을 이용해<br>
+6번, 받은 정보를 이용해 UserDetails 객체를 반환만 시켜주면<br>
+그 이후는 7번 부터 Spring Security가 알아서 진행시켜준다.</p>
+
+<p>이를 토대로 위에 프로그램을 작성해 놓은 것을 보면<br>
+오버라이딩한 loadUserByUsername 메서드를 통해서<br>
+username을 매개변수로 정보를 받는다.<br>
+해당 정보로 DB를 조회한다음, UserDetails 객체를 반환시켜주는 프로그램이다.</p>
+
+<p><br></p>
+
+<p><strong><span style="color:#0066CC"> 위의 얘기를 한마디로 정리 해보자면 !! </span></strong></p>
+
+<p>UserDetailsService 인터페이스를 구현한 클래스를 만든다.<br>
+loadUserByUsername(); 메서드를 오버라이딩하여 매개변수로 username 정보를 받을 수 있다.<br>
+username정보를 이용해 DB에 조회를 한다.<br>
+조회한 데이터를 토대로 UserDetails 객체를 만들어 반환만 시켜주면 된다.<br>
+이후는 Spring Security가 알아서 해줌</p>
+
+<p><br></p>
+
+<h3 id="오늘-만난-error">오늘 만난 ERROR</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.codestates.member.MemberController required a single bean, but 2 were found:
+	- inMemoryMemberService: defined by method 'inMemoryMemberService' in class path resource [com/codestates/config/JavaConfigurationV1.class]
+	- dbMemberService: defined by method 'dbMemberService' in class path resource [com/codestates/config/JavaConfigurationV2.class]
+</code></pre></div></div>
+<p>오늘 테스트 중 만났던 에러다. <br>
+내용은 MemberController에서 싱글빈을 요구한는데 2개가 있다는 것 같은 내용이다.<br>
+즉, 같은 타입의 빈이 두개가 등록된 문제라고 생각했다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+</code></pre></div></div>
+<p>밑에 아주친절하게 @Primary나  @Qualifier를 사용하라한다.</p>
+
+<p><br></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+*  InMemory 사용을 위한 빈주입
+* */</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV1</span> <span class="o">{</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">inMemoryMemberService</span><span class="o">(</span><span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="n">userDetailsManager</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+*  DB 사용을 위한 빈주입
+* */</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV2</span> <span class="o">{</span>
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">dbMemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>MemberControler에서는 MemberService를 DI받게 설계해놓았고</p>
+
+<p>MemberService라는 인터페이스를 구현한<br>
+클래스 inMemoryMemberServie, DBMemberService 두개를<br>
+빈으로 등록하려고 시도하니까 발생한 알람인 것 같다.</p>
+
+<p>여기서 @Configuration을 한군데를 지워주면<br>
+중복되지 않고 해결 할 수 있다.</p>
+
+<p>하지만 코드는 그대로 유지싶었기에</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV2</span> <span class="o">{</span>
+    <span class="nd">@Bean</span>
+    <span class="nd">@Primary</span>
+    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">dbMemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span> <span class="n">passwordEncoder</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>JavaConfigurationV2에 빈등록 메서드에 @Primary를 이용해<br>
+빈을 선택해 주입해주도록 정했다.</p>
+
+<hr>
+
+<p>오늘은 이렇게 스프링 시큐리티의 기본적인<br>
+사용방법을 알아보았다.</p>
+
+<p>내부적으로 이루어지는 작업들이 많아 정확한<br>
+흐름이 감이 잡히질 않는 것 같다.<br>
+글을 적으면서도 내가 정확히 이해한게 맞는지 수십번을 돌아가서 확인하고 반복했다. <br>
+확인했다고 한들… 정확한 정보를 적은 것 같지 않은 느낌이든다.<br>
+계속 익숙해지게 사용해보면서 사용법에 익숙해져보자</p>
+
+<p>오늘공부는 여기서 끝 !!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 짜장면, 탕수육</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/11/17/til.html" title="TIL) 인증, 보안 기초">TIL) 인증, 보안 기초</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/27/til.html" title="">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
+<li><a class="post-link" href="/til/2022/11/14/til.html" title="">TIL) API Documentation 2</a></li>
+<li><a class="post-link" href="/til/2022/09/27/til.html" title="">TIL) Java Algorithm 1</a></li>
+<li><a class="post-link" href="/til/2022/10/18/til.html" title="">TIL) Spring AOP 2</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
