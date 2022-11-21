@@ -1,4 +1,264 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-19T23:00:52+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Security 1</title><link href="http://localhost:4000/til/2022/11/18/til.html" rel="alternate" type="text/html" title="TIL) Spring Security 1" /><published>2022-11-18T00:00:00+09:00</published><updated>2022-11-18T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/18/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/18/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMbi5KBKT2qUujSToFzrlGZ8riZgXZWFRWl1il4pHA0AlwRLqDL1ROTXlmdEytfEfxx0rpCo3VI8iZTbovSWK60aVBtSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-21T18:50:10+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Security 2</title><link href="http://localhost:4000/til/2022/11/21/til.html" rel="alternate" type="text/html" title="TIL) Spring Security 2" /><published>2022-11-21T00:00:00+09:00</published><updated>2022-11-21T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/21/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/21/til.html"><![CDATA[<p>주말이라는 것은… 사람을 참 나태하게 만들기도<br />
+활력을 공급하기도 하는 것 같다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOjX-PSPnxF_8TEMdso4KXA0JFYzGA1vArqAdtB6h1-NxbA6XRbp-Xy587IzIYiyL_lKX7HXm5PYPHWKxXIq9zV_OpOtA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>토요일까지 Spring Security를 공부하다가 번아웃이와<br />
+일요일에 너무 게으르게 누워만 있었더니<br />
+유튜브 나태지옥에 다시 빠져버렸다.</p>
+
+<hr />
+
+<p>저번주에 Spring Security를 사용하는 예제 코드와<br />
+간단한 흐름을 알아보았다.<br />
+그중 Filter라는 것들을 배웠고 Spring Security도<br />
+Filter로 구성된 FilterChain으로 구동하는 것도 배웠다.</p>
+
+<p>오늘은 그 중에서 인증관련된 Filter를 자세히 알아보자</p>
+
+<h2 id="spring-security-인증">Spring Security 인증</h2>
+
+<h3 id="filter-흐름-복습">Filter 흐름 복습</h3>
+
+<p>저번주에 공부했었던 <a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 1)</a>의 흐름을 다시한번 짚고 넘어가자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdqM4FUdK-kbSe3fOY-_nbwexPCpzCoO0wU4fxsPySDcyhG4ju9jOfdiay5TA0GmdJqNj0L4UZcOZGIHz9XGJLAcqNlw=w1299-h921" alt="image" class="align-left" style="max-width: 60%" /></p>
+
+<p>클라이언트에서 요청이오면<br />
+Filter들의 모임인 FilterChain을 거쳐 하나씩 실행한다.<br />
+그 중 FilterChainProxy 클래스로 부터 보안을 위한 작업 필터모음인<br />
+SecurityFilterChain를 수행하게된다.</p>
+
+<p>여기서 SecurityFilterChain도 Filter들로 이루어져있고<br />
+아래의 사진이 SecurityFilterChain의 대략적인 구조이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNlrpr3UQFs4rI7dXvh6L-v1GvYL_3mSnWy8cA9rKECR2M-C_y4fYtJrNqD7xWcvzqy0TDvYC65satnVVyAEYsoTGaQbg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /><br />
+<a href="https://velog.io/@sa833591/Spring-Security-5">hyozkim.log - 출처</a></p>
+
+<p>사진에서 보면 알 수 있듯이 <br />
+SecurityFilterChain의 구조는</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SecurityContextPersistenceFilter  
+LogoutFilter  
+UsernamePasswordAuthenticationFilter  
+...  
+</code></pre></div></div>
+
+<p>등 여러가지 필터를가진 형태로 존재한다.</p>
+
+<p>모든 Filter의 구조를 알고 이해한다면 분명 SpringSecurity에 대한<br />
+이해도가 깊어질 것이자만, 현재 공부를 시작한지 얼마안된<br />
+내가 전부를 이해하기에는 사실 무리가 있는 것 같다고 생각이 들었다.</p>
+
+<p>이 중에서도 인증과 관련된 UsernamePasswordAuthenticationFilter의<br />
+인증 처리 흐름을 이해해보려한다. 해당하는 부분을 어제 코드로 구현하기도 했고<br />
+흐름을 알아야 SpringSecurity를 기본적인 내용을 구현하는데 무리가 없을 것 같다.</p>
+
+<p><br /></p>
+
+<p><strong>Security Filter 확인 방법?</strong></p>
+
+<p>위에서 얘기했듯이 여러 Filter들을 거쳐서<br />
+인증과 권한에 대한 수행을 SpringSecurity가 진행해준다.<br />
+실제로 어떠한 Filter를 거쳐왔는지 확인을 할 수 있는 애노테이션이 있고  <br />
+디버그 용도로 매우 유용하게 쓰일 것 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span><span class="o">(</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span> <span class="c1">// 디버그 설정</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfigurationV2</span> <span class="o">{</span>
+    
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">loginPage</span><span class="o">(</span><span class="s">"/auths/login-form"</span><span class="o">)</span> 
+                <span class="o">.</span><span class="na">loginProcessingUrl</span><span class="o">(</span><span class="s">"/process_login"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">failureUrl</span><span class="o">(</span><span class="s">"/auths/login-form?error"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">()</span> 
+                <span class="o">.</span><span class="na">anyRequest</span><span class="o">()</span> 
+                <span class="o">.</span><span class="na">permitAll</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>@EnableWebSecurity(debug = true) 어노테이션을<br />
+이용해 현재 요청에 이용된 Filter의 목록이 조회가 가능하다.</p>
+
+<p>애플리케이션을 실행시키고<br />
+formLogin 방식으로 요청을 보내보았다.</p>
+
+<p>그리고 콘솔을 확인해보면</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  UsernamePasswordAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+</code></pre></div></div>
+<p>첫번쨰로 요청에 대한 정보들과<br />
+다음으로는 Security filter chain에 Filter 목록들이<br />
+나오는 것을 확인할 수 있다.</p>
+
+<p>위에서 볼 수 있듯이 우리가 알아보려고하는<br />
+UsernamePasswordAuthenticationFilter 클래스도 <br />
+콘솔로 확인이 가능하다.</p>
+
+<p><br /></p>
+
+<h3 id="인증-처리">인증 처리</h3>
+
+<p>이제 본격적으로 인증이 어떠한 과정으로<br />
+진행되는지 처리 순서에 대한 흐름을 알아보자.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM9oGy1ZMRYopmfP5I5a2V8YyhzZ_cPot1-9VSX4vFPRYbCISfsxHheqNiPvpRv-ywxmVYbIGBUyfKCX3AaeeChzJ7toQ=w1920-h921" alt="image" class="align-left" style="max-width: 120%" /></p>
+
+<p>(1). 클라이언트에서 로그인 요청이 오면, SecurityFilterChain을 거치게된다.<br />
+그 중 인증에 관한 부분은 <strong>UsernamePasswordAuthenticationFilter</strong> 클래스이다.</p>
+
+<p><br /></p>
+
+<p>(2). Authentication 객체를 생성한다.<br />
+여기서 로그인할때 받아온 Username과 Password를 이용해<br />
+Authentication의 구현체인 UsernamePasswordAuthenticationToken <br />
+클래스를 이용해 Authentication 객체를 만든다.<br />
+<em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
+<p><br /></p>
+
+<p>(3). Authentication 객체를 AuthenticationManager로 전달한다.  <br />
+여기서 구현체인 ProviderManager가 인증이라는 작업의 총괄 매니저다. <br />
+총괄은 하지만 실제 인증처리는 <strong>AuthenticationProvider</strong>에게 위임한다.<br />
+<em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
+<p><br /></p>
+
+<p>(4). Authentication 객체를 AuthenticationProvider로 전달한다.<br />
+ProviderManager가 전달해준 Authentication객체로 인증하는 작업을 진행한다.<br />
+인증을 구현하는 방법은 2가지 정도가 있다.</p>
+
+<ol>
+  <li>AuthenticationProvider를 상속받아 구현</li>
+  <li>UserDetailsService를 상속받아 구현</li>
+</ol>
+
+<p><a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 1)</a>에서 우리는 UserDetailsService를 상속받아  <br />
+직접 클래스를 구현했었다.</p>
+
+<p>여기서 1번방법으로 구현하면 UserDetailsService 부분은<br />
+사용하지 않고 구현을 할 수 있다. 구현할때 중요한 부분은<br />
+직접 Credentials과 Password를 인증과정 로직을 구현해야한다는 점이다.</p>
+
+<p>하지만 어제 우리가 구현했던 2번방법으로 구현하면<br />
+AuthenticationProvider를 구현하지 않아도된다.<br />
+DaoAuthenticationProvider를 구현 클래스로 사용하기 때문이다. 
+실제로 호출 흐름을 본다면,</p>
+
+<ol>
+  <li>ProviderManager .authenticate() 메서드 호출</li>
+  <li>AuthenticationProvider 인터페이스의 AbstractUserDetailsAuthenticationProvider가<br />
+.authenticate(); 메서드를 구현했음.</li>
+  <li>.authenticate(); 메서드안에서 인증 처리를 위한 retrieveUser(); 호출<br />
+DaoAuthenticationProvider 클래스가 retrieveUser();를 구현했음</li>
+  <li>retrieveUser();메서드에서 UserDetailsService .loadUserByUsername() 메서드 호출<br />
+loadUserByUsername(); 메서드는 우리가 구현해야하는 부분이다.</li>
+</ol>
+
+<p><em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
+<p><br /></p>
+
+<p>(5). 즉, 위에서 얘기했던 DaoAuthenticationProvider 클래스가<br />
+UserDetailsService를 이용해 UserDetails를 객체를 조회 한다.</p>
+
+<p>실제로 어제 예제에서 UserDetails를 상속받아<br />
+username, password, 권한정보를 객체로 만들어 구현하였고<br />
+해당객체를 UserDetailsService를 이용해 반환하는 프로그램도 작성했다.<br />
+<em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
+<p><br /></p>
+
+<p>(6). 즉, Credential 저장소라는 뜻은 DB의 암호화된 비밀번호를 가져온다는 뜻이다.  <br />
+쉽게 말하자면 (5)번을 통해 호출된 UserDetailsService에서<br />
+loadUserByUsername(String username); 메서드를 이용해 <br />
+우리는 어떤 username으로 접근하는지 알 수 있으며, 해당 정보로 DB를 조회해<br />
+싫제로 동일한 username이 존재할 경우 해당 테이블의 정보를 가져올 수 있다.<br />
+즉, 권한정보, 암호화된 비밀번호 등등 사용자 정보를 가져올 수 있다는 뜻이다.</p>
+
+<p><br /></p>
+
+<p>(7). 이제 우리는 (6)번을 통해서 조회한 데이터로 인증을 비교할<br />
+UserDetails 객체를 만들 수 있다. UserDetails 객체는<br />
+username,password,권한정보를 가지고 있으면 객체로 만들 수 있다.</p>
+
+<p><br /></p>
+
+<p>(8). 만들어진 UserDetails 객체는, 맨처음 호출했던 <br />
+DaoAuthenticationProvider 클래스에 반환하게 되어진다.<br />
+아까 얘기했듯이 AuthenticationProvider를 구현한 클래스로<br />
+인증을 처리해주는 클래스이다.</p>
+
+<p><br /></p>
+
+<p>(9). UserDetails 정보를 이용해 DaoAuthenticationProvider 클래스가<br />
+mitigateAgainstTimingAttack(); 메서드를 호출해 인증을 처리한다.<br />
+인증처리가 정상적으로 이루어졌을 경우에 <br />
+그림과 같이 인증정보인 <code class="language-plaintext highlighter-rouge">Collection&lt;GrantedAuthority&gt;</code>가 추가된<br />
+Authentication 객체를 반환하게 된다.<br />
+<em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
+
+<p><br /></p>
+
+<p>(10). 이제 인증이 완료된 객체를 호출했던<br />
+ProviderManager로 반한된다.<br />
+<em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
+
+<p><br /></p>
+
+<p>(11). 마찬가지로 처음에 호출을 했던 <br />
+UsernamePasswordAuthenticationFilter 클래스로<br />
+인증이완료된 객체가 반환되게 되어진다.<br />
+<em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
+
+<p><br /></p>
+
+<p>(12). 최종적으로 인증이 완료된 Authentication 객체를<br />
+SecurityContextHolder를 이용해 SecurityContext에 저장을하게 된다.<br />
+SecurityContext의 세션 정책에 따라서<br />
+HttpSession에 저장되어 사용자의 인증 상태를 유지하기도 하고<br />
+HttpSession을 생성하지 않고 무상태를 유지하기도 한다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>이렇게 오늘은 SecurityFilterChain에서<br />
+어떻게 인증이 이루어지는지 알아보았다.</p>
+
+<p>오늘 정말 파급적인 효과로 코드에 대해 이해를 했다.<br />
+아키텍쳐를 그려가면서, 실제 코드들이 호출되서<br />
+실행되는 것을 하나하나 따라가보면서 순서에 대한 흐름을 글로 정리해봤다.</p>
+
+<p>이렇게 코드를 따라가면서, 파악한 내용을 적고 하다보니까<br />
+어디서 부터 시작되었고, 어떻게 객체를 돌려받는지가<br />
+파악되다보니까 어느정도 인증처리에 대한 흐름은 잡힌 것 같다.</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 된장찌개, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.]]></summary></entry><entry><title type="html">TIL) Spring Security 1</title><link href="http://localhost:4000/til/2022/11/18/til.html" rel="alternate" type="text/html" title="TIL) Spring Security 1" /><published>2022-11-18T00:00:00+09:00</published><updated>2022-11-18T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/18/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/18/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMbi5KBKT2qUujSToFzrlGZ8riZgXZWFRWl1il4pHA0AlwRLqDL1ROTXlmdEytfEfxx0rpCo3VI8iZTbovSWK60aVBtSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
 
 <p>예전보다 월-금 시간이 정말 빨리간다.<br />
 그만큼 공부하는 시간을 즐기고 있으니 시간도 빨리가는 것 같다.</p>
@@ -1068,121 +1328,7 @@ Spring JDBC,JPA,Transaction, JUnit, APi 문서 자동화 등<br />
 <p>이상 세달차 공부 중인 <br />
 나란 사람의 회고를 적어본다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry><entry><title type="html">Spring) MySQL Local 연동 하기</title><link href="http://localhost:4000/spring/2022/11/15/spring-mysql.html" rel="alternate" type="text/html" title="Spring) MySQL Local 연동 하기" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/15/spring-mysql</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/15/spring-mysql.html"><![CDATA[<p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br />
-연결하여 사용해보려고한다.</p>
-
-<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br />
-저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
-
-<p>MySQL WorkBench GUI로 작업하였고<br />
-리소스는 .yml 파일을 사용했다.</p>
-
-<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
-
-<p><br /></p>
-
-<p>1). bulid.gradle 설정</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
-</code></pre></div></div>
-
-<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>추가하고 Gradle Reload를 할 경우 위와 같이<br />
-라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<p>2). .yml 파일 설정</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">jpa</span><span class="pi">:</span>
-    <span class="na">hibernate</span><span class="pi">:</span>
-      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
-    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
-    <span class="na">properties</span><span class="pi">:</span>
-      <span class="na">hibernate</span><span class="pi">:</span>
-        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
-  <span class="na">datasource</span><span class="pi">:</span>
-    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
-    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
-    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>두번째로 연결을위한 .yml파일 설정이다.<br />
-프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br />
-properties 확장자를 application.yml로 변경하였다.</p>
-
-<p>spring : <br />
-jpa : <br />
-에 해당하는 부분은 jpa관련 설정이다.</p>
-
-<p>우리가 봐야할 부분은<br />
-spring :<br />
-datasource :<br />
-이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
-
-<p>넣어줘야할 정보는 4가지 이다.</p>
-<ol>
-  <li>포트넘버</li>
-  <li>스키마 이름</li>
-  <li>유저네임</li>
-  <li>비밀번호</li>
-</ol>
-
-<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br />
-아래에 어디서 찾는지 적어보겠다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>워크밴치(MySQL WorkBench)를 열어보면<br />
-커넥션에 관한 정보가 나온다.<br />
-없으면 연결을 한번도 하지 않은 것이기에<br />
-커넥션을 만들어주면 된다.</p>
-
-<p>커넥션을 더블클릭 해보자</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br />
-여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br />
-비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
-
-<p>여기서 알 수 있는 정보는</p>
-
-<p><strong>포트넘버 = 3306<br />
-유저네임 = root<br />
-비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
-
-<p>이렇게 알 수 있다.</p>
-
-<p>그리고 접속을 한 다음에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br />
-스키마를 생성해주면 된다.</p>
-
-<p>생성한 스키마가 스키마이름이 되는 것이다.<br />
-나는 example로 설정했고<br />
-이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
-
-<p>이렇게 정리해서 정보를 적어보자면</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
-  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
-  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
-  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>이렇게 설정할 수 있을 것이다.</p>
-
-<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br />
-처음에 mysql를 다운받고 설정한 비밀번호다.<br />
-인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="mysql" /><summary type="html"><![CDATA[오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.]]></summary></entry><entry><title type="html">TIL) Application 빌드, 실행</title><link href="http://localhost:4000/til/2022/11/15/til.html" rel="alternate" type="text/html" title="TIL) Application 빌드, 실행" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/15/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNq0VcIEmAZMz_1paQl-4m8_fIqcR-XIxlvy4GrezxEOvY6tzpT_1uI3JJK_XNFFzX3gFipA7DgprUqDMmQVqM19rSf8Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry><entry><title type="html">TIL) Application 빌드, 실행</title><link href="http://localhost:4000/til/2022/11/15/til.html" rel="alternate" type="text/html" title="TIL) Application 빌드, 실행" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/15/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNq0VcIEmAZMz_1paQl-4m8_fIqcR-XIxlvy4GrezxEOvY6tzpT_1uI3JJK_XNFFzX3gFipA7DgprUqDMmQVqM19rSf8Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
 
 <p>오늘은 섹션 마지막날이다. <br />
 벌써 3달째를 달리고 있는 부트캠프</p>
@@ -1424,7 +1570,121 @@ runtimeOnly 'mysql:mysql-connector-java'
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
+<strong>오늘의 점심</strong>: 김치찌개, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Spring) MySQL Local 연동 하기</title><link href="http://localhost:4000/spring/2022/11/15/spring-mysql.html" rel="alternate" type="text/html" title="Spring) MySQL Local 연동 하기" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/15/spring-mysql</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/15/spring-mysql.html"><![CDATA[<p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br />
+연결하여 사용해보려고한다.</p>
+
+<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br />
+저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
+
+<p>MySQL WorkBench GUI로 작업하였고<br />
+리소스는 .yml 파일을 사용했다.</p>
+
+<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
+
+<p><br /></p>
+
+<p>1). bulid.gradle 설정</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
+</code></pre></div></div>
+
+<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>추가하고 Gradle Reload를 할 경우 위와 같이<br />
+라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<p>2). .yml 파일 설정</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="na">hibernate</span><span class="pi">:</span>
+      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
+    <span class="na">properties</span><span class="pi">:</span>
+      <span class="na">hibernate</span><span class="pi">:</span>
+        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
+    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
+    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>두번째로 연결을위한 .yml파일 설정이다.<br />
+프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br />
+properties 확장자를 application.yml로 변경하였다.</p>
+
+<p>spring : <br />
+jpa : <br />
+에 해당하는 부분은 jpa관련 설정이다.</p>
+
+<p>우리가 봐야할 부분은<br />
+spring :<br />
+datasource :<br />
+이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
+
+<p>넣어줘야할 정보는 4가지 이다.</p>
+<ol>
+  <li>포트넘버</li>
+  <li>스키마 이름</li>
+  <li>유저네임</li>
+  <li>비밀번호</li>
+</ol>
+
+<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br />
+아래에 어디서 찾는지 적어보겠다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>워크밴치(MySQL WorkBench)를 열어보면<br />
+커넥션에 관한 정보가 나온다.<br />
+없으면 연결을 한번도 하지 않은 것이기에<br />
+커넥션을 만들어주면 된다.</p>
+
+<p>커넥션을 더블클릭 해보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br />
+여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br />
+비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
+
+<p>여기서 알 수 있는 정보는</p>
+
+<p><strong>포트넘버 = 3306<br />
+유저네임 = root<br />
+비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
+
+<p>이렇게 알 수 있다.</p>
+
+<p>그리고 접속을 한 다음에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br />
+스키마를 생성해주면 된다.</p>
+
+<p>생성한 스키마가 스키마이름이 되는 것이다.<br />
+나는 example로 설정했고<br />
+이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
+
+<p>이렇게 정리해서 정보를 적어보자면</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
+  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>이렇게 설정할 수 있을 것이다.</p>
+
+<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br />
+처음에 mysql를 다운받고 설정한 비밀번호다.<br />
+인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="mysql" /><summary type="html"><![CDATA[오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.]]></summary></entry><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOXnXDoCRH7AtlOncucaI0nI7RqC9GMkm0ZG-VhgIXazy7m5tTSccABV_f-3G5RjFSfN1ojWWOJzPxeYeKp4Ycs2Ykj=w1920-h921" alt="image" class="align-left" style="max-width: 65%" /></p>
 
@@ -2564,201 +2824,4 @@ Test 클래스가 만들어 진다.</p>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) JUnit 1</title><link href="http://localhost:4000/til/2022/11/08/til.html" rel="alternate" type="text/html" title="TIL) JUnit 1" /><published>2022-11-08T00:00:00+09:00</published><updated>2022-11-08T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/08/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/08/til.html"><![CDATA[<p>오늘따라 눈을 뜨기가 힘들었다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRtGpeYtviYIzfeRp5N9UsAFv4DyoXncCtpBv_yEBy2yHuy6nlv2NoLtIhafrvn3BC3SJSlY-XIggHVKpNsrfQ-cfUeRQ=w1512-h808" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>오랜만에 잠에서 이겨내지 못하는 아침이었다…<br />
-정말 한결같기는 진짜 어렵다는 생각도 들고<br />
-참 나약하구나라는 생각도 든다.</p>
-
-<p>그래도 오늘은 비교적 쉬운 주제이기 때문에<br />
-열심히 공부해보자 !!</p>
-
-<hr />
-<p>어제는 트랜잭션에 대해 알아보았다.<br />
-기본적으로 선언형 방식을 이용해보았다. 속성에 대해서는<br />
-깊은 공부가 이루어지지는 않았다.<br />
-트랜잭션의 기본 동작원리와 적용시 어떻게 처리가되는지?<br />
-정도 확인을 해보았다.</p>
-
-<p>오늘은 비교적 난이도가 쉬운 주제인 Testing에 대해 공부해볼 예정이다.</p>
-
-<h2 id="test">TEST</h2>
-<p>테스트는 여러가지 분야에서 많이 들어봤을 것 같다.<br />
-무었이든지 출시하기전에는 검증과 테스트가 거쳐진다.</p>
-
-<p>프로그램에서의 테스트는 내가 작성한 로직에 대한<br />
-검증이고, 여러가지 예외상황을 가정해 테스트를 진행해볼 수 있다.</p>
-
-<h3 id="unit-test">Unit Test</h3>
-<p>단위테스트라고 직역할 수 있다.<br />
-단위 테스트는 이름에서 오듯이 단위를 정해 테스트를 진행한는 것이다.<br />
-비지니스 로직에서 사용하는 클래스들이 독립적으로 테스트하기<br />
-가장 좋은 대상이기 때문에 단위테스트라고 부르는 경우가 많다.</p>
-
-<p>우리가 작성한 메서드 단위로 테스트를 한다고 생각하면 될 것 같다.<br />
-그 외에 전체단위로 보았을 때 여러 테스트가 있다.</p>
-
-<ol>
-  <li>기능 테스트
--&gt; 클라이언트, 애플리케이션, DB 까지 테스트하는 과정</li>
-  <li>통합 테스트
--&gt; 애플리케이션, DB까지 테스트하는 과정</li>
-  <li>슬라이드 테스트
--&gt; 애플리케이션 특정 계층을 쪼개어서 하는 테스트</li>
-</ol>
-
-<p><br /></p>
-
-<h3 id="test-express">Test Express</h3>
-<p>Given-When-Then 방식으로 표현을 한다.<br />
-BDD(Behavior Driven Development)라는 테스트 방식의 용어이다.</p>
-
-<p><strong>Given</strong><br />
--&gt; 테스트를 위한 준비과정을 명시<br />
--&gt; 테스트에 필요한 전제 조건들이 포함된다.</p>
-
-<p><strong>When</strong><br />
--&gt; 테스트할 동작을 지정한다.<br />
--&gt; 테스트할 메서드 호출을 하는 부분이다.</p>
-
-<p><strong>Then</strong><br />
--&gt; 테스트의 결과를 검증하는 영영이다.<br />
--&gt; Assertion과 같은 클래스로 검증을하는 부분이다.</p>
-
-<p><br /></p>
-
-<h3 id="junit">JUnit</h3>
-<p>우리는 Java언어로 만들어진 애플리케이션을 테스트하기위해서<br />
-오픈 소스 테스트 프레임워크인 JUnit을 사용하게 된다.<br />
-(Spring Boot의 Default 테스트 프레임워크가 Junit이다)</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTUGtth7qi-Z3xGykSHbxfz7SkPIuHfT_kXClFjYRN9M2CbsLZ4nY0Eu-CfahjOSV00vSWx_g5kPmxUZDMn9iQdpfKttQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위 사진과 같이 스프링 프로젝트를 만들 경우<br />
-test 패키지가 생긴다 안에 패키지를 만들어 다양한 <br />
-테스트 케이스를 만들어 로직을 검증해볼 수 있다.</p>
-
-<p>기본적인 사용방법은 간단하다.</p>
-
-<p>클래스를 만들어<br />
-매서드에 @Test 어노테이션을 붙여 테스트 해볼 수 있다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JunitTest</span> <span class="o">{</span>
-    
-    <span class="nd">@Test</span>
-    <span class="nd">@DisplayName</span><span class="o">(</span><span class="s">"Test 1"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">assertionTest</span><span class="o">(){</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>어노테이션에 대해 공부한 것들을 적어본다</p>
-
-<p>@BeforeEach<br />
--&gt; 테스트 실행중 먼저 실행되어지는 메서드에 붙여준다.<br />
--&gt; 각테스트 매서드가 실행되기전 실행한다.</p>
-
-<p>@BeforeAll<br />
--&gt; 테스트 실행중 딱한번만 실행되어지는 메서드에 붙여준다.<br />
--&gt; Test 클래스 실행전 한번만 실행된다.<br />
--&gt; 그러므로 정적 메서드여야 한다 (static)</p>
-
-<p>@AfterEach<br />
--&gt; 테스트 실행중 실행완료후 실행되어지는 메서드에 붙여준다.<br />
--&gt; 각테스트 메서드가 실행되고난후 실행한다.</p>
-
-<p>@AfterAll<br />
--&gt; 위에 내용과 같으니 참조</p>
-
-<p>@DisplayName(“”)<br />
--&gt; 메서드에 붙여주면, 해당 어노테이션의 이름을 커스터마이징 할 수 있다.</p>
-
-<p>@SpringBootTest<br />
--&gt; 테스트 클래스에 붙여준다 <br />
--&gt; 테스트실행시, 스프링을 띄운다음 스프링을 사용할 수 있게된다.<br />
--&gt; 즉, 애플리케이션에서 컨테이너에 담아둔 빈들을 주입할 수 있다.</p>
-
-<p>@TestConfiguration<br />
--&gt; 테스트 안에서 내부 클래스를 만들어서 사용하면서 이 어노태이션을 붙이면 <br />
-스프링 부트가 자동으로 만들어주는 빈들에 추가로 필요한 스프링 빈들을 등록하고 테스트를 수행할 수 있다.</p>
-
-<p>@AutoConfigureMockMvc<br />
--&gt; MockMvc 기능을 사용하기위한 애노테이션 <br />
--&gt; Controller 슬라이스 테스트를 진행한다고 가정하면 <br />
-Controller 테스트를 위한 애플리케이션의 자동 구성 작업을 해준다.<br />
--&gt; 주입받은 객체는 .perform()을 이용해 http매세더 요청가능</p>
-
-<p><br /></p>
-
-<p>사용 방법을 알았으니 이제 검증하는 방법도 알아야한다.<br />
-검증할때 사용하는 클래스들이 여러가지 있다.</p>
-
-<p>1). Assertions 클래스<br />
--&gt; assertJ 패키지의 클래스를 가져와야 사용가능<br />
--&gt; .assertThat(); 같은 매서드로 검증해주는 기능들을 제공해줌</p>
-
-<p>.assertThat();<br />
--&gt; 다양한 검증 메서드들을 제공</p>
-
-<p>.assertThatThrownBy();<br />
--&gt; assertThat과 동일하게 메서드를 제공하지만 예외를 확인할 수 있다.</p>
-
-<p>.isTure();<br />
--&gt; 앞의 내용이 참이면 테스트 성공</p>
-
-<p>.isFalse();<br />
--&gt; 앞의 내용이 거짓이면 테스트 실패</p>
-
-<p>.isEqualTo<br />
--&gt; 값이 동일하면 테스트 성공</p>
-
-<p>2.) Assertions 클래스<br />
--&gt; jupiter 패키지의 클래스를 가져와야 사용가능</p>
-
-<p>.assertEquals();<br />
--&gt; 기대값이 실제값과 같은지 비교<br />
--&gt; 좌측이 기대값, 우측이 실제값<br />
--&gt; ex) assertEquals(“a”,”a”);</p>
-
-<p>.assertNotNull();<br />
--&gt; Null값이 아니면 검증 통과, 아니면 Fail<br />
--&gt; ex) assertNotNull(변수, 매세지);</p>
-
-<p>.assertThrows();<br />
--&gt; 기대하는 Exception타입과 내용을 입력한다.  <br />
--&gt; 기대하는값이 Exception 타입과 맞지 않을 경우에는 테스트 실패<br />
-반대로 타입과 같을경우에는 성공<br />
--&gt; ex) assertThrows(NullPointerException.class, ()-&gt; 호출메서드));</p>
-
-<p>2). Assumption 클래스<br />
-.assumeTrue();<br />
--&gt; 특정 조건에서 선택적인 테스트가 필요할때 사용</p>
-
-<p>4). MatcherAssert 클래스<br />
-   -&gt; JUnit 기반의 Assertion 프레임워크이다.<br />
-   -&gt; 자연스러운 문장으로 이어지는 특성이있어 가독성 향상이 크다.<br />
-   -&gt; hamcrest 패키지에 있음</p>
-
-<p>.assertThat();<br />
--&gt; 다양한 검증 메서드를 제공해줌<br />
--&gt; ex) .assertThat(a, is(equalTo(null)));<br />
-.is();<br />
-.equalTo();<br />
-.notNullValue();</p>
-
-<p><br /></p>
-
-<p>이 외에도 JUnit 기반으로 만들어진 프레임워크에서<br />
-사용할 수 있는 클래스와 메서드들이 많이 있고<br />
-이 부분은 지속적으로 테스트프로그램 작성하면서 습관을 들이면서<br />
-지식의 범위를 늘려야할 것 같다.</p>
-
-<hr />
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 카레,밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘따라 눈을 뜨기가 힘들었다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry></feed>

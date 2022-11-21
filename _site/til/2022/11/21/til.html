@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring Exception 2 | LeeJellan</title>
+<title>TIL) Spring Security 2 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring Exception 2">
+<meta property="og:title" content="TIL) Spring Security 2">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="요즘 스프링 공부하는게 너무 재밌다.">
-<meta property="og:description" content="요즘 스프링 공부하는게 너무 재밌다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/26/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/26/til.html">
+<meta name="description" content="주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.">
+<meta property="og:description" content="주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/11/21/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/11/21/til.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-26T00:00:00+09:00">
+<meta property="article:published_time" content="2022-11-21T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring Exception 2">
+<meta property="twitter:title" content="TIL) Spring Security 2">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-26T00:00:00+09:00","datePublished":"2022-10-26T00:00:00+09:00","description":"요즘 스프링 공부하는게 너무 재밌다.","headline":"TIL) Spring Exception 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/26/til.html"},"url":"http://localhost:4000/til/2022/10/26/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-21T00:00:00+09:00","datePublished":"2022-11-21T00:00:00+09:00","description":"주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.","headline":"TIL) Spring Security 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/21/til.html"},"url":"http://localhost:4000/til/2022/11/21/til.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring Exception 2</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+68</h2>
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring Security 2</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+94</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-26T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 26, 2022
+    <time class="dt-published" datetime="2022-11-21T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 21, 2022
     </time>
 
     
@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -685,175 +685,282 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>요즘 스프링 공부하는게 너무 재밌다.</p>
+      <p>주말이라는 것은… 사람을 참 나태하게 만들기도<br>
+활력을 공급하기도 하는 것 같다.</p>
 
-<p>처음에 이해가 가지않았을 때는 이게 뭔가 싶기도하고,,<br>
-학습의지가 떨어졌는데 어느 순간 깨달음을 얻고 나서는<br>
-다음 학습이 기대되고 얼른 더 다른걸 해보고 싶다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOjX-PSPnxF_8TEMdso4KXA0JFYzGA1vArqAdtB6h1-NxbA6XRbp-Xy587IzIYiyL_lKX7HXm5PYPHWKxXIq9zV_OpOtA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>어제는 클라이언트에서 받은 데이터를 예외처리하는<br>
-여러가지 방법을 알아보았다.</p>
-
-<p>오늘은 예외 던지기에 대해 공부해 보는 날이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSQnaE21aVigm3UisbtYcpIDvy2dUTKPe9eBRofjjG5-ECCzS8FRO0Md_pXQkLTbl23ajRuf_s=w1920-h921" align="left" width="400px"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p>토요일까지 Spring Security를 공부하다가 번아웃이와<br>
+일요일에 너무 게으르게 누워만 있었더니<br>
+유튜브 나태지옥에 다시 빠져버렸다.</p>
 
 <hr>
 
-<p><br></p>
+<p>저번주에 Spring Security를 사용하는 예제 코드와<br>
+간단한 흐름을 알아보았다.<br>
+그중 Filter라는 것들을 배웠고 Spring Security도<br>
+Filter로 구성된 FilterChain으로 구동하는 것도 배웠다.</p>
 
-<p>어제는 @Vaild, @Vaildated 유효설 실패에 대한<br>
-예외처리를 하는 프로그램을 공부 했다.<br>
-오늘은 다른 예외들의 예외처리하는 프로그램을 공부해 보자.</p>
+<p>오늘은 그 중에서 인증관련된 Filter를 자세히 알아보자</p>
 
-<p><strong>1). 예외처리를 매개변수로 받기</strong></p>
+<h2 id="spring-security-인증">Spring Security 인증</h2>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
-<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nc">ErrorResponse</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">RuntimeException</span> <span class="n">error</span><span class="o">){</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
+<h3 id="filter-흐름-복습">Filter 흐름 복습</h3>
+
+<p>저번주에 공부했었던 <a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 1)</a>의 흐름을 다시한번 짚고 넘어가자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdqM4FUdK-kbSe3fOY-_nbwexPCpzCoO0wU4fxsPySDcyhG4ju9jOfdiay5TA0GmdJqNj0L4UZcOZGIHz9XGJLAcqNlw=w1299-h921" alt="image" class="align-left" style="max-width: 60%"></p>
+
+<p>클라이언트에서 요청이오면<br>
+Filter들의 모임인 FilterChain을 거쳐 하나씩 실행한다.<br>
+그 중 FilterChainProxy 클래스로 부터 보안을 위한 작업 필터모음인<br>
+SecurityFilterChain를 수행하게된다.</p>
+
+<p>여기서 SecurityFilterChain도 Filter들로 이루어져있고<br>
+아래의 사진이 SecurityFilterChain의 대략적인 구조이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNlrpr3UQFs4rI7dXvh6L-v1GvYL_3mSnWy8cA9rKECR2M-C_y4fYtJrNqD7xWcvzqy0TDvYC65satnVVyAEYsoTGaQbg=w1920-h921" alt="image" class="align-left" style="max-width: 100%"><br>
+<a href="https://velog.io/@sa833591/Spring-Security-5">hyozkim.log - 출처</a></p>
+
+<p>사진에서 보면 알 수 있듯이 <br>
+SecurityFilterChain의 구조는</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SecurityContextPersistenceFilter  
+LogoutFilter  
+UsernamePasswordAuthenticationFilter  
+...  
 </code></pre></div></div>
 
-<p>@ExceptionHandler로 에러를 감지하게 해주고<br>
-에러가 감지되었는데 RuntimeException에러가 발생하면<br>
-RuntimeException 클래스로 객체를 받아서<br>
-에러의 정보들을 객체를 통해 확인할 수 있다.</p>
+<p>등 여러가지 필터를가진 형태로 존재한다.</p>
 
-<p>여기서 getMessage(); 메서드는<br>
-<strong>Throwalbe</strong>의 메서드를 <strong>상속</strong>받아 사용하고 있다.</p>
+<p>모든 Filter의 구조를 알고 이해한다면 분명 SpringSecurity에 대한<br>
+이해도가 깊어질 것이자만, 현재 공부를 시작한지 얼마안된<br>
+내가 전부를 이해하기에는 사실 무리가 있는 것 같다고 생각이 들었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"Not found"</span><span class="o">);</span>
-</code></pre></div></div>
-
-<p>만약 다른 메서드에서 위와 같이 강제로 RuntimeException을 발생시키고<br>
-Message로 “Not found”라고 적어두었을 경우.<br>
-생성자로 RuntimeException의 String 값을 넣을 경우<br>
-최상위 클래스인 Throwable의 message가 저장되게된다.</p>
-
-<p>해당 메서드가 실행 되면, @ExceptionHandler에 의해<br>
-RuntimeException 객체가 매개변수를 통해 전달된다.</p>
-
-<p>문제점은 위의 예외상황은 RuntimeException만 작성했을 뿐<br>
-의도적으로 발생 시킬 예외 상황이 더 있을 수 있다.<br>
-그리고 예외 의도가 명확하지 않다는 점.</p>
+<p>이 중에서도 인증과 관련된 UsernamePasswordAuthenticationFilter의<br>
+인증 처리 흐름을 이해해보려한다. 해당하는 부분을 어제 코드로 구현하기도 했고<br>
+흐름을 알아야 SpringSecurity를 기본적인 내용을 구현하는데 무리가 없을 것 같다.</p>
 
 <p><br></p>
 
-<p><strong>2). 개선된 예외 상황 처리</strong></p>
+<p><strong>Security Filter 확인 방법?</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
-    <span class="no">MEMBER_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span> <span class="s">"Member Not Found"</span><span class="o">);</span>
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
+<p>위에서 얘기했듯이 여러 Filter들을 거쳐서<br>
+인증과 권한에 대한 수행을 SpringSecurity가 진행해준다.<br>
+실제로 어떠한 Filter를 거쳐왔는지 확인을 할 수 있는 애노테이션이 있고  <br>
+디버그 용도로 매우 유용하게 쓰일 것 같다.</p>
 
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
-
-    <span class="nc">ExceptionCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">status</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">status</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span><span class="o">(</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span> <span class="c1">// 디버그 설정</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfigurationV2</span> <span class="o">{</span>
+    
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">loginPage</span><span class="o">(</span><span class="s">"/auths/login-form"</span><span class="o">)</span> 
+                <span class="o">.</span><span class="na">loginProcessingUrl</span><span class="o">(</span><span class="s">"/process_login"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">failureUrl</span><span class="o">(</span><span class="s">"/auths/login-form?error"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">()</span> 
+                <span class="o">.</span><span class="na">anyRequest</span><span class="o">()</span> 
+                <span class="o">.</span><span class="na">permitAll</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
+<p>@EnableWebSecurity(debug = true) 어노테이션을<br>
+이용해 현재 요청에 이용된 Filter의 목록이 조회가 가능하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">){</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">exceptionCode</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+<p>애플리케이션을 실행시키고<br>
+formLogin 방식으로 요청을 보내보았다.</p>
+
+<p>그리고 콘솔을 확인해보면</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  UsernamePasswordAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
 </code></pre></div></div>
+<p>첫번쨰로 요청에 대한 정보들과<br>
+다음으로는 Security filter chain에 Filter 목록들이<br>
+나오는 것을 확인할 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
-<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">BusinessLogicException</span> <span class="n">e</span><span class="o">){</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">());</span>
-    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">()));</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>위에 클래스를 3가지로 나누어서<br>
-BusinessLogicException 클래스를 통해<br>
-객체를 받는 방법이다.</p>
-
-<p>먼저 enum 클래스를 통해서<br>
-사용할 생성자의 데이터를 맵핑해주고</p>
-
-<p>BusinessLogicException 클래스를 만들어<br>
-RuntimeException을 상속해 spuer(); 생성자를 통해<br>
-Throawble까지 메세지를 올려주고, 객체를 저장하게 작성했다.<br>
-해당 객체는 @Getter를 이용해 가져올 수 있고<br>
-그 객체를 통해서 Enum의 Status값과 Message를 가져오는 모습이다.</p>
+<p>위에서 볼 수 있듯이 우리가 알아보려고하는<br>
+UsernamePasswordAuthenticationFilter 클래스도 <br>
+콘솔로 확인이 가능하다.</p>
 
 <p><br></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">);</span>
-</code></pre></div></div>
+<h3 id="인증-처리">인증 처리</h3>
 
-<p>최종적으로 예외를 강제로 위와 같이<br>
-MEMBER_NOT_FOUND로 던졌을 경우</p>
+<p>이제 본격적으로 인증이 어떠한 과정으로<br>
+진행되는지 처리 순서에 대한 흐름을 알아보자.</p>
 
-<p>BusinessLogicException 클래스와 ExceptionCode 클래스를<br>
-이용해 객체츨 만들고 예외처리로 흐름을 넘겨<br>
-우리가 커스터 마이징한 값을 출력하는 것 까지 보았다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM9oGy1ZMRYopmfP5I5a2V8YyhzZ_cPot1-9VSX4vFPRYbCISfsxHheqNiPvpRv-ywxmVYbIGBUyfKCX3AaeeChzJ7toQ=w1920-h921" alt="image" class="align-left" style="max-width: 120%"></p>
 
-<p>그럼 우리가 이제 이 기반으로<br>
-응답하는 객체를 새로 정리해서 보낸다든지?<br>
-커스터마이징이 가능하게 되는 것이다.</p>
-
-<p>중요한 점은 에러가 강제로 발생 되었을 경우<br>
-우리가 흐름을 가져와 제어할 수있다는 점을 얻어간 것 같다.</p>
+<p>(1). 클라이언트에서 로그인 요청이 오면, SecurityFilterChain을 거치게된다.<br>
+그 중 인증에 관한 부분은 <strong>UsernamePasswordAuthenticationFilter</strong> 클래스이다.</p>
 
 <p><br></p>
 
-<p>어제 공부했던거와 더불어 다시 정리해보자면</p>
+<p>(2). Authentication 객체를 생성한다.<br>
+여기서 로그인할때 받아온 Username과 Password를 이용해<br>
+Authentication의 구현체인 UsernamePasswordAuthenticationToken <br>
+클래스를 이용해 Authentication 객체를 만든다.<br>
+<em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
+<p><br></p>
+
+<p>(3). Authentication 객체를 AuthenticationManager로 전달한다.  <br>
+여기서 구현체인 ProviderManager가 인증이라는 작업의 총괄 매니저다. <br>
+총괄은 하지만 실제 인증처리는 <strong>AuthenticationProvider</strong>에게 위임한다.<br>
+<em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
+<p><br></p>
+
+<p>(4). Authentication 객체를 AuthenticationProvider로 전달한다.<br>
+ProviderManager가 전달해준 Authentication객체로 인증하는 작업을 진행한다.<br>
+인증을 구현하는 방법은 2가지 정도가 있다.</p>
+
 <ol>
-  <li>
-    <p>MethodArgumentNotValidException<br>
--&gt;@Vaild 유효성 검증 실패한 예외잡기</p>
-  </li>
-  <li>
-    <p>ConstraintViolationException <br>
--&gt;@Vaildated 유효성 검증 실패한 예외잡기</p>
-  </li>
-  <li>
-    <p>HttpRequestMethodNotSupportedException<br>
--&gt; 해당 핸들러 메서드에 정의된 메서드와 호출한 메서드가 잘못되었을때 예외잡기</p>
-  </li>
-  <li>
-    <p>NullPointerException : NullPoint 예외처리 발생한 것 잡기</p>
-  </li>
-  <li>
-    <p>RuntimeException 클래스를 상속받아 클래스를 만들어<br>
-제어흐름을 가져올 수 있음.</p>
-  </li>
+  <li>AuthenticationProvider를 상속받아 구현</li>
+  <li>UserDetailsService를 상속받아 구현</li>
 </ol>
 
+<p><a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 1)</a>에서 우리는 UserDetailsService를 상속받아  <br>
+직접 클래스를 구현했었다.</p>
+
+<p>여기서 1번방법으로 구현하면 UserDetailsService 부분은<br>
+사용하지 않고 구현을 할 수 있다. 구현할때 중요한 부분은<br>
+직접 Credentials과 Password를 인증과정 로직을 구현해야한다는 점이다.</p>
+
+<p>하지만 어제 우리가 구현했던 2번방법으로 구현하면<br>
+AuthenticationProvider를 구현하지 않아도된다.<br>
+DaoAuthenticationProvider를 구현 클래스로 사용하기 때문이다. 
+실제로 호출 흐름을 본다면,</p>
+
+<ol>
+  <li>ProviderManager .authenticate() 메서드 호출</li>
+  <li>AuthenticationProvider 인터페이스의 AbstractUserDetailsAuthenticationProvider가<br>
+.authenticate(); 메서드를 구현했음.</li>
+  <li>.authenticate(); 메서드안에서 인증 처리를 위한 retrieveUser(); 호출<br>
+DaoAuthenticationProvider 클래스가 retrieveUser();를 구현했음</li>
+  <li>retrieveUser();메서드에서 UserDetailsService .loadUserByUsername() 메서드 호출<br>
+loadUserByUsername(); 메서드는 우리가 구현해야하는 부분이다.</li>
+</ol>
+
+<p><em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
 <p><br></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 라면, 불고기, 밥</p>
+<p>(5). 즉, 위에서 얘기했던 DaoAuthenticationProvider 클래스가<br>
+UserDetailsService를 이용해 UserDetails를 객체를 조회 한다.</p>
+
+<p>실제로 어제 예제에서 UserDetails를 상속받아<br>
+username, password, 권한정보를 객체로 만들어 구현하였고<br>
+해당객체를 UserDetailsService를 이용해 반환하는 프로그램도 작성했다.<br>
+<em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
+
+<p><br></p>
+
+<p>(6). 즉, Credential 저장소라는 뜻은 DB의 암호화된 비밀번호를 가져온다는 뜻이다.  <br>
+쉽게 말하자면 (5)번을 통해 호출된 UserDetailsService에서<br>
+loadUserByUsername(String username); 메서드를 이용해 <br>
+우리는 어떤 username으로 접근하는지 알 수 있으며, 해당 정보로 DB를 조회해<br>
+싫제로 동일한 username이 존재할 경우 해당 테이블의 정보를 가져올 수 있다.<br>
+즉, 권한정보, 암호화된 비밀번호 등등 사용자 정보를 가져올 수 있다는 뜻이다.</p>
+
+<p><br></p>
+
+<p>(7). 이제 우리는 (6)번을 통해서 조회한 데이터로 인증을 비교할<br>
+UserDetails 객체를 만들 수 있다. UserDetails 객체는<br>
+username,password,권한정보를 가지고 있으면 객체로 만들 수 있다.</p>
+
+<p><br></p>
+
+<p>(8). 만들어진 UserDetails 객체는, 맨처음 호출했던 <br>
+DaoAuthenticationProvider 클래스에 반환하게 되어진다.<br>
+아까 얘기했듯이 AuthenticationProvider를 구현한 클래스로<br>
+인증을 처리해주는 클래스이다.</p>
+
+<p><br></p>
+
+<p>(9). UserDetails 정보를 이용해 DaoAuthenticationProvider 클래스가<br>
+mitigateAgainstTimingAttack(); 메서드를 호출해 인증을 처리한다.<br>
+인증처리가 정상적으로 이루어졌을 경우에 <br>
+그림과 같이 인증정보인 <code class="language-plaintext highlighter-rouge">Collection&lt;GrantedAuthority&gt;</code>가 추가된<br>
+Authentication 객체를 반환하게 된다.<br>
+<em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
+
+<p><br></p>
+
+<p>(10). 이제 인증이 완료된 객체를 호출했던<br>
+ProviderManager로 반한된다.<br>
+<em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
+
+<p><br></p>
+
+<p>(11). 마찬가지로 처음에 호출을 했던 <br>
+UsernamePasswordAuthenticationFilter 클래스로<br>
+인증이완료된 객체가 반환되게 되어진다.<br>
+<em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
+
+<p><br></p>
+
+<p>(12). 최종적으로 인증이 완료된 Authentication 객체를<br>
+SecurityContextHolder를 이용해 SecurityContext에 저장을하게 된다.<br>
+SecurityContext의 세션 정책에 따라서<br>
+HttpSession에 저장되어 사용자의 인증 상태를 유지하기도 하고<br>
+HttpSession을 생성하지 않고 무상태를 유지하기도 한다.</p>
+
+<p><br></p>
+
+<hr>
+
+<p>이렇게 오늘은 SecurityFilterChain에서<br>
+어떻게 인증이 이루어지는지 알아보았다.</p>
+
+<p>오늘 정말 파급적인 효과로 코드에 대해 이해를 했다.<br>
+아키텍쳐를 그려가면서, 실제 코드들이 호출되서<br>
+실행되는 것을 하나하나 따라가보면서 순서에 대한 흐름을 글로 정리해봤다.</p>
+
+<p>이렇게 코드를 따라가면서, 파악한 내용을 적고 하다보니까<br>
+어디서 부터 시작되었고, 어떻게 객체를 돌려받는지가<br>
+파악되다보니까 어느정도 인증처리에 대한 흐름은 잡힌 것 같다.</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 된장찌개, 라면, 밥</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/25/til.html" title="TIL) Spring Exception 1">TIL) Spring Exception 1</a><a class="next" href="/til/2022/10/27/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring JDBC 기반 액세스 계층...</a>
+<a class="previous" href="/til/2022/11/18/til.html" title="TIL) Spring Security 1">TIL) Spring Security 1</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/02/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
-<li><a class="post-link" href="/til/2022/11/18/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring Security 1</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Java Algorithm 3</a></li>
-<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="TIL) Spring JDBC 기반 액세스 계층 1">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+        <li><a class="post-link" href="/spring/2022/11/15/spring-mysql.html" title="">Spring) MySQL Local 연동 하기</a></li>
+<li><a class="post-link" href="/til/2022/10/07/til.html" title="">TIL) DB RDMBS 3</a></li>
+<li><a class="post-link" href="/til/2022/10/20/til.html" title="">TIL) Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/til/2022/11/15/til.html" title="">TIL) Application 빌드, 실행</a></li>
 </ul>
     </div>
 <div class="post-comments">
