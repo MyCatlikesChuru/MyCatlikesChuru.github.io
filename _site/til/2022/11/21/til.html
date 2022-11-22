@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring Security 2 | LeeJellan</title>
+<title>TIL) Spring Security 2 (인증처리) | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring Security 2">
+<meta property="og:title" content="TIL) Spring Security 2 (인증처리)">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
 <meta name="description" content="주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.">
@@ -20,9 +20,9 @@
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2022-11-21T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring Security 2">
+<meta property="twitter:title" content="TIL) Spring Security 2 (인증처리)">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-21T00:00:00+09:00","datePublished":"2022-11-21T00:00:00+09:00","description":"주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.","headline":"TIL) Spring Security 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/21/til.html"},"url":"http://localhost:4000/til/2022/11/21/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-21T00:00:00+09:00","datePublished":"2022-11-21T00:00:00+09:00","description":"주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.","headline":"TIL) Spring Security 2 (인증처리)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/21/til.html"},"url":"http://localhost:4000/til/2022/11/21/til.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring Security 2</h1>
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring Security 2 (인증처리)</h1>
   <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+94</h2>
 
   <p class="post-meta">
@@ -707,7 +707,7 @@ Filter로 구성된 FilterChain으로 구동하는 것도 배웠다.</p>
 
 <h3 id="filter-흐름-복습">Filter 흐름 복습</h3>
 
-<p>저번주에 공부했었던 <a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 1)</a>의 흐름을 다시한번 짚고 넘어가자</p>
+<p>저번주에 공부했었던 <a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 기초)</a>의 흐름을 다시한번 짚고 넘어가자</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdqM4FUdK-kbSe3fOY-_nbwexPCpzCoO0wU4fxsPySDcyhG4ju9jOfdiay5TA0GmdJqNj0L4UZcOZGIHz9XGJLAcqNlw=w1299-h921" alt="image" class="align-left" style="max-width: 60%"></p>
 
@@ -810,74 +810,80 @@ UsernamePasswordAuthenticationFilter 클래스도 <br>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM9oGy1ZMRYopmfP5I5a2V8YyhzZ_cPot1-9VSX4vFPRYbCISfsxHheqNiPvpRv-ywxmVYbIGBUyfKCX3AaeeChzJ7toQ=w1920-h921" alt="image" class="align-left" style="max-width: 120%"></p>
 
-<p>(1). 클라이언트에서 로그인 요청이 오면, SecurityFilterChain을 거치게된다.<br>
-그 중 인증에 관한 부분은 <strong>UsernamePasswordAuthenticationFilter</strong> 클래스이다.</p>
+<p>(1). 클라이언트에서 로그인 요청이 오면, <code class="language-plaintext highlighter-rouge">SecurityFilterChain</code>을 거치게된다.<br>
+그 중 인증에 관한 부분은 <code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code> 클래스이다.</p>
 
 <p><br></p>
 
-<p>(2). Authentication 객체를 생성한다.<br>
+<p>(2). <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 생성한다.<br>
 여기서 로그인할때 받아온 Username과 Password를 이용해<br>
-Authentication의 구현체인 UsernamePasswordAuthenticationToken <br>
-클래스를 이용해 Authentication 객체를 만든다.<br>
+<code class="language-plaintext highlighter-rouge">Authentication</code>의 구현체인 <code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationToken</code> <br>
+클래스를 이용해 <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 만든다.<br>
 <em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
 
 <p><br></p>
 
-<p>(3). Authentication 객체를 AuthenticationManager로 전달한다.  <br>
-여기서 구현체인 ProviderManager가 인증이라는 작업의 총괄 매니저다. <br>
-총괄은 하지만 실제 인증처리는 <strong>AuthenticationProvider</strong>에게 위임한다.<br>
+<p>(3). <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 <code class="language-plaintext highlighter-rouge">AuthenticationManager</code>로 전달한다.  <br>
+여기서 구현체인 <code class="language-plaintext highlighter-rouge">ProviderManager</code>가 인증이라는 작업의 총괄 매니저다. <br>
+총괄은 하지만 실제 인증처리는 <code class="language-plaintext highlighter-rouge">AuthenticationProvider</code>에게 위임한다.<br>
 <em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
 
 <p><br></p>
 
-<p>(4). Authentication 객체를 AuthenticationProvider로 전달한다.<br>
-ProviderManager가 전달해준 Authentication객체로 인증하는 작업을 진행한다.<br>
+<p>(4). <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 <code class="language-plaintext highlighter-rouge">AuthenticationProvider</code>로 전달한다.<br>
+<code class="language-plaintext highlighter-rouge">ProviderManager</code>가 전달해준 <code class="language-plaintext highlighter-rouge">Authentication</code>객체로 인증하는 작업을 진행한다.<br>
 인증을 구현하는 방법은 2가지 정도가 있다.</p>
 
 <ol>
-  <li>AuthenticationProvider를 상속받아 구현</li>
-  <li>UserDetailsService를 상속받아 구현</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">AuthenticationProvider</code>를 상속받아 구현</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">UserDetailsService</code>를 상속받아 구현</li>
 </ol>
 
-<p><a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 1)</a>에서 우리는 UserDetailsService를 상속받아  <br>
-직접 클래스를 구현했었다.</p>
+<p><a href="https://mycatlikeschuru.github.io/til/2022/11/18/til.html">(Spring Security 기초)</a>에서 우리는 <code class="language-plaintext highlighter-rouge">UserDetailsService</code>를<br>
+상속받아 직접 클래스를 구현했었다.</p>
 
-<p>여기서 1번방법으로 구현하면 UserDetailsService 부분은<br>
+<p>여기서 1번방법으로 구현하면 <code class="language-plaintext highlighter-rouge">₩</code>UserDetailsService` 부분은<br>
 사용하지 않고 구현을 할 수 있다. 구현할때 중요한 부분은<br>
 직접 Credentials과 Password를 인증과정 로직을 구현해야한다는 점이다.</p>
 
 <p>하지만 어제 우리가 구현했던 2번방법으로 구현하면<br>
-AuthenticationProvider를 구현하지 않아도된다.<br>
-DaoAuthenticationProvider를 구현 클래스로 사용하기 때문이다. 
+<code class="language-plaintext highlighter-rouge">AuthenticationProvider</code>를 구현하지 않아도된다.<br>
+<code class="language-plaintext highlighter-rouge">DaoAuthenticationProvider</code>를 구현 클래스로 사용하기 때문이다. 
 실제로 호출 흐름을 본다면,</p>
 
 <ol>
-  <li>ProviderManager .authenticate() 메서드 호출</li>
-  <li>AuthenticationProvider 인터페이스의 AbstractUserDetailsAuthenticationProvider가<br>
-.authenticate(); 메서드를 구현했음.</li>
-  <li>.authenticate(); 메서드안에서 인증 처리를 위한 retrieveUser(); 호출<br>
-DaoAuthenticationProvider 클래스가 retrieveUser();를 구현했음</li>
-  <li>retrieveUser();메서드에서 UserDetailsService .loadUserByUsername() 메서드 호출<br>
-loadUserByUsername(); 메서드는 우리가 구현해야하는 부분이다.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">ProviderManager</code> 클래스의 <code class="language-plaintext highlighter-rouge">.authenticate();</code> 메서드 호출</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">AuthenticationProvider</code> 인터페이스의 <code class="language-plaintext highlighter-rouge">AbstractUserDetailsAuthenticationProvider</code>가<br>
+<code class="language-plaintext highlighter-rouge">.authenticate();</code> 메서드를 구현했음.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">.authenticate();</code> 메서드안에서 인증 처리를 위한 <code class="language-plaintext highlighter-rouge">retrieveUser();</code> 호출<br>
+<code class="language-plaintext highlighter-rouge">DaoAuthenticationProvider</code> 클래스가 <code class="language-plaintext highlighter-rouge">.retrieveUser();</code>를 구현했음</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">.retrieveUser();</code> 메서드에서 <code class="language-plaintext highlighter-rouge">UserDetailsService</code> 클래스의 <code class="language-plaintext highlighter-rouge">.loadUserByUsername()</code>  <br>
+메서드 호출 <code class="language-plaintext highlighter-rouge">.loadUserByUsername();</code> 메서드는 우리가 구현해야하는 부분이다.</li>
 </ol>
 
 <p><em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
 
 <p><br></p>
 
-<p>(5). 즉, 위에서 얘기했던 DaoAuthenticationProvider 클래스가<br>
-UserDetailsService를 이용해 UserDetails를 객체를 조회 한다.</p>
+<p>(5). 즉, 위에서 얘기했던 <code class="language-plaintext highlighter-rouge">DaoAuthenticationProvider</code> 클래스가<br>
+<code class="language-plaintext highlighter-rouge">UserDetailsService</code>를 이용해 <code class="language-plaintext highlighter-rouge">UserDetails</code>를 객체를 조회 한다.</p>
 
-<p>실제로 어제 예제에서 UserDetails를 상속받아<br>
+<p>실제로 어제 예제에서 <code class="language-plaintext highlighter-rouge">UserDetails</code>를 상속받아<br>
 username, password, 권한정보를 객체로 만들어 구현하였고<br>
-해당객체를 UserDetailsService를 이용해 반환하는 프로그램도 작성했다.<br>
+해당객체를 <code class="language-plaintext highlighter-rouge">UserDetailsService</code>를 이용해 반환하는 프로그램도 작성했다.<br>
 <em><strong>(❗️Authentication 객체는 인증이 완료되지 않음)</strong></em></p>
 
 <p><br></p>
 
 <p>(6). 즉, Credential 저장소라는 뜻은 DB의 암호화된 비밀번호를 가져온다는 뜻이다.  <br>
-쉽게 말하자면 (5)번을 통해 호출된 UserDetailsService에서<br>
-loadUserByUsername(String username); 메서드를 이용해 <br>
+쉽게 말하자면 (5)번을 통해 호출된 <code class="language-plaintext highlighter-rouge">UserDetailsService</code>에서<br>
+<code class="language-plaintext highlighter-rouge">loadUserByUsername(String username);</code> 메서드를 이용해 <br>
 우리는 어떤 username으로 접근하는지 알 수 있으며, 해당 정보로 DB를 조회해<br>
 싫제로 동일한 username이 존재할 경우 해당 테이블의 정보를 가져올 수 있다.<br>
 즉, 권한정보, 암호화된 비밀번호 등등 사용자 정보를 가져올 수 있다는 뜻이다.</p>
@@ -885,43 +891,43 @@ loadUserByUsername(String username); 메서드를 이용해 <br>
 <p><br></p>
 
 <p>(7). 이제 우리는 (6)번을 통해서 조회한 데이터로 인증을 비교할<br>
-UserDetails 객체를 만들 수 있다. UserDetails 객체는<br>
+<code class="language-plaintext highlighter-rouge">UserDetails</code> 객체를 만들 수 있다. <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체는<br>
 username,password,권한정보를 가지고 있으면 객체로 만들 수 있다.</p>
 
 <p><br></p>
 
-<p>(8). 만들어진 UserDetails 객체는, 맨처음 호출했던 <br>
-DaoAuthenticationProvider 클래스에 반환하게 되어진다.<br>
-아까 얘기했듯이 AuthenticationProvider를 구현한 클래스로<br>
+<p>(8). 만들어진 <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체는, 맨처음 호출했던 <br>
+<code class="language-plaintext highlighter-rouge">DaoAuthenticationProvider</code> 클래스에 반환하게 되어진다.<br>
+아까 얘기했듯이 <code class="language-plaintext highlighter-rouge">AuthenticationProvider</code>를 구현한 클래스로<br>
 인증을 처리해주는 클래스이다.</p>
 
 <p><br></p>
 
-<p>(9). UserDetails 정보를 이용해 DaoAuthenticationProvider 클래스가<br>
-mitigateAgainstTimingAttack(); 메서드를 호출해 인증을 처리한다.<br>
+<p>(9). <code class="language-plaintext highlighter-rouge">UserDetails</code> 정보를 이용해 <code class="language-plaintext highlighter-rouge">DaoAuthenticationProvider</code> 클래스가<br>
+<code class="language-plaintext highlighter-rouge">.mitigateAgainstTimingAttack();</code> 메서드를 호출해 인증을 처리한다.<br>
 인증처리가 정상적으로 이루어졌을 경우에 <br>
 그림과 같이 인증정보인 <code class="language-plaintext highlighter-rouge">Collection&lt;GrantedAuthority&gt;</code>가 추가된<br>
-Authentication 객체를 반환하게 된다.<br>
+<code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 반환하게 된다.<br>
 <em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
 
 <p><br></p>
 
 <p>(10). 이제 인증이 완료된 객체를 호출했던<br>
-ProviderManager로 반한된다.<br>
+<code class="language-plaintext highlighter-rouge">ProviderManager</code>로 반한된다.<br>
 <em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
 
 <p><br></p>
 
 <p>(11). 마찬가지로 처음에 호출을 했던 <br>
-UsernamePasswordAuthenticationFilter 클래스로<br>
+<code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code> 클래스로<br>
 인증이완료된 객체가 반환되게 되어진다.<br>
 <em><strong>(⭕️Authentication 객체는 인증이 완료됨)</strong></em></p>
 
 <p><br></p>
 
 <p>(12). 최종적으로 인증이 완료된 Authentication 객체를<br>
-SecurityContextHolder를 이용해 SecurityContext에 저장을하게 된다.<br>
-SecurityContext의 세션 정책에 따라서<br>
+<code class="language-plaintext highlighter-rouge">SecurityContextHolder</code>를 이용해 <code class="language-plaintext highlighter-rouge">SecurityContext</code>에 저장을하게 된다.<br>
+S<code class="language-plaintext highlighter-rouge">ecurityContext</code>의 세션 정책에 따라서<br>
 HttpSession에 저장되어 사용자의 인증 상태를 유지하기도 하고<br>
 HttpSession을 생성하지 않고 무상태를 유지하기도 한다.</p>
 
@@ -952,15 +958,15 @@ HttpSession을 생성하지 않고 무상태를 유지하기도 한다.</p>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/11/18/til.html" title="TIL) Spring Security 1">TIL) Spring Security 1</a><span></span>
+<a class="previous" href="/til/2022/11/18/til.html" title="TIL) Spring Security 1 (기초)">TIL) Spring Security 1 (기초)</a><a class="next" href="/til/2022/11/22/til.html" title="TIL) Spring Security 3 (권한부여)">TIL) Spring Security 3 (권한부여)</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/spring/2022/11/15/spring-mysql.html" title="">Spring) MySQL Local 연동 하기</a></li>
-<li><a class="post-link" href="/til/2022/10/07/til.html" title="">TIL) DB RDMBS 3</a></li>
-<li><a class="post-link" href="/til/2022/10/20/til.html" title="">TIL) Spring MVC Controller 계층</a></li>
-<li><a class="post-link" href="/til/2022/11/15/til.html" title="">TIL) Application 빌드, 실행</a></li>
+        <li><a class="post-link" href="/til/2022/10/14/til.html" title="TIL) Spring Security 3 (권한부여)">TIL) Spring DI 2</a></li>
+<li><a class="post-link" href="/til/2022/11/16/til.html" title="TIL) Spring Security 3 (권한부여)">TIL) 세달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/11/08/til.html" title="TIL) Spring Security 3 (권한부여)">TIL) JUnit 1</a></li>
+<li><a class="post-link" href="/til/2022/09/30/til.html" title="TIL) Spring Security 3 (권한부여)">TIL) Network Basic</a></li>
 </ul>
     </div>
 <div class="post-comments">
