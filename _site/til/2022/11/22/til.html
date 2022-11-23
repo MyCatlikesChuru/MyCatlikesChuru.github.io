@@ -790,7 +790,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 </code></pre></div></div>
 <p>실제로 코드를 확인해보면<br>
-생성자로 AuthorizationManager의 객체를 DI받고 있다.<br>
+생성자로 <code class="language-plaintext highlighter-rouge">AuthorizationManager</code>의 객체를 DI받고 있다.<br>
 그리고 <code class="language-plaintext highlighter-rouge">.check(this::getAuthentication, request);</code> 메서드를 호출해<br>
 <code class="language-plaintext highlighter-rouge">Authentication</code>와 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를 매개변수로 넘겨주고있다.</p>
 
@@ -957,6 +957,14 @@ Map을 담고있는 객체가 반환되며 권한 부여과정이 진행되고</
 
 <hr>
 
+<p>이렇게 오늘을 끝으로 Spring Security의<br>
+인증과 권한에 대해 알아보았다.<br>
+좀 더 깊은내용을 이해하기 위해서는 여러가지 Filter에 대해 공부가<br>
+필요해보이고, 내일부터 공부하는 JWT를 이용할때 어떠한 방식으로<br>
+Spring Security 로직이 변경되는지 내일부터 다시 공부해보자</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
 <p><br></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
@@ -967,15 +975,15 @@ Map을 담고있는 객체가 반환되며 권한 부여과정이 진행되고</
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/11/21/til.html" title="TIL) Spring Security 2 (인증처리)">TIL) Spring Security 2 (인증처리)</a><span></span>
+<a class="previous" href="/til/2022/11/21/til.html" title="TIL) Spring Security 2 (인증처리)">TIL) Spring Security 2 (인증처리)</a><a class="next" href="/til/2022/11/23/til.html" title="TIL) JWT 인증">TIL) JWT 인증</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/15/til.html" title="">TIL) Application 빌드, 실행</a></li>
-<li><a class="post-link" href="/til/2022/09/28/til.html" title="">TIL) Java Algorithm 2</a></li>
-<li><a class="post-link" href="/til/2022/10/26/til.html" title="">TIL) Spring Exception 2</a></li>
-<li><a class="post-link" href="/it/2022/10/25/it-etc-imageurl.html" title="">구글 드라이브로 이미지 url 적용하기</a></li>
+        <li><a class="post-link" href="/til/2022/09/15/til.html" title="TIL) JWT 인증">TIL) Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+<li><a class="post-link" href="/spring/2022/11/15/spring-mysql.html" title="TIL) JWT 인증">Spring) MySQL Local 연동 하기</a></li>
+<li><a class="post-link" href="/til/2022/09/21/til.html" title="TIL) JWT 인증">TIL) Json</a></li>
+<li><a class="post-link" href="/til/2022/10/24/til.html" title="TIL) JWT 인증">TIL) Spring MVC Serivce 계층</a></li>
 </ul>
     </div>
 <div class="post-comments">

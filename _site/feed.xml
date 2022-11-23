@@ -1,4 +1,435 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-22T20:17:51+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Security 3 (권한부여)</title><link href="http://localhost:4000/til/2022/11/22/til.html" rel="alternate" type="text/html" title="TIL) Spring Security 3 (권한부여)" /><published>2022-11-22T00:00:00+09:00</published><updated>2022-11-22T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/22/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/22/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO-9XVEAUETJGFf5AjYCUCurD1z-9yBYl4hAKS_SdfBOSr5ac7uSAlI8PoCiXakOadLKWhnBi-RnF5XAFfKoh4ynbCMmQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-23T17:56:01+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) JWT 인증</title><link href="http://localhost:4000/til/2022/11/23/til.html" rel="alternate" type="text/html" title="TIL) JWT 인증" /><published>2022-11-23T00:00:00+09:00</published><updated>2022-11-23T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/23/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/23/til.html"><![CDATA[<p>확실히 Spring 관련된 기술을 사용하면서<br />
+프로그래밍을 하고 있다는 느낌이 들때가 많아서 좋다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMWwuYanwzEYSBU97J-DZR9DkAcwyTyZwvas0jVZbla4RaJ-_F28bKYzcWQqOh3iqItCBSFVIUY6GDFl9qgi16AsH2POw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>사용하려는 프레임워크나 기술에 대한<br />
+아키텍처 구조를 파악하고, 실제 어떻게 호출과 응답이 이루어지는지<br />
+확인하는 과정이 순탄치는 않지만… 조금씩 눈에 들어오니<br />
+확실히 재미의 가속도가 붙는 것 같다.</p>
+
+<hr />
+
+<p>3일 동안 Spring Security에 대한 내용을 얼추 마무리했다.<br />
+오늘은 JWT에 대한 내용을 공부하는 시간이고<br />
+JWT를 사용해 어떻게 Spring Security와 연결을 지어가는지<br />
+2일에 걸쳐 공부해볼려고 한다.</p>
+
+<h2 id="jwt-인증">JWT 인증</h2>
+
+<h3 id="jwt란">JWT란?</h3>
+<p>Json Web Token의 약자로<br />
+Json 포맷으로 사용자에 대한 속성을 저장하는 웹 토큰이다.</p>
+
+<p>기존에는 세션기반 인증으로 서버에 유저정보를 담는 방식으로 인증을 진행했었는데<br />
+이렇게 되면 매번 요청을할때마다 DB를 살펴보아야하기 때문에<br />
+이러한 부담을 줄이기 위해 토큰기반 인증이 나왔다.</p>
+
+<p>토큰은 유저 정보를 암호화한 상태로 담을 수 있고<br />
+암호화했기 때문에 클라이언트에 담을 수 있다.</p>
+
+<p>토큰기반 인증의 장점?</p>
+<ol>
+  <li>무상태성, 확장성<br />
+-&gt; 서버는 클라이언트에 대한 정보를 저장할 필요가 없다.<br />
+-&gt; 토큰을 헤더에 추가함으로 인증절차 완료</li>
+  <li>안정성<br />
+-&gt; 암호화 한 토큰을 사용</li>
+  <li>어디서나 생성 가능<br />
+-&gt; 토큰을 생성하는 서버가 꼭 토큰을 만들지 않아도됨</li>
+  <li>권한 부여에 용이 <br />
+-&gt; 토큰의 payload 안에 어떤 정보에 접근이 가능한지 정의</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="jwt-종류">JWT 종류</h3>
+
+<p>JWT는 <code class="language-plaintext highlighter-rouge">Access Token</code>, <code class="language-plaintext highlighter-rouge">Refresh Token</code><br />
+이 두가지 종류의 토큰을 사용자의 자격 증명에 이용한다.</p>
+
+<p><strong><span style="color:#0066CC">Access Token</span></strong> : 보호된 정보들에 접근할 수 있는 권한을 부여할때 사용<br />
+<strong><span style="color:#0066CC">Refresh Token</span></strong> : Access Token의 유효기간이 만료되면 Refresh Token을 이용해<br />
+새로운 Access Token을 발급 받는다. (다시 로그인 인증할 필요 X)</p>
+
+<p>Access Token이 탈취당했을 경우 <br />
+탈취한 사람이 해당 사용자인 것 처럼 서버에 여러가지 요청을 보낼 수 있다.<br />
+그렇기 때문에 탈취당하더라도 오랫동안 사용할 수 없도록<br />
+Refresh Token을 사용해 Access Token을 새로 발급을 받는다.</p>
+
+<p>만약 Refresh Token까지 탈취를 당했을 경우<br />
+탈취한 사람이 해당 사용자에 큰 해를 입힐 수 있다.<br />
+그렇기 때문에 로그인 인증을 다시할 필요없는 편의 같은 기능보다<br />
+정보를 지키는 것이 더 중요한 웹 애플리케이션은 Refresh Token을<br />
+사용하지 않는 곳이 많다고 한다.<br />
+(즉, Access Token 유효기간이 만료되면 재인증을 해야함)</p>
+
+<p><br /></p>
+
+<h3 id="jwt-구조">JWT 구조</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOYuUIX6V7l7AAL_dwuJ4c8dxSmCnlrTXPYPA2gYVV4MM1qyH7K_aGFmXu_Jkx_GYNgHI1jDmR8sJ09gf0bW7f1U9su=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /><br />
+<a href="https://catsbi.oopy.io/26b7f35c-e323-4e75-a9ee-2fe3e57ac641">출처 - Catsbi님 blog</a></p>
+
+<p>JWT는 Header.Payload.Signature 구조로 이루어진다.</p>
+
+<p><strong>1). Header</strong><br />
+   -&gt; 어떤 종류의 토큰인지  <br />
+   -&gt; 어떤 알고리즘으로 암호화 하는지<br />
+   -&gt; Header의 JSON 객체를 base64 방식으로 인코딩한다.</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HS256"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>2). Payload</strong><br />
+   -&gt; 유저의 정보 (사용자의 이름 등)  <br />
+   -&gt; 민감한 정보는 담지 않는 것이 좋다.<br />
+   -&gt; 기타 필요한 정보<br />
+   -&gt; Payload의 JSON 객체를 base64 방식으로 인코딩한다.</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LeeJaehyeok"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">151623391</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>3). Signature</strong><br />
+   -&gt; Header, Payload를 base64 인코딩한 값과 salt값의 조합으로 암호화된 값<br />
+   -&gt; 단방향 암호화를 수행한다.<br />
+   -&gt; 이렇게 암호화된 메세지는 토큰의 위변조 유무를 검증하는데 사용한다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HMACSHA256(base64UrlEncode(header) + '.' + base64UrlEncode(payload), secret);
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="세션기반-자격증명-vs-토큰기반-자격-증명">세션기반 자격증명 vs 토큰기반 자격 증명</h3>
+
+<p>✅ 세션기반 자격 증명</p>
+<ul>
+  <li>인증된 사용자 정보를 서버 측 세션 저장소에서 관리한다.</li>
+  <li>생성된 사용자 세션의 고유 ID인 세션 ID는 클라이언트의 쿠키에 저장된다.  <br />
+request 전송 시, 인증된 사용자인지를 증명하는 수단으로 사용한다.</li>
+  <li>세션 ID만 클라이언트 쪽에서 사용해 상대적으로 네트워크 트랙픽을 적게 사용한다.</li>
+  <li>서버 측에서 세션 정보를 관리하므로 보안성 측면에서 유리하다.</li>
+  <li>서버의 확장성 면에서는 세션 불일치 문제가 발생할 가능성이 높다.</li>
+  <li>세션 데이터가 많아질수록 서버으 부담이 가중된다.</li>
+  <li>SSR 박식의 애플리케이션에 적합한 방식이다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>✅ 토큰기반 자격 증명의 특징</p>
+<ul>
+  <li>인증된 사용자 정브는 서버 측에서 별도의 관리를 하지 않는다.</li>
+  <li>생성된 토큰을 Header에 포함시킨다. request 전승 시, 인증된 사용자인지 증명하는 수단으로 사용된다.</li>
+  <li>토큰내에 인증된 사용자 정보 등을 포함하고 있어 세션에 비해 상대적으로 많은 네트워크 트래픽을 사용한다.</li>
+  <li>서버 측에서 토큰을 관리하지 않으므로 보안성 측면에서 조금 더 불리하다.</li>
+  <li>인증된 사용자 request의 상태를 유지할 필요가 없기 때문에 서버의 확장성면에서 유리하고<br />
+세션 불일치 같은 문제가 발생하지 않는다.</li>
+  <li>토큰에 포함되는 사용자 정보는 토큰의 특성상 암호화가 되지 않기때문에 공격자에게 토큰이 탈취될 경우<br />
+사용자 정보를 그대로 제공하는셈이 되므로 민감한 정보는 토큰에 포함시키지 말아야한다.</li>
+  <li>기본적으로 토큰이 만료되기 전까지는 토큰을 모효화 시킬 수 없다.</li>
+  <li>CSR 방식의 애플리케이션에 적합한 방식이다.</li>
+</ul>
+
+<h3 id="토큰기반-인증절차">토큰기반 인증절차</h3>
+
+<p>아래의 사진은 토큰기반 인증절차에 대한 큰 흐름이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOIQ-igIsxJcmvSaYg6jxG6SeXQZlDrwTmzkQCd2vE2Dy4zpZG_Z_nTqJvBkFwsDBxcZYFe5xKIx86lhvRNC5h92NGU=w1299-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<ol>
+  <li>클라이언트에서 로그인 요청을 보냅니다.</li>
+  <li>아이디/비밀번호가 일치하는지 확인하고, 클라이언트에게 보낼 암호화된 토큰을 생성합니다.</li>
+  <li>토큰을 클라이언트에게 전송하면, 클라이언트는 토큰을 저장합니다.<br />
+-&gt; 저장하는 위치는 Local Storage, Session Storage, Cookie 등이 될 수 있다.</li>
+  <li>클라리언트가 Headers 또는 쿠키에 토큰을 담아 어떠한 요청을 합니다.</li>
+  <li>서버에서 토큰을 검증해 서버에서 발급한 토큰이 맞을 경우, 클라이언트의 요청을 처리한 후 응답을 보낸다.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="jwt-토큰-만들어보기">JWT 토큰 만들어보기</h3>
+
+<p>Spring Security와 JWT를 같이 사용해보기전에 먼저 <br />
+JWT 토큰을 만드는 방법을 코드로 작성해보자</p>
+
+<p><strong>1). 의존 라이브러리 추가</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//jwt 의존 라이브러리</span>
+<span class="n">implementation</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">jsonwebtoken</span><span class="o">:</span><span class="n">jjwt</span><span class="o">-</span><span class="nl">api:</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">5</span><span class="err">'</span>
+<span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">jsonwebtoken</span><span class="o">:</span><span class="n">jjwt</span><span class="o">-</span><span class="nl">impl:</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">5</span><span class="err">'</span>
+<span class="n">runtimeOnly</span>	<span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">jsonwebtoken</span><span class="o">:</span><span class="n">jjwt</span><span class="o">-</span><span class="nl">jackson:</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">5</span><span class="err">'</span>
+</code></pre></div></div>
+<p>우선 build.gradle에 jjwt 의존라이브러리를 추가해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMK5rCr5B2LRfcaM0vHK_8HL-XpmBLw8J4-SmsT_ZLhCAPgxjzuWPKRWep1z0eOw7WsW7Res6as9NvHmBdxJe1STWkt5A=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>추가된 모습을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>2). AccessToken 만들기</strong><br />
+JWT 토큰을 생서해주는 클래스를 만들어보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
+    
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64SecretKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">secretKey</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">String</span> <span class="n">encode</span> <span class="o">=</span> <span class="nc">Encoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">secretKey</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+      <span class="k">return</span> <span class="n">encode</span><span class="o">;</span>
+   <span class="o">}</span>
+
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">generateAccessToken</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span><span class="o">,</span> <span class="nc">String</span> <span class="n">subject</span><span class="o">,</span> <span class="nc">Date</span> <span class="n">expiration</span><span class="o">,</span> <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">)</span> <span class="o">{</span>
+
+      <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="n">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span>
+
+      <span class="k">return</span> <span class="nc">Jwts</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+              <span class="o">.</span><span class="na">setClaims</span><span class="o">(</span><span class="n">claims</span><span class="o">)</span> <span class="c1">// Custom Claims를 추가 (인증된 사용자와 관련된 정보)</span>
+              <span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="n">subject</span><span class="o">)</span> <span class="c1">// JWT에 대한 제목을 추가</span>
+              <span class="o">.</span><span class="na">setIssuedAt</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getTime</span><span class="o">())</span> <span class="c1">// JWT 발행 일자 설정</span>
+              <span class="o">.</span><span class="na">setExpiration</span><span class="o">(</span><span class="n">expiration</span><span class="o">)</span> <span class="c1">// JWT 만료일자 설정</span>
+              <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">key</span><span class="o">)</span> <span class="c1">// 서명을 위한 Key 객체를 넣어준다.</span>
+              <span class="o">.</span><span class="na">compact</span><span class="o">();</span> <span class="c1">// JWT를 생성하고 직렬화해줌</span>
+   <span class="o">}</span>
+   
+   <span class="o">...</span> <span class="n">생략</span>
+   
+   <span class="kd">private</span> <span class="nc">Key</span> <span class="nf">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
+      <span class="kt">byte</span><span class="o">[]</span> <span class="n">keyBytes</span> <span class="o">=</span> <span class="nc">Decoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span> <span class="c1">// 디코딩 진행</span>
+      <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Key</span><span class="o">)</span> <span class="nc">Keys</span><span class="o">.</span><span class="na">hmacShaKeyFor</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">);</span> <span class="c1">// HMAC 알고리즘을 적용한 Key 객체 생성</span>
+      <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>1). <code class="language-plaintext highlighter-rouge">encodeBase64SecretKey();</code> 메서드<br />
+해당 메서드 부터 살펴보면, String 타입의 객체 secretKey라는 것을<br />
+매개변수로 받고있다. 받은 매개변수는 Base64 인코딩을 통해 나온 객체를 다시 리턴해준다.<br />
+즉, secretKey를 인코딩해주는 메서드이다.</p>
+
+<p>2). <code class="language-plaintext highlighter-rouge">generateAccessToken();</code> 메서드<br />
+AccessToken을 만들어주는 메서드이다.<br />
+우선 매개변수로 받는 객체는 총 4개가 된다.</p>
+
+<p>Map&lt;String, Object&gt; claims<br />
+String subject<br />
+Date expiration <br />
+String base64EncodedSecretKey</p>
+
+<p>claims 객체는 사용자의 관련된 정보가 Map에 담겨있다.<br />
+subject 객체는 해당 토큰의 제목이다.<br />
+expriation 객체 같은 경우에는 토큰의 만료 시간을 설정한다.<br />
+base64EncodedSecretKey 객체는 <code class="language-plaintext highlighter-rouge">1)번</code>에서 인코딩한 객체를 넣어주면된다.</p>
+
+<p>3). <code class="language-plaintext highlighter-rouge">getKeyFormBase64EncodedKey();</code> 메서드<br />
+인코딩으로 받은 객체를 다시 디코딩해주는 메서드이다.<br />
+HMAC_SHA 알고리즘을 적용해 Key객체로 만들어 리턴해준다.<br />
+해당 키는 <code class="language-plaintext highlighter-rouge">2)번</code>에서 Access Token을 만들대 사용된다.</p>
+
+<p><br /></p>
+
+<p>이렇게 우선 AccessToken을 만들어주는 메서드를 구현했다.<br />
+해당 메서드를 테스트코드를 만들어 검증해보자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@TestInstance</span><span class="o">(</span><span class="nc">TestInstance</span><span class="o">.</span><span class="na">Lifecycle</span><span class="o">.</span><span class="na">PER_CLASS</span><span class="o">)</span> <span class="c1">// 테스트 인스턴스 생성단위가 클래스임</span>
+<span class="kd">class</span> <span class="nc">JwtTokenizerTest</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="kd">static</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">secretKey</span><span class="o">;</span>
+   <span class="kd">private</span> <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">;</span>
+
+   <span class="nd">@BeforeAll</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">jwtTokenizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JwtTokenizer</span><span class="o">();</span>
+      <span class="n">secretKey</span> <span class="o">=</span> <span class="s">"LeeJaehyeok637637123231231231123"</span><span class="o">;</span> <span class="c1">// 디코딩값: TGVlSmFlaHllb2s2Mzc2MzcxMjMyMzEyMzEyMzExMg==</span>
+      <span class="n">base64EncodedSecretKey</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">encodeBase64SecretKey</span><span class="o">(</span><span class="n">secretKey</span><span class="o">);</span>
+   <span class="o">}</span>
+   
+   <span class="nd">@Test</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">encode64SecretKeyTest</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span>
+      <span class="n">assertThat</span><span class="o">(</span><span class="n">secretKey</span><span class="o">,</span> <span class="n">is</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="nc">Decoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">))));</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Test</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">generateAccessTokenTest</span><span class="o">(){</span>
+      <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+      <span class="n">claims</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"memberId"</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+      <span class="n">claims</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"roles"</span><span class="o">,</span> <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"USER"</span><span class="o">));</span>
+
+      <span class="nc">String</span> <span class="n">subject</span> <span class="o">=</span> <span class="s">"test access token"</span><span class="o">;</span>
+      <span class="nc">Calendar</span> <span class="n">calendar</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+      <span class="n">calendar</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">MINUTE</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+      <span class="nc">Date</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">calendar</span><span class="o">.</span><span class="na">getTime</span><span class="o">();</span>
+
+      <span class="nc">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">generateAccessToken</span><span class="o">(</span><span class="n">claims</span><span class="o">,</span> <span class="n">subject</span><span class="o">,</span> <span class="n">expiration</span><span class="o">,</span> <span class="n">base64EncodedSecretKey</span><span class="o">);</span>
+
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">accessToken</span><span class="o">);</span>
+
+      <span class="n">assertThat</span><span class="o">(</span><span class="n">accessToken</span><span class="o">,</span> <span class="n">notNullValue</span><span class="o">());</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위와 같이 테스트 코드를 작성할 수 있다.</p>
+
+<p>테스트를 실행전 secretKey값을 넣어놓고 인코딩한 값을<br />
+base64EncodedSecretKey 객체에 넣어두었다.</p>
+
+<p>첫번쨰 테스트 <code class="language-plaintext highlighter-rouge">encode64SecretKeyTest();</code> 메서드는<br />
+현재 인코딩된값을 다시 디코딩해 secretKey값과 비교해<br />
+같으면 테스트를 통과하는 코드이다.</p>
+
+<p>두번째 테스트 <code class="language-plaintext highlighter-rouge">generateAccessTokenTest();</code> 메서드는<br />
+실제로 AccessToken을 만들어보는 테스트이고<br />
+위에서 보았던 <code class="language-plaintext highlighter-rouge">generateAccessToken()</code>;의 매개변수에<br />
+해당하는 데이터를 만들어서 메서드 실행한다음 반환값을 받으면된다.</p>
+
+<p>실제 해당 반환된 토큰 accessToken를 출력해보면<br />
+<code class="language-plaintext highlighter-rouge">eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm1lbWJlcklkIjoxLCJzdWIi
+OiJ0ZXN0IGFjY2VzcyB0b2tlbiIsImlhdCI6MTY2OTE5MjY0OSwiZXhwIjoxNjY5MTkzMj
+Q5fQ.yt_Y741NrTH5l7wsk3oYhbBqkZKgy7GNtJxsI-XuIQg</code></p>
+
+<p>이러한 JWT 토큰이 만들어지는 것을 확인할 수 있고<br />
+위에서 공부했던 것 처럼 Header, Payload, Signature로 이루어진 것을 볼 수 있다.</p>
+
+<p>해당 토큰을 <a href="https://jwt.io/">JWT 사이트</a>에서 디코딩 해보면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO_wCj1b91B1IxTjBKbJBSMY_NTzz2HQ5SjXSIlqonhF-Rw9nXUkcUqJWXnZ585EHK7u8dGAODelmV8U6Fl_DM4kVbpCg=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우리가 정의했던 값으로 해독이 가능한 모습을<br />
+확인해볼 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>3). RefreshToken 만들기</strong><br />
+RefreshToken을 만드는 방법은 사실 AccessToken과<br />
+동일한 방법으로 만들면된다. 다만 차이점은 claims에 대한 내용만<br />
+빠진 상태로 만들면 된다.</p>
+
+<p>아까와 동일한 클래스 JwtTokenizer에다 메서드를 추가해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
+    
+   <span class="o">...</span> <span class="n">생략</span>
+
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">generateRefreshToken</span><span class="o">(</span><span class="nc">String</span> <span class="n">subject</span><span class="o">,</span> <span class="nc">Date</span> <span class="n">expiration</span><span class="o">,</span> <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
+      <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="n">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span>
+
+      <span class="k">return</span> <span class="nc">Jwts</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+              <span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="n">subject</span><span class="o">)</span> <span class="c1">// JWT에 대한 제목을 추가</span>
+              <span class="o">.</span><span class="na">setIssuedAt</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getTime</span><span class="o">())</span> <span class="c1">// JWT 발행 일자 설정</span>
+              <span class="o">.</span><span class="na">setExpiration</span><span class="o">(</span><span class="n">expiration</span><span class="o">)</span> <span class="c1">// JWT 만료일자 설정</span>
+              <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">key</span><span class="o">)</span> <span class="c1">// 서명을 위한 Key 객체를 넣어준다.</span>
+              <span class="o">.</span><span class="na">compact</span><span class="o">();</span> <span class="c1">// JWT를 생성하고 직렬화해줌</span>
+   <span class="o">}</span>
+   
+   <span class="o">...</span> <span class="n">생략</span>
+   
+<span class="o">}</span>
+</code></pre></div></div>
+<p>AcessToken과 다른점은 얘기했듯이<br />
+clamis에 대한 내용만 빠진 상태로 Token을 만들어주면된다.</p>
+
+<p><br /></p>
+
+<h3 id="오늘-만난-error">오늘 만난 ERROR</h3>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The specified key byte array is 248 bits which is not secure enough for any JWT HMAC-SHA algorithm.  The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size &gt;= 256 bits (the key size must be greater than or equal to the hash output size).  Consider using the io.jsonwebtoken.security.Keys#secretKeyFor(SignatureAlgorithm) method to create a key guaranteed to be secure enough for your preferred HMAC-SHA algorithm.  See https://tools.ietf.org/html/rfc7518#section-3.2 for more information.
+io.jsonwebtoken.security.WeakKeyException: The specified key byte array is 136 bits which is not secure enough for any JWT HMAC-SHA algorithm.  The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size &gt;= 256 bits (the key size must be greater than or equal to the hash output size).  Consider using the io.jsonwebtoken.security.Keys#secretKeyFor(SignatureAlgorithm) method to create a key guaranteed to be secure enough for your preferred HMAC-SHA algorithm.  See https://tools.ietf.org/html/rfc7518#section-3.2 for more information.
+</code></pre></div></div>
+
+<p>HMAC_SHA 알고리즘을 사용 중 발생했던 에러를 적어본다.<br />
+알람 발생 경위는 위에 에러 콘솔에서<br />
+<code class="language-plaintext highlighter-rouge">HMAC-SHA algorithms MUST have a size &gt;= 256 bits</code>를 보고 알 수 있다.<br />
+SecretKey값이 256 bits가 넘지 않아서 발생한 문제로 추청되어</p>
+
+<p>테스트를 진행해봤다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64SecretKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">secretKey</span><span class="o">){</span>
+     <span class="nc">String</span> <span class="n">encode</span> <span class="o">=</span> <span class="nc">Encoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">secretKey</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
+     <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"encodeBase64SecretKey Method 실행 { "</span> <span class="o">+</span><span class="s">"secretKEY = "</span><span class="o">+</span> <span class="n">secretKey</span> <span class="o">+</span> <span class="s">" secretKEY.Byte = "</span><span class="o">+</span> <span class="n">secretKey</span><span class="o">.</span><span class="na">getBytes</span><span class="o">().</span><span class="na">length</span> <span class="o">+</span> <span class="s">" Base64 Encode = "</span> <span class="o">+</span> <span class="n">encode</span><span class="o">+</span><span class="s">" }"</span><span class="o">);</span>
+     <span class="k">return</span> <span class="n">encode</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+<p>현재 매개변수로 String secretKey를 BASE64로 인코딩 해주는 작업이다.<br />
+secretKey = “LeeJaehyeok63763712323123123112”;<br />
+실제로 이러한 데이터를 secretKey로 입력했다.</p>
+
+<p>해당 encode 객체로 아래의 메서드의 매개변수로 보내주었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="nc">Key</span> <span class="nf">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
+     <span class="kt">byte</span><span class="o">[]</span> <span class="n">keyBytes</span> <span class="o">=</span> <span class="nc">Decoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span> <span class="c1">// 디코딩 진행</span>
+     <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Key</span><span class="o">)</span> <span class="nc">Keys</span><span class="o">.</span><span class="na">hmacShaKeyFor</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">);</span> <span class="c1">// HMAC 알고리즘을 적용한 Key 객체 생성</span>
+     <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+<p>첫번째로 인코딩했던 문자열을 디코딩해주고<br />
+HMAC_SHA 알고리즘을 통해 Key값으로 바꾸는 작업을 했다.<br />
+이떄 여기서 에러가 발생했던 지점이었다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">.hmacShaKeyFor();</code> 안에서 스펙과 맞지않는 디코드값을 <br />
+넣어준게 문제인 것 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="nc">Key</span> <span class="nf">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
+     <span class="kt">byte</span><span class="o">[]</span> <span class="n">keyBytes</span> <span class="o">=</span> <span class="nc">Decoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span> <span class="c1">// 디코딩 진행</span>
+        
+     <span class="c1">// ===========Test 임시 코드===========</span>
+     <span class="nc">String</span> <span class="n">test</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
+     <span class="k">for</span> <span class="o">(</span><span class="kt">byte</span> <span class="n">s</span> <span class="o">:</span> <span class="n">keyBytes</span><span class="o">){</span>
+        <span class="n">test</span> <span class="o">+=</span> <span class="o">(</span><span class="kt">char</span><span class="o">)</span><span class="n">s</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">test</span><span class="o">);</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+     <span class="c1">// ==================================</span>
+     
+     <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Key</span><span class="o">)</span> <span class="nc">Keys</span><span class="o">.</span><span class="na">hmacShaKeyFor</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">);</span> <span class="c1">// HMAC 알고리즘을 적용한 Key 객체 생성</span>
+     <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
+ <span class="o">}</span>
+</code></pre></div></div>
+<p>실제로 디코딩했을때 우리가 넣어줬던</p>
+
+<p><code class="language-plaintext highlighter-rouge">System.out.println(test);</code><br />
+LeeJaehyeok63763712323123123112 값이 디코딩된것이 콘솔에 출력되었고</p>
+
+<p><code class="language-plaintext highlighter-rouge">System.out.println(keyBytes.length);</code><br />
+31 이라는 값이 출력되었다. 말은 즉슨 31Byte라는 것을 의미한다.</p>
+
+<p>그러면 우리가 처음에 넣어줬던 secretKey는 31 Bytes였고<br />
+Bit로 환산해보면 1Byte = 8 Bit로 계산되어지니<br />
+<code class="language-plaintext highlighter-rouge">8 * 31 = 248</code>, 즉 248bits로 계산되어진다.</p>
+
+<p>그러면 우리가 처음에 봤던 에러콘솔 첫줄에<br />
+<code class="language-plaintext highlighter-rouge">The specified key byte array is 248 bits which is not secure enough for any JWT HMAC-SHA algorithm.</code> 이러한 구문이 있었고, 우리가 정의한 byte가 248 bits이니까<br />
+<code class="language-plaintext highlighter-rouge">size &gt;= 256 bits</code>를 넘기게 만들라는 뜻으로 해석할 수 있다.</p>
+
+<p>즉, secretKey의 String Byte값을 지정했을때<br />
+<code class="language-plaintext highlighter-rouge">32 Bytes = 256 Bits</code>가 넘지 않아서 생기는 문제였던 것!</p>
+
+<p>그래서 secretKey값을 LeeJaehyeok637637123231231231123로<br />
+뒤에 숫자하나를 추가했더니 정상적으로 작동하는 모습을 볼 수 있었다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>이렇게 오늘은 JWT와 인증과 관련된 기초지식을<br />
+먼저 배웠고, 내일부터는 Spring Security와 같이 사용해볼 것 같다.</p>
+
+<p>사실 오늘은 토큰을 생성하는 법만 배웠고 더 나아간 학습을
+진행하지 않았기 때문에 클라이엔트에 어떻게 보내줄지<br />
+혹시 요청을 받을때 JWT를 해독해 검증하는 과정을 어떻게할지<br />
+아직 머리속에서 마땅한 그림은 떠오르지 않는 상태이다.</p>
+
+<p>모쪼록 내일까지 JWT 인증과 관련된 부분을 잘 마무리 해보자<br />
+오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 삽겹살, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[확실히 Spring 관련된 기술을 사용하면서 프로그래밍을 하고 있다는 느낌이 들때가 많아서 좋다.]]></summary></entry><entry><title type="html">TIL) Spring Security 3 (권한부여)</title><link href="http://localhost:4000/til/2022/11/22/til.html" rel="alternate" type="text/html" title="TIL) Spring Security 3 (권한부여)" /><published>2022-11-22T00:00:00+09:00</published><updated>2022-11-22T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/22/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/22/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO-9XVEAUETJGFf5AjYCUCurD1z-9yBYl4hAKS_SdfBOSr5ac7uSAlI8PoCiXakOadLKWhnBi-RnF5XAFfKoh4ynbCMmQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
 
 <p>어제 공부했던 Spring Security 인증처리 과정에서대해<br />
 코드를 찾아가보면서 어느정도 깨달음이 있어서<br />
@@ -103,7 +534,7 @@
 
 </code></pre></div></div>
 <p>실제로 코드를 확인해보면<br />
-생성자로 AuthorizationManager의 객체를 DI받고 있다.<br />
+생성자로 <code class="language-plaintext highlighter-rouge">AuthorizationManager</code>의 객체를 DI받고 있다.<br />
 그리고 <code class="language-plaintext highlighter-rouge">.check(this::getAuthentication, request);</code> 메서드를 호출해<br />
 <code class="language-plaintext highlighter-rouge">Authentication</code>와 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를 매개변수로 넘겨주고있다.</p>
 
@@ -266,6 +697,14 @@ Map을 담고있는 객체가 반환되며 권한 부여과정이 진행되고</
 <p><br /></p>
 
 <hr />
+
+<p>이렇게 오늘을 끝으로 Spring Security의<br />
+인증과 권한에 대해 알아보았다.<br />
+좀 더 깊은내용을 이해하기 위해서는 여러가지 Filter에 대해 공부가<br />
+필요해보이고, 내일부터 공부하는 JWT를 이용할때 어떠한 방식으로<br />
+Spring Security 로직이 변경되는지 내일부터 다시 공부해보자</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
 
 <p><br /></p>
 
@@ -1600,121 +2039,7 @@ Spring JDBC,JPA,Transaction, JUnit, APi 문서 자동화 등<br />
 <p>이상 세달차 공부 중인 <br />
 나란 사람의 회고를 적어본다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry><entry><title type="html">Spring) MySQL Local 연동 하기</title><link href="http://localhost:4000/spring/2022/11/15/spring-mysql.html" rel="alternate" type="text/html" title="Spring) MySQL Local 연동 하기" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/15/spring-mysql</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/15/spring-mysql.html"><![CDATA[<p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br />
-연결하여 사용해보려고한다.</p>
-
-<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br />
-저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
-
-<p>MySQL WorkBench GUI로 작업하였고<br />
-리소스는 .yml 파일을 사용했다.</p>
-
-<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
-
-<p><br /></p>
-
-<p>1). bulid.gradle 설정</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
-</code></pre></div></div>
-
-<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>추가하고 Gradle Reload를 할 경우 위와 같이<br />
-라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<p>2). .yml 파일 설정</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">jpa</span><span class="pi">:</span>
-    <span class="na">hibernate</span><span class="pi">:</span>
-      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
-    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
-    <span class="na">properties</span><span class="pi">:</span>
-      <span class="na">hibernate</span><span class="pi">:</span>
-        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
-  <span class="na">datasource</span><span class="pi">:</span>
-    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
-    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
-    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>두번째로 연결을위한 .yml파일 설정이다.<br />
-프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br />
-properties 확장자를 application.yml로 변경하였다.</p>
-
-<p>spring : <br />
-jpa : <br />
-에 해당하는 부분은 jpa관련 설정이다.</p>
-
-<p>우리가 봐야할 부분은<br />
-spring :<br />
-datasource :<br />
-이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
-
-<p>넣어줘야할 정보는 4가지 이다.</p>
-<ol>
-  <li>포트넘버</li>
-  <li>스키마 이름</li>
-  <li>유저네임</li>
-  <li>비밀번호</li>
-</ol>
-
-<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br />
-아래에 어디서 찾는지 적어보겠다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>워크밴치(MySQL WorkBench)를 열어보면<br />
-커넥션에 관한 정보가 나온다.<br />
-없으면 연결을 한번도 하지 않은 것이기에<br />
-커넥션을 만들어주면 된다.</p>
-
-<p>커넥션을 더블클릭 해보자</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br />
-여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br />
-비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
-
-<p>여기서 알 수 있는 정보는</p>
-
-<p><strong>포트넘버 = 3306<br />
-유저네임 = root<br />
-비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
-
-<p>이렇게 알 수 있다.</p>
-
-<p>그리고 접속을 한 다음에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br />
-스키마를 생성해주면 된다.</p>
-
-<p>생성한 스키마가 스키마이름이 되는 것이다.<br />
-나는 example로 설정했고<br />
-이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
-
-<p>이렇게 정리해서 정보를 적어보자면</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
-  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
-  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
-  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>이렇게 설정할 수 있을 것이다.</p>
-
-<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br />
-처음에 mysql를 다운받고 설정한 비밀번호다.<br />
-인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="mysql" /><summary type="html"><![CDATA[오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.]]></summary></entry><entry><title type="html">TIL) Application 빌드, 실행</title><link href="http://localhost:4000/til/2022/11/15/til.html" rel="alternate" type="text/html" title="TIL) Application 빌드, 실행" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/15/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNq0VcIEmAZMz_1paQl-4m8_fIqcR-XIxlvy4GrezxEOvY6tzpT_1uI3JJK_XNFFzX3gFipA7DgprUqDMmQVqM19rSf8Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry><entry><title type="html">TIL) Application 빌드, 실행</title><link href="http://localhost:4000/til/2022/11/15/til.html" rel="alternate" type="text/html" title="TIL) Application 빌드, 실행" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/15/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNq0VcIEmAZMz_1paQl-4m8_fIqcR-XIxlvy4GrezxEOvY6tzpT_1uI3JJK_XNFFzX3gFipA7DgprUqDMmQVqM19rSf8Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
 
 <p>오늘은 섹션 마지막날이다. <br />
 벌써 3달째를 달리고 있는 부트캠프</p>
@@ -1956,7 +2281,121 @@ runtimeOnly 'mysql:mysql-connector-java'
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
+<strong>오늘의 점심</strong>: 김치찌개, 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Spring) MySQL Local 연동 하기</title><link href="http://localhost:4000/spring/2022/11/15/spring-mysql.html" rel="alternate" type="text/html" title="Spring) MySQL Local 연동 하기" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/15/spring-mysql</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/15/spring-mysql.html"><![CDATA[<p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br />
+연결하여 사용해보려고한다.</p>
+
+<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br />
+저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
+
+<p>MySQL WorkBench GUI로 작업하였고<br />
+리소스는 .yml 파일을 사용했다.</p>
+
+<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
+
+<p><br /></p>
+
+<p>1). bulid.gradle 설정</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
+</code></pre></div></div>
+
+<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>추가하고 Gradle Reload를 할 경우 위와 같이<br />
+라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<p>2). .yml 파일 설정</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="na">hibernate</span><span class="pi">:</span>
+      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
+    <span class="na">properties</span><span class="pi">:</span>
+      <span class="na">hibernate</span><span class="pi">:</span>
+        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
+    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
+    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>두번째로 연결을위한 .yml파일 설정이다.<br />
+프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br />
+properties 확장자를 application.yml로 변경하였다.</p>
+
+<p>spring : <br />
+jpa : <br />
+에 해당하는 부분은 jpa관련 설정이다.</p>
+
+<p>우리가 봐야할 부분은<br />
+spring :<br />
+datasource :<br />
+이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
+
+<p>넣어줘야할 정보는 4가지 이다.</p>
+<ol>
+  <li>포트넘버</li>
+  <li>스키마 이름</li>
+  <li>유저네임</li>
+  <li>비밀번호</li>
+</ol>
+
+<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br />
+아래에 어디서 찾는지 적어보겠다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>워크밴치(MySQL WorkBench)를 열어보면<br />
+커넥션에 관한 정보가 나온다.<br />
+없으면 연결을 한번도 하지 않은 것이기에<br />
+커넥션을 만들어주면 된다.</p>
+
+<p>커넥션을 더블클릭 해보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br />
+여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br />
+비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
+
+<p>여기서 알 수 있는 정보는</p>
+
+<p><strong>포트넘버 = 3306<br />
+유저네임 = root<br />
+비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
+
+<p>이렇게 알 수 있다.</p>
+
+<p>그리고 접속을 한 다음에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br />
+스키마를 생성해주면 된다.</p>
+
+<p>생성한 스키마가 스키마이름이 되는 것이다.<br />
+나는 example로 설정했고<br />
+이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
+
+<p>이렇게 정리해서 정보를 적어보자면</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
+  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>이렇게 설정할 수 있을 것이다.</p>
+
+<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br />
+처음에 mysql를 다운받고 설정한 비밀번호다.<br />
+인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="mysql" /><summary type="html"><![CDATA[오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.]]></summary></entry><entry><title type="html">TIL) API Documentation 2</title><link href="http://localhost:4000/til/2022/11/14/til.html" rel="alternate" type="text/html" title="TIL) API Documentation 2" /><published>2022-11-14T00:00:00+09:00</published><updated>2022-11-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/14/til.html"><![CDATA[<p>한 주가 끝나고 새로운 주가 시작되었다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOXnXDoCRH7AtlOncucaI0nI7RqC9GMkm0ZG-VhgIXazy7m5tTSccABV_f-3G5RjFSfN1ojWWOJzPxeYeKp4Ycs2Ykj=w1920-h921" alt="image" class="align-left" style="max-width: 65%" /></p>
 
@@ -2557,339 +2996,4 @@ SpringRestDocs를 사용하는 법을 알아보았고</p>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 핫도그, 빵</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[요번주도 한주가 지나간다. 얼마 공부한 것 같은느낌이 아닌데 벌써 월요일이지나 금요일이 되었다.]]></summary></entry><entry><title type="html">TIL) JUnit 3</title><link href="http://localhost:4000/til/2022/11/10/til.html" rel="alternate" type="text/html" title="TIL) JUnit 3" /><published>2022-11-10T00:00:00+09:00</published><updated>2022-11-10T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/10/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/10/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPEtAIsYVHYZngjJKd7DhE7QvwO4nT5RQrbx3n7Hgtx83b5wSHcAK9fgNs42_a12-wjBXSB7EmmaORw8NUf4CEwXDJY2g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>드이어 JUnit 관련해서 마지막 시간이다.<br />
-테스트 프로그램을 작성하는 연습도 틈틈히 해둬야<br />
-까먹지 않고 계층별 테스트가 원활하게 잘 될 것 같다.</p>
-
-<p>새로운걸 알면알수록 재미있지만<br />
-내 뇌용량의 초과로,,, 전에 배웠던 내용들이 슬슬<br />
-휘발되기 시작한다 ㅋㅋ…</p>
-
-<p>복습 하는시간도 마련해야 할 것 같은 느낌이다</p>
-
-<hr />
-
-<p>어제는 <a href="https://mycatlikeschuru.github.io/til/2022/11/09/til.html">계층별 테스트</a>에 대해서 간단하게 포스팅 해보았다.<br />
-사실 계층별 테스트라고 작성을 했지만<br />
-진정한 Slice 테스트가 되는 프로그램이 아니였고<br />
-계층별 테스트를 위한 문법을 사전에 공부한느 시간이었다.</p>
-
-<p>오늘은 정말 애플리케이션 계층별로 테스트를<br />
-진행하려면 어떻게해야하는지?</p>
-
-<p>테스팅 기술에 대해 배워보는 시간이다.</p>
-
-<h2 id="mockito">Mockito</h2>
-
-<p>오늘 공부할 api는 Mockito라는 테스트를 위한 api이다.</p>
-
-<p>우리가 평상시에 Mock이라고하면 가짜를 얘기한다.<br />
-목업폰과 같이 실제 기능은 없지는 모양만있는 가짜이다.</p>
-
-<p>이와 같은 기술로 객체를 가짜로 만들어 계층별 테스트하는 방법이다.</p>
-
-<p>너무나게 당연하게도 다른 계층을 접근하지 않으니<br />
-테스트시간이 확실히 빨라지게되며<br />
-계층별로 테스트를 해볼 수 있다는 장점이 있다.</p>
-
-<h3 id="controller-계층-slice-test">Controller 계층 Slice Test</h3>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTnXpBWUcCganXkdulhuUs7yIiBV4jduubimbBhkIH1II-o-KZ6mUljknzsuWm-0Hf-czO1b7FkvAxK-aJEpMiHDGar9Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>간단하게 Controller 계층만 두고 얘기해보자<br />
-어제 <a href="https://mycatlikeschuru.github.io/til/2022/11/09/til.html">JUnit 2</a> 챕터에서 테스트해보았던건<br />
-왼쪽에서 보는 것과 같은 형태의 ‘통합 테스트’라고 볼 수 있다.</p>
-
-<p>이유는 핸들러메서드를 호출해 Service -&gt; Repository 까지<br />
-접근해 Controller 계층이 잘 실행되는지를 알아보았기 때문이다.</p>
-
-<p>이제 우리가 해볼거는 Mock 객체를 만들어<br />
-Test를 호출하면 Controller 계층만 독단적으로<br />
-테스트할 수 있는 방법이다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
-<span class="nd">@SpringBootTest</span>
-<span class="nd">@AutoConfigureMockMvc</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberControllerHomeworkTest</span> <span class="o">{</span>
-    <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
-
-    <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="nc">Gson</span> <span class="n">gson</span><span class="o">;</span>
-
-    <span class="nd">@MockBean</span> <span class="c1">// 추가부분</span>
-    <span class="kd">private</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
-
-    <span class="nd">@Autowired</span> <span class="c1">// mppaer 사용을 위한 추가</span>
-    <span class="kd">private</span> <span class="nc">MemberMapper</span> <span class="n">mapper</span><span class="o">;</span>
-
-    <span class="nd">@Test</span>
-    <span class="kt">void</span> <span class="nf">postMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>코드를 예제로 살펴보자</p>
-
-<p>이전과 달라진점은 @MockBean이 추가되었다는 점이다.<br />
-SpringBoot를 사용하는 어노테이션을 달아주었기때문에</p>
-
-<p>@MockBean을 필드변수에 붙여주면<br />
-해당 객체에 Bean과 같은 타입의 객체가 DI된다.</p>
-
-<p>즉 MemberService 클래스 객체가 주입되므로<br />
-우리는 가짜로 만들어진 memberService 객체로 메서드들을 호출할 수 있다.</p>
-
-<p>@Test 프로그램을 작성해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
-<span class="kt">void</span> <span class="nf">postMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-    <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span><span class="o">(</span>
-            <span class="s">"dhfif718@naver.com"</span><span class="o">,</span>
-            <span class="s">"이재혁"</span><span class="o">,</span>
-            <span class="s">"010-1234-5678"</span>
-    <span class="o">);</span>
-
-    <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">memberPostToMember</span><span class="o">(</span><span class="n">post</span><span class="o">);</span>
-    <span class="n">member</span><span class="o">.</span><span class="na">setStamp</span><span class="o">(</span><span class="k">new</span> <span class="nc">Stamp</span><span class="o">());</span>
-
-    <span class="n">given</span><span class="o">(</span><span class="n">memberService</span><span class="o">.</span><span class="na">createMember</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-
-    <span class="nc">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">post</span><span class="o">);</span>
-
-    <span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>
-            <span class="n">post</span><span class="o">(</span><span class="s">"/api/members"</span><span class="o">)</span>
-                    <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-                    <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-                    <span class="o">.</span><span class="na">content</span><span class="o">(</span><span class="n">content</span><span class="o">)</span>
-    <span class="o">);</span>
-
-    <span class="nc">MvcResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actions</span>
-            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isCreated</span><span class="o">())</span>
-            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.email"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getEmail</span><span class="o">()))</span>
-            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.name"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getName</span><span class="o">()))</span>
-            <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.phone"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getPhone</span><span class="o">()))</span>
-            <span class="o">.</span><span class="na">andReturn</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>대부분은 자바 문법적인 요소이고<br />
-중요한 부분은 given(); api 쪽이다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">BDDMockito</span><span class="o">.</span><span class="na">given</span><span class="o">;</span>
-</code></pre></div></div>
-<p>해당 라이브러리를 import 해야 사용이 가능하고</p>
-
-<p>given(); 메서드를 통해서 우리는 가짜 객체를 만들 수 있다.</p>
-
-<p>given() : 가짜로 만들 메서드 지정<br />
-willRetrun() : 가짜로 만든 반환 값 지정<br />
-이렇게 생각하면 간단 할 것 같다.</p>
-
-<p>여기서 @MockBean을 통해 의존성 주입받은 객체의<br />
-memberSerive.createMember()를 given()안에 넣어주었고<br />
-해당 .createMember()의 매개변수가 Member.class 타입이므로<br />
-Mockito.any(Member.class) 라고 설정을 해두었다.</p>
-
-<p>여기서 만약 다른 타입일 경우에<br />
-Mockito.anyInt()<br />
-Mockito.anyLong()<br />
-Mockito.anyString()<br />
-등 여러가지 메서드들도 제공하고 있다.</p>
-
-<p><br /></p>
-
-<p>테스트 코드를 이렇게 작성하면<br />
-가짜객체로 리턴값을 우리가 정해서 넘겨줄 수 있다.<br />
-Controller 계층 프로그램을 봐보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span>
-<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Post</span> <span class="n">requestBody</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">memberPostToMember</span><span class="o">(</span><span class="n">requestBody</span><span class="o">);</span>
-    <span class="n">member</span><span class="o">.</span><span class="na">setStamp</span><span class="o">(</span><span class="k">new</span> <span class="nc">Stamp</span><span class="o">());</span> <span class="c1">// homework solution 추가</span>
-
-    <span class="nc">Member</span> <span class="n">createdMember</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">.</span><span class="na">createMember</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span>
-            <span class="k">new</span> <span class="nc">SingleResponseDto</span><span class="o">&lt;&gt;(</span><span class="n">mapper</span><span class="o">.</span><span class="na">memberToMemberResponse</span><span class="o">(</span><span class="n">createdMember</span><span class="o">)),</span>
-            <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>위에서 보듯이 memberService.createMember(member);<br />
-메서드를 호출하는 시점에서 우리의 가짜 객체의 반환값이<br />
-대신 createdMember 객체로 할당되게 되어진다.</p>
-
-<p>그렇게 되면 Service 계층을 접근하지않고<br />
-우리가 만든 Mock으로만으로 Controller를 테스트 해 볼 수 있는 것이다.</p>
-
-<p><br /></p>
-
-<h3 id="service-계층-slice-test">Service 계층 Slice Test</h3>
-
-<p>Controller 계층을 테스트할 때에는 SpringBootTest를 이용했다.<br />
-스프링 부트를 실행시키는 시간도 포함하면<br />
-시간이 느려질 수 있는 단점이 있지만 Controller 계층은<br />
-spring web servlet 기술을 사용하기에 포함시켰었다.</p>
-
-<p>하지만 Service 계층은 SpringBoot 없이도<br />
-Mockito API를 이용해 Serivce 계층만 테스트가 가능하다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT11Owrzo9GJ8WW4G2Oo2z7sh78eNqCI7yo5XbMPJ_0mlZQKHtsqqku8nDD_99cQhCgmaZ-OBsms1m9QJdQuPEvf_ijUw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같이 테스트가 이루어지고<br />
-Repository 계층과의 연결도 끊고 Mock 객체로만<br />
-테스트를 할 수 있다는 점이 중요하다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExtendWith</span><span class="o">(</span><span class="nc">MockitoExtension</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberServiceMockTest</span> <span class="o">{</span>
-
-    <span class="nd">@Mock</span>
-    <span class="kd">private</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
-
-
-    <span class="nd">@InjectMocks</span>
-    <span class="kd">private</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
-
-    <span class="nd">@Test</span>
-    <span class="kt">void</span> <span class="nf">createMemberTest</span><span class="o">()</span>  <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>Controller과는 다르게 @ExtendWith 어노테이션을 이용해<br />
-Mockito API를 사용할 수 있다.</p>
-
-<p>여기서 우리가 테스트할 계층은 memberService 계층이고<br />
-가짜로 만들어야할 객체는 memberRepository이다</p>
-
-<p>그런 개념에서 @Mock을 memberRepository에 붙이고 <br />
-@InjectMocks를 memberService에 붙여주면</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
-<span class="nd">@Service</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nf">MemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
-    <span class="o">}</span>
-    
-    <span class="o">...</span>
-</code></pre></div></div>
-<p>Service 계층의 Repository에 Mock객체가<br />
-자동으로 의존성 주입이된다.</p>
-
-<p>그리하여 우리가 Repository를 Mock 객체를 사용할 수 있는 것이다.</p>
-
-<p><br /></p>
-
-<p>이제 테스트 예제코드를 봐보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
-<span class="kt">void</span> <span class="nf">createMemberTest</span><span class="o">()</span>  <span class="o">{</span>
-        <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">,</span><span class="s">"이재혁"</span><span class="o">,</span><span class="s">"010-1234-5678"</span><span class="o">);</span>
-
-        <span class="n">given</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">())).</span><span class="na">willReturn</span><span class="o">(</span><span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">member</span><span class="o">));</span>
-        <span class="c1">//given(memberRepository.findByEmail(Mockito.anyString())).willReturn(Optional.of(member));</span>
-
-        <span class="n">assertThrows</span><span class="o">(</span><span class="nc">BusinessLogicException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">memberService</span><span class="o">.</span><span class="na">createMember</span><span class="o">(</span><span class="n">member</span><span class="o">));</span>
-    <span class="o">}</span>
-</code></pre></div></div>
-
-<p>검증을 어떻게하는지에 따라 달리지겠지만<br />
-Member 객체를 생성하는 serive 클래스 메서드를 테스트하기위해<br />
-새로운 Member 객체를 만들어 검증할 것이다.</p>
-
-<p>given()으로 Controller 계층에서 했던것과 동일하게<br />
-가짜로만들 메서드의 형식과 매개타입을 입력해준다음<br />
-리턴값으로 어떤 객체를 받을지 정해주면된다.</p>
-
-<p>최종적으로 동일한 Member가 발견되어<br />
-Exception을 잡아 검증하는 프로그램으로 작성하였다.</p>
-
-<p>우리가 잘라줘야하는부분은 Repositroy의 findByEmail();로 정의한 부분이다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Member</span> <span class="nf">createMember</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">verifyExistsEmail</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
-    <span class="nc">Member</span> <span class="n">savedMember</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">savedMember</span><span class="o">;</span>
-<span class="o">}</span>
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">verifyExistsEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="n">email</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_EXISTS</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>MemberService 로직은 너무 간단하게<br />
-기존 member와 email을 비교해 같은 email이 존재하면<br />
-throw Exception을 하게 되어있다.</p>
-
-<p>우리는 위에서 메서드 호출할때의 매개변수 “dhfif718@naver.com”과<br />
-결과로 반환된 객체의 email “dhfif718@naver.com” 결과적으로 같기 때문에<br />
-if(member.isPresent()) 조건에 성립되<br />
-Exception을 던지게되어 Serivce 로직을 검증해볼 수 있다.</p>
-
-<p>자연스럽게 예외가 던져지므로 해당 Service 로직은 종료되고<br />
-.save()까지 검증할 필요가 없어진다.<br />
-save를 검증하는 것은 사실 비지니스로직을 검증하는 것보단<br />
-Repository를 검증하는 것에 가깝기 때문에<br />
-Serivce 계층에서 검증하는 로직을 굳이 작성하지 않아도 될 것 같다.</p>
-
-<p><br /></p>
-
-<h3 id="오늘-만난-에러">오늘 만난 에러</h3>
-
-<p>이렇게 위에서 Controller과 Service 계층을 분리해서<br />
-따로 따로 테스트할 수 있게 프로그램을 작성하고<br />
-정상적으로 수행되는 모습을 볼 수 있었다.</p>
-
-<p>Mockito라는 API를 처음 사용하다보니<br />
-여러가지 에러들을 만났고 그중에 기억남는 에러를 적어본다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">cancelOrderTest</span><span class="o">(){</span>
-    <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
-    <span class="kt">long</span> <span class="n">orderId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
-    <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Order</span><span class="o">&gt;</span> <span class="n">findOrder</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
-    <span class="n">given</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getOrderId</span><span class="o">())).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">findOrder</span><span class="o">);</span>
-    <span class="n">assertThrows</span><span class="o">(</span><span class="nc">BusinessLogicException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">orderService</span><span class="o">.</span><span class="na">cancelOrder</span><span class="o">(</span><span class="n">orderId</span><span class="o">));</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>위와 같이 테스트 코드를 작성후 실행시켜 보았는데</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTitd8kl31KKTTaIB7nQrL7AvxwT54hIPaJEcnmdlC5BhBrezzcRcqyhYeyWzO1aK7O1OYjVG_yqk2EYkUVRD6lZHWCiw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>misusing.PotentialStubbingProblem 이라는 에러를 만났다.<br />
-잠재적인 Stubbing 문제라면서 예외가 잡혔다.</p>
-
-<p>코드를 열심히 보다보니..<br />
-given()안의 매개변수로 order.getOrderId()를 넣어주고 있었고<br />
-cancelOrder();메서드 호출하는 매개변수에는 orderId를 넣어주고 있었다.</p>
-
-<p>여기서 order객체가 만들어질때 Long타입으로 null로 만들어졌고<br />
-타입이 잘못들어간 상태로 테스트 코드를 실행하니까 위와 같은 에러가 발생했다.</p>
-
-<p>해결은</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span><span class="o">(</span><span class="n">orderRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">anyLong</span><span class="o">())).</span><span class="na">willReturn</span><span class="o">(</span><span class="n">findOrder</span><span class="o">);</span>
-</code></pre></div></div>
-<p>위와 같이 타입을 Mockito.anyLong()을 붙여서 해결이 가능하고<br />
-order.serOrderId(orderId);를 통해서 값을 넣어주어도<br />
-문제가 해결이 가능하다.</p>
-
-<hr />
-
-<p>오늘 공부는 여기까지 했고<br />
-JUnit관련해서 Slice 테스트에 대해 자세히 배울 수 있어서<br />
-너무 유익한 시간이였다.</p>
-
-<p>한가지 아쉬운점은 많은 api중에서도 한정적인 것만 사용해보았기에<br />
-지식층이 얕은점..?이 조금 아쉬웠고<br />
-이후에 프로젝트하기전에 테스트 관련 여러 메서드들을 공부한다음<br />
-테스트 코드를 작성해봐야겠다.</p>
-
-<p>오늘 공부는 여기서 끝 !</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 카레, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 핫도그, 빵</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[요번주도 한주가 지나간다. 얼마 공부한 것 같은느낌이 아닌데 벌써 월요일이지나 금요일이 되었다.]]></summary></entry></feed>
