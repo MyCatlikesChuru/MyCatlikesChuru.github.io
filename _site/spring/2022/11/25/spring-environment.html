@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) 인증, 보안 기초 | LeeJellan</title>
+<title>Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) 인증, 보안 기초">
+<meta property="og:title" content="Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오늘은 드디어 인증과 보안관련된 공부가 시작되었다.">
-<meta property="og:description" content="오늘은 드디어 인증과 보안관련된 공부가 시작되었다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/11/17/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/11/17/til.html">
+<meta name="description" content="오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 기록해보려고한다.">
+<meta property="og:description" content="오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 기록해보려고한다.">
+<link rel="canonical" href="http://localhost:4000/spring/2022/11/25/spring-environment.html">
+<meta property="og:url" content="http://localhost:4000/spring/2022/11/25/spring-environment.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-11-17T00:00:00+09:00">
+<meta property="article:published_time" content="2022-11-25T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) 인증, 보안 기초">
+<meta property="twitter:title" content="Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-17T00:00:00+09:00","datePublished":"2022-11-17T00:00:00+09:00","description":"오늘은 드디어 인증과 보안관련된 공부가 시작되었다.","headline":"TIL) 인증, 보안 기초","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/17/til.html"},"url":"http://localhost:4000/til/2022/11/17/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-25T00:00:00+09:00","datePublished":"2022-11-25T00:00:00+09:00","description":"오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 기록해보려고한다.","headline":"Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2022/11/25/spring-environment.html"},"url":"http://localhost:4000/spring/2022/11/25/spring-environment.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) 인증, 보안 기초</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+90</h2>
+  <h1 class="post-title p-name" itemprop="name headline">Spring) Could not resolve placeholder '환경변수명' in value "${환경변수명}" 오류</h1>
+  <h2 class="post-subtitle">Mac 환경변수 적용안되는 문제</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-11-17T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 17, 2022
+    <time class="dt-published" datetime="2022-11-25T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 25, 2022
     </time>
 
     
@@ -676,270 +676,234 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#zsh">#zsh</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오늘은 드디어<br>
-인증과 보안관련된 공부가 시작되었다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSK7Vlbd6P-ZA2TpRO9yTFxz9gH-OdxjYebZ6-r_KUFyGQiml5Hx8m6WodAQFCprhzYPGAg5SXnE-TkysLMqq-BedG44A=w1920-h864" alt="image" class="align-left" style="max-width: 50%"></p>
-
-<p>Spring Security, JWT, OAuth2 등<br>
-여러가지를 배울 예정이고</p>
-
-<p>가장 고전하는 영역이지 않을까 생각한다.</p>
-
-<hr>
-
-<p>오늘은 인증, 보안에 대한 기초를 먼저 파악하고<br>
-내일부터 본격적인 Spring Security 사용법을 알아볼 것 같다.<br>
-오늘은 기초인 HTTPS와 Hashing, Cookie, Session에 대해 알아보자</p>
+      <p>오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 <br>
+기록해보려고한다.</p>
 
 <p><br></p>
 
-<h3 id="https">HTTPS</h3>
+<h2 id="문제-내용">문제 내용</h2>
 
-<p>우리가 여태까지 배웠기를 HTTP 프로토콜을 이용해<br>
-TCP/IP 통신으로 서버와 연결할 수 있다고 공부를 했었다.<br>
-HTTP Message를 통해 Json 객체를 받아보기도 하였다.</p>
+<p>우선 나는 Mac을 사용하고 Shell은 zsh를 사용한다.</p>
 
-<p>HTTPS의 Hyper Text Transfer Protocol Secure Socket layer의 약자다. <br>
-보면 알 수 있듯이 기존의 <strong>HTTP + Secure Socket layer</strong>가 붙은 모습이다.<br>
-HTTP 프로토콜을 보다 안전하게 요청을 주고 받기위해 SSL, TLS라는 알고리즘을 이용해 <br>
-HTTP 통신을 하는 과정에서 데이터를 암호화하여 전송하는 방법이다.</p>
+<p>문제의 시작은 이러하다. JWT관련 공부중이였고<br>
+코드에서 @Value 어노테이션으로 application.yml 파일의 <br>
+설정된 값들을 사용하려고하였다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmQ7kg8wBa9J9dzD10tI68mzIX9M97wYHvAyH-tNw-vTeDL5V8vTsTeX3a_QiO7FnYOL0DMp_w7JRIh9Jt27wXdEgUoDiw=w1510-h1614" alt="image" class="align-left" style="max-width: 100%"><br>
-HTTPS TLS HandShake (출처: <a href="https://www.cloudflare.com/ko-kr/learning/ssl/what-happens-in-a-tls-handshake">CLOUDFLARE 사이트 참조</a> )</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
 
-<p>해당 그림은 HTTPS의 통신 핸드쉐이크이다. <br>
-클라이언트에서 접속요청이 왔을 때, 내부적으로 통신이되어지는 순서이다.</p>
+    <span class="nd">@Getter</span>
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${jwt.secret-key}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">secretKey</span><span class="o">;</span>
+    
+    <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
-<p>TCP 연결이 완료후 TLS 핸드쉐이크가 동작하는 모습을 볼 수 있고<br>
-TLS 핸드쉐이크 내에서는 인증서, 대칭키, 비대칭키와 같은 암복호를 통해<br>
-인증된 서버에 접속을 할 수 있게 확인을 해준다.</p>
+<p>사용하려고 하는 대상은 SecretKey이고<br>
+중요한 정보이기 때문에 <strong>시스템 환경변수</strong>를 사용해<br>
+값을 사용하고 싶어 .yml 파일에 값을 셋팅해두었다.</p>
 
-<p>정말 간단하게 정리해보자면</p>
+<p><br></p>
 
-<p><strong><span style="color:#F04965">대칭키 </span>: 키 한개로 암복호를 한다.</strong><br>
-<strong><span style="color:#F04965">비대칭키</span> : 암호화한 키와 복호화한키가 다르다.</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jwt</span><span class="pi">:</span>
+  <span class="na">secret-key</span><span class="pi">:</span> <span class="s">${JWT_SECRET_KEY}</span>       <span class="c1"># 환경 변수로 설정했음</span>
+  <span class="na">access-token-expiration-minutes</span><span class="pi">:</span> <span class="m">30</span>
+  <span class="na">refresh-token-expiration-minutes</span><span class="pi">:</span> <span class="m">420</span>
+</code></pre></div></div>
 
-<p>키의 종류로는 <strong>공개키(Public Key)</strong>와 <strong>개인키(Private Key)</strong>가 존재하고</p>
+<p>위와 같이 ${환경변수명} 으로 지정을하였고<br>
+만약 테스트를 실행한다면 @Value가 .yml의 경로를 찾아<br>
+JWT_SECRET_KEY라고 설정된 환경변수를 가져와야한다.</p>
 
-<p>대칭키 같은경우에는 공개키-공개키, 개인키-개인키로 암호화 복호화를 할 수 있고<br>
-비대칭키 같은 경우에는 공개키-개인키, 개인키-공개키로 암호화 복호화를 할 수 있다.<br>
-HTTPS TLS 핸드쉐이크는 대칭키,비대칭키를 둘다 사용한다.</p>
+<p>하지만 테스트를 실행했을때</p>
 
-<p>여기서 비대칭키 같은 경우에는<br>
-개인키로 암호화한것을 공개키로 복호화할 수 있는데, 목적은 인증서같은 누구나 볼 수 있는 정보고<br>
-공개키로 암호화한것을 개인키로 복호화할 수 있는데, 목적은 정보보호와 외부의 탈취방지를 위한 것이다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtTokenizer': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'JWT_SECRET_KEY' in value "${JWT_SECRET_KEY}"
+</code></pre></div></div>
+<p>위와 같은 에러가 발생했고…. 무언가 환경변수를<br>
+제대로 가져오지 못한다고 생각이 들었다.</p>
 
-<p>여기서 <strong>인증서</strong>라는 개념이나오는데<br>
-이러한 인증서의 역할은 서버에서 인증서를 브라우저에게 보내주는데<br>
-클라이언트에 접속한 곳이 정말 해당 서버와 일치하는지 보증해주는 장치이다.<br>
-이러한 인증서를 관리해주는 공인된 기관들을<br>
-Certificate Authority 라고하며 대표적으로 AWS가 있다.</p>
+<p><br></p>
 
-<p>TLS 핸드쉐이크를 정리해보자면</p>
+<h2 id="문제-확인-및-해결">문제 확인 및 해결</h2>
 
+<p>첫번째로 해당 에러가 발생하는 대부분의 이유는</p>
 <ol>
-  <li>Client -&gt; Server에게 헬로 요청</li>
-  <li>Server -&gt; Client 인증서를 포함해서 헬로 응답 (개인키로 암호화하여 전달)</li>
-  <li>Client는 내장된 CA 리스트를 보고 인증서를 확인한다. (개인키-&gt;공개키 복호화)</li>
-  <li>Client가 CA의 공개키로 복호화를 통해 인증서를 검증했다면 Client는 대칭키를 만든다.</li>
-  <li>이 대칭키를 서버의 공개키로 암호화해서 Client -&gt; Server에 전달한다.</li>
-  <li>그럼 Server는 서버의 개인키로 복호화하여 클라이언트의 대칭키를 확인한다. (공개키-&gt;개인키 복호화)</li>
-  <li>Server -&gt; Client의 대칭키로 샘플 데이터를 암호화해서 클라이언트에게 보내서 확인한다.</li>
-  <li>Client는 서버에게 받은 데이터를 대칭키로 복호화해서 서로 대칭키를 잘 가지고 있는지 확인한다</li>
-  <li>이 후에는 Client와 Server는 서로 대칭키로 암호화와 복호화를 진행하여 데이터를 전송한다</li>
+  <li>application.yml 혹은 application.properties를 설정하지 않거나 경로를 틀림</li>
+  <li>환경변수 설정에 문제가 있었음. (bash shell, zsh shell 등..)</li>
 </ol>
 
-<p>사실 이런 일련의 과정들은<br>
-브라우저와 서버가 해당 과정을 대신 처리해주기 때문에<br>
-개념과 순서정도만 이해하면 좋을 것 같다.</p>
+<p>하지만 나는 위에 있는 내용을 전부 충족했지만 왜? 도대체 값을 가져오지<br>
+못하는지 미쳐버릴 지경에 이르렀었다.</p>
+
+<p>사실 문제 해결은 간단했다.<br>
+하지만 문제 해결을 먼저 올리기전에 환경변수 설정에 대해 적어본다.</p>
 
 <p><br></p>
 
-<h4 id="로컬-환경에서-테스트">로컬 환경에서 테스트</h4>
-<p>그럼 로컬환경에서 인증서 발급과 <br>
-Https 서버를 구현하는 간단한 예제를 살펴보자</p>
+<h3 id="macos-환경-변수-적용법">MacOS 환경 변수 적용법</h3>
 
-<p>우선 Tomcat WAS를 사용하기위해<br>
-스프링부트로 프로젝트를 만들었고</p>
-
-<p>로컬환경에서 인증서를 만들기위해 터미널로 mkcert를 설치해야한다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>mkcert
+<p><strong>1). 현재 사용하고 있는 Shell을 확인</strong></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$SHELL</span>
 </code></pre></div></div>
-<p>homebrew를 이용해 mkcert 설치</p>
+<p>사용하고 있는 터미널에서 위를 입력해준다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkcert <span class="nt">-install</span>
-</code></pre></div></div>
-<p>PKCS12 형식 인증서를 생성할 수 있도록 설치</p>
+<p>만약 zsh Shell을 사용하고 있을 경우에는  -&gt; /bin/zsh<br>
+bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkcert <span class="nt">-pkcs12</span> localhost
-</code></pre></div></div>
-<p>내가 만든 프로젝트 resources 경로에서<br>
-위의 명령어를 실행시켜 PKCS12 인증서를 생성해주면</p>
+<p>아마 대부분 맥북유저는 zsh Shell을 사용하고 있을 것 같다.</p>
 
 <p><br></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSGGxmFhNDI5InKLm5xBczg_DBOgwK4OJj_PGLONuWvOCIyDPyNnQBHZR2LmGmp5KEwzXwK3MxI2-ryG8RDepbN8HRYxw=w3024-h1614" alt="image" class="align-left" style="max-width: 50%"></p>
+<p><strong>2). 사용하고 있는 Shell에 따른 등록</strong></p>
 
-<p>위와 같이 resources에 <br>
-localhost.p12 인증서가 생긴다.</p>
-
-<p>인증서가 생겼다면 application.properties 안에</p>
-<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">server.ssl.key-store</span><span class="p">=</span><span class="s">classpath:localhost.p12</span>
-<span class="py">server.ssl.key-store-type</span><span class="p">=</span><span class="s">PKCS12</span>
-<span class="py">server.ssl.key-store-password</span><span class="p">=</span><span class="s">changeit</span>
+<p>vi 편집기 사용법을 알고있다고 가정하겠습니다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.zshrc
 </code></pre></div></div>
-<p>와 같이 입력해주면 https로 서버를 사용가능하다.<br>
-여기서 비밀번호는 초기해 셋팅을 하지않으면 changeit으로 입력하면된다.</p>
-
-<p>그리고 스프링 애플리케이션을 실행시키면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmThmekJqkRGtjmJemxwLYuP9uTAyLwsOWuvrxTqsdCdOtk4pnyAXTjmlQ8MrR_5PaU4rYOu8DZll_u-Qvzy1E2s4UGW7A=w3024-h1614" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>사진과 같이 https로 서버 구현된 것을 확인할 수 있다.</p>
+<p>만약 zsh를 사용하고 있는 경우에는 .zshrc 파일에 환경 변수를<br>
+등록해줘야합니다.</p>
 
 <p><br></p>
 
-<h3 id="hasing">Hasing</h3>
-<p>어떤한 문자열에 임의의 연상을 적용하여 <br>
-다른 문자열로 변환하는 것을 Hasing이라고 한다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.bashrc
+</code></pre></div></div>
+<p>bash를 사용하고 있는 경우에는 .bashrc 파일에 등록!</p>
 
-<p>즉, 해싱한다는 의미는 어떠한 값을 암호화해준다 생각하면 될 것 같다.<br>
-여기서 해싱의 특징을 적어보자면</p>
+<p><br></p>
 
-<ol>
-  <li>모든 값에 대한 해시값을 계산하는데 오래걸리지 않아야한다.</li>
-  <li>최대한 해시값을 피해야 하며, 모든 값은 고유한 해시값을 가진다.</li>
-  <li>아죽 작은 단위의 변경이라도 완전히 다른 해시값을 가져야한다.</li>
-</ol>
+<p><strong>3). 환경 변수를 등록합니다.</strong></p>
 
-<h3 id="salt">Salt</h3>
-<p>암호화해야 하는 값에 어떤 별도의 값을 추가하여 결과를 변형하는 것이다.<br>
-영어로 소금이라는 뜻과 걸맞게 무언가 간을치는 느낌이라 생각하면 될 것 같다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo </span><span class="nv">JWT_SECRET_KEY</span><span class="o">=</span>LeeJaehyeok637637123231231231123
+</code></pre></div></div>
+<p>현재 내가 등록하려는 환경변수는 <code class="language-plaintext highlighter-rouge">JWT_SECRET_KEY</code> 라는 이름으로<br>
+위에서 설정한다고 얘기했었고, 해당 값은 위처럼 <code class="language-plaintext highlighter-rouge">LeeJaehyeok637637123231231231123</code>을<br>
+사용하려고 값을 임의로 설정해서 넣어주었다.</p>
 
-<p>Salt의 큰 특징을 4가지 살펴보면</p>
+<p><br></p>
 
-<ol>
-  <li>유저와 패스워드 별로 유일한 값을 가져야 한다.</li>
-  <li>사용자 계정을 생성할 때와 비밀번호를 변경할 때 마다 새로운 임의의 Salt를 사용해서 해싱해야 한다.</li>
-  <li>절대 재사용하지 말아야한다.</li>
-  <li>DB의 유저테이블에 같이 저장 되어야한다.</li>
-</ol>
+<p><strong>4). 환경 변수 확인.</strong></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printenv</span>
+</code></pre></div></div>
+<p>printenv 명령어를 입려하면 우선 <br>
+전체 적용된 환경변수 목록이 나온다.<br>
+그 중에 우리가 적용한 JWT_SECRET_KEY가 있으면<br>
+정상적으로 잘 적용되었다고 볼 수 있다.</p>
 
-<h3 id="cookie">Cookie</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$JWT_SECRET_KEY</span>
+</code></pre></div></div>
+<p>echo 명령어를 이용하면 지정해서 확인이 가능하다.<br>
+내가 등록한 환경변수는 <code class="language-plaintext highlighter-rouge">JWT_SECRET_KEY</code>로 등록했기에<br>
+해당 명령어를 입력하면 아래와 같이 표시된다면 정상이다.</p>
 
-<p>쿠키는 서버가 웹 브라우저에 정보를 저장하고 불러올 수 있는 수단<br>
-이라고 생각하면 간단할 것 같다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJh2n11ERgYKg0d3nAkDTsgg7LPqEe2CpPKYPF1Z_QrHIuceZwiBV8Yk3kndJG8x8yQFFPKWCfp-kBFUZAkkOK4WfrBg=w1512-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>우리가 이전에 배운 Http 프로토콜은<br>
-무상태성(stateless)은 이전에 했던 작업에 대해 기억하지 않는 특성을 가지는데<br>
-검색을 하려는데 검색목록이 아래 표시된다든지<br>
-로그인 기억버튼을 눌러놓았는데 다음에 열어도 눌려져있다든지<br>
-우리는 요청을 보낼때 무상태성으로 동작하기때문에 이러한 내용들을 기억하지 못 하는데<br>
-브라우저에서 쿠키라는 것을 이용해 이러한 내용들을 저장해 사용할 수 있는 것이다.</p>
+<p>그럼 여기까지 설정하고 조회까지 해보았으면<br>
+환경변수 설정에는 문제가 없는 것이다.</p>
 
-<p>한마디로 서버가 클라이언트에서 요청을 받고<br>
-클라이언트쪽에 응답할때 쿠키에 데이터를 싦어서 보내면<br>
-브라우저에서 쿠키값을 유지시키고 사용한다고 보면될 것 같다.</p>
+<p>혹여나 bash 사용으로 bash_profile에 설정하셨는데<br>
+환경변수가 자꾸 리셋된다는 문제를 겪는 분들은<br>
+1번 항목에 어떤 Shell을 사용하는지 다시 확인해볼 필요가 있다.</p>
 
-<p>쿠키의 옵션으로는</p>
+<p><br></p>
 
-<p>domain - 서버와 요청의 도메인이 일치하는 경우 쿠키 전송<br>
-path - 서버의 요청의 세부 경로가 일치하는 경우 쿠키 전송<br>
-maxage/expires - 쿠키의 유효기간 설정<br>
-httpOnly - 스크립트의 쿠키 접근 가능 여부 설정<br>
-secure - HTTPS 에서만 쿠키 전송 여부 설정<br>
-sameSite - 같은 사이트에서만 쿠키를 사용할 수 있게 하는 설정</p>
+<h3 id="그래서해결-방법">그래서해결 방법?</h3>
 
-<h3 id="session">Session</h3>
+<p>문제는 너무 간단했다.<br>
+실제로 환경변수는 잘 적용되어있었고<br>
+환경변수가 적용되지 않았던 이유는 <span style="color:#F04965"><strong>IDE Restart</strong></span>를 하지 않았던 문제였다.</p>
 
-<p>세션은 인증해주는 방법으로<br>
-여러 페이지에 걸쳐 사용되는 사용자 정보를 저장하는 방법이다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNQCKU6FpLklbn9HwlXNB15z8k77FNAGe0aGtURuUgAQxxwBdQD5RP_qiE5wrluKo6XwD61r9x3JbIxnQlpzdIxb-tl4Q=w1512-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>세션은 중요한 데이터를 서버에 저장하고 암호화된<br>
-세션id를 쿠키에 담아 클라이언트에 전달하고<br>
-세션id가 부여된 브라우저는 신분증같이 이를 이 유저는 인증에 성공했다고 알리며<br>
-다른 요청을 보낼때 마다 해당 세선id로 인증을 거치며 사용할 수 있게된다.</p>
+<p>Restart 하는 방법은 먼저 상단의 <code class="language-plaintext highlighter-rouge">File</code>에서<br>
+<code class="language-plaintext highlighter-rouge">Invaildate Caches</code>를 눌러준다.</p>
 
-<p><br>
-<br></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOq9qiFokRYmFR5OoFF3OVqGXqXL1QiRwBXUhE_PPCn1IiFPqGfYuDBF-wnApzQ99xla-dQA1B9WteBeCJ0OUEi3uGhUw=w1512-h864" alt="image" class="align-left" style="max-width: 60%"></p>
 
-<p><strong>쿠키와 세션의 비교</strong></p>
+<p>그리고 <code class="language-plaintext highlighter-rouge">INVALIDATE AND RESTART</code> 버튼을 눌러주면 된다.<br>
+그러면 IDE가 자동적으로 재시작될 것이고<br>
+스프링 부트실행시 해당 에러는 발생하지않고, 정상적으로 <br>
+환경변수의 값을 가져오는 것이 확인이 가능하다.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th style="text-align: center">Cookie</th>
-      <th style="text-align: center">Seesion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>설명</td>
-      <td style="text-align: center">쿠키는 그저 http의 stateless<br>한 것을 보완해주는 도구</td>
-      <td style="text-align: center">접속 상태를 서버가 가짐<br> 접속 상태와 권환 부여를 위해<br>세션아이디를 쿠키로 전송</td>
-    </tr>
-    <tr>
-      <td>접속 상태<br>저장 경로</td>
-      <td style="text-align: center">클라이언트</td>
-      <td style="text-align: center">서버</td>
-    </tr>
-    <tr>
-      <td>장점</td>
-      <td style="text-align: center">서버에 부담을 덜어줌</td>
-      <td style="text-align: center">신뢰할 수 있는 유저인지 서버에서 확인</td>
-    </tr>
-    <tr>
-      <td>단점</td>
-      <td style="text-align: center">쿠키 그자체는 인증이 아님</td>
-      <td style="text-align: center">하나의 서버에서만 접속 상태를 가지므로 <br>서버분산에 불리</td>
-    </tr>
-  </tbody>
-</table>
+<p>실제로 출력해서 확인해보고 싶을 경우</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
+
+    <span class="nd">@Getter</span>
+    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${jwt.secret-key}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">secretKey</span><span class="o">;</span>
+
+    <span class="o">...</span> <span class="n">중간</span> <span class="n">생략</span>
+    
+    <span class="nd">@PostConstruct</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">secretKey</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Spring Boot 실행시 출력으로 값을 확인해 볼 수 있다.</p>
+
+<p>혹은 실제로 환경변수를 클래스를 이용해 가져오고 싶다면</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
+    
+    <span class="o">...</span> <span class="n">이상</span> <span class="n">생략</span>
+            
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Environment</span> <span class="n">environment</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">JwtTokenizer</span><span class="o">(</span><span class="nc">Environment</span> <span class="n">environment</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">environment</span> <span class="o">=</span> <span class="n">environment</span><span class="o">;</span>
+        <span class="nc">String</span> <span class="n">key</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"JWT_SECRET_KEY"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">import org.springframework.core.env.Environment;</code> 패키지를 improt하여<br>
+<code class="language-plaintext highlighter-rouge">.getProperty();</code> 메서드로 환경변수를 가져올 수 있다.</p>
 
 <p><br></p>
 
 <hr>
 
-<p>오늘은 이렇게 인증, 보안에 관한 <br>
-간단한 CS 지식들을 공부해보았는데<br>
-사실 처음 듣는 개념들이라 아직 어떻게 쓰이는지 감을 잡기가 어렵다.</p>
+<p><strong>기타 정보(Shell 변경)</strong></p>
 
-<p>이러한 것들이 있고 후에 학습하면서<br>
-이렇게 사용하는구나를 깨닫고 내것으로 체득을 해야할 것 같다.</p>
+<p>만약 zsh, bash를 변경해보고 싶으신 분은<br>
+1). zsh를 기본으로 사용하고 싶은경우</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chsh <span class="nt">-s</span> /bin/zsh
+</code></pre></div></div>
 
-<p>오늘 공부는 여기서 끝 !</p>
+<p>2). bash를 기본으로 사용하고 싶은경우</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chsh <span class="nt">-s</span> /bin/bash
+</code></pre></div></div>
+<p>입력후 현재 노트북 비밀번호를 입력해주시면 됩니다.</p>
 
-<p><br></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 라면, 김밥</p>
+<hr>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/11/16/til.html" title="TIL) 세달차 회고">TIL) 세달차 회고</a><a class="next" href="/til/2022/11/18/til.html" title="TIL) Spring Security 1 (기초)">TIL) Spring Security 1 (기초)</a>
+<a class="previous" href="/til/2022/11/24/til.html" title="TIL) Spring Security JWT 사용하여 인증하기">TIL) Spring Security JWT 사용하여 인증하기...</a><a class="next" href="/til/2022/11/25/til.html" title="TIL) OAuth 2 인증 기초">TIL) OAuth 2 인증 기초</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/07/til.html" title="TIL) Spring Security 1 (기초)">TIL) DB RDMBS 3</a></li>
-<li><a class="post-link" href="/til/2022/11/16/til.html" title="TIL) Spring Security 1 (기초)">TIL) 세달차 회고</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="TIL) Spring Security 1 (기초)">TIL) Java Algorithm 3</a></li>
-<li><a class="post-link" href="/til/2022/11/07/til.html" title="TIL) Spring Security 1 (기초)">TIL) Spring Transaction 2 , Event 비동기 적용</a></li>
+        <li><a class="post-link" href="/til/2022/09/15/til.html" title="TIL) OAuth 2 인증 기초">TIL) Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+<li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="TIL) OAuth 2 인증 기초">맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
+<li><a class="post-link" href="/til/2022/11/09/til.html" title="TIL) OAuth 2 인증 기초">TIL) JUnit 2</a></li>
+<li><a class="post-link" href="/til/2022/09/30/til.html" title="TIL) OAuth 2 인증 기초">TIL) Network Basic</a></li>
 </ul>
     </div>
 <div class="post-comments">

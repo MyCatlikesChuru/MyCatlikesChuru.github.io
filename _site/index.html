@@ -710,6 +710,318 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/til/2022/11/25/til.html">
+          TIL) OAuth 2 인증 기초
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 25, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/11/25/til.html">
+        <p>
+        
+
+이번주는 정말 게으르게 보낸 것 같다.
+
+물론 옛날에 비하면 엄청난 발전이지만… 역시 한번 쉬면
+계속 쉬고 싶은 마음이 생겨서,, 조금 게으르게 학습한 느낌을 받았다.
+
+다시한번 각성하여 Spring 세션을 잘 마무리 해보자.
+
+
+
+OAuth 2
+
+OAuth 2 란?
+
+흔히 생각해보면, 우리가 웹사이트 로그인을 할때
+소셜 로그인(구글,카카오톡 등) 인증방식을 사용해 로그인을 하는데
+이런 인증방식들은 OAuth2라는 기술을 바탕으로 구현이 된다.
+
+우리가 알고 있는 일반적인 애플리케이션은
+서비스를 이용하는 사용자에 대한 인증처리는 해당 애플리케이션이 직접했다.
+
+
+- 크리덴셜을 저장하지 않는 아키텍처 -
+
+OAu... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2022/11/25/spring-environment.html">
+          Spring) Could not resolve placeholder '환경변수명' in value "${환경변수명}" 오류
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 25, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2022/11/25/spring-environment.html">
+        <p>
+        오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 
+기록해보려고한다.
+
+
+
+문제 내용
+
+우선 나는 Mac을 사용하고 Shell은 zsh를 사용한다.
+
+문제의 시작은 이러하다. JWT관련 공부중이였고
+코드에서 @Value 어노테이션으로 application.yml 파일의 
+설정된 값들을 사용하려고하였다.
+
+@Component
+public class JwtTokenizer {
+
+    @Getter
+    @Value("${jwt.secret-key}")
+    private String secretKey;
+    
+    ... 이하 생략
+}
+
+
+사용하려고 하는 대상은 SecretKey이고
+중요한 정보이기 때문에 시... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#zsh">#zsh</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/11/24/til.html">
+          TIL) Spring Security JWT 사용하여 인증하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 24, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/11/24/til.html">
+        <p>
+        날씨가 많이 쌀쌀해졌다.
+
+
+
+요즘 학습량이 늘어나 새벽까지 공부하다보니
+컨디션 난조가 심하다.. 일찍자려고해도
+어떻게 하다보니까 해야할 것들이 밀려 늦게 잠을 청하게된다.
+
+그러다보니 아침,점심에 정신을 못차리고 공부를 제대로 못하는..
+악순환의 반복이다. 오늘은 최대한 일찍 공부를 마치고
+월드컵도 시작이니 일찍 잠을 자야겠다.
+
+
+
+어제 JWT 인증 파트에서 JWT에 대해 기초지식을
+공부했었고, 실제로 AcessToken, RefreshToken을 만들어보기도 했다.
+
+이제 JWT 토큰을 만드는 방법을 알았으니
+이 토큰을 어떻게 Headers로 전송하고
+Spring Security를 이용해 인증과정을 거치게 되... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/til/2022/11/23/til.html">
           TIL) JWT 인증
         </a>
@@ -6282,7 +6594,7 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
   <ul>
     <li>
       <a href="/index.html">
-        All<span>54</span>
+        All<span>57</span>
       </a>
     </li>
 
@@ -6301,13 +6613,13 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
     
       <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>1</span>
+          Spring <span>2</span>
         </a>
       </li>
     
       <li>
         <a href="/categories.html#h-TIL">
-          TIL <span>48</span>
+          TIL <span>50</span>
         </a>
       </li>
     
