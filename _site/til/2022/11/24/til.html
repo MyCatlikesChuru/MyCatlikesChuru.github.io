@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -699,7 +699,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <hr>
 
-<p>어제 <a href="https://mycatlikeschuru.github.io/til/2022/11/23/til.html">JWT 인증</a> 파트에서 JWT에 대해 기초지식을<br>
+<p>어제 <a href="https://mycatlikeschuru.github.io/til/2022/11/23/til.html">JWT 기초</a> 파트에서 JWT에 대해 기초지식을<br>
 공부했었고, 실제로 AcessToken, RefreshToken을 만들어보기도 했다.</p>
 
 <p>이제 JWT 토큰을 만드는 방법을 알았으니<br>
@@ -720,6 +720,387 @@ Spring Security를 이용해 인증과정을 거치게 되는지? 에 대한<br>
 (구현하는건 이제부터 개발자가 해야하는 영역)</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOQR4FMzSp9LHOptJF9_XBX4UQULmx47cZIefY8NeWpgeh2vTm3_WS04sbLy7xWlLrtlt4FbZfxdTdk501lzUyEOSykZQ=w1299-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>그림으로 한번 정리해보자.</p>
+
+<p><code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code>를 상속받는<br>
+<code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code> 라는 클래스를 만들어 구현할 것이다.<br>
+그리고 우리가 구현한 필터는 등록해놓아야하고, 기존의 <br>
+<code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code> 필터는 비활성화해줘야한다.</p>
+
+<p>구현할때 유의할점은 인증을 총괄하는 <code class="language-plaintext highlighter-rouge">AuthenticationManager</code>의<br>
+<code class="language-plaintext highlighter-rouge">.authenticate();</code>메서드를 이용해 인증 처리를 위임해줘야한다.<br>
+그러면 우리가 자주보았던 인증처리 흐름대로 코드가 진행되고</p>
+
+<p>Spring Security에서 구현했던 <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체를 만들어서<br>
+<code class="language-plaintext highlighter-rouge">.loadUserByUsername();</code>메서드 호출시 반환만 해주면<br>
+구현하는 부분은 끝난다.</p>
+
+<p>그리고 인증완료된 객체가 돌아오면, JWT를 생성 후 클라이언트에<br>
+Response Header에 담아 보내주면된다.</p>
+
+<p><br></p>
+
+<p>다시 한번 정리해보자면 <br>
+<code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code> 이름으로 JWT Filter를 하나 만들 것이다.<br>
+<code class="language-plaintext highlighter-rouge">AbstractAuthenticationProcessingFilter</code>추상 클래스를 에서 filter가 시작된다.<br>
+<code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code> 클래스를 상속하면, 위에 추상클래스도<br>
+상속관계이기때문에 Overriding하여 구현할 수 있다.</p>
+
+<p>Overriding한 메서드를 구현해야하는데 2가지를 구현해야한다.</p>
+
+<ol>
+  <li>
+<code class="language-plaintext highlighter-rouge">attemptAuthentication();</code> 메서드 구현<br>
+-&gt; 인증을 위임해주고 인증처리 완료된 객체가 반환되는 메서드이므로<br>
+인증과 관련된 정보를 넘겨주는 것을 구현해야함.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">successfulAuthentication();</code> 메서드 구현<br>
+-&gt; 인증 완료 후 JWT 토큰을 만들어 Header에 담아주는 클래스를 구현해야함<br>
+-&gt; Security Context에 저장하는 부분은 추후 JWT 비교필터에서 추가</li>
+</ol>
+
+<p><br></p>
+
+<h3 id="코드로-한번-확인해-보자-">코드로 한번 확인해 보자 !</h3>
+
+<h4 id="1-jwtauthenticationfilter-구현">1). JwtAuthenticationFilter 구현</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtAuthenticationFilter</span> <span class="kd">extends</span> <span class="nc">UsernamePasswordAuthenticationFilter</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">AuthenticationManager</span> <span class="n">authenticationManager</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">JwtAuthenticationFilter</span><span class="o">(</span><span class="nc">AuthenticationManager</span> <span class="n">authenticationManager</span><span class="o">,</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authenticationManager</span> <span class="o">=</span> <span class="n">authenticationManager</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">jwtTokenizer</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@SneakyThrows</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Authentication</span> <span class="nf">attemptAuthentication</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
+        <span class="nc">LoginDto</span> <span class="n">loginDto</span> <span class="o">=</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">request</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">(),</span> <span class="nc">LoginDto</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// ServletInputSteam 을 LoginDto 클래스 객체로 역직렬화</span>
+
+        <span class="nc">UsernamePasswordAuthenticationToken</span> <span class="n">authenticationToken</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UsernamePasswordAuthenticationToken</span><span class="o">(</span><span class="n">loginDto</span><span class="o">.</span><span class="na">getUsername</span><span class="o">(),</span> <span class="n">loginDto</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span>
+        <span class="k">return</span> <span class="n">authenticationManager</span><span class="o">.</span><span class="na">authenticate</span><span class="o">(</span><span class="n">authenticationToken</span><span class="o">);</span>
+    <span class="o">}</span> 
+    
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">successfulAuthentication</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">FilterChain</span> <span class="n">chain</span><span class="o">,</span> <span class="nc">Authentication</span> <span class="n">authResult</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+        
+        <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Member</span><span class="o">)</span> <span class="n">authResult</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
+
+        <span class="nc">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">delegateAccessToken</span><span class="o">(</span><span class="n">member</span><span class="o">);</span> <span class="c1">// accessToken 만들기</span>
+        <span class="nc">String</span> <span class="n">refreshToken</span> <span class="o">=</span> <span class="n">delegateRefreshToken</span><span class="o">(</span><span class="n">member</span><span class="o">);</span> <span class="c1">// refreshToken 만들기</span>
+
+        <span class="nc">String</span> <span class="n">headerValue</span> <span class="o">=</span> <span class="s">"Bearer "</span><span class="o">+</span> <span class="n">accessToken</span><span class="o">;</span>
+
+        <span class="n">response</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">,</span><span class="n">headerValue</span><span class="o">);</span> <span class="c1">// Header에 등록</span>
+        <span class="n">response</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">"Refresh"</span><span class="o">,</span><span class="n">refreshToken</span><span class="o">);</span> <span class="c1">// Header에 등록</span>
+
+        <span class="k">this</span><span class="o">.</span><span class="na">getSuccessHandler</span><span class="o">().</span><span class="na">onAuthenticationSuccess</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">,</span><span class="n">authResult</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">delegateAccessToken</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">){</span>
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">claims</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span><span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+        <span class="n">claims</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"roles"</span><span class="o">,</span><span class="n">member</span><span class="o">.</span><span class="na">getRoles</span><span class="o">());</span>
+
+        <span class="nc">String</span> <span class="n">subject</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">();</span>
+        <span class="nc">Date</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getTokenExpiration</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getAccessTokenExpirationMinutes</span><span class="o">());</span>
+
+        <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">encodeBase64SecretKey</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getSecretKey</span><span class="o">());</span>
+        <span class="nc">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">generateAccesToken</span><span class="o">(</span><span class="n">claims</span><span class="o">,</span> <span class="n">subject</span><span class="o">,</span> <span class="n">expiration</span><span class="o">,</span> <span class="n">base64EncodedSecretKey</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">accessToken</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">delegateRefreshToken</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">subject</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">();</span>
+        <span class="nc">Date</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getTokenExpiration</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getRefreshTokenExpirationMinutes</span><span class="o">());</span>
+        <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">encodeBase64SecretKey</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getSecretKey</span><span class="o">());</span>
+        <span class="nc">String</span> <span class="n">refreshToken</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">generateRefreshToken</span><span class="o">(</span><span class="n">subject</span><span class="o">,</span> <span class="n">expiration</span><span class="o">,</span> <span class="n">base64EncodedSecretKey</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">refreshToken</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>해당 코드에서 유의 깊게 봐야할 부분은 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code>클래스를 만들었고<br>
+extend로 <code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code> 클래스를 상속받고<br>
+@Overriding 하여 <code class="language-plaintext highlighter-rouge">attemptAuthentication();</code>와 <code class="language-plaintext highlighter-rouge">successfulAuthentication();</code> 메서드를<br>
+구현하는 코드를 작성 중이다. 위에서 그림으로 보았던 부분이다.</p>
+
+<p>구현 내용을 살펴보면
+<code class="language-plaintext highlighter-rouge">attemptAuthentication();</code> 메서드는 <br>
+우리가 기존에 Form Login으로 파라미터를 가져오고 Authentication 객체를 만들어<br>
+<code class="language-plaintext highlighter-rouge">authenticate();</code> 메서드로 인증 처리 위임을 시작해주는 부분이다.<br>
+Form Login 방식을 쓰지않고, 클라이언트 쪽에서 JSON 객체로</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"username"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dhfif718@naver.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"password"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>로그인 인증 정보를 이렇게 보내줄 것이다.<br>
+그렇기 때문에 <code class="language-plaintext highlighter-rouge">attemptAuthentication();</code> 메서드를 구현한 것이고<br>
+받은 JSON 객체는 <code class="language-plaintext highlighter-rouge">request.getInputStream();</code>으로 꺼낼 수 있다.<br>
+위에서는 <code class="language-plaintext highlighter-rouge">ObjectMapper</code> 클래스를 이용해 Dto를 하나 만들어<br>
+맵핑하여 값을 저장해 주었다. 그리고 저장해준 데이터를 가지고 Authentication 객체를 만들었다.</p>
+
+<p><br></p>
+
+<p><code class="language-plaintext highlighter-rouge">successfulAuthentication();</code>메서드는<br>
+인증된 객체가 넘어왔을 것이고, 인증된 객체 <code class="language-plaintext highlighter-rouge">authResult</code>는<br>
+이전에 Spring Security 사용할 때 <code class="language-plaintext highlighter-rouge">UserDetails</code> 객체를 반환해 구현했었다.<br>
+실제 구현할때 <code class="language-plaintext highlighter-rouge">UserDetails</code>를 <code class="language-plaintext highlighter-rouge">Member</code> 클래스를가 상속하도록 구현해서<br>
+<code class="language-plaintext highlighter-rouge">authResult.getPrincipal();</code>메서드로 Down Casting하여 Member 객체를<br>
+가져올 수 있게되는 것이다.</p>
+
+<p>이렇게 가져온 <code class="language-plaintext highlighter-rouge">Member</code> 객체를 활용해서 AccessToken과 RefreshToken을 만들어<br>
+<code class="language-plaintext highlighter-rouge">response.setHeader();</code> 메서드를 활용해 HEADER에 값을 추가할 수 있다.<br>
+HEADER에 까지 정상적으로 넣었으면 <code class="language-plaintext highlighter-rouge">.onAuthenticationSuccess();</code>를 호출해<br>
+성공적으로 인증된 객체를 만들었다고 알리고, 다음 Filter를 진행하게 된다.</p>
+
+<p>여기까지 보았을때 한가지 의아한 점을 찾을 수 있다.<br>
+공부했던 인증 처리흐름에 마지막은 <code class="language-plaintext highlighter-rouge">Security Context</code>에 저장을해야<br>
+나중에 권한부여를 할때 <code class="language-plaintext highlighter-rouge">Security Context</code>에서 꺼낼 수 있는데 <br>
+이부분을 구현하지 않았던점을 의아해할 수 있다.</p>
+
+<p>해당부분은 다음 Filter에서 처리할 것이다.<br>
+그럼 다음 추가할 Filter를 알아보자</p>
+
+<p><br></p>
+
+<h4 id="2-jwtverificationfilter-구현">2). JwtVerificationFilter 구현</h4>
+<p>해당 필터는 이전에 필터 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code>의 다음 Filter로<br>
+우리가 구현하는 새로운 Filter 클래스이다.</p>
+
+<p>해당 필터의 역할은 넘어온 JWT에 대한 검증과<br>
+검증이 완료된 Authentication 객체를 <code class="language-plaintext highlighter-rouge">Security Context</code>에<br>
+저장하는 역할을 구현해주는 클래스이다.</p>
+
+<p>여기서 한가지 중요한점은 <code class="language-plaintext highlighter-rouge">Security Context</code>에 저장은 하지만<br>
+Session 방식을 사용하지 않는 형식으로 <code class="language-plaintext highlighter-rouge">SecurityFilterChain</code>에서 설정할 것이다.<br>
+그래야 JWT를 사용하는 목적과 맞기 때문이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtVerificationFilter</span> <span class="kd">extends</span> <span class="nc">OncePerRequestFilter</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">JwtVerificationFilter</span><span class="o">(</span><span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">,</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">jwtTokenizer</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorityUtils</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    * 필터 추가, JWT 객체를 꺼내서 비교후 SecurityContext에 저장함
+    * */</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doFilterInternal</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">FilterChain</span> <span class="n">filterChain</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
+
+        <span class="c1">// 예외처리 추가</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span> <span class="o">=</span> <span class="n">verifyJws</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+            <span class="n">setAuthenticationToContext</span><span class="o">(</span><span class="n">claims</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">SignatureException</span> <span class="n">se</span><span class="o">){</span>
+            <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"exception"</span><span class="o">,</span><span class="n">se</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">ExpiredJwtException</span> <span class="n">ex</span><span class="o">){</span>
+            <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"exception"</span><span class="o">,</span><span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+            <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"exception"</span><span class="o">,</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">// 다음 Filter 실행</span>
+        <span class="n">filterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+
+     <span class="cm">/*
+     * 만약 request에 전달받은 authorization이 없으면 해당 필터는 실행안함
+     * */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">shouldNotFilter</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">authorization</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">authorization</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">authorization</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"Bearer"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    * request 객체로 claims 객체 꺼내는 메서드
+    * */</span>
+    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">verifyJws</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">jws</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">).</span><span class="na">replace</span><span class="o">(</span><span class="s">"Bearer "</span><span class="o">,</span><span class="s">""</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">encodeBase64SecretKey</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getSecretKey</span><span class="o">());</span>
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getClaims</span><span class="o">(</span><span class="n">jws</span><span class="o">,</span> <span class="n">base64EncodedSecretKey</span><span class="o">).</span><span class="na">getBody</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">claims</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    * SecurityContext에 저장하는 부분
+    * */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">setAuthenticationToContext</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span><span class="o">){</span>
+        <span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">claims</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"username"</span><span class="o">);</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">.</span><span class="na">createAuthorities</span><span class="o">((</span><span class="nc">List</span><span class="o">)</span><span class="n">claims</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"roles"</span><span class="o">));</span>
+
+        <span class="nc">Authentication</span> <span class="n">authentication</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UsernamePasswordAuthenticationToken</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">authorities</span><span class="o">);</span>
+        <span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">setAuthentication</span><span class="o">(</span><span class="n">authentication</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>해당 클래스는 생각보다 간단하다.<br>
+우선 <code class="language-plaintext highlighter-rouge">OncePerRequestFilter</code>를 상속받아 필터로 사용하는 클래스이다.<br>
+사용자 한번의 요청에 딱한번만 실행하는 필터이고 <a href="https://minkukjo.github.io/framework/2020/12/18/Spring-142/">minkukjo님의 블로그</a>를 참고하면 좋을 것 같다.</p>
+
+<p>우리는 로그인할때 JWT토큰을 HEADER에 싦어 클라이언트에 발행해 줬다.<br>
+이제 만약 클라이언트에서 어떠한 요청이 있다고 가정할때 HEADER Access Token을 보내면<br>
+request 객체를 이용해서 HEADER에서 JWT를 가져와서, 우리가 기존에 만들어둔<br>
+<code class="language-plaintext highlighter-rouge">.getClamis();</code>메서드를 이용해 비교후 claims 객체를 가져올 수 있다.</p>
+
+<p>만약 토큰이 만료시간이 다되었거나 서명형식이 틀렸다거나하면<br>
+예외가 발생하면서 JWT 인증이 되었다고 판단하지않아 <br>
+다음 필터를 진행하게 된다. 여기서 다음 필터를 진행하게 되면 <code class="language-plaintext highlighter-rouge">Security Context</code>에는<br>
+아무런 객체가 없기때문에 권한확인하는 필터에서 인가가 되지 않는다.</p>
+
+<p>즉, 우리가 발행한 Access Token과 일치하는 지 확인한다음<br>
+<code class="language-plaintext highlighter-rouge">Security Context</code>에 인증된 객체를 저장해주는 필터 클래스이다.<br>
+만약 일치하지않거나 예외가 발생하면 <code class="language-plaintext highlighter-rouge">Security Context</code>에 객체를<br>
+저장하지 않고 다음 Filter로 넘어가는 방식이다.</p>
+
+<p>이렇게 까지만 구현하면 JWT 관련해서 발행과, 인증에 대한<br>
+구현 부분은 끝났다. 이제 우리가 마지막으로 해줘야할 부분은<br>
+Spring SecurityFilterChain에 설정정보를 설정하는일만 남았다.</p>
+
+<p><br></p>
+
+<h4 id="3-spring-security-filterchain-설정">3). Spring Security FilterChain 설정</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span><span class="o">(</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfigurationV6</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">SecurityConfigurationV6</span><span class="o">(</span><span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">,</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">jwtTokenizer</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">authorityUtils</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">headers</span><span class="o">().</span><span class="na">frameOptions</span><span class="o">().</span><span class="na">sameOrigin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">cors</span><span class="o">(</span><span class="nc">Customizer</span><span class="o">.</span><span class="na">withDefaults</span><span class="o">())</span> <span class="c1">// corsConfigurationSource라는 이름으로 등록된 Bean을 사용한다고 정의</span>
+                <span class="o">.</span><span class="na">sessionManagement</span><span class="o">().</span><span class="na">sessionCreationPolicy</span><span class="o">(</span><span class="nc">SessionCreationPolicy</span><span class="o">.</span><span class="na">STATELESS</span><span class="o">)</span> <span class="c1">// 세션 정책 추가 (JWT사용으로 STATELESS로 설정)</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">formLogin</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// CSR 방식사용으로 formLogin 비활성화</span>
+                <span class="o">.</span><span class="na">httpBasic</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// UsernamePasswordAuthenticationFilter 등 비활성화</span>
+                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">()</span> <span class="c1">// 예외처리 기능이 작동</span>
+                <span class="o">.</span><span class="na">authenticationEntryPoint</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAuthenticationEntryPoint</span><span class="o">())</span>  <span class="c1">// 인증 실패시 처리</span>
+                <span class="o">.</span><span class="na">accessDeniedHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAccessDeniedHandler</span><span class="o">())</span> <span class="c1">// 인증 실패시 처리</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomFilterConfigurer</span><span class="o">())</span> <span class="c1">// 커스터마이징한 필터를 추가할 수 있음</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorize</span> <span class="o">-&gt;</span> <span class="n">authorize</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="s">"/*/members"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">PATCH</span><span class="o">,</span> <span class="s">"/*/members/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/*/members"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/*/members/**"</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">,</span> <span class="s">"ADMIN"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="s">"/*/members/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">permitAll</span><span class="o">()</span>
+                <span class="o">);</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">PasswordEncoderFactories</span><span class="o">.</span><span class="na">createDelegatingPasswordEncoder</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="cm">/*
+    * 구체적인 CORS 정책을 설정
+    * */</span>
+    <span class="nd">@Bean</span>
+    <span class="nc">CorsConfigurationSource</span> <span class="nf">corsConfigurationSource</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">CorsConfiguration</span> <span class="n">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CorsConfiguration</span><span class="o">();</span>
+        <span class="n">configuration</span><span class="o">.</span><span class="na">setAllowedOrigins</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"*"</span><span class="o">));</span> <span class="c1">// 스크림트 기반의 HTTP 통신을 허용</span>
+        <span class="n">configuration</span><span class="o">.</span><span class="na">setAllowedMethods</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span><span class="s">"POST"</span><span class="o">,</span> <span class="s">"PATCH"</span><span class="o">,</span> <span class="s">"DELETE"</span><span class="o">));</span> <span class="c1">// HTTP Method에 대한 HTTP 통신 허용</span>
+
+        <span class="nc">UrlBasedCorsConfigurationSource</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UrlBasedCorsConfigurationSource</span><span class="o">();</span> <span class="c1">// CorsConfigurationSource 구현체 생성</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">registerCorsConfiguration</span><span class="o">(</span><span class="s">"/**"</span><span class="o">,</span> <span class="n">configuration</span><span class="o">);</span> <span class="c1">// 모든 URL에 정책 적용</span>
+        <span class="k">return</span> <span class="n">source</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFilterConfigurer</span> <span class="kd">extends</span> <span class="nc">AbstractHttpConfigurer</span><span class="o">&lt;</span><span class="nc">CustomFilterConfigurer</span><span class="o">,</span><span class="nc">HttpSecurity</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">builder</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+            <span class="nc">AuthenticationManager</span> <span class="n">authenticationManager</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">getSharedObject</span><span class="o">(</span><span class="nc">AuthenticationManager</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// AuthenticationManager 객체얻기</span>
+
+            <span class="nc">JwtAuthenticationFilter</span> <span class="n">jwtAuthenticationFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JwtAuthenticationFilter</span><span class="o">(</span><span class="n">authenticationManager</span><span class="o">,</span> <span class="n">jwtTokenizer</span><span class="o">);</span> <span class="c1">// JwtAuthenticationFilter 객체만들기 (생성하면서 DI하기)</span>
+
+            <span class="c1">// 상속받은 AbstractAuthenticationProcessingFilter 클래스의 FilterProcessesUrl 설정해주기 (설정안할시 default: /Login)</span>
+            <span class="c1">// 즉, 로그인 요청할때 이 Url로 요청해야함, 우리가 기존에 UsernamePassword 필터 사용시에는 /process_login 하던부분임</span>
+            <span class="n">jwtAuthenticationFilter</span><span class="o">.</span><span class="na">setFilterProcessesUrl</span><span class="o">(</span><span class="s">"/v11/auth/login"</span><span class="o">);</span>
+            <span class="c1">// Exception 추가</span>
+            <span class="n">jwtAuthenticationFilter</span><span class="o">.</span><span class="na">setAuthenticationSuccessHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAuthenticationSuccessHandler</span><span class="o">());</span>
+            <span class="n">jwtAuthenticationFilter</span><span class="o">.</span><span class="na">setAuthenticationFailureHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAuthenticationFailureHandler</span><span class="o">());</span>
+
+            <span class="nc">JwtVerificationFilter</span> <span class="n">jwtVerificationFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JwtVerificationFilter</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">,</span> <span class="n">authorityUtils</span><span class="o">);</span>
+
+            <span class="c1">// Spring Security FilterChain에 추가</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">addFilter</span><span class="o">(</span><span class="n">jwtAuthenticationFilter</span><span class="o">)</span>  <span class="c1">// 우리가만든 jwtAuthenticationFilter 필터추가</span>
+                    <span class="o">.</span><span class="na">addFilterAfter</span><span class="o">(</span><span class="n">jwtVerificationFilter</span><span class="o">,</span> <span class="nc">JwtAuthenticationFilter</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">//  jwtVerificationFilter 필터추가, 뒤에 클래스는 어느클래스 다음에 실행할지 설정</span>
+
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이전에 Spring Security 설정과 크게 달라진 점은 3가지 정도 있다.</p>
+
+<ol>
+  <li>CORS 정책을 추가</li>
+  <li>세션 정책 추가</li>
+  <li>우리가 만든 Filter 추가</li>
+  <li>예외처리에 대한 기능 추가</li>
+</ol>
+
+<p>이렇게 3가지에 대한 내용을 추가 설정해 주었다.
+자세한 내용은 코드옆에 설명을 적어 놓았다.</p>
+
+<p>여기서 세션정책관련해서는 아까 <code class="language-plaintext highlighter-rouge">SecurityContext</code>에 객체를 저장하지만<br>
+STATELESS로 설정하여 서버에서 관리하지 않게 되어진다.<br>
+즉, 무상태성으로 서버에서 관리하지 않는 것이다.</p>
+
+<p>또한 예외처리를 위한</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Security filter chain: [
+  DisableEncodeUrlFilter
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  CorsFilter
+  LogoutFilter
+  JwtAuthenticationFilter
+  JwtVerificationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  AuthorizationFilter
+]
+</code></pre></div></div>
+<p>최종적으로 완성된 SecurityFilterChain 구성<br>
+보이는 것과 같이 Cors 정책추가와<br>
+<code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code>가 비활성화 되었고<br>
+우리가 만들어준 필터 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code>와 <code class="language-plaintext highlighter-rouge">JwtVerificationFilter</code>가<br>
+추가된 모습을 콘솔로 확인이 가능하다. (@EnableWebSecurity(debug = true))</p>
+
+<p><br></p>
 
 <h3 id="jwt-예외관련">JWT 예외관련</h3>
 
@@ -795,15 +1176,15 @@ Exception이 발생한다.</p>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/11/23/til.html" title="TIL) JWT 인증">TIL) JWT 인증</a><a class="next" href="/spring/2022/11/25/spring-environment.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">Spring) Could not resolve placeholder '환경변수명'...</a>
+<a class="previous" href="/til/2022/11/23/til.html" title="TIL) JWT 기초">TIL) JWT 기초</a><a class="next" href="/spring/2022/11/25/spring-environment.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">Spring) Could not resolve placeholder '환경변수명'...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/11/til.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">TIL) API Documentation 1</a></li>
-<li><a class="post-link" href="/til/2022/09/15/til.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">TIL) Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
-<li><a class="post-link" href="/til/2022/10/20/til.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">TIL) Spring MVC Controller 계층</a></li>
+        <li><a class="post-link" href="/til/2022/10/11/til.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">TIL) Spring Basic 1</a></li>
 <li><a class="post-link" href="/til/2022/09/21/til.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">TIL) Json</a></li>
+<li><a class="post-link" href="/til/2022/11/03/til.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">TIL) Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/spring/2022/11/15/spring-mysql.html" title="Spring) Could not resolve placeholder '환경변수명' in value &quot;${환경변수명}&quot; 오류">Spring) MySQL Local 연동 하기</a></li>
 </ul>
     </div>
 <div class="post-comments">
