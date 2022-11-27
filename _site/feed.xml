@@ -1,157 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-26T18:08:46+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) OAuth 2 인증 기초</title><link href="http://localhost:4000/til/2022/11/25/til.html" rel="alternate" type="text/html" title="TIL) OAuth 2 인증 기초" /><published>2022-11-25T00:00:00+09:00</published><updated>2022-11-25T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/25/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/25/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDuT8mojlcwDj4isWJwyJvwaEPSsequtCg9insTbysDEVk6R7VRiRwBIm8ta5JK6J4r7ZDnBUypheW5SWHioLCJ0f8=w1920-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-27T19:18:50+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..</title><link href="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html" rel="alternate" type="text/html" title="macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name .." /><published>2022-11-27T00:00:00+09:00</published><updated>2022-11-27T00:00:00+09:00</updated><id>http://localhost:4000/macos/2022/11/27/OS-macOs-4</id><content type="html" xml:base="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html"><![CDATA[<p>오늘 공부하다가 막혔던 부분이 있어서 <br />
+도움이 될까 싶어 적어본다.</p>
 
-<p>이번주는 정말 게으르게 보낸 것 같다.</p>
+<h3 id="apache-웹-서버">APACHE 웹 서버</h3>
 
-<p>물론 옛날에 비하면 엄청난 발전이지만… 역시 한번 쉬면<br />
-계속 쉬고 싶은 마음이 생겨서,, 조금 게으르게 학습한 느낌을 받았다.</p>
+<p>아파치 HTTP 서버(Apache HTTP Server)는 <br />
+아파치 소프트웨어 재단에서 관리하는 오픈 소스, 크로스 플랫폼 HTTP 웹 서버 소프트웨어다. <br />
+BSD, 리눅스 등 유닉스 계열 뿐 아니라 마이크로소프트 윈도우나 노벨 넷웨어 <br />
+같은 기종에서도 무료로 운용할 수 있다고 한다. <strong>[<a href="https://ko.wikipedia.org/wiki/%EC%95%84%ED%8C%8C%EC%B9%98_HTTP_%EC%84%9C%EB%B2%84">출처 - 위키백과</a>]</strong></p>
 
-<p>다시한번 각성하여 Spring 세션을 잘 마무리 해보자.</p>
-
-<hr />
-
-<h2 id="oauth-2">OAuth 2</h2>
-
-<h3 id="oauth-2-란">OAuth 2 란?</h3>
-
-<p>흔히 생각해보면, 우리가 웹사이트 로그인을 할때<br />
-소셜 로그인(구글,카카오톡 등) 인증방식을 사용해 로그인을 하는데<br />
-이런 인증방식들은 OAuth2라는 기술을 바탕으로 구현이 된다.</p>
-
-<p>우리가 알고 있는 일반적인 애플리케이션은<br />
-서비스를 이용하는 사용자에 대한 인증처리는 해당 애플리케이션이 직접했다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtOEbcjSRPGtg0QXyV8y1h1SCQegF3vUKPYwVCv7sEcPex_-9W-jvRfU7gcNry-watl1K_E1i57hcZE0mSkiSjOoVg=w1920-h921" alt="image" class="align-left" style="max-width: 80%" /><br />
-<strong><em>- 크리덴셜을 저장하지 않는 아키텍처 -</em></strong></p>
-
-<p>OAuth2 인증 프토토콜은 특정 애플리케이션에서 사용자의 인증을 직접<br />
-처리하는 것이아니라 사용자 정보를 보유하고 있는 신뢰할 만한 써드 파티<br />
-애플리케이션(구글,카카오톡 등)에서 인증을 대신 처리해주고 Resource에 대한<br />
-자격 증명용 토큰을 발급한후, Client가 해당토큰을 이용해 써드파티 애플리케이션의<br />
-서비스를 사용하게 해주는 방식이다.</p>
+<p>Mac 환경에서 Apache 웹서버를 사용해보려하다 오류가 발생했다.<br />
+오류를 얘기하기전 우선 설치 과정을 아래의 사이트를 참고했다.<br />
+<strong>[<a href="https://www.javatpoint.com/how-to-install-apache-on-mac">Apache 설치 방법 - 참고사이트</a>]</strong></p>
 
 <p><br /></p>
 
-<p><strong>*써드 파티(3rd Party)란?</strong><br />
-프로그래밍을 도와주는 라이브러리를 만드는 외부 생산자를 뜻한다.</p>
+<p>homebrew를 이용한 설치방법이고<br />
+Mac 사용 유저라면 익히 알고 있을 것이다.</p>
 
-<p>1st 파티 개발자 : 하드웨어 생상자가 ‘직접’ 소프트웨어를 개발하는 경우<br />
-2nd 파티 개발자 : 하드웨어 생산지인 기업과 자사간의 관계에 속한 소프트웨어 개발자<br />
-3rd 파티 개발자 : 아무 관련없는 제3자 소프트웨어 개발자<br />
-이렇게 예를 들어볼 수 있을 것 같다.</p>
+<p>설치를 완료한다음 <br />
+문제는 아파치 서버를 실행/종료 시키기위해서<br />
+<code class="language-plaintext highlighter-rouge">sudo apachectl start</code> 명령어와 <code class="language-plaintext highlighter-rouge">sudo apachectl stop</code> 명령어를<br />
+사용하게 되는데… AH00558 코드로된 알람이 발생했다.</p>
 
-<p><br /></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMPblHp1IrHpidEB8NNOHDrTqEx8Q_JW9oJb7H4iCMDJNIKJUgNoYoQPhx8afmEEUw_UNIczBB2e98aG8ey3dT_HzWk=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
 
-<h3 id="oauth-2-인증-컴포넌트-역할">OAuth 2 인증 컴포넌트 역할</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AH00558: httpd: Could not reliably determine the server<span class="s1">'s fully qualified domain name, using MacBook-Pro.local. Set the '</span>ServerName<span class="s1">' directive globally to suppress this message
+</span></code></pre></div></div>
 
-<p>시작에 앞서 OAuth 2 인증을 처리하는 <br />
-컴포넌트들이 무엇이 있고 어떠한 역할을하는지 알아보자</p>
-
-<ol>
-  <li>Resource Owner<br />
--&gt; 사용하고자 하는 Resource의 소유자를 의미한다.</li>
-  <li>Client<br />
--&gt; Resource Owner를 대신해 보호된 Resource에 엑세스하는 애플리케이션</li>
-  <li>Resource Server<br />
--&gt; Client의 요청을 수락하고 Resource Owner에 해당하는 Resource를 제공하는 서버</li>
-  <li>Authorization Server<br />
--&gt; Clinet가 Resource Server에 접근할 수 있는 권한을 부여하는 서버</li>
-</ol>
-
-<p>이렇게 글로만 정리하자면 사실 이해하기 힘들 것이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOuRXi0z_GnyDCCDHETh73m4ATTFc7XkcLLrbwxEbd_Rd71mekz5lc9oxBxt5WGwp-6BLNg3GiMQ4jErSdSRIpCvj3kkw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>대략적인 역할을 보면 이렇게 나눠볼 수 있을 것 같다.<br />
-기존에 우리가 불러오던 Client가 웹 애플리케이션 서버로<br />
-변경된 모습을 볼 수 있다.</p>
-
-<p>Resource Owner의 대리인으로써 구글에 인증과 Resource를<br />
-요청하고 있기때문에 Client라고 부를 수 있다</p>
+<p>오류는 그렇다 쳐도, 기본 적으로 localhost에 접속하면<br />
+<code class="language-plaintext highlighter-rouge">It works!</code> 화면이 노출되지 않았다.<br />
+localhost:8080에 접속해야지만 화면이 노출되었고<br />
+설정을 바꿀 필요가 있다고 느껴졌다.</p>
 
 <p><br /></p>
 
-<h3 id="authorization-grant-유형">Authorization Grant 유형</h3>
-<p>Authorization Grant는 Client 애플리케이션이 Access Token을<br />
-얻기 위한 Resource Owner의 권한을 표현하는 크리덴셜(Credential)을 의미한다.</p>
+<p><strong>1). httpd.conf 파일 찾기</strong></p>
 
-<p>즉, Access Token을 얻기 위한 수단이다.</p>
+<p>설정을 변경하기 위해서는 <code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일을 수정해줘야한다.<br />
+해당 파일 경로를 찾기위해 여러가지 블로그를 찾아보았는데</p>
 
-<p><strong><em>*Access Token 이란?<br />
-Client가 Resource Server에 보호된 Resource에<br />
-엑세스하기 위해 사용하는 자격 증명용 토큰이다.</em></strong></p>
+<p>사람마다 여러가지 경로로 수정을 하는걸 보았다.</p>
 
-<p><br /></p>
+<p><code class="language-plaintext highlighter-rouge">/etc/apache2/httpd.conf</code><br />
+<code class="language-plaintext highlighter-rouge">/private/etc/apache2/httpd.conf</code><br />
+와 같은 경로로 수정한 사람들도 있는 것 같다.<br />
+하지만 나와 같은 경우는 제대로 반영되지 않았고…</p>
 
-<p>총 4가지의 타입이 있으니 알아보자</p>
+<p>어떠한 차이인지는 아직 불분명하지만 내가 수정했던 경로는 아래와 같다.  <br />
+📌<code class="language-plaintext highlighter-rouge">/opt/homebrew/etc/httpd/httpd.conf</code>📌 <br />
+아마 homebrew를 통해 실행하는 것이기 때문이지 않을까? 라는 생각을 해본다.</p>
 
-<p><strong>1). Authorization Code Grant (권한부여 승인 코드 방식)</strong> <br />
--. 가장 많이 쓰이는 방법이고 기본이 되는 방식이다.<br />
--. 권한 부여 승인을 위해 자체 생성한 Authorization Code를 전달하는 방식이다.<br />
--. Refresh Token을 사용할 수 있다.<br />
--. 권한 부여 승인 요청시 응답 타입을 <code class="language-plaintext highlighter-rouge">code</code>로 지정하여 요청한다.</p>
+<p><code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일을 찾는데 처음에 애먹어서 시간을 많이 쓴 것 같다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPgVHuUuCDajpaRydkqDrMFvzkbLFg3gep5w9RB8biTR9VOow-YfScef_SaV6QJH5cGhGZwcx6giLOKPrAC4ppHoW1TNQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<p>파일을 찾았으면 이제 shell에서 vi 편집기로 값을 수정해주면된다.</p>
 
-<p><br /></p>
-
-<p><strong>2). Implicit Grant (암묵적 승인 방식)</strong><br />
--. 별도의 Authorization Code 없이 바로 Access Token을 발급받는 방식이다.<br />
--. 자격증명을 안전하게 저장하기 힘든 Client에게 최적화된 방식이다.<br />
--. Refresh Token 사용이 불가능하다.<br />
--. 권한 부여 승인 요청시 응답타입을 <code class="language-plaintext highlighter-rouge">token</code>으로 지정하여 요청한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMa7L3zIQi3fKSZII9kd56k64SdaQpQJjnDrCev_ByGw1cuJYu3r61IXE0Ubx-pNNUJKs9tkNeOeQmBFZnGtOLekTEQCg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /opt/homebrew/etc/httpd/httpd.conf
+</code></pre></div></div>
 
 <p><br /></p>
 
-<p><strong>3). Resource Owner Password Credential Grant (자원 소유자 자격증명 승인방식)</strong><br />
--. 로그인 시 필요한 정보로 Access Token을 발급 받는 방식이다.<br />
--. 자신의 서비스에서 제공하는 애플리케이션의 경우에만 사용되는 인증 방식이다.<br />
-(Authorization Server, Resource Server, Client가 모두 같은 시스템에 속해있을 경우에만 가능)<br />
--. Refresh Token 사용이 가능하다.</p>
+<p><strong>2). Port 80 으로 변경하기</strong></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMijQTmGrLYDoKw37n3jPJRqt5i6JjFcp8XeFprwPcptgPdHdPvhscdpyh52SFQHU7ju84XmIWMYyJIR6TYVznjIuPpsw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+<p>편집기를 열고 아래와 같은 Listen을 찾아준다.</p>
 
-<p><br /></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPzEEFalQYxag6NQ4wOJV1AuBpyHFHn9LwAi4g0PY8YljuKfpiPQY-9H1mOU1Vxqa-0reRKR1itloqQ_nXt8n7xKAh8=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
 
-<p><strong>4). Client Credentials Grant (클라이언트 자격증명 승인방식)</strong><br />
--. Client 자신이 관리하는 Resource, Authorization Server에 해당 Client를 위한<br />
-제한된 Resource 접근 권한이 설정되어 있을 경우 사용 가능한 방식이다.<br />
--. Refresh Token의 사용이 불가능하다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOmLKEo6UjsefDdk3MWt5D0fLVXTDfA9dnjjHZibE6A55PjTKLDzqBn-NZTS3WsK-6ojytFXEXqtgqkjvuTIclhg3RH4w=w1299-h921" alt="image" class="align-left" style="max-width: 90%" /></p>
+<p>아마 기본적으로 8080으로 설정되어있을 것이다.<br />
+#으로 주석처리를 해준다음, 아래에서 <code class="language-plaintext highlighter-rouge">Listen 80</code>으로 설정해주었다.</p>
 
 <p><br /></p>
 
-<h3 id="사전-준비">사전 준비</h3>
-<p>위에서 얘기했듯이 우리는 써드파티 애플리케이션 중<br />
-OAuth 2 인증 프로토콜을 제공하는 벤더(구글, 카카오톡, 페이스북 등)를<br />
-선정 한다음 프로그램을 작성해야한다.</p>
+<p><strong>3). localhost로 변경 하기</strong></p>
 
-<p>그중 위에서 예로든 구글의 OAuth 2 프로토콜을 이용해볼 예정이고<br />
-프로그램 작성 전에 먼저 클라이언트 ID와 Secret를 생성해야한다.<br />
-<a href="http://yoonbumtae.com/?p=2631">구글 API 콘솔에서의 OAuth 2 설정 - 출처: yoonbumtae님</a>을 보고<br />
-클라이언트 ID와 Secret를 생성하면 준비는 끝난다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO9rZHRQQQ0HI4HBe-UBcgFt4ZMl91uomBFpsZLjsruipSi2KrdWjR89J1rptKW4mQSwI7iFSbjmpV5PgPfGLj88BO4yw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO3kkRX35q-9PPahcVGwcdd2LGECoC7sez4uGlFClTNsVllR01dQocyQJSuF42Ej0tF7n3FIYHclCxtaNIefADUtJgiJw=w1920-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+<p>위의 사진과 같이 ServerName을 localhost로 설정해주면 된다.</p>
 
 <p><br /></p>
 
-<hr />
+<p><strong>4). 결과 확인하기</strong></p>
 
-<p>오늘은 OAuth 2 에대한 간단한 지식을 알아봤다.<br />
-사실 이론만 보기에는 코드를 보지않아서<br />
-느낌이 확 와닿지는 않는다…</p>
+<p>아파치 웹서버 실행 명령어인<br />
+<code class="language-plaintext highlighter-rouge">sudo apachectl start</code>,<code class="language-plaintext highlighter-rouge">sudo apachectl stop</code>를 입력해도</p>
 
-<p>하지만 큰그림을 보고 코드를 보면 더 눈에 잘들어오기 때문에<br />
-큰 아키텍처를 생각하고 코드를 다움주부터 연습을 해봐야겠다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMxycEEiyoGZsXP0ZAh9sdmRXbB9ucK6Ar42OXNGDH3-OZW4FNBlpa68ehMFGULCDXcXODH-iLfmTYgK239LTRz134ZRg=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
 
-<p>오늘 공부는 여기서 끝 !</p>
+<p>더 이상 AH00558 오류가 발생하지 않는 모습이다.</p>
 
 <p><br /></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김밥, 된장찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류</title><link href="http://localhost:4000/spring/2022/11/25/spring-environment.html" rel="alternate" type="text/html" title="Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류" /><published>2022-11-25T00:00:00+09:00</published><updated>2022-11-25T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/25/spring-environment</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/25/spring-environment.html"><![CDATA[<p>오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 <br />
+<p>아파치 웹서버를 실행 시켜놓은 상태에서</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMRbasfobijEvOlwe60oFwSiELjJ7dm4RE7huFv2fFxSceyEPbFWQtmJCGSotTjXhbdaHpxJMCUOK2eMNPAneRzzlNyKA=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>localhost를 입력하여 접속할 경우<br />
+이제 드디어 <code class="language-plaintext highlighter-rouge">It works</code> 화면을 볼 수 있게 된다 !!</p>
+
+<p>혹시나 싶어 <a href="https://mainia.tistory.com/5490">WindowOS 해결 방법 - 출처 mainia님</a> 찾다가 좋은글인 것 같아 올려본다.<br />
+좀 더 자세한 내용을 보고싶다면 <a href="https://velog.io/@diduya/macOS%EC%97%90-Homebrew%EB%A1%9C-Apache-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0">내가 참고한 해결 방법 - 출처 diduya님</a> 포스팅을 봐도<br />
+좋은 해결법이될 것 같다.</p>
+
+<hr />]]></content><author><name>LEE JAEHYEOK</name></author><category term="macOs" /><category term="macOs" /><category term="IT" /><summary type="html"><![CDATA[오늘 공부하다가 막혔던 부분이 있어서 도움이 될까 싶어 적어본다.]]></summary></entry><entry><title type="html">Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류</title><link href="http://localhost:4000/spring/2022/11/25/spring-environment.html" rel="alternate" type="text/html" title="Spring) Could not resolve placeholder ‘환경변수명’ in value “${환경변수명}” 오류" /><published>2022-11-25T00:00:00+09:00</published><updated>2022-11-25T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/25/spring-environment</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/25/spring-environment.html"><![CDATA[<p>오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 <br />
 기록해보려고한다.</p>
 
 <p><br /></p>
@@ -354,7 +303,160 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
 </code></pre></div></div>
 <p>입력후 현재 노트북 비밀번호를 입력해주시면 됩니다.</p>
 
-<hr />]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="zsh" /><summary type="html"><![CDATA[오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 기록해보려고한다.]]></summary></entry><entry><title type="html">TIL) Spring Security JWT 사용하여 인증하기</title><link href="http://localhost:4000/til/2022/11/24/til.html" rel="alternate" type="text/html" title="TIL) Spring Security JWT 사용하여 인증하기" /><published>2022-11-24T00:00:00+09:00</published><updated>2022-11-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/24/til.html"><![CDATA[<p>날씨가 많이 쌀쌀해졌다.</p>
+<hr />]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="zsh" /><summary type="html"><![CDATA[오늘은 내가 겪은 환경변수에 관련된 설정과 오류를 기록해보려고한다.]]></summary></entry><entry><title type="html">TIL) OAuth 2 인증 기초</title><link href="http://localhost:4000/til/2022/11/25/til.html" rel="alternate" type="text/html" title="TIL) OAuth 2 인증 기초" /><published>2022-11-25T00:00:00+09:00</published><updated>2022-11-25T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/25/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/25/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDuT8mojlcwDj4isWJwyJvwaEPSsequtCg9insTbysDEVk6R7VRiRwBIm8ta5JK6J4r7ZDnBUypheW5SWHioLCJ0f8=w1920-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이번주는 정말 게으르게 보낸 것 같다.</p>
+
+<p>물론 옛날에 비하면 엄청난 발전이지만… 역시 한번 쉬면<br />
+계속 쉬고 싶은 마음이 생겨서,, 조금 게으르게 학습한 느낌을 받았다.</p>
+
+<p>다시한번 각성하여 Spring 세션을 잘 마무리 해보자.</p>
+
+<hr />
+
+<h2 id="oauth-2">OAuth 2</h2>
+
+<h3 id="oauth-2-란">OAuth 2 란?</h3>
+
+<p>흔히 생각해보면, 우리가 웹사이트 로그인을 할때<br />
+소셜 로그인(구글,카카오톡 등) 인증방식을 사용해 로그인을 하는데<br />
+이런 인증방식들은 OAuth2라는 기술을 바탕으로 구현이 된다.</p>
+
+<p>우리가 알고 있는 일반적인 애플리케이션은<br />
+서비스를 이용하는 사용자에 대한 인증처리는 해당 애플리케이션이 직접했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtOEbcjSRPGtg0QXyV8y1h1SCQegF3vUKPYwVCv7sEcPex_-9W-jvRfU7gcNry-watl1K_E1i57hcZE0mSkiSjOoVg=w1920-h921" alt="image" class="align-left" style="max-width: 80%" /><br />
+<strong><em>- 크리덴셜을 저장하지 않는 아키텍처 -</em></strong></p>
+
+<p>OAuth2 인증 프토토콜은 특정 애플리케이션에서 사용자의 인증을 직접<br />
+처리하는 것이아니라 사용자 정보를 보유하고 있는 신뢰할 만한 써드 파티<br />
+애플리케이션(구글,카카오톡 등)에서 인증을 대신 처리해주고 Resource에 대한<br />
+자격 증명용 토큰을 발급한후, Client가 해당토큰을 이용해 써드파티 애플리케이션의<br />
+서비스를 사용하게 해주는 방식이다.</p>
+
+<p><br /></p>
+
+<p><strong>*써드 파티(3rd Party)란?</strong><br />
+프로그래밍을 도와주는 라이브러리를 만드는 외부 생산자를 뜻한다.</p>
+
+<p>1st 파티 개발자 : 하드웨어 생상자가 ‘직접’ 소프트웨어를 개발하는 경우<br />
+2nd 파티 개발자 : 하드웨어 생산지인 기업과 자사간의 관계에 속한 소프트웨어 개발자<br />
+3rd 파티 개발자 : 아무 관련없는 제3자 소프트웨어 개발자<br />
+이렇게 예를 들어볼 수 있을 것 같다.</p>
+
+<p><br /></p>
+
+<h3 id="oauth-2-인증-컴포넌트-역할">OAuth 2 인증 컴포넌트 역할</h3>
+
+<p>시작에 앞서 OAuth 2 인증을 처리하는 <br />
+컴포넌트들이 무엇이 있고 어떠한 역할을하는지 알아보자</p>
+
+<ol>
+  <li>Resource Owner<br />
+-&gt; 사용하고자 하는 Resource의 소유자를 의미한다.</li>
+  <li>Client<br />
+-&gt; Resource Owner를 대신해 보호된 Resource에 엑세스하는 애플리케이션</li>
+  <li>Resource Server<br />
+-&gt; Client의 요청을 수락하고 Resource Owner에 해당하는 Resource를 제공하는 서버</li>
+  <li>Authorization Server<br />
+-&gt; Clinet가 Resource Server에 접근할 수 있는 권한을 부여하는 서버</li>
+</ol>
+
+<p>이렇게 글로만 정리하자면 사실 이해하기 힘들 것이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOuRXi0z_GnyDCCDHETh73m4ATTFc7XkcLLrbwxEbd_Rd71mekz5lc9oxBxt5WGwp-6BLNg3GiMQ4jErSdSRIpCvj3kkw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>대략적인 역할을 보면 이렇게 나눠볼 수 있을 것 같다.<br />
+기존에 우리가 불러오던 Client가 웹 애플리케이션 서버로<br />
+변경된 모습을 볼 수 있다.</p>
+
+<p>Resource Owner의 대리인으로써 구글에 인증과 Resource를<br />
+요청하고 있기때문에 Client라고 부를 수 있다</p>
+
+<p><br /></p>
+
+<h3 id="authorization-grant-유형">Authorization Grant 유형</h3>
+<p>Authorization Grant는 Client 애플리케이션이 Access Token을<br />
+얻기 위한 Resource Owner의 권한을 표현하는 크리덴셜(Credential)을 의미한다.</p>
+
+<p>즉, Access Token을 얻기 위한 수단이다.</p>
+
+<p><strong><em>*Access Token 이란?<br />
+Client가 Resource Server에 보호된 Resource에<br />
+엑세스하기 위해 사용하는 자격 증명용 토큰이다.</em></strong></p>
+
+<p><br /></p>
+
+<p>총 4가지의 타입이 있으니 알아보자</p>
+
+<p><strong>1). Authorization Code Grant (권한부여 승인 코드 방식)</strong> <br />
+-. 가장 많이 쓰이는 방법이고 기본이 되는 방식이다.<br />
+-. 권한 부여 승인을 위해 자체 생성한 Authorization Code를 전달하는 방식이다.<br />
+-. Refresh Token을 사용할 수 있다.<br />
+-. 권한 부여 승인 요청시 응답 타입을 <code class="language-plaintext highlighter-rouge">code</code>로 지정하여 요청한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPgVHuUuCDajpaRydkqDrMFvzkbLFg3gep5w9RB8biTR9VOow-YfScef_SaV6QJH5cGhGZwcx6giLOKPrAC4ppHoW1TNQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<p><strong>2). Implicit Grant (암묵적 승인 방식)</strong><br />
+-. 별도의 Authorization Code 없이 바로 Access Token을 발급받는 방식이다.<br />
+-. 자격증명을 안전하게 저장하기 힘든 Client에게 최적화된 방식이다.<br />
+-. Refresh Token 사용이 불가능하다.<br />
+-. 권한 부여 승인 요청시 응답타입을 <code class="language-plaintext highlighter-rouge">token</code>으로 지정하여 요청한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMa7L3zIQi3fKSZII9kd56k64SdaQpQJjnDrCev_ByGw1cuJYu3r61IXE0Ubx-pNNUJKs9tkNeOeQmBFZnGtOLekTEQCg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<p><strong>3). Resource Owner Password Credential Grant (자원 소유자 자격증명 승인방식)</strong><br />
+-. 로그인 시 필요한 정보로 Access Token을 발급 받는 방식이다.<br />
+-. 자신의 서비스에서 제공하는 애플리케이션의 경우에만 사용되는 인증 방식이다.<br />
+(Authorization Server, Resource Server, Client가 모두 같은 시스템에 속해있을 경우에만 가능)<br />
+-. Refresh Token 사용이 가능하다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMijQTmGrLYDoKw37n3jPJRqt5i6JjFcp8XeFprwPcptgPdHdPvhscdpyh52SFQHU7ju84XmIWMYyJIR6TYVznjIuPpsw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<p><strong>4). Client Credentials Grant (클라이언트 자격증명 승인방식)</strong><br />
+-. Client 자신이 관리하는 Resource, Authorization Server에 해당 Client를 위한<br />
+제한된 Resource 접근 권한이 설정되어 있을 경우 사용 가능한 방식이다.<br />
+-. Refresh Token의 사용이 불가능하다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOmLKEo6UjsefDdk3MWt5D0fLVXTDfA9dnjjHZibE6A55PjTKLDzqBn-NZTS3WsK-6ojytFXEXqtgqkjvuTIclhg3RH4w=w1299-h921" alt="image" class="align-left" style="max-width: 90%" /></p>
+
+<p><br /></p>
+
+<h3 id="사전-준비">사전 준비</h3>
+<p>위에서 얘기했듯이 우리는 써드파티 애플리케이션 중<br />
+OAuth 2 인증 프로토콜을 제공하는 벤더(구글, 카카오톡, 페이스북 등)를<br />
+선정 한다음 프로그램을 작성해야한다.</p>
+
+<p>그중 위에서 예로든 구글의 OAuth 2 프로토콜을 이용해볼 예정이고<br />
+프로그램 작성 전에 먼저 클라이언트 ID와 Secret를 생성해야한다.<br />
+<a href="http://yoonbumtae.com/?p=2631">구글 API 콘솔에서의 OAuth 2 설정 - 출처: yoonbumtae님</a>을 보고<br />
+클라이언트 ID와 Secret를 생성하면 준비는 끝난다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO3kkRX35q-9PPahcVGwcdd2LGECoC7sez4uGlFClTNsVllR01dQocyQJSuF42Ej0tF7n3FIYHclCxtaNIefADUtJgiJw=w1920-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 OAuth 2 에대한 간단한 지식을 알아봤다.<br />
+사실 이론만 보기에는 코드를 보지않아서<br />
+느낌이 확 와닿지는 않는다…</p>
+
+<p>하지만 큰그림을 보고 코드를 보면 더 눈에 잘들어오기 때문에<br />
+큰 아키텍처를 생각하고 코드를 다움주부터 연습을 해봐야겠다.</p>
+
+<p>오늘 공부는 여기서 끝 !</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 김밥, 된장찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) Spring Security, JWT 사용하여 인증하기</title><link href="http://localhost:4000/til/2022/11/24/til.html" rel="alternate" type="text/html" title="TIL) Spring Security, JWT 사용하여 인증하기" /><published>2022-11-24T00:00:00+09:00</published><updated>2022-11-24T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/24/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/24/til.html"><![CDATA[<p>날씨가 많이 쌀쌀해졌다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtphG8edbKbbvSASKsJ_-tJ0REdmM2lcBp23tquh_bZGuSnGZt9pJIqpz7InTIiLhjrD7ZaBJzmsPBW69wtFDH28VC=w3024-h1728" alt="image" class="align-left" style="max-width: 60%" /></p>
 
@@ -742,7 +844,11 @@ Spring SecurityFilterChain에 설정정보를 설정하는일만 남았다.</p>
 STATELESS로 설정하여 서버에서 관리하지 않게 되어진다.<br />
 즉, 무상태성으로 서버에서 관리하지 않는 것이다.</p>
 
-<p>또한 예외처리를 위한</p>
+<p>또한 예외처리를 위한 우리가 구현한 클래스들도 설정해놓았고<br />
+Cors 정책관련해서도 Bean으로 등록해 추가해주었다.</p>
+
+<p>그리고 마지막으로 사용자에 따른 페이지 권한에 대한 <br />
+<code class="language-plaintext highlighter-rouge">antMatchers();</code>를 설정한 다음 마무리를 지었다.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Security filter chain: [
   DisableEncodeUrlFilter
@@ -761,11 +867,20 @@ STATELESS로 설정하여 서버에서 관리하지 않게 되어진다.<br />
   AuthorizationFilter
 ]
 </code></pre></div></div>
-<p>최종적으로 완성된 SecurityFilterChain 구성<br />
-보이는 것과 같이 Cors 정책추가와<br />
+<p>최종적으로 완성된 SecurityFilterChain 구성은<br />
+보이는 것과 같이 <code class="language-plaintext highlighter-rouge">CorsFilter</code> 추가와<br />
 <code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code>가 비활성화 되었고<br />
 우리가 만들어준 필터 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code>와 <code class="language-plaintext highlighter-rouge">JwtVerificationFilter</code>가<br />
 추가된 모습을 콘솔로 확인이 가능하다. (@EnableWebSecurity(debug = true))</p>
+
+<p><br /></p>
+
+<p>이렇게 JWT 설정관련해서 주요하게 우리가 구현해야하는<br />
+클래스를 설명했고 구현한 코드도 적어보았다.</p>
+
+<p>구현했던 클래스 중 가장 중요한 클래스만 정리를 해두었고<br />
+해당 클래스를 구현하기위해 보조로 필요한 예외처리 클래스라든가 등등..은<br />
+따로 코드를 올리진 않았다는 점은 참고해주실 바란다.</p>
 
 <p><br /></p>
 
@@ -789,8 +904,7 @@ STATELESS로 설정하여 서버에서 관리하지 않게 되어진다.<br />
 
 <p>로그인 요청을 할때, 우리는 JWT 토큰을 Header에 담아서 보내준다.<br />
 토큰을 만들때는 만료시간을 설정하는데<br />
-설정한 만료시간이 지났는데 리소스에 접근요청을 보내면<br />
-해당 예외가 발생한다.</p>
+설정한 만료시간이 지났는데 리소스에 접근요청을 보내면 g해당 예외가 발생한다.</p>
 
 <p><br /></p>
 
@@ -832,11 +946,26 @@ Exception이 발생한다.</p>
 <p><br /></p>
 
 <hr />
+<p>이렇게 오늘은 JWT를 통해 인증까지 해보는 작업을 해보았다.<br />
+사실은 내가 정리하면서 맞게 적는지 엄청 코드를 반복적으로 확인하면서<br />
+글을 써내려갔다. 조금 덜 정리된 부분이 많아서 아쉽지만<br />
+나름 내가 코드를 분석하고 정리를 해보니 어느정도 감은 잡힌 것 같다.</p>
+
+<p>오늘까지해서 JWT에 대한 내용은 끝났고<br />
+실제로 내가 어드밴스한 내용을 구현하고 싶다면<br />
+인증처리 흐름만 익힐게 아니라 내부의 코드들이 어떻게 구현되있는지<br />
+완벽하게 이해하고 있어야 어드밴스한 구현이 가능할 듯 싶다.</p>
+
+<p>오늘까지 공부하면서 많은 소득이 있었고<br />
+큰 그림을 배웠고, 세부적인 내용도 어느정도 뜯어보니<br />
+코드에 대한 자신감이 조금 더 생긴 주였던 것 같다.</p>
+
+<p>오늘 공부는 여기서 끝!!</p>
 
 <p><br /></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>:</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨가 많이 쌀쌀해졌다.]]></summary></entry><entry><title type="html">TIL) JWT 기초</title><link href="http://localhost:4000/til/2022/11/23/til.html" rel="alternate" type="text/html" title="TIL) JWT 기초" /><published>2022-11-23T00:00:00+09:00</published><updated>2022-11-23T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/23/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/23/til.html"><![CDATA[<p>확실히 Spring 관련된 기술을 사용하면서<br />
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨가 많이 쌀쌀해졌다.]]></summary></entry><entry><title type="html">TIL) JWT 기초</title><link href="http://localhost:4000/til/2022/11/23/til.html" rel="alternate" type="text/html" title="TIL) JWT 기초" /><published>2022-11-23T00:00:00+09:00</published><updated>2022-11-23T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/23/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/23/til.html"><![CDATA[<p>확실히 Spring 관련된 기술을 사용하면서<br />
 프로그래밍을 하고 있다는 느낌이 들때가 많아서 좋다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMWwuYanwzEYSBU97J-DZR9DkAcwyTyZwvas0jVZbla4RaJ-_F28bKYzcWQqOh3iqItCBSFVIUY6GDFl9qgi16AsH2POw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
@@ -2877,118 +3006,4 @@ Spring JDBC,JPA,Transaction, JUnit, APi 문서 자동화 등<br />
 <p>이상 세달차 공부 중인 <br />
 나란 사람의 회고를 적어본다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry><entry><title type="html">Spring) MySQL Local 연동 하기</title><link href="http://localhost:4000/spring/2022/11/15/spring-mysql.html" rel="alternate" type="text/html" title="Spring) MySQL Local 연동 하기" /><published>2022-11-15T00:00:00+09:00</published><updated>2022-11-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/11/15/spring-mysql</id><content type="html" xml:base="http://localhost:4000/spring/2022/11/15/spring-mysql.html"><![CDATA[<p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br />
-연결하여 사용해보려고한다.</p>
-
-<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br />
-저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
-
-<p>MySQL WorkBench GUI로 작업하였고<br />
-리소스는 .yml 파일을 사용했다.</p>
-
-<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
-
-<p><br /></p>
-
-<p>1). bulid.gradle 설정</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
-</code></pre></div></div>
-
-<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>추가하고 Gradle Reload를 할 경우 위와 같이<br />
-라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<p>2). .yml 파일 설정</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">jpa</span><span class="pi">:</span>
-    <span class="na">hibernate</span><span class="pi">:</span>
-      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
-    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
-    <span class="na">properties</span><span class="pi">:</span>
-      <span class="na">hibernate</span><span class="pi">:</span>
-        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
-  <span class="na">datasource</span><span class="pi">:</span>
-    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
-    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
-    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>두번째로 연결을위한 .yml파일 설정이다.<br />
-프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br />
-properties 확장자를 application.yml로 변경하였다.</p>
-
-<p>spring : <br />
-jpa : <br />
-에 해당하는 부분은 jpa관련 설정이다.</p>
-
-<p>우리가 봐야할 부분은<br />
-spring :<br />
-datasource :<br />
-이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
-
-<p>넣어줘야할 정보는 4가지 이다.</p>
-<ol>
-  <li>포트넘버</li>
-  <li>스키마 이름</li>
-  <li>유저네임</li>
-  <li>비밀번호</li>
-</ol>
-
-<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br />
-아래에 어디서 찾는지 적어보겠다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>워크밴치(MySQL WorkBench)를 열어보면<br />
-커넥션에 관한 정보가 나온다.<br />
-없으면 연결을 한번도 하지 않은 것이기에<br />
-커넥션을 만들어주면 된다.</p>
-
-<p>커넥션을 더블클릭 해보자</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br />
-여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br />
-비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
-
-<p>여기서 알 수 있는 정보는</p>
-
-<p><strong>포트넘버 = 3306<br />
-유저네임 = root<br />
-비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
-
-<p>이렇게 알 수 있다.</p>
-
-<p>그리고 접속을 한 다음에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br />
-스키마를 생성해주면 된다.</p>
-
-<p>생성한 스키마가 스키마이름이 되는 것이다.<br />
-나는 example로 설정했고<br />
-이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
-
-<p>이렇게 정리해서 정보를 적어보자면</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
-  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
-  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
-  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>이렇게 설정할 수 있을 것이다.</p>
-
-<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br />
-처음에 mysql를 다운받고 설정한 비밀번호다.<br />
-인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="mysql" /><summary type="html"><![CDATA[오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.]]></summary></entry></feed>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 가을을 지나 겨울을 향해 달리고있다. 시간은 멈추지 않는다.]]></summary></entry></feed>
