@@ -1,4 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-28T16:31:47+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Security, JWT , OAuth 2 인증</title><link href="http://localhost:4000/til/2022/11/28/til.html" rel="alternate" type="text/html" title="TIL) Spring Security, JWT , OAuth 2 인증" /><published>2022-11-28T00:00:00+09:00</published><updated>2022-11-28T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/28/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/28/til.html"><![CDATA[<p><img src="" alt="image" class="align-left" style="max-width: 100%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-28T16:39:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring Security, JWT , OAuth 2 인증</title><link href="http://localhost:4000/til/2022/11/28/til.html" rel="alternate" type="text/html" title="TIL) Spring Security, JWT , OAuth 2 인증" /><published>2022-11-28T00:00:00+09:00</published><updated>2022-11-28T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/28/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/28/til.html"><![CDATA[<p>다시 시작된 월요일!!</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMbQN6-pRfE1nN6vp5n5bBxnzsRqAV9BVPdgdDtWEnmszNdkYWeBFUUR3XTJDQMFuQ4R9pAKdzVK7cB7d9feDMhlllDAQ=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>드디어 프로젝트를 해야할 시간이 다가오기 시작한다.</p>
+
+<p>현재까지 배운 기술을 이용해 무언가 만들어본다는게 너무 설레고 기대된다.<br />
+여태까지 배운 기술들에 대한 내용 중 크게 이해가 안되는 부분은 없었고<br />
+Advance한 공부가 필요한 내용들이 많았다.</p>
+
+<p>프로젝트를 기회로 깊이 파헤쳐보는 기회가 올 것 같아 너무나 기대된다.<br />
+오늘은 OAuth2에 대한 마지막 시간이다.</p>
+
+<p>그 동안 배운 Spring Security와 JWT, OAuth2를<br />
+전부 이용해서 인증과 권한부여 코드를 작성해보는 것이다.</p>
 
 <hr />
 
@@ -613,7 +627,7 @@ OAuth2에 대한 완벽한 이해가 되었다고는 할 수 없을 것 같다.<
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..</title><link href="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html" rel="alternate" type="text/html" title="macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name .." /><published>2022-11-27T00:00:00+09:00</published><updated>2022-11-27T00:00:00+09:00</updated><id>http://localhost:4000/macos/2022/11/27/OS-macOs-4</id><content type="html" xml:base="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html"><![CDATA[<p>오늘 공부하다가 막혔던 부분이 있어서 <br />
+<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[다시 시작된 월요일!!]]></summary></entry><entry><title type="html">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..</title><link href="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html" rel="alternate" type="text/html" title="macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name .." /><published>2022-11-27T00:00:00+09:00</published><updated>2022-11-27T00:00:00+09:00</updated><id>http://localhost:4000/macos/2022/11/27/OS-macOs-4</id><content type="html" xml:base="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html"><![CDATA[<p>오늘 공부하다가 막혔던 부분이 있어서 <br />
 도움이 될까 싶어 적어본다.</p>
 
 <h3 id="apache-웹-서버">APACHE 웹 서버</h3>
