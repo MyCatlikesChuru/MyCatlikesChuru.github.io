@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Spring WebFlux Project Reactor | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Spring WebFlux Project Reactor">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="어느덧 11월의 마지막이 다가왔다.">
+<meta property="og:description" content="어느덧 11월의 마지막이 다가왔다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/11/30/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/11/30/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-11-30T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Spring WebFlux Project Reactor">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-30T00:00:00+09:00","datePublished":"2022-11-30T00:00:00+09:00","description":"어느덧 11월의 마지막이 다가왔다.","headline":"TIL) Spring WebFlux Project Reactor","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/11/30/til.html"},"url":"http://localhost:4000/til/2022/11/30/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring WebFlux Project Reactor</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+103</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-11-30T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 30, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>어느덧 11월의 마지막이 다가왔다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP-V3f78gzYoHWe4BsoYdT3mBXrBTI7YNQJSLWZStK3WDB2VvN0qjzA3GflB1maNYmMaDLa5a3SAqzjBTNSgMxDF3ee=w1185-h921" alt="image" class="align-left" style="max-width: 50%"></p>
+
+<p>코딩 공부를 시작한게 8월인데 벌써 4개월이 지났다니<br>
+믿기지 않는다.. 그만큼 많이 발전도 했지만<br>
+아직도 많이 부족하다고 느끼기에 시간이 더욱더 간절하게 느껴진다.</p>
+
+<p>오늘은 어제배운 Reactive 프로그램의 스트림즈의 구현체인<br>
+Project Reactor에 대해 공부해보는 시간이다.</p>
+
+<hr>
+
+<h2 id="project-reactor">Project Reactor</h2>
+
+<h3 id="project-reactor-란">Project Reactor 란?</h3>
+
+<p><a href="https://projectreactor.io/">Project Reactor</a> 줄여서 Reactor라고 부른다. 리액티브 스트림즈의 구현체 중 하나로써<br>
+Reactive 기반 Spring Web Application을 만들때 사용하는 핵심기술이다.</p>
+
+<p>리액티브 프로그래밍은 Non-Blocking통신을 지원하며, Non-Blocking이 핵심적인 특징이다. <br>
+간단하게 얘기하지면 요청 쓰레드가 차단이 되지 않는다 정도로 알면될 것 같다.</p>
+
+<p>Publisher 타입으로 Mono[0|1]와 Flux[N]이라는 두 가지 타입을 제공한다.</p>
+
+<p><br></p>
+
+<h3 id="marble-diagram">Marble Diagram</h3>
+
+<p><strong>1). Mono</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNhCC3gMyVY9U2tYfXL1Ugml0_Fey_7uS4w1fYYfafR-twQzcbefQVQDrr0dAmTnmofFKkHwbcguv_pVuYEj0mmm6Hn3g=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>Marble Diagram으로 동그란것 하나를 데이터라 생각하면 쉬울 것 같다.</p>
+
+<p>흐름 순서는 위에 다이어그램을 보면 이해가 쉬울 것 같다. <br>
+Mono 시퀀스가 시작되고 데이터를 emit한다. Mono는 Mono[0|1] 즉, 0건 또는 1의<br>
+데이터만 emit 하는 Reactor 타입이기 때문에 위와 같이 표현되었다.</p>
+
+<p>그리고 Mono 시퀀스가 종료되고, Operator를 통해 데이터가 가공된다.<br>
+그리고 Downstream의 타임라인으로 전달되어<br>
+정의되어있는 해당 시퀀스를 실행하고 종료하게 되어진다.</p>
+
+<p>코드로 보면 이렇게 볼 수 있을 것 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Mono</span>
+                <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span>
+                        <span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">),</span>
+                        <span class="n">error</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span>
+                        <span class="o">()</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Complete"</span><span class="o">)</span>
+                <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 출력</span>
+<span class="no">HELLO</span><span class="o">,</span> <span class="no">REACTIVE</span>
+<span class="nc">Complete</span>
+</code></pre></div></div>
+<p>위에 코드를 보면 <code class="language-plaintext highlighter-rouge">.map();</code>메서드가 Operator의 역할이다.<br>
+<code class="language-plaintext highlighter-rouge">just();</code>에서 데이터를 emit한 후 <code class="language-plaintext highlighter-rouge">.UpperCase();</code> 대문자로 변환시키고 있다.<br>
+그리고 최종적으로 Downstream쪽에서 데이터를 전달해<br>
+<code class="language-plaintext highlighter-rouge">.subscribe();</code> 메서드로 전달받은 데이터를 처리해준 모습을 볼 수 있다.<br>
+해당 상황은 우선 Error가 발생하지 않은 경우를 테스트 해보았다.</p>
+
+<p>이제 만약 Downstream에서 Error가 발생했을 경우<br>
+비정상적인 종료를 한번 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Mono</span>
+                <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span>
+                        <span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">[</span><span class="mi">3</span><span class="o">]),</span>
+                        <span class="n">error</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"! Error : "</span><span class="o">+</span> <span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span>
+                        <span class="o">()</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Complete"</span><span class="o">)</span>
+                <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 출력</span>
+<span class="o">!</span> <span class="nc">Error</span> <span class="o">:</span> <span class="nc">Index</span> <span class="mi">3</span> <span class="n">out</span> <span class="n">of</span> <span class="n">bounds</span> <span class="k">for</span> <span class="n">length</span> <span class="mi">2</span>
+<span class="nc">Complete</span>
+</code></pre></div></div>
+<p>위에 예제 코드를 보면 단순히 String을 배열로 쪼개서<br>
+Downstream으로 넘겨주는 코드이다.<br>
+받았을때 공백기준으로 나눴기때문에 배열방에는 2개만 존재하고<br>
+범위를 벗어나는 데이터를 조회하려고 명령을 내렸을 경우<br>
+error를 처리해주는 메서드를 만들어 표현할 수 있다.</p>
+
+<p><br></p>
+
+<p><strong>2). Flux</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNa2bYw_449zSbZ1QB7bHvPkp-iEamCVUmFSVFMs6xh0U2LZ9zmFCflb1hwKNBcdZqL4xl-pGtpMAa8KWzt3xKEWHHZHA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>기본 적인 흐름은 Mono와 전부 동일하다.<br>
+다른 점은 처리해야할 데이터가 Flux[N]개로<br>
+여러개의 데이터를 emit할 수 있는 모습을 다이어그램에서 볼 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="scheduler">Scheduler</h3>
+
+<p>Reactor에서 Scheduler는 쓰레드를 관리하는 관리자 역할이다.<br>
+즉, Reactor Sequence 상에서 처리되는 동작들을 하나 이상의 쓰레드에서<br>
+동작하도록 별도의 쓰레드를 제공해준다고 생각하면 쉬울 것 같다.</p>
+
+<p>Reactor는 기본적으로 Non-Blocking 통신을 위한 비동프로그래밍을 위해<br>
+탄생했기 때문에 여러 쓰레드를 손쉽게 관리해주는 Scheduler의 역할이 중요하다 할 수 있다.</p>
+
+<p>간단한 코드로 비교예제를 살펴보자
+먼저 Scheduler를 추가하지 않았을 경우를 살펴보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scheduler를 추가하지 않았을 경우</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Flux</span>
+            <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20:51:36.461 [main] DEBUG reactor.util.Loggers - Using Slf4j logging framework
+20:51:36.481 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
+</code></pre></div></div>
+<p>해당 프로그램을 실행시켰을때 콘솔에서 확인할 수 있는 로그이다.<br>
+Scheduler를 추가하지 않고 기존과 동일하게 사용하였고<br>
+여기서 알 수 있는 점은 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드를 사용하고 있다는 점이다.</p>
+
+<p><br></p>
+
+<p>Scheduler를 적용한 코드를 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scheduler를 사용하였을 경우</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="nc">Flux</span>
+                <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">boundedElastic</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">doOnSubscribe</span><span class="o">(</span><span class="n">subscription</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# doOnSubscribe"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
+
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100L</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20:53:19.592 [main] DEBUG reactor.util.Loggers - Using Slf4j logging framework
+20:53:19.623 [main] INFO com.codestates.example.schedulers.SchedulersExample02 - # doOnSubscribe
+20:53:19.630 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
+</code></pre></div></div>
+
+<p>위에 코드는 Scheduler를 사용하였을때의 코드이다.<br>
+첫번째 코드와 차이점은 <code class="language-plaintext highlighter-rouge">subscribeOn();</code>, <code class="language-plaintext highlighter-rouge">doOnSubscribe();</code>  <br>
+Operator를 추가해서 사용을 하고 있다는 점이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">subscribeOn();</code> Operator는 <code class="language-plaintext highlighter-rouge">Schedulers.boundedElastic()</code>와 같은<br>
+Scheduler를 지정하면 구독 직후에 실행되는 쓰레드가 main 쓰레드에서 해당 쓰레드로 변경된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">doOnSubscribe();</code>Operator는 구독 발생 직후에 Trigger되는 Operator로<br>
+구독 직후에 어떤 동작을 수행하고 싶을때 사용하는 Operator이다.</p>
+
+<p>출력 결과를 보면 알 수 있듯이 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드에서 진행 중이던 흐름이<br>
+<code class="language-plaintext highlighter-rouge">[boundedElastic-1]</code> 쓰레드로 변경된 모습을 로그로 확인해 볼 수 있다.</p>
+
+<p><br></p>
+
+<p>마지막으로 예제하나만 더보고 넘어가자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="nc">Flux</span>
+            <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">boundedElastic</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">doOnSubscribe</span><span class="o">(</span><span class="n">subscription</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# doOnSubscribe"</span><span class="o">))</span>
+
+            <span class="o">.</span><span class="na">publishOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">parallel</span><span class="o">())</span>  <span class="c1">// (1)</span>
+            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# filter doOnNext"</span><span class="o">))</span>  <span class="c1">// (2)</span>
+
+            <span class="o">.</span><span class="na">publishOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">parallel</span><span class="o">())</span>    <span class="c1">// (3)</span>
+            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# map doOnNext"</span><span class="o">))</span> <span class="c1">// (4)</span>
+
+            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
+
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100L</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>21:03:32.441 [main] INFO com.codestates.example.schedulers.SchedulersExample - # doOnSubscribe
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
+</code></pre></div></div>
+<p>해당코드가 이전과 다른점은 <code class="language-plaintext highlighter-rouge">publishOn();</code>이라는 Operator가 추가된 예제이다.<br>
+<code class="language-plaintext highlighter-rouge">publishOn();</code>은 <code class="language-plaintext highlighter-rouge">publishOn();</code> 기준으로 Downstream쪽 쓰레드가<br>
+<code class="language-plaintext highlighter-rouge">publishOn();</code>에서 Scheduler로 지정한 쓰레드로 변경이된다. (Schedulers.parallel())</p>
+
+<p><code class="language-plaintext highlighter-rouge">doOnNext();</code> Operator는 바로앞에 위치한 Operaotr가 실행될 때<br>
+Trigger되는 Operator이다. 위에선 filter와 map을 구분짓기위해 사용했다.</p>
+
+<p>콘솔로그에서 볼 수 있듯이 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드에서 <code class="language-plaintext highlighter-rouge">[parallel-2]</code>로 쓰레드가 변경되었고<br>
+<code class="language-plaintext highlighter-rouge">[parallel-1]</code>로 변경된 모습을 볼 수 있다. 내부적으로 <code class="language-plaintext highlighter-rouge">[parallel]</code> 쓰레드의 순서는 보장되지 않는다.</p>
+
+<p><br></p>
+
+<h3 id="operator">Operator</h3>
+
+<p>이전부터 계속 Operator를 사용한는 코드들을 보았다.<br>
+그만큼 Reactor와 Operator를 뗄래야 뗄 수 없는 관계이다.</p>
+
+<p>Operator 관련해서는 사실 지원하는 종류가 너무 많기 때문에<br>
+부가적인 Advance 공부는 추후에 해봐야할 것 같고<br>
+목록만 우선 정리 해놓으려고 한다.</p>
+
+<p>그 중에서 자주사용하고 중요한 것 들을 <span style="color:#CC00CC"><strong>보라색</strong></span>으로 표시해둔다.</p>
+
+<p>✅ <strong>새로운 Sequence를 생성하고자 할 경우 (Creating)</strong></p>
+<ul>
+  <li>just()</li>
+  <li><span style="color:#CC00CC"><strong>fromStream()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>fromIterable()</strong></span></li>
+  <li>fromArray()</li>
+  <li>range()</li>
+  <li>interval()</li>
+  <li>empty()</li>
+  <li>never</li>
+  <li>defer()</li>
+  <li>using()</li>
+  <li>generate()</li>
+  <li><span style="color:#CC00CC"><strong>create()</strong></span></li>
+</ul>
+
+<p>✅ <strong>기존 Sequence에서 변환작업이 필요한 경우 (Transforming)</strong></p>
+<ul>
+  <li><span style="color:#CC00CC"><strong>map()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>flatMap()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>concat()</strong></span></li>
+  <li>collectList()</li>
+  <li>collectMap()</li>
+  <li>merge()</li>
+  <li><span style="color:#CC00CC"><strong>zip()</strong></span></li>
+  <li>the()</li>
+  <li>switchIfEmpty</li>
+  <li>and()</li>
+  <li>when()</li>
+</ul>
+
+<p>✅ <strong>Sequence에서 내부의 동작을 확인하고자 할 경우 (Peeking)</strong></p>
+<ul>
+  <li>doOnSubscribe</li>
+  <li><span style="color:#CC00CC"><strong>doOnNext()</strong></span></li>
+  <li>doOnError()</li>
+  <li>doOnCancel()</li>
+  <li>doFirst()</li>
+  <li>doOnRequest()</li>
+  <li>doOnTerminate()</li>
+  <li>doAfterTerminate()</li>
+  <li>doOnEach()</li>
+  <li>doFinally()</li>
+  <li><span style="color:#CC00CC"><strong>log()</strong></span></li>
+</ul>
+
+<p>✅ <strong>Sequence에서 데이터를 걸러야할 경우 (Filtering)</strong></p>
+<ul>
+  <li><span style="color:#CC00CC"><strong>filter()</strong></span></li>
+  <li>ignoreElements()</li>
+  <li>distinct()</li>
+  <li><span style="color:#CC00CC"><strong>take()</strong></span></li>
+  <li>next()</li>
+  <li>skip()</li>
+  <li>sample()</li>
+  <li>single()</li>
+</ul>
+
+<p>✅ <strong>에러를 처리하고자할 경우 (Handling errors)</strong></p>
+<ul>
+  <li><span style="color:#CC00CC"><strong>error()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>timeout()</strong></span></li>
+  <li>onErrorReturn()</li>
+  <li>onErrorResume()</li>
+  <li>onErrorMap()</li>
+  <li>doFinally()</li>
+  <li><span style="color:#CC00CC"><strong>retry()</strong></span></li>
+</ul>
+
+<p><br></p>
+
+<hr>
+
+<p>오늘은 어제보다 조금더 Spring WebFlux에 대해 알아보았고<br>
+사실 아직 Spring MVC 어떻게 대체해서 사용해야할지 크게<br>
+감이 잡히지는 않는다. 뭔가 Stream API와 비슷한 느낌이 들어 친숙하긴하지만<br>
+개념들이 많이 다른 것 처럼 느껴져서 어렵고 생소했다.</p>
+
+<p>내일 우리가 구현했던 Spring MVC 대신<br>
+Spring WebFlux 기술을 활용해서 한번 적용해보자</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/11/29/til.html" title="TIL) Spring WebFlux Reactive 프로그래밍">TIL) Spring WebFlux Reactive 프로그래밍</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/09/26/til.html" title="">TIL) Java Algorithm BFS, DFS</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="">TIL) Spring Exception 2</a></li>
+<li><a class="post-link" href="/til/2022/11/14/til.html" title="">TIL) API Documentation 2</a></li>
+<li><a class="post-link" href="/spring/2022/11/15/spring-mysql.html" title="">Spring) MySQL Local 연동 하기</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

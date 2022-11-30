@@ -1,4 +1,335 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-29T16:46:11+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring WebFlux Reactive 프로그래밍</title><link href="http://localhost:4000/til/2022/11/29/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux Reactive 프로그래밍" /><published>2022-11-29T00:00:00+09:00</published><updated>2022-11-29T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/29/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/29/til.html"><![CDATA[<p>오늘은 리액티브 프로그래밍에 대해 공부해보는 날이다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-30T21:22:46+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring WebFlux Project Reactor</title><link href="http://localhost:4000/til/2022/11/30/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux Project Reactor" /><published>2022-11-30T00:00:00+09:00</published><updated>2022-11-30T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/30/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/30/til.html"><![CDATA[<p>어느덧 11월의 마지막이 다가왔다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP-V3f78gzYoHWe4BsoYdT3mBXrBTI7YNQJSLWZStK3WDB2VvN0qjzA3GflB1maNYmMaDLa5a3SAqzjBTNSgMxDF3ee=w1185-h921" alt="image" class="align-left" style="max-width: 50%" /></p>
+
+<p>코딩 공부를 시작한게 8월인데 벌써 4개월이 지났다니<br />
+믿기지 않는다.. 그만큼 많이 발전도 했지만<br />
+아직도 많이 부족하다고 느끼기에 시간이 더욱더 간절하게 느껴진다.</p>
+
+<p>오늘은 어제배운 Reactive 프로그램의 스트림즈의 구현체인<br />
+Project Reactor에 대해 공부해보는 시간이다.</p>
+
+<hr />
+
+<h2 id="project-reactor">Project Reactor</h2>
+
+<h3 id="project-reactor-란">Project Reactor 란?</h3>
+
+<p><a href="https://projectreactor.io/">Project Reactor</a> 줄여서 Reactor라고 부른다. 리액티브 스트림즈의 구현체 중 하나로써<br />
+Reactive 기반 Spring Web Application을 만들때 사용하는 핵심기술이다.</p>
+
+<p>리액티브 프로그래밍은 Non-Blocking통신을 지원하며, Non-Blocking이 핵심적인 특징이다. <br />
+간단하게 얘기하지면 요청 쓰레드가 차단이 되지 않는다 정도로 알면될 것 같다.</p>
+
+<p>Publisher 타입으로 Mono[0|1]와 Flux[N]이라는 두 가지 타입을 제공한다.</p>
+
+<p><br /></p>
+
+<h3 id="marble-diagram">Marble Diagram</h3>
+
+<p><strong>1). Mono</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNhCC3gMyVY9U2tYfXL1Ugml0_Fey_7uS4w1fYYfafR-twQzcbefQVQDrr0dAmTnmofFKkHwbcguv_pVuYEj0mmm6Hn3g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Marble Diagram으로 동그란것 하나를 데이터라 생각하면 쉬울 것 같다.</p>
+
+<p>흐름 순서는 위에 다이어그램을 보면 이해가 쉬울 것 같다. <br />
+Mono 시퀀스가 시작되고 데이터를 emit한다. Mono는 Mono[0|1] 즉, 0건 또는 1의<br />
+데이터만 emit 하는 Reactor 타입이기 때문에 위와 같이 표현되었다.</p>
+
+<p>그리고 Mono 시퀀스가 종료되고, Operator를 통해 데이터가 가공된다.<br />
+그리고 Downstream의 타임라인으로 전달되어<br />
+정의되어있는 해당 시퀀스를 실행하고 종료하게 되어진다.</p>
+
+<p>코드로 보면 이렇게 볼 수 있을 것 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Mono</span>
+                <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span>
+                        <span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">),</span>
+                        <span class="n">error</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span>
+                        <span class="o">()</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Complete"</span><span class="o">)</span>
+                <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 출력</span>
+<span class="no">HELLO</span><span class="o">,</span> <span class="no">REACTIVE</span>
+<span class="nc">Complete</span>
+</code></pre></div></div>
+<p>위에 코드를 보면 <code class="language-plaintext highlighter-rouge">.map();</code>메서드가 Operator의 역할이다.<br />
+<code class="language-plaintext highlighter-rouge">just();</code>에서 데이터를 emit한 후 <code class="language-plaintext highlighter-rouge">.UpperCase();</code> 대문자로 변환시키고 있다.<br />
+그리고 최종적으로 Downstream쪽에서 데이터를 전달해<br />
+<code class="language-plaintext highlighter-rouge">.subscribe();</code> 메서드로 전달받은 데이터를 처리해준 모습을 볼 수 있다.<br />
+해당 상황은 우선 Error가 발생하지 않은 경우를 테스트 해보았다.</p>
+
+<p>이제 만약 Downstream에서 Error가 발생했을 경우<br />
+비정상적인 종료를 한번 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Mono</span>
+                <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span>
+                        <span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">[</span><span class="mi">3</span><span class="o">]),</span>
+                        <span class="n">error</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"! Error : "</span><span class="o">+</span> <span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span>
+                        <span class="o">()</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Complete"</span><span class="o">)</span>
+                <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 출력</span>
+<span class="o">!</span> <span class="nc">Error</span> <span class="o">:</span> <span class="nc">Index</span> <span class="mi">3</span> <span class="n">out</span> <span class="n">of</span> <span class="n">bounds</span> <span class="k">for</span> <span class="n">length</span> <span class="mi">2</span>
+<span class="nc">Complete</span>
+</code></pre></div></div>
+<p>위에 예제 코드를 보면 단순히 String을 배열로 쪼개서<br />
+Downstream으로 넘겨주는 코드이다.<br />
+받았을때 공백기준으로 나눴기때문에 배열방에는 2개만 존재하고<br />
+범위를 벗어나는 데이터를 조회하려고 명령을 내렸을 경우<br />
+error를 처리해주는 메서드를 만들어 표현할 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>2). Flux</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNa2bYw_449zSbZ1QB7bHvPkp-iEamCVUmFSVFMs6xh0U2LZ9zmFCflb1hwKNBcdZqL4xl-pGtpMAa8KWzt3xKEWHHZHA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>기본 적인 흐름은 Mono와 전부 동일하다.<br />
+다른 점은 처리해야할 데이터가 Flux[N]개로<br />
+여러개의 데이터를 emit할 수 있는 모습을 다이어그램에서 볼 수 있다.</p>
+
+<p><br /></p>
+
+<h3 id="scheduler">Scheduler</h3>
+
+<p>Reactor에서 Scheduler는 쓰레드를 관리하는 관리자 역할이다.<br />
+즉, Reactor Sequence 상에서 처리되는 동작들을 하나 이상의 쓰레드에서<br />
+동작하도록 별도의 쓰레드를 제공해준다고 생각하면 쉬울 것 같다.</p>
+
+<p>Reactor는 기본적으로 Non-Blocking 통신을 위한 비동프로그래밍을 위해<br />
+탄생했기 때문에 여러 쓰레드를 손쉽게 관리해주는 Scheduler의 역할이 중요하다 할 수 있다.</p>
+
+<p>간단한 코드로 비교예제를 살펴보자
+먼저 Scheduler를 추가하지 않았을 경우를 살펴보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scheduler를 추가하지 않았을 경우</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Flux</span>
+            <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20:51:36.461 [main] DEBUG reactor.util.Loggers - Using Slf4j logging framework
+20:51:36.481 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
+20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
+</code></pre></div></div>
+<p>해당 프로그램을 실행시켰을때 콘솔에서 확인할 수 있는 로그이다.<br />
+Scheduler를 추가하지 않고 기존과 동일하게 사용하였고<br />
+여기서 알 수 있는 점은 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드를 사용하고 있다는 점이다.</p>
+
+<p><br /></p>
+
+<p>Scheduler를 적용한 코드를 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scheduler를 사용하였을 경우</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="nc">Flux</span>
+                <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">boundedElastic</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">doOnSubscribe</span><span class="o">(</span><span class="n">subscription</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# doOnSubscribe"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
+
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100L</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20:53:19.592 [main] DEBUG reactor.util.Loggers - Using Slf4j logging framework
+20:53:19.623 [main] INFO com.codestates.example.schedulers.SchedulersExample02 - # doOnSubscribe
+20:53:19.630 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
+20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
+</code></pre></div></div>
+
+<p>위에 코드는 Scheduler를 사용하였을때의 코드이다.<br />
+첫번째 코드와 차이점은 <code class="language-plaintext highlighter-rouge">subscribeOn();</code>, <code class="language-plaintext highlighter-rouge">doOnSubscribe();</code>  <br />
+Operator를 추가해서 사용을 하고 있다는 점이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">subscribeOn();</code> Operator는 <code class="language-plaintext highlighter-rouge">Schedulers.boundedElastic()</code>와 같은<br />
+Scheduler를 지정하면 구독 직후에 실행되는 쓰레드가 main 쓰레드에서 해당 쓰레드로 변경된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">doOnSubscribe();</code>Operator는 구독 발생 직후에 Trigger되는 Operator로<br />
+구독 직후에 어떤 동작을 수행하고 싶을때 사용하는 Operator이다.</p>
+
+<p>출력 결과를 보면 알 수 있듯이 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드에서 진행 중이던 흐름이<br />
+<code class="language-plaintext highlighter-rouge">[boundedElastic-1]</code> 쓰레드로 변경된 모습을 로그로 확인해 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p>마지막으로 예제하나만 더보고 넘어가자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="nc">Flux</span>
+            <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">boundedElastic</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">doOnSubscribe</span><span class="o">(</span><span class="n">subscription</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# doOnSubscribe"</span><span class="o">))</span>
+
+            <span class="o">.</span><span class="na">publishOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">parallel</span><span class="o">())</span>  <span class="c1">// (1)</span>
+            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# filter doOnNext"</span><span class="o">))</span>  <span class="c1">// (2)</span>
+
+            <span class="o">.</span><span class="na">publishOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">parallel</span><span class="o">())</span>    <span class="c1">// (3)</span>
+            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# map doOnNext"</span><span class="o">))</span> <span class="c1">// (4)</span>
+
+            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
+
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100L</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>21:03:32.441 [main] INFO com.codestates.example.schedulers.SchedulersExample - # doOnSubscribe
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
+21:03:32.448 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
+21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
+</code></pre></div></div>
+<p>해당코드가 이전과 다른점은 <code class="language-plaintext highlighter-rouge">publishOn();</code>이라는 Operator가 추가된 예제이다.<br />
+<code class="language-plaintext highlighter-rouge">publishOn();</code>은 <code class="language-plaintext highlighter-rouge">publishOn();</code> 기준으로 Downstream쪽 쓰레드가<br />
+<code class="language-plaintext highlighter-rouge">publishOn();</code>에서 Scheduler로 지정한 쓰레드로 변경이된다. (Schedulers.parallel())</p>
+
+<p><code class="language-plaintext highlighter-rouge">doOnNext();</code> Operator는 바로앞에 위치한 Operaotr가 실행될 때<br />
+Trigger되는 Operator이다. 위에선 filter와 map을 구분짓기위해 사용했다.</p>
+
+<p>콘솔로그에서 볼 수 있듯이 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드에서 <code class="language-plaintext highlighter-rouge">[parallel-2]</code>로 쓰레드가 변경되었고<br />
+<code class="language-plaintext highlighter-rouge">[parallel-1]</code>로 변경된 모습을 볼 수 있다. 내부적으로 <code class="language-plaintext highlighter-rouge">[parallel]</code> 쓰레드의 순서는 보장되지 않는다.</p>
+
+<p><br /></p>
+
+<h3 id="operator">Operator</h3>
+
+<p>이전부터 계속 Operator를 사용한는 코드들을 보았다.<br />
+그만큼 Reactor와 Operator를 뗄래야 뗄 수 없는 관계이다.</p>
+
+<p>Operator 관련해서는 사실 지원하는 종류가 너무 많기 때문에<br />
+부가적인 Advance 공부는 추후에 해봐야할 것 같고<br />
+목록만 우선 정리 해놓으려고 한다.</p>
+
+<p>그 중에서 자주사용하고 중요한 것 들을 <span style="color:#CC00CC"><strong>보라색</strong></span>으로 표시해둔다.</p>
+
+<p>✅ <strong>새로운 Sequence를 생성하고자 할 경우 (Creating)</strong></p>
+<ul>
+  <li>just()</li>
+  <li><span style="color:#CC00CC"><strong>fromStream()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>fromIterable()</strong></span></li>
+  <li>fromArray()</li>
+  <li>range()</li>
+  <li>interval()</li>
+  <li>empty()</li>
+  <li>never</li>
+  <li>defer()</li>
+  <li>using()</li>
+  <li>generate()</li>
+  <li><span style="color:#CC00CC"><strong>create()</strong></span></li>
+</ul>
+
+<p>✅ <strong>기존 Sequence에서 변환작업이 필요한 경우 (Transforming)</strong></p>
+<ul>
+  <li><span style="color:#CC00CC"><strong>map()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>flatMap()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>concat()</strong></span></li>
+  <li>collectList()</li>
+  <li>collectMap()</li>
+  <li>merge()</li>
+  <li><span style="color:#CC00CC"><strong>zip()</strong></span></li>
+  <li>the()</li>
+  <li>switchIfEmpty</li>
+  <li>and()</li>
+  <li>when()</li>
+</ul>
+
+<p>✅ <strong>Sequence에서 내부의 동작을 확인하고자 할 경우 (Peeking)</strong></p>
+<ul>
+  <li>doOnSubscribe</li>
+  <li><span style="color:#CC00CC"><strong>doOnNext()</strong></span></li>
+  <li>doOnError()</li>
+  <li>doOnCancel()</li>
+  <li>doFirst()</li>
+  <li>doOnRequest()</li>
+  <li>doOnTerminate()</li>
+  <li>doAfterTerminate()</li>
+  <li>doOnEach()</li>
+  <li>doFinally()</li>
+  <li><span style="color:#CC00CC"><strong>log()</strong></span></li>
+</ul>
+
+<p>✅ <strong>Sequence에서 데이터를 걸러야할 경우 (Filtering)</strong></p>
+<ul>
+  <li><span style="color:#CC00CC"><strong>filter()</strong></span></li>
+  <li>ignoreElements()</li>
+  <li>distinct()</li>
+  <li><span style="color:#CC00CC"><strong>take()</strong></span></li>
+  <li>next()</li>
+  <li>skip()</li>
+  <li>sample()</li>
+  <li>single()</li>
+</ul>
+
+<p>✅ <strong>에러를 처리하고자할 경우 (Handling errors)</strong></p>
+<ul>
+  <li><span style="color:#CC00CC"><strong>error()</strong></span></li>
+  <li><span style="color:#CC00CC"><strong>timeout()</strong></span></li>
+  <li>onErrorReturn()</li>
+  <li>onErrorResume()</li>
+  <li>onErrorMap()</li>
+  <li>doFinally()</li>
+  <li><span style="color:#CC00CC"><strong>retry()</strong></span></li>
+</ul>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 어제보다 조금더 Spring WebFlux에 대해 알아보았고<br />
+사실 아직 Spring MVC 어떻게 대체해서 사용해야할지 크게<br />
+감이 잡히지는 않는다. 뭔가 Stream API와 비슷한 느낌이 들어 친숙하긴하지만<br />
+개념들이 많이 다른 것 처럼 느껴져서 어렵고 생소했다.</p>
+
+<p>내일 우리가 구현했던 Spring MVC 대신<br />
+Spring WebFlux 기술을 활용해서 한번 적용해보자</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 11월의 마지막이 다가왔다.]]></summary></entry><entry><title type="html">TIL) Spring WebFlux Reactive 프로그래밍</title><link href="http://localhost:4000/til/2022/11/29/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux Reactive 프로그래밍" /><published>2022-11-29T00:00:00+09:00</published><updated>2022-11-29T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/29/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/29/til.html"><![CDATA[<p>오늘은 리액티브 프로그래밍에 대해 공부해보는 날이다.<br />
 아마 깊은 내용은 다루지 않고, 간단한 지식들만 공부 할 것 같다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOLvm3Tcr7jOo11hO8F_VEjXkI7bN97rGtSVrf1Ti3xqf3ZQe4jQOr1kpMnycZ3ZuOxgeCDU8X3g9guLl8uMN_t1zRm8Q=w1185-h864" alt="image" class="align-left" style="max-width: 30%" /></p>
@@ -2811,656 +3142,4 @@ HttpSession을 생성하지 않고 무상태를 유지하기도 한다.</p>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 된장찌개, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.]]></summary></entry><entry><title type="html">TIL) Spring Security 1 (기초)</title><link href="http://localhost:4000/til/2022/11/18/til.html" rel="alternate" type="text/html" title="TIL) Spring Security 1 (기초)" /><published>2022-11-18T00:00:00+09:00</published><updated>2022-11-18T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/18/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/18/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMbi5KBKT2qUujSToFzrlGZ8riZgXZWFRWl1il4pHA0AlwRLqDL1ROTXlmdEytfEfxx0rpCo3VI8iZTbovSWK60aVBtSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>예전보다 월-금 시간이 정말 빨리간다.<br />
-그만큼 공부하는 시간을 즐기고 있으니 시간도 빨리가는 것 같다.</p>
-
-<p>오늘도 이번주의 마지막이니 만큼<br />
-더 집중해서 공부해보자 !</p>
-
-<hr />
-
-<p>오늘은 Spring Security에 대해 공부하는 날이다.<br />
-다음주에도 계속 공부할 것 같고<br />
-오늘은 기본 구조와 웹 요청 처리 흐름에대해 공부해보려한다.</p>
-
-<h2 id="spring-security">Spring Security</h2>
-
-<p><strong>Spring Security란 ?</strong><br />
-Spring MVC 기반 애플리케이션의 인증,인가 기능을<br />
-지원하는 보안 프레임워크이다.</p>
-
-<p>Interceptor나 Servlet Filter과 같은 보안 기능을<br />
-직접 구현할 수 있지만 Spring Security에서 안정적으로 지원하고 있기 때문에<br />
-Spring MVC를 기반으로한다면 Spring Security를 이용하는게 안전한 선택이라 할 수 있다.</p>
-
-<p><strong>스프링 시큐리티를 이용한다면 ?</strong></p>
-<ol>
-  <li>다양한 유형의 사용자 인증 기능 적용 가능 (폼 로그인, 토큰, OAuth 2기반 인증)</li>
-  <li>애플리케이션 사용자의 역할에 따른 권한 레벨 적용</li>
-  <li>애플리케이션에서 제공하는 리소스 대한 접근 제어</li>
-  <li>민감한 정보에 대한 데이터 암호화</li>
-  <li>일반적으로 알려진 웹 보안 공격 차단</li>
-</ol>
-
-<p>스프링 시큐리티 관련 용어를 미리 숙지하고 <br />
-본격적인 내용을 살펴보면 도움이 될 것이다.</p>
-<ol>
-  <li><strong>Principal (주체)</strong><br />
--&gt; 애플리케이션에서 작업을 수행할 수 있는 사용자,디바이스,시스템 등이 될 수 있다.<br />
-인증 프로세스가 성공적으로 수행된 사용자의 계정 정보를 의미함.</li>
-  <li><strong>Authentication (인증)</strong><br />
--&gt; 애플리케이션을 사용하는 사용자가 본인이 맞음을 증명하는 절차</li>
-  <li><strong>Authorization (인가)</strong><br />
--&gt; 인증이 정상적으로 수행된 사용자에게 하나 이상의 권한을 부여함.<br />
-특정 애플리케이션에 특정 리소스에 접근할 수 있게 허가하는 과정을 의미한다.</li>
-  <li><strong>Access Control (접근제어)</strong><br />
--&gt; 사용자가 애플리케이션의 리소스에 접근하는 행위를 제어하는 것을 의미한다.</li>
-  <li><strong>Credential (신원 증명정보)</strong><br />
--&gt; 인증을 정상적으로 수행하기 위해서 식별하기 위한 정보.</li>
-</ol>
-
-<p><br /></p>
-
-<h3 id="spring-security-흐름">Spring Security 흐름</h3>
-
-<p>사용해보기에 앞서<br />
-SSR방식으로 테스트를 진행할 예정이다.<br />
-별도의 html을 만들어서 테스트를 진행했고<br />
-Form Login 방식으로 테스트를 진행했다.</p>
-
-<p>간단한 스프링 시큐리티의 보안 적용 흐름을 알고 넘어가보자.<br />
-우리는 보통 웹에서 요청을 보내면 EndPoint를 거쳐 리소스에 접근을 한다.</p>
-
-<p>Servlet 기반의 애플리케이션일 경우 EndPoint에 요청이 도달하기전에 요청을 가로챈 후  <br />
-어떤 처리를 할 수 있는 적절한 포인트를 제공해줄 수 있는 API가 있다.<br />
-그것은 바로 Servlet Filter이다.</p>
-
-<p>Servlet Filter를 잠깐 정리하자면</p>
-<ol>
-  <li>Java에서 Interface형태로 제공하는 API이다.</li>
-  <li>웹요청을 가로채 전처리, 응답을 전달하기전 후처리를 할 수 있다.</li>
-</ol>
-
-<p>이러한 Servlet Filter는 하나 이상의 필터들을 연결해<br />
-Filter Chain을 구성할 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOgZKwDg4Q2Nju5ltzUyuDISAyDNnWwDlA-x9U3zTRmZq0JpKZx5Q6Qg95NA9nMQoOQuuyyURwFi0LI-XHIUlnGlFw3Ew=w3024-h1620" alt="image" class="align-left" style="max-width: 40%" /><br />
-출처 - <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security 레퍼런스</a></p>
-
-<p><br /></p>
-
-<p>Filter Chain의 Filter들은 우리가 구현한 작업들을 실행한 후에<br />
-HttpServlet을 거쳐 DispatcherServlet에 요청이 전달되어진다.</p>
-
-<p>DispatcherServlet은 Spring MVC 계층구조할때 많이 보았을 것이다.<br />
-클라이언트에서 받은 모든 요청을 적합한 컨트롤러에 위임해주는<br />
-Spring MVC에서 아주 중요한 역할을 가지고 있는 녀석이였다.</p>
-
-<p>여하튼 우리가 알아야할 핵심은 DispatcherServlet에 도달하기 전에<br />
-Servlet Filter가 가로챈다는 것이다.</p>
-
-<p><br /></p>
-
-<p>그럼 Spring Security와 Servlet Filter와 어떠한 관계가 있냐?</p>
-
-<p>Spring Security에서는 보안과 관련된 Filter를 이용해 <br />
-클라이언트에 요청을 중간에 가로챈 뒤 추가적으로 작업을 할 수 있도록 도와준다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMdhZrHIw8wm0G_zG7eQgHqqNnxZhifIy-8Y1taID3Id73Ik4ScIIQt6oclNltVUbpDmsfKO-prb1xGOdVcuLX7eJCA7A=w3024-h1620" alt="image" class="align-left" style="max-width: 70%" /><br />
-출처 - <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security 레퍼런스</a></p>
-
-<p><br /></p>
-
-<p>그것을 도와주는 클래스들이 바로 위에있는 아키텍쳐에서 보는<br />
-DelegatingFilterProxy와 FilterChainProxy이다. <br />
-해당 클래스들은 Filter 인터페이스를 구현하고 있어<br />
-Servlet Filter로써의 역할을 수행해한다.</p>
-
-<p>DelegatingFilterProxy는 Servlet Container 영의 Filter와<br />
-ApplicationContext에 Bean으로 등록된 Filter들을 연결해주는 역할을 가진다.</p>
-
-<p>FilterChainProxy는 Spring Security를 사용하기 위한 진입점이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNcZKkvVUXMS9csndq0ceE71GN1u2pu7EDH5twxx0Grcg4f36ZzPqvVnHu73GrKupyuIf_iKM3qR7WVa328iuXmCWqZjQ=w3024-h1620" alt="image" class="align-left" style="max-width: 80%" /><br />
-출처 - <a href="https://docs.spring.io/spring-security/reference/servlet/architecture.html">Spring Security 레퍼런스</a></p>
-
-<p><br /></p>
-
-<p>위의 그림에서 보듯이 Spring Security의 Filter Chain으로 <br />
-보안을 위한 작업을 처리하는 필터의 모음을 만들면 <br />
-FilterChainProxy로 부터 해당 Filter들을 시작할 수 있게되어진다.</p>
-
-<p>한마디로 FilterChainProxy부터 Spring Security에서 제공하는<br />
-보안 Filter들이 필요한 작업을 수행해주게 도와주는 클래스라 보면된다.</p>
-
-<p><br /></p>
-
-<h3 id="spring-security-연습해보기">Spring Security 연습해보기</h3>
-
-<p>위의 Spring Security 요청 흐름에 대해 어느정도<br />
-이해가 되었다면, 아래 코드들을 보고<br />
-어느 부분인지 정확히는 몰라도 흐름은 파악이 가능하다.</p>
-
-<p>우선 Spring Security를 사용하기 위한 의존라이브러리를 추가해야한다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">security</span><span class="err">'</span>
-</code></pre></div></div>
-<p>build.gradle에 의존라이브러를 추가시켜 놓으면 준비 끝이다.</p>
-
-<p>처음으로 우선 위에서 보았던<br />
-SecurityFilterChain을 구성해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfiguration</span> <span class="o">{</span>
-    
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="n">http</span>
-                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// csrf 공격에 대한 설정 비활성화</span>
-                <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span><span class="c1">// Form 로그인 인증 방법</span>
-                <span class="o">.</span><span class="na">loginPage</span><span class="o">(</span><span class="s">"/auths/login-form"</span><span class="o">)</span> <span class="c1">// 로그인 커스텀 페이지 설정 (우리가만든 경로설정)</span>
-                <span class="o">.</span><span class="na">loginProcessingUrl</span><span class="o">(</span><span class="s">"/process_login"</span><span class="o">)</span><span class="c1">// 인증요청을 수행할 요청 URL 설정 (html form태그에서 요청)</span>
-                <span class="o">.</span><span class="na">failureUrl</span><span class="o">(</span><span class="s">"/auths/login-form?error"</span><span class="o">)</span><span class="c1">// 실패시 리다이렉트할 URL 지정</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
-                <span class="o">.</span><span class="na">logout</span><span class="o">()</span> <span class="c1">// 로그아웃 설정위한 LogoutConfigurer를 리턴해줌</span>
-                <span class="o">.</span><span class="na">logoutUrl</span><span class="o">(</span><span class="s">"/logout"</span><span class="o">)</span> <span class="c1">// 로그아웃 요청 url 설정 (html form태그에서 요청)</span>
-                <span class="o">.</span><span class="na">logoutSuccessUrl</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="c1">// 성공시 리다이렉트할 장소</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
-                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">().</span><span class="na">accessDeniedPage</span><span class="o">(</span><span class="s">"/auths/access-denied"</span><span class="o">)</span> <span class="c1">// 권한이 없을때 보낼 요청</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
-                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorize</span> <span class="o">-&gt;</span>
-                        <span class="n">authorize</span><span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/orders/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span> <span class="c1">// 해당 경로에 ADMIN 권한만 접근가능</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/members/my-page"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span> <span class="c1">// 해당 경로에 USER 권한만 접근가능</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span> <span class="c1">// 앞에지정한 URL을 제외한것 접근 모두가능</span>
-                <span class="o">);</span>
-<span class="c1">//                .authorizeHttpRequests() // 클라이언트의 요청이 들어오면 접근권한을 확인하겠다고 정의</span>
-<span class="c1">//                .anyRequest() // 클라이언트의 모든 요청에 대해 접근을 허용</span>
-<span class="c1">//                .permitAll(); // 클라이언트의 모든 요청에 대해 접근을 허용</span>
-        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>기본적인 구성방법은 SecurityFilterChain 클래스 타입을 반환하는<br />
-메서드를 하나 만들어 filter의 정보를 넣어주는 것이다.<br />
-그리고 해당 메서드를 Spring Container에 Bean으로 담아주면된다.</p>
-
-<p>빈으로 담아주면 아까 위에서 얘기했던<br />
-DelegatingFilterProxy 클래스에 의해<br />
-서블릿 컨테이너 영역의 필터와 스프링 컨테이너의 빈으로 등록된 필터를<br />
-연결해주는 브릿가 생긴다고 예상해볼 수 있을 것 같다.</p>
-
-<p>그리고 SSR방식의 FormLogin을 사용한다고 가정했으니<br />
-첫번째 필터로는 로그인에 해당하는 내용들  <br />
-두번째 필터로는 로그아웃에 해당하는 내용들 <br />
-세번째로는 권한이 없을때 처리하는 내용<br />
-네번째로는 클라이언트 요청에따른 권한 설정에 대한 내용<br />
-이렇게 각각 필터들을 하나의 필터체인으로 .build(); 하여 반환하면<br />
-해당 내용에 따라 인증과 권한 부여가 이루어질 수 있다.</p>
-
-<p><br /></p>
-
-<h4 id="in-memory로-인증-해보기">In Memory로 인증 해보기</h4>
-
-<p>DB를 이용하지 않는 인증방법을 한번 연습해보자</p>
-
-<p><strong><span style="color:#F04965"> 1). 단순하게 고정해서 등록해 인증과 권한을 주는 방식 </span></strong></p>
-
-<p>SecurityConfiguration 클래스 아래에 <br />
-UserDetailsManager 반환하는 Bean 객체를 만들어주었다.</p>
-
-<p>UserDetailsManager 라는 인터페이스를 <br />
-구현한 객체를 Bean으로 등록해주면 해당 정보로 등록된<br />
-사용자들은 정보에 해당하는 인증과 권한을 가지게 된다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Bean</span>
- <span class="kd">public</span> <span class="nc">UserDetailsManager</span> <span class="nf">userDetailsService</span><span class="o">(){</span>
-     <span class="nc">UserDetails</span> <span class="n">user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">.</span><span class="na">withDefaultPasswordEncoder</span><span class="o">()</span> <span class="c1">// password 암호화</span>
-             <span class="o">.</span><span class="na">username</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">)</span> <span class="c1">// 식별하는 사용자 아이디 값</span>
-             <span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="s">"1111"</span><span class="o">)</span>
-             <span class="o">.</span><span class="na">roles</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span> <span class="c1">// 권한지정</span>
-             <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-     <span class="nc">UserDetails</span> <span class="n">admin</span> <span class="o">=</span> <span class="nc">User</span><span class="o">.</span><span class="na">withDefaultPasswordEncoder</span><span class="o">()</span>
-             <span class="o">.</span><span class="na">username</span><span class="o">(</span><span class="s">"admin@naver.com"</span><span class="o">)</span>
-             <span class="o">.</span><span class="na">password</span><span class="o">(</span><span class="s">"2222"</span><span class="o">)</span>
-             <span class="o">.</span><span class="na">roles</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span>
-             <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-
-     <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryUserDetailsManager</span><span class="o">(</span><span class="n">user</span><span class="o">,</span><span class="n">admin</span><span class="o">);</span>
- <span class="o">}</span>
-</code></pre></div></div>
-<p>InMemoryUserDetailsManager 구현체로 구성 정보를 넘겨주면 된다.<br />
-구성 정보를 만드는 방법은 UserDetails 인터페이스를 상속받는<br />
-User 클래스를 이용해 만들 수있다.</p>
-
-<p>만약 클라이언트에서 form login 방식으로 로그인 요청이 온다면<br />
-해당 구성정보를 가진 사용자는 로그인이 되며<br />
-권한을 각각 USER, ADMIN으로 부여받게 되어진다.</p>
-
-<p>위에 있는 정보는 DB를 이용한 것도 아니며<br />
-단순하게 UserDetailsManager 타입의 Bean을 만들어 주 었을 뿐인데<br />
-Spring Security는 해당 정보를 가진 사용자가 로그인을 하면<br />
-인증을 해주고 권한을 부여해줄 수 있는 것이다.</p>
-
-<p>여기서 <strong>User.withDefaultPasswordEncoder()</strong> 메서드를 사용하면<br />
-bcrypt 방식으로 password를 암호화해준다. 즉, 1111,2222로 들어온 값을<br />
-암호화하여 관리를 한다는 의미이다.</p>
-
-<p>만약 코드로 치게된다면 <strong>Deprecated</strong> 상태로 변하는데 (가운데줄 쳐짐)<br />
-해당 API는 권장하지 않는다는 뜻이다. 이 경우에는 고정으로 사용하고 있기에<br />
-고정해서 사용하지 말라는 의미에서 Deprecated로 변한 것을 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong><span style="color:#F04965"> 2). 회원 가입을 이용해 등록하기 </span></strong></p>
-
-<p>기본적으로 password를 암호화를 해야한다.<br />
-암호화를 하기위해 위에서 이용했던 bcrpty 방식으로 암호화를 <br />
-도와주는 API가 있다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cm">/*
- * PasswordEncoder Bean 등록
- * 암호화를 해야한다. Spring Security에서 지원하는 Default = bcrypt
- * */</span>
- <span class="nd">@Bean</span>
- <span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">(){</span>
-     <span class="k">return</span> <span class="nc">PasswordEncoderFactories</span><span class="o">.</span><span class="na">createDelegatingPasswordEncoder</span><span class="o">();</span>
- <span class="o">}</span>
-</code></pre></div></div>
-<p>SecurityConfiguration 클래스에<br />
-PasswordEncoder 인터페이스 타입 객체를 Bean으로 등록해주고<br />
-회원가입시 사용할 수있다.</p>
-
-<p>회원가입할 경우 Controller는 구성되어 있다고 가정하고<br />
-Service 코드를 확인해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
-*  InMemory 사용을 위한 빈주입
-* */</span>
-<span class="c1">//@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV1</span> <span class="o">{</span>
-
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">inMemoryMemberService</span><span class="o">(</span><span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="n">userDetailsManager</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>MemberService라는 인터페이스 타입으로 객체를 Bean으로 등록해준다.</p>
-
-<p>InMemoryMemberSerivce에 우리가 이용해야할<br />
-UserDetailsManager와 PasswordEncoder를 매개변수로 넣어<br />
-생성자로 반환하게 되어진다.</p>
-
-<p>그럼 Bean으로 InMemoryMemberService을 구현체로<br />
-의존성 주입하여 Controller에서 이용이 가능하다..</p>
-
-<p><br /></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InMemoryMemberService</span> <span class="kd">implements</span> <span class="nc">MemberService</span> <span class="o">{</span>
-
-   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">;</span>
-
-   <span class="kd">public</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">this</span><span class="o">.</span><span class="na">userDetailsManager</span> <span class="o">=</span> <span class="n">userDetailsManager</span><span class="o">;</span>
-      <span class="k">this</span><span class="o">.</span><span class="na">passwordEncoder</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">;</span>
-   <span class="o">}</span>
-
-   <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">createMember</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
-
-      <span class="nc">List</span><span class="o">&lt;</span><span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="n">createAuthorities</span><span class="o">(</span><span class="nc">Member</span><span class="o">.</span><span class="na">MemberRole</span><span class="o">.</span><span class="na">ROLE_USER</span><span class="o">.</span><span class="na">name</span><span class="o">());</span> <span class="c1">// 권한 USER로 설정</span>
-
-      <span class="nc">String</span> <span class="n">encryptedPassword</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span> <span class="c1">// 비밀번호 암호화 진행</span>
-
-      <span class="nc">UserDetails</span> <span class="n">userDetails</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span> <span class="n">encryptedPassword</span><span class="o">,</span> <span class="n">authorities</span><span class="o">);</span> <span class="c1">// username, password, 권한 정보로 유저 생성</span>
-      <span class="n">userDetailsManager</span><span class="o">.</span><span class="na">createUser</span><span class="o">(</span><span class="n">userDetails</span><span class="o">);</span> <span class="c1">// 생성한 유저정보 등록</span>
-
-      <span class="k">return</span> <span class="n">member</span><span class="o">;</span>
-   <span class="o">}</span>
-
-   <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="nf">createAuthorities</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">roles</span><span class="o">)</span> <span class="o">{</span>
-
-      <span class="k">return</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">roles</span><span class="o">)</span>
-              <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">role</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">SimpleGrantedAuthority</span><span class="o">(</span><span class="n">role</span><span class="o">))</span>
-              <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>여기서 회원가입을 위한 서비스 로직 createMember <br />
-안의 내용을 들여다보면된다.</p>
-
-<p>첫번째로 권한에 대한 내용을 설정하기위해<br />
-new SimpleGrantedAuthority();을 이용해 객체를<br />
-List 형태로 담아둔 authorities를 만들었다.</p>
-
-<p>두번째로 암호화를 위해 DI받은 passwordEncoder의 메서드인<br />
-.encode();를 이용해 비밀번호를 넘겨줘<br />
-bcrypt 방식으로 암호화하여 String 타입으로 받아두었다.</p>
-
-<p>마지막으로 new User();를 이용해<br />
-위에서 고정으로 구성정보를 구성한 것 처럼</p>
-
-<p>username, password, roles를 생성자로 넘겨<br />
-UserDetails 타입의 객체로 만들어<br />
-위에서 DI 받은 userDetailsManger의 메서드<br />
-createUser();의 매개변수로 넘겨주게 되면<br />
-회원 가입을 할때 해당 정보를 가진 Member가 인증과 권한정보를<br />
-가지게되어 로그인할때 해당 정보를 가진 사용자가 로그인을 한다면<br />
-인증이되어 설정한 ROLE_USER 권한으로 이용이 가능하게되어진다.</p>
-
-<p><br />
-<br /></p>
-
-<p><strong><span style="color:#0066CC"> 위의 1,2번을 한마디로 정리 해보자면 !! </span></strong></p>
-
-<p>UserDetails 객체를 만들어 줘야한다.<br />
-그리고 그 객체를 이용해 UserDetailsManager의 구현체인<br />
-InMemoryUserDetailsManager .createUser(); 메서드에<br />
-매개변수로 UserDetails 객체를 넘겨주는게 끝이다 !</p>
-
-<p><br /></p>
-
-<h4 id="h2-db로-인증-해보기">H2 DB로 인증 해보기</h4>
-
-<p>위에서 UserDetailsManager를 이용해 인증과 권한을 가졌다면</p>
-
-<p>DB를 이용하기 위해서는 UserDetailsService 인터페이스를 이용해야한다.<br />
-UserDetailsManager가 UserDetailsService를 상속받은 관계이다.</p>
-
-<p>우선 H2 DB 설정과 관련된 부분은 되어있다고 가정하겠다. <br />
-문제없이 H2 DataBase를 사용하기 위해서는<br />
-기존에 설정했던 SecurityFilterChain에서 한가지 Filter를 추가해줘야한다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfiguration</span> <span class="o">{</span>
-    
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="n">http</span>
-                <span class="o">.</span><span class="na">headers</span><span class="o">().</span><span class="na">frameOptions</span><span class="o">().</span><span class="na">sameOrigin</span><span class="o">()</span>  <span class="c1">// &lt;frame&gt; 태그등 렌더링여부 설정, 동일 출처로부터 들어오는 request만 렌더링허용 , H2 사용을 위함</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
-                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// csrf 공격에 대한 설정 비활성화</span>
-                <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span><span class="c1">// Form 로그인 인증 방법</span>
-                <span class="o">.</span><span class="na">loginPage</span><span class="o">(</span><span class="s">"/auths/login-form"</span><span class="o">)</span> <span class="c1">// 로그인 커스텀 페이지 설정 (우리가만든 경로설정)</span>
-                <span class="o">.</span><span class="na">loginProcessingUrl</span><span class="o">(</span><span class="s">"/process_login"</span><span class="o">)</span><span class="c1">// 인증요청을 수행할 요청 URL 설정 (html form태그에서 요청)</span>
-                <span class="o">.</span><span class="na">failureUrl</span><span class="o">(</span><span class="s">"/auths/login-form?error"</span><span class="o">)</span><span class="c1">// 실패시 리다이렉트할 URL 지정</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
-                <span class="o">.</span><span class="na">logout</span><span class="o">()</span> <span class="c1">// 로그아웃 설정위한 LogoutConfigurer를 리턴해줌</span>
-                <span class="o">.</span><span class="na">logoutUrl</span><span class="o">(</span><span class="s">"/logout"</span><span class="o">)</span> <span class="c1">// 로그아웃 요청 url 설정 (html form태그에서 요청)</span>
-                <span class="o">.</span><span class="na">logoutSuccessUrl</span><span class="o">(</span><span class="s">"/"</span><span class="o">)</span> <span class="c1">// 성공시 리다이렉트할 장소</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
-                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">().</span><span class="na">accessDeniedPage</span><span class="o">(</span><span class="s">"/auths/access-denied"</span><span class="o">)</span> <span class="c1">// 권한이 없을때 보낼 요청</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 보안설정을 메서드 체인형태로 구성하게 도와줌</span>
-                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorize</span> <span class="o">-&gt;</span>
-                        <span class="n">authorize</span><span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/orders/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span> <span class="c1">// 해당 경로에 ADMIN 권한만 접근가능</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/members/my-page"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span> <span class="c1">// 해당 경로에 USER 권한만 접근가능</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span> <span class="c1">// 앞에지정한 URL을 제외한것 접근 모두가능</span>
-                <span class="o">);</span>
-<span class="c1">//                .authorizeHttpRequests() // 클라이언트의 요청이 들어오면 접근권한을 확인하겠다고 정의</span>
-<span class="c1">//                .anyRequest() // 클라이언트의 모든 요청에 대해 접근을 허용</span>
-<span class="c1">//                .permitAll(); // 클라이언트의 모든 요청에 대해 접근을 허용</span>
-        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>.headers().frameOptions().sameOrigin()<br />
-메서드들이 추가되었고, 추가하지 않으면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPof1RAUkqFj1p0icu1y0Y1G_-q79XgeRnNvxsgf4sahOYXm9S9UNHjL3dST2DYsW76e9J9ZS_C961EXzBBqNjpKuygEg=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위의 화면과 같이 정상적으로 H2 DataBase가 표시되지 않을 수 있다.</p>
-
-<p><br /></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
-*  DB 사용을 위한 빈주입
-* */</span>
-<span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV2</span> <span class="o">{</span>
-
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">dbMemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberServiceV1</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>기존에 InMemory를 사용하기 위해 설정했던 구성정보를 지우고<br />
-새로운 구성정보를 설정. DBMemberService가 적용되도록 스프링 빈으로 등록했다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBMemberServiceV1</span> <span class="kd">implements</span> <span class="nc">MemberService</span> <span class="o">{</span>
-
-   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
-   <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">;</span>
-
-   <span class="kd">public</span> <span class="nf">DBMemberServiceV1</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
-      <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
-      <span class="k">this</span><span class="o">.</span><span class="na">passwordEncoder</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">;</span>
-   <span class="o">}</span>
-
-   <span class="nd">@Override</span>
-   <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">createMember</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
-      <span class="n">verifyExistsEmail</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
-      <span class="nc">String</span> <span class="n">encryptedPassword</span> <span class="o">=</span> <span class="n">passwordEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span> <span class="c1">// 비밀번호 암호화</span>
-      <span class="n">member</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">encryptedPassword</span><span class="o">);</span> <span class="c1">// 암호화된 비밀번호 객체에 맵핑</span>
-
-      <span class="nc">Member</span> <span class="n">saveMember</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">member</span><span class="o">);</span> <span class="c1">// DB에 저장</span>
-
-      <span class="k">return</span> <span class="n">saveMember</span><span class="o">;</span>
-   <span class="o">}</span>
-
-   <span class="kd">private</span> <span class="kt">void</span> <span class="nf">verifyExistsEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="n">email</span><span class="o">);</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span>
-         <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_EXISTS</span><span class="o">);</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>DBMemberService에서는<br />
-비밀번호 암호화를 한 것을 member 객체에 담아<br />
-Repository에 저장하게만 구성해주면 끝난다.</p>
-
-<p>인메모리 사용할때에는 UserDetailsManager에다가 저장했지만<br />
-이제는 DBMemberService는 회원가입이라는<br />
-서비스 로직만 남게 된 것이다.</p>
-
-<p>이제 회원가입을하였고<br />
-로그인을 하였을때 UserDetailsManager와 같은 역할을 구현해줘야한다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
-* DB사용했을때 인증 처리 적용하기 (인메모리 사용시 기존 UserDetailManager를 사용했었음)
-* UserDetailsService는 User정보를 로드하는 핵심적인 인터페이스다.
-* UserDetailManager는 UserDetailsService를 상속하고있음
-* */</span>
-<span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloUserDetailsServiceV1</span> <span class="kd">implements</span> <span class="nc">UserDetailsService</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">HelloAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">HelloUserDetailsServiceV1</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">HelloAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">authorityUtils</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="cm">/*
-    * UserDetailService 오버라이딩하여 UserDetails 객채를 만들어 반환하기
-    * 이후는 스프링시큐리티가 인증처리를 대신해준다
-    * */</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">UserDetails</span> <span class="nf">loadUserByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">UsernameNotFoundException</span> <span class="o">{</span>
-        <span class="c1">// 해당 메서드 호출 시점은, login.html에서 로그인 버튼 누를떄이다.</span>
-        <span class="c1">// 즉, &lt;form action="/process_login" method="post"&gt; 가 실행될떄 호출됨</span>
-        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">optionalMember</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="n">username</span><span class="o">);</span> <span class="c1">// 이메일로 멤버찾기</span>
-        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">optionalMember</span><span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">));</span> <span class="c1">// 멤버 찾기 예외 처리</span>
-        <span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">.</span><span class="na">createAuthorities</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span> <span class="c1">// 이메일 비교후 권한 처리</span>
-        <span class="nc">UserDetails</span> <span class="n">user1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span> <span class="n">findMember</span><span class="o">.</span><span class="na">getPassword</span><span class="o">(),</span> <span class="n">authorities</span><span class="o">);</span> <span class="c1">// 해당 정보로 User생성자로 UserDetails 만들기</span>
-        <span class="k">return</span> <span class="n">user1</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>우리는 UserDetailsService를 구현할 클래스를 만들어<br />
-상속을 받게 만들어준다음. loadUserByUsername 오버라이딩해<br />
-재정의를 해서 반환을 UserDetails 객체로 만들어 반환을 해주면된다.</p>
-
-<p>회원가입은 이미 되어있고, 암호화까지해 놓은 상태로 DB에 저장되어있다.<br />
-우리가 로그인 페이지에서 form login으로 post 메서드 /process_login을 호출하게되면<br />
-우리가 위에서 봤던 흐름대로 EndPoint까지 가기전에<br />
-Servlet Filter가 흐름을 가로채서 실행하게 되고<br />
-우리는 Spring Security를 사용하고 있기때문에 인증 절차를 가지게된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOFEpthgmY3S8CBykz2TudWwacXHEngWxFMzuqUbbRWjNwnV379_0wvzLGpOM0t0X18sB8nTpumplyiCwlc5r_PjdIZfg=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>인증 절차는 실제로 이러한 흐름을 진행된다고한다.</p>
-
-<ol>
-  <li>
-    <p>사용자가 로그인 정보와 함께 인증 요청을 한다.(Http Request)</p>
-  </li>
-  <li>
-    <p>AuthenticationFilter가 요청을 가로채고, 가로챈 정보를 통해<br />
-UsernamePasswordAuthenticationToken의 인증용 객체를 생성한다.</p>
-  </li>
-  <li>
-    <p>AuthenticationManager의 구현체인 ProviderManager에게 생성한 <br />
-UsernamePasswordToken 객체를 전달한다.</p>
-  </li>
-  <li>
-    <p>AuthenticationManager는 등록된 AuthenticationProvider(들)을 조회하여 인증을 요구한다.</p>
-  </li>
-  <li>
-    <p>실제 DB에서 사용자 인증정보를 가져오는 UserDetailsService에 사용자 정보를 넘겨준다.</p>
-  </li>
-  <li>
-    <p>넘겨받은 사용자 정보를 통해 DB에서 찾은 사용자 정보인 UserDetails 객체를 만든다.</p>
-  </li>
-  <li>
-    <p>AuthenticationProvider(들)은 UserDetails를 넘겨받고 사용자 정보를 비교한다.</p>
-  </li>
-  <li>
-    <p>인증이 완료되면 권한 등의 사용자 정보를 담은 Authentication 객체를 반환한다.</p>
-  </li>
-  <li>
-    <p>다시 최초의 AuthenticationFilter에 Authentication 객체가 반환된다.</p>
-  </li>
-  <li>
-    <p>Authenticaton 객체를 SecurityContext에 저장한다.</p>
-  </li>
-</ol>
-
-<p><a href="https://dev-coco.tistory.com/174">출처 - 슬기로운 개발생활</a></p>
-
-<p><br /></p>
-
-<p>즉, 우리가 구현해줘야할 부분은<br />
-5번에서 사용자 정보를 받는 것을 이용해<br />
-6번, 받은 정보를 이용해 UserDetails 객체를 반환만 시켜주면<br />
-그 이후는 7번 부터 Spring Security가 알아서 진행시켜준다.</p>
-
-<p>이를 토대로 위에 프로그램을 작성해 놓은 것을 보면<br />
-오버라이딩한 loadUserByUsername 메서드를 통해서<br />
-username을 매개변수로 정보를 받는다.<br />
-해당 정보로 DB를 조회한다음, UserDetails 객체를 반환시켜주는 프로그램이다.</p>
-
-<p><br /></p>
-
-<p><strong><span style="color:#0066CC"> 위의 얘기를 한마디로 정리 해보자면 !! </span></strong></p>
-
-<p>UserDetailsService 인터페이스를 구현한 클래스를 만든다.<br />
-loadUserByUsername(); 메서드를 오버라이딩하여 매개변수로 username 정보를 받을 수 있다.<br />
-username정보를 이용해 DB에 조회를 한다.<br />
-조회한 데이터를 토대로 UserDetails 객체를 만들어 반환만 시켜주면 된다.<br />
-이후는 Spring Security가 알아서 해줌</p>
-
-<p><br /></p>
-
-<h3 id="오늘-만난-error">오늘 만난 ERROR</h3>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Parameter 0 of constructor in com.codestates.member.MemberController required a single bean, but 2 were found:
-	- inMemoryMemberService: defined by method 'inMemoryMemberService' in class path resource [com/codestates/config/JavaConfigurationV1.class]
-	- dbMemberService: defined by method 'dbMemberService' in class path resource [com/codestates/config/JavaConfigurationV2.class]
-</code></pre></div></div>
-<p>오늘 테스트 중 만났던 에러다. <br />
-내용은 MemberController에서 싱글빈을 요구한는데 2개가 있다는 것 같은 내용이다.<br />
-즉, 같은 타입의 빈이 두개가 등록된 문제라고 생각했다.</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Action:
-
-Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
-</code></pre></div></div>
-<p>밑에 아주친절하게 @Primary나  @Qualifier를 사용하라한다.</p>
-
-<p><br /></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
-*  InMemory 사용을 위한 빈주입
-* */</span>
-<span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV1</span> <span class="o">{</span>
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">inMemoryMemberService</span><span class="o">(</span><span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="n">userDetailsManager</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
-*  DB 사용을 위한 빈주입
-* */</span>
-<span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV2</span> <span class="o">{</span>
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">dbMemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>MemberControler에서는 MemberService를 DI받게 설계해놓았고</p>
-
-<p>MemberService라는 인터페이스를 구현한<br />
-클래스 inMemoryMemberServie, DBMemberService 두개를<br />
-빈으로 등록하려고 시도하니까 발생한 알람인 것 같다.</p>
-
-<p>여기서 @Configuration을 한군데를 지워주면<br />
-중복되지 않고 해결 할 수 있다.</p>
-
-<p>하지만 코드는 그대로 유지싶었기에</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV2</span> <span class="o">{</span>
-    <span class="nd">@Bean</span>
-    <span class="nd">@Primary</span>
-    <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">dbMemberService</span><span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">,</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span> <span class="n">passwordEncoder</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>JavaConfigurationV2에 빈등록 메서드에 @Primary를 이용해<br />
-빈을 선택해 주입해주도록 정했다.</p>
-
-<hr />
-
-<p>오늘은 이렇게 스프링 시큐리티의 기본적인<br />
-사용방법을 알아보았다.</p>
-
-<p>내부적으로 이루어지는 작업들이 많아 정확한<br />
-흐름이 감이 잡히질 않는 것 같다.<br />
-글을 적으면서도 내가 정확히 이해한게 맞는지 수십번을 돌아가서 확인하고 반복했다. <br />
-확인했다고 한들… 정확한 정보를 적은 것 같지 않은 느낌이든다.<br />
-계속 익숙해지게 사용해보면서 사용법에 익숙해져보자</p>
-
-<p>오늘공부는 여기서 끝 !!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 짜장면, 탕수육</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 된장찌개, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[주말이라는 것은… 사람을 참 나태하게 만들기도 활력을 공급하기도 하는 것 같다.]]></summary></entry></feed>
