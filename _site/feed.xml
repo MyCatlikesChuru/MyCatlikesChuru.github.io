@@ -1,4 +1,287 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-01T23:48:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Spring WebFlux 구현하기</title><link href="http://localhost:4000/til/2022/12/01/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux 구현하기" /><published>2022-12-01T00:00:00+09:00</published><updated>2022-12-01T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/01/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/01/til.html"><![CDATA[<p>12월이 시작되었다 !<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-02T18:18:57+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Cloud 운영 환경 구성 1</title><link href="http://localhost:4000/til/2022/12/02/til.html" rel="alternate" type="text/html" title="TIL) Cloud 운영 환경 구성 1" /><published>2022-12-02T00:00:00+09:00</published><updated>2022-12-02T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/02/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/02/til.html"><![CDATA[<p>날씨가 갑자기 겨울로 넘어왔다…<br />
+손발이 떨릴정도로 이제 추운 날씨가 왔다.</p>
+
+<p>갑자기 추워진만큼 건강관리를 잘해야겠다.<br />
+이제 다음주 부터 슬슬 프로젝트가 시작될 것 같으니<br />
+열심히 공부해서 참여하도록해야겠다 !</p>
+
+<hr />
+
+<h2 id="운영-환경-구성">운영 환경 구성</h2>
+
+<p>여태까지 애플리케이션을 위한 프로그램을 배웠다면<br />
+이제 유저들이 사용할 수 있도록, 웹서비스에 배포를 해야한다.<br />
+그러기 위해서는 클라우드 서비스에 대한 내용을 알아야하며<br />
+가장 많이 사용하는 <strong>AWS</strong>(Amazon Web Service)를 이용할 예정이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqOLzNVFQEsg_qVlTE8LMUqfss5wT_TUYqngNJB6_sgDfVqJyntlKRdVf4o86XtCoGcpGM3EHGia4hRgiH-bbS5wnd=w1920-h919" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p><br /></p>
+
+<h3 id="cloud-computing">Cloud Computing</h3>
+
+<p>기존에는 같은 공간에 더 많은 컴퓨터를 추가하거나, 컴퓨터 성능을 업그레이드했다.<br />
+하지만 이러한 방식에는 한계가 존재했다.</p>
+<ol>
+  <li>주기적인 관리가 필요</li>
+  <li>공간의 한계</li>
+</ol>
+
+<p>와 같은 한계가 존재하다보니 거대 기업들은 데이터 센터라는<br />
+건물을 세워 유휴 자원을 대여해주는 서비스들이 생기기 시작했다.<br />
+이러한 서비스들은 서버의 자원과 공간, 네트워크 환경을 제공해준다.<br />
+이러한 환경을 <strong>On-premise</strong>라고 한다.</p>
+
+<p><strong><em>On-Premise : 자체적으로 보유한 전산실 서버에 직접 설치해 운영하는 방식</em></strong></p>
+
+<p><br /></p>
+
+<p>현대의 클라우드 컴퓨팅은 데이터 센터와 비슷한 역할을하지만<br />
+물리적인 컴퓨터가 아닌, 가상컴퓨터를 대여해준다는 점이 다르다.</p>
+
+<p>그럼 클라우드 서비스의 장점이 무었이 있냐면</p>
+<ol>
+  <li>컴퓨팅 능력을 유연하게 조절가능</li>
+  <li>사용한 만큼 요금만 지불</li>
+  <li>컴퓨터의 스냅샷을 이용해 다른 컴퓨터로 즉시 이주가 가능</li>
+</ol>
+
+<p>클라우드 서비스 형태는<br />
+SaaS (Software as a Service) : 네트워크+하드웨어+운영체제+DB/플랫폼+애플리케이션<br />
+PasS(Platform as a Service) : 네트워크+하드웨어+운영체제+DB/플랫폼<br />
+IaaS(Infrastructure as a Service) : 네트워크+하드웨어</p>
+
+<p>이러한 서비스 형태를 제공해주고 서비스 범위가 각각 다르다.<br />
+AWS 같은 경우는 IaaS와 가까운 형태이다.</p>
+
+<p><br /></p>
+
+<h3 id="deploy">Deploy</h3>
+
+<p>전개하다, 배포하다라는 의미를 가지고 있다.<br />
+배포는 우리가 개발한 서비스를 사용자들이 이용 가능하게 하는 일련의 과정이다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✅ 1단계 : Development  
+로컬환경에서 개발 및 테스트 하는 단계이다.  
+
+            ↓
+
+✅ 2단계 : Intergration  
+각자의 환경에서 개발된 부분을 취합하는 단계이다.  
+
+            ↓
+
+✅ 3단계 : Staging  
+다양한 환경에서 테스트를 진행하는 단계이다.
+
+            ↓
+
+✅ 4단계 : Production  
+실제로 서비스가 제공되는 단계이다.  
+</code></pre></div></div>
+
+<p>작성한 코드가 다른 환경에서 정상 작동할 수 있게 하려면<br />
+설정을 환경변수에 저장해야 한다.<br />
+환경 변수는 코드 변경 없이 배포 때마다 쉽게 변경할 수 있다.</p>
+
+<p>이 외에도 docker와 같은 개발 환경 자체를 통일시키는<br />
+솔루션을 사용할 수 도 있다.</p>
+
+<p><br /></p>
+
+<h3 id="aws-ec2">AWS EC2</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtO5zNG-mSGQ0VpIrnDtKv8WjStCZz80s64TdpaTziPs4U4w2NrWWr-2PCFgKEx1F9AZ6MgqbDeUn9oKYze6SjTKfr=w1920-h919" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Amazon Elastic Compute Cloud라고도 부른다.<br />
+AWS에서 원격으로 제어할 수 있는 가상의 컴퓨터 한 대를 빌리는 것을 말한다.<br />
+이렇게 빌린 컴퓨터를 인스턴스(Instance)라고한다.</p>
+
+<p>Elastic(탄력적인)이라는 영어 단어에서 알 수 있듯이<br />
+우리가 사용한 만큼 비용을 지불하기 때문에<br />
+비용,성능,용량을 자유롭게 조절할 수가 있다.</p>
+
+<p>EC2의 사용의 장점?</p>
+<ol>
+  <li>구성하는데 필요한 시간이 짧다</li>
+  <li>다양한 운영체제에 대한 선택이 가능하다</li>
+</ol>
+
+<p>AMI는 Amazon Machine Image의 약자로<br />
+소프트웨어 구성이 기재된 템플릿이다.<br />
+(윈도우, 우분투 리눅스, 우분투+node.js 등등)<br />
+인스턴스 생성시 선택해야하는 소프트웨어라고 생각하면 될 것 같다.<br />
+사용 용도에 맞게 운영체제, 런타임 등의 구성된 셋팅을 선택할 수 있다.</p>
+
+<p><a href="https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/concepts.html">AWS EC2 설명서</a>를 확인해보면 도움이 될 것 같다.</p>
+
+<p><br /></p>
+
+<h3 id="rds">RDS</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN7nLYSONV59gpEN-AxxvVVseentMz1scQ3svv2baW-tIKb0ddiTx5w_BNK7X9_4WqxQmttPUh9sUH9av2MmooXk_zsYg=w1920-h919" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Relational Database Service의 약자로<br />
+AWS에서 제공하는 관계형 데이터 베이스 서비스이다.</p>
+
+<p>EC2에서 빌린 가상의 컴퓨터에서 MySQL을 설치해서 사용할 수도 있다.<br />
+하지만 RDS를 따로 사용하는 이유는</p>
+
+<p>EC2 인스턴스를 사용하면 DB 관련해서<br />
+자동으로 관리를 담당하는 부분이 매우 적기 때문에, 사용자가 일일이<br />
+시간을 투자해서 데이터베이스 엔진의 설치, 버전관리, 데이터 백업을 해야한다.<br />
+또한 가용성과 내구성이 확보되지 않기 때문에, DB의 데이터가 유실되가나<br />
+정상적으로 사용하지 못할 확률이 커지고, 후에 필요에 따른 확장이 어렵기 때문이다.</p>
+
+<p>즉, RDS를 이용하면 DB 유지보수와 관련된 일을 RDS에서 자동 관리한다.<br />
+사용자가 해야할 일은 초기 설정을 제외하고 DB에 저장된 데이터를 관리하는<br />
+일 밖에 없어지기 때문에 큰 편의성을 느낄 수 있다.</p>
+
+<p>또한 여러가지 DB 엔진(Oracle, MySQL, MairaDB 등) 선택지를 제공해준다.</p>
+
+<p><br /></p>
+
+<h3 id="s3">S3</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPyX47-O0zlGcOuOrGwR40VZM8bDpk1COUH1tS16G9Z2SxWkYDkjNyVlfi-EuCJ46PbsuRvLkYR_IOIjxQdxQkNKQl1lg=w1920-h919" alt="image" class="align-left" style="max-width: 40%" /></p>
+
+<p>Simple Storage Service를 줄여서 S3라고 부른다.<br />
+AWS에서 제공하는 클라우드 스토리지 서비스이며,<br />
+클라우드 스토리지 서비스는 인터넷 공간에 데이터를 저장하는 저장소를 얘끼한다.<br />
+ex) 구글 드라이브, 아이클라우드 등</p>
+
+<p>S3 사용 시 장점?</p>
+<ol>
+  <li>데이터를 무한히 저장 가능하다.</li>
+  <li>스토리지의 내구성이 높다 (파일 유실가능성이 적다)</li>
+  <li>가용성이 보장된다.(저장된 파일들을 정상적으로 사용할 수있는 시간이 길다)</li>
+  <li>다양한 스토리지 클래스 제공 <br />
+-. Standard 클래스 : 데이터에 자주 엑세스할 때 사용
+-. Glacier 클래스 : 데이터를 장기보관할 때 사용</li>
+  <li>정적 웹 사이트 호스팅이   가능</li>
+</ol>
+
+<p><em><strong>정적 파일 : 서버의 개입없이 생성된 파일</strong></em> <br />
+<strong><em>웹 호스팅 : 공간을 임대해 주는 서비스</em></strong></p>
+
+<p>S3에서는 버킷이 사용자들이 웹사이트를 배포할 수 있는 공간을 제공해준다.</p>
+
+<p>버킷은 S3에 저장되는 파일을 담는 최상위 디렉토리이다.<br />
+저장되는 파일을 객체라 부르며, 키-값 페어 형식으로 데이터를 저장한다.</p>
+
+<p>또한 S3에 저장되는 객체는 메타데이터가 있다.<br />
+객체의 생성일, 크기, 유형등의 정보를 담고있는 데이터 이다.</p>
+
+<p>그리고 모든 객체는 고유한 URL 주소를 가지고 있다.</p>
+
+<p><br /></p>
+
+<h3 id="3-티어-아키텍처">3 티어 아키텍처</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNdT-BlxNhiUbdv4av_8HXLA9C0nN5uxsAAk3-Qs26EWWJPkMA7rgXgpEc8lcRXoiCLRkfMKylvorlDOAMa4WHMIAehjg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /><br />
+<a href="https://docs.aws.amazon.com/ko_kr/whitepapers/latest/serverless-multi-tier-architectures-api-gateway-lambda/three-tier-architecture-overview.html">출처 - amazon 3 Tier Architecture</a></p>
+
+<p>3 티어 아키텍처는 배포 전략중 하나로 <br />
+Client, Server, Database로 나누어 서비스를 제공할 수 있다.</p>
+
+<p>S3 서비스로 Client를 제공할 수 있다.<br />
+EC2 서비스로 Sever를 제공해줄 수 있다.  <br />
+RDS 서비스로 Database를 제공해줄 수 있다.</p>
+
+<p><br /></p>
+
+<h3 id="서버-빌드해보기">서버 빌드해보기</h3>
+
+<p>인스턴스 생성과정은 생략하려한다. AMI는 우분투이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOOs9dXoVlxUnDghCnZt618o7m0rdY0vzDl18ChINSDbBBG7Gpl-cj3FrS4dV5hrez8sLKsR2mKROev8SUXg0OjTvRwHQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>인스턴스에 연결을 하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN2yvWvOOqcKCByF_cKadUZS6r1gMIDTDoH64uyFEmX7xamfZe9zoqlkICswPW6q0f5r6Xn9NN2Y-DiMKLIOg0E_fLbVA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같은 화면이 뜬다. 이제 여기서 나는 bash가 편하기때문에</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash
+</code></pre></div></div>
+
+<p>그리고 폴더 Root경로를 상단으로 변경했다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~
+</code></pre></div></div>
+<p>여기서 root경로를 상단에 두지않고 <code class="language-plaintext highlighter-rouge">git clone</code>과 같은 명령어를<br />
+내보낼 경우 Permission denied 에러가 발생할 수 있으니 주의하자</p>
+
+<p>본격적으로 인스턴스에 개발환경을 구축해야한다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+</code></pre></div></div>
+<p>패키지 매니저가 관리하는 패키지의 정보를 최신 상태로 업데이트한다.</p>
+
+<p><br /></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-11-jre-headless
+</code></pre></div></div>
+<p>그리고 jdk를 설치해준다. 확인창이나오면 “Y”를 눌러 진행</p>
+
+<p>설치가 완료되었으면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">--version</span>
+</code></pre></div></div>
+<p>을 입력하여 설치가 잘되었는지 확인이 가능하다.</p>
+
+<p>이제 우리가 배포하기위한 프로젝트를 Git에서 가져오면된다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone 레포지토리주소
+</code></pre></div></div>
+<p>여기서 처음 셋팅하는 경우에는<br />
+SSH Key를 우분투에 발급 받아야한다.<br />
+그리고 발급받은 공개키를 GitHub SSH keys에 셋팅을 해줘야<br />
+우분투 서버에서 GitHub를 통해 clone을 해올 수 있다..</p>
+
+<p>키 발급과 등록하는것은 생략하겠다.</p>
+
+<p>이제 우리의 프로젝트를 가져왔으니<br />
+해당 프로젝트를 빌드해야한다. 우선 폴더경로로 진입해서</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew build
+</code></pre></div></div>
+<p>파일을 빌드시켜주면 된다.</p>
+
+<p>그리고 빌드된 .jar파일을 통해 java를 실행시켜보면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> build/libs/DeployServer-0.0.1-SNAPSHOT.jar
+</code></pre></div></div>
+<p>Jar파일의 폴더 경로를 지정한 것이다.<br />
+그러면 내 인스턴스에서 만들었던 Spring 프로젝트가</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNrA5k8JSBJnGbyXfOB8y2Rm398vzC329yxq29jDQqLacYTabUWRlV00FKA9lkb88EcT00KBsWN-e9S0PV3Re4DgW9B=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>정상 적으로 실행된 모습을 볼 수 있다.</p>
+
+<p>이제 인스턴스의 <code class="language-plaintext highlighter-rouge">퍼블릭 IPv4 DNS</code> 주소를 <code class="language-plaintext highlighter-rouge">:8080</code> 포트를 붙여<br />
+웹 브라우저 상에서 접속을 시도해본다면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMEFzEzwGnFUUnCFLAnVY5C946SOyarcOzfBaUdrBE5Y1JhIJZ_JZ-Dl75VdRWuUackRT7Pgkh9b-ofsr_OIwxfgXLeaQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>내가 만들었던 프로젝트가 정상적으로<br />
+보이는 것을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 이렇게 Cloud 운영환경에 대해 기초 지식과<br />
+실제로 Spring 프로젝트 파일을 빌드해보았다.</p>
+
+<p>여러가지로 신기하고 재밌었다.<br />
+이렇게 가상으로 컴퓨터를 빌려 정말 간단하게 운영이 가능하다니..<br />
+얼추 이제 어떻게 시스템이 구성되어있고 각자의 위치가<br />
+어느정도 감이 잡히고 있다.</p>
+
+<p>요번주도 공부하느라 고생많았다 !!!!<br />
+주말에 프로젝트 대비를 위함 Spring MVC 공부를 더해야겠다.</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨가 갑자기 겨울로 넘어왔다… 손발이 떨릴정도로 이제 추운 날씨가 왔다.]]></summary></entry><entry><title type="html">TIL) Spring WebFlux 구현하기</title><link href="http://localhost:4000/til/2022/12/01/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux 구현하기" /><published>2022-12-01T00:00:00+09:00</published><updated>2022-12-01T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/01/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/01/til.html"><![CDATA[<p>12월이 시작되었다 !<br />
 올해도 이렇게 시간이 빨리가는 구나<br />
 점점 더빨리가는 시간이 조금 야속하다.</p>
 
@@ -3188,284 +3471,4 @@ Bit로 환산해보면 1Byte = 8 Bit로 계산되어지니<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 삽겹살, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[확실히 Spring 관련된 기술을 사용하면서 프로그래밍을 하고 있다는 느낌이 들때가 많아서 좋다.]]></summary></entry><entry><title type="html">TIL) Spring Security 3 (권한부여)</title><link href="http://localhost:4000/til/2022/11/22/til.html" rel="alternate" type="text/html" title="TIL) Spring Security 3 (권한부여)" /><published>2022-11-22T00:00:00+09:00</published><updated>2022-11-22T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/22/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/22/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO-9XVEAUETJGFf5AjYCUCurD1z-9yBYl4hAKS_SdfBOSr5ac7uSAlI8PoCiXakOadLKWhnBi-RnF5XAFfKoh4ynbCMmQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>어제 공부했던 Spring Security 인증처리 과정에서대해<br />
-코드를 찾아가보면서 어느정도 깨달음이 있어서<br />
-진전이 있는 느낌이 들어 오랜만에 편안한 마음으로 공부를 했다.</p>
-
-<p>오늘은 Spring Security 권한관련 Filter를 공부하는 날이고<br />
-섹션 중 Spring Security는 마지막인 시간이다.</p>
-
-<hr />
-
-<p>어제 <a href="https://mycatlikeschuru.github.io/til/2022/11/21/til.html">(Spring Security 인증처리)</a>에 대한 내용을<br />
-코드와 아케텍쳐를 통해 쭉 살펴보았다.</p>
-
-<p>오늘은 권한과 관련된 Filter인<br />
-<code class="language-plaintext highlighter-rouge">AuthorizationFilter</code> 클래스에 대한 권한 부여의<br />
-간단한 처리 흐름과 코드를 살펴보려고한다.</p>
-
-<p><br /></p>
-
-<h2 id="spring-security-권한부여">Spring Security 권한부여</h2>
-
-<p>어제는 인증처리에 관련된 내용을 배웠다.<br />
-인증이란 이 사이트를 이용할 수 있는 유저인지 확인하는 과정이다.<br />
-하지만 권한부여는 뭘까?</p>
-
-<p>인증된 사용자가 모든 리소스에 접근을 제한하는 것을 말한다. <br />
-헤딩 사용자가 이용할 수 있는 리소스를 제한하거나 풀어주는 것을<br />
-권한 부여라고 한다.</p>
-
-<p><br /></p>
-
-<h3 id="권한부여-처리흐름">권한부여 처리흐름</h3>
-
-<p><strong>AuthorizationFilter</strong></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOQXGNO9jp7S5n8BR1acug8wbYP2K5CODLz3E8JL1OYltFHyEMNavYMMn7otGOC4UHR5N_85NhELKDMT5Cm9oKCeMjE=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>Spring Security에서는 권한 부여를 위해<br />
-<code class="language-plaintext highlighter-rouge">AuthorizationFilter</code> 클래스를 이용해 처리를 한다.</p>
-
-<p>SecurityFilterChain을 구성하는 Filter 중 하나로<br />
-인증 Filter를 거친 후 진행하게 되어진다.<br />
-본격적으로 <code class="language-plaintext highlighter-rouge">AuthorizationFilter</code>의 권한처리 흐름을 알아보자</p>
-
-<p><br /></p>
-
-<p>(1). <code class="language-plaintext highlighter-rouge">SecurityContextHolder</code>로 부터 <code class="language-plaintext highlighter-rouge">Authentication</code> 객채를 가져온다.<br />
-<a href="https://mycatlikeschuru.github.io/til/2022/11/21/til.html">(Spring Security 인증처리)</a> 과정에서 인증이 완료된 객체 <code class="language-plaintext highlighter-rouge">Authentication</code>를 <br />
-<code class="language-plaintext highlighter-rouge">SecurityContextHolder</code>에 넣어줬던 흐름이 인증처리의 마지막이어었다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationFilter</span> <span class="kd">extends</span> <span class="nc">OncePerRequestFilter</span> <span class="o">{</span>
-    
-    <span class="o">...</span> <span class="n">이상</span> <span class="n">생략</span>
-    
-    <span class="kd">private</span> <span class="nc">Authentication</span> <span class="nf">getAuthentication</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">Authentication</span> <span class="n">authentication</span> <span class="o">=</span> <span class="nc">SecurityContextHolder</span><span class="o">.</span><span class="na">getContext</span><span class="o">().</span><span class="na">getAuthentication</span><span class="o">();</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">authentication</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">AuthenticationCredentialsNotFoundException</span><span class="o">(</span>
-                    <span class="s">"An Authentication object was not found in the SecurityContext"</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">authentication</span><span class="o">;</span>
-    <span class="o">}</span>
-    
-    <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
-            
-<span class="o">}</span>
-</code></pre></div></div>
-<p>실제로 <code class="language-plaintext highlighter-rouge">AuthorizationFilter</code> 클래스 코드 중 <code class="language-plaintext highlighter-rouge">getAuthentication();</code> 메서드를 이용해  <br />
-<code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 꺼내는 모습을 코드로 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p>(2). <code class="language-plaintext highlighter-rouge">Authentication</code> 객체와 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를<br />
-<code class="language-plaintext highlighter-rouge">AuthorizationManager</code>에게 전달한다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationFilter</span> <span class="kd">extends</span> <span class="nc">OncePerRequestFilter</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">HttpServletRequest</span><span class="o">&gt;</span> <span class="n">authorizationManager</span><span class="o">;</span>
-     
-    <span class="o">...</span> <span class="n">생략</span>
-    
-    <span class="kd">public</span> <span class="nf">AuthorizationFilter</span><span class="o">(</span><span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">HttpServletRequest</span><span class="o">&gt;</span> <span class="n">authorizationManager</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Assert</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">authorizationManager</span><span class="o">,</span> <span class="s">"authorizationManager cannot be null"</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">authorizationManager</span> <span class="o">=</span> <span class="n">authorizationManager</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doFilterInternal</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">FilterChain</span> <span class="n">filterChain</span><span class="o">)</span>
-            <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
-
-        <span class="nc">AuthorizationDecision</span> <span class="n">decision</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">authorizationManager</span><span class="o">.</span><span class="na">check</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">getAuthentication</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">eventPublisher</span><span class="o">.</span><span class="na">publishAuthorizationEvent</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">getAuthentication</span><span class="o">,</span> <span class="n">request</span><span class="o">,</span> <span class="n">decision</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">decision</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">decision</span><span class="o">.</span><span class="na">isGranted</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">AccessDeniedException</span><span class="o">(</span><span class="s">"Access Denied"</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="n">filterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
-    <span class="o">}</span>
-    
-    <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
-
-<span class="o">}</span>
-
-</code></pre></div></div>
-<p>실제로 코드를 확인해보면<br />
-생성자로 <code class="language-plaintext highlighter-rouge">AuthorizationManager</code>의 객체를 DI받고 있다.<br />
-그리고 <code class="language-plaintext highlighter-rouge">.check(this::getAuthentication, request);</code> 메서드를 호출해<br />
-<code class="language-plaintext highlighter-rouge">Authentication</code>와 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를 매개변수로 넘겨주고있다.</p>
-
-<p><br /></p>
-
-<p>(3). <code class="language-plaintext highlighter-rouge">AuthorizationManager</code>는 <br />
-권한 부여 처리를 총괄하는 매니저 역할의 인터페이스이다.<br />
-구현체는  <code class="language-plaintext highlighter-rouge">RequestMatcherDelegatingAuthorizationManager</code> 클래스이다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FunctionalInterface</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    
-    <span class="o">...</span> <span class="n">이상</span> <span class="n">생략</span>
-
-	<span class="nd">@Nullable</span>
-	<span class="nc">AuthorizationDecision</span> <span class="nf">check</span><span class="o">(</span><span class="nc">Supplier</span><span class="o">&lt;</span><span class="nc">Authentication</span><span class="o">&gt;</span> <span class="n">authentication</span><span class="o">,</span> <span class="no">T</span> <span class="n">object</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>코드로도 볼 수 있듯이 인터페이스에 메서드가 정의되어있고</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">RequestMatcherDelegatingAuthorizationManager</span> <span class="kd">implements</span> <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">HttpServletRequest</span><span class="o">&gt;</span> <span class="o">{</span>
-
-    <span class="o">...</span>
-    <span class="n">이상</span> <span class="n">생략</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">AuthorizationDecision</span> <span class="nf">check</span><span class="o">(</span><span class="nc">Supplier</span><span class="o">&lt;</span><span class="nc">Authentication</span><span class="o">&gt;</span> <span class="n">authentication</span><span class="o">,</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">isTraceEnabled</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">trace</span><span class="o">(</span><span class="nc">LogMessage</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Authorizing %s"</span><span class="o">,</span> <span class="n">request</span><span class="o">));</span>
-        <span class="o">}</span>
-        <span class="k">for</span> <span class="o">(</span><span class="nc">RequestMatcherEntry</span><span class="o">&lt;</span><span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">RequestAuthorizationContext</span><span class="o">&gt;&gt;</span> <span class="n">mapping</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">mappings</span><span class="o">)</span> <span class="o">{</span>
-
-            <span class="nc">RequestMatcher</span> <span class="n">matcher</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="na">getRequestMatcher</span><span class="o">();</span>
-            <span class="nc">MatchResult</span> <span class="n">matchResult</span> <span class="o">=</span> <span class="n">matcher</span><span class="o">.</span><span class="na">matcher</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">matchResult</span><span class="o">.</span><span class="na">isMatch</span><span class="o">())</span> <span class="o">{</span>
-                <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">RequestAuthorizationContext</span><span class="o">&gt;</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="na">getEntry</span><span class="o">();</span>
-                <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">isTraceEnabled</span><span class="o">())</span> <span class="o">{</span>
-                    <span class="k">this</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">trace</span><span class="o">(</span><span class="nc">LogMessage</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"Checking authorization on %s using %s"</span><span class="o">,</span> <span class="n">request</span><span class="o">,</span> <span class="n">manager</span><span class="o">));</span>
-                <span class="o">}</span>
-                <span class="k">return</span> <span class="n">manager</span><span class="o">.</span><span class="na">check</span><span class="o">(</span><span class="n">authentication</span><span class="o">,</span>
-                        <span class="k">new</span> <span class="nf">RequestAuthorizationContext</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">matchResult</span><span class="o">.</span><span class="na">getVariables</span><span class="o">()));</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">logger</span><span class="o">.</span><span class="na">trace</span><span class="o">(</span><span class="s">"Abstaining since did not find matching RequestMatcher"</span><span class="o">);</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
-            
-<span class="o">}</span>
-</code></pre></div></div>
-<p>구현체인 <code class="language-plaintext highlighter-rouge">RequestMatcherDelegatingAuthorizationManager</code> 클래스에<br />
-<code class="language-plaintext highlighter-rouge">check();</code>메서드가 Override되어 있는 모습을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<p>(4),(5). 이제 전달받은 객체들로 <code class="language-plaintext highlighter-rouge">check();</code> 메서드 내부에서<br />
-권한 처리에 대한 로직이 수행된다.</p>
-
-<ol>
-  <li><code class="language-plaintext highlighter-rouge">RequestMatcherEntry</code> 정보를 얻은 후에 <code class="language-plaintext highlighter-rouge">RequestMatcher</code> 객체를 얻는다.</li>
-  <li><code class="language-plaintext highlighter-rouge">RequestMatcher</code> 객체로 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를 넣어 <code class="language-plaintext highlighter-rouge">MatchResult</code> 객체를 만든다.</li>
-  <li><code class="language-plaintext highlighter-rouge">MatchResult</code> 객체의 메서드 <code class="language-plaintext highlighter-rouge">.isMatch();</code>로 권한을 체크한다.</li>
-</ol>
-
-<p>만약에 권한이 존재해 <code class="language-plaintext highlighter-rouge">if (matchResult.isMatch())</code> 메서드를 통과한다면<br />
-<code class="language-plaintext highlighter-rouge">manager.check();</code>를 통해서 <code class="language-plaintext highlighter-rouge">matchResult.getVariables();</code>를 통해서<br />
-Map을 담고있는 객체가 반환되며 권한 부여과정이 진행되고</p>
-
-<p>만약에 권한이 존재하지 않아 <code class="language-plaintext highlighter-rouge">if (matchResult.isMatch())</code> 메서드를 통과하지 못한다면<br />
-<code class="language-plaintext highlighter-rouge">return null;</code>로 인해 null값이 반환되게 되어진다.<br />
-즉, 맨처음에 우리가 <code class="language-plaintext highlighter-rouge">check();</code>메서드를 호출했던 <code class="language-plaintext highlighter-rouge">AuthorizationFilter</code>에서</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
-<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doFilterInternal</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">FilterChain</span> <span class="n">filterChain</span><span class="o">)</span>
-        <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
-
-    <span class="nc">AuthorizationDecision</span> <span class="n">decision</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">authorizationManager</span><span class="o">.</span><span class="na">check</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">getAuthentication</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">eventPublisher</span><span class="o">.</span><span class="na">publishAuthorizationEvent</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">getAuthentication</span><span class="o">,</span> <span class="n">request</span><span class="o">,</span> <span class="n">decision</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">decision</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">decision</span><span class="o">.</span><span class="na">isGranted</span><span class="o">())</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nf">AccessDeniedException</span><span class="o">(</span><span class="s">"Access Denied"</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="n">filterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">throw new AccessDeniedException("Access Denied");</code> 예외를 던지게되어<br />
-권한을 부여하지 않도록 처리를 해주는 것이다.</p>
-
-<p><br /></p>
-
-<h3 id="접근-제어-표현식">접근 제어 표현식</h3>
-
-<p>Spring Security 웹 및 메서드 보안을 위한 표현식</p>
-
-<p><strong>Spring EL</strong></p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>표현식</td>
-      <td>: 설명 :</td>
-    </tr>
-    <tr>
-      <td>hasRole</td>
-      <td>현재 보안 주체(principal)가 지정된 역할을 갖고 있는지 여부를 확인하고 가지고 있다면 true를 리턴한다. <br /> hasRole(’admin’)처럼 파라미터로 넘긴 role이 ROLE_ 로 시작하지 않으면 기본적으로 추가한다. <br /> (DefaultWebSecurityExpressionHandler의 defaultRolePrefix를 수정하면 커스텀할 수 있다.)</td>
-    </tr>
-    <tr>
-      <td>hasAnyRole</td>
-      <td>현재 보안 주체가 지정한 역할 중 1개라도 가지고 있으면 true를 리턴한다. (문자열 리스트를 콤마로 구분해서 전달한다.) <br /> ex) hasAnyRole(’admin’, ‘user’)</td>
-    </tr>
-    <tr>
-      <td>hasAuthority</td>
-      <td>현재 보안 주체가 지정한 권한을 갖고 있는지 여부를 확인하고 가지고 있다면 true를 리턴한다. <br /> ex) hasAuthority(’read’)</td>
-    </tr>
-    <tr>
-      <td>hasAnyAuthority</td>
-      <td>현재 보안 주체가 지정한 권한 중 하나라도 있으면 true를 리턴한다. <br /> ex) hasAnyAuthority(’read’, ‘write’)</td>
-    </tr>
-    <tr>
-      <td>principal</td>
-      <td>현재 사용자를 나타내는 principal 객체에 직접 접근할 수 있다.</td>
-    </tr>
-    <tr>
-      <td>authentication</td>
-      <td>SecurityContext로 조회할 수 있는 현재 Authentication 객체에 직접 접근할 수 있다.</td>
-    </tr>
-    <tr>
-      <td>permitAll</td>
-      <td>항상 true로 평가한다.</td>
-    </tr>
-    <tr>
-      <td>denyAll</td>
-      <td>항상 false로 평가한다.</td>
-    </tr>
-    <tr>
-      <td>isAnonymous()</td>
-      <td>현재 보안 주체가 익명 사용자면 true를 리턴한다.</td>
-    </tr>
-    <tr>
-      <td>isRememberMe()</td>
-      <td>현재 보안 주체가 remember-me 사용자면 true를 리턴한다.</td>
-    </tr>
-    <tr>
-      <td>isAuthenticated()</td>
-      <td>사용자가 익명이 아닌 경우 true를 리턴한다.</td>
-    </tr>
-    <tr>
-      <td>isFullyAuthenticated()</td>
-      <td>사용자가 익명 사용자나 remember-me 사용자가 아니면 true를 리턴한다.</td>
-    </tr>
-    <tr>
-      <td>hasPermission <br /> (Object target, Object permission)</td>
-      <td>사용자가 target에 해당 permission 권한이 있으면 true를 리턴한다. <br /> ex) hasPermission(domainObject, ‘read’)</td>
-    </tr>
-    <tr>
-      <td>hasPermission <br /> (Object targetId, String targetType, Object permission)</td>
-      <td>사용자가 target에 해당 permission 권한이 있으면 true를 리턴한다. <br /> ex) hasPermission(1, ‘com.example.domain.Message’, ‘read’)</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><br /></p>
-
-<hr />
-
-<p>이렇게 오늘을 끝으로 Spring Security의<br />
-인증과 권한에 대해 알아보았다.<br />
-좀 더 깊은내용을 이해하기 위해서는 여러가지 Filter에 대해 공부가<br />
-필요해보이고, 내일부터 공부하는 JWT를 이용할때 어떠한 방식으로<br />
-Spring Security 로직이 변경되는지 내일부터 다시 공부해보자</p>
-
-<p>오늘 공부는 여기서 끝 !!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 삽겹살, 된장찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 삽겹살, 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[확실히 Spring 관련된 기술을 사용하면서 프로그래밍을 하고 있다는 느낌이 들때가 많아서 좋다.]]></summary></entry></feed>
