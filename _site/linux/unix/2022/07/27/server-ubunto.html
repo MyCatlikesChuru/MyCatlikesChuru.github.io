@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) DB RDMBS 3 | LeeJellan</title>
+<title>Permission denied (publickey) 우분투 에러 조치 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) DB RDMBS 3">
+<meta property="og:title" content="Permission denied (publickey) 우분투 에러 조치">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="벌써 금요일이다. 어제 공부를 열심히한 덕인가? 내용이 머릿속에서 정리가 된 상태로 일어났다.">
-<meta property="og:description" content="벌써 금요일이다. 어제 공부를 열심히한 덕인가? 내용이 머릿속에서 정리가 된 상태로 일어났다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/07/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/07/til.html">
+<meta name="description" content="아직 부족한 것도 많고 정확한 지식이 아닐 수도 있지만 차근차근 정리해보고자 올려본다.">
+<meta property="og:description" content="아직 부족한 것도 많고 정확한 지식이 아닐 수도 있지만 차근차근 정리해보고자 올려본다.">
+<link rel="canonical" href="http://localhost:4000/linux/unix/2022/07/27/server-ubunto.html">
+<meta property="og:url" content="http://localhost:4000/linux/unix/2022/07/27/server-ubunto.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-07T00:00:00+09:00">
+<meta property="article:published_time" content="2022-07-27T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) DB RDMBS 3">
+<meta property="twitter:title" content="Permission denied (publickey) 우분투 에러 조치">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-07T00:00:00+09:00","datePublished":"2022-10-07T00:00:00+09:00","description":"벌써 금요일이다. 어제 공부를 열심히한 덕인가? 내용이 머릿속에서 정리가 된 상태로 일어났다.","headline":"TIL) DB RDMBS 3","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/07/til.html"},"url":"http://localhost:4000/til/2022/10/07/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-07-27T00:00:00+09:00","datePublished":"2022-07-27T00:00:00+09:00","description":"아직 부족한 것도 많고 정확한 지식이 아닐 수도 있지만 차근차근 정리해보고자 올려본다.","headline":"Permission denied (publickey) 우분투 에러 조치","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/linux/unix/2022/07/27/server-ubunto.html"},"url":"http://localhost:4000/linux/unix/2022/07/27/server-ubunto.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) DB RDMBS 3</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+49</h2>
+  <h1 class="post-title p-name" itemprop="name headline">Permission denied (publickey) 우분투 에러 조치</h1>
+  <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-07T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 07, 2022
+    <time class="dt-published" datetime="2022-07-27T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jul 27, 2022
     </time>
 
     
@@ -676,350 +676,214 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>벌써 금요일이다.<br>
-어제 공부를 열심히한 덕인가?<br>
-내용이 머릿속에서 정리가 된 상태로 일어났다.</p>
+      <p>아직 부족한 것도 많고 정확한 지식이 아닐 수도 있지만<br>
+차근차근 정리해보고자 올려본다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQvuZVY5YLg2gzW8Gl1_NYrq648uZdNfedr-mVAtza4pMJ15bP5tc-eGx-RDU8IWGdiLg3_yuk=w1920-h921" align="left" width="300px"></p>
+<p>우선 맥북 M1을 사용하고 있고<br>
+EC2에서 우분투를 구매해서 배포해보려고한다.<br>
+EC2 인스턴스를 생성하면<br>
+.pem 파일의 키페어를 받게되고 이걸로 접속을하면된다.</p>
 
-<p><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
+<p><strong>내 EC2 우분투 접속 명령</strong></p>
 
-<p>정신이 맑으니 오늘은 퐈이팅해서 공부열심히하고<br>
-주말에 천천히 복습하면서 쉬어야겠다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>400 키파일.pem
+ssh <span class="nt">-i</span> 키파일.pem ubuntu@내주소
+</code></pre></div></div>
 
-<hr>
+<p>키파일.pem : 인스턴스 생성시 등록한 키페어를 올려다 놓으면 <br>
+<code class="language-plaintext highlighter-rouge">/Users/ljh/Desktop/~~</code> 이런식으로 경로가 불러와집니다.<br>
+내주소 : 54.180.104.68과 같은 방식으로 인스턴스의 IPv4 주소를 써주시면 됩니다.</p>
 
-<p>오늘도 ERD관련해서 공부를 진행한다.<br>
-어제와 다른점은 ERD Cloud를 이용해서 그렸다면<br>
-이번엔 SQL 문법으로 테이블을 만들고<br>
-레코드값 넣고 타입정하고 이런 것들을 쿼리를 날려<br>
-최종적으로 어제 했던 것과 같이 ERD를 완성시키는 날이다.</p>
+<h2 id="본론"><strong>본론</strong></h2>
 
-<p>우선 MySQL WorkBench를 이용해<br>
-문법을 이용해 만들어 보는 연습을 해보았다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO5mxdALoh_qyYSNlGFvrZ3xcP7I0znYaf5bjB_otxkC8N7CS27SUOGBgJdGR92hnc7XdVhTKb7dIYC7vw-lQzc-IWGAA=w1185-h864" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>예전에는 정상적으로 우분투 화면까지 넘어갔는데…<br>
+갑자기 Permission denied (publickey) 에러가 나오면서<br>
+우분투에 접속이 되지않는 현상이 발생했다….</p>
+
+<p>Github ssh key를 만지면서 뭔가 꼬인 것 같아서<br>
+재정비를 해야겠다고 생각을 했다.</p>
+
+<p>아마 통상적인 방법으로는<br>
+PasswordAuthentication를 Yes로 변경해주는 <br>
+방법이 가장 많이 구글링될 것이다.</p>
+
+<p>나와 같은 경우는 전부 제대로 설정은되어있고<br>
+무언가 GitHub ssh key를 만들면서 id_rsa가아닌 다른 키로<br>
+인식하고 있는 그런느낌이다…</p>
+
+<h2 id="조치-시작"><strong>조치 시작</strong></h2>
+
+<p>처음으로 우선 내가가지고 있는 ssh key가 무엇이 있는지 조회해봤다.</p>
+
+<p><strong>현재 키 조회하기</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> ~/.ssh
+</code></pre></div></div>
+
+<p>.ssh 폴더에 접근 명령어</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO0Dk8ZvLJStChwZFxcd2xsDH9qZn8OyDmaFppSODP8TD69B0ZE4Xu5jSI5Dp_rd-HZ1lmiexZuKiUNT8W3a1pJBgOMTA=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>.ssh폴더안에는 여러가지 키파일들이 있는 것 같다… 사실 어느게 어떤 역활을<br>
+하는지 명확하게 모르겠지만… 현재 내가 겪고있는 에러는<br>
+Github ssh key로 인증하려고 만들면서 문제가 발생한 것 같다.<br>
+Github Key는 위에 MycatlikesChuru-GitHub와 .pub으로된 파일이다.<br>
+(MycatlikesChuru = 제 깃허브 아이디입니다)</p>
 
 <p><br></p>
 
-<h2 id="mysql-workbench-연습"><strong>MYSQL WorkBench 연습</strong></h2>
+<p>터미널로 말고 폴더로 접근을 할 수도 있다.</p>
 
-<h3 id="테이블-생성"><strong>테이블 생성</strong></h3>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPxmOArwI-J4N2Tet7soYrnZVq_Q_q-_UGdIXAdyD_ULgiCzFnlW0nYFU8UQK_DAurbVUd5PYb8boVhiiCE33w8GacpcQ=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>기본적인 문법으로 Database를 만들고<br>
-Table과 동시에 컬럼을 만들 었다.<br>
-그냥 아무런 의미없는 테이블이다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE user (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  name varchar(255) not null,
-  email varchar(255) not null
-);
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE content (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  title varchar(255) not null,
-  body varchar(255) not null,
-  userId int not null,
-  created_at timestamp not null DEFAULT (current_timestamp),
-);
-</code></pre></div></div>
-
-<p>그러면 두 개의 테이블이 만들어졌을 것이고<br>
-conten의 userId를 FK(외래키)로 지정하여<br>
-user의 id를 참조하도록 만들었다.</p>
-
-<p>ALTER TABLE을 이용해 컬럼을 삭제하거나 추가할 수가 있는데<br>
-FOREIGN KEY라는 키워드와 REFERENCES를 이용하면<br>
-외래키를 사용할 수 있게된다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER TABLE `content` ADD FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
-</code></pre></div></div>
-
-<p>위에 구문은 content 테이블의 userId 외래키에게<br>
-user의 id를 참조하도록 추가해주는 구문이다.<br>
-영어 그대로 읽으면 좀 더 쉬운 느낌이든다.</p>
-
-<p>여기서 한가지 문제점이었던 것은<br>
-실수로 레코드에 데이터를 넣고 외래키 지정하려고 위의 명령어를<br>
-사용했을때는 오류가 발생해서 레코드값을 클리어하고</p>
-
-<p>다시 설정해주었다.</p>
+<p>Finder에서<br>
+[Command ⌘ + 방향키 윗키 ▲]를 누르시면<br>
+상위폴더로 이동하는데</p>
 
 <p><br></p>
 
-<h3 id="레코드값-추가"><strong>레코드값 추가</strong></h3>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNBHoeRLdhVU-POH7DSa21ksNTH3ViqamaC11awzIcd0s6oItQnBB0i4u_YuVQwZni_8pzl2IVDosuFyoEL7iDC7A7F0Q=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>그리고 그냥 아무런 데이터 들을 INSERT하여<br>
-레코드의 값을 채워 주었다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO content (title,body,userId) VALUES ('쿠크','세이튼?',5);
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO user (name,email) VALUES ('KIM BOM JIN','bomgin892@gmail.com');
-</code></pre></div></div>
-
-<p>값을 넣고 제대로 만들어졌는지 <br>
-user랑 content Table 조회.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSOvS-lEJeZZxZJMhv9d8_S29rfChOw46TofK0s4Gg7Lx9rHkEFw5k_RXQpoIcEXmDiTbmP0W0=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSZhr3hpt1dm-AQF94fqHIOpwitoetZUbgB4hAAsHLsZp-21tBmw-T7CTi5e2SFIMevjpvjA5k=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>조회가 잘 되는 것 같다.<br>
-여기서 배운 것은, 데이터를 삭제하면 자동증가인 id값은<br>
-지운번호 부터 시작하지 않는 다는 것과.</p>
-
-<p>timestamp라는 타입을 이용해 레코드가 생성되는 시점에<br>
-시간을 남겨주는 방법도 배웠다.</p>
+<p>사용자 이름 폴더에서<br>
+[Command ⌘ + shit + .]을 누르면 숨김폴더를 볼 수 있다.<br>
+숨김폴더에서 .ssh들어가면 내가 가지고 있는 키의 목록이 보인다.<br>
+이제 가지고 있는 키를 id_rsa키 먼저 삭제해볼 생각이다</p>
 
 <p><br></p>
 
-<h3 id="left-join"><strong>LEFT JOIN</strong></h3>
+<p><strong>id_rsa 삭제</strong></p>
 
-<p>가장 헷갈리는 JOIN 관련된 문법을 주로 연습했다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM content
-LEFT JOIN user ON content.id = user.id;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> ~/.ssh/id<span class="k">*</span>
 </code></pre></div></div>
 
-<p>우선 테이블 두개를 JOIN 해보았다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPsZTlkzPfQnnc289BRxHCoiR6CUEy8TZjKKjJFSCVgGSL74Urg2S-woTbE0rmS4HzLgKcd7lJ4vO9e7unTemny314cQg=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>LEFT                 RIGHT</p>
-
-<p>content                user</p>
-
-<p>이렇게 지정해 놓고 LEFT JOIN을 이용하였다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQWAFlkas5e12rh7yXiMVm18gzHOyiNViWneuKtacFT9jPXohbqDjM7dc5biwyGAfkvdTgTeZk=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>그렇게 되면 LEFT의 전체 요소들과 <br>
-RIGHT중 공통된 부분만 가져오는 방법이다.</p>
-
-<p>그림만 봐서는 왼쪽 TABLE만 값을 가져오는 것 아닌가?<br>
-라는 생각을 할 수 있지만, 전혀 다르다.</p>
-
-<p>왼쪽의 내용 + 포함된 오른쪽의 내용 까지이다.<br>
-한번 아래에서 테스트해보자.</p>
-
-<p><strong>왼쪽만 조회시</strong><br>
-<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTiKxU3U4ri7ve7JSWHTl3ShR5x3HSZzB4u16--SOJ139WQW3L87dWbU0Hp49gw2DwFDz7lWsU=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>LEFT의 있는 데이터만 조회된다.</p>
-
-<p><strong>LEFT JOIN하여 조회하기</strong><br>
-<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRTqHcAzM2b3RKC8cnRVc6DSbR4oyGpahHqB7deKdWaIxE5dnos0dl1UdaUR7kuN-J8YI4flIQ=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>왼쪽만 조회하는 것과는 다른 내용이 추가되었다.<br>
-2,3번 Id에 해당하는 데이터가 추가되었고<br>
-나머지 행은 NULL이 되어있는 모습이다.</p>
-
-<p>여기서 알수 있는점은 SELECT *를 하여 전체 열을 조회하게하였고<br>
-JOIN을 통해 두개의 열이 합쳐져서 전체 열이 표현된 모습이다.</p>
-
-<p>그런데 위에 조건에 ON content.id = user.id; 라는 조건이 붙었다.<br>
-이말과 같이 content.id와 같은 user.id만 표시하게 되는 것이다.<br>
-그래서 user에 1,2,3,4,5 id가 있지만 2,3만 추출되고<br>
-나머지는 값이 없기 때문에 null이 표시되어지는 것이다.</p>
-
-<p>여기서 만약 조건을<br>
-content.userId = user.id; 로 바꿧을때는 어떻게될까?<br>
-<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQjKYD3yYhQKDINnu_QbeO7GX7b3uhgMD1B9uG8lh03SchJfqgrGfHA5Fd-b4nMPnGL02d9tX0=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>위에서 보는 것과 같이 content의 userId에는<br>
-user의 모든 내용을 담고 있기 때문에<br>
-모든 데이터가 표시되는 모습이다.</p>
-
-<p>여기서 우리는 원하는 데이터만 SELECT를 변경해 추출할 수있다.<br>
-<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSPdKaYbcXnEnBcZ0aiCW7lSSsIwR53BqppaJT3AjdMOW-px0Z_VGB9KREGe-296Mgm5ktWZ8Y=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>SELECT *를 내가 원하는 데이터만 받도록 변경하였다.<br>
-깔끔하게 데이터가 보이는 모습이다.</p>
-
-<p>여기서 알 수 있는 얘기는 어제 배웠던 1:N 상황에서<br>
-하나의 테이블만 참조해도 모든 자원을 확인할 수 있다는 점이다.<br>
-userId라는 FK 하나를 통해서 content 테이블은<br>
-user 테이블을 참조해 데이터를 들여다보게 될 수 있는 것이다.</p>
+<p>다시 조회해보면 이렇게 삭제된 모습을 볼 수 있다.<br>
+(폴더에서 삭제해도 무방하다)</p>
 
 <p><br></p>
 
-<h3 id="inner-join"><strong>INNER JOIN</strong></h3>
+<p><strong>키 발급</strong></p>
 
-<p>이번엔 처음으로 돌아가서<br>
-INNER JOIN을 해보자</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM content
-INNER JOIN user ON content.id = user.id;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen
 </code></pre></div></div>
 
-<p>LEFT 에서 INNER만 바꾼 코드다<br>
-전체를 조회하며<br>
-조회하는 범위는 LEFT -&gt; INNER로 변경된 것이다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1OngBZCQL3owrEIqE7NFff7U1n8G94CpQ72rNK8O5rG0_CDcy-K1fcmO6sz_vcpo32yFAap40uBwJRYGMhWSknuEVhw=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>LEFT                 RIGHT</p>
-
-<p>content                user</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRVwqkuUldTkrI5tCZGl8hHm54R1yp4jhwU5oMhfmPvupP_aCVwrGkVgWIzEYaeXh1DU5j6cUA=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>즉 위와 같이 포함하게 되는 것이고</p>
-
-<p>content와 user의 데이터 중 공통으로 참조된 값만 표현한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTx-v76yqZD9LLpwvzHrz_kNndsJYxnFI3Fbpe0isoBWrmPz15KJQi8I-K08SatuAW2_QshFBo=w1920-h921" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>직접 실행하게되면 2,3번만 해당하는 데이터들만 표현되었다.<br>
-LEFT로 실행했을때는 LEFT의 레코드들이 쭉 표현되었고 <br>
-RIGHT 테이블의 레코드는 조건에 부합하는 값만 가져오고<br>
-나머지는 다 Null로 표현되었었다.</p>
-
-<p>INNER JOIN으로 표현하니 LEFT의 값들과 RIGHT와<br>
-동일한 데이터만 표시하게 되는 모습이다.</p>
-
-<p>여기까지 JOIN에 대해서 여러가지 시도해보면서<br>
-데이터에 접근하다보니까 얼추 어떻게 사용하는지 이해가 되었다.<br>
-RIGHT JOIN은 LEFT JOIN과 같은 방식이고<br>
-주로 LEFT를 사용한다고하여 다른 JOIN들을 포함해<br>
-추후에 학습해보자</p>
+<p>ssh-keygen을 입력하면 키를 발급받을 수 있다.<br>
+첫번째 질문 Enter file in which to save the key 질문에서는 그냥<br>
+엔터를 누르고 원하는 비밀번호를 2번 입력하면 위와 같이 키가 발급된다.<br>
+다시 조회를해보면 만들어진 것을 확인할 수 있을 것이다.</p>
 
 <p><br></p>
 
-<h2 id="dbdaigram-연습"><strong>DBdaigram 연습</strong></h2>
+<p><strong>발급받은키 확인</strong></p>
 
-<p><a href="https://dbdiagram.io/home">DBdiagram</a>이라는 홈페이지에서<br>
-SQL를 입력해 ERD처럼 만들 수 가 있다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+</code></pre></div></div>
 
-<p>물론 Workbench로도 작업이 가능하지만<br>
-오늘 실습에 의의는 DB GUI를 이용하지 않고<br>
-위에 홈페이지에서 진행해보는 것이니<br>
-작업을 해보자.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOBGGEQANI1GXxRtOnOhymi5qVrX2TFXbVIk3dKnHI5iIKnyvh2XpIBm4TX4gwobkvVClBbCsfTv_HV1FYmmoNuX32ydg=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>user, category, content, content_category, role 이라는<br>
-테이블을 만들어 id와 각각의 레코드를 생성한 후에<br>
-Foreign Key를 사용할 수 있도록 해주는 문제다.</p>
+<p>그러면 위 명령어를 입력해서 발급받은키의 내용을<br>
+드래그해서 복사한다음에<br>
+authorized_keys 파일에 붙여넣어주면된다.<br>
+붙여넣는 방법은 두가지가 있는데 폴더에 들어가서 직접 넣어도되고</p>
+
+<p><br></p>
+
+<p><strong>키값 authorized_keys에 넣기</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&gt;&gt;</span> ~/.ssh/authorized_keys
+</code></pre></div></div>
+
+<p>위의 터미널을 입력후 -&gt; 복사한 키값을 붙여넣고 , 줄바꿈후에 -&gt; Ctrl + D(저장)을 눌러주면 값이 들어간다.<br>
+authorized_keys파일은 위에 설명한거와같이 .ssh폴더안에 같이 들어있다.<br>
+폴더에 들어가서 값이 제대로 들어가있는걸 확인해보면된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPHPm3mhCgwqMLHJV3ZA995ilkJz5xPYmy09FSpfS_eD9qbl6eXblDC-cfyNP4Vt1S4JriPBAEn2hHHBt0Sc3a9dkTjYA=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이렇게 우선 id_rsa키를 다시 만들고<br>
+키값을 붙여넣어주었고 <br>
+이제 MycatlikesChuru-GitHub 파일과 MycatlikesChuru-GitHub.pub 라는 두개의<br>
+파일을 우선 사용하지 않기때문에 삭제를 하였다. (폴더에 접근해서 그냥 Delete시킴)</p>
+
+<p>이렇게 최종적으로 내가한 작업은</p>
 
 <ol>
-  <li>user 테이블의 Foreign Key = role.id</li>
-  <li>content 테이블의 Foreign Key = user.id</li>
-  <li>content_category 테이블의 Foreign Key = content.id</li>
-  <li>content_category 테이블의 Foreign Key = category.id</li>
+  <li>id_rsa키를 다시 발급받고</li>
+  <li>발급받은 키를 auhorzied_keys파일에 값을 붙여넣음</li>
+  <li>기존에 Git ssh key 삭제</li>
 </ol>
 
-<p>위의 조건을 토대로 작업을 진행하였다.</p>
+<p>이렇게 3개의 과정만 진행한 다음에 다시 우분투에 접속을 시도했다.</p>
 
-<p>1번은 1:N<br>
-2번은 1:N<br>
-3,4번은 N:N<br>
-의 형태로 참조가 진행되어진다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE `user` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `roledId` INT
-);
-
-CREATE TABLE `category` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL
-);
-
-CREATE TABLE `content` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `body` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT (current_timestamp),
-  `userId` varchar(255) NOT NULL
-);
-
-CREATE TABLE `content_category` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `contentId` INT NOT NULL,
-  `categoryId` INT NOT NULL
-);
-
-CREATE TABLE `role` (
-  `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL
-);
-
-ALTER TABLE `content` ADD FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
-
-ALTER TABLE `user` ADD FOREIGN KEY (`roledId`) REFERENCES `role` (`id`);
-
-ALTER TABLE `content_category` ADD FOREIGN KEY (`contentId`) REFERENCES `content` (`id`);
-
-ALTER TABLE `content_category` ADD FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`);
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>400 키파일.pem
+ssh <span class="nt">-i</span> 키파일.pem ubuntu@내주소
 </code></pre></div></div>
 
-<p>위와 같이 작성하게된다면<br>
-아래와 같이 표현되게 되어진다!!<br>
-<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQWGPu-fBWAkkSYF6PD3P7BLzH-wpJlCBWVLphgYG4aumTBqo-0N9ky843Tz44EZKgj5RqL_gA=w1920-h921" align="left"></p>
+<p>그랬더니…</p>
 
-<p><br><br><br><br><br><br><br><br><br><br></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNhleFsNeV-oZSJ__Zwjk6nT1vDSLBodB3ydIIGNEJUzJk8skhQty4P_-UyTbHWk_kBARWCKhDnFiEaHtCD1wwHv0P2Cg=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p><br></p>
+<p>정말 신기하게도 열린 내서버….!!<br>
+드디어 우분투에 접속을 완료했다….</p>
+
+<p>명확하게 무슨 문제가 일어나서 접속이 안되었는지는 파악이 안되었지만<br>
+Github ssh키로 인증을 받게 되있엇고 권한이 금지되어있었는데.<br>
+삭제를하고 id_rsa키를 새로 받았더니 작동된걸보면<br>
+우분투 인증이 Github ssh키로 인식해서 셋팅이 제대로 안된 느낌을 받았다.<br>
+후에 ssh key관련되서 어떤식으로 인증이 이루어지고 관리를 해야하는지 공부를 해봐야겠다.</p>
 
 <hr>
 
-<p>처음에 SQL을 접했을때 문법을 사용하는 것에는<br>
-무리가 없었지만 왜 사용해야하고<br>
-어떻게 활용을하며,, 관계를 정하는데 있어<br>
-너무 많은 어려움이 있었다.</p>
+<h4 id="번외로"><strong>번외로!</strong></h4>
 
-<p>RDBMS 3일차 공부를 시작하면서<br>
-공부하던게 쌓여서 그런지<br>
-어느순간 이해가 딱되서 머리가 트인 느낌이들었다.<br>
-오늘하루 공부가 잘되서 너무 기뻣고<br>
-재밋게 실습했던 것 같다.<br>
-오늘 공부는 여기서 끝!</p>
+<p>혹시나 위와 같은방법으로 했는데 해결이 안된다면<br>
+아래의 내용을 터미널에서 추가해보고 작업해보자!</p>
 
-<p><br></p>
+<p><strong>하나씩 추가하기</strong></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 엽기 떡볶이, 주먹밥</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>700 ~/.ssh
+<span class="nb">chmod </span>600 ~/.ssh/id_rsa
+<span class="nb">chmod </span>644 ~/.ssh/id_rsa.pub  
+<span class="nb">chmod </span>644 ~/.ssh/authorized_keys
+<span class="nb">chmod </span>644 ~/.ssh/known_hosts
+</code></pre></div></div>
+
+<p><strong>한방에 추가하기</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>700 ~/.ssh &amp; <span class="nb">chmod </span>600 ~/.ssh/id_rsa &amp; <span class="nb">chmod </span>644 ~/.ssh/id_rsa.pub  &amp; <span class="nb">chmod </span>644 ~/.ssh/authorized_keys &amp; <span class="nb">chmod </span>644 ~/.ssh/known_hosts
+</code></pre></div></div>
+
+<p>아래 사이트를 참고하였다!<br>
+<a href="https://github.com/rangyu/TIL/blob/master/ubuntu/SSH-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%A0%91%EC%86%8D-%EC%8B%9C-%ED%8D%BC%EB%AF%B8%EC%85%98-%EB%AC%B8%EC%A0%9C-UNPROTECTED-PRIVATE-KEY-FILE.md">참고 - rangyu님의 blog</a></p>
+
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/06/til.html" title="TIL) DB RDMBS 2">TIL) DB RDMBS 2</a><a class="next" href="/til/2022/10/11/til.html" title="TIL) Spring Basic 1">TIL) Spring Basic 1</a>
+<span></span><a class="next" href="/macos/2022/08/03/OS-macOs-1.html" title="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">맥북 업데이트 후 xcrun error invalid...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/16/til.html" title="TIL) Spring Basic 1">TIL) Java Thread, JVM</a></li>
-<li><a class="post-link" href="/til/2022/11/28/til.html" title="TIL) Spring Basic 1">TIL) Spring Security, JWT , OAuth 2 인증</a></li>
-<li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="TIL) Spring Basic 1">Spring) @JsonIgnore 사용하기</a></li>
-<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="TIL) Spring Basic 1">macOs) neofetch를 활용하여 terminal 커스터마이징</a></li>
+        <li><a class="post-link" href="/til/2022/11/24/til.html" title="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">TIL) Spring Security, JWT 사용하여 인증하기</a></li>
+<li><a class="post-link" href="/til/2022/09/23/til.html" title="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">TIL) Java 자료구조 Graph, Tree, BST</a></li>
+<li><a class="post-link" href="/til/2022/09/22/til.html" title="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">TIL) Java 자료구조 Stack, Queue</a></li>
+<li><a class="post-link" href="/til/2022/11/22/til.html" title="맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">TIL) Spring Security 3 (권한부여)</a></li>
 </ul>
     </div>
 <div class="post-comments">

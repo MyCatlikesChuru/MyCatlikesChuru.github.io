@@ -7128,6 +7128,203 @@ echo $LANG
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/spring/2022/08/03/spring-port.html">
+          Spring) Web server failed to start. Port 8080 was already in use 에러조치
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 03, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2022/08/03/spring-port.html">
+        <p>
+        매우 간단한 문제지만 조치한 내용을 적어본다.
+간혹 SpringBoot 애플리케이션 실행 시 아래와 같은 에러가 발생할 때가 있다.
+Web server failed to start. Port 8080 was already in use.
+
+
+
+8080포트가 이미 사용중이란 뜻.
+실제로 여러개의 서버를 켜두었거나.. 꺼져있지만 제대로 안꺼졌다는 뜻이다.
+
+Spotlight (⌘Command + SpaceBar)를 열어 터미널을 검색.
+
+터미널을 띄운 후 아래의 명령어입력.
+
+현재 열려있는 포트를 조회하는 명령어입니다.
+
+lsof -PiTCP -sTCP:LISTEN
+
+
+
+
+이렇게 사용중인 포트가 쭉 나온다.
+여기서 PI... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#shell">#shell</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2022/08/03/spring-json.html">
+          Spring) @JsonIgnore 사용하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Aug 03, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2022/08/03/spring-json.html">
+        <p>
+        @JsonIgone은 리턴할때 해당 Entity의 값을 숨겨주는 기능이다.
+DB에는 값이저장되지만, Json 반환을할떄 표시되지 않는다.
+
+
+
+위의 값들은
+userId, username, password, nickname, activated 이렇게 5개의 값이
+DB column으로 표시되어야한다.
+
+
+
+하나의 api를 만들어 Json으로 전부 return하게 테스트 해보았다.
+Postman으로 api실행 요청을 보내고 반환 받은 객체다.
+위의 @JsonIgnore 어노테이션을 붙인 activated만 나오지 않는 모습을 볼 수 있다.
+
+
+ <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#Spring">#Spring</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html">
           맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치
         </a>
@@ -7153,6 +7350,108 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
         </p>
       </a>
       <div class="post-tags"><a class="post-tag" href="/tags.html#macOs">#macOs</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/linux/unix/2022/07/27/server-ubunto.html">
+          Permission denied (publickey) 우분투 에러 조치
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jul 27, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/linux/unix/2022/07/27/server-ubunto.html">
+        <p>
+        아직 부족한 것도 많고 정확한 지식이 아닐 수도 있지만
+차근차근 정리해보고자 올려본다.
+
+우선 맥북 M1을 사용하고 있고
+EC2에서 우분투를 구매해서 배포해보려고한다.
+EC2 인스턴스를 생성하면
+.pem 파일의 키페어를 받게되고 이걸로 접속을하면된다.
+
+내 EC2 우분투 접속 명령
+
+sudo chmod 400 키파일.pem
+ssh -i 키파일.pem ubuntu@내주소
+
+
+키파일.pem : 인스턴스 생성시 등록한 키페어를 올려다 놓으면 
+/Users/ljh/Desktop/~~ 이런식으로 경로가 불러와집니다.
+내주소 : 54.180.104.68과 같은 방식으로 인스턴스의 IPv4 주소를 써주시면 됩니다.
+
+본론
+
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
+</div>
     </li>
 </ul>
 
@@ -7188,7 +7487,7 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
   <ul>
     <li>
       <a href="/index.html">
-        All<span>63</span>
+        All<span>66</span>
       </a>
     </li>
 
@@ -7206,8 +7505,14 @@ xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools
       </li>
     
       <li>
+        <a href="/categories.html#h-Linux/Unix">
+          Linux/Unix <span>1</span>
+        </a>
+      </li>
+    
+      <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>2</span>
+          Spring <span>4</span>
         </a>
       </li>
     
