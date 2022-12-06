@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 배포 컨테이너 Docker | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) 배포 컨테이너 Docker">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Docker">
+<meta property="og:description" content="Docker">
+<link rel="canonical" href="http://localhost:4000/til/2022/12/06/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/12/06/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-12-06T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) 배포 컨테이너 Docker">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-06T00:00:00+09:00","datePublished":"2022-12-06T00:00:00+09:00","description":"Docker","headline":"TIL) 배포 컨테이너 Docker","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/12/06/til.html"},"url":"http://localhost:4000/til/2022/12/06/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) 배포 컨테이너 Docker</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+109</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-12-06T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 06, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="docker">Docker</h2>
+
+<p>실제 선박의 컨테이너라함은 여러가지 물자들은 하나의 컨테이너에 싦어<br>
+부피,인력,물자 이동 등 엄청난 장점을 가져왔다.</p>
+
+<p>소프트웨어 측면에서도 배포하는 과정을 편하게 사용하고 여러 장점을 가지기 위해<br>
+애플리케이션을 컨테이너화할 수 있는 도커가 등장했다.<br>
+즉, 컨테이너 방식의 애플리케이션이라는 뜻은 실행환경에 <br>
+구애받지 않고 실행시킬 수 있다는 뜻이다.</p>
+
+<p>가장 많이 듣는 용어를 적어본다.</p>
+
+<ul>
+  <li>
+    <p><strong>컨테이너</strong><br>
+애플리케이션이 의존성, 네트워크 환경, 파일 시스템에 구애받지 않고<br>
+도커라는 기술 위에 실행될 수 있도록 만든 애플리케이션 상자이다.<br>
+즉, <strong>도커에 의해 관리/제공되는 애플리케이션 단위이다.</strong></p>
+  </li>
+  <li>
+    <p><strong>이미지</strong><br>
+모든 컨테이너는 이미지로 부터 생성된다.<br>
+이미지를 이용해 여러개의 컨테이너를 생성할 수 있고, 애플리케이션 <br>
+수평확장이 가능하다. 즉, <strong>도커 컨테이너를 생성하는데 사용되는 템플릿이다.</strong></p>
+  </li>
+  <li>
+    <p><strong>레지스트리</strong><br>
+이미지는 레지스트리에 저장된다. 대포적으로<br>
+Docker Hub, Amazon ECR등이 있다.<br>
+즉, <strong>도커 이미지를 저장하고 배포/공유하는데 사용한다.</strong></p>
+  </li>
+</ul>
+
+<p><br></p>
+
+<h3 id="docker-컨테이너-방식의-장점">Docker 컨테이너 방식의 장점</h3>
+
+<p><strong>1). 의존성 충돌 문제를 해결</strong><br>
+컨테이너 기술을 바탕으로 한 컴퓨터 안에 여러대의 컨테이너가 있다.<br>
+애플리케이션 실행 환경이 격리되어있다는 뜻이므로<br>
+각자 고유의 의존성을 포함하고 있다.</p>
+
+<p>그렇다면, 어떤 자원을 독립적으로 가지고 있는지 알아보자</p>
+<ol>
+  <li>프로세스<br>
+-. 특정 컨테이너에서 작동하는 프로세스는 기본적으로 그 컨테이너 안에서만 액세스 가능<br>
+-. 컨테이너 안에서 실행되는 프로세스는 다른 컨테이너의 프로세스에게 영향 X</li>
+  <li>네트워크<br>
+-. 기본으로 컨테이너 하나에 하나의 IP 주소가 할당</li>
+  <li>파일 시스템<br>
+-. 컨테이너 안에서 사용되는 파일 시스템은 구획화 되어있다.<br>
+그래서 해당 컨테이너에서의 명령이나 파일 등의 액세스를 제한 할 수 있다.</li>
+</ol>
+
+<p><br></p>
+
+<p><strong>2). 개발과 배포 환경을 일치 시켜준다.</strong><br>
+Docker를 사용하면 OS에 상관없이 즉시 애플리케이션 실행 환경을 만들 수 있다.<br>
+그리고 개발 컨테이너 위에서 진행할 경우, 모든 개발팀이 동일한 환경 하에<br>
+개발을 진행할 수 있다.</p>
+
+<p><strong>3). 수평 확장을 쉽게 해준다, 각 서버에 새로운 내용을 배포하기 쉽게 만들어준다.</strong><br>
+컨테이너 기술의 가장 큰 장점은 실행 환경의 일치이다.<br>
+엄청난 트래픽을 요구하는 애플리케이션들은 단하나의 서버가 아니라<br>
+트래픽을 분산하기 위해 프록시 서버를 운영한다고 한다.</p>
+
+<p>프록시 서버는 여러 대의 동일한 서버 중 한군데를 이용할 수 있도록 돕는데<br>
+동일한 서비스가 여러 컴퓨터에서 작동하기위해서 편리하게 사용하는 기술이 컨테이너 기술이다.</p>
+
+<p><br></p>
+
+<h3 id="docker-설치">Docker 설치</h3>
+
+<p>현재 나는 MacOS를 사용하고 있기때문에<br>
+<a href="https://docs.docker.com/desktop/install/mac-install/">Docker Mac install</a>를 접속해 도커를 설치할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOirwJaCgDYW20G-JPu9KXSWfoPXL55k_PPeZhnPzs4qxZUhExHL7cjPH110xQtywGE6J71t1n7aRJnz0k2XmPKfqNofg=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>도커 설치를 완료하면 위와 같은 애플리케이션 GUI 확인이 가능하다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nt">--version</span>
+</code></pre></div></div>
+<p>실제로 CLI로 버젼을 입력할 경우 정상적으로 설치되었으면<br>
+현재 설치된 버전이 나올 것이다.</p>
+
+<p><br></p>
+
+<h3 id="docker-사용전-명령어-보기">Docker 사용전 명령어 보기</h3>
+
+<p>Docker GUI를 이용하지 않고<br>
+<a href="https://docs.docker.com/engine/reference/commandline/container_run/">CLI</a>를 통한 연습을 진행해보려한다.</p>
+
+<p>그전에 선행되어야하는 것이 명령어를 먼저 알아야한다.</p>
+
+<h4 id="1-이미지-관련-명령어">1). 이미지 관련 명령어</h4>
+
+<p>✅ 설치된 이미지 조회하는 명령어이다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image <span class="nb">ls</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>✅ 이미지를 설치하는 방법이다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image pull 이미지이름:tag
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>✅ 설치되어 있는 이미지를 삭제하는 방법이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image <span class="nb">rm </span>이미지이름
+</code></pre></div></div>
+<p>만약 이미지를 컨테이너에 사용할 경우 삭제가 불가능하다.<br>
+컨테이너를 종료시키고 삭제 후 에 이미지를 삭제해야한다.</p>
+
+<p><br></p>
+
+<h4 id="2-컨테이너-관련-명령어">2). 컨테이너 관련 명령어</h4>
+
+<p>✅ 설치되어 있는 이미지를 삭제하는 방법이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--name</span> 컨테이너이름 <span class="nt">-p</span> 8080:80 이미지이름
+</code></pre></div></div>
+<p><strong>컨테이너 이름</strong>은 우리가 정하면 된다.</p>
+
+<p><strong>이미지 이름</strong>은 설치한 이미지의 이름을 적어주면되는데<br>
+만약 해당 이미지으 tag가 있다면 <code class="language-plaintext highlighter-rouge">이미지이름:tag</code> 를 적어줘야한다.<br>
+여기서 tag라 함은 <code class="language-plaintext highlighter-rouge">latest</code>, <code class="language-plaintext highlighter-rouge">2.0</code>이라든가의 버젼을 의미한다.</p>
+
+<p>또한 포트번호는 8080:80이라고 적어두었는데<br>
+첫번쨰 포트는 내부포트이고 두번쨰 포트는 외부포트이다.<br>
+외부에서 통신을하기 위한 통신 포트를 요청하면<br>
+컨테이너의 내부포트로 forwarding 하겠다는 의미이다.<br>
+즉, 8080포트로 요청할 경우 80으로 포트포워딩 하겠다는 뜻이다.<br>
+<a href="https://ooeunz.tistory.com/104">Port Forwarding 참고 - ooeunz님 블로그</a></p>
+
+<p><br></p>
+
+<p>✅ 컨테이너 리스트 출력</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container ps <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>✅ 실행중인 컨테이너 리스트 출력</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span>
+</code></pre></div></div>
+<p>컨테이너 리스트 출려과는 다르다. 현재 start되어있는 컨테이너만 출력되어진다.</p>
+
+<p><br></p>
+
+<p>✅ 컨테이너 실행</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container start 컨테이너이름
+</code></pre></div></div>
+<p>컨테이너를 백그라운드 상태로 실행시킬 수 있는 명령어이다.</p>
+
+<p><br></p>
+
+<p>✅ 컨테이너 중지</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container stop 컨테이너이름
+</code></pre></div></div>
+<p>살행 중인 컨테이너를 종료하는 명령어이다.</p>
+
+<p><br></p>
+
+<p>✅ 컨테이너 삭제</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">rm </span>컨테이너이름
+</code></pre></div></div>
+<p>컨테이너를 중지시킨다음, 해당 컨테이너가 필요없을 경우<br>
+해당 명령얼 컨테이너를 삭제할 수 있다.</p>
+
+<p><br></p>
+
+<p>✅ 컨테이너 내부 접근</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> 컨테이너이름 bash
+</code></pre></div></div>
+<p>선택한 컨테이너를 bash CLI로 접근할 수 있다.</p>
+
+<p><br></p>
+
+<p>✅ 현재 폴더의 파일을 컨테이너의 경로에 복사하기</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">cp</span> ./ 컨테이너이름:/경로
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>✅ 구동중인 컨테이너를 지정해 이미지로 만들기</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container commit 컨테이너이름 이미지이름:tag
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>✅ 이미지 빌드하는 방법</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> 이미지이름:tag <span class="nb">.</span> 
+</code></pre></div></div>
+<p>Dockerfile을 만들고, Dockerfile 대로 이미지를 build하는 방법이다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM httpd:2.4 
+COPY ./ /usr/local/apache2/htdocs/
+</code></pre></div></div>
+<p>와 같은 형식으로 Dockerfile을 만든다.<br>
+위에 내용을 해석하자면 베이스 이미지르 httpd로 사용<br>
+현재경로에(./) 있는 파일들을 특정경로(/usr/local/apache2/htdocs/)로 이동한다.</p>
+
+<p>이렇게 빌드된 이미지를 이제 컨테이너로 사용할 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="docker-사용해보기">Docker 사용해보기</h3>
+
+<p>순서는 레지스트리에서 이미지를 받고 컨테이너를 만들면된다.<br>
+그리고 해당 컨테이너 주소로 접속해 우리가 하려고하는 <br>
+애플리케이션의 테스트가 가능하다.</p>
+
+<h4 id="hello-docker">Hello docker</h4>
+<p>우선 만들어 놓은 프로젝트가 없으니<br>
+간단한 이미지 부터 사용해보려한다.</p>
+
+<p><a href="https://hub.docker.com/">dockerhub</a>에서 여러가지 이미지를 받을 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOVWTMjVY1qXqFAq126SrK8teCYWrYjuD9AUm4P7X5-jZFdC34n7mts1L9tvQHKnubRGziozwnzaI33PP8bx462unP0xQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>그 중 귀여운 고래화면을 띄워주는 <code class="language-plaintext highlighter-rouge">docker/whalesay</code>를 검색해보자<br>
+검색해보면 오른쪽에 커맨드로 도커를 가져올 수 있는 명령어가 있고<br>
+사용 방법에 대한 내용이 쭉 나와 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull docker/whalesay
+</code></pre></div></div>
+<p>를 입력해주면 해당 이미지를 다운 받는다</p>
+
+<p>그리고 컨테이너를 시작시켜주는 명령어를 사용하면 된다.<br>
+해당 이미지에선 사용하는 방법을 설명해준다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run docker/whalesay cowsay boo
+</code></pre></div></div>
+<p>를 입력하게 되면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> _____
+&lt; boo <span class="o">&gt;</span>
+ <span class="nt">-----</span>
+    <span class="se">\</span>
+     <span class="se">\</span>
+      <span class="se">\</span>
+                    <span class="c">##        .</span>
+              <span class="c">## ## ##       ==</span>
+           <span class="c">## ## ## ##      ===</span>
+       /<span class="s2">""""""""""""""""</span>___/ <span class="o">===</span>
+  ~~~ <span class="o">{</span>~~ ~~~~ ~~~ ~~~~ ~~ ~ /  <span class="o">===</span>- ~~~
+       <span class="se">\_</span>_____ o          __/
+        <span class="se">\ </span>   <span class="se">\ </span>       __/
+          <span class="se">\_</span>___<span class="se">\_</span>_____/
+</code></pre></div></div>
+<p>이러한 귀여운 고래 모습을 볼 수 있다.</p>
+
+<p>이제 간단한 이미지를 다운받아 사용까지 해보았다.<br>
+삭제를 하려면 컨테이너에서 먼저 삭제한다음<br>
+이미지를 삭제해주면 된다.</p>
+
+<p><br></p>
+
+<h4 id="httpd-사용해보기">httpd 사용해보기</h4>
+
+<p>이제 본격적으로 사용해보자 homebrew <code class="language-plaintext highlighter-rouge">httpd</code>를 사용하듯<br>
+Apache HTTP Server인 <code class="language-plaintext highlighter-rouge">httpd</code> 이미지를 이용해<br>
+웹서버를 띄워 볼 수 도 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">-p</span> 818:80 httpd
+</code></pre></div></div>
+<p>test라는 이름의 컨테이너로 818포트를 80포트로 포워딩하게 해두었다.<br>
+httpd의 기본포트는 80번으로 설정되어있다.</p>
+
+<p>해당 컨테이너를 실행한 후에 <code class="language-plaintext highlighter-rouge">http://localhost:818</code>로 접속하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNFNMWOpsHkODxYQxJgNRxLj1AeHg2F0fO44DfPsxGt3X1MLhhs0yKVwVkF5SiESv9ODhQJ4xY0Mpgki2MHFCrIEQgc=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>기존에 Apache HTTP Server를 띄우는 것처럼<br>
+기본 html인 It works!가 확인이 가능하다.</p>
+
+<p><br></p>
+
+<h4 id="httpd-서버에-프로그램-올리기">httpd 서버에 프로그램 올리기</h4>
+
+<p>이제 여기서 우리가 해당 컨테이너에 프로그램을 넣을 수 있다.<br>
+예를 들어 <code class="language-plaintext highlighter-rouge">팩맨 게임</code>을 해당 웹서버에 올린다고 가정하자.<br>
+(해당 게임 프로그램은 <a href="https://github.com/daleharvey/pacman">pacman github</a>에서 클론 받을 수 있다.)</p>
+
+<p>방법은 2가지 정도가 있다.<br>
+첫번째 방법은 현재 컨테이너에다가 파일을 복사하는 방법과<br>
+두번째 방법은 Dockerfile을 이용해 이미지를 다시만든다음에 컨테이너로 만들면된다.</p>
+
+<p>첫번째 방법 부터해보자<br>
+현재 만들어둔 test 컨테이너 안에 httpd 경로에 파일을 복사하면된다.<br>
+실제로 컨테이너를 접속해보면 <code class="language-plaintext highlighter-rouge">/usr/local/apache2/htdocs/</code>경로에<br>
+<code class="language-plaintext highlighter-rouge">index.html</code>파일이 있는 것을 볼 수 있다. 해당 파일은 It works! 파일이다.<br>
+해당 경로에 내가 올리려는 <code class="language-plaintext highlighter-rouge">팩맨 게임</code>의 <code class="language-plaintext highlighter-rouge">index.html</code>과 여러 파일들을 넣어주면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">cp</span> ./ <span class="nb">test</span>:/usr/local/apache2/htdocs/
+</code></pre></div></div>
+<p>이제 내가가지고 있는 프로그램 파일 경로로 접속해<br>
+해당 명령어를 입력해주면 해당 경로에 있는 파일들이<br>
+전부 test 컨테이너의 해당 경로로 복사되어진다.</p>
+
+<p>그리고 다시 컨테이너를 시작해준다면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container start <span class="nb">test</span>
+</code></pre></div></div>
+<p>백그라운드로 실행 될 것이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNlwmnQmaBw58r6RaXn6r0cqk2S5p1PNxjI-p9i_FN0dP0id_Gk2udyi8M6KHtwMnNn9bcC67lLPdIL1OD4gr_HuSlLtA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><code class="language-plaintext highlighter-rouge">팩맨 게임</code>이 실제로 동작하는 것을 볼 수 있다.</p>
+
+<p><br></p>
+
+<p>두번째 방법으로는
+<code class="language-plaintext highlighter-rouge">팩맨 게임</code>폴더에 <code class="language-plaintext highlighter-rouge">Dockerfile</code>이라는 <br>
+이름의 파일을 만든다. 그리고 해당 파일 안에는</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM httpd:2.4
+COPY ./ /usr/local/apache2/htdocs/
+</code></pre></div></div>
+<p>와 같은 내용을 넣어준다. (설명은 명령어에서 설명했으므로 생략)</p>
+
+<p>그리고 build 명령어를 이용해서 이미지를 빌드할 수 있다.<br>
+명령어를 실행할때는 <code class="language-plaintext highlighter-rouge">Dockerfile</code> 경로에서 입력해야한다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> pacman:2.0 <span class="nb">.</span>
+</code></pre></div></div>
+<p>build 명령어를 실행하면, 이미지 파일이 생성되고<br>
+해당 이미지 파일로 이제 컨테이너를 실행시키면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--name</span> pacmangametest <span class="nt">-p</span> 818:80 pacman:2.0
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>이렇게 CLI로 명령어로 docker를 사용하는 방법을<br>
+간단하게 알아보았다. 실제로 우리가 만든 이미지와 컨테이너들을<br>
+처음에 설치했던 GUI에서 확인이 가능하다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo7gNUnHKL8zeCRsYvKbyYYsOo7MetSL7gXnBiWBaVDpwCNjPW8nF03SW8upgiGOE4S8bBqLdOrxDnnkH9PJTQvp9lWA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><br></p>
+
+<hr>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 삼첩분식</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/12/05/til.html" title="TIL) Cloud 운영 환경 구성 2">TIL) Cloud 운영 환경 구성 2...</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/18/til.html" title="">TIL) Spring AOP 2</a></li>
+<li><a class="post-link" href="/til/2022/11/01/til.html" title="">TIL) Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
+<li><a class="post-link" href="/til/2022/11/22/til.html" title="">TIL) Spring Security 3 (권한부여)</a></li>
+<li><a class="post-link" href="/spring/2022/11/15/spring-mysql.html" title="">Spring) MySQL Local 연동 하기</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
