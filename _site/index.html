@@ -710,13 +710,320 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/til/2022/12/09/til.html">
+          TIL) Cloud 운영 전략
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 09, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/12/09/til.html">
+        <p>
+        Proxy Server
+
+프록시 서버는 클라이언트가 서버와 소통할 때
+서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록
+해주는 대리 서버라고 생각하면 간단하다.
+
+1). Forward Proxy
+
+클라이언트 가까이에 위치한 프록시 서버다.
+클라이언트를 대신해 서버에 요청을 전달해준다.
+
+
+
+장점
+
+  캐싱을 통해 빠른 서비스 이용이 가능하다
+  보안 (서버에서 프록시서버 IP를 받기때문에 클라이언트 IP를 숨길 수 있다)
+
+
+
+
+2). Reverse Proxy
+
+서버 가까이에 위치한 프록시 서버다.
+서버를 대신해서 클라이언트에 응답을 제공해준다.
+
+
+
+
+  분산처리 (여러대의 서버로 요청을 나누어 전... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/12/08/til.html">
+          TIL) 배포 자동화 GitHub Actions
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 08, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/12/08/til.html">
+        <p>
+        Github Action
+
+오늘은 GitHub Actions라는 빌드, 테스트 및 배포 파이프라인을
+자동화할 수 있는 CI/CD 플랫폼을 배워보려한다.
+
+Pull Request나 push 같은 이벤트를 트리거로 Workflow를 구성할 수 있다.
+Workflow는 하나 이상의 작업이 실행되는 자동화 프로세스로, 각 작업은 자체 가상 머신
+또는 컨테이너 내부에서 실행된다.
+
+
+
+Github Actions를 통한 자동화 배포 Flow
+
+
+
+
+  레포지토리에 변화가 생기면 Github Actions 작동
+  프로젝트 빌드 결과물(.jar) S3로 전송 및 저장
+  CodeDeploy로 배포 명령
+  프로젝트 빌드 결과물... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/12/07/til.html">
+          TIL) 배포 자동화 AWS Pipeline
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/12/07/til.html">
+        <p>
+        배포 자동화
+말그대로 배포 자동화란 기존에 배포를 위한 복잡한 작업을
+클릭 혹은 명령어 입력을 통해 전체 배포 과정을 자동으로 진행하는 과정이다.
+
+배포 자동화 파이프 라인
+파이프 라인이라하면, 이전에 Stream API 공부할 때
+들어보았었다. 무언가 연결해준다는 의미를 가지고 있었다.
+배포 자동화에서 파이프 라인은 소스 코드의 관리부터 실제 서비스로의
+배포 과정을 연결하는 구조를 뜻한다. 파이프라인은 전체 배포 과정을
+여러 Stage(단계)로 분리한다. 가장 많이 쓰이는 3가지를 알아보자
+
+
+
+
+  Source 단계
+원격 저장소에 관리되고 있는 소스 코드에 변경 사항이 일어날 경우
+이를 감지하고 다음 단계로 전... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/til/2022/12/06/til.html">
           TIL) 배포 컨테이너 Docker
         </a>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 06, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/06/til.html">
         <p>
@@ -7889,7 +8196,7 @@ ssh -i 키파일.pem ubuntu@내주소
   <ul>
     <li>
       <a href="/index.html">
-        All<span>70</span>
+        All<span>73</span>
       </a>
     </li>
 
@@ -7920,7 +8227,7 @@ ssh -i 키파일.pem ubuntu@내주소
     
       <li>
         <a href="/categories.html#h-TIL">
-          TIL <span>58</span>
+          TIL <span>61</span>
         </a>
       </li>
     

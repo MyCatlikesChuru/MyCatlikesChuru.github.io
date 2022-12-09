@@ -1,4 +1,679 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-06T22:15:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) 배포 컨테이너 Docker</title><link href="http://localhost:4000/til/2022/12/06/til.html" rel="alternate" type="text/html" title="TIL) 배포 컨테이너 Docker" /><published>2022-12-06T00:00:00+09:00</published><updated>2022-12-06T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/06/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/06/til.html"><![CDATA[<h2 id="docker">Docker</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-09T15:44:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Cloud 운영 전략</title><link href="http://localhost:4000/til/2022/12/09/til.html" rel="alternate" type="text/html" title="TIL) Cloud 운영 전략" /><published>2022-12-09T00:00:00+09:00</published><updated>2022-12-09T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/09/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/09/til.html"><![CDATA[<h3 id="proxy-server">Proxy Server</h3>
+
+<p>프록시 서버는 클라이언트가 서버와 소통할 때<br />
+서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록<br />
+해주는 대리 서버라고 생각하면 간단하다.</p>
+
+<p><strong>1). Forward Proxy</strong></p>
+
+<p>클라이언트 가까이에 위치한 프록시 서버다.<br />
+클라이언트를 대신해 서버에 요청을 전달해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMnENrT4W97MGhsCoY41GXXR2exz07o-Ftd6n5xNT5FsDCQA2-bKk1EkIPg1xG3Ziuonj4jBh9yFy3kLW35p_mYG1d7=w1920-h921" alt="image" class="align-left" style="max-width: 80%" /></p>
+
+<p>장점</p>
+<ul>
+  <li>캐싱을 통해 빠른 서비스 이용이 가능하다</li>
+  <li>보안 (서버에서 프록시서버 IP를 받기때문에 클라이언트 IP를 숨길 수 있다)</li>
+</ul>
+
+<p><br /></p>
+
+<p><strong>2). Reverse Proxy</strong></p>
+
+<p>서버 가까이에 위치한 프록시 서버다.<br />
+서버를 대신해서 클라이언트에 응답을 제공해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN3VUWC1TvwBt7n1ovAf-TPeX_VITPkt4aYr7_Nuf273yVBYeaq0oUo5sHfd-Npoe-w3HAY6kaY792Baqa5L01NYcYW=w1920-h921" alt="image" class="align-left" style="max-width: 80%" /></p>
+
+<ul>
+  <li>분산처리 (여러대의 서버로 요청을 나누어 전달 후 처리, ex) 로드밸랜서)</li>
+  <li>보안 (클라이언트에게 서버 IP가 노출되지 않는다)</li>
+</ul>
+
+<p><br /></p>
+
+<h3 id="load-balancer">Load Balancer</h3>
+<p>로드 밸런서는 서버에 가해지는 부하(Load)를 분산(Balance) 해주는<br />
+장치 또는 기술을 통칭한다.</p>
+
+<p>하나의 서버에 클라이언트의 잦은 요청이 있으면<br />
+서버의 과부하가 온다. 과부하로 인해서 서버가 원할하게 서비스를 제공하지<br />
+못하는 경우가 발생하기 때문에, 이와 같은 문제를 해결하기 위한<br />
+로드 밸린스 방식으로는 크게 2가지가 존재한다.</p>
+
+<p><br /></p>
+
+<p><strong>✅ 로드 밸런서 방식</strong></p>
+
+<p><strong>1). Scale up</strong><br />
+물리적으로 서버의 사양을 높이는 하드웨어적 방법이다.<br />
+서버 수를 늘리지 않고 프로그램 구현있어 변화가 필요없다는 장점이 있다.</p>
+
+<p>하지만 굉장히 높은 비용이 발생하고, 하드웨어의 업그레이드는<br />
+한계가 있다는 단점이 있다.</p>
+
+<p><strong>2). Scale out</strong><br />
+서버의 갯수를 늘려 서버의 줄 부하를 분산시키는 방법이다.<br />
+많은 요청이 오더라도 여러대의 서버가 나눠서 처리를 하기 떄문에<br />
+서버의 사양을 높이지 않고도 비교적 저렴한 방법으로 부하를 처리할 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>✅ 로드 밸런서 알고리즘</strong></p>
+
+<p><strong>1). 라운드로빈 방식 (Round Robin Method)</strong><br />
+서버에 들어온 요청을 순서대로 돌아가며 배정하는 방식</p>
+
+<p><strong>2). 가중 라운드로빈 방식 (Weighted Round Robin Method)</strong><br />
+각각의 서버마다 가중치를 매기고 가중치가 높은 서버에 클라이언트 요청을 우선 배분하는 방식이다.</p>
+
+<p><strong>3). IP 해시 방식 (IP Hash Method)</strong><br />
+클라이언트의 IP 주소를 특정 서버로 매핑하여 요청을 처리하는 방식이다.</p>
+
+<p><strong>4). 최소 연결 방식 (Least Connection Method)</strong><br />
+요청이 들어온 시점에 가장 적은 연결상태를 보이는 서버에 우선적으로 트래픽을 배분하는 방식이다.</p>
+
+<p><strong>5). 최소 리스폰타임 (Least Response Time Method)</strong><br />
+서버에 현재 연결 상태와 응답시긴을 모두 고려하여 트래픽을 배분하는 방식이다.</p>
+
+<p><br /></p>
+
+<p><strong>✅ 로드 밸런서 종류</strong></p>
+
+<p>로드 벨런서는 클라이언트의 요청을 어떤 것을 기준으로<br />
+분산시키느냐에 따라 종류가 나눠진다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">로드 밸런서 종류</th>
+      <th style="text-align: left">로드 밸런싱의 기준</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">L2</td>
+      <td style="text-align: left">데이터 전송 계층에서 Mac 주소를 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L3</td>
+      <td style="text-align: left">네트워크 계층에서 IP 주소를 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L4</td>
+      <td style="text-align: left">전송 계층에서 IP주소와 Port를 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L7</td>
+      <td style="text-align: left">응용 계층에서 클라이언트의 요청을 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>✅ Auto Scaling</strong></p>
+
+<p>오토 스케일링은 Scale out 방식으로 서버를 증설할 때<br />
+자동으로 서버를 관리해주는 기능이다.<br />
+클라이언트의 요청이 많아져 서버의 처리 요구량이 증가하면 새 리소스를<br />
+자동으로 추하고 반대로 처리 요구량이 줄어들면 리소스를 감소시켜<br />
+적절한 분산 환경을 만들어준다.</p>
+
+<p><br /></p>
+
+<h3 id="web-server">Web Server</h3>
+
+<h4 id="tomcat">Tomcat</h4>
+
+<p>톰캣은 스프링 학습하면서도 많이 보았을 것이다.<br />
+Apache 회사에서 개발한 서블릿 컨테이너만 있는 오픈소스 웹 애플리케이션 서비이다.</p>
+
+<p>우리가 흔히 <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> 의존라이브러리를 설정해주면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM9BsZsYaMRKMNzpvRyIJ8x1e_QHfIL7G3lRFVPR5032Zy9WiYHkN968M8hq7geCpfSYH9AC0G8N496-KSCb84A34sepQ=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>외부 라이브러리에 추가된 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<h4 id="jetty">Jetty</h4>
+
+<p>제티는 이클립스 재단의 HTTP 서버이자 자바 서블릿 컨테이너이다.<br />
+우리는 스프링 웹에 내장되어 있는 톰켓을 사용했지만<br />
+Jetty 서버로 변경하여 사용하는 것도 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+	<span class="n">implementation</span> <span class="o">(</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">exclude</span> <span class="nl">module:</span> <span class="err">'</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">tomcat</span><span class="err">'</span>
+	<span class="o">}</span>
+	<span class="n">implementation</span> <span class="o">(</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">jetty</span><span class="err">'</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>기존의 톰켓 서버를 제외시키고, Jetty의 의존라이브러리를 추가해주면된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM4Q_56HQcx6ER0D9G9vc_AzQ_8_XrDREbC2LuRI1onRPzYvqLRzIIAG9jqfKepfooEmAcKuLKWqQLqjckdnKhxsUCs=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>gradle 리로드완료하면 외부라이브러리에서 Tomcat은 없어지고<br />
+jetty가 추가된 모습을 확인할 수가 있다.</p>
+
+<p>마찬가지로 애플리케이션을 로컬에서 실행하면 <br />
+콘솔에 <code class="language-plaintext highlighter-rouge">Jetty started on port(s) 8080</code>를 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<h4 id="nginx-proxy-server">NginX (Proxy Server)</h4>
+
+<p>NginX는 가볍고 높은 성능을 보이는 오픈소스 웹 서버 소프트웨어이다.<br />
+Tomcat과 Jetty가 Java 서블릿 컨테이너 혹은 웹 애플리케이션 서버였다면<br />
+NginX는 웹 서버로 클라이언트에게 정적 리소스를 빠르게 응답하기 위한 웹서버로 사용할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOG2uzsclZ4QWPxVAe_uxKcedgoaUBgThcMRAT424RV8K7dLYr9RTnqxzVnbtWUkm6Ovs1fmsRs7A7EAgNcEovLGs2bTA=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같은 구조를 만든다고 가정하고 로컬환경에서 테스트를 해보자</p>
+
+<p>MacOs 기준으로 설명해본다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>nginx
+</code></pre></div></div>
+<p>homebrew를 이용해 nginx를 설치해준다.<br />
+설치가 완료되면 <code class="language-plaintext highlighter-rouge">brew list</code> 명령어로 설치리스트를 확인할 수 있다.</p>
+
+<p>NginX 서버를 실행시키는 방법은</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services start nginx
+</code></pre></div></div>
+<p>해당 명령어를 입력하면 서버가 실행된다.<br />
+MacOS기준으로 기본 포트는 <code class="language-plaintext highlighter-rouge">localhost:8080</code>로 접속이 가능하다. 접속 성공 시에는 콘솔에  <br />
+<code class="language-plaintext highlighter-rouge">==&gt; Successfully started nginx (label: homebrew.mxcl.nginx)</code><br />
+해당 문구를 확인할 수 있다.</p>
+
+<p>만약 서버를 종료하고 싶다면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services stop nginx
+</code></pre></div></div>
+<p>해당 명령어를 입력해주면 된다.</p>
+
+<p>당연하게도 포트 변경도 가능하다.<br />
+<code class="language-plaintext highlighter-rouge">nginx.conf</code>파일을 찾아서 변경해주면 된다.<br />
+homebrew로 설치하였다면 <code class="language-plaintext highlighter-rouge">/opt/homebrew/etc/nginx/nginx.conf</code><br />
+해당 경로에 존재할 확률이 높다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNeZvcQvQB3AXd4W2johu0UXke69vIktUKMB9ZCIWk3-U1-ZZEMEqf1zJcXXLqtOzRARHIow3uCQYvxVJevdtJorh-w=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>해당 파일을 vi, nano 편집기로 수정하여도 되고<br />
+직접 열어 수정해도 된다.</p>
+
+<p>파일에서 http &gt; server &gt; listen의 포트번호가<br />
+8080으로 되어있을 텐데 해당 포트를 바꿔주면 된다.<br />
+나는 80으로 변경하여 사용했다.</p>
+
+<p>그리고 location에서 proxy_pass 관련 내용을 추가해주면 된다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+		listen       80; # 포트 변경
+...
+		location / {
+				...
+				proxy_pass http://localhost:8080; # 요청을 8080 포트로 넘깁니다.
+				proxy_set_header X-Real-IP $remote_addr;
+				proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+				proxy_set_header Host $http_host;
+		}
+}
+</code></pre></div></div>
+
+<p>다시 nginx를 실행 시키고, 스프링 부트를 실행시킨다음<br />
+<code class="language-plaintext highlighter-rouge">localhost:80</code>에 접속 요청을 하면<br />
+SpringBoot로 서버를 띄운 화면으로 넘어가는 것을 확인할 수 있을 것이다.</p>
+
+<p><br /></p>
+
+<h4 id="nginx-load-balancer">NginX (Load Balancer)</h4>
+
+<p>위에서 NginX로 프록시 서버를 만들어서 Spring Web 서버와 연결해보는 것 까지 해보았다.<br />
+NginX를 이용해 로컬환경에서 로드 벨런싱을 구성할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPbhOAOVSac7VnsgOd7t4bBzA3D7UlzJQGluLPU_4874TJYacn9Jp7MvB4AuwI0cKCtT3kMfDyslCcYClK7J6f4iQ0b=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>해당 구성도 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일의 설정을 변경해서<br />
+로드벨런싱이 되도록 구성할 수 있다.<br />
+<a href="https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/">NginX 로드벨런싱 레퍼런스</a>를 참고해서 작성해보자</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+http {
+    ...
+    
+    # 로드 벨런싱 테스트를 위한 추가 (22.12.09)
+    upstream backend {
+        server localhost:8080;
+        server localhost:8081;
+    }
+    # 여기 위까지 추가
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+	    
+	    # 로드 밸런싱 테스트를 위한 추가 (22.12.09)
+	    proxy_pass http://backend;    
+	    
+        }
+        ...
+    }
+    ...
+}
+</code></pre></div></div>
+<p>로드 벨런싱을 위한 추가라고 붙은 주석이 달린 곳을 보면된다.<br />
+스프링 톰켓 서버를 8080, 8081로 애플리케이션으로 실행 시켜둔 다음에<br />
+nginx 서버를 80으로 실행 시키고 접속 요청을 하였을 경우</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMKVdGhcGq-yZafA-Yn63bYoQPXPy66rpCBac1Xkzm4czEkxlMaLbtVs-uIpxJ9Jb5zrusAmMAHT38Mlfcu0c7sjJ6z_A=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이렇게 작성한 화면이 띄워지게 된다.<br />
+여기서 화면을 구분하기 위해 PID값을 추가해 줬다.<br />
+보면 알 수 있듯이 2개의 서버중 33861 PID 값을 가진 화면을 불러왔다.</p>
+
+<p>여러번 새로고침을 반복하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPOoMHE0tlxe7V1CdRoQCdJmIN7tcTL1QwqUY4OwiudZff34WNG0Ss4s1HVGHXJyqp6vwdzWDNhjx6epx8Qh4RgGDBycw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이번엔 33818 PID 값을 가진 화면을 불러왔다.<br />
+이렇게 클라이언트에서 nginx 서버에 요청 시<br />
+로드 벨런싱이 적용되어 동작하는걸 눈으로 확인해 볼 수 있다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>이렇게 오늘은 클라우드 운영 전략에 대해 간단하게 알아보았다.<br />
+백엔드 공부를 시작하면서 늘 걱정이었던게<br />
+서버가 터지는 것을 어떻게 방지하지? 라는 의문이 있었고<br />
+환경적으로 이렇게 설정할 수 있구나라는걸 많이 배운 것 같다.</p>
+
+<p>이러한 전략들 외에 실제로 웹 요청이 많을때 프로그램 코드적으로는<br />
+어떻게 해야 잘 짤 수 있을까도 많이 고민해보면 좋을 것 같다. (WebFlux라든가..)</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 간장계란밥, 김치찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[Proxy Server]]></summary></entry><entry><title type="html">TIL) 배포 자동화 GitHub Actions</title><link href="http://localhost:4000/til/2022/12/08/til.html" rel="alternate" type="text/html" title="TIL) 배포 자동화 GitHub Actions" /><published>2022-12-08T00:00:00+09:00</published><updated>2022-12-08T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/08/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/08/til.html"><![CDATA[<h2 id="github-action">Github Action</h2>
+
+<p>오늘은 GitHub Actions라는 빌드, 테스트 및 배포 파이프라인을<br />
+자동화할 수 있는 CI/CD 플랫폼을 배워보려한다.</p>
+
+<p>Pull Request나 push 같은 이벤트를 트리거로 Workflow를 구성할 수 있다.<br />
+Workflow는 하나 이상의 작업이 실행되는 자동화 프로세스로, 각 작업은 자체 가상 머신<br />
+또는 컨테이너 내부에서 실행된다.</p>
+
+<p><br /></p>
+
+<h3 id="github-actions를-통한-자동화-배포-flow">Github Actions를 통한 자동화 배포 Flow</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNS7vEzt0Vzp4__CH13v9LcmDTz7WAHn3CuXNw2JbEdcTd0Rlim8mfhT_8BX6KokJ4pPfSp7XLuV-zHGrM6KAUkfRwPag=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<ol>
+  <li>레포지토리에 변화가 생기면 Github Actions 작동</li>
+  <li>프로젝트 빌드 결과물(.jar) S3로 전송 및 저장</li>
+  <li>CodeDeploy로 배포 명령</li>
+  <li>프로젝트 빌드 결과물(.jar) CodeDeploy로 전달</li>
+  <li>EC2 배포 및 샐행</li>
+</ol>
+
+<p>GitHub Actions는 설정파일(<code class="language-plaintext highlighter-rouge">.yml</code>)에 따라 Github Repository에<br />
+특정 변동사항을 트리거로 작동된다. 트리커는 Pull Request나 push 같은 이벤트를<br />
+사용할 수 있다고 위에서 얘기 했었었다.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">main"</span> <span class="pi">]</span>
+</code></pre></div></div>
+<p>간단한 예시로 <code class="language-plaintext highlighter-rouge">main</code>브랜치에 push가 되어질때를 트리거로 사용하는 <code class="language-plaintext highlighter-rouge">.yml</code>설정이다.</p>
+
+<p>Github Actions에서 빌드를 마치고 빌드 결과물을(.jar)  AWS S3 버킷에 객체를 저장한다.<br />
+그리고 Code Deploy로 배포 명령이 내려진다.<br />
+(즉, S3는 빌드한 결과물을 저장해주는 용도로만 사용할 것이다.)</p>
+
+<p>그렇게 Code Deploy가 배포 명령을 받으면<br />
+S3에 저장되어 있던 빌드 결과물이 EC2 인스턴스로 이동한다.<br />
+그리고 <code class="language-plaintext highlighter-rouge">appspec.yml</code>파일에 설정한대로 shell script를 동작한다.</p>
+
+<p>그렇게되면 EC2에서 <code class="language-plaintext highlighter-rouge">.yml</code>,<code class="language-plaintext highlighter-rouge">.sh</code>파일들에 의해 빌드파일(<code class="language-plaintext highlighter-rouge">.jar</code>)을 실행하고<br />
+배포 결과를 로그로 남길 수 있다.<br />
+즉, EC2에서는 Code Deploy Agent의 설치와 JDK 버전 설치가 필요하다.</p>
+
+<p><br /></p>
+
+<h3 id="github-actions-생성">Github Actions 생성</h3>
+<p>이제 자동 배포과정은 위에서 알아 보았으니<br />
+Github Actions을 이용해 설정을 진행해보자.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMYNPG-u6wiQkjifVTjEQoKHtaBipydSZPQKgyZx0rYIcuXUSkJSallw1_50L0eTN2PolpzM0LN3Iq-53XpaeOGc0RISQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>테스트용으로 만든 Repository의 상단의 Actions를 들어가서<br />
+Java with Gradle을 찾아 구성을 클릭해준다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM5ES3mIxRbG_7Tv7xj6t5VmlwijcfF3hNJE-Y-6LL5Ho0UW-ryp83Wv09WSYX_zmL1A_yXR83yC5j1CYsvj7RGrvxRzw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>눌러 주고나면 상단에 <code class="language-plaintext highlighter-rouge">.yml</code>파일을 저장할 경로가 나오고<br />
+이름을 설정해 줄 수 있다. 기본이름인 <code class="language-plaintext highlighter-rouge">gradle.yml</code>로 설정 후</p>
+
+<p>하단에는 <code class="language-plaintext highlighter-rouge">gradle.yml</code> 파일에 대한 설정을 해주어야한다.<br />
+위에서 잠깐 얘기했던 변동사항 트리거 설정, JDK 설치<br />
+build한 후 압축하는 기능, AWS credentials 구성, 압축한 파일 S3 전송<br />
+CodeDeploy에게 배포 명령 등 다양한 Workflow를 설정해 줄 수 있다.</p>
+
+<p>해당 설정을 마쳤다면, Start commit 버튼을 눌러준 후 Commit new file을 눌러 주면 된다. <br />
+<code class="language-plaintext highlighter-rouge">gradle.yml</code> 파일은 Repository <code class="language-plaintext highlighter-rouge">.github/workflows</code> 경로에 저장된다.</p>
+
+<p>그리고 Actions에서 우리가 설정한 <code class="language-plaintext highlighter-rouge">gradle.yml</code> 설정대로<br />
+Workflow가 진행되는 것을 확인 할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN_vA2swoIsKid0hpogGa6K3M2HJBTtXm-GDj3Jgd5XETM9wAWdxUNkQyJXVJNWW3jWBSsFBStT6Zi3nWTmNAZJ_xD8mQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>모든 과정이 완료되면 위와 같이 녹색으로 표시가 된다.<br />
+이제 S3에 빌드파일 객체가 전달되었을 것이고<br />
+Code Deploy의 작동을 모아놓는 <code class="language-plaintext highlighter-rouge">appspec.yml</code>설정이 제대로 되어있고<br />
+script <code class="language-plaintext highlighter-rouge">.sh</code>들의 코드가 정상적으로 들어가 있다면<br />
+EC2에 정상적인 배포가 자동으로 이루어졌을 것이다.</p>
+
+<p>Github Actions를 설정하기전에</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOCCMyhm1hmET_5cP4ljHyaJO7PsnSF7BHDYz2UDXIXk_bnHjHRXcJiInrmSFkwX5vihtTEAlXthho-aq2hznZ2WicsZw=w1304-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우리가 이용하는 Code Deploy의 애플리케이션 생성과<br />
+<code class="language-plaintext highlighter-rouge">appspec.yml</code>, <code class="language-plaintext highlighter-rouge">.sh</code>파일에 대한 설정은 끝나 있어야한다.</p>
+
+<p><br /></p>
+
+<h3 id="github-action-configure-aws-credentials">Github Action Configure AWS credentials</h3>
+
+<p>현재 IAM 계정으로 AWS를 이용중이다.<br />
+(<a href="https://docs.aws.amazon.com/ko_kr/powershell/latest/userguide/pstools-appendix-sign-up.html">참고 - AWS 엑세스키 관련 문서</a>)</p>
+
+<p>Github Actions에서 Workflow를 실행하는 과정에서<br />
+Access Key가 필요하다. 공개되면 보안 이슈가 발생할 수 있어<br />
+Github Secret 기능을 이용해 Access Key 값을 저장한 후 사용할 수 있다.<br />
+<a href="https://github.com/aws-actions/configure-aws-credentials">configure-aws-credentials 레퍼런스</a>를 참고해보면 좋을 것 같다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">steps</span><span class="pi">:</span>      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Configure AWS credentials</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">aws-actions/configure-aws-credentials@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">aws-access-key-id</span><span class="pi">:</span> <span class="s">$</span> <span class="c1"># 등록한 Github Secret</span>
+          <span class="na">aws-secret-access-key</span><span class="pi">:</span> <span class="s">$</span> <span class="c1"># 등록한 Github Secret</span>
+          <span class="na">aws-region</span><span class="pi">:</span> <span class="s">ap-northeast-2</span>
+     
+      <span class="s">// ..생략</span>
+</code></pre></div></div>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNUWS9aAZNZWUWqRYoX-BwmSLb-6gQk_20nb6IINmQUT2KAzI4lG5iZRNsAOzd0bseG1KReKyflHyumA-PfLlni5ijXrA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이렇게 키값을 설정해주면<br />
+<code class="language-plaintext highlighter-rouge">gradle.yml</code>에서 환경변수 사용하듯이 사용이 가능하다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>이렇게 오늘은 Github actions를 이용해<br />
+push 한번으로 EC2까지 자동으로 배포되어지는 기능을 사용해 보았다.<br />
+안에 엄청나게 복잡한 내용들이 존재하는건 분명하다.</p>
+
+<p>이 기능을 이용해본 입장으로서는 Workflow 구성설정과<br />
+AWS CodeDeploy의 <code class="language-plaintext highlighter-rouge">.yml</code>,<code class="language-plaintext highlighter-rouge">.sh</code> 파일에 대한 내용만<br />
+우리가 동작을 원하는대로 설정만 잘해두면 무리없이 동작되는 것 같다.</p>
+
+<p>이렇게 이틀 동안 배포자동화에 대한 두가지 방법을 알아 보았다.<br />
+느낀점은 AWS에 대한 공부가 절실하다는 것.<br />
+전체적인 흐름을 이해했으니 이제 상세한 공부들이 필요할 시기다.</p>
+
+<p>오늘 공부는 여기서 끝!!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 짜파게티, 김치찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[Github Action]]></summary></entry><entry><title type="html">TIL) 배포 자동화 AWS Pipeline</title><link href="http://localhost:4000/til/2022/12/07/til.html" rel="alternate" type="text/html" title="TIL) 배포 자동화 AWS Pipeline" /><published>2022-12-07T00:00:00+09:00</published><updated>2022-12-07T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/07/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/07/til.html"><![CDATA[<h2 id="배포-자동화">배포 자동화</h2>
+<p>말그대로 배포 자동화란 기존에 배포를 위한 복잡한 작업을<br />
+클릭 혹은 명령어 입력을 통해 전체 배포 과정을 자동으로 진행하는 과정이다.</p>
+
+<h3 id="배포-자동화-파이프-라인">배포 자동화 파이프 라인</h3>
+<p>파이프 라인이라하면, 이전에 Stream API 공부할 때<br />
+들어보았었다. 무언가 연결해준다는 의미를 가지고 있었다.<br />
+배포 자동화에서 파이프 라인은 소스 코드의 관리부터 실제 서비스로의<br />
+배포 과정을 연결하는 구조를 뜻한다. 파이프라인은 전체 배포 과정을<br />
+여러 Stage(단계)로 분리한다. 가장 많이 쓰이는 3가지를 알아보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOBugDzkr65yzP1swq8j1g1mBAZr045aqB-cw37iLymttIosjnfOMB7uXqdvuDB57Pn7JMCKjSYkUackOYK56Jxv-_yeg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<ul>
+  <li>Source 단계
+원격 저장소에 관리되고 있는 소스 코드에 변경 사항이 일어날 경우<br />
+이를 감지하고 다음 단계로 전달하는 작업을 수행하는 단계이다.</li>
+  <li>Build 단계
+Source 단계에서 전달받은 코드를 컴파일, 빌드, 테스트하여 가공한다.</li>
+  <li>Deploy 단계
+Build 단계에서 전달받은 결과물을 실제 서비스에 반영하는 작업을 수행한다.</li>
+</ul>
+
+<p>기본적으로 위와 같이 단계가 있고, 상황과 필요에 따라<br />
+더 세분화되거나 간소화될 수 있다.</p>
+
+<p>AWS 개발자 도구 섹션에는 배포 자동화 파이프 라인을<br />
+구출할 수 있는 서비스를 제공해준다.</p>
+
+<p>CodeCommit - Source 단계때 구성할때 사용  <br />
+CodeBuild - Build 단계를 구성할때 사용<br />
+CodeDeploy - Deploy 단계를 구성할때 사용<br />
+CodePipeline - 각 단계를 연결하는 파이프라인을 구축할때 사용</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM8pJIpAdD3GNp2mXZL5SYWXzDvSr1uUBGS_yexwRH8gfwX8ADARYcBpQiHMhElbxPMW_wio_bkug-UdFYF-4uucf4f7Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>CodeCommit을 제외한 파이프라인 구성이다.<br />
+GitHub 레포지포티와 연결하여, 후에 변경사항을 반영했을 경우<br />
+배포 과정이 자동으로 진행되는 방식이다.</p>
+
+<p><br /></p>
+
+<h3 id="개발환경-구축">개발환경 구축</h3>
+
+<p>이와 같이 구성을 하기 위해서<br />
+EC2 인스턴스에 java,aws-cli,ruby를 설치하여 개발환경을 구축해야한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+</code></pre></div></div>
+<p>apt를 업데이트를 먼저 진행한다.</p>
+
+<p><br /></p>
+
+<p><strong>1). Java 설치</strong></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-11-jre-headless
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>2). AWS CLI 설치</strong></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="nt">-o</span> <span class="s2">"awscliv2.zip"</span>
+<span class="nb">sudo </span>apt <span class="nb">install </span>unzip
+unzip awscliv2.zip
+<span class="nb">sudo</span> ./aws/install
+</code></pre></div></div>
+<p><a href="https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-install.html">AWS CLI 공식 문서</a>를 참고하면 동일하게 나온다.<br />
+unzip이 설치되어있다면 생략해도 가능하다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws <span class="nt">--version</span>
+</code></pre></div></div>
+<p>설치가 완려되면 버젼확인이 가능하다.</p>
+
+<p><br /></p>
+
+<p><strong>3). CodeDeploy Agent 설치</strong></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>ruby-full             
+<span class="nb">sudo </span>apt <span class="nb">install </span>wget
+<span class="nb">cd</span> /home/ubuntu
+<span class="nb">sudo </span>wget https://aws-codedeploy-ap-northeast-2.s3.ap-northeast-2.amazonaws.com/latest/install
+<span class="nb">sudo chmod</span> +x ./install
+<span class="nb">sudo</span> ./install auto <span class="o">&gt;</span> /tmp/logfile
+</code></pre></div></div>
+<p><a href="https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/codedeploy-agent-operations-install-ubuntu.html">AWS CodeDeploy 공식 문서</a>를 참조하면 확인이 가능하다.
+wget이 없을 경우 wget 설치.</p>
+
+<p>설치가 완료되면 서비스가 실행중인다 확인할 수 있다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service codedeploy-agent status
+</code></pre></div></div>
+<p>를 입력하였을 경우 <code class="language-plaintext highlighter-rouge">active(running)</code>문구를 확인할 수 있다. 
+만약 확인이 되지 않을 경우</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service codedeploy-agent start
+<span class="nb">sudo </span>service codedeploy-agent stop
+</code></pre></div></div>
+<p>start와 stop을 반복하여 확인할 수 있다..</p>
+
+<p><br /></p>
+
+<h3 id="파이프라인-구축">파이프라인 구축</h3>
+
+<p>우선 AWS에서 파이프라인을 만들기전에<br />
+애플리케이션에서 설정을해줘야하는 정보가 있다.<br />
+설정 후 GitHub 레포지토리에 push해 놓으면 후에 파이프라인 구성완료 시<br />
+자동으로 EC2로 빌드가 되어진다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">appspec.yml</code>,<code class="language-plaintext highlighter-rouge">buildspec.yml</code>파일을 프로젝트 하위폴더로 만들어 설정해 놓아야한다.<br />
+<a href="https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html">AWS CodeDeploy hooks</a>, <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html">AWS CodeBuild reference</a>를 참조해 설정이 가능하다.<br />
+그에 따른 여러 Script(.sh) 파일도 만들어 줘야한다.</p>
+
+<p><br /></p>
+
+<p>설정을 완료하였다면 AWS측을 설정해보자
+우선 IAM 계정을 사용하고 있을 경우<br />
+EC2 인스턴스의 IAM 역할 권한을 추가해줘야한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNHCZmULZC_buWOV0uETzML7F5yL9VNR0hj_Q4BV4gGNtv0GOCClWrzgXa-dtUzxqNLqn_WwwcpSwaMV_RmfKBf5nQxqw=w1347-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM1bpbtv0DDnd8H-7P6jP2brR474UmPVdMEFXnEfif64w1RL6X4FAttBZUzd8SRMg0-G4IbhFIgL0E9SilwKHxEh3JctA=w1347-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>AmazonS3FullAccess<br />
+AmazonEC2RoleforAWSCodeDeploy<br />
+AWSCodeDeployRole<br />
+AmazonSSMFullAccess<br />
+정책 생성을 진행 해주면 된다.</p>
+
+<p>그리고 신뢰 관계 정책 설정에서</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM83eaHqKN9E2lXj13Vs4tHqQtA7pwGi-9gfttGhvNhZhUlChzPlKtzn90TDSUfHuueIgv0lRqhAbOB35wAVXDl5If0=w1347-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Service의 <code class="language-plaintext highlighter-rouge">"codedeploy.ap-northeast-2.amazonaws.com"</code>를 할당해주면 된다.</p>
+
+<p><br /></p>
+
+<p>그 다음엔 CodeDeploy에서 애플리케이션을 생성해주자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOCCMyhm1hmET_5cP4ljHyaJO7PsnSF7BHDYz2UDXIXk_bnHjHRXcJiInrmSFkwX5vihtTEAlXthho-aq2hznZ2WicsZw=w1304-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<p>그리고 CodePipeline에서 파이프라인을 생성해주면 된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPtKi60Y7GgJNZ-krPaDlb7pxQeTHn1rhOxGyNiRfip436OUWCtxR4xNpu-yETn1kF6Yod57iJmMKi50rXhxLMyQIHXsw=w1304-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>파이프라인을 만들때 Source 단계에서는 <br />
+GiuHub에 연결해서 사용하면 된다.</p>
+
+<p>이제 파이프라인 구성을 완료하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOgBdDghrM3cnjcID_cq7VNsyWqpOinvicT0MfJeSOpE0dVVs1zM986Cu6Jz9kQ7MW0j1X2amC1ego-aMHv2bM-NcG9WA=w1304-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 파이프라인이 실행이 완료된 것을 볼 수 있다.<br />
+이제 우리가 Github에 push를 하는 순간</p>
+
+<p>해당 내용이 EC2 인스턴스 서버에 빌드되는게<br />
+자동화가 되었다는 사실 !!!</p>
+
+<p>엄청 대단한 기술이다… 물론 알아야할 것도 엄청 많아서 난해했지만<br />
+현재는 따라하는 단계만 마친 것 같다.</p>
+
+<p><br /></p>
+
+<h3 id="서버-환경-변수-설정">서버 환경 변수 설정</h3>
+
+<p>기존에는 <code class="language-plaintext highlighter-rouge">.yml</code>, <code class="language-plaintext highlighter-rouge">.properties</code> 파일에 환경변수를<br />
+설정하여 파싱해서 가져다 사용했었다.<br />
+이제는 EC2에 서버가 배포되어있으니 AWS의 Parameter Store<br />
+서비스를 이용하면 환경변수가 쉽게 설정이 가능하다.</p>
+
+<p>우선 EC2에 배포하려는 프로그램에 설정해주자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span><span class="o">{</span>
+    <span class="o">...</span>
+    <span class="n">implementation</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">cloud</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">aws</span><span class="o">-</span><span class="n">parameter</span><span class="o">-</span><span class="n">store</span><span class="o">-</span><span class="n">config</span><span class="err">'</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencyManagement</span> <span class="o">{</span> 
+	<span class="n">imports</span> <span class="o">{</span>
+		<span class="n">mavenBom</span> <span class="s">"org.springframework.cloud:spring-cloud-starter-parent:Hoxton.SR12"</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>build.gradle의 의존관계를 설정해주어야한다.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">aws</span><span class="pi">:</span>
+  <span class="na">paramstore</span><span class="pi">:</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">prefix</span><span class="pi">:</span> <span class="s">/spring-boot-aws</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">be-88-MyCatlikesChuru</span> <span class="c1"># 리소스 이름을 작성합니다.</span>
+    <span class="na">profileSeparator</span><span class="pi">:</span> <span class="s">_</span>
+</code></pre></div></div>
+
+<p>파라미터 스토어에서는 <code class="language-plaintext highlighter-rouge">/prefix/name/key</code>의 순서로 네이밍 규칙에 <br />
+맞게 작성해야한다. name은 EC2 인스턴스이름과 동일하게 설정해주자.</p>
+
+<p>그리고 <code class="language-plaintext highlighter-rouge">.yml</code>, <code class="language-plaintext highlighter-rouge">.properties</code>에 설정해 주었던<br />
+환경변수는 EC2 파라미터 스토어에서 대체되니<br />
+삭제하거나 주석처리를 하면 된다.</p>
+
+<p>이제 AWS의 파라미터 스토어에서 파라미터를 생성해주면된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO32zl6JsLi9OZI8wmEopf7e19jrzKC-54eaufU8QdnSmQp_MyS-toExX9-gZKm2RPXwZFu4DMEF7NPDYuTNMPUmcJnvA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이름에는 네이밍 규칙을 넣어주면 되고 <br />
+값에는 우리가 실제로 환경변수를 사용할 값을 넣어주면 된다.</p>
+
+<p>예를들어 mysql을 사용하려는데 username을 설정한다고 가정하면<br />
+<code class="language-plaintext highlighter-rouge">spring.datasource.username=admin</code>과 같은 형태로 <code class="language-plaintext highlighter-rouge">.properties</code>에  <br />
+사용한다고 가정을 하였을 경우</p>
+
+<p>이름 : <code class="language-plaintext highlighter-rouge">/spring-boot-aws/be-88-MyCatlikesChuru/spring.datasource.username</code><br />
+값 : <code class="language-plaintext highlighter-rouge">admin</code><br />
+과 같은 형태로 파라미터를 만들어 준다면<br />
+우리가 EC2에 정상적으로 배포해둔 서버에 해당 환경변수가 적용될 것이다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 이렇게 배포를 자동화하는 기술을 배워보았다.<br />
+AWS에서 지원하는 파이프라인 구성을 통해<br />
+EC2 인스턴스 빌드가 자동으로 되는 과정을 지켜보았고<br />
+이번에 공부하면서 느낀건데… AWS에 대한 깊은 공부가<br />
+정말 필요하다고 절실히 느꼈다.</p>
+
+<p>Java와 Spring이 어느정도 익숙해진다면<br />
+AWS 공부를 열심히 해볼 생각이다.</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 콩나물 김치찌개, 계란야채부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[배포 자동화 말그대로 배포 자동화란 기존에 배포를 위한 복잡한 작업을 클릭 혹은 명령어 입력을 통해 전체 배포 과정을 자동으로 진행하는 과정이다.]]></summary></entry><entry><title type="html">TIL) 배포 컨테이너 Docker</title><link href="http://localhost:4000/til/2022/12/06/til.html" rel="alternate" type="text/html" title="TIL) 배포 컨테이너 Docker" /><published>2022-12-06T00:00:00+09:00</published><updated>2022-12-06T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/06/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/06/til.html"><![CDATA[<h2 id="docker">Docker</h2>
 
 <p>실제 선박의 컨테이너라함은 여러가지 물자들은 하나의 컨테이너에 싦어<br />
 부피,인력,물자 이동 등 엄청난 장점을 가져왔다.</p>
@@ -347,6 +1022,15 @@ COPY ./ /usr/local/apache2/htdocs/
 <p><br /></p>
 
 <hr />
+
+<p>오늘은 이렇게 짧지만 docker를 공부했다.<br />
+계속 연습하다보니까 어느정도 이해가 되었다.<br />
+이렇게 이미지로 만들어 팀원들과 배포환경을 동일하게<br />
+사용할 수 있을 것 같다.</p>
+
+<p>이제 곧 프로젝트인데 프로젝트할 때 적용해보도록 해봐야겠다!!</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
 
 <p><br /></p>
 
@@ -2154,917 +2838,4 @@ Subscriber는 Publisher가 emit한 데이터를 전달 받아서<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 리액티브 프로그래밍에 대해 공부해보는 날이다. 아마 깊은 내용은 다루지 않고, 간단한 지식들만 공부 할 것 같다.]]></summary></entry><entry><title type="html">TIL) Spring Security, JWT , OAuth 2 인증</title><link href="http://localhost:4000/til/2022/11/28/til.html" rel="alternate" type="text/html" title="TIL) Spring Security, JWT , OAuth 2 인증" /><published>2022-11-28T00:00:00+09:00</published><updated>2022-11-28T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/28/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/28/til.html"><![CDATA[<p>다시 시작된 월요일!!</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMbQN6-pRfE1nN6vp5n5bBxnzsRqAV9BVPdgdDtWEnmszNdkYWeBFUUR3XTJDQMFuQ4R9pAKdzVK7cB7d9feDMhlllDAQ=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>드디어 프로젝트를 해야할 시간이 다가오기 시작한다.</p>
-
-<p>현재까지 배운 기술을 이용해 무언가 만들어본다는게 너무 설레고 기대된다.<br />
-여태까지 배운 기술들에 대한 내용 중 크게 이해가 안되는 부분은 없었고<br />
-Advance한 공부가 필요한 내용들이 많았다.</p>
-
-<p>프로젝트를 기회로 깊이 파헤쳐보는 기회가 올 것 같아 너무나 기대된다.<br />
-오늘은 OAuth2에 대한 마지막 시간이다.</p>
-
-<p>그 동안 배운 Spring Security와 JWT, OAuth2를<br />
-전부 이용해서 인증과 권한부여 코드를 작성해보는 것이다.</p>
-
-<hr />
-
-<h2 id="oauth2-인증-하기">OAuth2 인증 하기</h2>
-
-<p>저번주에 배웠던 이론을 토대로 <br />
-OAuth2 인증을 실제로 적용해 보자</p>
-
-<p>우선 Frontend와 Backend가 분리되어있는<br />
-CSR 방식의 애플리케이션에서 Google OAuth2 인증을 기준으로<br />
-적용해볼 생각이다. Frontend 쪽 애플리케이션은<br />
-Apache 웹 서버를 이용해 테스트 할 것이다.</p>
-
-<p>그리고 저번주에 사전에 준비했던 <a href="https://console.cloud.google.com/apis">구글 API 콘솔</a> 애플리케이션을<br />
-미리 만들어두어야 테스트가 가능하다.</p>
-
-<p><strong>1). 구글 OAuth2 로그인 인증하기</strong></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPYCl2OOAe2LzCPgn7AQnO8UlsiBuNOeltWAqxTW2abHw4z1QBzsc0U4uLd_c6l4a6Aw6wBcn-AxXgMyQCDUjStijQcAg=w1299-h920" alt="image" class="align-left" style="max-width: 120%" /></p>
-
-<p>이제 가장 중요한 처리 흐름에 대해 이해해야한다.<br />
-현재 빨간색으로 되어있는 부분은 우리가 구현해줘야하는 부분이고<br />
-파란색 부분은 구현하지 않아도 Spring Security에서 처리해준다.</p>
-
-<p>처음으로 (1)번 로그인 링크를 Frontend 서버에서 클릭을하면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNEUrb0C3R5OQ64jxKBOQ2RZmo0stTpPeSGsr_TD-oZb_u8a1K9qBDeExZ7GR8XUZ8quM1L1S9_A3lwrcxbQlf-PyVTZg=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /><br />
-(테스트 용도로 Apache 웹서버에 해당 html을 만들었다.)</p>
-
-<p>(2)번과 같은 형식의 인증 URI로 request 전송을 해줘야한다.<br />
-<code class="language-plaintext highlighter-rouge">OAuth2LoginAuthenticationFilter</code> 클래스가 이부분을 처리해준다.<br />
-해당 클래스도 <code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code>와 같이<br />
-<code class="language-plaintext highlighter-rouge">AbstractAuthenticationProcessingFilter</code> 추상 클래스를 상속하고 있다.<br />
-즉 필터가 시작되면 추상클래스에 정의된 <code class="language-plaintext highlighter-rouge">doFilter();</code>메서드를 실행하는 것이다.</p>
-
-<p>그리고 (3)번에서 Google을 로그인 화면을 요청하는 URI로 리다이렉트한다.<br />
-또한 Authorization Server가 Backend 애플리케이션 쪽으로<br />
-Authorization Code를 전송할 Redirect URI(<code class="language-plaintext highlighter-rouge">http://localhost:8080/login/oauth2/code/google</code>)를<br />
-쿼리 파리미터로 전달해준다. Redirect URI는 Spring Security가 내부적으로 제공해준다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPPdDAGDY39IwFa0FL10w8N0wMvZKXU62PSF8IeM9KDaMb5N48amtymQFMn9uQ8JpkmTFtCWgUkev_Xt-7gr4iPANG1-g=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>즉, <code class="language-plaintext highlighter-rouge">https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?redirect_uri=http://localhost:8080/login/oauth2/code/google</code><br />
-와 같은 형식으로 리다이렉션해 (4)번인 로그인 화면을 보여준다. 이외에 쿼리들도 있지만 따로 적지는 않겠다.</p>
-
-<p>그러면 이제 구글 로그인 화면이 Resource Owner한테 보일테니<br />
-(5)번 로그인을 해주면 된다. 그렇게 되면 Backend 애플리케이션 서버에서<br />
-위에서 받은 Redirect URI로 Authorization Code를 요청하고<br />
-그럼과 같은 순서대로 Access Token을 받고, Resource Server에<br />
-요청하여 데이터를 접근할 수 있게되는 것이다.</p>
-
-<p>그리고 마지막으로 전송받으면 로그인 완료 Redirect를 진행할<br />
-URI를 만들어 Frontend 애플리케이션으로 던져주면<br />
-OAuth2 로그인 인증 구현에는 끝난다.<br />
-(JWT 토큰도 만들어 함께 보낸다)</p>
-
-<p><br /></p>
-
-<p>코드로 한번 살펴보자</p>
-
-<p>우선 JWT를 만들어주는 클래스를 먼저 작성해보자<br />
-이전에 JWT 코드와 동일하다</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
-
-    <span class="nd">@Getter</span>
-    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${jwt.key.secret}"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">securityKey</span><span class="o">;</span>
-
-    <span class="nd">@Getter</span>
-    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${jwt.access-token-expiration-minutes}"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">accessTokenExpirationMinutes</span><span class="o">;</span>
-
-    <span class="nd">@Getter</span>
-    <span class="nd">@Value</span><span class="o">(</span><span class="s">"${jwt.refresh-token-expiration-minutes}"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">refreshTokenExpirationMinutes</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64SecretKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">securityKey</span><span class="o">){</span>
-        <span class="k">return</span> <span class="nc">Encoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">securityKey</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">generateAccessToken</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span><span class="o">,</span> <span class="nc">String</span> <span class="n">subject</span><span class="o">,</span> <span class="nc">Date</span> <span class="n">expiration</span><span class="o">,</span> <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
-
-        <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="n">getKeyFromBase64EncodedKey</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="nc">Jwts</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="n">subject</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">setClaims</span><span class="o">(</span><span class="n">claims</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">setIssuedAt</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getTime</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">setExpiration</span><span class="o">(</span><span class="n">expiration</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">key</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">compact</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">generateRefreshToken</span><span class="o">(</span><span class="nc">String</span> <span class="n">subject</span><span class="o">,</span> <span class="nc">Date</span> <span class="n">expiration</span><span class="o">,</span> <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
-
-        <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="n">getKeyFromBase64EncodedKey</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="nc">Jwts</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">setSubject</span><span class="o">(</span><span class="n">subject</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">setIssuedAt</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">().</span><span class="na">getTime</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">setExpiration</span><span class="o">(</span><span class="n">expiration</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">signWith</span><span class="o">(</span><span class="n">key</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">compact</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">Jws</span><span class="o">&lt;</span><span class="nc">Claims</span><span class="o">&gt;</span> <span class="nf">getClaims</span><span class="o">(</span><span class="nc">String</span> <span class="n">jws</span><span class="o">,</span> <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
-
-        <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="n">getKeyFromBase64EncodedKey</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span>
-
-        <span class="nc">Jws</span><span class="o">&lt;</span><span class="nc">Claims</span><span class="o">&gt;</span> <span class="n">claimsJws</span> <span class="o">=</span> <span class="nc">Jwts</span><span class="o">.</span><span class="na">parserBuilder</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">setSigningKey</span><span class="o">(</span><span class="n">key</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">build</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">parseClaimsJws</span><span class="o">(</span><span class="n">jws</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="n">claimsJws</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">Date</span> <span class="nf">getTokenExpiration</span><span class="o">(</span><span class="kt">int</span> <span class="n">expirationMinutes</span><span class="o">){</span>
-        <span class="nc">Calendar</span> <span class="n">instance</span> <span class="o">=</span> <span class="nc">Calendar</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
-        <span class="n">instance</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">Calendar</span><span class="o">.</span><span class="na">MINUTE</span><span class="o">,</span> <span class="n">expirationMinutes</span><span class="o">);</span>
-        <span class="nc">Date</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="na">getTime</span><span class="o">();</span>
-
-        <span class="k">return</span> <span class="n">expiration</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">Key</span> <span class="nf">getKeyFromBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
-        <span class="kt">byte</span><span class="o">[]</span> <span class="n">keyBytes</span> <span class="o">=</span> <span class="nc">Decoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span>
-        <span class="k">return</span> <span class="nc">Keys</span><span class="o">.</span><span class="na">hmacShaKeyFor</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>달라진점은 없고, 후에 JWT를 만들때 DI받아 사용해주면 된다.</p>
-
-<p><br /></p>
-
-<p>두번째로는 SecurityFilterChain을 구성해보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="nd">@EnableWebSecurity</span><span class="o">(</span><span class="n">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfigurationV2</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">SecurityConfigurationV2</span><span class="o">(</span><span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">,</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">,</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">jwtTokenizer</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">authorityUtils</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberService</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="n">http</span>
-                <span class="o">.</span><span class="na">headers</span><span class="o">().</span><span class="na">frameOptions</span><span class="o">().</span><span class="na">sameOrigin</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">cors</span><span class="o">(</span><span class="n">withDefaults</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">sessionManagement</span><span class="o">().</span><span class="na">sessionCreationPolicy</span><span class="o">(</span><span class="nc">SessionCreationPolicy</span><span class="o">.</span><span class="na">STATELESS</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">formLogin</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">httpBasic</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">authenticationEntryPoint</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAuthenticationEntryPoint</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">accessDeniedHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAccessDeniedHandler</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomFilterConfigurer</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorize</span> <span class="o">-&gt;</span> <span class="n">authorize</span> <span class="c1">// url authorization 전체 추가</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="s">"/*/coffees"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">PATCH</span><span class="o">,</span> <span class="s">"/*/coffees/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/*/coffees/**"</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">,</span> <span class="s">"ADMIN"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/*/coffees"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="s">"/*/coffees"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="s">"/*/orders"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">PATCH</span><span class="o">,</span> <span class="s">"/*/orders"</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">,</span> <span class="s">"ADMIN"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/*/orders/**"</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">,</span> <span class="s">"ADMIN"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="s">"/*/orders"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
-                                <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">permitAll</span><span class="o">()</span>
-                <span class="o">)</span>
-                <span class="o">.</span><span class="na">oauth2Login</span><span class="o">(</span><span class="n">oauth2</span> <span class="o">-&gt;</span> <span class="n">oauth2</span>
-                        <span class="o">.</span><span class="na">successHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">OAuth2MemberSuccessHandler</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">,</span> <span class="n">authorityUtils</span><span class="o">,</span> <span class="n">memberService</span><span class="o">))</span>
-                <span class="o">);</span>
-
-        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Bean</span>
-    <span class="nc">CorsConfigurationSource</span> <span class="nf">corsConfigurationSource</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">CorsConfiguration</span> <span class="n">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CorsConfiguration</span><span class="o">();</span>
-        <span class="n">configuration</span><span class="o">.</span><span class="na">setAllowedOrigins</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"*"</span><span class="o">));</span>
-        <span class="n">configuration</span><span class="o">.</span><span class="na">setAllowedMethods</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span><span class="s">"POST"</span><span class="o">,</span> <span class="s">"PATCH"</span><span class="o">,</span> <span class="s">"DELETE"</span><span class="o">));</span>
-        <span class="nc">UrlBasedCorsConfigurationSource</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UrlBasedCorsConfigurationSource</span><span class="o">();</span>
-        <span class="n">source</span><span class="o">.</span><span class="na">registerCorsConfiguration</span><span class="o">(</span><span class="s">"/**"</span><span class="o">,</span> <span class="n">configuration</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">source</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFilterConfigurer</span> <span class="kd">extends</span> <span class="nc">AbstractHttpConfigurer</span><span class="o">&lt;</span><span class="nc">CustomFilterConfigurer</span><span class="o">,</span> <span class="nc">HttpSecurity</span><span class="o">&gt;</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">builder</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-            <span class="nc">JwtVerificationFilter</span> <span class="n">jwtVerificationFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JwtVerificationFilter</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">,</span> <span class="n">authorityUtils</span><span class="o">);</span>
-
-            <span class="n">builder</span><span class="o">.</span><span class="na">addFilterAfter</span><span class="o">(</span><span class="n">jwtVerificationFilter</span><span class="o">,</span> <span class="nc">OAuth2LoginAuthenticationFilter</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>필터체인 구성도 크게 바뀐건 없다.<br />
-달라진점은 JWT 인증을 사용했을 때는, <code class="language-plaintext highlighter-rouge">jwtAuthenticationFilter</code>라는 필터 클래스를<br />
-우리가 직접 구현해줘서, 필터체인에 등록해주었었다. 그 부분이 사라지고<br />
-우리는 OAuth2 인증을 이용하기 위해 <code class="language-plaintext highlighter-rouge">.oauth2Login()</code> 가 추가되었고, 추가됨에 따라  <br />
-<code class="language-plaintext highlighter-rouge">OAuth2AuthorizationRequestRedirectFilter</code> 와 <br />
-<code class="language-plaintext highlighter-rouge">OAuth2LoginAuthenticationFilter</code> 가 추가된다. <br />
-해당 필터들이 추가됨에따라 OAuth2 인증을 진행해주고, 인증에 성공시
-<code class="language-plaintext highlighter-rouge">AbstractAuthenticationProcessingFilter</code> 클래스에서<br />
-<code class="language-plaintext highlighter-rouge">successfulAuthentication();</code>메서드를 호출하게 되어진다.</p>
-
-<p>호출되면 인증된 객체가 <code class="language-plaintext highlighter-rouge">SecurityContext</code>에 저장되고<br />
-<code class="language-plaintext highlighter-rouge">AuthenticationSuccessHandler</code> 인터페이스에 <code class="language-plaintext highlighter-rouge">onAuthenticationSuccess();</code>를 호출하게된다.<br />
-말은 즉슨 해당 인터페이스를 상속해 구현하는 클래스를 우리가 만들어서 Frontend쪽 서버로<br />
-JWT 토큰을 만들어서 보낸다거나, 리다이렉트할 URI를 생성한다든가 조작이 가능하다는 점이다.</p>
-
-<p>그렇게 조작하는 클래스를 우리가 만들어보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OAuth2MemberSuccessHandler</span> <span class="kd">extends</span> <span class="nc">SimpleUrlAuthenticationSuccessHandler</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">OAuth2MemberSuccessHandler</span><span class="o">(</span><span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">,</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">,</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">jwtTokenizer</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">authorityUtils</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">memberService</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAuthenticationSuccess</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">Authentication</span> <span class="n">authentication</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ServletException</span> <span class="o">{</span>
-        <span class="c1">// 인증된 객체로 부터 Resource Owner의 이메일 주소를 얻을 수 있다.</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"# Redirect to Frontend"</span><span class="o">);</span>
-        <span class="nc">OAuth2User</span> <span class="n">oAuth2User</span> <span class="o">=</span> <span class="o">(</span><span class="nc">OAuth2User</span><span class="o">)</span> <span class="n">authentication</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
-        <span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="n">oAuth2User</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
-        <span class="nc">String</span> <span class="n">email</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
-
-        <span class="cm">/*
-         * 플랫폼에 따른 email 가져오기
-         * */</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"삭제"</span><span class="o">)){</span> <span class="c1">// 해당 부분은 getName();의 번호를 가져오는 부분으로 비교함. 혹시 몰라서 번호는 삭제</span>
-            <span class="c1">// 구글</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"# Google 로그인 실행"</span><span class="o">);</span>
-            <span class="n">email</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">oAuth2User</span><span class="o">.</span><span class="na">getAttributes</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"email"</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"삭제"</span><span class="o">)){</span>
-            <span class="c1">//카카오</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"# Kakao 로그인 실행"</span><span class="o">);</span>
-            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">oAuth2User</span><span class="o">.</span><span class="na">getAttributes</span><span class="o">();</span>
-            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">kakao_account</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;)</span> <span class="n">attributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"kakao_account"</span><span class="o">);</span>
-            <span class="n">email</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">kakao_account</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"email"</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"삭제"</span><span class="o">)){</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"# GitHub 로그인 실행"</span><span class="o">);</span>
-            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">oAuth2User</span><span class="o">.</span><span class="na">getAttributes</span><span class="o">();</span>
-            <span class="n">email</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">attributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"login"</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"# Naver 로그인 실행"</span><span class="o">);</span>
-            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">attributes</span> <span class="o">=</span> <span class="n">oAuth2User</span><span class="o">.</span><span class="na">getAttributes</span><span class="o">();</span>
-            <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">naver_account</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;)</span> <span class="n">attributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"response"</span><span class="o">);</span>
-            <span class="n">email</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">naver_account</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"email"</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="c1">// 강제 admin 권한 부여 (테스트 용도)</span>
-        <span class="nc">String</span> <span class="n">adminCheck</span> <span class="o">=</span> <span class="s">"admin@gmail.com"</span><span class="o">;</span>
-        <span class="c1">// 얻은 email 주소로 권한 List 만들기</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="n">authorityUtils</span><span class="o">.</span><span class="na">createRoles</span><span class="o">(</span><span class="n">adminCheck</span><span class="o">);</span>
-
-        <span class="c1">// email을 토대로 Member 객체 만들어서 DB에 저장</span>
-        <span class="c1">// 현재는 저장안하도록 테스트만진행</span>
-<span class="c1">//        saveMember(email);</span>
-
-        <span class="c1">// 리다이렉트를 하기위한 정보들을 보내줌</span>
-        <span class="n">redirect</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">,</span><span class="n">email</span><span class="o">,</span><span class="n">authorities</span><span class="o">);</span>
-    <span class="o">}</span>
-
-
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">redirect</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">authorities</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
-        <span class="c1">// 받은 정보를 토대로 AccessToken, Refresh Token을 만듬</span>
-        <span class="nc">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">delegateAccessToken</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">authorities</span><span class="o">);</span>
-        <span class="nc">String</span> <span class="n">refreshToken</span> <span class="o">=</span> <span class="n">delegateRefreshToken</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>
-
-        <span class="c1">// Token을 토대로 URI를 만들어서 String으로 변환</span>
-        <span class="nc">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="n">createURI</span><span class="o">(</span><span class="n">accessToken</span><span class="o">,</span> <span class="n">refreshToken</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
-
-        <span class="c1">// 만든 URI로 리다이렉트 보냄</span>
-        <span class="n">getRedirectStrategy</span><span class="o">().</span><span class="na">sendRedirect</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">,</span><span class="n">uri</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">delegateAccessToken</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">authorities</span><span class="o">){</span>
-
-        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">claims</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-        <span class="n">claims</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span><span class="n">username</span><span class="o">);</span>
-        <span class="n">claims</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"roles"</span><span class="o">,</span><span class="n">authorities</span><span class="o">);</span>
-
-        <span class="nc">String</span> <span class="n">subject</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
-        <span class="nc">Date</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getTokenExpiration</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getAccessTokenExpirationMinutes</span><span class="o">());</span>
-        <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">encodeBase64SecretKey</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getSecurityKey</span><span class="o">());</span>
-
-        <span class="nc">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">generateAccessToken</span><span class="o">(</span><span class="n">claims</span><span class="o">,</span> <span class="n">subject</span><span class="o">,</span> <span class="n">expiration</span><span class="o">,</span> <span class="n">base64EncodedSecretKey</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">accessToken</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="nc">String</span> <span class="nf">delegateRefreshToken</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">){</span>
-
-        <span class="nc">String</span> <span class="n">subject</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
-        <span class="nc">Date</span> <span class="n">expiration</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getTokenExpiration</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getRefreshTokenExpirationMinutes</span><span class="o">());</span>
-        <span class="nc">String</span> <span class="n">base64EncodedSecretKey</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">encodeBase64SecretKey</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">getSecurityKey</span><span class="o">());</span>
-        <span class="nc">String</span> <span class="n">refreshToken</span> <span class="o">=</span> <span class="n">jwtTokenizer</span><span class="o">.</span><span class="na">generateRefreshToken</span><span class="o">(</span><span class="n">subject</span><span class="o">,</span> <span class="n">expiration</span><span class="o">,</span> <span class="n">base64EncodedSecretKey</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="n">refreshToken</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="no">URI</span> <span class="nf">createURI</span><span class="o">(</span><span class="nc">String</span> <span class="n">accessToken</span><span class="o">,</span> <span class="nc">String</span> <span class="n">refreshToken</span><span class="o">){</span>
-        <span class="nc">MultiValueMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">queryParams</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedMultiValueMap</span><span class="o">&lt;&gt;();</span>
-        <span class="n">queryParams</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"access_token"</span><span class="o">,</span> <span class="n">accessToken</span><span class="o">);</span>
-        <span class="n">queryParams</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"refresh_token"</span><span class="o">,</span> <span class="n">refreshToken</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="nc">UriComponentsBuilder</span>
-                <span class="o">.</span><span class="na">newInstance</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">scheme</span><span class="o">(</span><span class="s">"http"</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">host</span><span class="o">(</span><span class="s">"localhost"</span><span class="o">)</span>
-<span class="c1">//                .port(80) // 기본 포트가 80이기 때문에 괜찮다</span>
-                <span class="o">.</span><span class="na">path</span><span class="o">(</span><span class="s">"/receive-token.html"</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">queryParams</span><span class="o">(</span><span class="n">queryParams</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">build</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">toUri</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">SimpleUrlAuthenticationSuccessHandler</code>클래스를 상속받고 있다.<br />
-해당 클래스는 <code class="language-plaintext highlighter-rouge">AuthenticationSuccessHandler</code> 인터이스를 상속받고있다.<br />
-위에서 얘기했듯이 인증에 성공시 해당 인터페이스의 <code class="language-plaintext highlighter-rouge">onAuthenticationSuccess();</code>가<br />
-호출되어지고, 이 메서드를 Overriding하여 구현하면 된다.</p>
-
-<p>구현 내용은 인증된 객체에서 우선 정보를 꺼내도록했다.<br />
-email 정보를 꺼내서 추후에 DB에 관리한다면 저장할 예정이다.<br />
-또한 여러가지 Google,Kakao,Github,Kakao 등을 구별하기위해<br />
-<code class="language-plaintext highlighter-rouge">getName();</code>의 값을 사용했지만… 이부분은 따로 header에서 구분할 수 있는<br />
-무언가를 가져와야할 것 같은 느낌이든다. (아직 해결못한 숙제다)</p>
-
-<p>그래도 우선 구현테스트를 위해 name값으로 케이스를 나눠<br />
-<code class="language-plaintext highlighter-rouge">getAttributes();</code> 안에있는 email 정보를 꺼내서 저장하는 것을 구현했다.</p>
-
-<p>그리고 가장 중요한 부분인 Redirect 부분인데<br />
-현재 구글 인증이 정상적으로 이루어져 흐름이 이쪽으로 넘어온 것이고<br />
-이제 우리는 로그인을 완료했으니 다른페이지를 Redirect 해야하며<br />
-JWT을 만들어서 header에 싦어주는 코드를 구현해야한다.</p>
-
-<p>그 구현 부분이 <code class="language-plaintext highlighter-rouge">redirect();</code>으로 작성했고<br />
-해당 내용은 accessToken, refreshToken을 만들고<br />
-UriComponentsBuilder를 통해서 우리가 Redirect할 주소와<br />
-queryParams로 추가해서 URI만들었다.</p>
-
-<p>이제 Redirect만 진행하면된다. <code class="language-plaintext highlighter-rouge">getRedirectStrategy().sendRedirect();</code>를 구현해<br />
-Redirect를 진행하도록했고 해당 메서드는 <code class="language-plaintext highlighter-rouge">AbstractAuthenticationTargetUrlRequestHandler</code> <br />
-인터페이스의 메서드로 마찬가지로 <code class="language-plaintext highlighter-rouge">SimpleUrlAuthenticationSuccessHandler</code>와 상속관계라<br />
-Overriding하여 우리가 구현이 가능한 부분이다. 매개 변수로는</p>
-
-<p>HttpServletRequest 객체, HttpServletResponse 객체, String uri<br />
-이렇게 매개변수로 넘겨주면 Redirect하게 되어지는 것이다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">security</span><span class="pi">:</span>
-    <span class="na">oauth2</span><span class="pi">:</span>
-      <span class="na">client</span><span class="pi">:</span>
-        <span class="na">registration</span><span class="pi">:</span>
-          <span class="na">google</span><span class="pi">:</span>
-            <span class="na">clientId</span><span class="pi">:</span> <span class="s">${G_CLIENT_ID}</span> <span class="c1"># 구글 API콘솔로 발급받은 ID</span>
-            <span class="na">clientSecret</span><span class="pi">:</span> <span class="s">${G_CLIENT_SECRET}</span> <span class="c1"># 구글 API콘솔로 발급받은 SECRET</span>
-            <span class="na">scope</span><span class="pi">:</span>
-              <span class="pi">-</span> <span class="s">email</span>
-              <span class="pi">-</span> <span class="s">profile</span>
-</code></pre></div></div>
-<p>이제 마지막으로 .yml 파일에 필요한 설정정보를 입력해주면<br />
-Springn Security에서 자동으로 진행해준다.</p>
-
-<p>정말 대단하다… 내가 직접구현한 코드는 완전 극히 일부일텐데<br />
-이모든걸 자동화시켜놓고 우리같은 초짜 개발자도 이용할 수 있다는게…<br />
-후에 실제 Filter 동작에 디버그를 걸어놓고 어떻게 OAuth2 인증 과정을<br />
-거치가는지는 면밀한 파악이 필요할 것 같다.</p>
-
-<p><br /></p>
-
-<p>이렇게 구현을 완료한 다음에<br />
-실제로 로그인을 진행해보았을 때, 구글 로그인 완료 후에</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMsRfmFlCV2832vUEdC9XNM1u89sACuHGq-cKq-QfuuzyoTLPQDhc32NXsUg5dDd33-8J3tJXvUQ1V14h3ailY1wbfrjg=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>개발자도구로 원하는 페이지에 리다이렉션이 되었고<br />
-우리가 만들어준 accessToken과 refreshToken이 정상적으로<br />
-로컬 스토리지에 담겨있는 모습을 확인해 볼 수 있다.</p>
-
-<p>로컬 스토리지에 담긴 이유는 Frontend 쪽 서버에<br />
-javaScript언어로 저장하도록 코드를 추가해놓아서 저장되어지는 것이다.<br />
-물론 <code class="language-plaintext highlighter-rouge">response.setHeader();</code>메서드를 통해서 header로 전송할 수도 있다.</p>
-
-<p><br /></p>
-
-<p><strong>2). 카카오톡 OAuth2 로그인 인증하기</strong></p>
-
-<p>구글 로그인 인증을 완료해 보았으니<br />
-다른 로그인도 한번 시도해보고 싶었다.</p>
-
-<p>위에 코드는 전부 그대로 두고 .yml 설정 파일의 설정 정보만 변경하면 똑같이 인증이 가능하다.</p>
-
-<p>구글 콘솔 API처럼 카카오톡도 <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/common">카카오톡 로그인 애플리케이션</a>을 만들어 줘야한다.<br />
-해당 사이트에 들어가 애플리케이션을 만들고</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMNQi6w61DyZV6ZpqvZm6pPcQJYYnsPc7iY0O_zUDGz-JTOT5txnrrNGQNFkUn52am_j-h4ZDHflC0zWCl5wQPJcc5S1A=w1299-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>client-id와 client-secret를 발급 받으면 된다.<br />
-그 외에 scope 정보 동의 설정들도 가능했다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">security</span><span class="pi">:</span>
-    <span class="na">oauth2</span><span class="pi">:</span>
-      <span class="na">client</span><span class="pi">:</span>
-        <span class="na">registration</span><span class="pi">:</span>
-          <span class="na">google</span><span class="pi">:</span>
-            <span class="na">clientId</span><span class="pi">:</span> <span class="s">${G_CLIENT_ID}</span> <span class="c1"># 구글 API콘솔로 발급받은 ID</span>
-            <span class="na">clientSecret</span><span class="pi">:</span> <span class="s">${G_CLIENT_SECRET}</span> <span class="c1"># 구글 API콘솔로 발급받은 SECRET</span>
-            <span class="na">scope</span><span class="pi">:</span>
-              <span class="pi">-</span> <span class="s">email</span>
-              <span class="pi">-</span> <span class="s">profile</span>
-          <span class="na">kakao</span><span class="pi">:</span>
-            <span class="na">client-id</span><span class="pi">:</span> <span class="s">${K_CLIENT_ID}</span> <span class="c1"># 앱 설정 -&gt; 앱 키 -&gt; REST API 키</span>
-            <span class="na">client-secret</span><span class="pi">:</span> <span class="s">${K_CLIENT_SECRET}</span>  <span class="c1"># 제품 설정 -&gt; 카카오 로그인 -&gt; 보안 -&gt; Client Secret</span>
-            <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s">http://localhost:8080/login/oauth2/code/kakao</span>
-            <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
-            <span class="na">client-authentication-method</span><span class="pi">:</span> <span class="s">POST</span>
-            <span class="na">client-name</span><span class="pi">:</span> <span class="s">Kakao</span>
-            <span class="na">scope</span><span class="pi">:</span>
-              <span class="pi">-</span> <span class="s">profile_nickname</span>
-              <span class="pi">-</span> <span class="s">profile_image</span>
-              <span class="pi">-</span> <span class="s">account_email</span>
-        <span class="na">provider</span><span class="pi">:</span>
-          <span class="na">kakao</span><span class="pi">:</span>
-            <span class="na">authorization-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/authorize</span>
-            <span class="na">token-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/token</span>
-            <span class="na">user-info-uri</span><span class="pi">:</span> <span class="s">https://kapi.kakao.com/v2/user/me</span>
-            <span class="na">user-name-attribute</span><span class="pi">:</span> <span class="s">id</span>
-</code></pre></div></div>
-
-<p>기존 구글설정에 밑에 카카오관련 설정을 넣어주고</p>
-
-<p>Frontend 서버에서 <code class="language-plaintext highlighter-rouge">http://localhost:8080/oauth2/authorization/kakao</code> 로 요청을 보내주면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPAV4LBZQ-47VonDS63Xdnq372ABlm7MY1RK4wselyaycZ2FsH9ZGokzqYFMESSg8Qk8DGXiK5CfZcn55FoQ1xLok2RAQ=w1920-h920" alt="image" class="align-left" style="max-width: 80%" /></p>
-
-<p>우리가 설정한대로 카카오톡 로그인 인증이 동일하게 진행할 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>3). 네이버 OAuth2 로그인 인증하기</strong></p>
-
-<p>네이버도 마찬가지다 <a href="https://developers.naver.com/products/login/api/api.md">네이버 로그인 애플리케이션</a>에 들어가  <br />
-애플리케이션을 만들어준다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNKLUTpN-9m9o5CXOIedRwYXZbs5uBcW6AxtCgKUjRgT1qAjRtU7vDZfTgjaQiOQ5Jj_3aq_zmAas4fzv67DLhASES5=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>동일하게 id와 secretKey를 받았을 것이다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">security</span><span class="pi">:</span>
-      <span class="na">oauth2</span><span class="pi">:</span>
-        <span class="na">client</span><span class="pi">:</span>
-          <span class="na">registration</span><span class="pi">:</span>
-            <span class="na">google</span><span class="pi">:</span>
-              <span class="na">clientId</span><span class="pi">:</span> <span class="s">${G_CLIENT_ID}</span> <span class="c1"># 구글 API콘솔로 발급받은 ID</span>
-              <span class="na">clientSecret</span><span class="pi">:</span> <span class="s">${G_CLIENT_SECRET}</span> <span class="c1"># 구글 API콘솔로 발급받은 SECRET</span>
-              <span class="na">scope</span><span class="pi">:</span>
-                <span class="pi">-</span> <span class="s">email</span>
-                <span class="pi">-</span> <span class="s">profile</span>
-            <span class="na">kakao</span><span class="pi">:</span>
-              <span class="na">client-id</span><span class="pi">:</span> <span class="s">${K_CLIENT_ID}</span> <span class="c1"># 앱 설정 -&gt; 앱 키 -&gt; REST API 키</span>
-              <span class="na">client-secret</span><span class="pi">:</span> <span class="s">${K_CLIENT_SECRET}</span>  <span class="c1"># 제품 설정 -&gt; 카카오 로그인 -&gt; 보안 -&gt; Client Secret</span>
-              <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s">http://localhost:8080/login/oauth2/code/kakao</span>
-              <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
-              <span class="na">client-authentication-method</span><span class="pi">:</span> <span class="s">POST</span>
-              <span class="na">client-name</span><span class="pi">:</span> <span class="s">Kakao</span>
-              <span class="na">scope</span><span class="pi">:</span>
-                <span class="pi">-</span> <span class="s">profile_nickname</span>
-                <span class="pi">-</span> <span class="s">profile_image</span>
-                <span class="pi">-</span> <span class="s">account_email</span>
-            <span class="na">naver</span><span class="pi">:</span>
-              <span class="na">client-id</span><span class="pi">:</span> <span class="s">${N_CLIENT_ID}</span>
-              <span class="na">client-secret</span><span class="pi">:</span> <span class="s">${N_CLIENT_SECRET}</span>
-              <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/{action}/oauth2/code/{registrationId}"</span> <span class="c1"># (== http://localhost:8080/login/oauth2/code/naver)</span>
-              <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
-              <span class="na">scope</span><span class="pi">:</span> <span class="s">name, email, profile_image</span>
-              <span class="na">client-name</span><span class="pi">:</span> <span class="s">Naver</span>
-          <span class="na">provider</span><span class="pi">:</span>
-            <span class="na">kakao</span><span class="pi">:</span>
-              <span class="na">authorization-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/authorize</span>
-              <span class="na">token-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/token</span>
-              <span class="na">user-info-uri</span><span class="pi">:</span> <span class="s">https://kapi.kakao.com/v2/user/me</span>
-              <span class="na">user-name-attribute</span><span class="pi">:</span> <span class="s">id</span>
-            <span class="na">naver</span><span class="pi">:</span>
-              <span class="na">authorization_uri</span><span class="pi">:</span> <span class="s">https://nid.naver.com/oauth2.0/authorize</span>
-              <span class="na">token_uri</span><span class="pi">:</span> <span class="s">https://nid.naver.com/oauth2.0/token</span>
-              <span class="na">user-info-uri</span><span class="pi">:</span> <span class="s">https://openapi.naver.com/v1/nid/me</span>
-              <span class="na">user_name_attribute</span><span class="pi">:</span> <span class="s">response</span>
-</code></pre></div></div>
-
-<p>네이버도 동일하게 설정을 완료해주고<br />
-Frontend 서버에서 <code class="language-plaintext highlighter-rouge">http://localhost:8080/oauth2/authorization/naver</code> 로 요청을 보내주면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOzNDUxcjFONc6GXx7sdUQHD8X7MyLz6P4HC8egracTxzybn6-6Ik4dC1jcgxtySNbwe7ueB3K3vvpz-jXu1jrpC9l-=w1299-h920" alt="image" class="align-left" style="max-width: 80%" /></p>
-
-<p>위와 같이 네이버 로그인 인증을 사용할 수 있게된다.</p>
-
-<p><br /></p>
-
-<p><strong>4). Github OAuth2 로그인 인증하기</strong></p>
-
-<p>마지막으로 Github OAuth2도 적용해보고 싶어 시도해봤다.</p>
-
-<p>GitHub 홈페이지에서<br />
-<code class="language-plaintext highlighter-rouge">Setting -&gt; Developer settings -&gt; OAuth Apps</code><br />
-경로로 접속하면 아래와 같이 애플리케이션을 만들수 있는 화면이 나온다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO851leSPchx-qwjJ_xI7KGIzTiarPVJUFY6-Ix1iWnh7kyS2RqWZBzZqGbLXiqoUnvcaFzV8jSvKNtDivX-r6hHmyIZA=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>나는 practice라는 이름으로 애플리케이션을 만들었다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">security</span><span class="pi">:</span>
-      <span class="na">oauth2</span><span class="pi">:</span>
-        <span class="na">client</span><span class="pi">:</span>
-          <span class="na">registration</span><span class="pi">:</span>
-            <span class="na">google</span><span class="pi">:</span>
-              <span class="na">clientId</span><span class="pi">:</span> <span class="s">${G_CLIENT_ID}</span> <span class="c1"># 구글 API콘솔로 발급받은 ID</span>
-              <span class="na">clientSecret</span><span class="pi">:</span> <span class="s">${G_CLIENT_SECRET}</span> <span class="c1"># 구글 API콘솔로 발급받은 SECRET</span>
-              <span class="na">scope</span><span class="pi">:</span>
-                <span class="pi">-</span> <span class="s">email</span>
-                <span class="pi">-</span> <span class="s">profile</span>
-            <span class="na">kakao</span><span class="pi">:</span>
-              <span class="na">client-id</span><span class="pi">:</span> <span class="s">${K_CLIENT_ID}</span> <span class="c1"># 앱 설정 -&gt; 앱 키 -&gt; REST API 키</span>
-              <span class="na">client-secret</span><span class="pi">:</span> <span class="s">${K_CLIENT_SECRET}</span>  <span class="c1"># 제품 설정 -&gt; 카카오 로그인 -&gt; 보안 -&gt; Client Secret</span>
-              <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s">http://localhost:8080/login/oauth2/code/kakao</span>
-              <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
-              <span class="na">client-authentication-method</span><span class="pi">:</span> <span class="s">POST</span>
-              <span class="na">client-name</span><span class="pi">:</span> <span class="s">Kakao</span>
-              <span class="na">scope</span><span class="pi">:</span>
-                <span class="pi">-</span> <span class="s">profile_nickname</span>
-                <span class="pi">-</span> <span class="s">profile_image</span>
-                <span class="pi">-</span> <span class="s">account_email</span>
-            <span class="na">naver</span><span class="pi">:</span>
-              <span class="na">client-id</span><span class="pi">:</span> <span class="s">${N_CLIENT_ID}</span>
-              <span class="na">client-secret</span><span class="pi">:</span> <span class="s">${N_CLIENT_SECRET}</span>
-              <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/{action}/oauth2/code/{registrationId}"</span> <span class="c1"># (== http://localhost:8080/login/oauth2/code/naver)</span>
-              <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
-              <span class="na">scope</span><span class="pi">:</span> <span class="s">name, email, profile_image</span>
-              <span class="na">client-name</span><span class="pi">:</span> <span class="s">Naver</span>
-            <span class="na">github</span><span class="pi">:</span>
-              <span class="na">clientId</span><span class="pi">:</span> <span class="s">${H_CLIENT_ID}</span>
-              <span class="na">clientSecret</span><span class="pi">:</span> <span class="s">${H_CLIENT_SECRET}</span>
-              <span class="na">redirect-uri</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{baseUrl}/{action}/oauth2/code/{registrationId}"</span> <span class="c1"># (== http://localhost:8080/login/oauth2/code/google)</span>
-              <span class="na">authorization-grant-type</span><span class="pi">:</span> <span class="s">authorization_code</span>
-              <span class="na">client-name</span><span class="pi">:</span> <span class="s">GitHub</span>
-              <span class="na">scope</span><span class="pi">:</span>
-                <span class="pi">-</span> <span class="s">email</span>
-                <span class="pi">-</span> <span class="s">profile</span>
-          <span class="na">provider</span><span class="pi">:</span>
-            <span class="na">kakao</span><span class="pi">:</span>
-              <span class="na">authorization-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/authorize</span>
-              <span class="na">token-uri</span><span class="pi">:</span> <span class="s">https://kauth.kakao.com/oauth/token</span>
-              <span class="na">user-info-uri</span><span class="pi">:</span> <span class="s">https://kapi.kakao.com/v2/user/me</span>
-              <span class="na">user-name-attribute</span><span class="pi">:</span> <span class="s">id</span>
-            <span class="na">naver</span><span class="pi">:</span>
-              <span class="na">authorization_uri</span><span class="pi">:</span> <span class="s">https://nid.naver.com/oauth2.0/authorize</span>
-              <span class="na">token_uri</span><span class="pi">:</span> <span class="s">https://nid.naver.com/oauth2.0/token</span>
-              <span class="na">user-info-uri</span><span class="pi">:</span> <span class="s">https://openapi.naver.com/v1/nid/me</span>
-              <span class="na">user_name_attribute</span><span class="pi">:</span> <span class="s">response</span>
-</code></pre></div></div>
-
-<p>위에서 했던 구글,카카오,네이버와 동일하게<br />
-.yml 파일에 설정 정보만 추가해주면 인증 사용이 가능하고</p>
-
-<p>Frontend 서버에서 <code class="language-plaintext highlighter-rouge">http://localhost:8080/oauth2/authorization/github</code> 로 요청을 보내주면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOaC_iiUM1AFkW7zDZbf4FANkrFWyZsicq-OxPRG3aqYGgXWLsZYCi_DzPa-aTNW8OWIfJnoVBC5-Ze7u6eXct9r5ch=w1299-h920" alt="image" class="align-left" style="max-width: 70%" /></p>
-
-<p>동일하게 로그인 요청을 보내면<br />
-정상적으로 인증이되고 AccessToken과 Refresh Token이 발급되는<br />
-모습을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<hr />
-
-<p>이렇게 오늘은 OAuth2 인증에 대한<br />
-여러가지 벤더들의 로그인 기능을 사용해 보았다.<br />
-실질적으로 어떤 회사냐에 따라 변경하는 부분은 크게 어렵지 않은 것 같다.</p>
-
-<p>하지만 Spring이 상당히 많은 부분을 작업해주고<br />
-내가 구현하는 부분인 정망 극히 일부이기 때문에<br />
-OAuth2에 대한 완벽한 이해가 되었다고는 할 수 없을 것 같다.</p>
-
-<p>계속 공부하면서 느끼는 것은 프레임워크에 대한 세부 내용<br />
-이해하는 것이 정말 중요하다고 느끼고<br />
-추후에 이부분에 대한 흐름들은 따로 공부를하려고한다.</p>
-
-<p>오늘 공부는 여기서 끝 !</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[다시 시작된 월요일!!]]></summary></entry><entry><title type="html">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..</title><link href="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html" rel="alternate" type="text/html" title="macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name .." /><published>2022-11-27T00:00:00+09:00</published><updated>2022-11-27T00:00:00+09:00</updated><id>http://localhost:4000/macos/2022/11/27/OS-macOs-4</id><content type="html" xml:base="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html"><![CDATA[<p>오늘 공부하다가 막혔던 부분이 있어서 <br />
-도움이 될까 싶어 적어본다.</p>
-
-<h3 id="apache-웹-서버">APACHE 웹 서버</h3>
-
-<p>아파치 HTTP 서버(Apache HTTP Server)는 <br />
-아파치 소프트웨어 재단에서 관리하는 오픈 소스, 크로스 플랫폼 HTTP 웹 서버 소프트웨어다. <br />
-BSD, 리눅스 등 유닉스 계열 뿐 아니라 마이크로소프트 윈도우나 노벨 넷웨어 <br />
-같은 기종에서도 무료로 운용할 수 있다고 한다. <strong>[<a href="https://ko.wikipedia.org/wiki/%EC%95%84%ED%8C%8C%EC%B9%98_HTTP_%EC%84%9C%EB%B2%84">출처 - 위키백과</a>]</strong></p>
-
-<p>Mac 환경에서 Apache 웹서버를 사용해보려하다 오류가 발생했다.<br />
-오류를 얘기하기전 우선 설치 과정을 아래의 사이트를 참고했다.<br />
-<strong>[<a href="https://www.javatpoint.com/how-to-install-apache-on-mac">Apache 설치 방법 - 참고사이트</a>]</strong></p>
-
-<p><br /></p>
-
-<p>homebrew를 이용한 설치방법이고<br />
-Mac 사용 유저라면 익히 알고 있을 것이다.</p>
-
-<p>설치를 완료한다음 <br />
-문제는 아파치 서버를 실행/종료 시키기위해서<br />
-<code class="language-plaintext highlighter-rouge">sudo apachectl start</code> 명령어와 <code class="language-plaintext highlighter-rouge">sudo apachectl stop</code> 명령어를<br />
-사용하게 되는데… AH00558 코드로된 알람이 발생했다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMPblHp1IrHpidEB8NNOHDrTqEx8Q_JW9oJb7H4iCMDJNIKJUgNoYoQPhx8afmEEUw_UNIczBB2e98aG8ey3dT_HzWk=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AH00558: httpd: Could not reliably determine the server<span class="s1">'s fully qualified domain name, using MacBook-Pro.local. Set the '</span>ServerName<span class="s1">' directive globally to suppress this message
-</span></code></pre></div></div>
-
-<p>오류는 그렇다 쳐도, 기본 적으로 localhost에 접속하면<br />
-<code class="language-plaintext highlighter-rouge">It works!</code> 화면이 노출되지 않았다.<br />
-localhost:8080에 접속해야지만 화면이 노출되었고<br />
-설정을 바꿀 필요가 있다고 느껴졌다.</p>
-
-<p><br /></p>
-
-<p><strong>1). httpd.conf 파일 찾기</strong></p>
-
-<p>설정을 변경하기 위해서는 <code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일을 수정해줘야한다.<br />
-해당 파일 경로를 찾기위해 여러가지 블로그를 찾아보았는데</p>
-
-<p>사람마다 여러가지 경로로 수정을 하는걸 보았다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">/etc/apache2/httpd.conf</code><br />
-<code class="language-plaintext highlighter-rouge">/private/etc/apache2/httpd.conf</code><br />
-와 같은 경로로 수정한 사람들도 있는 것 같다.<br />
-하지만 나와 같은 경우는 제대로 반영되지 않았고…</p>
-
-<p>어떠한 차이인지는 아직 불분명하지만 내가 수정했던 경로는 아래와 같다.  <br />
-📌<code class="language-plaintext highlighter-rouge">/opt/homebrew/etc/httpd/httpd.conf</code>📌 <br />
-아마 homebrew를 통해 실행하는 것이기 때문이지 않을까? 라는 생각을 해본다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일을 찾는데 처음에 애먹어서 시간을 많이 쓴 것 같다.</p>
-
-<p>파일을 찾았으면 이제 shell에서 vi 편집기로 값을 수정해주면된다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /opt/homebrew/etc/httpd/httpd.conf
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>2). Port 80 으로 변경하기</strong></p>
-
-<p>편집기를 열고 아래와 같은 Listen을 찾아준다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPzEEFalQYxag6NQ4wOJV1AuBpyHFHn9LwAi4g0PY8YljuKfpiPQY-9H1mOU1Vxqa-0reRKR1itloqQ_nXt8n7xKAh8=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>아마 기본적으로 8080으로 설정되어있을 것이다.<br />
-#으로 주석처리를 해준다음, 아래에서 <code class="language-plaintext highlighter-rouge">Listen 80</code>으로 설정해주었다.</p>
-
-<p><br /></p>
-
-<p><strong>3). localhost로 변경 하기</strong></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO9rZHRQQQ0HI4HBe-UBcgFt4ZMl91uomBFpsZLjsruipSi2KrdWjR89J1rptKW4mQSwI7iFSbjmpV5PgPfGLj88BO4yw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위의 사진과 같이 ServerName을 localhost로 설정해주면 된다.</p>
-
-<p><br /></p>
-
-<p><strong>4). 결과 확인하기</strong></p>
-
-<p>아파치 웹서버 실행 명령어인<br />
-<code class="language-plaintext highlighter-rouge">sudo apachectl start</code>,<code class="language-plaintext highlighter-rouge">sudo apachectl stop</code>를 입력해도</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMxycEEiyoGZsXP0ZAh9sdmRXbB9ucK6Ar42OXNGDH3-OZW4FNBlpa68ehMFGULCDXcXODH-iLfmTYgK239LTRz134ZRg=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>더 이상 AH00558 오류가 발생하지 않는 모습이다.</p>
-
-<p><br /></p>
-
-<p>아파치 웹서버를 실행 시켜놓은 상태에서</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMRbasfobijEvOlwe60oFwSiELjJ7dm4RE7huFv2fFxSceyEPbFWQtmJCGSotTjXhbdaHpxJMCUOK2eMNPAneRzzlNyKA=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>localhost를 입력하여 접속할 경우<br />
-이제 드디어 <code class="language-plaintext highlighter-rouge">It works</code> 화면을 볼 수 있게 된다 !!</p>
-
-<p><br /></p>
-
-<p><strong>5). html 파일 로딩하기</strong></p>
-
-<p>이 부분은 참고차 한번 적어본다.<br />
-아파치 웹서버에 내가 만든 html 파일을 적용 시키고싶을때</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPcmo_lcNtNltnX94Eob3uyBQJybrqArcuxv2z-iwhwBK57y-p25jsZ_Ix3I54tn2Nd91TGqAAm2KLiE9OkCGh4SiZwgA=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일에서 <code class="language-plaintext highlighter-rouge">DocumentRoot</code>를 수정해주면 html 파일을 사용할 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPgBo-oGeeI700xa9M9BOdiv2Uw4FQKR_C_9gwzceG8GVhNMT8iTUzJBVJLLQpGRRA_itVQOTuAz3AQGnJ_c7Ci0c9m8A=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>예를 들어서 index.html 이라는 파일을 만들어 위의 경로에 파일을 두었을때</p>
-
-<p>기존에 localhost:80 접속 시 <code class="language-plaintext highlighter-rouge">It wroks!</code>로 나왔던 화면이<br />
-내가 만든 화면으로 대체된 모습을 볼 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNlhfc-M7DRb35wAbT-xovzxuD54T512fR8OIeFZV-EtR0ngdJiUFt3vW4ToqBe3FzhdN8ZagQMmwTk5rt2syRzbW0dOA=w1782-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>이 화면은 테스트용으로 만든 화면이고<br />
-정상적으로 파일이 접속된 모습을 볼 수 있다.<br />
-이후 부터는 폴더경로를 만들어 html 파일에 접근하면된다.</p>
-
-<p><br /></p>
-
-<hr />
-
-<p>혹시나 싶어 <a href="https://mainia.tistory.com/5490">WindowOS 해결 방법 - 출처 mainia님</a> 찾다가 좋은글인 것 같아 올려본다.<br />
-좀 더 자세한 내용을 보고싶다면 <a href="https://velog.io/@diduya/macOS%EC%97%90-Homebrew%EB%A1%9C-Apache-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0">내가 참고한 해결 방법 - 출처 diduya님</a> 포스팅을 봐도<br />
-좋은 해결법이될 것 같다.</p>
-
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="macOs" /><category term="macOs" /><summary type="html"><![CDATA[오늘 공부하다가 막혔던 부분이 있어서 도움이 될까 싶어 적어본다.]]></summary></entry><entry><title type="html">TIL) OAuth 2 인증 기초</title><link href="http://localhost:4000/til/2022/11/25/til.html" rel="alternate" type="text/html" title="TIL) OAuth 2 인증 기초" /><published>2022-11-25T00:00:00+09:00</published><updated>2022-11-25T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/25/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/25/til.html"><![CDATA[<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDuT8mojlcwDj4isWJwyJvwaEPSsequtCg9insTbysDEVk6R7VRiRwBIm8ta5JK6J4r7ZDnBUypheW5SWHioLCJ0f8=w1920-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>이번주는 정말 게으르게 보낸 것 같다.</p>
-
-<p>물론 옛날에 비하면 엄청난 발전이지만… 역시 한번 쉬면<br />
-계속 쉬고 싶은 마음이 생겨서,, 조금 게으르게 학습한 느낌을 받았다.</p>
-
-<p>다시한번 각성하여 Spring 세션을 잘 마무리 해보자.</p>
-
-<hr />
-
-<h2 id="oauth-2">OAuth 2</h2>
-
-<h3 id="oauth-2-란">OAuth 2 란?</h3>
-
-<p>흔히 생각해보면, 우리가 웹사이트 로그인을 할때<br />
-소셜 로그인(구글,카카오톡 등) 인증방식을 사용해 로그인을 하는데<br />
-이런 인증방식들은 OAuth2라는 기술을 바탕으로 구현이 된다.</p>
-
-<p>우리가 알고 있는 일반적인 애플리케이션은<br />
-서비스를 이용하는 사용자에 대한 인증처리는 해당 애플리케이션이 직접했다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtOEbcjSRPGtg0QXyV8y1h1SCQegF3vUKPYwVCv7sEcPex_-9W-jvRfU7gcNry-watl1K_E1i57hcZE0mSkiSjOoVg=w1920-h921" alt="image" class="align-left" style="max-width: 80%" /><br />
-<strong><em>- 크리덴셜을 저장하지 않는 아키텍처 -</em></strong></p>
-
-<p>OAuth2 인증 프토토콜은 특정 애플리케이션에서 사용자의 인증을 직접<br />
-처리하는 것이아니라 사용자 정보를 보유하고 있는 신뢰할 만한 써드 파티<br />
-애플리케이션(구글,카카오톡 등)에서 인증을 대신 처리해주고 Resource에 대한<br />
-자격 증명용 토큰을 발급한후, Client가 해당토큰을 이용해 써드파티 애플리케이션의<br />
-서비스를 사용하게 해주는 방식이다.</p>
-
-<p><br /></p>
-
-<p><strong>*써드 파티(3rd Party)란?</strong><br />
-프로그래밍을 도와주는 라이브러리를 만드는 외부 생산자를 뜻한다.</p>
-
-<p>1st 파티 개발자 : 하드웨어 생상자가 ‘직접’ 소프트웨어를 개발하는 경우<br />
-2nd 파티 개발자 : 하드웨어 생산지인 기업과 자사간의 관계에 속한 소프트웨어 개발자<br />
-3rd 파티 개발자 : 아무 관련없는 제3자 소프트웨어 개발자<br />
-이렇게 예를 들어볼 수 있을 것 같다.</p>
-
-<p><br /></p>
-
-<h3 id="oauth-2-인증-컴포넌트-역할">OAuth 2 인증 컴포넌트 역할</h3>
-
-<p>시작에 앞서 OAuth 2 인증을 처리하는 <br />
-컴포넌트들이 무엇이 있고 어떠한 역할을하는지 알아보자</p>
-
-<ol>
-  <li>Resource Owner<br />
--&gt; 사용하고자 하는 Resource의 소유자를 의미한다.</li>
-  <li>Client<br />
--&gt; Resource Owner를 대신해 보호된 Resource에 엑세스하는 애플리케이션</li>
-  <li>Resource Server<br />
--&gt; Client의 요청을 수락하고 Resource Owner에 해당하는 Resource를 제공하는 서버</li>
-  <li>Authorization Server<br />
--&gt; Clinet가 Resource Server에 접근할 수 있는 권한을 부여하는 서버</li>
-</ol>
-
-<p>이렇게 글로만 정리하자면 사실 이해하기 힘들 것이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOuRXi0z_GnyDCCDHETh73m4ATTFc7XkcLLrbwxEbd_Rd71mekz5lc9oxBxt5WGwp-6BLNg3GiMQ4jErSdSRIpCvj3kkw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>대략적인 역할을 보면 이렇게 나눠볼 수 있을 것 같다.<br />
-기존에 우리가 불러오던 Client가 웹 애플리케이션 서버로<br />
-변경된 모습을 볼 수 있다.</p>
-
-<p>Resource Owner의 대리인으로써 구글에 인증과 Resource를<br />
-요청하고 있기때문에 Client라고 부를 수 있다</p>
-
-<p><br /></p>
-
-<h3 id="authorization-grant-유형">Authorization Grant 유형</h3>
-<p>Authorization Grant는 Client 애플리케이션이 Access Token을<br />
-얻기 위한 Resource Owner의 권한을 표현하는 크리덴셜(Credential)을 의미한다.</p>
-
-<p>즉, Access Token을 얻기 위한 수단이다.</p>
-
-<p><strong><em>*Access Token 이란?<br />
-Client가 Resource Server에 보호된 Resource에<br />
-엑세스하기 위해 사용하는 자격 증명용 토큰이다.</em></strong></p>
-
-<p><br /></p>
-
-<p>총 4가지의 타입이 있으니 알아보자</p>
-
-<p><strong>1). Authorization Code Grant (권한부여 승인 코드 방식)</strong> <br />
--. 가장 많이 쓰이는 방법이고 기본이 되는 방식이다.<br />
--. 권한 부여 승인을 위해 자체 생성한 Authorization Code를 전달하는 방식이다.<br />
--. Refresh Token을 사용할 수 있다.<br />
--. 권한 부여 승인 요청시 응답 타입을 <code class="language-plaintext highlighter-rouge">code</code>로 지정하여 요청한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPgVHuUuCDajpaRydkqDrMFvzkbLFg3gep5w9RB8biTR9VOow-YfScef_SaV6QJH5cGhGZwcx6giLOKPrAC4ppHoW1TNQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<p><strong>2). Implicit Grant (암묵적 승인 방식)</strong><br />
--. 별도의 Authorization Code 없이 바로 Access Token을 발급받는 방식이다.<br />
--. 자격증명을 안전하게 저장하기 힘든 Client에게 최적화된 방식이다.<br />
--. Refresh Token 사용이 불가능하다.<br />
--. 권한 부여 승인 요청시 응답타입을 <code class="language-plaintext highlighter-rouge">token</code>으로 지정하여 요청한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMa7L3zIQi3fKSZII9kd56k64SdaQpQJjnDrCev_ByGw1cuJYu3r61IXE0Ubx-pNNUJKs9tkNeOeQmBFZnGtOLekTEQCg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<p><strong>3). Resource Owner Password Credential Grant (자원 소유자 자격증명 승인방식)</strong><br />
--. 로그인 시 필요한 정보로 Access Token을 발급 받는 방식이다.<br />
--. 자신의 서비스에서 제공하는 애플리케이션의 경우에만 사용되는 인증 방식이다.<br />
-(Authorization Server, Resource Server, Client가 모두 같은 시스템에 속해있을 경우에만 가능)<br />
--. Refresh Token 사용이 가능하다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMijQTmGrLYDoKw37n3jPJRqt5i6JjFcp8XeFprwPcptgPdHdPvhscdpyh52SFQHU7ju84XmIWMYyJIR6TYVznjIuPpsw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<p><strong>4). Client Credentials Grant (클라이언트 자격증명 승인방식)</strong><br />
--. Client 자신이 관리하는 Resource, Authorization Server에 해당 Client를 위한<br />
-제한된 Resource 접근 권한이 설정되어 있을 경우 사용 가능한 방식이다.<br />
--. Refresh Token의 사용이 불가능하다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOmLKEo6UjsefDdk3MWt5D0fLVXTDfA9dnjjHZibE6A55PjTKLDzqBn-NZTS3WsK-6ojytFXEXqtgqkjvuTIclhg3RH4w=w1299-h921" alt="image" class="align-left" style="max-width: 90%" /></p>
-
-<p><br /></p>
-
-<h3 id="사전-준비">사전 준비</h3>
-<p>위에서 얘기했듯이 우리는 써드파티 애플리케이션 중<br />
-OAuth 2 인증 프로토콜을 제공하는 벤더(구글, 카카오톡, 페이스북 등)를<br />
-선정 한다음 프로그램을 작성해야한다.</p>
-
-<p>그중 위에서 예로든 구글의 OAuth 2 프로토콜을 이용해볼 예정이고<br />
-프로그램 작성 전에 먼저 클라이언트 ID와 Secret를 생성해야한다.<br />
-<a href="http://yoonbumtae.com/?p=2631">구글 API 콘솔에서의 OAuth 2 설정 - 출처: yoonbumtae님</a>을 보고<br />
-클라이언트 ID와 Secret를 생성하면 준비는 끝난다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO3kkRX35q-9PPahcVGwcdd2LGECoC7sez4uGlFClTNsVllR01dQocyQJSuF42Ej0tF7n3FIYHclCxtaNIefADUtJgiJw=w1920-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<hr />
-
-<p>오늘은 OAuth 2 에대한 간단한 지식을 알아봤다.<br />
-사실 이론만 보기에는 코드를 보지않아서<br />
-느낌이 확 와닿지는 않는다…</p>
-
-<p>하지만 큰그림을 보고 코드를 보면 더 눈에 잘들어오기 때문에<br />
-큰 아키텍처를 생각하고 코드를 다움주부터 연습을 해봐야겠다.</p>
-
-<p>오늘 공부는 여기서 끝 !</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김밥, 된장찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 리액티브 프로그래밍에 대해 공부해보는 날이다. 아마 깊은 내용은 다루지 않고, 간단한 지식들만 공부 할 것 같다.]]></summary></entry></feed>

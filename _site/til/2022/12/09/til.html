@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Cloud 운영 전략 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Cloud 운영 전략">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Proxy Server">
+<meta property="og:description" content="Proxy Server">
+<link rel="canonical" href="http://localhost:4000/til/2022/12/09/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/12/09/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-12-09T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Cloud 운영 전략">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-09T00:00:00+09:00","datePublished":"2022-12-09T00:00:00+09:00","description":"Proxy Server","headline":"TIL) Cloud 운영 전략","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/12/09/til.html"},"url":"http://localhost:4000/til/2022/12/09/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Cloud 운영 전략</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+112</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-12-09T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 09, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h3 id="proxy-server">Proxy Server</h3>
+
+<p>프록시 서버는 클라이언트가 서버와 소통할 때<br>
+서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록<br>
+해주는 대리 서버라고 생각하면 간단하다.</p>
+
+<p><strong>1). Forward Proxy</strong></p>
+
+<p>클라이언트 가까이에 위치한 프록시 서버다.<br>
+클라이언트를 대신해 서버에 요청을 전달해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMnENrT4W97MGhsCoY41GXXR2exz07o-Ftd6n5xNT5FsDCQA2-bKk1EkIPg1xG3Ziuonj4jBh9yFy3kLW35p_mYG1d7=w1920-h921" alt="image" class="align-left" style="max-width: 80%"></p>
+
+<p>장점</p>
+<ul>
+  <li>캐싱을 통해 빠른 서비스 이용이 가능하다</li>
+  <li>보안 (서버에서 프록시서버 IP를 받기때문에 클라이언트 IP를 숨길 수 있다)</li>
+</ul>
+
+<p><br></p>
+
+<p><strong>2). Reverse Proxy</strong></p>
+
+<p>서버 가까이에 위치한 프록시 서버다.<br>
+서버를 대신해서 클라이언트에 응답을 제공해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN3VUWC1TvwBt7n1ovAf-TPeX_VITPkt4aYr7_Nuf273yVBYeaq0oUo5sHfd-Npoe-w3HAY6kaY792Baqa5L01NYcYW=w1920-h921" alt="image" class="align-left" style="max-width: 80%"></p>
+
+<ul>
+  <li>분산처리 (여러대의 서버로 요청을 나누어 전달 후 처리, ex) 로드밸랜서)</li>
+  <li>보안 (클라이언트에게 서버 IP가 노출되지 않는다)</li>
+</ul>
+
+<p><br></p>
+
+<h3 id="load-balancer">Load Balancer</h3>
+<p>로드 밸런서는 서버에 가해지는 부하(Load)를 분산(Balance) 해주는<br>
+장치 또는 기술을 통칭한다.</p>
+
+<p>하나의 서버에 클라이언트의 잦은 요청이 있으면<br>
+서버의 과부하가 온다. 과부하로 인해서 서버가 원할하게 서비스를 제공하지<br>
+못하는 경우가 발생하기 때문에, 이와 같은 문제를 해결하기 위한<br>
+로드 밸린스 방식으로는 크게 2가지가 존재한다.</p>
+
+<p><br></p>
+
+<p><strong>✅ 로드 밸런서 방식</strong></p>
+
+<p><strong>1). Scale up</strong><br>
+물리적으로 서버의 사양을 높이는 하드웨어적 방법이다.<br>
+서버 수를 늘리지 않고 프로그램 구현있어 변화가 필요없다는 장점이 있다.</p>
+
+<p>하지만 굉장히 높은 비용이 발생하고, 하드웨어의 업그레이드는<br>
+한계가 있다는 단점이 있다.</p>
+
+<p><strong>2). Scale out</strong><br>
+서버의 갯수를 늘려 서버의 줄 부하를 분산시키는 방법이다.<br>
+많은 요청이 오더라도 여러대의 서버가 나눠서 처리를 하기 떄문에<br>
+서버의 사양을 높이지 않고도 비교적 저렴한 방법으로 부하를 처리할 수 있다.</p>
+
+<p><br></p>
+
+<p><strong>✅ 로드 밸런서 알고리즘</strong></p>
+
+<p><strong>1). 라운드로빈 방식 (Round Robin Method)</strong><br>
+서버에 들어온 요청을 순서대로 돌아가며 배정하는 방식</p>
+
+<p><strong>2). 가중 라운드로빈 방식 (Weighted Round Robin Method)</strong><br>
+각각의 서버마다 가중치를 매기고 가중치가 높은 서버에 클라이언트 요청을 우선 배분하는 방식이다.</p>
+
+<p><strong>3). IP 해시 방식 (IP Hash Method)</strong><br>
+클라이언트의 IP 주소를 특정 서버로 매핑하여 요청을 처리하는 방식이다.</p>
+
+<p><strong>4). 최소 연결 방식 (Least Connection Method)</strong><br>
+요청이 들어온 시점에 가장 적은 연결상태를 보이는 서버에 우선적으로 트래픽을 배분하는 방식이다.</p>
+
+<p><strong>5). 최소 리스폰타임 (Least Response Time Method)</strong><br>
+서버에 현재 연결 상태와 응답시긴을 모두 고려하여 트래픽을 배분하는 방식이다.</p>
+
+<p><br></p>
+
+<p><strong>✅ 로드 밸런서 종류</strong></p>
+
+<p>로드 벨런서는 클라이언트의 요청을 어떤 것을 기준으로<br>
+분산시키느냐에 따라 종류가 나눠진다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">로드 밸런서 종류</th>
+      <th style="text-align: left">로드 밸런싱의 기준</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">L2</td>
+      <td style="text-align: left">데이터 전송 계층에서 Mac 주소를 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L3</td>
+      <td style="text-align: left">네트워크 계층에서 IP 주소를 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L4</td>
+      <td style="text-align: left">전송 계층에서 IP주소와 Port를 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L7</td>
+      <td style="text-align: left">응용 계층에서 클라이언트의 요청을 바탕으로 로드 밸런싱을 한다.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<p><strong>✅ Auto Scaling</strong></p>
+
+<p>오토 스케일링은 Scale out 방식으로 서버를 증설할 때<br>
+자동으로 서버를 관리해주는 기능이다.<br>
+클라이언트의 요청이 많아져 서버의 처리 요구량이 증가하면 새 리소스를<br>
+자동으로 추하고 반대로 처리 요구량이 줄어들면 리소스를 감소시켜<br>
+적절한 분산 환경을 만들어준다.</p>
+
+<p><br></p>
+
+<h3 id="web-server">Web Server</h3>
+
+<h4 id="tomcat">Tomcat</h4>
+
+<p>톰캣은 스프링 학습하면서도 많이 보았을 것이다.<br>
+Apache 회사에서 개발한 서블릿 컨테이너만 있는 오픈소스 웹 애플리케이션 서비이다.</p>
+
+<p>우리가 흔히 <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> 의존라이브러리를 설정해주면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM9BsZsYaMRKMNzpvRyIJ8x1e_QHfIL7G3lRFVPR5032Zy9WiYHkN968M8hq7geCpfSYH9AC0G8N496-KSCb84A34sepQ=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>외부 라이브러리에 추가된 모습을 볼 수 있다.</p>
+
+<p><br></p>
+
+<h4 id="jetty">Jetty</h4>
+
+<p>제티는 이클립스 재단의 HTTP 서버이자 자바 서블릿 컨테이너이다.<br>
+우리는 스프링 웹에 내장되어 있는 톰켓을 사용했지만<br>
+Jetty 서버로 변경하여 사용하는 것도 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+	<span class="n">implementation</span> <span class="o">(</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">exclude</span> <span class="nl">module:</span> <span class="err">'</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">tomcat</span><span class="err">'</span>
+	<span class="o">}</span>
+	<span class="n">implementation</span> <span class="o">(</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">jetty</span><span class="err">'</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>기존의 톰켓 서버를 제외시키고, Jetty의 의존라이브러리를 추가해주면된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM4Q_56HQcx6ER0D9G9vc_AzQ_8_XrDREbC2LuRI1onRPzYvqLRzIIAG9jqfKepfooEmAcKuLKWqQLqjckdnKhxsUCs=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>gradle 리로드완료하면 외부라이브러리에서 Tomcat은 없어지고<br>
+jetty가 추가된 모습을 확인할 수가 있다.</p>
+
+<p>마찬가지로 애플리케이션을 로컬에서 실행하면 <br>
+콘솔에 <code class="language-plaintext highlighter-rouge">Jetty started on port(s) 8080</code>를 확인할 수 있다.</p>
+
+<p><br></p>
+
+<h4 id="nginx-proxy-server">NginX (Proxy Server)</h4>
+
+<p>NginX는 가볍고 높은 성능을 보이는 오픈소스 웹 서버 소프트웨어이다.<br>
+Tomcat과 Jetty가 Java 서블릿 컨테이너 혹은 웹 애플리케이션 서버였다면<br>
+NginX는 웹 서버로 클라이언트에게 정적 리소스를 빠르게 응답하기 위한 웹서버로 사용할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOG2uzsclZ4QWPxVAe_uxKcedgoaUBgThcMRAT424RV8K7dLYr9RTnqxzVnbtWUkm6Ovs1fmsRs7A7EAgNcEovLGs2bTA=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>위와 같은 구조를 만든다고 가정하고 로컬환경에서 테스트를 해보자</p>
+
+<p>MacOs 기준으로 설명해본다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>nginx
+</code></pre></div></div>
+<p>homebrew를 이용해 nginx를 설치해준다.<br>
+설치가 완료되면 <code class="language-plaintext highlighter-rouge">brew list</code> 명령어로 설치리스트를 확인할 수 있다.</p>
+
+<p>NginX 서버를 실행시키는 방법은</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services start nginx
+</code></pre></div></div>
+<p>해당 명령어를 입력하면 서버가 실행된다.<br>
+MacOS기준으로 기본 포트는 <code class="language-plaintext highlighter-rouge">localhost:8080</code>로 접속이 가능하다. 접속 성공 시에는 콘솔에  <br>
+<code class="language-plaintext highlighter-rouge">==&gt; Successfully started nginx (label: homebrew.mxcl.nginx)</code><br>
+해당 문구를 확인할 수 있다.</p>
+
+<p>만약 서버를 종료하고 싶다면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services stop nginx
+</code></pre></div></div>
+<p>해당 명령어를 입력해주면 된다.</p>
+
+<p>당연하게도 포트 변경도 가능하다.<br>
+<code class="language-plaintext highlighter-rouge">nginx.conf</code>파일을 찾아서 변경해주면 된다.<br>
+homebrew로 설치하였다면 <code class="language-plaintext highlighter-rouge">/opt/homebrew/etc/nginx/nginx.conf</code><br>
+해당 경로에 존재할 확률이 높다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNeZvcQvQB3AXd4W2johu0UXke69vIktUKMB9ZCIWk3-U1-ZZEMEqf1zJcXXLqtOzRARHIow3uCQYvxVJevdtJorh-w=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>해당 파일을 vi, nano 편집기로 수정하여도 되고<br>
+직접 열어 수정해도 된다.</p>
+
+<p>파일에서 http &gt; server &gt; listen의 포트번호가<br>
+8080으로 되어있을 텐데 해당 포트를 바꿔주면 된다.<br>
+나는 80으로 변경하여 사용했다.</p>
+
+<p>그리고 location에서 proxy_pass 관련 내용을 추가해주면 된다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+		listen       80; # 포트 변경
+...
+		location / {
+				...
+				proxy_pass http://localhost:8080; # 요청을 8080 포트로 넘깁니다.
+				proxy_set_header X-Real-IP $remote_addr;
+				proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+				proxy_set_header Host $http_host;
+		}
+}
+</code></pre></div></div>
+
+<p>다시 nginx를 실행 시키고, 스프링 부트를 실행시킨다음<br>
+<code class="language-plaintext highlighter-rouge">localhost:80</code>에 접속 요청을 하면<br>
+SpringBoot로 서버를 띄운 화면으로 넘어가는 것을 확인할 수 있을 것이다.</p>
+
+<p><br></p>
+
+<h4 id="nginx-load-balancer">NginX (Load Balancer)</h4>
+
+<p>위에서 NginX로 프록시 서버를 만들어서 Spring Web 서버와 연결해보는 것 까지 해보았다.<br>
+NginX를 이용해 로컬환경에서 로드 벨런싱을 구성할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPbhOAOVSac7VnsgOd7t4bBzA3D7UlzJQGluLPU_4874TJYacn9Jp7MvB4AuwI0cKCtT3kMfDyslCcYClK7J6f4iQ0b=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>해당 구성도 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일의 설정을 변경해서<br>
+로드벨런싱이 되도록 구성할 수 있다.<br>
+<a href="https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/">NginX 로드벨런싱 레퍼런스</a>를 참고해서 작성해보자</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+http {
+    ...
+    
+    # 로드 벨런싱 테스트를 위한 추가 (22.12.09)
+    upstream backend {
+        server localhost:8080;
+        server localhost:8081;
+    }
+    # 여기 위까지 추가
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+	    
+	    # 로드 밸런싱 테스트를 위한 추가 (22.12.09)
+	    proxy_pass http://backend;    
+	    
+        }
+        ...
+    }
+    ...
+}
+</code></pre></div></div>
+<p>로드 벨런싱을 위한 추가라고 붙은 주석이 달린 곳을 보면된다.<br>
+스프링 톰켓 서버를 8080, 8081로 애플리케이션으로 실행 시켜둔 다음에<br>
+nginx 서버를 80으로 실행 시키고 접속 요청을 하였을 경우</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMKVdGhcGq-yZafA-Yn63bYoQPXPy66rpCBac1Xkzm4czEkxlMaLbtVs-uIpxJ9Jb5zrusAmMAHT38Mlfcu0c7sjJ6z_A=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이렇게 작성한 화면이 띄워지게 된다.<br>
+여기서 화면을 구분하기 위해 PID값을 추가해 줬다.<br>
+보면 알 수 있듯이 2개의 서버중 33861 PID 값을 가진 화면을 불러왔다.</p>
+
+<p>여러번 새로고침을 반복하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPOoMHE0tlxe7V1CdRoQCdJmIN7tcTL1QwqUY4OwiudZff34WNG0Ss4s1HVGHXJyqp6vwdzWDNhjx6epx8Qh4RgGDBycw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이번엔 33818 PID 값을 가진 화면을 불러왔다.<br>
+이렇게 클라이언트에서 nginx 서버에 요청 시<br>
+로드 벨런싱이 적용되어 동작하는걸 눈으로 확인해 볼 수 있다.</p>
+
+<p><br></p>
+
+<hr>
+
+<p>이렇게 오늘은 클라우드 운영 전략에 대해 간단하게 알아보았다.<br>
+백엔드 공부를 시작하면서 늘 걱정이었던게<br>
+서버가 터지는 것을 어떻게 방지하지? 라는 의문이 있었고<br>
+환경적으로 이렇게 설정할 수 있구나라는걸 많이 배운 것 같다.</p>
+
+<p>이러한 전략들 외에 실제로 웹 요청이 많을때 프로그램 코드적으로는<br>
+어떻게 해야 잘 짤 수 있을까도 많이 고민해보면 좋을 것 같다. (WebFlux라든가..)</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 간장계란밥, 김치찌개</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/12/08/til.html" title="TIL) 배포 자동화 GitHub Actions">TIL) 배포 자동화 GitHub Actions</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/09/22/til.html" title="">TIL) Java 자료구조 Stack, Queue</a></li>
+<li><a class="post-link" href="/til/2022/11/25/til.html" title="">TIL) OAuth 2 인증 기초</a></li>
+<li><a class="post-link" href="/til/2022/09/19/til.html" title="">TIL) 한달차 회고</a></li>
+<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

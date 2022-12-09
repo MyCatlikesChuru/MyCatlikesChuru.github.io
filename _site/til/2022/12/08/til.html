@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring JDBC 기반 액세스 계층 2 | LeeJellan</title>
+<title>TIL) 배포 자동화 GitHub Actions | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring JDBC 기반 액세스 계층 2">
+<meta property="og:title" content="TIL) 배포 자동화 GitHub Actions">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="어느새 벌써 한주가 끝났다.">
-<meta property="og:description" content="어느새 벌써 한주가 끝났다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/28/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/28/til.html">
+<meta name="description" content="Github Action">
+<meta property="og:description" content="Github Action">
+<link rel="canonical" href="http://localhost:4000/til/2022/12/08/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/12/08/til.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-28T00:00:00+09:00">
+<meta property="article:published_time" content="2022-12-08T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring JDBC 기반 액세스 계층 2">
+<meta property="twitter:title" content="TIL) 배포 자동화 GitHub Actions">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-28T00:00:00+09:00","datePublished":"2022-10-28T00:00:00+09:00","description":"어느새 벌써 한주가 끝났다.","headline":"TIL) Spring JDBC 기반 액세스 계층 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/28/til.html"},"url":"http://localhost:4000/til/2022/10/28/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-08T00:00:00+09:00","datePublished":"2022-12-08T00:00:00+09:00","description":"Github Action","headline":"TIL) 배포 자동화 GitHub Actions","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/12/08/til.html"},"url":"http://localhost:4000/til/2022/12/08/til.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring JDBC 기반 액세스 계층 2</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+70</h2>
+  <h1 class="post-title p-name" itemprop="name headline">TIL) 배포 자동화 GitHub Actions</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+111</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-28T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 28, 2022
+    <time class="dt-published" datetime="2022-12-08T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 08, 2022
     </time>
 
     
@@ -685,182 +685,160 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>어느새 벌써 한주가 끝났다.</p>
+      <h2 id="github-action">Github Action</h2>
 
-<p>코드스테이츠 시작 전부터 5개월 동안<br>
-제대로 쉬지 못하고 공부를 지속하다보니 살짝 번아웃이<br>
-오긴하는 것 같다.. 공부는 즐겁고 얼른 이 기술을 습득해<br>
-적용하고 싶지만,, 너무 오랫동안 여행을 가지 못해서<br>
-어디론가 훌쩍 떠나고 싶다.</p>
+<p>오늘은 GitHub Actions라는 빌드, 테스트 및 배포 파이프라인을<br>
+자동화할 수 있는 CI/CD 플랫폼을 배워보려한다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSBGqdkMkYbzBmUzeLdSEzgYHBaRbLNMmENQpr1mjJdIXzRObuGsIxR3g7G770hOSSAJTkT3Gc=w1512-h810" align="left"></p>
+<p>Pull Request나 push 같은 이벤트를 트리거로 Workflow를 구성할 수 있다.<br>
+Workflow는 하나 이상의 작업이 실행되는 자동화 프로세스로, 각 작업은 자체 가상 머신<br>
+또는 컨테이너 내부에서 실행된다.</p>
 
-<p><br><br><br><br><br><br><br><br><br><br><br></p>
+<p><br></p>
 
-<p>그래도 목표에 도달하기위해 열심히 해보자 !!</p>
+<h3 id="github-actions를-통한-자동화-배포-flow">Github Actions를 통한 자동화 배포 Flow</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNS7vEzt0Vzp4__CH13v9LcmDTz7WAHn3CuXNw2JbEdcTd0Rlim8mfhT_8BX6KokJ4pPfSp7XLuV-zHGrM6KAUkfRwPag=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<ol>
+  <li>레포지토리에 변화가 생기면 Github Actions 작동</li>
+  <li>프로젝트 빌드 결과물(.jar) S3로 전송 및 저장</li>
+  <li>CodeDeploy로 배포 명령</li>
+  <li>프로젝트 빌드 결과물(.jar) CodeDeploy로 전달</li>
+  <li>EC2 배포 및 샐행</li>
+</ol>
+
+<p>GitHub Actions는 설정파일(<code class="language-plaintext highlighter-rouge">.yml</code>)에 따라 Github Repository에<br>
+특정 변동사항을 트리거로 작동된다. 트리커는 Pull Request나 push 같은 이벤트를<br>
+사용할 수 있다고 위에서 얘기 했었었다.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">main"</span> <span class="pi">]</span>
+</code></pre></div></div>
+<p>간단한 예시로 <code class="language-plaintext highlighter-rouge">main</code>브랜치에 push가 되어질때를 트리거로 사용하는 <code class="language-plaintext highlighter-rouge">.yml</code>설정이다.</p>
+
+<p>Github Actions에서 빌드를 마치고 빌드 결과물을(.jar)  AWS S3 버킷에 객체를 저장한다.<br>
+그리고 Code Deploy로 배포 명령이 내려진다.<br>
+(즉, S3는 빌드한 결과물을 저장해주는 용도로만 사용할 것이다.)</p>
+
+<p>그렇게 Code Deploy가 배포 명령을 받으면<br>
+S3에 저장되어 있던 빌드 결과물이 EC2 인스턴스로 이동한다.<br>
+그리고 <code class="language-plaintext highlighter-rouge">appspec.yml</code>파일에 설정한대로 shell script를 동작한다.</p>
+
+<p>그렇게되면 EC2에서 <code class="language-plaintext highlighter-rouge">.yml</code>,<code class="language-plaintext highlighter-rouge">.sh</code>파일들에 의해 빌드파일(<code class="language-plaintext highlighter-rouge">.jar</code>)을 실행하고<br>
+배포 결과를 로그로 남길 수 있다.<br>
+즉, EC2에서는 Code Deploy Agent의 설치와 JDK 버전 설치가 필요하다.</p>
+
+<p><br></p>
+
+<h3 id="github-actions-생성">Github Actions 생성</h3>
+<p>이제 자동 배포과정은 위에서 알아 보았으니<br>
+Github Actions을 이용해 설정을 진행해보자.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMYNPG-u6wiQkjifVTjEQoKHtaBipydSZPQKgyZx0rYIcuXUSkJSallw1_50L0eTN2PolpzM0LN3Iq-53XpaeOGc0RISQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>테스트용으로 만든 Repository의 상단의 Actions를 들어가서<br>
+Java with Gradle을 찾아 구성을 클릭해준다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM5ES3mIxRbG_7Tv7xj6t5VmlwijcfF3hNJE-Y-6LL5Ho0UW-ryp83Wv09WSYX_zmL1A_yXR83yC5j1CYsvj7RGrvxRzw=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>눌러 주고나면 상단에 <code class="language-plaintext highlighter-rouge">.yml</code>파일을 저장할 경로가 나오고<br>
+이름을 설정해 줄 수 있다. 기본이름인 <code class="language-plaintext highlighter-rouge">gradle.yml</code>로 설정 후</p>
+
+<p>하단에는 <code class="language-plaintext highlighter-rouge">gradle.yml</code> 파일에 대한 설정을 해주어야한다.<br>
+위에서 잠깐 얘기했던 변동사항 트리거 설정, JDK 설치<br>
+build한 후 압축하는 기능, AWS credentials 구성, 압축한 파일 S3 전송<br>
+CodeDeploy에게 배포 명령 등 다양한 Workflow를 설정해 줄 수 있다.</p>
+
+<p>해당 설정을 마쳤다면, Start commit 버튼을 눌러준 후 Commit new file을 눌러 주면 된다. <br>
+<code class="language-plaintext highlighter-rouge">gradle.yml</code> 파일은 Repository <code class="language-plaintext highlighter-rouge">.github/workflows</code> 경로에 저장된다.</p>
+
+<p>그리고 Actions에서 우리가 설정한 <code class="language-plaintext highlighter-rouge">gradle.yml</code> 설정대로<br>
+Workflow가 진행되는 것을 확인 할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN_vA2swoIsKid0hpogGa6K3M2HJBTtXm-GDj3Jgd5XETM9wAWdxUNkQyJXVJNWW3jWBSsFBStT6Zi3nWTmNAZJ_xD8mQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>모든 과정이 완료되면 위와 같이 녹색으로 표시가 된다.<br>
+이제 S3에 빌드파일 객체가 전달되었을 것이고<br>
+Code Deploy의 작동을 모아놓는 <code class="language-plaintext highlighter-rouge">appspec.yml</code>설정이 제대로 되어있고<br>
+script <code class="language-plaintext highlighter-rouge">.sh</code>들의 코드가 정상적으로 들어가 있다면<br>
+EC2에 정상적인 배포가 자동으로 이루어졌을 것이다.</p>
+
+<p>Github Actions를 설정하기전에</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOCCMyhm1hmET_5cP4ljHyaJO7PsnSF7BHDYz2UDXIXk_bnHjHRXcJiInrmSFkwX5vihtTEAlXthho-aq2hznZ2WicsZw=w1304-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>우리가 이용하는 Code Deploy의 애플리케이션 생성과<br>
+<code class="language-plaintext highlighter-rouge">appspec.yml</code>, <code class="language-plaintext highlighter-rouge">.sh</code>파일에 대한 설정은 끝나 있어야한다.</p>
+
+<p><br></p>
+
+<h3 id="github-action-configure-aws-credentials">Github Action Configure AWS credentials</h3>
+
+<p>현재 IAM 계정으로 AWS를 이용중이다.<br>
+(<a href="https://docs.aws.amazon.com/ko_kr/powershell/latest/userguide/pstools-appendix-sign-up.html">참고 - AWS 엑세스키 관련 문서</a>)</p>
+
+<p>Github Actions에서 Workflow를 실행하는 과정에서<br>
+Access Key가 필요하다. 공개되면 보안 이슈가 발생할 수 있어<br>
+Github Secret 기능을 이용해 Access Key 값을 저장한 후 사용할 수 있다.<br>
+<a href="https://github.com/aws-actions/configure-aws-credentials">configure-aws-credentials 레퍼런스</a>를 참고해보면 좋을 것 같다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">steps</span><span class="pi">:</span>      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Configure AWS credentials</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">aws-actions/configure-aws-credentials@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">aws-access-key-id</span><span class="pi">:</span> <span class="s">$</span> <span class="c1"># 등록한 Github Secret</span>
+          <span class="na">aws-secret-access-key</span><span class="pi">:</span> <span class="s">$</span> <span class="c1"># 등록한 Github Secret</span>
+          <span class="na">aws-region</span><span class="pi">:</span> <span class="s">ap-northeast-2</span>
+     
+      <span class="s">// ..생략</span>
+</code></pre></div></div>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNUWS9aAZNZWUWqRYoX-BwmSLb-6gQk_20nb6IINmQUT2KAzI4lG5iZRNsAOzd0bseG1KReKyflHyumA-PfLlni5ijXrA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이렇게 키값을 설정해주면<br>
+<code class="language-plaintext highlighter-rouge">gradle.yml</code>에서 환경변수 사용하듯이 사용이 가능하다.</p>
+
+<p><br></p>
 
 <hr>
 
-<p>어제는 Spring data JDBC를 사용하는 연습을 해보았다.</p>
+<p>이렇게 오늘은 Github actions를 이용해<br>
+push 한번으로 EC2까지 자동으로 배포되어지는 기능을 사용해 보았다.<br>
+안에 엄청나게 복잡한 내용들이 존재하는건 분명하다.</p>
 
-<p>몇일전까지는 이해가 되서 재밌었는데,,<br>
-급격한 난이도 상승으로 인한  즐거움과 어지러움이 공존했다.</p>
+<p>이 기능을 이용해본 입장으로서는 Workflow 구성설정과<br>
+AWS CodeDeploy의 <code class="language-plaintext highlighter-rouge">.yml</code>,<code class="language-plaintext highlighter-rouge">.sh</code> 파일에 대한 내용만<br>
+우리가 동작을 원하는대로 설정만 잘해두면 무리없이 동작되는 것 같다.</p>
 
-<p>요는 JDBC 사용법이 어려웠던 것 보다는<br>
-Database, Service, Dto, Mapper, Controller의 연동과<br>
-데이터 전달흐름을 정확히 캐치하기가 어려운게 너무 컷었다.</p>
+<p>이렇게 이틀 동안 배포자동화에 대한 두가지 방법을 알아 보았다.<br>
+느낀점은 AWS에 대한 공부가 절실하다는 것.<br>
+전체적인 흐름을 이해했으니 이제 상세한 공부들이 필요할 시기다.</p>
 
-<p>그도 그럴 것이 이 모든 내용을 일주일안에<br>
-전부 학습한 내용이라 그런 것 같다는 생각이 들었다.</p>
-
-<p>그래도 오늘 배운 것을 차근차근 정리해보자</p>
-
-<p><br></p>
-
-<h3 id="domain-driven-design">Domain Driven Design</h3>
-
-<p>Domain Driven Design는 DDD라고 줄여 불른다.<br>
-우리말로 도메인 주도 설계 정도로 해석할 수 있는데<br>
-용어의 의미 그대로 도메인 위주의 설계 기법을 의미한다.</p>
-
-<p><strong>Aggregate란?</strong><br>
-관련 도메인을 하나의 군집으로 묶은 것을 의미한다.<br>
-예를들어 커피주문을 앱으로 만든다고 가정하 였을 경우</p>
-
-<p>회원 (회원Id, 회원이름, 회원이메일 등..)<br>
-주문 (주문Id, 주문시간, 주문상태 등..)<br>
-음료 (음료Id, 음료종류, 음료가격, 음료조리시간 등..)</p>
-
-<p>이렇게 3개의 군집(회원,주문,음료)로 나는 것을 Aggregate라고 한다.</p>
-
-<p><strong>Aggregate route란?</strong><br>
-Aggregate route는 말그대로 군집중에 기준이 되는 뿌리. 즉 정보다<br>
-객체를 참조하기 위한 기준이되는 값이라고 생각하면 간단할 것 같다.<br>
-말 뜻에서 오듯이 변경이되지 않는 값으로 잡아야한다. (ex: id)</p>
-
-<p>한마디 정리 : Aggregate의 대표다 !</p>
-
-<p><br></p>
-
-<h3 id="entity-설계">Entity 설계</h3>
-<p>이전에 학습했던 RDBMS 챕터에서<br>
-ERD(Entity Relationship Diagram) 설계할때 잠깐 공부했었다.<br>
-1:1, 1:N, N:N 관계를 정의하고, 외래키(foreign key)로<br>
-다른 Entity를 Join해 값을 참조가 가능했었다.</p>
-
-<p>우리가 예제로 만들 애플리케이션의 Entity의 관계를 정의하고<br>
-프로그램을 시작하는게 좋을 것 같다.</p>
-
-<h3 id="오늘-배운-것을-적어보자-">오늘 배운 것을 적어보자 !</h3>
-
-<p><strong>1). AggregateReference</strong><br>
--. JDBC 라이브러리 안에 들어있는 인터페이스이다.<br>
--. Table 왜래키처럼 다른 클래스의 Aggregate Route를 참조할 수 있는 방법이다.</p>
-
-<p><strong>2). @Table</strong><br>
--. Table의 이름을 정의하는 어노테이션이다.<br>
--. .sql 파일에 정의된 테이블의 이름과 연결해준다고 생각하면 될 것 같다.<br>
--. @Table이 설정이 안되어 있을 경우 클래스이름과 동일한 테이블을 연결해준다.</p>
-
-<p><strong>3). @MappedCollection</strong><br>
--. Entity 클래스 간의 연관 관계를 맺어주는 어노테이션이다.</p>
-
-<p>1,2,3번에 대한 예제를 프로그램으로 살펴보자</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE IF NOT EXISTS ORDERS (
-    ORDER_ID bigint NOT NULL AUTO_INCREMENT,
-    MEMBER_ID bigint NOT NULL,
-    PRIMARY KEY (ORDER_ID),
-    FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER(MEMBER_ID)
-);
-</code></pre></div></div>
-<p>SQL구문으로 ORDERS 테이블을 만들었고<br>
-내부의 ORDER_ID, MEMBER_ID를 컬럼을 만들었다.<br>
-각각 기본키와 외래키로 등록하였다.</p>
-
-<p><br></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@Table</span><span class="o">(</span><span class="s">"ORDERS"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
-    <span class="nd">@Id</span>
-    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderId</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nc">AggregateReference</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="n">memberId</span><span class="o">;</span>
-
-    <span class="nd">@MappedCollection</span><span class="o">(</span><span class="n">idColumn</span> <span class="o">=</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">CoffeeRef</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>우리가 DB와 연결하기위해 Repository 인터페이스를 만들었고<br>
-Spring data JDBC 기술을 이용하는 CrudRepository 인터페이스를 상속받아<br>
-DB에 접근하여 CRUD를 사용했었다.</p>
-
-<p>Order 클래스는 우리가 객체를 만들어<br>
-값을 저장해둔다음. 해당 객체를 CrudRepository의<br>
-메서드를 이용해 .save();를하여 객체를 넘겨주면<br>
-우리가 위에서 정의해둔 테이블에 값이 저장되게 되어진다.</p>
-
-<p>1).
-여기서 @Table의 역할을 알 수 있다. 
-.save();를 진행할떄, 어느 테이블에 저장을해야할지<br>
-알수가 없다. 그것을 지정해주는 애노테이션으로
-Table이 ORDERS로 지정된 테이블을 연결해준다.<br>
-@Table을 안붙여줬을 경우 자동으로 클래스이름의 테이블을 찾아간다.</p>
-
-<p>2). AggregateReference 타입으로 만든 memberId라는 값은<br>
-Member 클래스의 Long으로 지정된 Id값을 참조할 수 있게된다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">AggregateReference</span><span class="o">.</span><span class="na">IdOnlyAggregateReference</span><span class="o">();</span>
-</code></pre></div></div>
-<p>위의 코드를 이용해 Order 객체를 생성할 때, 어떤 Member가 선택했는지<br>
-전달받은 Id를 위의 메서드 안에 넣어 준 객체를 이용해서 만들어주면된다.</p>
-
-<p>그렇게 만들어진 order클래스 객체의 memberId값으로<br>
-memberRepository에 접근해 Id를 이용해 객체를 찾고<br>
-다른 값들도 가져올 수 있게 되는 것이다.</p>
-
-<p>3). @MappedCollection
-N:N 관계의 경우 중간 Entity 클래스가 하나 필요하다.<br>
-Order - OrderCoffee - Coffee (1 : N : 1)과 같은 그림이다.<br>
-그 중간 클래스는 CoffeeRef고 테이블은 ORDER_COFFEE로 정했다.</p>
-
-<p>idColumn, keyColumn에 대한 설정이 필요하고
-List를 사용할 경우 2개다 지정해야하며, Set을 싸용할 경우 IdColumn만 지정해도 사용가능하다.</p>
-
-<p>idColumn은 CoffeeRef에서 사용할 외래키를 적어주면된다.<br>
-CoffeeRef(N): Order(1)이기 때문에<br>
-ORDER_ID를 참조하게 적어주면된다.</p>
-
-<p>keyColumn은 외래키를 포함하고 있는 테이블의 기본키를 컬럼명을 지정하면된다.<br>
-현재 같은 경우 keyColumn = “ORDER_COFFEE_ID”로 적어주면 되는 것이다.</p>
-
-<hr>
-
-<p>이렇게 오늘은 Spring data JDBC에 대해 알아보았다.<br>
-사실 몇개는 간단하게 느껴졌는데<br>
-연관 관계 Mapping은 아직 익숙치않아서 그런지<br>
-조금 많이 어렵게 느껴졌다.<br>
-다음주에 실습이 또 있는데 실습을 통해서 익숙해지도록 노력해야겠다.</p>
+<p>오늘 공부는 여기서 끝!!</p>
 
 <p><br></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 불고기, 계란부침, 밥</p>
+<strong>오늘의 점심</strong>: 짜파게티, 김치찌개</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/27/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring JDBC 기반 액세스 계층...</a><a class="next" href="/til/2022/10/31/til.html" title="TIL) Spring Data JDBC Pagination">TIL) Spring Data JDBC Pagination</a>
+<a class="previous" href="/til/2022/12/07/til.html" title="TIL) 배포 자동화 AWS Pipeline">TIL) 배포 자동화 AWS Pipeline</a><a class="next" href="/til/2022/12/09/til.html" title="TIL) Cloud 운영 전략">TIL) Cloud 운영 전략</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/28/til.html" title="TIL) Spring Data JDBC Pagination">TIL) Spring Security, JWT , OAuth 2 인증</a></li>
-<li><a class="post-link" href="/til/2022/11/30/til.html" title="TIL) Spring Data JDBC Pagination">TIL) Spring WebFlux Project Reactor</a></li>
-<li><a class="post-link" href="/til/2022/10/27/til.html" title="TIL) Spring Data JDBC Pagination">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
-<li><a class="post-link" href="/til/2022/10/07/til.html" title="TIL) Spring Data JDBC Pagination">TIL) DB RDMBS 3</a></li>
+        <li><a class="post-link" href="/til/2022/10/11/til.html" title="TIL) Cloud 운영 전략">TIL) Spring Basic 1</a></li>
+<li><a class="post-link" href="/til/2022/09/20/til.html" title="TIL) Cloud 운영 전략">TIL) Java 재귀</a></li>
+<li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="TIL) Cloud 운영 전략">맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
+<li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="TIL) Cloud 운영 전략">macOs) brew update Error Another active Homebrew update process is already in...</a></li>
 </ul>
     </div>
 <div class="post-comments">
