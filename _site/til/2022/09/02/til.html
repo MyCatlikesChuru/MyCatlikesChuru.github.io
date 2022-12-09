@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Java 객체지향 - 클래스, 필드, 메서드 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Java 객체지향 - 클래스, 필드, 메서드">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="아니 벌써 금요일!???">
+<meta property="og:description" content="아니 벌써 금요일!???">
+<link rel="canonical" href="http://localhost:4000/til/2022/09/02/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/09/02/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-09-02T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Java 객체지향 - 클래스, 필드, 메서드">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-09-02T00:00:00+09:00","datePublished":"2022-09-02T00:00:00+09:00","description":"아니 벌써 금요일!???","headline":"TIL) Java 객체지향 - 클래스, 필드, 메서드","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/09/02/til.html"},"url":"http://localhost:4000/til/2022/09/02/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Java 객체지향 - 클래스, 필드, 메서드</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+14</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-09-02T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 02, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>아니 벌써 금요일!???</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPXxdrUKN_2jIzjCnfFdsUXiVv75j5fmMUDmMJGZJVu6DlnYbeemrOVV4_0Lbks5mEH2HFci91DbGei0i8_rInWXHNB=w1920-h921" alt="image" class="align-left" style="max-width: 50%"></p>
+
+<p>시간이 이렇게 빨리가다니요번주는 진짜 엄청 빨리 시간이 지났던 것 같다.<br>
+아무래도 문법공부와 문제풀이를 해서 그런가? 벌써 금요일이다…</p>
+
+<p>어제는 배열에 대해 공부했고여러방을이용해 같은 계열의<br>
+데이터들은한군데 저장할 수 있는 것을 알아보았다.<br>
+오늘은 자바의 심장… 자바의 꽃이라고 많이들하는객체지향에대해 공부해보는 날이다.</p>
+
+<p>오늘도 화이팅!!</p>
+
+<hr>
+
+<h3 id="객체지향-프로그래밍-object-oriented-programming">객체지향 프로그래밍 (Object-Oriented Programming)</h3>
+
+<p>객체 개념에 기반한 프로그램패러다임, 객체 간 관계 및 유기적인 협력.<br>
+실제 사물의 <strong>속성</strong>과 <strong>기능</strong>을 분석한 후에 이것을 프로그래밍의 변수와 함수로<br>
+정의함으로 실제 세계를 최댛나 컴퓨터 프로그래밍에 반영하고자 하는 시도라 설명할 수 있다.</p>
+
+<p>가장 많이 드는 예로 자동차를 생각해보면 <br>
+속성에는 자동차의 색깔, 자동차 바퀴의 크기, 자동차 내부 디자인 등 이있고<br>
+기능에는 주행(엑셀을 밟으면 차가 움직인다), 라디오 (라디오를 키면 음성이나온다) 등 이있다.</p>
+
+<p>자동차라는 설계도 안에<br>
+여러가지 속성과 기능을 합쳐서 자동차라는 것을 만들 듯이<br>
+객체지향 프로그래밍도 속성과 기능을 프로그래밍의 변수와 함수로 정의해<br>
+하나의 설계도를 완성하는 것이라 생각할 수 있는 것 같다.</p>
+
+<p>이제 객체지향이라는 것이 어떤 느낌인지 대략 파악하였으니<br>
+실제 Java 언어로 객체지향 프로그래밍을 하기위해서</p>
+
+<p>어떤 것을 배워야하는지 알아보자!!</p>
+
+<p><br></p>
+
+<h3 id="클래스class">클래스(Class)</h3>
+
+<p>클래스는 객체를 정의한 ‘<strong>설계도</strong>’, ‘<strong>틀</strong>‘이라는 말로 많이 정의하는 것으로 들었다.<br>
+즉, 클래스는 객체를 생성하는데 사용된다.<br>
+반대로 객채는 클래스에 정의되고 설계된 내용 그대로 생성된다.</p>
+
+<p>❗️<strong>클래스는 객체 그자체가 아니다!   단지 객체를 생성하는 데 사용되는 하나의 틀!</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNnX1FjSj6BKsdcmuzX_TEnWNbV_n7TDV27o0j8ZUJYo06FAJAOpQZUXq8ZNDR7YE8qttTg0kOpuZayquwoRLVHqEV0=w1920-h921" alt="image" class="align-left" style="max-width: 100%"><br>
+<a href="https://wikidocs.net/165339">출처 - wikidocs 레퍼런스</a></p>
+
+<p>가장 많이 드는 예로, 붕아빵 틀과 붕어빵이 있다.<br>
+Class 즉 설계도,틀 이라고했는데<br>
+위에서 보면 붕어빵을 만들 수 있는 틀이다. 수백번 수천번을 만들던<br>
+기계가 고장나지 않는 이상 항상 같은 모양으로 만들어 질 수 있다.<br>
+그 틀안에서 만들어진 붕어빵을 즉, 클래스를 통행 생성된 객체를<br>
+<strong>인스턴스(Instance</strong>)라고 한다.</p>
+
+<p>객체와 인스턴스는 같은 말이라 차이를 두는 것에 큰 의미는 없고<br>
+엄격히 구분하자면 객체 &gt; 인스턴스 의 의미를 가지고 있다.<br>
+이렇게 생성된 인스턴스들은 여러가지 속성을 가질 수 있다.<br>
+붕어빵에 팥만 들어가냐? 아니다.<br>
+슈크림도 들어가고 만드는 사람이 원하면 무었이든 넣을 수 있다.<br>
+이렇게 클래스에서 만들어진 인스턴스들은 같은 틀에서<br>
+만들어졌지만 서로 다르다고 볼 수 있다.</p>
+
+<p>이제 프로그램적으로 접근해서<br>
+설계도,틀을 즉 Class를 구성하는 여러요소와 문법이있다.</p>
+
+<p><em><strong>1).필드 (field)</strong></em><br>
+-. 클래스의 속성을 나타내는 변수이다.  <br>
+ex) int x = 10;</p>
+
+<p><em><strong>2).메서드 (method)</strong></em><br>
+-. 클래스의 기능을 나타내는 함수이다.<br>
+ex) public void carDrive();</p>
+
+<p><em><strong>3).생성자 (constructor)</strong></em><br>
+-. 클래스의 객체를 생성하는 역할이다.<br>
+-. 클래스와 동일한 이름으로 만든다.</p>
+
+<p><em><strong>4).이너 클래스 (inner class)</strong></em><br>
+-. 클래 내부의 클래스를 의미한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleClass</span> <span class="o">{</span>
+	<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span> <span class="c1">// (1)필드</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">carDrive</span><span class="o">()</span> <span class="o">{...}</span> <span class="c1">// (2)메서드</span>
+	<span class="kd">public</span> <span class="nc">ExampleClass</span> <span class="o">{...}</span> <span class="c1">// (3)생성자</span>
+	<span class="kd">class</span> <span class="nc">ExampleClass2</span> <span class="o">{...}</span> <span class="c1">// (4)이너 클래스</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위에서 필드,메서드,이너클래스는 멤버(member)라고 부른다.<br>
+생성자나 메서드, 이너클래스 등 오늘말고 다른날에 심화학습할 것 같다.<br>
+오늘은 이런 것들이 있다 정도만 알면 될 것 같다.</p>
+
+<p><br></p>
+
+<h3 id="객체object">객체(Object)</h3>
+
+<p>앞에서 엄격하게 나누자면 얘기했듯이 개별객체는 인스턴스<br>
+좀 더 큰범위는 객체이다.<br>
+객체를 생성과 활용을 할 수 있는 방법을 알아보자</p>
+
+<p><br></p>
+
+<h4 id="선언방법">선언방법</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">클래스명</span> <span class="n">참조_변수명</span> <span class="o">=</span> <span class="k">new</span> <span class="n">생성자</span><span class="o">();</span>
+<span class="nc">Car</span> <span class="n">avante</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Car</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>자동차라는 설계도 Car의 생성자를 호출해<br>
+새로운 인스턴스인 avante라는 자동차라는 객체를 만든 모습이다.<br>
+이렇게 자동차라는 설계도로 생성자의 값을 변경해주면<br>
+무수히 많은 자동차 객체를 만들 수 있는 것이다.</p>
+
+<p>여기서 new라는 키워드는 생성된 객체를 <strong>힙 메모리</strong>에 넣으라는 의미를 가지고 있다.<br>
+즉 여기서 생성된 참조 변수인 avante는 실제 데이터가 저장되어 있는 <strong>힙 메모리</strong>의 주소값을 가르킨다.<br>
+(JVM 메모리 구조에 대한 공부도 필요해보인다)</p>
+
+<p><br></p>
+
+<h4 id="객채활용">객채활용</h4>
+
+<p>이렇게 만들어진 avante라는 객체를 활용해야할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Car</span> <span class="n">avante</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Car</span><span class="o">();</span>
+
+<span class="n">참조</span> <span class="n">변수명</span><span class="o">.</span><span class="na">필드명</span> <span class="c1">// 필드값 불러오는 방법</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"내 차의 모델은 "</span> <span class="o">+</span> <span class="n">avante</span><span class="o">.</span><span class="na">model</span> <span class="c1">//필드에 있는 model이라 선언된 값 불러와 출력</span>
+
+<span class="n">참조</span> <span class="n">변수명</span><span class="o">.</span><span class="na">메서드명</span><span class="o">()</span> <span class="c1">// 메서드 호출하는 방법</span>
+<span class="n">avante</span><span class="o">.</span><span class="na">drive</span><span class="o">();</span> <span class="c1">// drive으로 지정된 메서드를 호출해 운전기능실행</span>
+<span class="n">avante</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span> <span class="c1">// stop으로 지정된 메서드를 호출해 운전정지실행</span>
+</code></pre></div></div>
+
+<p>첫번째로는 필드값을 불러와서 속성을 활용할 수 있고<br>
+메서드를 불러와서 기능을 활용할 수 있다.<br>
+이제 위에서 간단하게 설명한 필드와 메서드에 대한 내용들을 알아보자</p>
+
+<p><br></p>
+
+<h3 id="필드field">필드(Field)</h3>
+
+<p>위에서 얘기했듯이 필드는 속성을 정의할 때 사용된다.<br>
+즉, 클래스에 포함된 변수를 의미한다.</p>
+
+<p>자바 변수는 크게 3가지로 나뉜다.</p>
+
+<ol>
+  <li>클래스 변수 (class variable / cv)</li>
+  <li>인스턴스 변수 (instance variable / iv)</li>
+  <li>지역 변수 (local variable / lv)</li>
+</ol>
+
+<p>이 세가지를 필드라부르고<br>
+static 키워드의 유무로 구분이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Car</span><span class="o">{</span> 
+    <span class="kt">int</span> <span class="n">carColor</span><span class="o">;</span> <span class="c1">// 인스턴스 변수</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="n">carSzie</span> <span class="c1">// 클래스 변수</span>
+    
+    <span class="kt">void</span> <span class="nf">drive</span><span class="o">(){</span>
+    	<span class="kt">int</span> <span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="c1">// 지역변수</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<h4 id="클래스변수-vs-인스턴스-변수">클래스변수 vs 인스턴스 변수</h4>
+
+<p>static이 있냐 없냐에 따라<br>
+인스턴수 변수냐, 클래스 변수냐의 차이를 나타난다고 하였는데</p>
+
+<p>아래의 예제를 보며 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">example</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    	<span class="c1">//클래스명.인스턴스변수 = 오류</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">a</span><span class="o">);</span> <span class="c1">//오류발생 </span>
+        
+        <span class="c1">//클래스명.클래스변수 = 정상</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">b</span><span class="o">);</span> <span class="c1">//example 클래스의 클래스변수 b값이 출력됨</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>example 클래스에 a라는 기본타입의 인스턴스 변수를 선언 및 할당하였고<br>
+b라는 기본타입의 클래스 변수를 선언 및 할당하였다.</p>
+
+<p><em>*기본타입(정수타입,실수타입,문자타입,논리타입)</em><br>
+위에서 알 수 있는 사실은, <code class="language-plaintext highlighter-rouge">클래스명.클래스변수</code>를 사용해야 값을 가져올 수 있다는 점</p>
+
+<p>이 클래스의 인스턴스를 만들지 않고<br>
+호출할 수 있는 것은 클래스 변수이다.<br>
+인스턴스변수는 인스턴스를 만들고 선언이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    	<span class="n">example</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">example</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">a</span><span class="o">);</span> <span class="c1">//오류발생 기존 오류발생코드.</span>
+        
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">test</span><span class="o">.</span><span class="na">a</span><span class="o">);</span> <span class="c1">// 인스턴스변수 값을 가져오는법</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">b</span><span class="o">);</span> <span class="c1">//example 클래스의 클래스변수 b값이 출력됨</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 test라는 인스턴스를 통해 인스턴스변수를 가져올 수 있다.</p>
+
+<p><br></p>
+
+<h4 id="지역변수">지역변수</h4>
+
+<p>지역변수는 메서드 내에 선언되며 메서드 내 {}블록에서만 사용이 가능한 변수다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">drive</span><span class="o">(){</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kt">int</span> <span class="nf">speedChange</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">;</span> <span class="c1">// 지역변수 a를 사용하지 못함</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>예를들어 Car라는 클래스의<br>
+운전과, 속도변경의 기능은 메서드 2개가 있다고 가정할때.<br>
+int a 라는 지역변수를 <code class="language-plaintext highlighter-rouge">drive()</code> 메서드에 0이라는 값으로 할당하였다.<br>
+근데 이값을 s<code class="language-plaintext highlighter-rouge">peedChange()</code> 메서드에 사용하고 싶어<br>
+위와 같이 return a를 하였을 경우 오류가 발생한다.<br>
+왜냐하면 a는 지역변수 이기때문에 메서드 내 {}블록에서만 사용가능한 변수이기 때문이다.</p>
+
+<p>큰 특징은 멤버 변수와는 다르게 지역변수는 스택 메모리에 저장되어<br>
+메서드가 종료되는 것과 동시에 함께 소멸된다.</p>
+
+<p>위에서 인스턴스 변수와 클래스 변수를 나눌때<br>
+static을 사용한다고 하였는데 이것에 대해 조금더 공부해보자</p>
+
+<p><br></p>
+
+<h4 id="static">static</h4>
+
+<p>static은 클래스의 멤버에 사용하는 키워드이다.<br>
+*클래스의 멤버(필드,메서드,이너클래스)</p>
+
+<p>멤버에 static 키워드가 붙어있으면 이것을 ‘<strong>정적 멤버(static member)</strong>‘라고 부른다.<br>
+기존에 new를 사용해 인스턴스를 만들어 <code class="language-plaintext highlighter-rouge">인스턴스명.멤버명</code> 이렇게 사용하면<br>
+힙 메모리에 생성되고 독립적인 저장공간을 가지게 된다.</p>
+
+<p>반면 static으로 선언된 정적 멤버 <code class="language-plaintext highlighter-rouge">클래스명.멤버명</code> 이렇게 사용하게되면<br>
+클래스 내부에 저장 공간을 가지고 있기 때문에 객체 생성 없이 곧바로 사용이 가능하다.</p>
+
+<p>이상 어려운 말은 끝났고<br>
+정말 간단 예제로 static의 사용법을 알아보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">seat</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+        <span class="kd">static</span> <span class="kt">int</span> <span class="n">tire</span>  <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Main{
+    public static void main(String args[]) throws IOException {
+        Car Hyundai = new Car();
+        Car Kia  = new Car();
+
+        Hyundai.seat = 5; // 현대는 자리가 5개!
+        Kia.seat = 6; // 기아는 자리가 6개!
+        System.out.println(Hyundai.seat); // 5
+        System.out.println(Kia.seat); // 6
+
+        Hyundai.tire = 5; // 현대는 바퀴가 5개!
+        Kia.tire = 9; // 기아는 바퀴가 9개!
+        System.out.println(Hyundai.tire); // 9
+        System.out.println(Kia.tire); // 9
+    }
+}
+</code></pre></div></div>
+
+<p>간단하게 Car라는 클래스에<br>
+좌석수는 4개 int seat = 4;<br>
+바퀴가 4개 static int tire = 4;<br>
+로 설정해두었다고 가정하자</p>
+
+<p>여기서 차이는 좌석은 인스턴스변수고 / 바퀴는 클래스 변수다.<br>
+이제 Car라는 Class로 각각 다른 자동차를 만들어보자<br>
+<code class="language-plaintext highlighter-rouge">Car Hyundai = new Car();</code><br>
+<code class="language-plaintext highlighter-rouge">Car Kia = new Car();</code><br>
+이렇게 2개의 인스턴스를 생성했고 각각 다른 객체이다.</p>
+
+<p>여기서 먼저 해볼 것은. 인스턴스명.멤버명 으로 값을 변경해보는 것이다.<br>
+Hyundai.seat = 5; // 현대는 자리가 5개!<br>
+Kia.seat = 6; // 기아는 자리가 6개!<br>
+현대는 좌석을 5개, 기아는 좌석을 6개로 설정했을때</p>
+
+<p>출력해보면 각각 인스턴스에 5개,6개의 좌석이 잘 생성된다.</p>
+
+<p>하지만!<br>
+static을 사용한 정적멤버 변수인 tire를<br>
+Hyundai.tire = 5; // 현대는 바퀴가 5개!<br>
+Kia.tire = 9; // 기아는 바퀴가 9개!<br>
+이렇게 인스턴스명.멤버명 현대는 5개 , 기아는 9개로 바꾸어도</p>
+
+<p>값을 공유하기 때문에 마지막에 저장한 9개가 출력되어진다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Kia</span><span class="o">.</span><span class="na">tire</span> <span class="o">=</span> <span class="mi">9</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Hyundai</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 9</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Kia</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 9</span>
+
+<span class="nc">Car</span><span class="o">.</span><span class="na">tire</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Hyundai</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 20</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Kia</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 20</span>
+
+<span class="nc">Hyundai</span><span class="o">.</span><span class="na">tire</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Hyundai</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 5</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Kia</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 5</span>
+
+<span class="nc">Kia</span><span class="o">.</span><span class="na">tire</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Hyundai</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 10</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Kia</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 10</span>
+
+<span class="c1">//새로운 인스턴스 토요타 등장!</span>
+<span class="nc">Car</span> <span class="nc">Toyota</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Car</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Toyota</span><span class="o">.</span><span class="na">tire</span><span class="o">);</span> <span class="c1">// 10</span>
+</code></pre></div></div>
+
+<p><strong>결론!</strong><br>
+<strong>결과적으론 static으로 설정한 멤버(필드,메서드,이너클래스)들을</strong><br>
+<strong>값을 공유하기때문에 인스턴스를 새로생성해도 그값을 가지고 있다.</strong></p>
+
+<p><br></p>
+
+<h4 id="static-변수와-instance-변수">Static 변수와 instance 변수</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">seat</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span> <span class="c1">// 인스턴스 변수</span>
+        <span class="kd">static</span> <span class="kt">int</span> <span class="n">tire</span>  <span class="o">=</span> <span class="mi">4</span><span class="o">;</span> <span class="c1">// 클래스 변수</span>
+        <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">abc</span><span class="o">(){</span> <span class="c1">// 클래스 메서드</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">seat</span><span class="o">);</span> <span class="c1">// 에러 발생</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tire</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">non-static variable this cannot be referenced from a static context</code><br>
+클래스 메서드인 <code class="language-plaintext highlighter-rouge">abc()</code>안에 인스턴스 변수를 사용했더니 위와 같은 알람이 발생한다.<br>
+Referenced(참조)를 하려면 메모리 어딘가에 인스턴스가 있어야함</p>
+
+<p><strong>check !! 클래스메서드에서는 클래스 변수만 접근이 가능하다!! 즉, 인스턴스 변수 접근불가</strong></p>
+
+<p><br></p>
+
+<h3 id="메서드method">메서드(Method)</h3>
+
+<p>메서드는 특정 작업을 수행하는 일련의 명령문들의 집합이다.<br>
+앞에 얘기했던 것 처럼 기능에 속한다.<br>
+메서드는 크게 메서드 시그니처와 메서드 바디로 구분한다.</p>
+
+<h4 id="선언방법-1">선언방법</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">자바제어자</span> <span class="n">반환타입</span> <span class="n">메서드명</span><span class="o">(</span><span class="n">매개</span> <span class="n">변수</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 메서드 시그니처</span>
+	<span class="n">메서드</span> <span class="n">내용</span> <span class="c1">// 메서드 바디</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>메서드명은 관련적으로 소문자로 표시하니 참고하자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 메서드 시그니처</span>
+	<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="o">;</span> <span class="c1">// 메서드 바디</span>
+	<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>접근제어자는(public,private)등 으로 이후에 배울 항목이니 우선 패스하자<br>
+static은 위에서 배웠듯이 클래스 메서드를 생성한 것이다.<br>
+여기서 int가 반환타입인데 반환타입이 없을 경우에는 void로 작성한다.<br>
+void가 아닌 경우에는 반드시 return이 있어야한다.</p>
+
+<p><br></p>
+
+<h4 id="호출방법">호출방법</h4>
+
+<p>메서드를 정의해놓아도 호출하지 않으면 아무런 일도 일어나지 않는다<br>
+메서드도 클래스의 멤버이므로 클래스 외부에서 메서드를 사용하기 위해서는<br>
+먼저 인스턴스를 생성해야하고 <strong>포인트 연산자</strong>(.)를 통해 메서드를 호출할 수 있다.<br>
+하지만, 클래스 내부에 있는 메서드끼리는 따로 객체를 생성하지 않고도 서로 호출가능!!!</p>
+
+<p><em>클래스 내부에 있는 메서드끼리 호출방법.</em></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">메서드이름</span><span class="o">(</span><span class="n">매개변수1</span><span class="o">,</span><span class="n">매개변수2</span><span class="o">,</span> <span class="o">...);</span> <span class="c1">// 메서드 호출방법, 매개변수 없을 경우있음</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span><span class="kt">int</span> <span class="n">y</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>같은 Main Class에 있는 메서드 끼리는<br>
+<code class="language-plaintext highlighter-rouge">add(1,2);</code> 이런식으로 인스턴스를 생성하지 않아도 호출이 가능하다.</p>
+
+<p><br></p>
+
+<p><em>외부 클래스에 있는 메서드끼리 호출방법.</em></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="nc">Calculate</span> <span class="n">plus</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Calculate</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">plus</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Calculate</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span><span class="kt">int</span> <span class="n">y</span><span class="o">){</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이렇게 2개의 클래스가 있다고 가정해보자<br>
+함수를 호출하기위해선 인스턴스를 만들어주어야하고<br>
+위에서 Calculate라는 클래스를 이용해 plus라는 인스턴스를 만들었다.<br>
+여기서 <code class="language-plaintext highlighter-rouge">plus.add(1,2);</code> 인자를 입력해 함수를 호출했다.<br>
+여기서 <code class="language-plaintext highlighter-rouge">plus.add(인자);</code> 안에있는 값을 <strong>인자</strong>(argument)라고한다.<br>
+메서드를 정의할 때 선언된 매개변수와 일치가 되어야한다.</p>
+
+<p><br></p>
+
+<h4 id="메서드의-오버로딩">메서드의 오버로딩</h4>
+
+<p>메서드 오버로딩은 하나의 클래스 안에 같은 이름의 메서드를 여러개 정의하는 것이다.<br>
+쉽게말해 같은 메서드 이름이 여러개 있는데 메서드의 매개변수의 타입과 수가 달라지는 것이다.</p>
+
+<p>오버로딩의 조건</p>
+
+<ol>
+  <li>메서드의 이름이 같아야한다.</li>
+  <li>매개변수의 개수 또는 타입이 달라야한다.</li>
+</ol>
+
+<p>간단한 예제를 들어보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Transfer</span> <span class="n">taxi</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Transfer</span><span class="o">();</span> <span class="c1">// 객체 생성</span>
+ 
+        <span class="n">taxi</span><span class="o">.</span><span class="na">fuel</span><span class="o">();</span> <span class="c1">// 메서드 호출</span>
+        <span class="n">taxi</span><span class="o">.</span><span class="na">fuel</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span> 
+        <span class="n">taxi</span><span class="o">.</span><span class="na">fuel</span><span class="o">(</span><span class="s">"Diesel"</span><span class="o">,</span><span class="mi">10</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Transfer</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fuel</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 메서드 오버로딩. 같은 이름의 메서드 3개.</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"기름부족"</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fuel</span><span class="o">(</span><span class="kt">int</span> <span class="n">remain</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"기름부족:"</span> <span class="o">+</span> <span class="n">remain</span> <span class="o">+</span> <span class="s">"L"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fuel</span><span class="o">(</span><span class="nc">String</span> <span class="n">whatfuel</span><span class="o">,</span> <span class="kt">int</span> <span class="n">remain</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"연로:"</span> <span class="o">+</span> <span class="n">whatfuel</span> <span class="o">+</span> <span class="s">"기름부족:"</span> <span class="o">+</span> <span class="n">remain</span> <span class="o">+</span> <span class="s">"L"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//기름부족</span>
+<span class="c1">//기름부족:5L</span>
+<span class="c1">//연로:Diesel기름부족:10L</span>
+</code></pre></div></div>
+
+<p>fuel(연료)라는 같은 메서드 이름을가진 것들이 3개가 존재한다.<br>
+하지만 메서드마다 매개변수가 다르고<br>
+다른 것에따라 출력값도 달라지게된다.<br>
+이러한 경우를 오버로딩되었다고한다.</p>
+
+<p><br></p>
+
+<hr>
+
+<h3 id="마치며">마치며…</h3>
+
+<p>오늘은 많은 개념과 내용을 배웠다.<br>
+솔직히 한번에 이해했다고 하면 거짓말일 것 같다.<br>
+객체지향의 Class에 해당하는 필드와 메서드에 대해<br>
+조금 중점적으로 공부해보았는데 머리가 터질 것 같다.</p>
+
+<p><img src="https://t1.daumcdn.net/keditor/emoticon/friends1/large/015.gif" alt="" class="align-left" style="max-width: 20%"></p>
+
+<p>하지만 문제없다. 나에게는 주말과 복습이라는 친구가 있으니<br>
+대략적인 큰틀과 내용은 이해했지만 조금 더<br>
+개념에 대해 확실히 알아가고 생소한 이름들이 너무 많아<br>
+얘기할때 바로 이것이 무엇이다! 라고 정의가 되고 머릿속에서<br>
+그려지는 정도까지 숙달해야할 것같다!!</p>
+
+<p>오늘 공부는 여기서 끝!!!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️️️️<br>
+<strong>오늘의 점심</strong>: 뼈해장국, 햄계란부침, 공기밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/09/01/til.html" title="TIL) Java 문법기초 - 배열">TIL) Java 문법기초 - 배열</a><a class="next" href="/til/2022/09/05/til.html" title="TIL) Java 객체지향 - 생성자, 내부 클래스">TIL) Java 객체지향 - 생성자, 내부...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/09/08/til.html" title="TIL) Java 객체지향 - 생성자, 내부 클래스">TIL) Java 객체지향 - 추상화</a></li>
+<li><a class="post-link" href="/til/2022/11/18/til.html" title="TIL) Java 객체지향 - 생성자, 내부 클래스">TIL) Spring Security 1 (기초)</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="TIL) Java 객체지향 - 생성자, 내부 클래스">TIL) Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/11/29/til.html" title="TIL) Java 객체지향 - 생성자, 내부 클래스">TIL) Spring WebFlux Reactive 프로그래밍</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
