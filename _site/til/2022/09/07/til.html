@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Java 객체지향 - 다형성 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Java 객체지향 - 다형성">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="늦잠을 자버렸다. 물론 9시전에 줌을 키긴했지만…. 원래는 8시20분에 일어나 천천히 준비하고 줌을 키는데 오늘은 8시50분에 일어나버려서 바로 모자만쓰고 줌을 켰다.">
+<meta property="og:description" content="늦잠을 자버렸다. 물론 9시전에 줌을 키긴했지만…. 원래는 8시20분에 일어나 천천히 준비하고 줌을 키는데 오늘은 8시50분에 일어나버려서 바로 모자만쓰고 줌을 켰다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/09/07/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/09/07/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-09-07T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Java 객체지향 - 다형성">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-09-07T00:00:00+09:00","datePublished":"2022-09-07T00:00:00+09:00","description":"늦잠을 자버렸다. 물론 9시전에 줌을 키긴했지만…. 원래는 8시20분에 일어나 천천히 준비하고 줌을 키는데 오늘은 8시50분에 일어나버려서 바로 모자만쓰고 줌을 켰다.","headline":"TIL) Java 객체지향 - 다형성","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/09/07/til.html"},"url":"http://localhost:4000/til/2022/09/07/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Java 객체지향 - 다형성</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+19</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-09-07T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 07, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>늦잠을 자버렸다.<br>
+물론 9시전에 줌을 키긴했지만….<br>
+원래는 8시20분에 일어나 천천히 준비하고 줌을 키는데<br>
+오늘은 8시50분에 일어나버려서 바로 모자만쓰고 줌을 켰다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMIhp56etTdMS7kJQblb4iGo1gVjoPF-c6ZkkZM9YPAihieMmVhzuPAcQmk_RWiyhEIat6273a6-nhMfkFPOX-0AjjU=w1920-h921" alt="image" class="align-left" style="max-width: 50%"></p>
+
+<p>너무 졸리다….<br>
+어제의 게임이 이 졸림의 근원.<br>
+공부에 집중도를 높이기위해선 게임을 안하는게<br>
+최고의 선택인 것 같다… 알면서도 끊지못하는<br>
+이 다이어트같은놈. 매우 피곤하지만 정신을 부여잡고</p>
+
+<p>공부를 시작해보자 👀</p>
+
+<hr>
+
+<p>저번 시간에 공부했던 내용은 상속과 캡슐화이다.<br>
+이번에는 객체지향 프로그래밍의 4개의 기둥인 나머지 2개<br>
+다형성과 추상화를 배워볼 시간이다.</p>
+
+<p>오늘은 다형성에 대해서만 정리해보고 내일 추상화를 정리하려고 한다.<br>
+내가 이해한 것이 맞을 지는 모르겠지만 기록해보면서 정리해보자</p>
+
+<h2 id="다형성">다형성</h2>
+
+<h3 id="다형성이란">다형성이란?</h3>
+
+<p>하나의 객체가 여러 가지 형태를 가질 수 있는 성질을 의미한다.<br>
+자바 프로그래밍의 다형성은</p>
+
+<p>‘<strong>한 타입의 참조변수를 통해 여러 타입의 객체를 참조할 수 있도록 만든 것</strong>‘을 의미한다.<br>
+다시한번 정의하자면 ‘<strong>상위클래스 타입의 참조변수로 하위클래스의 객체를 참조</strong>‘할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FriendTest</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Friend</span> <span class="n">friend</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Friend</span><span class="o">();</span> <span class="c1">// 객체 타입과 참조변수 타입의 일치 -&gt; 가능</span>
+        <span class="nc">BoyFriend</span> <span class="n">boyfriend</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BoyFriend</span><span class="o">();</span> <span class="c1">// 객체 타입과 참조변수 타입의 일치 -&gt; 가능</span>
+        <span class="nc">Friend</span> <span class="n">girlfriend</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GirlFriend</span><span class="o">();</span> <span class="c1">// 객체 타입과 참조변수 타입의 불일치 -&gt; 가능</span>
+	<span class="c1">//GirlFriend friend1 = new Friend(); -&gt; 하위클래스 타입으로 상위클래스 객체 참조 -&gt; 불가능</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+    
+<span class="kd">class</span> <span class="nc">Friend</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">BoyFriend</span> <span class="kd">extends</span> <span class="nc">Friend</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">GirlFriend</span> <span class="kd">extends</span> <span class="nc">Friend</span> <span class="o">{}</span>
+</code></pre></div></div>
+
+<p>위의 코드를 예제로 보았을때</p>
+
+<p>Friend라는 상위클래스와<br>
+BoyFriend, GirlFriend라는 하위클래스를 상속하고 있는데<br>
+여기서 중요한점은 객체 타입과 참조변수의 타입이 일치하지 않는데<br>
+객체 타입이 상위클래스인 경우 하위클래스를 객체로 참조변수에 담을 수 있다.<br>
+좀더 자세히 얘기해자 다른타입의 객체와 참조변수가 달랐을때의</p>
+
+<p>멤버변수를 세어보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Person</span><span class="o">{</span> 
+    <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    
+    <span class="kt">void</span> <span class="nf">eat</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"밥을 먹는다."</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kt">void</span> <span class="nf">sleep</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"잠은 잔다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// Person 클래스의 멤버는 4개 (변수 2개 + 메서드2개)</span>
+
+
+<span class="kd">class</span> <span class="nc">Programmer</span> <span class="kd">extends</span> <span class="nc">Person</span><span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">program</span><span class="o">(){</span>
+   	 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"프로그램을 한다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// Programmer의 멤버는 5개 (상위 클래스 멤버4개 + 자신클래스의 메서드 1개)</span>
+</code></pre></div></div>
+
+<p>위의 경우 Person 클래스는 4개의 멤버가 있고<br>
+Programmer 클래스는 Person을 상속받기에 5개의 멤버가 있다.<br>
+여기서 프로그램으로 표현 해보자면 이렇게 멤버를 사용이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span> <span class="c1">// -&gt; 4개의 멤버 사용가능</span>
+<span class="nc">Programmer</span> <span class="n">programmer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Programmer</span><span class="o">();</span> <span class="c1">// -&gt; 6개의 멤버 사용가능</span>
+</code></pre></div></div>
+
+<p>하지만 상위클래스인 Person 타입으로 Programmer라는 클래스의 객체로<br>
+programmer라는 참조면수에 할당하게 되면 멤버가 몇개 일까?</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Person</span> <span class="n">programmer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Programmer</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>정답은 4개이다.</p>
+
+<p>이유는 Person의 멤버가 4개이기 때문이고 멤버는 Person 클래스의<br>
+정의되어있는 변수와 메서드만 사용이 가능하다.</p>
+
+<p>그말은 즉슨</p>
+
+<p><code class="language-plaintext highlighter-rouge">programmer.name</code>
+<code class="language-plaintext highlighter-rouge">programmer.age</code> 
+<code class="language-plaintext highlighter-rouge">programmer.eat();</code>
+<code class="language-plaintext highlighter-rouge">programmer.sleep();</code></p>
+
+<p>이렇게 4가지 멤버만 사용이 가능하다는 뜻이다. <code class="language-plaintext highlighter-rouge">programmer.program();</code> 메서드는<br>
+멤버에 해당하지 않기때문에 실행 불가능.</p>
+
+<p><br></p>
+
+<h3 id="참조변수의-타입-변환">참조변수의 타입 변환</h3>
+
+<p>참조변수의 타입변환은 사용할 수 있는 멤버의 개수를 조절한다는 것 같다.<br>
+위에서 예제로 알아봤듯이 참조변수의 타입이 Person이냐 Programmer이냐 에따라<br>
+멤버의 개수가 4개 5개 이렇게 바뀐 모습을 볼 수 있기 때문이다.</p>
+
+<p>타입 변환을 위해서 아래와 같은 조건이 충족해야한다.<br>
+<strong>1. 서로 상속관계에 있는 상위 클래스 - 하위 클래스 사이에만 타입 변환이 가능합니다.</strong><br>
+<strong>2. 하위 클래스 타입에서 상위 클래스 타입으로의 타입 변환(업캐스팅)은 형변환 연산자(괄호)를 생략할 수 있습니다.</strong><br>
+<strong>3. 반대로 상위 클래스에서 하위 클래스 타입으로 변환(다운캐스팅)은 형변환 연산자(괄호)를 반드시 명시해야합니다.</strong></p>
+
+<p>타입 캐스팅(변환)의 코드 예제이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Car</span><span class="o">();</span>
+<span class="nc">Vehicle</span> <span class="n">vehicle</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Vehicle</span><span class="o">)</span> <span class="n">car</span><span class="o">;</span> <span class="c1">// 상위 클래스 Vehicle 타입으로 변환(생략 가능)</span>
+<span class="nc">Car</span> <span class="n">car2</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Car</span><span class="o">)</span> <span class="n">vehicle</span><span class="o">;</span> <span class="c1">// 하위 클래스 Car타입으로 변환(생략 불가능)</span>
+<span class="nc">MotorBike</span> <span class="n">motorBike</span> <span class="o">=</span> <span class="o">(</span><span class="nc">MotorBike</span><span class="o">)</span> <span class="n">car</span><span class="o">;</span> <span class="c1">// 상속관계가 아니므로 타입 변환 불가 -&gt; 에러발생</span>
+</code></pre></div></div>
+
+<p>Vehicle이라는 상위클래스가 있고<br>
+상속받은 Car, MotorBike라는 하위클래스가 있다고 가정해보자. 
+하위클래스로 만든 객체인 car라는 참조변수를<br>
+Vehicle이라는 타입으로 업캐스팅할 수 있다.<br>
+<strong>(*업캐스팅: 보다 위로 형변환을함)</strong></p>
+
+<p>그 형 변환을 하여 저장한 참조변수 vehicle을 다시<br>
+하위 클래스 Car타입으로 다운캐스팅을 할 수 있다.<br>
+여기서 중요한점은 하위클래스인 Car와, MotorBike끼리는 타입캐스팅이 불가능하다.</p>
+
+<p>또 하나로 타입캐스팅이 안되는 부분이 있는데</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Vehicle</span> <span class="n">vehicle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vehicle</span><span class="o">();</span>
+<span class="nc">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Car</span><span class="o">)</span><span class="n">vehicle</span><span class="o">();</span> <span class="c1">// 에러</span>
+</code></pre></div></div>
+
+<p>전제조건은 _<strong>업캐스팅이 선행되어야 다운 캐스팅</strong>_이 가능하다.<br>
+이것이 포인트이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Vehicle</span> <span class="n">vehicle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Car</span><span class="o">();</span> <span class="c1">// 업캐스팅이 선행됨</span>
+<span class="nc">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Car</span><span class="o">)</span><span class="n">vehicle</span><span class="o">();</span> <span class="c1">// 가능</span>
+</code></pre></div></div>
+
+<p>위와 같이 하위객채(<code class="language-plaintext highlighter-rouge">Car();</code>)로 인스턴스를 만들었다.<br>
+위에 구문은 <code class="language-plaintext highlighter-rouge">Vehicle vehicle = (Vehicle) new Car();</code> 와<br>
+같은 구문이다. 즉 생성될때부터 업캐스팅이 되어지는 것이고<br>
+업캐스팅될때 이것이 생략되어있기때문에 그런 것이다.<br>
+위의 같은 경우는 다운캐스팅이 가능하다. 이유는 업캐스팅이 선행되었기때문에.</p>
+
+<p>정리해보자면 애초에 생성된 객체가 하위클래스로<br>
+다운 캐스팅하는 것은 불가능한 것 같다.<br>
+(Vehicle 객체에서 하위클래스인 Car로 캐스팅이 안되는 것과 같이)</p>
+
+<p><br></p>
+
+<h3 id="instanceof">instanceof</h3>
+
+<p>여기서 타입캐스팅이 가능한지 여부에 대한<br>
+확인하는 명령어가 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Vehicle</span> <span class="n">vehicle</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Vehicle</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">vehicle</span> <span class="k">instanceof</span> <span class="nc">Object</span><span class="o">);</span> <span class="c1">//true</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">vehicle</span> <span class="k">instanceof</span> <span class="nc">Vehicle</span><span class="o">);</span> <span class="c1">//true</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">vehicle</span> <span class="k">instanceof</span> <span class="nc">Car</span><span class="o">);</span> <span class="c1">//false</span>
+</code></pre></div></div>
+
+<p>위와 같이 만들어진 객체 기준으로 타입 캐스팅이 가능한지<br>
+여부를 boolean값으로 return해주는 기능이다.</p>
+
+<p>첫번째 Object는 상위클래스이므로 당연히 업캐스팅이 가능하다 // true<br>
+두번째 Vehicle은 자기자신 클래스이므로 당연히 가능하다 // true<br>
+세번째 Car는 하위클래스이다. 하위클래스는 상위클래스를 참조하지 못한다 // false</p>
+
+<p>비유를 쉽게하자면 상위클래스 = 부모 / 하위클래스 = 자식 인데,<br>
+자식은 내집과 부모집을 마음대로 왔다갔다 할 수 있지만<br>
+부모는 자식집을 마음대로 왔다갔다 할 수 없다.<br>
+부모기준에서 생성된 객체는 하위클래스인 자식집을 가지 못하는 것</p>
+
+<p>즉 참조를 못한는 것 같다.</p>
+
+<p><br></p>
+
+<h3 id="다형성의-활용">다형성의 활용</h3>
+
+<p>한방에 정리해보자.</p>
+
+<p>다형성이란 <strong>상위클래스 타입의 참조변수로 하위클래스의 객체를 참조</strong> 이말만 기억하면 된다.<br>
+예를들어 커피집에 대한 다형성 활용을 보자면<br>
+커피집에는 손님이 있고, 커피 가격과 종류, 고객이 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Custmoer</span> <span class="n">custmoer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Custmoer</span><span class="o">();</span>
+<span class="n">custmoer</span><span class="o">.</span><span class="na">buyCoffee</span><span class="o">(</span><span class="k">new</span> <span class="nc">Americano</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>Custmoer의 buyCofferr 매소드를 호출<br>
+<code class="language-plaintext highlighter-rouge">new Americano();</code> 객체를 생성자로 호출</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Custmoer</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">money</span> <span class="o">=</span> <span class="mi">50000</span><span class="o">;</span>
+    <span class="kt">void</span> <span class="nf">buyCoffee</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">money</span><span class="o">&lt;</span><span class="n">coffee</span><span class="o">.</span><span class="na">price</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"잔액이 부족합니다."</span><span class="o">);</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">money</span> <span class="o">-=</span> <span class="n">coffee</span><span class="o">.</span><span class="na">price</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">coffee</span><span class="o">+</span><span class="s">"를 구입했습니다"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>buyCoffee를 호출하였을때<br>
+<code class="language-plaintext highlighter-rouge">Coffer coffee = new Americano();</code> 이렇게 매개변수로 들어가게 된다.<br>
+그렇게 되면 <code class="language-plaintext highlighter-rouge">Americano();</code> 생성자가 호출되게 되고</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Americano</span> <span class="kd">extends</span> <span class="nc">Coffee</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">Americano</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="mi">4000</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="s">"카페라떼"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>아메리카노 생성자 <code class="language-plaintext highlighter-rouge">public Americano()</code>의 내용 에는<br>
+<code class="language-plaintext highlighter-rouge">super(4000);</code> 상위 클래스의 생성자를 호출하고<br>
+인자로 4000의 값을 넣어 두었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Coffee</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Coffee</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그렇게 될 경우 상위 클래스인 Coffee의<br>
+생성자에 int price의 매개변수에 4000이란 값이 매칭되고<br>
+인스턴스 변수인 this.price에 4000원이란 값이 책정되게 되어지는 것이다.<br>
+이제 생성자로 초기화가 완료된 객체인 coffee로 coffee.price를 이용해<br>
+현재 가지고있는 인스턴스 변수인 money = 50000;과 함께<br>
+가격을 차감하며 계산이 가능한 것이다.</p>
+
+<p>여기서 중요한건 coffee참조변수의 멤버는<br>
+상위 클래스인 Coffee의 인스턴스 변수인 price 한개 밖에 없다.<br>
+(생성자는 멤버에 포함되지 않음)</p>
+
+<hr>
+
+<h2 id="마치며">마치며…</h2>
+
+<p>내가 작성하면서도 개념이 이해가 쉽지가않다.<br>
+아직 정확하지 않는 정보들일 수도 있고<br>
+조금더 글을 적으면서 내가 적은게 맞는지<br>
+단어선택도 신중하게쓰고 연습을 많이 해야겠다!!</p>
+
+<p>오늘 공부는 여기서 끝!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️️️️<br>
+<strong>오늘의 점심</strong>: 라면, 계란부침, 공기밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/09/06/til.html" title="TIL) Java 객체지향 - 상속, 캡슐화">TIL) Java 객체지향 - 상속, 캡슐화...</a><a class="next" href="/til/2022/09/08/til.html" title="TIL) Java 객체지향 - 추상화">TIL) Java 객체지향 - 추상화</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/12/08/til.html" title="TIL) Java 객체지향 - 추상화">TIL) 배포 자동화 GitHub Actions</a></li>
+<li><a class="post-link" href="/til/2022/11/16/til.html" title="TIL) Java 객체지향 - 추상화">TIL) 세달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/11/23/til.html" title="TIL) Java 객체지향 - 추상화">TIL) JWT 기초</a></li>
+<li><a class="post-link" href="/til/2022/09/06/til.html" title="TIL) Java 객체지향 - 추상화">TIL) Java 객체지향 - 상속, 캡슐화</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

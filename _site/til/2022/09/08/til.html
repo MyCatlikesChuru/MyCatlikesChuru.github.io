@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Java 객체지향 - 추상화 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Java 객체지향 - 추상화">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="오늘은 비교적 여유로운 날이다.">
+<meta property="og:description" content="오늘은 비교적 여유로운 날이다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/09/08/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/09/08/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-09-08T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Java 객체지향 - 추상화">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-09-08T00:00:00+09:00","datePublished":"2022-09-08T00:00:00+09:00","description":"오늘은 비교적 여유로운 날이다.","headline":"TIL) Java 객체지향 - 추상화","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/09/08/til.html"},"url":"http://localhost:4000/til/2022/09/08/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Java 객체지향 - 추상화</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+20</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-09-08T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 08, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>오늘은 비교적 여유로운 날이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNVZwSNL4rKsK4BrS4Kz4SGNN5bloRVFm2vPQJGbx-GMKR2tFNZBoD5-zW9YtbkWtWcowFiSPh74AmKnpjx22FTN_zHUg=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>오늘의 수업은 보이는 라디오와 개인 블로그 작성하는 시간이다.<br>
+여태까지 공부해왔던 것을 조금씩 되짚어 보는 시간을 가질 수 있도록<br>
+코드스테이츠쪽에서 배려해준 것 같다.<br>
+물론 내일이 추석인 것도 감안해주신듯하다!! ㅎㅎ</p>
+
+<p><img src="https://t1.daumcdn.net/keditor/emoticon/friends1/large/017.gif" alt="" class="align-left" style="max-width: 40%"></p>
+
+<p>코드스테이츠 보이는 라디오에 내 사연이 소개가 되었다.<br>
+미래에 취업 수요와 시장전망의 관련된 얘기였다.<br>
+대표주제로 선정되었다는 뜻은 나와 같은<br>
+고민한 사연들이 많았던 것 같은 느낌이다.</p>
+
+<p>사실 모든 걱정들은 사람을 지치게하기도하고 원동력을<br>
+만들어준다고 생각하면서 살고있다.<br>
+모든게 적당한게 좋듯이 미래에 대한 걱정은 제쳐두고<br>
+내가 선택한 길이 맞다고 믿으며, 지금에 집중하려고한다.<br>
+걱정만한다고 해결되는 것은 없고, 그 걱정에 대한<br>
+대비는 공부하고 코딩하는 것!</p>
+
+<p>오늘도 스스로에게 화이팅을 외쳐본다 !! 🔥</p>
+
+<hr>
+
+<h2 id="추상화">추상화</h2>
+
+<p>추상이라는 의미를 먼저 생각해보자<br>
+보통 무언가 확실하지 않거나 정해져있지 않을때 우린<br>
+음..? 조금 추상적인데? 라는 말을 자주쓴다.<br>
+사전적의미로는 “사물이나 표상을 어떤 성질,본질에 착안하여 그것을 추출하여 파악하는 것”<br>
+이라고 정의한다고한다. 말이 너무 어렵고 핵심적으로 알면 될 것은<br>
+<strong>공통성과 본질을 모아 추출하</strong>는 것이다.</p>
+
+<p>사람을 예로 들어보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMdvdeNcKAQJkqNN_Mo0w_X6x3vy-fHsvKbHKs37quBod4jAOP9dD-xoHx1fTgfx73UUYjBWmHfj16cWg-ec0bWJ3HtkQ=w1920-h921" alt="image" class="align-left" style="max-width: 30%"><br>
+[파블로 피카소 - 우는 여인]</p>
+
+<p>사람이라는 추상화로 그린 작품이다.<br>
+우리는 사람하면 생각하는 것이 무엇일까?<br>
+공통적으로 눈이 2개있고, 입술,치아,코, 머리카락 등<br>
+공통적으로 가지고 있는 특성이 많다.</p>
+
+<p>하지만 이 공통적인 부분도 다를 수 도 있다.<br>
+머리카락같은 경우 색깔이 전부 다르듯이<br>
+우리는 추성적으로 공통적인 특성을 가지고 사람은 이렇다!<br>
+라고 생각을 하기 때문에 추상화라는 것은 공통성과 본질을<br>
+모아 추출한 것 이라고 정의하면 될 것 같다.</p>
+
+<p><br></p>
+
+<h3 id="abstract-제어자">abstract 제어자</h3>
+
+<p>위의 제어자는 기타제어자에 포함되어 있는 제어자이다.<br>
+abstract를 메서드 앞에 붙이면 ‘<strong>추상 메서드</strong>’<br>
+클래스 앞에 붙이면 ‘<strong>추상 클래스</strong>‘라고 불른다.<br>
+그럼 이 abstract 제어자가 붙은 추상 메서드와 추상 클래슨느 어떤 역할을하는가?<br>
+가장 큰 <strong>핵심적인 개념은</strong> ‘<strong>미완성</strong>‘에 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span> <span class="c1">// 추상 메서드가 최소 하나 이상 포함돼있는 추상 클래스</span>
+	<span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">();</span> <span class="c1">// 메서드 바디가 없는 추상메서드</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>간단한 예제로 알아보자 Person이라는 클래스의 <code class="language-plaintext highlighter-rouge">run();</code> 달리는 기능이 있다.<br>
+abstract를 제어자로 붙이 class는 최소 하나 이상 추상 메서드가 포함되어있어야하고<br>
+메서드는 바디가 없어야한다. 바디가 없어야한다? 즉 <code class="language-plaintext highlighter-rouge">run();</code>이라는 기능에 대해<br>
+상세하게 정해진게 없다는 뜻이된다.</p>
+
+<p><br></p>
+
+<h3 id="추상-클래스-abstract-class">추상 클래스 (abstract class)</h3>
+
+<p>그럼 abstract로 정의된 class인 추상 클래스에 대해 알아보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Person</span> <span class="n">man1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">();</span> <span class="c1">// 에러발생.</span>
+</code></pre></div></div>
+
+<p>위에서 예제로든 Person 클래스는 abstract 제어자를 사용하기때문에<br>
+추상 클래스가 되어진다. 추상 클래스는 기본적으로 객체를 생성하지 못한다.<br>
+이유는 미완성 클래스이기 때문이다.</p>
+
+<p>추상 클래스의 큰 특징은 추상 메서드가 하나 이상 포함되어야 한다는 점<br>
+외에는 기본적으로 일반 클래스와 동일하다고 볼 수 있다.<br>
+추상 클래스는 상속 관계에 있어서 새로운 클래스<br>
+작성하는데 매우 용이하다. 예제를 하나 들어보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="n">hair</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Programmer</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span> <span class="c1">// Person 클래스로부터 상속</span>
+	<span class="kd">public</span> <span class="nf">Programmer</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">hair</span> <span class="o">=</span> <span class="s">"검정색"</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 메서드 오버라이딩 -&gt; 구현부 완성</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"5km/sec"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Singer</span> <span class="kd">extends</span> <span class="nc">Person</span> <span class="o">{</span> <span class="c1">// Person 클래스로부터 상속</span>
+	<span class="kd">public</span> <span class="nf">Singer</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">.</span><span class="na">hair</span> <span class="o">=</span> <span class="s">"갈색"</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 메서드 오버라이딩 -&gt; 구현부 완성</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"10km/sec"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="nc">Person</span> <span class="n">programmer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Programmer</span><span class="o">();</span> <span class="c1">// 다형성 상위클래스로 하위클래스 참조</span>
+        <span class="n">programmer</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">programmer</span><span class="o">.</span><span class="na">hair</span><span class="o">);</span>
+
+        <span class="nc">Person</span> <span class="n">singer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Singer</span><span class="o">();</span> <span class="c1">// 다형성 상위클래스로 하위클래스 참조</span>
+        <span class="n">singer</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">singer</span><span class="o">.</span><span class="na">hair</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="mi">5</span><span class="n">km</span><span class="o">/</span><span class="n">sec</span>
+<span class="n">검정색</span>
+<span class="mi">10</span><span class="n">km</span><span class="o">/</span><span class="n">sec</span>
+<span class="n">갈색</span>
+</code></pre></div></div>
+
+<p>추상적인 클래스인 Person에 hair라는 머리색을 담는 변수와<br>
+<code class="language-plaintext highlighter-rouge">run();</code>이라는 달리는 기능의 메서드를 만들었다.<br>
+이기능은 완성되지 않은 미완성 메서드이다.</p>
+
+<p>여기서 추상클래스 Person을 상속받아<br>
+하위 클래스로 Programmer와 Singer를 만들었다.<br>
+이 두사람은 각각 다른 머리색깔과 달릴때 속도가 다르다.<br>
+각각 <code class="language-plaintext highlighter-rouge">run();</code>달리는 기능을 오버라이드해서 재정의 해주었고<br>
+각각 다른생성자로 인스턴스를 생성할때 각기 다른 속도와 머리색으로<br>
+정의되는 모습을 볼 수 있다.</p>
+
+<p>여기서 중요한점은 구체화가 되는 순서는, <strong>상속계측도의 상층부에 위치 할 수록</strong><br>
+<strong>추상화의 정도가 높고 아래로 내려갈 수록 구체화</strong> 된다..</p>
+
+<p><br></p>
+
+<h3 id="final-키워드">final 키워드</h3>
+
+<p>말그대로 최종,마지막이라는 의미를 가진 키워드이다. <br>
+클래스,메서드,변수 앞에 위치할 수 있고 차이점이 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>위치</strong></th>
+      <th><strong>의미</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>클래스</td>
+      <td>변경, 확장 불가능한 클래스, 상속불가</td>
+    </tr>
+    <tr>
+      <td>메서드</td>
+      <td>오버라이딩 불가</td>
+    </tr>
+    <tr>
+      <td>변수</td>
+      <td>상수, 값 변경이 불가능</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>코드 예제를 들어보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span> <span class="c1">// 확장/상속 불가능한 클래스</span>
+	<span class="kd">final</span> <span class="nc">String</span> <span class="n">hair</span> <span class="o">=</span> <span class="s">"검은색"</span><span class="o">;</span> <span class="c1">// 변경되지 않는 상수</span>
+
+	<span class="kd">final</span> <span class="kt">int</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span> <span class="c1">// 오버라이딩 불가한 메서드</span>
+		<span class="kd">final</span> <span class="kt">int</span> <span class="n">speed</span> <span class="o">=</span> <span class="mi">15</span><span class="o">;</span> <span class="c1">// 상수</span>
+		<span class="k">return</span> <span class="n">speed</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위에서 부터<br>
+Person 클래스는 확장,상속이 불가능해진다.<br>
+이말은 즉 다른클래스에 확장도 안되며, 다른클래스를 상속하지도 못한다.<br>
+hiar 인스턴스 변수는 검은색이라는 값에서 변경될 수가 없다.</p>
+
+<p>말은 즉슨 다른 곧에서 hair = “노란색”이라고 재정의가 불가능하단 얘기다.<br>
+다른 값을 넣으려고할 경우 cannot assign a value to final variable 이라는<br>
+오류를 확인할 수 있을 것이다.<br>
+<code class="language-plaintext highlighter-rouge">run();</code> 메서드는 다른 클래스에서 오버라이딩이 불가능해진다.</p>
+
+<p>위에 예제에서 보앗듯이 추상클래스에서는<br>
+바디를 정의하지않고 오버라이딩해 하위 클래스에서 재정의를 한다.<br>
+이럴때 오버라이딩을 사용하지 못하는 고정메서드가 되어버리는 것이다.<br>
+함나디로 정의하자면 <strong>final 제어자</strong>가 추가되면<br>
+<strong>더이상 변경이 불가하거나 확장되지 않는 성질</strong>을 가지게 된다.</p>
+
+<p><br></p>
+
+<h3 id="인터페이스-interface">인터페이스 (interface)</h3>
+
+<p>이제 우리가 핵심적으로 배울 인터페이스이다.<br>
+우리가 Git을 사용할때나 컴퓨터를 사용할때 GUI를 통해 사용할 수 있게된다.<br>
+<strong>G</strong>raphic <strong>U</strong>ser <strong>I</strong>nterface의 약자로 사용자와의 그래픽 인터페이스라고 해석된다.<br>
+여기서 인터페이스란? 이어준다는 느낌으로 받아들이면 될 것 같다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO0yXEvuCqiOg6TQtbD3dLgS_FuXVPFIoFl6wyPR1ES5yUdswqCPLJZ2nxuwRa7ZyMDlQQjW1JL19fJrVW6bbuS4bNezA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>자바의 클래스를 만들때 interface를 선택할 수 있다.</p>
+
+<p>C = 클래스 / I = 인터페이스<br>
+그럼 자바의 interface는 어떤 역할을 하냐?</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN2Hk3V_Rbvx6wUE-Rr-GBrLg7Zvx6dOkXkWzbiCDG_6q1Mo1qr5Fg5PE0JuwQDEHN02bWXaYcsIi62g8m1I1zjIVeRGg=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이제 고객이라는 클래스에서 확장받은<br>
+고객들 (고객A,고객B,고객C ….)은 음료주문이라는 기능을 공통적으로 사용할 수 있다.<br>
+여기서 인터페이스(초록색 원)이 없다면 고객과 고객들이 의존,확장하게 되어지는데<br>
+인터페이스를 사용하면 이사이에서 징검다리 역할로<br>
+모든 고객들은 인터페이스에 의존하게되어진다.</p>
+
+<p>즉, 인터페이스를 통해서 소통하게 되어지는 느낌이다!!</p>
+
+<p>여기서 다형성을 적용해보자면 인터페이스를 통해서 하위 클래스인<br>
+고객A,고객B,고객C….. 등 무한히 늘어나는 고객에<br>
+참조를 할 수 있다는 점이다. 굳이 고객마다 매개변수를 전달해줄<br>
+필요없이 인스턴스 생성시 인자에 하위클래스를 생성자로 넣어주기만하면<br>
+고객들의 역할과 음료를 시키는 구현을 구분해서 작업이 된다는점이다.<br>
+여기서 그럼 그냥 추상클래스에 다형성을 적용해서 쓰면되지않냐?<br>
+라는 물음이 생기는데 아래에서 알아보자<br>
+기본적인 인터페이스 클래스를 만들고 그안에서 사용하는 방식이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">InterfaceEx</span><span class="o">{</span>
+	<span class="c1">//상수 (값이 고정되어있음)</span>
+   	<span class="c1">//추상 메서드 (구현부가 완성되지않음)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이전에 추상클래스에대해 배웠는데 추상클래스보다<br>
+더더더더 추상성을 가지는 것이 인터페이스이다.<br>
+그러므로 공통적인 필드만 모아놓은 상수와<br>
+구현체가 구현되지않은 추상 메서드만 사용이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">InterfaceEx</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">rock</span> <span class="o">=</span>  <span class="mi">1</span><span class="o">;</span> <span class="c1">// 인터페이스 인스턴스 변수 정의</span>
+    <span class="kd">final</span> <span class="kt">int</span> <span class="n">scissors</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span> <span class="c1">// public static 생략</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="n">paper</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="c1">// public &amp; final 생략</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">String</span> <span class="nf">getPlayingNum</span><span class="o">();</span>
+		<span class="kt">void</span> <span class="nf">call</span><span class="o">()</span> <span class="c1">//public abstract 생략 </span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그래서 기본적으로 인터페이스 안에서는 자동으로 타입이 지정되어진다.</p>
+
+<p><span style="color:#F04965"><strong>인터페이스 내부의 모든 필드</strong></span>가<br>
+<span style="color:#0066CC"><strong><em>public static final</em></strong></span> 로 정의가된다.</p>
+
+<p><span style="color:#F04965"><strong>인터페이스 내부의 모든 메서드</strong></span>는<br>
+<span style="color:#0066CC"><strong><em>public abstract</em></strong></span> 로 정의가 되고 <br>
+인터페이스 안에 있는 경우 컴파일러가 생략된 부분을 자동으로 추가해주게된다.</p>
+
+<p>클래스의 인터페이스를 확장할때 쓰는 방법이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">클래스명</span> <span class="kd">implements</span> <span class="n">인터페이스명</span> <span class="o">{</span>
+		<span class="o">...</span> <span class="c1">// 인터페이스에 정의된 모든 추상메서드 구현</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>인터페이스는 다중확장이 가능하다.<br>
+이점이 추상클래스와 가장 큰차이다. 추상 클래스는 extends를 해주기때문에<br>
+다중상속이 불가능하다. 또한 추상성이 명확한 인터페이스는<br>
+구현체를 반드시 오버라이드하여 구현해줘야한다.</p>
+
+<p>이말이 무슨말이냐면<br>
+인터페이스에서 추상적으로 정의한 메서드에는 바디가 없다.<br>
+공통적인 기능인 메서드를 오버라이드하여 클래스에서<br>
+그 바디를 만들어줘서 덮어써준다는 느낌이다.<br>
+인터페이스를 사용하면 역할과 구현을 분리시켜 복잡한 구현의 내용 또는<br>
+변경 상관없이 해당 기능을 사용할 수 있다는 점.<br>
+코드 변경의 번거로움을 최소화하고 손쉽게 해당 기능을 사용할 수 있다는 점이다.</p>
+
+<p>이 내용을 확인 시켜줄 코드 예제를 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InterfaceExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">();</span> <span class="c1">// User 클래스 객체 생성</span>
+        <span class="n">user</span><span class="o">.</span><span class="na">callProvider</span><span class="o">(</span><span class="k">new</span> <span class="nc">Provider</span><span class="o">());</span> <span class="c1">// Provider 객체 생성 후에 매개변수로 전달</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span> <span class="c1">// User 클래스</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">callProvider</span><span class="o">(</span><span class="nc">Provider</span> <span class="n">provider</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Provider 객체를 매개변수로 받는 callProvider 메서드</span>
+        <span class="n">provider</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Provider</span> <span class="o">{</span> <span class="c1">//Provider 클래스</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"바보"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Provider2</span> <span class="o">{</span> <span class="c1">// 새로 생긴 Provider2 클래스</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"천재"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같은 경우는 User 클래스가 Provider를 의존하고있다.<br>
+main 메서드 호출 -&gt; User -&gt; Provider 순으로 호출되기 때문이다.<br>
+여기서 보면 우리는 Provider라는 클래스를 호출하고 있는데<br>
+Provider2라는 새로운 클래스가 생겼다? 라고 가정을하면</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span> <span class="c1">// User 클래스</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">callProvider</span><span class="o">(</span><span class="nc">Provider</span> <span class="n">provider</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">provider</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">callProvider</span><span class="o">(</span><span class="nc">Provider2</span> <span class="n">provider2</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//새로 만듬</span>
+    	<span class="n">provider2</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
+    <span class="o">}</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>User 클래스안에 Provider2를 새로 생성하거나<br>
+기존의 Provider를 교체하거나 두가지 방법 뿐이다.<br>
+그렇게되면 매번 Provider가 늘어날 경우마다<br>
+우리는 User 클래스를 매번 수정해줘야하는 번거로움이 있다.<br>
+이럴 경우를 위해 인터페이스가 등장한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Cover</span> <span class="o">{</span> <span class="c1">// 인터페이스 정의</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InterfaceExample</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="o">();</span>
+        <span class="n">user</span><span class="o">.</span><span class="na">callProvider</span><span class="o">(</span><span class="k">new</span> <span class="nc">Provider</span><span class="o">());</span>
+        <span class="n">user</span><span class="o">.</span><span class="na">callProvider</span><span class="o">(</span><span class="k">new</span> <span class="nc">Provider2</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">callProvider</span><span class="o">(</span><span class="nc">Cover</span> <span class="n">cover</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 매개변수의 다형성 활용</span>
+        <span class="n">cover</span><span class="o">.</span><span class="na">call</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Provider</span> <span class="kd">implements</span> <span class="nc">Cover</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"바보"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Provider2</span> <span class="kd">implements</span> <span class="nc">Cover</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">call</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"천재"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>여기서 인터페이스를 사용해 call이라는<br>
+구현은 각각 Provider에 적용되어있다.<br>
+“바보”, “천재”로 오버라이딩되어 구현되어있고</p>
+
+<p>시작의 흐름을 보면 main메서드에서<br>
+User 클래스의 객체를 생성했다.</p>
+
+<p>user 객체로 callProvider라는 메서드를 호출하고 있고<br>
+인자는 <code class="language-plaintext highlighter-rouge">new Provider();</code> 와 <code class="language-plaintext highlighter-rouge">new Provider2();</code>를 넘겨주고있다.</p>
+
+<p>호출되어진 callProvider 메서드의 매개변수 타입은 인터페이스 Cover이고<br>
+최종적으로 cover를 참조변수로 받고 있다.<br>
+즉, <code class="language-plaintext highlighter-rouge">Cover cover = new Provider();</code> 가 되는 셈이고<br>
+Cover가 더 상위 클래스이고 이것을 확장받은 Provider가 하위 클래스이므로<br>
+다형성을 이용한 매개변수의 활용이라고 볼 수 있다.</p>
+
+<p>이렇게 되면 상위클래스 Cover가 하위클래스인 Provider를 참조할 수 있게되어지고<br>
+결과 적으로 cover라는 참조변수의 멤버는 인터페이스에 정의된<br>
+<code class="language-plaintext highlighter-rouge">public abstract void call();</code> 하나의 멤버만 가지게된다.<br>
+그렇게 <code class="language-plaintext highlighter-rouge">cover.call();</code>을 호출하게되면 오버라이딩된</p>
+
+<p>하위클래스의 값들을 참조하게되면서 “바보”와 “천재”가 순서대로 출력되게 되어지는 것이다.<br>
+이코드만 참조해도 알 수 있는 것은 어찌보면 최종 구현인 User 클래스의 <code class="language-plaintext highlighter-rouge">cover.call();</code><br>
+하나로 구현을 해놓고  Provider가 100명~1000명~ 몇명이 늘어나던<br>
+<code class="language-plaintext highlighter-rouge">cover.call();</code>이라는 구현은 딱 1개로 정의되고<br>
+더이상 수정할 필요가 없다는 점이다.</p>
+
+<hr>
+
+<h2 id="마치며">마치며..</h2>
+
+<p>여태까지 드디어 길고긴<br>
+객체지향 심화까지 달려보았는데<br>
+상속,캡슐화,다형성,추상화<br>
+이렇게 중요한 핵심 요소에 대해 공부했다.</p>
+
+<p>사실 이전부다 이해했다면 거짓말이고<br>
+어느정도 추상적으로^^ 감이 잡힌 것 같다.<br>
+앞으로 스프링을 들어가고 나서도 계속 보게될 개념들이니<br>
+이번 추석을 통해서 조금더 체득해볼 예정이다</p>
+
+<p>오늘 공부는 여기서 끝!!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️️️️<br>
+<strong>오늘의 점심</strong>: 간장계란밥, 스팸</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/09/07/til.html" title="TIL) Java 객체지향 - 다형성">TIL) Java 객체지향 - 다형성</a><a class="next" href="/til/2022/09/13/til.html" title="TIL) Java 열거형, 제너렉, 예외처리, 컬렉션">TIL) Java 열거형, 제너렉, 예외처리, 컬렉션...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/09/08/til.html" title="TIL) Java 열거형, 제너렉, 예외처리, 컬렉션">TIL) Java 객체지향 - 추상화</a></li>
+<li><a class="post-link" href="/spring/2022/11/15/spring-mysql.html" title="TIL) Java 열거형, 제너렉, 예외처리, 컬렉션">Spring) MySQL Local 연동 하기</a></li>
+<li><a class="post-link" href="/til/2022/10/25/til.html" title="TIL) Java 열거형, 제너렉, 예외처리, 컬렉션">TIL) Spring Exception 1</a></li>
+<li><a class="post-link" href="/til/2022/11/04/til.html" title="TIL) Java 열거형, 제너렉, 예외처리, 컬렉션">TIL) Spring Transaction 1</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
