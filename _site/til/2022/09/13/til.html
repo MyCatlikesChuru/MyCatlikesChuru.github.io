@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Java 열거형, 제너렉, 예외처리, 컬렉션 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Java 열거형, 제너렉, 예외처리, 컬렉션">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="추석이 끝났다. 추석에는 코드스테이츠도 교육을 안하기 때문에 따로 TIL을 작성하진 않았다. 연휴가 길어져서그런지 너무나도 게을러져버린 나…">
+<meta property="og:description" content="추석이 끝났다. 추석에는 코드스테이츠도 교육을 안하기 때문에 따로 TIL을 작성하진 않았다. 연휴가 길어져서그런지 너무나도 게을러져버린 나…">
+<link rel="canonical" href="http://localhost:4000/til/2022/09/13/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/09/13/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-09-13T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Java 열거형, 제너렉, 예외처리, 컬렉션">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-09-13T00:00:00+09:00","datePublished":"2022-09-13T00:00:00+09:00","description":"추석이 끝났다. 추석에는 코드스테이츠도 교육을 안하기 때문에 따로 TIL을 작성하진 않았다. 연휴가 길어져서그런지 너무나도 게을러져버린 나…","headline":"TIL) Java 열거형, 제너렉, 예외처리, 컬렉션","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/09/13/til.html"},"url":"http://localhost:4000/til/2022/09/13/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Java 열거형, 제너렉, 예외처리, 컬렉션</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+25</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-09-13T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 13, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 26 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>추석이 끝났다.<br>
+추석에는 코드스테이츠도 교육을 안하기 때문에<br>
+따로 TIL을 작성하진 않았다.<br>
+연휴가 길어져서그런지 너무나도 게을러져버린 나…</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMYNmGUU_b0X_ErW8lvUqRqh7d1hUpTQ8CrBghzwzTrUV1bGOLCuatOGPsPf9YQ-dQqhPYjBJuCznyAq499knfyvl83pA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>그래도 하루에 1일1커밋을 지키려고<br>
+알고리즘문제를 3~5개정도 매일 풀었다.<br>
+추석도 끝났으니 오늘부터 다시 열심히 시작해보자!!</p>
+
+<hr>
+
+<p>저번주에는 자바의 핵심인 객체지향 심화공부와<br>
+핵심요소인 4대원칙을 적용한 코드에 대해<br>
+공부를 해보았다. 오늘의 주를 이룰 공부는<br>
+자바의 컬렉션과 열겨형,제너릭,예외처리에 대해 공부해볼 예정이다.<br>
+들어가기 앞서서 열겨형,제너릭,예외처리는 어느정도<br>
+공부를 해둔상태라 알고는 있지만 조금 더 개념을 잡아가보도록 하자!</p>
+
+<h2 id="열거형enum"><strong>열거형(Enum)</strong></h2>
+
+<p>열거형이란? 간단하게 정의하자면<br>
+<em><strong>서로 연관된 상수들의 집합</strong>__이다</em>.<br>
+이러한 상수들을 보다 간편하게 관리할 때 유용하게 사용할 수 있는<br>
+자바의 문법 요소이고, 몇 가지로 한정된 변하지 않는 데이터를 다르는데 사용한다.  <br>
+<strong>*JDK 1.5이전 버전에서는 enum 지원x</strong></p>
+
+<p>열거형 사용법</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum 열거형이름 { 상수명1, 상수명2, ... }
+</code></pre></div></div>
+
+<p>열거형을 사용할땐 위와 같이 작성한다.<br>
+관례적으로 대문자로 작성한다.<br>
+예를들어 사계절을 열겨형으로 나눈다는 예제를 가정하면</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">Seasons</span> <span class="o">{</span> 
+    <span class="no">SPRING</span><span class="o">,</span> <span class="c1">//정수값 0 할당</span>
+    <span class="no">SUMMER</span><span class="o">,</span>  <span class="c1">//정수값 1 할당</span>
+    <span class="no">FALL</span><span class="o">,</span> <span class="c1">//정수값 2 할당</span>
+    <span class="no">WINTER</span> <span class="c1">//정수값 3 할당</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>자동적으로 시작부터 0인 정수값으로 할당되어 상수를 가르킨다.<br>
+열거형을 접근하는 방법은 static 변수를 참조하는 것과 동일하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Seasons</span><span class="o">.</span><span class="na">SPRING</span>
+</code></pre></div></div>
+
+<p>static 변수 접근 방법은 클래스이름.변수 였는데<br>
+열거형 접근 방법은 열거형이름.상수명이다.</p>
+
+<p>열거형 사용예제</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">Seasons</span> <span class="o">{</span><span class="no">SPRING</span><span class="o">,</span> <span class="no">SUMMER</span><span class="o">,</span> <span class="no">FALL</span><span class="o">,</span> <span class="no">WINTER</span><span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Seasons</span> <span class="n">seasons</span> <span class="o">=</span> <span class="nc">Seasons</span><span class="o">.</span><span class="na">SPRING</span><span class="o">;</span>
+        <span class="k">switch</span> <span class="o">(</span><span class="n">seasons</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">case</span> <span class="nl">SPRING:</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"봄"</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">SUMMER:</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"여름"</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">FALL:</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"가을"</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="k">case</span> <span class="nl">WINTER:</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"겨울"</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 출력 : 봄</span>
+</code></pre></div></div>
+
+<p>Seasons이라는 열거형이름으로 상수값 4개를 할당했다.<br>
+Seasons타입으로 seasons라는 참조변수에 Seasons.SPRING을 할당했다.<br>
+switch case문은 <strong>char, byte, short, int, Character, Byte, Short, Integer, String, enum </strong>타입 사용이<br>
+가능하기 때문에 enum으로 사용자 지정된 객체 seasons을 사용해도 동작이 가능하다.</p>
+
+<p>이와 같이 열겨형의 사용자 타입으로<br>
+선언된 객체에 대해 여러가지 기능들을 사용할 수 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>메서드</strong></th>
+      <th><strong>리턴타입</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name()</td>
+      <td>String</td>
+      <td>열겨 객체가 가지고 있는 문자열을 리턴, 리턴되는 문자열은 열거타입을 정의할 때 사용한 상수 이름과 동일하다.</td>
+    </tr>
+    <tr>
+      <td>ordinal()</td>
+      <td>int</td>
+      <td>열겨 객채의 순번(0번부터)을 리턴</td>
+    </tr>
+    <tr>
+      <td>compareTo(비교값)</td>
+      <td>int</td>
+      <td>주어진 매개값과 비교해서 순번 차이를 리턴</td>
+    </tr>
+    <tr>
+      <td>valueOf(String name)</td>
+      <td>열거 타입</td>
+      <td>주어진 문자열의 열거 객체를 리턴</td>
+    </tr>
+    <tr>
+      <td>values()</td>
+      <td>열거 배열</td>
+      <td>모든 열거 객체들을 배열로 리턴</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<h2 id="제너릭generic"><strong>제너릭(Generic)</strong></h2>
+
+<p>제너릭은 한개의 클래스의 여러가지 타입의 데이터를<br>
+저장할 수 있는 인스턴스를 만들게해주는 문법이라 볼 수 있다.<br>
+<code class="language-plaintext highlighter-rouge">&lt;T&gt;</code>를 타입 매개변수라고 한다.</p>
+
+<p>클래스 이름 옆에 작성해줌으로써 클래스 내부에서<br>
+사용할 타입 매개변수를 선언할 수 있다.</p>
+
+<p>코드로 예제를 들어보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">people1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GenericEx</span><span class="o">&lt;&gt;(</span><span class="s">"철수"</span><span class="o">);</span>
+        <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">people2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GenericEx</span><span class="o">&lt;&gt;(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">people1</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">people2</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="no">T</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">GenericEx</span><span class="o">(</span><span class="no">T</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="no">T</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="no">T</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//출력</span>
+<span class="n">철수</span>
+<span class="mi">1</span>
+</code></pre></div></div>
+
+<p>GenericEx라는 클래스의 name라는 인스턴스변수는<br>
+어떤 타입을 받을지 모르자고 가정해보자<br>
+String, Integer 등… 여러가지 타입을 받을 수 있는 변수인데<br>
+만약 제너릭이 없다면 우리는 여러 클래스를 만들어<br>
+String name , int name 따로 선언을 해주어야한다.</p>
+
+<p>하지만 제너릭 문법을 이용하면<br>
+위와 같이 하나의 클래스로 name이라는 변수에<br>
+여러가지 타입의 데이터를 담을 수 있는 것이다.</p>
+
+<p><br></p>
+
+<h3 id="타입-매개변수-여러개-사용"><strong>타입 매개변수 여러개 사용</strong></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class GenericEx&lt;K, V&gt; { ... }
+</code></pre></div></div>
+
+<p>타입 매개변수는 임의의 문자로 지정이 가능하다.</p>
+
+<p>T : Type<br>
+K : Key<br>
+V : Value<br>
+E : Element<br>
+N : Number<br>
+R : Result</p>
+
+<p>의 첫 글자를 따온 것이다.</p>
+
+<p><br></p>
+
+<h3 id="제너릭-클래스-정의시-주의할-점">제너릭 클래스 정의시 주의할 점</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="no">T</span> <span class="n">name1</span><span class="o">;</span> <span class="c1">// O </span>
+	<span class="kd">static</span> <span class="no">T</span> <span class="n">name2</span><span class="o">;</span> <span class="c1">// X </span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 예제와 같이 클래스 변수, 즉 static으로 선언된 변수는 사용할 수 없다.<br>
+그 이유는 클래스 변수에 타입 매개변수를 사용할 수 있다면<br>
+클래스 변수의 타입의 인스턴스 별로 가지게 된다.<br>
+즉, name2라는 값을 사용하기위해</p>
+
+<p><code class="language-plaintext highlighter-rouge">GenericEx&lt;String&gt; = new GenericEx&lt;&gt;("철수"); </code> <br>
+<code class="language-plaintext highlighter-rouge">GenericEx&lt;Integer&gt; = new GenericEx&lt;&gt;(1);</code></p>
+
+<p>각각 새로운 인스턴스를 선언했을때  <br>
+클래스 변수는 공유변수이기때문에 타입이 달라져 사용할 수가 없는 것이다.</p>
+
+<p><br></p>
+
+<h3 id="제너릭-메서드"><strong>제너릭 메서드</strong></h3>
+
+<p>제너릭을 클래스 전체에 선언할 수 있지만<br>
+클래스 내부의 특정 메서드만 제네릭으로 선언할 수도 있다.<br>
+이를 제네릭 메서드라고한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Basket</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>                        <span class="c1">// 1 : 여기에서 선언한 타입 매개변수 T와 </span>
+		<span class="o">...</span>
+		<span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="no">T</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 2 : 여기에서 선언한 타입 매개변수 T는 서로 다른 것입니다.</span>
+				<span class="o">...</span>
+		<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Basket</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">basket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bakset</span><span class="o">&lt;&gt;();</span> <span class="c1">// 위 예제의 1의 T가 String으로 지정됩니다. </span>
+<span class="n">basket</span><span class="o">.&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span><span class="n">add</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>                <span class="c1">// 위 예제의 2의 T가 Integer로 지정됩니다. </span>
+<span class="n">basket</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>                         <span class="c1">// 타입 지정을 생략할 수도 있습니다. </span>
+</code></pre></div></div>
+
+<p>위와 같이 선언하고 호출할 수 있다.<br>
+제네릭 메서드는 클래스 타입 매개변수와 달리 static메서드에서도 선언하여 사용할 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="와일드-카드"><strong>와일드 카드</strong></h3>
+
+<p>와일드 카드는 어떠한 용도로든 사용될 수 있는 일종의 비장의 카드란 의미다.<br>
+자바의 제네릭에서 와일드카드는 <strong>“어떠한 타입으로든 대체될 수 있는”</strong> 타입 파라미터를<br>
+의미하고, 기호로 <strong>”?”</strong> 로 사용한다.</p>
+
+<p>사용방법</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">T</span><span class="o">&gt;</span>
+<span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>T는 앞서 얘기한 타입매개 변수이고 저라리에는<br>
+다른 타입의 값들도 들어갈 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;? extends T&gt;</code> : 상한에 제한을 두는것<br>
+-&gt; T와 T를 상속받은 하위 클래스 타입만 타입 파라미터로 받을 수 있도록 지정</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;? super T&gt;</code> : 하한에 제한을 두는 것<br>
+-&gt; T와 T의 상위 클래스만 타입 파라미터로 받을 수 있도록 지정</p>
+
+<p>extends와 super를 조합하지 않은 <code class="language-plaintext highlighter-rouge">&lt;?&gt;</code> 와일드 카드는<br>
+<code class="language-plaintext highlighter-rouge">&lt;? extends Object&gt;</code>와 같은 표현이다.</p>
+
+<p><br></p>
+
+<h2 id="예외-처리exception-handling"><strong>예외 처리(Exception Handling)</strong></h2>
+
+<p>특정 원인에 의해서 발생한 에러에 대응할 수 있는 코드를 미리 사전에<br>
+작성하여 프로그램의 비정상적인 종료를 방지하고, 정상적인 실행 상태를<br>
+유지하기 위해 자바 문법에서는 예외처리가 필요하다.</p>
+
+<p>대표적인 예외 케이스</p>
+
+<ol>
+  <li>사용자 입력 오류</li>
+  <li>네트워크 연결 끊김</li>
+  <li>디스크 메모리 공간 부족 등 물리적 한계</li>
+  <li>개발자의 코드 에러</li>
+  <li>존재하지 않는 파일 불러오기</li>
+</ol>
+
+<p><strong>에러</strong>(error)와 <strong>예외</strong>(exception)는 다른 말이다.<br>
+에러는 복구하기 어려운 수준의 심각한 오류이다.<br>
+예를 들어 메모리 부족(<code class="language-plaintext highlighter-rouge">OutOfMemoryError</code>)과<br>
+스택오버플로우(<code class="language-plaintext highlighter-rouge">StackOverflowError</code>) 등이있다.<br>
+반면, 예외는 코딩으로 인한 상대적으로 미약한 수준의 오류다.</p>
+
+<p><br></p>
+
+<h3 id="컴파일-에러"><strong>컴파일 에러</strong></h3>
+
+<p>이름과 같이 컴파일 할 때 발생하는 에러다. <br>
+주로 세미콜론생략, 오탈자, 잘못된 자료형, 잘못된 포맷 등<br>
+문법적인 문제를 가르키는 신택시(syntax)오류류로부터 발생해<br>
+신택스 에러(Systax Errors)라고 부른다.</p>
+
+<p>코드로 오류를 보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>System.out.println 뒤에 세미콜린이 안붙어있다.<br>
+실행하게되면 <code class="language-plaintext highlighter-rouge">error: ';' expected</code><br>
+이렇게 Syntax 오류가 발생하게 된다.<br>
+컴파일 에러는 컴파일러에 의해 발견된다.</p>
+
+<p><br></p>
+
+<h3 id="런타임-에러"><strong>런타임 에러</strong></h3>
+
+<p>런타임 에러는 실행도중 발생하는 에러를 가르킨다.<br>
+코드로 예제를 보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span><span class="s">"b"</span><span class="o">,</span><span class="s">"c"</span><span class="o">};</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strs</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>간단하게 배열을 만들어 출력하는 프로그램이다<br>
+총 3개의 방에 각각 값들을 초기화 시켜주었고<br>
+[3]방을 출력하는 프로그램이다.<br>
+여기서 문제는 3번째 방은 초기화되어있지 않기때문에<br>
+<code class="language-plaintext highlighter-rouge">ArrayIndexOutOfBoundsException</code>와 같은 런타임 에러가 발생한다.<br>
+런타임 에러는 프로그램이 실행될 때에 JVM(자바 가상머신)에 의해 감지된다.</p>
+
+<p><br></p>
+
+<h3 id="예외-클래스의-상속-계층도"><strong>예외 클래스의 상속 계층도</strong></h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWDHcz-YlVdrqD6cLFPsEfFAkrwKtGtD-vwhcb7U8r6JMJ2pGN-CKnyL065Yfi7gJCyqfeJaFdA6b6T7neP_76pgzR=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>예외 클래스의 상속 계층도이다.<br>
+java.lang -&gt; Object -&gt; Throwable 에서 에러와 예외로 나누어진다.<br>
+Throwable 클래스로 부터 확장되며, 모든 예외는 Exception 클래스이다.<br>
+Exception 클래스는 실행 예외 클래스(<code class="language-plaintext highlighter-rouge">RuntimeException</code>)와</p>
+
+<p>일반 예외 클래스로 나눠질 수 있다.</p>
+
+<p><em><strong>실행 예외 클래스(Runtime Exception)</strong></em><br>
+런타임 시 발생하는 Runtime Exception 클래스와 그 하위 클래스를 지칭한다.<br>
+컴파일러가 예외 처리 코드 여부를 검사하지 않는다는 의미에서<br>
+<strong>Unchecked Exception</strong>라고 부른다.<br>
+주로 개발자의 실수로 의해 발생하고 문법 요소가 관련되어있다.<br>
+ex) ClassCastException, ArrayIndexOutOfBoundsException, NullPorinterException …</p>
+
+<p><br></p>
+
+<p><em><strong>일반 예외 클래스</strong></em><br>
+Runtime Exception 클래스와 그 하위클래스를<br>
+제외한 모든 Exception 클래스와 하위 클래스를 가르킨다.<br>
+컴파일러가 코드 실행 전에 예외 처리 코드 여부를 검사한다고 하여<br>
+<strong>Checked Exception</strong>라 부른다.<br>
+주로 잘못된 클래스명이나 데이터 형식 등의 사용자편의 실수로 발생하는 경우가 많다.</p>
+
+<p><br></p>
+
+<h3 id="try---catch">try - catch</h3>
+
+<p>자바에서의 예외 처리하기위한 문법이다.<br>
+사용 방법은 아래와 같다</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
+    <span class="c1">// 예외가 발생할 가능성이 있는 코드를 삽입</span>
+<span class="o">}</span> 
+<span class="k">catch</span> <span class="o">(</span><span class="nc">ExceptionType1</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// ExceptionType1 유형의 예외 발생 시 실행할 코드</span>
+<span class="o">}</span> 
+<span class="k">catch</span> <span class="o">(</span><span class="nc">ExceptionType2</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// ExceptionType2 유형의 예외 발생 시 실행할 코드</span>
+<span class="o">}</span> 
+<span class="k">finally</span> <span class="o">{</span>
+    <span class="c1">// finally 블럭은 옵셔널</span>
+    <span class="c1">// 예외 발생 여부와 상관없이 항상 실행</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>간단하다. 예외가 발생할 것 같은 코드를<br>
+try 구문에 넣어 실행 시킨 후.<br>
+에러의 유형의 클래스를 catch구문에 입력하고 매개변수를 적어준다.<br>
+그리고 예외가 발생한 클래스와 일치할경우<br>
+catch 구문의 실행내용이 실행되면 finally 구문으로 넘어가며<br>
+프로그램은 멈추지않고 계속 진행된다.</p>
+
+<p>코드 예제를 통해 사용해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span><span class="s">"b"</span><span class="o">,</span><span class="s">"c"</span><span class="o">};</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strs</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">NullPointerException</span> <span class="n">e1</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"NullPointerException 발생 !!"</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">ArrayIndexOutOfBoundsException</span> <span class="n">e2</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ArrayIndexOutOfBoundsException 발생 !!"</span><span class="o">);</span>
+        <span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"종료"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="nc">ArrayIndexOutOfBoundsException</span> <span class="n">발생</span> <span class="o">!!</span>
+<span class="n">종료</span>
+</code></pre></div></div>
+
+<p>배열 범위를 넘어가는 간단한 예외처리를 해볼 것이다.<br>
+우선 e1, e2 매개변수에 각각 예외클래스를 지정해 주었다.<br>
+e1 첫번째는 <code class="language-plaintext highlighter-rouge">NullPointerException</code><br>
+e2 두번째는 <code class="language-plaintext highlighter-rouge">ArrayIndexOutOfBoundsException</code><br>
+배열 범위초과의 문제니 두번째에 해당하는 예외가 발생할 것이다.<br>
+그리고 마지막에는 finllay로 종료를 출력하게 적어두었다.</p>
+
+<p>여기서 예외처리 케이스가 2가지가 있지만<br>
+해당되는 예외클래스의 구문만 실행된 모습이다!!<br>
+또한 finally는 Optional이므로 사용해도되고 안해도된다.</p>
+
+<p><br></p>
+
+<h3 id="예외-전가">예외 전가</h3>
+
+<p>try-catch문 외에 예외를 호출한 곳으로 다시 예외를 떠넘기는 방법도 있다.</p>
+
+<p>사용 방법</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">반환타입</span> <span class="n">메서드명</span><span class="o">(</span><span class="n">매개변수</span><span class="o">,</span> <span class="o">...)</span> <span class="kd">throws</span> <span class="n">예외클래스1</span><span class="o">,</span> <span class="n">예외클래스2</span><span class="o">,</span> <span class="o">...</span> <span class="o">{</span>
+	<span class="o">...</span><span class="na">생략</span><span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>예외클래스를 지정해서 늘려가며 사용이가능하다.<br>
+특정 메서드에서 모든 종류의 메서드가 발생할 가능성이 있는 경우도 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+	<span class="c1">//실행 구문</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Exception은 모든 예외의 상위 클래스이기 때문에<br>
+그 하위 클래스 타입의 예외 클래스들이 모두 포함되게 된다.<br>
+말그대로 예외 던지기이다.<br>
+예외를 발생하면 그 클래스로 던져버리는 것!<br>
+예외전가를 위한 코드 예제를 한가지보자</p>
+
+<p><strong>예외가 발생하지 않는 코드</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThrowExceptionTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+            <span class="n">throwException</span><span class="o">();</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">ClassNotFoundException</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">throwException</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">ClassNotFoundException</span><span class="o">,</span> <span class="nc">NullPointerException</span><span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+        <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"java.io.BufferedReader"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//출력</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">5</span>
+<span class="mi">6</span>
+</code></pre></div></div>
+
+<p>흐름을 이해하기위해 프린트로 출력을 두었다.<br>
+메인 메소드에서 try구문을 실행하게되었다.<br>
+throwException(); 메소드를 실행하게되고<br>
+Class.forName으로 존재하는 클래스를 불러왔다.<br>
+당연히 BufferedReader라는 클래스는 아래와 같이 존재하기 때문에</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPt8qLHQuc9MpAJ1yLSt5S80A5oSk6ff3bK2QndbBM-3QTlWoFZz6RBFL8tunexgvqow_xCILGiEY_gUM-FGoZbytCT5w=w1920-h921" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>예외가 발생하지 않아 1,2,5,6을 순서대로 출력한 모습이다.</p>
+
+<p><strong>예외가 발생하는 코드</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThrowExceptionTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span><span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+            <span class="n">throwException</span><span class="o">();</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">ClassNotFoundException</span> <span class="n">e</span><span class="o">){</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="kt">void</span> <span class="nf">throwException</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">ClassNotFoundException</span><span class="o">,</span> <span class="nc">NullPointerException</span><span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+        <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"java.babo"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 출력</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="n">java</span><span class="o">.</span><span class="na">babo</span>
+<span class="mi">4</span>
+<span class="mi">6</span>
+</code></pre></div></div>
+
+<p>이제 예외가 발생하는 위의 코드를 보자<br>
+존재하지않는 java.babo라는 임의의 클래스이름을 적었다.<br>
+당연히 예외가 발생하였고 throws로<br>
+throwExcetion(); 메소드를 호출한 main 메소드로 예외가 던져졌다.<br>
+catch문에 들어가 구문을 실행하여 메인메서드를 쭉 진행 한 모습을 볼 수 있다.<br>
+이처럼 예외처리 책임이 throwException 메소드가 아닌 main 메소드가 지게되었다.</p>
+
+<p>이것을 예외 전가라고한다.</p>
+
+<p><br></p>
+
+<h2 id="컬레션-프레임워크collection-framework">컬레션 프레임워크(Collection Framework)</h2>
+
+<p>여러 데이터들을 그룹으로 묶어놓은 것.<br>
+컬렉션을 다루는 데에 있어 편리한 메소드들을 미리 정의해 놓은 것을<br>
+컬렉션 프레임워크라고 한다.</p>
+
+<p>특정 자료 구조에 데이터를 추가하고,삭제,수정,검색 등 동작을 수행하는<br>
+편리한 메소드들을 제공해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPedjUWzVw9J1jRgfwzF_66GSn7NLyJTPYJ9F_1dJ29h7a-XzjVLdRRiIPoyRkAdX7jydbewhvSRZ4BW0iOBNl3tEV04w=w1920-h921" alt="image" class="align-left" style="max-width: 100%"><br>
+<a href="https://velog.io/@bahar-j/%EC%9E%90%EB%B0%94%EC%9D%98-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0">출처 - 컬렉션 자료구조 bahar-j님</a></p>
+
+<p>주요 인터페이스로 List, Set, Map을 제공한다.<br>
+간단한 정의를 하면 아래와 같다.</p>
+
+<p><em><strong>List</strong></em><br>
+-&gt; 데이터의 <strong>순서가 유지</strong>되며, <strong>중복 저장이 가능</strong>한 컬렉션을 구현하는데 사용<br>
+-&gt; ArrayList, Vector,LinkedList 등이 List 인터페이스를 구현함.</p>
+
+<p><em><strong>Set</strong></em><br>
+-&gt; 데이터의 <strong>순서가 유지</strong>되지 <strong>않으며</strong>, <strong>중복 저장이 불가능</strong>한 컬렉션을 구현하는데 사용<br>
+-&gt; HashSet, TreeSet 등이 Set 인터페이스를 구현함</p>
+
+<p><em><strong>Map</strong></em><br>
+-&gt; 키(key)와 값(value)의 쌍으로 데이터를 저장한느 컬렉션을 구현하는데 사용된다.<br>
+-&gt; 데이터의 <strong>순서가 유지</strong>되지 <strong>않으며</strong>, <strong>키는</strong> 값을 식별하기 위해 사용되므로 <strong>중복 저장이 불가능</strong>하지만<br>
+<strong>값</strong>은 <strong>중복 저장이 가능</strong>하다.</p>
+
+<p><br></p>
+
+<h3 id="liste">List&lt;E&gt;</h3>
+
+<p><strong>중복사용 O / 저장 순서 O</strong></p>
+
+<p>배열과 같이 객체를 일렬로 늘어놓는 구조를 가지고 있다.<br>
+객체를 인덱스로 관리하기 때문에 객체를 저장하면 자동으로<br>
+인덱스가 부여되고, 인덱스로 객체를 검색,추가,삭제 등 여러 기능을 제공한다.<br>
+자세한 메소드들은 아래 공식문서 참조 (버전에따라 검색필요)
+[<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">List (Java SE 11 &amp; JDK 11 )</a>]</p>
+
+<p><em><strong>ArrayList</strong></em><br>
+List를 인터페이스로 구현한 클래스로<br>
+컬렉션 프레임워크에서 가장 많이 사용된다.<br>
+쉽게 생각하면 배열과 비슷한 형태라고 보면된다.<br>
+기능적으로는 Vector와 동일하지만 개선된 버전이므로 ArrayList를 더많이 사용한다.<br>
+배열은 생성될 때 크기를 고정되며, 크기 변경을 할 수없는데<br>
+ArraysList는 저장 용량을 초과하면 객체가 자동으로 저장용량이 늘어나게 된다.<br>
+(기존 길이의 1.5배만큼)</p>
+
+<p>사용방법</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="n">타입</span> <span class="n">매개변수</span><span class="o">&gt;</span> <span class="n">객체명</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">타입</span> <span class="n">매개변수</span><span class="o">&gt;(</span><span class="n">초기</span> <span class="n">저장</span> <span class="n">용량</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>여기서 타입 매개변수는 제너릭을 표기함을 의미한다.<br>
+초기 저장 용량은 지정하지 않으면 10으로 저장되어진다.</p>
+
+<p><em><strong>LinkedList</strong></em><br>
+ArrayList와 동일하게 List를 인터페이스로 구현한 클래스이다.<br>
+ArraysList와 다른점은 데이터를 효율적으로 추가,삭제,변경할때 많이 사용한다.<br>
+배열에는 모든 데이터가 연속적으로 존재하는데<br>
+LinkedList에는 불연속적으로 존재하며, 이 데이터는 서로 연결(Link)되어 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNJLsmuUreZ-_HR7OY3KcrKTQGfTyzLZ2AWjDkUucDiMijvaaLDWdtYLKqjaPCMz53IJQIVMoOmM3sNtVwlarn-1lcK=w1920-h921" alt="image" class="align-left" style="max-width: 100%"><br>
+<a href="https://www.programiz.com/java-programming/linkedlist">출처 - Programiz</a></p>
+
+<p>위의 구조를 보면 각각 요소(node) Dog, Cat, Cow라는<br>
+요소들은 자신과 Next,Prev라는 주소값과 데이터로 구성되어 있다.<br>
+즉,Next와 Prev로 요소들을 참조하는 모습이다.</p>
+
+<p>여기서 추가,삭제가 이루어 질 경우에<br>
+배열처럼 데이터를 복사할 필요없이 링크를 끊어준다고 생각하면 된다.</p>
+
+<p><br></p>
+
+<h3 id="iterator">Iterator</h3>
+
+<p>번역 그대로하면 반복자라고한다.<br>
+컬렉션에 저장된 요소들을 순차적으로 읽어오는 역할을 한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>메서드</strong></th>
+      <th><strong>설명</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>hasNext();</td>
+      <td>읽어올 객체가 있으면 true, 없으면 false</td>
+    </tr>
+    <tr>
+      <td>next();</td>
+      <td>컬렉션에서 하나의 객체를 읽어온다. hasNext()==true -&gt; next();</td>
+    </tr>
+    <tr>
+      <td>remove();</td>
+      <td>next()를 통해 읽어온 객체를 삭제. next(); -&gt; remove();</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>코드로 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.LinkedList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">iteratorTest</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//list 객체 생성</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+
+        <span class="c1">//list 인덱스 추가</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"A"</span><span class="o">);</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"B"</span><span class="o">);</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"C"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span> <span class="c1">// list .toString 출력 표시</span>
+        
+        <span class="c1">//List와 Set 인터페이스를 구현한 클래스들은 iterator 매소드 호출가능</span>
+        <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"------------------"</span><span class="o">);</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>     <span class="c1">// 읽어올 다음 객체가 있다면</span>
+            <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">();</span> <span class="c1">// next()를 통해 다음 객체를 읽어옵니다.</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span> <span class="c1">// 뽑아온 객체 출력</span>
+            
+            <span class="n">iterator</span><span class="o">.</span><span class="na">remove</span><span class="o">();;</span> <span class="c1">// next()를 통해 읽어온 객체 삭제</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"------------------"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
+<span class="o">------------------</span>
+<span class="no">A</span>
+<span class="o">[</span><span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
+<span class="o">------------------</span>
+<span class="no">B</span>
+<span class="o">[</span><span class="no">C</span><span class="o">]</span>
+<span class="o">------------------</span>
+<span class="no">C</span>
+<span class="o">[]</span>
+<span class="o">------------------</span>
+</code></pre></div></div>
+
+<p>LinkedList로 객체로 만들어진 list라는 인스턴스로<br>
+순차적으로 값을 뽑아내고 하나찍 제거하는 프로그램이다.</p>
+
+<p><br></p>
+
+<h3 id="sete">Set&lt;E&gt;</h3>
+
+<p><strong>중복사용 X / 저장 순서 X</strong><br>
+Set은 요소의 중복을 허용하지 않고, 저장 순서를 유지하지 않는 컬렉션이다.</p>
+
+<p><em><strong>HashSet</strong></em> <br>
+Set 인터페이스를 구현한 가장 대표적인 컬렉션 클래스이다.<br>
+Set 인터페이스 특성을 그대로 물려받으므로 중복된 값을 허용하지 않고,<br>
+저장 순서를 유지하지 않는다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// HashSet 생성</span>
+    <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">languages</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+
+    <span class="c1">// HashSet에 객체 추가</span>
+    <span class="n">languages</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Java"</span><span class="o">);</span>
+    <span class="n">languages</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Python"</span><span class="o">);</span>
+    <span class="n">languages</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Javascript"</span><span class="o">);</span>
+    <span class="n">languages</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"C++"</span><span class="o">);</span>
+    <span class="n">languages</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Kotlin"</span><span class="o">);</span>
+    <span class="n">languages</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Ruby"</span><span class="o">);</span>
+    <span class="n">languages</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Java"</span><span class="o">);</span> <span class="c1">// 중복 추가되지 않음.</span>
+
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">languages</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span> 
+
+    <span class="c1">// 반복자 생성하여 it에 할당</span>
+    <span class="nc">Iterator</span> <span class="n">it</span> <span class="o">=</span> <span class="n">languages</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+
+    <span class="c1">// 반복자를 통해 HashSet을 순회하며 각 요소들을 출력</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//출력</span>
+<span class="o">[</span><span class="nc">Java</span><span class="o">,</span> <span class="no">C</span><span class="o">++,</span> <span class="nc">Javascript</span><span class="o">,</span> <span class="nc">Ruby</span><span class="o">,</span> <span class="nc">Python</span><span class="o">,</span> <span class="nc">Kotlin</span><span class="o">]</span>
+<span class="nc">Java</span>
+<span class="no">C</span><span class="o">++</span>
+<span class="nc">Javascript</span>
+<span class="nc">Ruby</span>
+<span class="nc">Python</span>
+<span class="nc">Kotlin</span>
+</code></pre></div></div>
+
+<p>선언 및 사용 방법은 List와 유사하다.<br>
+HashSet 객체로 languages 라는 인스턴스 생성<br>
+해당 인스턴스의 HasSet 메소드인 .add();를 이용해 값을 저장한다.</p>
+
+<p>여기서 주의 깊게 봐야할 점은 Java라는 얘가<br>
+두번이나 .add되었지만 결과적으로는 하나만 저장된다는 사실과<br>
+위에서 부터 저장한 순서와 상관없이 저장이된다는 것이<br>
+List와 가장 큰차이점이라고 할 수 있다.</p>
+
+<p><em><strong>TreeSet</strong></em><br>
+TreeSet은 이진트리형태로 데이터를 저장한다.<br>
+마찬가지로 Set 인터페이스 특성을 그대로 물려받으므로 중복된 값을 허용하지 않고,<br>
+저장 순서를 유지하지 않는다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMIEu1US6VSDNQBdcfr_41Gjh_8KWyMR40rh_3Vw6eoq_oCFSOAls6YhdZDBJByMOCoxzHLKlaUjJD3ZesgLVtpPIhr=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이진트리는 정렬과 검색에 특화된 자료 구조이다.<br>
+부모 노드와 자식 노드2개가 연결되있다.<br>
+왼쪽은 작은값, 오른쪽은 큰값 (ex 2,3 / 4,5…)<br>
+즉, 왼쪽 자식의 값이 루트나 부모보다 작고, 모든 오른쪽 자식의 값이<br>
+루트나 부모보다 큰값을 가지는 특징이 있다.</p>
+
+<p>코드 예제로 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeSetTeacher</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">TreeSet</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">treeSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TreeSet</span><span class="o">&lt;&gt;();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">treeSet</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()</span> <span class="o">*</span> <span class="mi">45</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span> <span class="c1">// 난수발생. 1~45 숫자</span>
+
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="s">"번째 num = "</span> <span class="o">+</span> <span class="n">num</span><span class="o">);</span>
+
+            <span class="k">try</span> <span class="o">{</span> <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span> <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{}</span> <span class="c1">//쓰레드로 1초 딜레이주기</span>
+
+            <span class="n">treeSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>  <span class="c1">// 추첨된 번호 추가하기</span>
+        <span class="o">}</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"당첨 번호는 : "</span> <span class="o">+</span> <span class="n">treeSet</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 출력 - 할때마다 달라짐 (난수에의해)</span>
+<span class="n">당첨</span> <span class="n">번호는</span> <span class="o">:</span> <span class="o">[</span><span class="mi">12</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">27</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">39</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>위의 코드는 1~45값의 난수를 발생시켜 하나씩<br>
+TreeSet객체로 만들어진 인스턴에서 .add();하는 프로그램이다.<br>
+숫자가 뒤죽박죽 .add되어지는데 이진트리 구조에 의해<br>
+최종적으로 객체를 출력하게되면 정렬되서 나오는 모습을 볼 수 있다.<br>
+또한 중복된 난수가 확인되었을경우<br>
+저장을 하지않는 모습을 볼 수 있다.</p>
+
+<h3 id="mapkv">Map&lt;K,V&gt;</h3>
+
+<p><strong>Key는 중복 허용 X / Value는 중복 허용 O / 저장 순서 X</strong><br>
+위에서 알아보았던, List,Set과는 다르게<br>
+Map은 키(Key)와 값(value)으로 구성된 객체를 저장하는 구조를 가지고 있다.<br>
+이 객체를 Entry객체라고한다. 이객체는 키와 값을 객체로 저장한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gONkr-ZmO86YJ7I_klj0GlBqFskbn2WJ9eUcXSbV_WG8y568GPdWFDMYWKk1gkgHBeQl6pNasfam00TUW8R_14Ar4AUzw=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>Map 인터페이스를 구현하는 클래스들도 많다.<br>
+HashMap, Hashtable, LinkedHashMap, Properties, TreeMap 등..</p>
+
+<p>오늘은 HashMap만 우선 알아보자</p>
+
+<p><br></p>
+
+<p><em><strong>HashMap</strong></em></p>
+
+<p>Map 인터페이스를 구현한 대표적인 클래스이다.<br>
+해시 함수를 통해 ‘키’와 ‘값이 저장되는 위치가 결정되고<br>
+사용자는 그 위치를 알 수 없고, 삽입되는 순서와 위치 또한 관계가 없다.<br>
+Map은 키와 값을 쌍으로 저장하기 때문에<br>
+iterator()를 직접 호출할 수 없다.</p>
+
+<p>그 대신 keySet() 이나 entrySet() 메서드를 이용해 Set 형태로 반환된<br>
+컬렉션에 반복자를 통해 순회할 수 있다.</p>
+
+<p>선언 방법</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">HashMap</span><span class="o">&lt;</span><span class="n">키</span> <span class="n">타입매개변수</span><span class="o">,</span> <span class="n">값</span> <span class="n">타입매개변수</span><span class="o">&gt;</span> <span class="n">hashmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+</code></pre></div></div>
+
+<p>다른 것들과 다른점은 키와 값의 타입매개변수<br>
+이렇게 두개를 설정해주어야한다.<br>
+아래의 코드로 간단하게 확인이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// HashMap 생성</span>
+    <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="c1">// Entry 객체 저장</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"피카츄"</span><span class="o">,</span> <span class="mi">85</span><span class="o">);</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"꼬부기"</span><span class="o">,</span> <span class="mi">95</span><span class="o">);</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"야도란"</span><span class="o">,</span> <span class="mi">75</span><span class="o">);</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"파이리"</span><span class="o">,</span> <span class="mi">65</span><span class="o">);</span>
+    <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"피존투"</span><span class="o">,</span> <span class="mi">15</span><span class="o">);</span>
+
+    <span class="c1">// 저장된 총 Entry 수 얻기</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"총 entry 수: "</span> <span class="o">+</span> <span class="n">map</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+    
+<span class="o">}</span>
+<span class="c1">//출력</span>
+<span class="n">총</span> <span class="n">entry</span> <span class="nl">수:</span> <span class="mi">5</span>
+</code></pre></div></div>
+
+<p>map.put()을 이용해 키와 값을 입력한다. <br>
+그리고 총 들어간 Entry의 개수를 int값을 반환해주는<br>
+size(); 확인시 5개가 저장된걸 볼 수 있다.</p>
+
+<p>이와 같이 HashMap에 있는 메서드들로 여러가지 코드가 작성이 가능하다.</p>
+
+<p><br></p>
+
+<hr>
+
+<p>오늘은 대충알고 있던 내용들을 더욱 점검해보는 시간이였다.<br>
+아직 정확히 이해되진않았다. 여러번 타이핑해보면서<br>
+사용 방법에 익숙해져야할 것 같은 느낌이다.<br>
+머리속에 둥둥~ 다비슷해보이는 문법들이라 너무 헷갈리고<br>
+멘붕의 하루였다.. 아마 다른분들도 멘붕이겠지..?<br>
+그치만 새롭게 무언가 더 사용하는 방법을 익힌 것에<br>
+만족을하며 오늘 공부를 마친다!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️️️️<br>
+<strong>오늘의 점심</strong>: 불고기, 계란말이, 공기밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/macos/2022/08/26/OS-macOs-3.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">macOs) neofetch를 활용하여 terminal 커스터마이징</a><a class="next" href="/til/2022/09/14/til.html" title="TIL) Java 컬렉션 문제풀이">TIL) Java 컬렉션 문제풀이</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/12/01/til.html" title="TIL) Java 컬렉션 문제풀이">TIL) Spring WebFlux 구현하기</a></li>
+<li><a class="post-link" href="/til/2022/10/25/til.html" title="TIL) Java 컬렉션 문제풀이">TIL) Spring Exception 1</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="TIL) Java 컬렉션 문제풀이">TIL) Spring AOP 1</a></li>
+<li><a class="post-link" href="/til/2022/09/22/til.html" title="TIL) Java 컬렉션 문제풀이">TIL) Java 자료구조 Stack, Queue</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
