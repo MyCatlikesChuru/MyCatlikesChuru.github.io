@@ -1,4 +1,356 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-10T13:38:26+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) Cloud 운영 전략</title><link href="http://localhost:4000/til/2022/12/09/til.html" rel="alternate" type="text/html" title="TIL) Cloud 운영 전략" /><published>2022-12-09T00:00:00+09:00</published><updated>2022-12-09T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/09/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/09/til.html"><![CDATA[<h3 id="proxy-server">Proxy Server</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-12T20:12:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) 프로젝트 연습, 준비</title><link href="http://localhost:4000/til/2022/12/12/til.html" rel="alternate" type="text/html" title="TIL) 프로젝트 연습, 준비" /><published>2022-12-12T00:00:00+09:00</published><updated>2022-12-12T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/12/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/12/til.html"><![CDATA[<p>드디어 정규과정이 다 끝이 났다.<br />
+4개월이란 짧은 시간에 정말 많은 것을 배웠고<br />
+모든 기술을 구현할 수 있는 능력은 없지만<br />
+작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.</p>
+
+<p>프로젝트때 내가 중점적으로 적용하고 공부해보려는 것은</p>
+<ol>
+  <li>Spring MVC</li>
+  <li>Spring AOP</li>
+  <li>Spring JPA</li>
+  <li>Spring Security(JWT, OAuth2)</li>
+  <li>계층별 테스트코드 작성</li>
+  <li>API 문서 자동화</li>
+  <li>배포 자동화</li>
+  <li>docker를 이용한 배포환경 통일화</li>
+</ol>
+
+<p>이렇게 8개 정도를 정말 숙달할 정도로 연습해보려한다.<br />
+현재 1번~4번까지는 어느정도 연습이 되어있지만<br />
+자세한 계층구조를 파악하는 목적을 두고 있다.</p>
+
+<p>5~8번까지는 실제 애플리케이션 동작들을 간편하게 사용하는 목적으로<br />
+이용할 가능성이크고 특히 아직 익숙하지 않은 docker에 대해선<br />
+팀원들과 상의해 정말 꼭 통일된 환경을 만들어서 작업을 해보고 싶다.</p>
+
+<p>이렇게 프로그램 작성과 적용하여 내부내용까지 정말 <br />
+이번 기회에 확실히 체득하고 내 것으로 만들 계획이다.</p>
+
+<p><br /></p>
+
+<h3 id="간단한-프로젝트-만들어서-해보기">간단한 프로젝트 만들어서 해보기</h3>
+
+<p>본격적으로 팀원이 정해지기전에<br />
+혼자 어느정도 만들어보는 시간을 가지는 시간이 주어졌다.</p>
+
+<p>오늘은 Todo List를 구현하는 프로그램을 만들어 보려한다.<br />
+클라이언트는 이미 오픈으로 제공되어 있는 <a href="https://todobackend.com/">Todo-Backend</a>사이트를 이용해<br />
+서버와 H2 데이터베이스를 이용해 작성해볼 생각이다.</p>
+
+<p>로컬 환경에서 테스트를 하고자한다면</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://todobackend.com/client/index.html?http://localhost:8080
+</code></pre></div></div>
+<p>해당 URL로 접속 시 TODO LIST에 대한 GET 요청이 이루어질 것이다.<br />
+GET,POST,PATCH,DELETE 까지 적용해보자</p>
+
+<p>우선 먼저 내가 사용할 기술들에 대한<br />
+의존 라이브러리를 추가해주었다.<br />
+내장 톰켓 서버를 사용할 것이고, H2를 사용할 거다.<br />
+그리고 Mapper를 이용할 것이고, DB에 접근하는 기술은 JPA를 사용할 것이다.<br />
+그리고 편의를 위한 롬복과, 테스트 코드 작성을 위한 의존라이브러리</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">jpa</span><span class="err">'</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">validation</span><span class="err">'</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="nl">mapstruct:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="o">:</span><span class="n">gson</span><span class="err">'</span>
+
+	<span class="n">compileOnly</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
+	<span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span><span class="err">'</span>
+	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
+	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="n">mapstruct</span><span class="o">-</span><span class="nl">processor:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
+
+	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이 정도를 추가해볼 수 있을 것 같다.</p>
+
+<p><br /></p>
+
+<p>이제 의존라이브러리 설정을 다해주었으니<br />
+웹 애플리케이션 계층 구조를 Controller, Service, Repository로 만들어<br />
+적절한 구현과 역할을 나눠주자.</p>
+
+<p>우선 Controller 부터 작성 했다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span><span class="err">\</span>
+<span class="nd">@RestController</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TodoListService</span> <span class="n">todoListService</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TodoListMapper</span> <span class="n">todoListMapper</span><span class="o">;</span>
+
+    <span class="nd">@PostMapping</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">createList</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">TodoListDto</span> <span class="n">todoListDto</span><span class="o">){</span>
+
+        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">createTodoList</span><span class="o">(</span><span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListDtoToTodoList</span><span class="o">(</span><span class="n">todoListDto</span><span class="o">));</span>
+        <span class="nc">TodoListResponseDto</span> <span class="n">todoListResponseDto</span> <span class="o">=</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListToTodoListResponseDto</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoListResponseDto</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@GetMapping</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getLists</span><span class="o">(){</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">&gt;</span> <span class="n">todoLists</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">getLists</span><span class="o">();</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoLists</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{listId}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getList</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
+
+        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">getList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
+        <span class="nc">TodoListResponseDto</span> <span class="n">todoListResponseDto</span> <span class="o">=</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListToTodoListResponseDto</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoListResponseDto</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PatchMapping</span><span class="o">(</span><span class="s">"/{listId}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">updateList</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">listId</span><span class="o">,</span>
+                                     <span class="nd">@RequestBody</span> <span class="nc">TodoListDto</span> <span class="n">todoListDto</span><span class="o">){</span>
+
+        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">changeTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">,</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListDtoToTodoList</span><span class="o">(</span><span class="n">todoListDto</span><span class="o">));</span>
+        <span class="nc">TodoListResponseDto</span> <span class="n">todoListResponseDto</span> <span class="o">=</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListToTodoListResponseDto</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoListResponseDto</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@DeleteMapping</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">deleteLists</span><span class="o">(){</span>
+
+        <span class="n">todoListService</span><span class="o">.</span><span class="na">deleteTodoLists</span><span class="o">();</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@DeleteMapping</span><span class="o">(</span><span class="s">"/{listId}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">deleteList</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
+
+        <span class="n">todoListService</span><span class="o">.</span><span class="na">deleteTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>크게 어려운 기술들은 없다.<br />
+총 6개의 API로 가장 간단한 동작들만하는 메서드이다.</p>
+
+<p>Entity 클래스 작성이다.<br />
+JPA기술을 사용하기 때문에 해당 관련 설정을 해주어야한다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoList</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">todoOrder</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">completed</span><span class="o">;</span>
+
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getCompleted</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">completed</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<p>4개의 필드변수가 존재하고 <br />
+테이블을 4개만 사용할 예정이다.</p>
+
+<p>Repository 계층이다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TodoListRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">,</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>JpaRepository를 상속받고, 우리가 Entity클래스로 지정한 <br />
+<code class="language-plaintext highlighter-rouge">TodoList</code>와 Id 타입인 <code class="language-plaintext highlighter-rouge">Long</code>을 타입매개변수로 넣어주자</p>
+
+<p>이제 Controller에서 주고받는 데이터를<br />
+맵핑해주는 Dto 클래스를 만들어보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListDto</span> <span class="o">{</span>
+
+    <span class="nd">@NotBlank</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"제목은 공백이 아니어야 합니다."</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">order</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">completed</span><span class="o">;</span>
+
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getCompleted</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">completed</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListResponseDto</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">todoOrder</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">completed</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>첫번째 Dto는 Json객체로 요청이 왔을때<br />
+맵핑을하도록 작성해주었다.<br />
+아직 Valid 대한 예외처리는 적용하지 못한 상태이다.</p>
+
+<p>두번째 Dto는 최종적으로 Reponse의 Body로 응답해줄<br />
+Json객체를 만들기위해 맵핑해주는 Dto객체이다.</p>
+
+<p>그리고 Mapper 클래스를 만들어보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TodoListMapper</span> <span class="o">{</span>
+    <span class="k">default</span> <span class="nc">TodoList</span> <span class="nf">todoListDtoToTodoList</span><span class="o">(</span><span class="nc">TodoListDto</span> <span class="n">todoListDto</span><span class="o">){</span>
+        <span class="k">if</span> <span class="o">(</span> <span class="n">todoListDto</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TodoList</span><span class="o">();</span>
+
+        <span class="n">todoList</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span> <span class="n">todoListDto</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()</span> <span class="o">);</span>
+        <span class="n">todoList</span><span class="o">.</span><span class="na">setTodoOrder</span><span class="o">(</span><span class="n">todoListDto</span><span class="o">.</span><span class="na">getOrder</span><span class="o">());</span>
+        <span class="n">todoList</span><span class="o">.</span><span class="na">setCompleted</span><span class="o">(</span> <span class="n">todoListDto</span><span class="o">.</span><span class="na">getCompleted</span><span class="o">());</span>
+
+        <span class="k">return</span> <span class="n">todoList</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nc">TodoListResponseDto</span> <span class="nf">todoListToTodoListResponseDto</span><span class="o">(</span><span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Mapper를 통해서 <code class="language-plaintext highlighter-rouge">TodoListDto</code>객체를 <code class="language-plaintext highlighter-rouge">TodoList</code> 클래스로<br />
+<code class="language-plaintext highlighter-rouge">TodoList</code>객체를 <code class="language-plaintext highlighter-rouge">TodoListResponseDto</code>클래스로 변경해준다.</p>
+
+<p>이제 간단한 서비스로직에 대한 예외처리를 위한<br />
+클래스를 만들어 보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
+    <span class="no">LIST_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span><span class="s">"TodoList Not Found"</span><span class="o">);</span>
+
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
+
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
+
+    <span class="nc">ExceptionCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">code</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">code</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServiceLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span><span class="o">{</span>
+    <span class="nd">@Getter</span>
+    <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">ServiceLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">){</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">exceptionCode</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>이제 해당 커스텀 코드로 예외를 발생시킬 것이다.<br />
+리스트의 존재여부와 같은 예외가 발생하면<br />
+해당 예외를 발생시켜 추후에 Advice로 잡아서 처리해줄 수 있다.</p>
+
+<p>이제 마지막으로 Service 로직을 작성해보자</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TodoListRepository</span> <span class="n">todoListRepository</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">TodoList</span> <span class="nf">createTodoList</span><span class="o">(</span><span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nf">saveTodoList</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">TodoList</span> <span class="nf">getList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
+        <span class="k">return</span> <span class="nf">findTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">&gt;</span> <span class="nf">getLists</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">todoListRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">TodoList</span> <span class="nf">changeTodoList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">,</span> <span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">){</span>
+        <span class="nc">TodoList</span> <span class="n">findTodoList</span> <span class="o">=</span> <span class="n">findTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
+
+        <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">todoList</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()).</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">title</span> <span class="o">-&gt;</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">title</span><span class="o">));</span>
+        <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">todoList</span><span class="o">.</span><span class="na">getTodoOrder</span><span class="o">()).</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">todoOrder</span> <span class="o">-&gt;</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">setTodoOrder</span><span class="o">(</span><span class="n">todoOrder</span><span class="o">));</span>
+        <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">todoList</span><span class="o">.</span><span class="na">getCompleted</span><span class="o">()).</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">completed</span> <span class="o">-&gt;</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">setCompleted</span><span class="o">(</span><span class="n">completed</span><span class="o">));</span>
+
+        <span class="k">return</span> <span class="nf">saveTodoList</span><span class="o">(</span><span class="n">findTodoList</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteTodoLists</span><span class="o">(){</span>
+        <span class="n">todoListRepository</span><span class="o">.</span><span class="na">deleteAll</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteTodoList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
+        <span class="n">findTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
+        <span class="n">todoListRepository</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
+    <span class="o">}</span>
+
+
+    <span class="kd">private</span> <span class="nc">TodoList</span> <span class="nf">findTodoList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">&gt;</span> <span class="n">findTodoList</span> <span class="o">=</span> <span class="n">todoListRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">ServiceLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">LIST_NOT_FOUND</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">TodoList</span> <span class="nf">saveTodoList</span><span class="o">(</span><span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">todoListRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<p>아주 기본적인 서비스로직을 구현했다.<br />
+트랜잭션 전파관련해 건드릴 만한 서비스도 존재하지 않아<br />
+클래스단에 @Transactional을 붙여주었다.</p>
+
+<p>JPA 기술을 이용해 <code class="language-plaintext highlighter-rouge">TodoList</code>객체만 보내주면<br />
+DB에 맵핑이 되어진다.</p>
+
+<p><br /></p>
+
+<p>이렇게 간단하게 API요청과 응답에 대한 내용은<br />
+전부 처리가 완료되었다.</p>
+
+<p>이제부터 좀더 다듬어야할 부분은</p>
+<ol>
+  <li>유효성 검증에 처리 추가</li>
+  <li>유효성 검증 실패에 따른 Advice 클래스 작성 필요</li>
+  <li>계층별 테스트 케이스 만들기</li>
+  <li>API 문서 자동화 해보기</li>
+</ol>
+
+<p>이렇게 코드를 추가해 볼 수 있을 것 같다.<br />
+그리고 현재 로컬서버에서만 작동할 수 있게 되어있는데<br />
+Ngrok를 이용해 로컬 환경에 접근할 수 있게 터널링 해주는 프로그램도<br />
+이용해 볼 수 있을 것 같다.</p>
+
+<p>우선적으로 터널링을 이용해 테스트를 해본다음<br />
+위에 4가지 기능들을 구현할 시간이 주어진다면 내일 이어서 작업해볼 예정이다.</p>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 이렇게 간단하게 웹계층을 만들어보는 시간을 가졌다.<br />
+Spring MVC관련 계층 프로그램은 이제<br />
+다른 프로그램을 보지않고도 할 수 있는 정도가 되었다.</p>
+
+<p>하지만 예외를 처리하는 Advice 클래스 구현이라든가<br />
+테스트 관련 계층은 문법이 생각나지않아 한번씩 보면서 작성을 해야한다…</p>
+
+<p>오늘 공부는 여기서 끝 !!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
+<strong>오늘의 점심</strong>: 제육볶음, 스팸부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[드디어 정규과정이 다 끝이 났다. 4개월이란 짧은 시간에 정말 많은 것을 배웠고 모든 기술을 구현할 수 있는 능력은 없지만 작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.]]></summary></entry><entry><title type="html">TIL) Cloud 운영 전략</title><link href="http://localhost:4000/til/2022/12/09/til.html" rel="alternate" type="text/html" title="TIL) Cloud 운영 전략" /><published>2022-12-09T00:00:00+09:00</published><updated>2022-12-09T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/09/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/09/til.html"><![CDATA[<h3 id="proxy-server">Proxy Server</h3>
 
 <p>프록시 서버는 클라이언트가 서버와 소통할 때<br />
 서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록<br />
@@ -2621,221 +2973,4 @@ Spring WebFlux 기술을 활용해서 한번 적용해보자</p>
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 11월의 마지막이 다가왔다.]]></summary></entry><entry><title type="html">TIL) Spring WebFlux Reactive 프로그래밍</title><link href="http://localhost:4000/til/2022/11/29/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux Reactive 프로그래밍" /><published>2022-11-29T00:00:00+09:00</published><updated>2022-11-29T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/29/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/29/til.html"><![CDATA[<p>오늘은 리액티브 프로그래밍에 대해 공부해보는 날이다.<br />
-아마 깊은 내용은 다루지 않고, 간단한 지식들만 공부 할 것 같다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOLvm3Tcr7jOo11hO8F_VEjXkI7bN97rGtSVrf1Ti3xqf3ZQe4jQOr1kpMnycZ3ZuOxgeCDU8X3g9guLl8uMN_t1zRm8Q=w1185-h864" alt="image" class="align-left" style="max-width: 30%" /></p>
-
-<p>우리는 Spring MVC 기반의 애플리케이션을 사용하고있는데<br />
-최신 기술로 Spring Reactive가 나와서 후에 어떻게<br />
-바뀔지는 아무도 모르니 Spring MVC 이해를 마친 후<br />
-해당 기술에 대해 깊게 공부해볼 필요가 있을 것 같다.</p>
-
-<hr />
-
-<h3 id="리액티브-프로그래밍이란">리액티브 프로그래밍이란?</h3>
-
-<p>기존의 명령형 프로그래밍 방식과 달리 선언형 프로그래밍 방식을 사용한다.<br />
-클라이언트의 요청에 반응을 잘하는 시스템을 의미한다.<br />
-리액티브 시스템 관점에서의 반응은 쓰레드의 Non-Blocking과 관련이 있다.<br />
-클라이언트의 요청에 대한 대기 시간을 최소화 할 수 있도록<br />
-요청 쓰레드가 차단되지 않게 함으로써, 클라이언트에게 즉각적으로<br />
-반응하도록 구성된 시스템이라고 볼 수 있다.</p>
-
-<p>리액티브 시스템의 특징을 알아보자</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMC17N9996c0CAWJ2CXGoDaByldzZ7UTKzUtpNVQbGGwNbemzqeKFNeAeqE8q_mHlA_5DEs1EUS4hO70psikE0WUvyOhg=w1554-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>1). MEANS<br />
--. 리액티브 시스템에서 사용하는 커뮤니케이션 수단</p>
-<ul>
-  <li>Message Driven  <br />
--. 리액티브 시스템에서는 메세지 기반 통신을 통해 여러 시스템 간에 느슨한 결합을 유지한다.</li>
-</ul>
-
-<p>2). FORM<br />
--. 메세지 기반 통신을 통해 리액티브 시스템이 어떤 특성을 가지는 구조로 형성되는지를 의미</p>
-<ul>
-  <li>Elastic<br />
--. 시스템으로 들어오는 요청량이 적거나 많거나에 상관없이 일정한 응답성을 유지하는 것</li>
-  <li>Resillient<br />
--. 시스템의 일부분에 장애가 발생하더라도 응답성을 유지하는 것</li>
-</ul>
-
-<p>3). VALUE<br />
--. 리액티브 시스템의 핵심 가치가 무엇인지를 표현하는 영역</p>
-<ul>
-  <li>Responsive<br />
--. 리액티브 시스템은 클라이언트의 요청에 즉각적으로 응답할 수 있어야함을 의미</li>
-  <li>Maintainable<br />
--. 클라이언트의 요청에 대한 즉각적인 응답이 지속가능해야함을 의미</li>
-  <li>Extensible<br />
--. 클라이언트의 요청에 대한 처리량을 자동으로 확장하고 축소할 수 있어야함을 의미</li>
-</ul>
-
-<p><br /></p>
-
-<h3 id="리액티브-스트림즈란">리액티브 스트림즈란?</h3>
-<p>리액티브 프로그래밍을 위한 표준사양이다.<br />
-리액티브 스트림즈에서 사양으로 정의된 구성요소를 알아보자</p>
-
-<p><strong>1). Publisher 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Publisher</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">subscribe</span><span class="o">(</span><span class="nc">Subscriber</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>-. 데이터 소스로 부터 데이터를 내보내는(emit) 역할을 한다. <br />
--. <code class="language-plaintext highlighter-rouge">subscribe();</code>추상 메서드를 포함하고 있고, 매개변수로 전달되는 Subscriberrk<br />
-Publisher로부터 내보내진 데이터를 소비하는 역할을 한다.</p>
-
-<p><br /></p>
-
-<p><strong>2). Subscriber 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscriber</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSubscribe</span><span class="o">(</span><span class="nc">Subscription</span> <span class="n">s</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onNext</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onComplete</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>-. Publisher로 부터 내보내진 데이터를 소비하는 역할을 한다.</p>
-
-<p>-. <code class="language-plaintext highlighter-rouge">onSubscribe(Subscription s);</code></p>
-<ul>
-  <li>구독이 시작되는 시점에 호출됨.</li>
-  <li>Pusblisher에게 요청할 데이터의 개수를 지정하거나 구독해지 처리가 가능</li>
-</ul>
-
-<p>-. <code class="language-plaintext highlighter-rouge">onNext(T t)</code></p>
-<ul>
-  <li>Publisher가 데이터를 emit할 때 호출됨</li>
-  <li>emti된 데이터를 전달 받아서 소비할 수 있다.</li>
-</ul>
-
-<p>-. <code class="language-plaintext highlighter-rouge">onError(Throwable t)</code></p>
-<ul>
-  <li>Publisher로부터 emit된 데이터가 Subscriber에게 전달되는 과정에서<br />
-에러가 발생할 경우에 호출된다.</li>
-</ul>
-
-<p>-. <code class="language-plaintext highlighter-rouge">onComplete()</code></p>
-<ul>
-  <li>Publisher가 데이터를 emit하는 과정이 종료될 경우 호출됨</li>
-  <li>emit이 정상적으로 완료된 후, 처리해야 될 작업이 있다면 해당 메서드 내에서 수행할 수 있다.</li>
-</ul>
-
-<p><br /></p>
-
-<p><strong>3). Subscription 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscription</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">request</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cancel</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>-. Subscriber의 구독 자체를 표현한 인터페이스이다.
--. <code class="language-plaintext highlighter-rouge">request(long n)</code></p>
-<ul>
-  <li>Publisher가 emit하는 데이터의 개수를 요청</li>
-</ul>
-
-<p>-. <code class="language-plaintext highlighter-rouge">cancel()</code></p>
-<ul>
-  <li>구독을 해지하는 역할을한다. 구독해지가 발생하면 Publisher는 더이상 데이터를 Emit하지 않는다.</li>
-</ul>
-
-<p><br /></p>
-
-<p><strong>4). Processor 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Processor</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">R</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">Subscriber</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;,</span> <span class="nc">Publisher</span><span class="o">&lt;</span><span class="no">R</span><span class="o">&gt;</span> <span class="o">{</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>-. 별도로 구현해야 되는 추상메서드는 없다.<br />
--. Publisher와 Subscriber의 역할을 동시에 할 수 있는 특징을 가지고 있다.</p>
-
-<p><br /></p>
-
-<p><strong>5). 구현체들</strong></p>
-<ul>
-  <li>Project Reactor</li>
-  <li>RxJava</li>
-  <li>Java Flow API</li>
-</ul>
-
-<p>코드로 알아보기</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// Publisher의 역할</span>
-        <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mono</span> <span class="o">=</span> <span class="nc">Mono</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">);</span>
-
-        <span class="c1">// Subscriber의 역할</span>
-        <span class="n">mono</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="c1">// 출력</span>
-<span class="nc">Hello</span><span class="o">,</span> <span class="nc">Reactive</span>
-</code></pre></div></div>
-<p>리액티브 스트림즈 구현체인 Project Reactor을 통해 출력하고 있는 모습이다.<br />
-<code class="language-plaintext highlighter-rouge">Mono</code>의 역할이 Publisher의 역할이고<br />
-Subscriber는 Publisher가 emit한 데이터를 전달 받아서<br />
-소비하는 역할이라고 위에서 공부했었다.</p>
-
-<p>Subscriber 역할을 하는 것은 <code class="language-plaintext highlighter-rouge">mono.subscribe();</code> 메서드이고<br />
-내부에 정의된 람다 표현식을 사용하고 있다.</p>
-
-<p>기존에 우리가 사용했던 Stream과 동일하게 메서드 체인형식으로 구성도 가능하다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Mono</span>
-            <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="c1">// 출력</span>
-<span class="nc">Hello</span><span class="o">,</span> <span class="nc">Reactive</span>
-</code></pre></div></div>
-
-<p>다른 형식의 예제를 알아보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveGlossaryExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Flux</span>
-            <span class="o">.</span><span class="na">fromIterable</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">11</span><span class="o">))</span>
-            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">number</span> <span class="o">-&gt;</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">))</span>
-            <span class="o">.</span><span class="na">reduce</span><span class="o">((</span><span class="n">n1</span><span class="o">,</span> <span class="n">n2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="c1">// 출력</span>
-<span class="mi">14</span>
-</code></pre></div></div>
-<p><strong>Publisher -&gt;</strong> <code class="language-plaintext highlighter-rouge">Flux</code>가 Pusblisher 이다.</p>
-
-<p><strong>Emit -&gt;</strong> <code class="language-plaintext highlighter-rouge">Flux</code>가 데이터를 내보내는 것을 가르킴</p>
-
-<p><strong>Subscriber -&gt;</strong> <code class="language-plaintext highlighter-rouge">Flux</code>가 emit한 데이터를 전달 받아서 소비하는 주체 <br />
-즉, <code class="language-plaintext highlighter-rouge">System.out::println</code> 부분이 Subscriber에 해당한다.</p>
-
-<p><strong>Subscribe -&gt;</strong> <code class="language-plaintext highlighter-rouge">subscribe</code> 메서드를 호출하면 구독을 하는 것이다.</p>
-
-<p><strong>Signal -&gt;</strong> Publisher가 발생시키는 이벤트를 의미한다.</p>
-
-<p><strong>Operator -&gt;</strong> 어떤 동작을 수행하는 메서드를 의미한다.<br />
-<code class="language-plaintext highlighter-rouge">fromIterable()</code>, <code class="language-plaintext highlighter-rouge">filter()</code>, <code class="language-plaintext highlighter-rouge">reduce()</code>등 하나하나들 Operator이라 한다.</p>
-
-<p><strong>Sequence -&gt;</strong> Operator 체인으로 표현되는 데이터의 흐름을 의미한다.<br />
-해당 코드에선 코드자체를 하나의 Sequence라고 보면된다.</p>
-
-<p><strong>Upstream -&gt;</strong> Operator 기준으로 위쪽 Sequence 일부를 Upstream이라함<br />
-<strong>Downstream -&gt;</strong> Operator 기준으로 아래쪽 Sequence 일부를 Downstream이라함</p>
-
-<p><br /></p>
-
-<hr />
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 리액티브 프로그래밍에 대해 공부해보는 날이다. 아마 깊은 내용은 다루지 않고, 간단한 지식들만 공부 할 것 같다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 11월의 마지막이 다가왔다.]]></summary></entry></feed>
