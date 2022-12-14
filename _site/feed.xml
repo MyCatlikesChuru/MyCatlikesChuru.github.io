@@ -1,4 +1,303 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-12T20:12:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) 프로젝트 연습, 준비</title><link href="http://localhost:4000/til/2022/12/12/til.html" rel="alternate" type="text/html" title="TIL) 프로젝트 연습, 준비" /><published>2022-12-12T00:00:00+09:00</published><updated>2022-12-12T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/12/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/12/til.html"><![CDATA[<p>드디어 정규과정이 다 끝이 났다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-14T15:30:05+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
+아직 2달이라는 프로젝트 기간이 남았지만<br />
+코드스테이츠의 정식적인 교육 기간은 종료되었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMPl-U5WSVnl2X_QlCFUFldb2dx62RGh-lw8AoRL2iVdE009mPfIjWddWnl9JK--dj78_kgJ-GdjDTkk40rN2z6SM7UMg=w3024-h1614" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>길면 길었고 짧으면 짧았지만 4개월간 새로운 내용들을<br />
+계속해서 배워가고 찾아보고 공부하는 과정이 정말 즐거웠다.</p>
+
+<p>평일,주말 가릴 것 없이 수업 진도를 따라가기 위해서<br />
+거의 점심,저녁 먹는 시간을 제외하고는<br />
+계속 공부했던 것 같다. 주말에는 조금 더쉬긴 했지만<br />
+공부하는 습관이 길들여진게 가장 중요한 것 같다.</p>
+
+<p>아직 배울 것도 까마득하고.. 시간이 모자라다는 생각이 정말 많이 들었다. <br />
+프로젝트에 앞서 어떤 기술을 배웠는지 회고해보고<br />
+어떻게 이용할 수 있을지? 공부를 앞으로 어떻게 할지를 적어보려한다.</p>
+
+<hr />
+
+<h3 id="네달차에는-어떤걸-배웠었지">네달차에는 어떤걸 배웠었지?</h3>
+
+<p>섹션1 에서는 웹에 대한 CS지식과 Java에 익숙해지기<br />
+섹션2 에서는 Java를 활용한 알고리즘 풀이와 Spring 맛보기<br />
+섹션3 에서는 Spring을 씹고 뜯으면서 즐기기<br />
+섹션4 에서는 Spring에 대한 인증과 보안에 대해 공부했고<br />
+빌드와 배포 과정을 배우면서 여태 배운걸 모든걸 적용해 웹을 만들고 배포하는<br />
+그러한 시간을 한달동안 가졌었다.</p>
+
+<p>이번 섹션에서는 정말로… Spring Security를 배우면서<br />
+배움의 깊이가 깊어지고 어떻게 공부를 해야할지 깨닫는 시간이었다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMb-GiTXNgFjwEFGssz9apOx8arCoSKe-OLIvTZ8FApzMK52-lE-5lXWb9LnJatBaqnGYRBIop7J17uy-uFoOOFVkuuDQ=w3024-h1614" alt="image" class="align-left" style="max-width: 60%" /></p>
+
+<p>사실 이전까지는 그냥 만들어진 기능만 잘 사용하면 그만아닌가? 라는 생각을 했다. <br />
+Spring Seucrity를 배우면서 내가 사용하려는 프레임워크에 대한 이해도가 깊어야<br />
+비로소 내가 구현하고자하는 것을 자유롭게 사용할 수 있다라는걸 느꼈다.</p>
+
+<p>보안관련된 부분과 CI/CD에 대해 배웠었는데<br />
+모든걸 당장 적용해보라하면 당연히 할 수 없다.<br />
+하지만 이번에 확실히 배운건.. 보안과 CI/CD에서 몰랏던 용어들이 친숙해진점과<br />
+어떤 기능들이 어디에 있는지..? 그림이 머릿속에 그려지는 것, 그리고<br />
+이제는 어떤 것을 찾아봐야하는지 안다는 점이다.</p>
+
+<p><br /></p>
+
+<h3 id="여태까지의-회고-앞으로의-계획">여태까지의 회고, 앞으로의 계획</h3>
+
+<p>네달이라는 긴 시간동안 공부하면서<br />
+한번도 빠지지 않고 지킨 것들이 2개가 있다.</p>
+
+<ul>
+  <li><strong>하루에 한번씩 커밋하기</strong> 🌱</li>
+</ul>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZ4F4mz3R-zJl8c9FppemfvEnqseVjc7mmB0bGlDHpZjio9pwt_lZVQJr1PM5BBMTdRiwOt_jIBXqYRUno7OIEZXpbCQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>정말 평일 주말 빠짐없이 커밋을 했다. (물론 의미있는 내용으로 !!) <br />
+주로한 커밋은 섹션중 배운 코드 정리한 내용들과 Github 블로그 커밋<br />
+그리고 알고리즘 풀이 커밋 등이 있었다.<br />
+앞으로도 계속 잔디를 심어갈 예정이다.</p>
+
+<p><br /></p>
+
+<ul>
+  <li><strong>TIL 꾸준히 작성하기</strong> 📖</li>
+</ul>
+
+<p>TIL 작성하느라 대부분 시간을 쏟은 것 같다.<br />
+정규시간이 끝나면 배운내용 정리하는 일이 정말 쉬운일이 아니였다.<br />
+하지만 내가 오늘 배운 내용을 다시 정리해보는 일은<br />
+대충 넘어갔던 내용이라든가 제대로 이해하지 못했던 것들이라든가..<br />
+개념을 다시한번 정립하는 시간을 가짐으로서 기초가 조금더 탄탄해진 느낌이 들었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNO2ubkWSA2QpXYZeuEW9qjrZow1SA61qggtuXAJsTN7eOZYUryE0HZJSPt1VTDrtCWB9yYUw92K7w9x4_j6vIr_RpWvA=w3024-h1728" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>오늘 글을 기점으로 TIL은 종료하려고한다.<br />
+부트캠프에서 배우는 내용을 정리하고자 시작했던 일이었고<br />
+이제 프로젝트때 공부한 내용이라든가, 에러 처리 글이라든가<br />
+각각 카테고리에 맞게 글을 써서 작성해보려한다.</p>
+
+<p>다시말해 이제는 정말 프로젝트에 집중해 기술을 익히고 공부해서<br />
+정리가 필요하다고 생각하는 부분만 정리하려는 것이다.</p>
+
+<p><br /></p>
+
+<p>모두가 공감하겠지만…<br />
+사람이 정말 부지런하고 꾸준하다는 것은 정말 힘든 것 같다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOP9T1JWo1M3EWlE2ddf1M5nv446f916LELnYwnbL7L23TGpLExKsbBfp9uNkCTKh2WhQdLOXpEg0dKWmj2Y-hOXOH1MA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>몸이 자꾸 침대로 먼저 가있는 나를 보면서.. 정말 나태하구나<br />
+라는 생각을 했던적이 많은 것 같다.</p>
+
+<p>처음엔 뭐든 할 것 같은 포부로 덤벼들 었지만 2~3달차가 정말 고비였다.<br />
+물론 게을리 놀고만 있진 않았지만, 시간을 내서 공부하는일이 쉽지는 않았다.</p>
+
+<p>회의감이 들 때 쯔음에 정신을 바짝 차리고 강의라도 듣자는 마음에<br />
+큰돈을 들여 인프런 강의를 구매했다. 돈을 주고 구매했다보니<br />
+계속 듣는 습관이 생기고 지속적으로 나를 그러한 환경에 노출시키다 보니<br />
+어느 순간 내가 알아서 찾아서 공부하는 단계까지 온 것 같다.</p>
+
+<p>아마 혼자 계속 공부를 했으면 정말 힘들었을 것 같다.<br />
+다행이 우리 1일1커밋 스터디원들과 떠들기도 하고<br />
+지식공유도하고 서로 의견들 나눠가면서 공부를 하다보니까<br />
+동기부여도되고 앞으로 나아가는데 추진력을 준 것 같아서 스터디 활동하길 잘했다고 생각했다.</p>
+
+<p><br /></p>
+
+<p>이제는 본격적으로 프로젝트에서 사용하는 기능들을<br />
+체득해야하는 시간이 다가왔다. 여태까지는 한번씩 사용해보고 <br />
+머리로만 이해를 했다면, 이제는 사용해보고 체득해야한다.</p>
+
+<p>앞으로의 2달을 알차게 보내기 위해<br />
+내가 정말 깊이있게 공부해보고 자연스럽게 사용하고 싶은 항목들을 쭉 적어본다.</p>
+
+<ol>
+  <li><strong>Spring MVC</strong><br />
+-. Spring MVC 계층에 대한 깊은 공부 ex) DispatcherServlet, HandlerMapping …등<br />
+-. 항상 사용하는 어노테이션과 클래스 외에 여러 방법으로 처리해보기</li>
+  <li><strong>Spring JPA</strong><br />
+-. 연관관계 맵핑하는 것이 자연스러워 질때까지 연습과 공부<br />
+-. Transaction에 대한 깊은 이해<br />
+-. JPA 기술을 이용하지않고 구현해보는 연습 ex) JDBC만 이용하기.. 등  <br />
+-. JPA - JDBC - DataBase 까지의 관계도를 그려보고 큰 아키텍쳐를 깊숙히 이해해보기</li>
+  <li><strong>Spring AOP</strong><br />
+-. AOP 기술 적용을 자연스럽게할 수 있을때까지 체득하고 공부하기<br />
+-. 아직 어색한 포인트컷 지시자에 대해 공부</li>
+  <li><strong>Spring Validation</strong><br />
+-. 유효성 검증에 대한 어노테이션 및 문법을 체득할떄까지 연습
+-. 정규 표현식에 대한 공부</li>
+  <li><strong>JUnit</strong><br />
+-. 계층별 테스트에 대한 코드를 익숙하게 작성할 수 있게 연습
+-. API 문서 자동화에 대한 연습</li>
+  <li><strong>Docker</strong><br />
+-. Docker를 이용하는 법이 익숙하게 체득하여 여러가지 용도로 활용해보고 싶음<br />
+(로컬환경 통일화, 프론트엔드 테스트 이미지 전송하여 테스트하도록.. 등)</li>
+  <li><strong>CI/CD</strong><br />
+-. AWS S3, EC2, RDS 등 인스턴스 만드는 것이 자유롭도록 연습<br />
+-. 수동으로 배포하는 과정을 수시로 연습 및 EC2 초기 환경에 필요한 목록들 정리<br />
+-. GitHub Action을 통한 빌드, 배포 자동화하는 과정에 대한 깊은 이해하기<br />
+-. 여유가 된다면 AWS 파이프라인까지 공부</li>
+</ol>
+
+<p>이렇게 크게 파트를 나눠서 적어보긴 했지만 분명 더 공부해야하는 범위들이 생길 것이다.  <br />
+내가 이렇게 적어놓은 이유는 적어도 2달동안 위에 있는 내용들에 대해<br />
+자연스럽게 술술 코드를 작성하거나 잠깐만 찾아봐도 할 수 있는 정도까지 체득하려고하는 것이다.<br />
+그래야 앞으로 더 깊이있는 내용을 공부할 수 있을 것 같고<br />
+추가적인 사항에 대한 공부를 지속할 수 있을 것 같기 떄문이다.</p>
+
+<p>위에 있는 7가지의 목표를 가지고 2달동안 진짜 죽어라 다시 공부에 전념해볼 생각이다.<br />
+이상 여태까지 부트캠프에 대한 회고와 앞으로의 계획을 적어보았다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[4달 동안의 교육과정이 끝났다. 아직 2달이라는 프로젝트 기간이 남았지만 코드스테이츠의 정식적인 교육 기간은 종료되었다.]]></summary></entry><entry><title type="html">TIL) Ngrok 사용하여 로컬에서 서버 실행</title><link href="http://localhost:4000/til/2022/12/13/til.html" rel="alternate" type="text/html" title="TIL) Ngrok 사용하여 로컬에서 서버 실행" /><published>2022-12-13T00:00:00+09:00</published><updated>2022-12-13T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/13/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/13/til.html"><![CDATA[<p>오늘은 어제 만들었던 TODO List 프로젝트를<br />
+로컬환경에 띄우고 외부에서 접속할 수 있도록 하려한다.<br />
+AWS EC2같은 클라우딩 서비스에 배포를 하지 않아도<br />
+외부에서 접속이가능하니 프론트엔드쪽과 협업할때 매우 좋을 것 같다.</p>
+
+<h3 id="ngrok-설치-및-사용">Ngrok 설치 및 사용</h3>
+
+<p>우리가 사용중인 네트워크 방화벽과 NAT를 손보면<br />
+외부IP에서 우리의 로컬환경에 접속이 가능하다. 하지만 그렇게 될 경우<br />
+보안적으로는 매우 위험할 것이고, 이러한 상황에 Ngrok라는 툴을 사용하면<br />
+상대적으로 안전하게 개발환경을 구축할 수 있다.</p>
+
+<p>Ngrok은 네트워크 설정을 하지 않아도<br />
+방화벽을 넘어 외부에서 로컬 환경에 접근할 수 있게 해주는 터널링 프로그램이다.<br />
+무료 플랜의 경우 연결 세선이 2시간 가량 유지 된다고한다.</p>
+
+<p><a href="https://ngrok.com/download">Ngrok 설치</a>방법은 하이퍼링크를 참조하자.<br />
+Mac 유저인 경우는 homebrew로 설치도 가능하고<br />
+ZIP파일을 다운받아 사용도 가능하다.</p>
+
+<p>ZIP파일을 다운 받으면 다운받은 경로에서 <br />
+관리자 권한으로 unzip을 해주면 된다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo unzip ~/Downloads/ngrok-v3-stable-darwin-amd64.zip -d /usr/local/bin
+</code></pre></div></div>
+<p>나와 같은 경우는 <code class="language-plaintext highlighter-rouge">~/Desktop/Download</code>의 경로에 파일이 있었기에<br />
+앞에 경로만 변경해서 <code class="language-plaintext highlighter-rouge">sudo unzip</code>을 실행해주면 된다.</p>
+
+<p>설치가 완료되고</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ngrok <span class="nt">-h</span>
+</code></pre></div></div>
+<p>를 입력하면 옵션에 대한 설명이 나올 것이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gObsmscGnFyEnA0dNsZKusGOpCI7AOhWbFj1xP9TzarKyjkfZMV-kWxLwuaaRfu64X9e7Q1sSuOtTyx8BVyQ9p_5EUkrQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>그렇다면 정상적으로 설치가 완료된 것이다.</p>
+
+<p>터미널에서</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ngrok http 8080
+</code></pre></div></div>
+<p>을 입력해주게 되면 <code class="language-plaintext highlighter-rouge">http://localhost:8080</code>로 연결해주는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOjwMrGdUi75T-RxvGdlsyritWRjFkORgi8EGTcO4k5XEjRyV_7wWkDoXIAkOjbTp5yImsdeNeBI5fcDNuEaklMf9u4iQ=w1920-h888" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>url을 하나 제공해준다. 해당 url로 협업하는 프론트엔드 측에<br />
+서버를 띄워주면 이것으로 임시적으로 테스트가 가능하다.</p>
+
+<p>해당 세션은 2시간이고, 종료했다 다시 시작하면 2시간이 채워지니<br />
+한번씩 껏다키는 번거로움을 제외하고는 정말 좋은 프로그램인 것 같다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">http://127.0.0.1:4040/</code> 로 접속하게 된다면<br />
+현재 요청,응답에 대한 내용들이 보기 편하게 나오니 참고해보면 좋을 것 같다.</p>
+
+<p><br /></p>
+
+<h3 id="tomcat-서버-띄우기">Tomcat 서버 띄우기</h3>
+
+<p>위에서 Ngrok를 사용해 외부에서 내 로컬서버로 터널링하는 것을 배웠다.<br />
+근데 만약 내가 개발중이라면 계속 스프링 부트 애플리케이션을 실행 시켜놓을 수는<br />
+없는 셈이다.. 그래서 톰캣 서버를 하나 띄워 임시 애플리케이션을 배포해두면<br />
+프론트엔드 측에서도 API 요청 체크가 가능하고, 백엔드 쪽에서도 개발을 진행할 수 있다.</p>
+
+<p><a href="https://tomcat.apache.org/download-90.cgi">톰캣 공식 사이트</a>에서  <code class="language-plaintext highlighter-rouge">tar.gz (pgp, sha512)</code>를 다운받으면 된다.<br />
+(나는 MacOS를 사용하므로 위에 파일을 받은 것이다)</p>
+
+<p><br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">bin</code>폴더에 스크립트 파일을 이용해 톰캣서버를 실행시킬 수 있다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./startup.sh
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>종료시에는 아래 스크립트를 실행시키면 된다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./shutdown.sh
+</code></pre></div></div>
+
+<p>톰캣서버가 실행되면 기본 포트는 <code class="language-plaintext highlighter-rouge">localhost:8080</code>으로 접속이 가능하다.</p>
+
+<p>톰캣서버의 설정을 변경하는 경로는 아래와 같다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf &gt; server.xml
+</code></pre></div></div>
+<p>해당 xml파일을 열어 포트번호를 변경한다든가… 혹은<br />
+내가 빌드한 <code class="language-plaintext highlighter-rouge">.war</code>파일의 경로를 설정한다든가 할 수 있다.</p>
+
+<p>우선 포트번호를 변경하는 방법이다.<br />
+아래와 같이 <code class="language-plaintext highlighter-rouge">Connector</code> 태그로 기존에 코드가 작성되어있다.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">"8090"</span> <span class="na">protocol=</span><span class="s">"HTTP/1.1"</span> <span class="na">connectionTimeout=</span><span class="s">"20000"</span> <span class="na">redirectPort=</span><span class="s">"8443"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+<p>변경하고자하는 포트로 변경. (8080-&gt;8090)<br />
+이제 <code class="language-plaintext highlighter-rouge">localhost:8090</code>으로 서버를 띄울 수 있다.</p>
+
+<p>그리고 webapps 폴더에 내가만든<br />
+애플리케이션을 놓고 해당 애플리케이션을 실행 시키고 싶을 경우<br />
+기존에 작성되어있는 <code class="language-plaintext highlighter-rouge">Host</code>태그를 찾아서 코드를 추가해야한다.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nt">&lt;Host</span> <span class="na">name=</span><span class="s">"localhost"</span>  <span class="na">appBase=</span><span class="s">"webapps"</span>
+            <span class="na">unpackWARs=</span><span class="s">"true"</span> <span class="na">autoDeploy=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- webapps 내 War파일 실행 --&gt;</span>
+            <span class="nt">&lt;Context</span> <span class="na">path=</span><span class="s">"/"</span> <span class="na">docBase=</span><span class="s">"todolist-0.0.1-SNAPSHOT"</span>  <span class="na">reloadable=</span><span class="s">"false"</span> <span class="nt">&gt;</span> <span class="nt">&lt;/Context&gt;</span>
+
+        <span class="c">&lt;!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html --&gt;</span>
+        <span class="c">&lt;!--
+        &lt;Valve className="org.apache.catalina.authenticator.SingleSignOn" /&gt;
+        --&gt;</span>
+
+        <span class="c">&lt;!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" --&gt;</span>
+        <span class="nt">&lt;Valve</span> <span class="na">className=</span><span class="s">"org.apache.catalina.valves.AccessLogValve"</span> <span class="na">directory=</span><span class="s">"logs"</span>
+               <span class="na">prefix=</span><span class="s">"localhost_access_log"</span> <span class="na">suffix=</span><span class="s">".txt"</span>
+               <span class="na">pattern=</span><span class="s">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> <span class="nt">/&gt;</span>
+
+      <span class="nt">&lt;/Host&gt;</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;!-- webapps 내 War파일 실행 --&gt;</code>이라고 적힌 아래의<br />
+<code class="language-plaintext highlighter-rouge">Context</code>태그의 내용을 추가해주면 된다.<br />
+여기서 <code class="language-plaintext highlighter-rouge">docBase</code>의 이름은 내가 빌드한 <code class="language-plaintext highlighter-rouge">.war</code>파일의 이름이다.</p>
+
+<p><br /></p>
+
+<p>마지막으로 정리해보자면</p>
+<ol>
+  <li>내가 만든 어플리케이션을 빌드</li>
+  <li>빌드한 파일을 톰켓 서버하나를 만들어 배포 (localhost:8090)</li>
+  <li>Ngrok을 이용해 로컬과 터널링하여 연결</li>
+  <li>프론트엔드쪽에서 API 요청 테스트가 가능</li>
+</ol>
+
+<p><br /></p>
+
+<hr />
+
+<p>오늘은 이렇게 만든 애플리케이션을<br />
+프론트엔드에서 사용할 수 있게 터널링을 해주는 방법을 배웠다.<br />
+docker를 이용해 사용을 해줄 수도있을 것 같다는 생각이든다.</p>
+
+<p>오늘 공부는 여기서 끝!</p>
+
+<p><br /></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️<br />
+<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 어제 만들었던 TODO List 프로젝트를 로컬환경에 띄우고 외부에서 접속할 수 있도록 하려한다. AWS EC2같은 클라우딩 서비스에 배포를 하지 않아도 외부에서 접속이가능하니 프론트엔드쪽과 협업할때 매우 좋을 것 같다.]]></summary></entry><entry><title type="html">TIL) 프로젝트 연습, 준비</title><link href="http://localhost:4000/til/2022/12/12/til.html" rel="alternate" type="text/html" title="TIL) 프로젝트 연습, 준비" /><published>2022-12-12T00:00:00+09:00</published><updated>2022-12-12T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/12/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/12/til.html"><![CDATA[<p>드디어 정규과정이 다 끝이 났다.<br />
 4개월이란 짧은 시간에 정말 많은 것을 배웠고<br />
 모든 기술을 구현할 수 있는 능력은 없지만<br />
 작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.</p>
@@ -2056,921 +2355,4 @@ SSH Key를 우분투에 발급 받아야한다.<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨가 갑자기 겨울로 넘어왔다… 손발이 떨릴정도로 이제 추운 날씨가 왔다.]]></summary></entry><entry><title type="html">TIL) Spring WebFlux 구현하기</title><link href="http://localhost:4000/til/2022/12/01/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux 구현하기" /><published>2022-12-01T00:00:00+09:00</published><updated>2022-12-01T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/01/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/01/til.html"><![CDATA[<p>12월이 시작되었다 !<br />
-올해도 이렇게 시간이 빨리가는 구나<br />
-점점 더빨리가는 시간이 조금 야속하다.</p>
-
-<p>그래도 내가 당장할 수 있는 일에<br />
-늘 집중할 수 있게 다시한번 마음을 다져보며<br />
-오늘 공부를 시작해보자</p>
-
-<hr />
-
-<p>오늘은 WebFlux 기술을 이용한 애플리케이션을 구현해볼 생각이다.</p>
-
-<h3 id="spring-webfulx-">Spring WebFulx ?</h3>
-
-<p>Spring WebFlux는 전통적인 Spring MVC방식의 애플리케이션보다<br />
-대량 클라이언트 요청을 좀 더 효율적으로 처리할 수 있는 현대적인<br />
-애플리케이션 구현을 위한 기술이라고 한다.</p>
-
-<p>Spring 5에 Reactive 스택이라는 기술이 새롭게 추가되었고<br />
-해당 기술에서 지원하는 타입 <code class="language-plaintext highlighter-rouge">Mono</code>와 <code class="language-plaintext highlighter-rouge">Flux</code>를 사용 했던 걸<br />
-이전에 <a href="https://mycatlikeschuru.github.io/til/2022/11/30/til.html">Project Reactor</a>를 공부 하면서 배웠었다.</p>
-
-<p>한마디로 저의를 하자면, Spring WebFlux는 <br />
-리액티브 웹 애플리케이션을 위한 웹 프레임워크이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPoDOocq2SqLuJtAX2FsfgKnh4PxlFxW5qpbRJoRuH6MuZSKYcSqpK9hsYGiSumVaYCclCg3iKyd351ISGmBJNX3xHw=w777-h753" alt="image" class="align-left" style="max-width: 100%" /><br />
-<a href="https://docs.spring.io/spring-framework/docs/5.2.5.RELEASE/spring-framework-reference/web-reactive.html#webflux-framework-choice">출처 - spring.io</a></p>
-
-<p>Spring MVC와 Spring WebFlux를 벤다이어그램으로 비교한 사진이다.</p>
-
-<p>이제 클라이언트의 요청을 적으로 받는다고 했었는데<br />
-어떻게 차이가나는지 한번 비교해보자</p>
-
-<p><br /></p>
-
-<h3 id="spring-mvc-vs-spring-webflux">Spring MVC vs Spring WebFlux</h3>
-
-<p>두개의 프레임워크를 사용해 어떠한 차이가 있는지 확인해보려한다.<br />
-테스트 방식은 서버 2개를 띄워서 한쪽에서 다른쪽을 여러번 동시에 요청하였을 경우<br />
-어떻게 처리가 진행되어지는지 비교해보자</p>
-
-<p><br /></p>
-
-<p><strong>1). Spring MVC 테스트 하기</strong></p>
-
-<p>IntelliJ의 Spring Project를 두개를 만들고 각각 다른 서버로 만들 것이다.</p>
-<ol>
-  <li>호출하는 서버 - MAIN , PORT 8080</li>
-  <li>호출받는 서버 - OUT, PORT 7070</li>
-</ol>
-
-<p>위와 같이 이름을 정해놓고 포트는</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">server</span><span class="pi">:</span>
-  <span class="na">port</span><span class="pi">:</span> <span class="m">7070</span>
-</code></pre></div></div>
-<p>.yml 파일에 추가를 통해 변경이 가능하다.<br />
-우선 MAIN 서버 부터 코드를 작성해보자</p>
-
-<p><br /></p>
-
-<ul>
-  <li><strong>Main 서버</strong></li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v11/coffees"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringMvcMainCoffeeController</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RestTemplate</span> <span class="n">restTemplate</span><span class="o">;</span>
-
-    <span class="nc">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://localhost:7070/v11/coffees/1"</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">SpringMvcMainCoffeeController</span><span class="o">(</span><span class="nc">RestTemplateBuilder</span> <span class="n">restTemplateBuilder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">restTemplate</span> <span class="o">=</span> <span class="n">restTemplateBuilder</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{coffee-id}"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getCoffee</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"coffee-id"</span><span class="o">)</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# call Spring MVC Main Controller: {}"</span><span class="o">,</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
-        <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CoffeeResponseDto</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getForEntity</span><span class="o">(</span><span class="n">uri</span><span class="o">,</span> <span class="nc">CoffeeResponseDto</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getBody</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>해당 Controller가 호출되었을 때, OUT서버를 호출하는 프로그램이다.<br />
-log로 현재 시간을 기록해 시간을 체크할 예정이다.<br />
-(Dto 코드는 간단하기 때문에 따로 올리지 않겠습니다!)</p>
-
-<p>그리고 Spring 애플리케이션쪽에는</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="nd">@SpringBootApplication</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringMvcMainSampleApplication</span> <span class="o">{</span>
-
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">SpringMvcMainSampleApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
-	<span class="o">}</span>
-
-	<span class="nd">@Bean</span>
-	<span class="kd">public</span> <span class="nc">CommandLineRunner</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
-			<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# 요청 시작 시간: {}"</span><span class="o">,</span> <span class="nc">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
-
-			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-				<span class="nc">CoffeeResponseDto</span> <span class="n">response</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getCoffee</span><span class="o">();</span>
-				<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"{}: coffee name: {}"</span><span class="o">,</span> <span class="nc">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">response</span><span class="o">.</span><span class="na">getKorName</span><span class="o">());</span>
-			<span class="o">}</span>
-		<span class="o">};</span>
-	<span class="o">}</span>
-
-	<span class="c1">// Postman처럼 아래 주소로 5번 요청</span>
-	<span class="c1">// 그에따른 7070 서버에 5번 요청</span>
-	<span class="kd">private</span> <span class="nc">CoffeeResponseDto</span> <span class="nf">getCoffee</span><span class="o">()</span> <span class="o">{</span>
-		<span class="nc">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RestTemplate</span><span class="o">();</span>
-		<span class="nc">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://localhost:8080/v11/coffees/1"</span><span class="o">;</span>
-		<span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">CoffeeResponseDto</span><span class="o">&gt;</span> <span class="n">response</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">.</span><span class="na">getForEntity</span><span class="o">(</span><span class="n">uri</span><span class="o">,</span> <span class="nc">CoffeeResponseDto</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-
-		<span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="na">getBody</span><span class="o">();</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">CommandLineRunner</code>를 반환타입으로한 메서드로<br />
-애플리케이션이 실행 시 5번 MAIN서버 API를 요청하도록 하였다.<br />
-5번을 실행하면서 OUT서버에서 응답받은 Coffee 이름과 현재 시간을 기록하게 작성했다.</p>
-
-<p><br /></p>
-
-<p>이제 MAIN서버에서 호출받는 OUT서버를 작성해보자</p>
-
-<ul>
-  <li>OUT 서버
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v11/coffees"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringMvcOutboundCoffeeController</span> <span class="o">{</span>
-  <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{coffee-id}"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getCoffee</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"coffee-id"</span><span class="o">)</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
-      <span class="nc">CoffeeResponseDto</span> <span class="n">responseDto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoffeeResponseDto</span><span class="o">(</span><span class="n">coffeeId</span><span class="o">,</span> <span class="s">"카페라떼"</span><span class="o">,</span> <span class="s">"CafeLattee"</span><span class="o">,</span> <span class="mi">4000</span><span class="o">);</span>
-
-      <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
-      <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">responseDto</span><span class="o">);</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>    </div>
-    <p>간단하다 MAIN서버에서 API호출 받는 서버로 Port번호는 7070으로 변경했다.<br />
-쓰레드를 5초간 정지시켜놓고 응답을해주는 프로그램이다.</p>
-  </li>
-</ul>
-
-<p>이제 OUT서버 애플리케이션을 먼저 실행시킨후<br />
-MAIN서버 애플리케이션을 동작시키면 작성한 코드에 의해 OUT서버 API가 5번 호출 될 것이다.</p>
-
-<p>MAIN서버에서 출력된 로그를 확인해보면</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2022-12-01 21:35:51.097  INFO 46801 --- [nio-8080-exec-1] c.c.c.c.SpringMvcMainCoffeeController    : # call Spring MVC Main Controller: 2022-12-01T21:35:51.097332
-2022-12-01 21:35:56.325  INFO 46801 --- [           main] c.c.SpringMvcMainSampleApplication       : 21:35:56.325066: coffee name: 카페라떼
-2022-12-01 21:35:56.330  INFO 46801 --- [nio-8080-exec-5] c.c.c.c.SpringMvcMainCoffeeController    : # call Spring MVC Main Controller: 2022-12-01T21:35:56.330589
-2022-12-01 21:36:01.354  INFO 46801 --- [           main] c.c.SpringMvcMainSampleApplication       : 21:36:01.354035: coffee name: 카페라떼
-2022-12-01 21:36:01.367  INFO 46801 --- [nio-8080-exec-3] c.c.c.c.SpringMvcMainCoffeeController    : # call Spring MVC Main Controller: 2022-12-01T21:36:01.367418
-2022-12-01 21:36:06.388  INFO 46801 --- [           main] c.c.SpringMvcMainSampleApplication       : 21:36:06.388594: coffee name: 카페라떼
-2022-12-01 21:36:06.399  INFO 46801 --- [nio-8080-exec-6] c.c.c.c.SpringMvcMainCoffeeController    : # call Spring MVC Main Controller: 2022-12-01T21:36:06.399304
-2022-12-01 21:36:11.428  INFO 46801 --- [           main] c.c.SpringMvcMainSampleApplication       : 21:36:11.428414: coffee name: 카페라떼
-2022-12-01 21:36:11.444  INFO 46801 --- [nio-8080-exec-2] c.c.c.c.SpringMvcMainCoffeeController    : # call Spring MVC Main Controller: 2022-12-01T21:36:11.444136
-2022-12-01 21:36:16.466  INFO 46801 --- [           main] c.c.SpringMvcMainSampleApplication       : 21:36:16.466802: coffee name: 카페라떼
-</code></pre></div></div>
-<p>5초 간격으로 API가 호출된 것을 볼 수 있다. <br />
-총 25초 정도 소요되었음을 확인할 수 있다.</p>
-
-<p>이유는 무었일까? Spring MVC는 Blocking 처리 방식이기 때문에<br />
-5번의 요청이 빠르게 들어와도 하나의 요청처리가 끝나고<br />
-다음 처리를 하지못하는 모습을 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>2). Spring WebFlux 테스트 하기</strong></p>
-
-<p>그럼 우리가배운 Non-Blocking처리를 하는<br />
-Spring WebFlux를 사용해서 한번 작성해보자.<br />
-방식은 Spring MVC와 동일 방법으로 테스트를 진행해보려한다.</p>
-
-<ul>
-  <li>MAIN 서버</li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v11/coffees"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringWebFluxMainCoffeeController</span> <span class="o">{</span>
-    <span class="nc">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://localhost:7070/v11/coffees/1"</span><span class="o">;</span>
-
-    <span class="nd">@ResponseStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">)</span>
-    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{coffee-id}"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">CoffeeResponseDto</span><span class="o">&gt;</span> <span class="nf">getCoffee</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"coffee-id"</span><span class="o">)</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# call Spring WebFlux Main Controller: {}"</span><span class="o">,</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
-        <span class="k">return</span> <span class="nc">WebClient</span><span class="o">.</span><span class="na">create</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">get</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">uri</span><span class="o">(</span><span class="n">uri</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">retrieve</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">bodyToMono</span><span class="o">(</span><span class="nc">CoffeeResponseDto</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>마찬가지로 OUT서버를 호출하는 동작이다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="nd">@SpringBootApplication</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringWebFluxMainSampleApplication</span> <span class="o">{</span>
-
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="nc">System</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">"reactor.netty.ioWorkerCount"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">);</span>
-		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">SpringWebFluxMainSampleApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
-	<span class="o">}</span>
-
-	<span class="nd">@Bean</span>
-	<span class="kd">public</span> <span class="nc">CommandLineRunner</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
-			<span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# 요청 시작 시간: {}"</span><span class="o">,</span> <span class="nc">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
-
-			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-				<span class="k">this</span><span class="o">.</span><span class="na">getCoffee</span><span class="o">().</span><span class="na">subscribe</span><span class="o">(</span>
-                                        <span class="n">response</span> <span class="o">-&gt;</span> <span class="o">{</span>
-                                            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"{}: coffee name: {}"</span><span class="o">,</span> <span class="nc">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">response</span><span class="o">.</span><span class="na">getKorName</span><span class="o">());</span>
-                                        <span class="o">}</span>
-                <span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">};</span>
-    <span class="o">}</span>
-    <span class="kd">private</span> <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">CoffeeResponseDto</span><span class="o">&gt;</span> <span class="nf">getCoffee</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://localhost:8080/v11/coffees/1"</span><span class="o">;</span>
-        <span class="k">return</span> <span class="nc">WebClient</span><span class="o">.</span><span class="na">create</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">get</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">uri</span><span class="o">(</span><span class="n">uri</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">retrieve</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">bodyToMono</span><span class="o">(</span><span class="nc">CoffeeResponseDto</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>Spring MVC와 동일하게 Spring WebFlux 방식으로<br />
-OUT서버를 호출하는 프로그램이다.</p>
-
-<ul>
-  <li>OUT 서버
-    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v11/coffees"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringWebFluxOutboundCoffeeController</span> <span class="o">{</span>
-  <span class="nd">@ResponseStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">)</span>
-  <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{coffee-id}"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">CoffeeResponseDto</span><span class="o">&gt;</span> <span class="nf">getCoffee</span><span class="o">(</span><span class="nd">@PathVariable</span><span class="o">(</span><span class="s">"coffee-id"</span><span class="o">)</span> <span class="kt">long</span> <span class="n">coffeeId</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
-      <span class="nc">CoffeeResponseDto</span> <span class="n">responseDto</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CoffeeResponseDto</span><span class="o">(</span><span class="n">coffeeId</span><span class="o">,</span> <span class="s">"카페라떼"</span><span class="o">,</span> <span class="s">"CafeLattee"</span><span class="o">,</span> <span class="mi">4000</span><span class="o">);</span>
-
-      <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
-      <span class="k">return</span> <span class="nc">Mono</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="n">responseDto</span><span class="o">);</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>    </div>
-    <p>이제 OUT 서버도 동일하게 쓰레드에 5초의 딜레이를 걸어놓고<br />
-OUT서버 애플리케이션부터 실행하고 MAIN서버를 실행하게되면</p>
-  </li>
-</ul>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2022-12-01 21:41:38.540  INFO 47287 --- [ctor-http-nio-1] c.c.SpringWebFluxMainSampleApplication   : 21:41:38.540514: coffee name: 카페라떼
-2022-12-01 21:41:38.541  INFO 47287 --- [ctor-http-nio-1] c.c.SpringWebFluxMainSampleApplication   : 21:41:38.541614: coffee name: 카페라떼
-2022-12-01 21:41:38.543  INFO 47287 --- [ctor-http-nio-1] c.c.SpringWebFluxMainSampleApplication   : 21:41:38.543159: coffee name: 카페라떼
-2022-12-01 21:41:38.544  INFO 47287 --- [ctor-http-nio-1] c.c.SpringWebFluxMainSampleApplication   : 21:41:38.544006: coffee name: 카페라떼
-2022-12-01 21:41:38.544  INFO 47287 --- [ctor-http-nio-1] c.c.SpringWebFluxMainSampleApplication   : 21:41:38.544734: coffee name: 카페라떼
-</code></pre></div></div>
-<p>이렇게 콘솔에 로그가 발생할 것이다.<br />
-우리가 요청시간을 확인하려고 남긴로그고 실제로 로그 시간을 확인해보면<br />
-1초도 차이나지않게 5개의 요청이 전부처리가된 것을 볼 수 있다.</p>
-
-<p>이 말은 즉, Non-Blocking 처리방식이다.<br />
-여러번의 요청이 들어와도 밀리지 않고 동작이 동시에 처리된 모습이다.</p>
-
-<p>이렇게 Non-Blocking으로 처리되는 것을 눈으로 보았는데<br />
-실제 Spring WebFlux안에는 이렇게 처리해줄 수 있는<br />
-엄청난 기술과 코드가 들어가 있을 것이다.. 실제로 Spring MVC처럼<br />
-클래스를 모두 찾아보고 아키텍처를 그리고 상속관계를 파악해보고<br />
-깊게 탐구해보고 싶지만… 현실적으로 지금 공부하는 단계에서는 전부 확인하는 것은<br />
-무리가 있어보인다. 이렇게 사용을하면 일단.. Non-Blocking 처리가 되는구나! 하고<br />
-후에 Advance한 공부를 해야할 것 같다.</p>
-
-<p><br /></p>
-
-<h3 id="spring-webflux-적용">Spring WebFlux 적용</h3>
-
-<p>실제로 우리가 Controller 계층과 Service 계층에<br />
-어떻게 Spring WebFlux를 적용할 수 있는지 알아보자</p>
-
-<p>애플리케이션 컨셉은<br />
-커피를 등록하면 해당 커피가 DB에 저장되는 컨셉이며<br />
-H2 Database를 사용하였다.</p>
-
-<p>우선 resources로 활용할 데이터를 저장해야한다.<br />
-첫번째로 <code class="language-plaintext highlighter-rouge">.sql</code> 파일을 작성해야한다.</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE IF NOT EXISTS COFFEE (
-    COFFEE_ID bigint NOT NULL AUTO_INCREMENT,
-    KOR_NAME varchar(100) NOT NULL,
-    ENG_NAME varchar(100) NOT NULL,
-    PRICE number NOT NULL,
-    COFFEE_CODE char(3) NOT NULL,
-    COFFEE_STATUS varchar(100) NOT NULL,
-    CREATED_AT datetime NOT NULL,
-    LAST_MODIFIED_AT datetime NOT NULL,
-    PRIMARY KEY (COFFEE_ID)
-);
-</code></pre></div></div>
-
-<p>그리고 <code class="language-plaintext highlighter-rouge">.yml</code> 파일을 설정해주자</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">r2dbc</span><span class="pi">:</span>
-    <span class="na">url</span><span class="pi">:</span> <span class="s">r2dbc:h2:mem:///test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</span>
-    <span class="na">username</span><span class="pi">:</span> <span class="s">sa</span>
-    <span class="na">password</span><span class="pi">:</span>
-  <span class="na">sql</span><span class="pi">:</span>
-    <span class="na">init</span><span class="pi">:</span>
-      <span class="na">schema-locations</span><span class="pi">:</span> <span class="s">classpath*:db/h2/schema.sql</span>
-<span class="na">logging</span><span class="pi">:</span>
-  <span class="na">level</span><span class="pi">:</span>
-    <span class="na">org</span><span class="pi">:</span>
-      <span class="na">springframework</span><span class="pi">:</span>
-        <span class="na">r2dbc</span><span class="pi">:</span> <span class="s">DEBUG</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">schema.sql</code>은 위에서 설정한 <code class="language-plaintext highlighter-rouge">.sql</code>파일이름이다.<br />
-<code class="language-plaintext highlighter-rouge">r2dbc</code>를 설정해줘야 h2 데이터베이스를 웹으로 접근할 수 있다.<br />
-후에 아래에서 접근하기 위한 코드를 작성해야한다.</p>
-
-<p>그리고 <code class="language-plaintext highlighter-rouge">build.gradle</code> 파일의 설정이다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">webflux</span><span class="err">'</span> <span class="c1">// 추가</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">validation</span><span class="err">'</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">r2dbc</span><span class="err">'</span> <span class="c1">// 추가</span>
-	<span class="n">compileOnly</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
-	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
-	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
-	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">projectreactor</span><span class="o">:</span><span class="n">reactor</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="nl">mapstruct:</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
-	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="n">mapstruct</span><span class="o">-</span><span class="nl">processor:</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
-	<span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">r2dbc</span><span class="o">:</span><span class="n">r2dbc</span><span class="o">-</span><span class="n">h2</span><span class="err">'</span> <span class="c1">// 추가</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span><span class="err">'</span> 
-<span class="o">}</span>
-</code></pre></div></div>
-<p>여러가지가 있지만 우리가 WebFlux를 사용하기 위해<br />
-추가한 의존라이브러리 <code class="language-plaintext highlighter-rouge">// 추가</code>라고 되어있는 부분을 꼭 추가해주자</p>
-
-<p>처음으로는 h2 DB를 접근할 수 있는 코드를 작성해보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="nd">@Slf4j</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">H2Console</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">Server</span> <span class="n">webServer</span><span class="o">;</span>
-
-    <span class="nd">@EventListener</span><span class="o">(</span><span class="nc">ContextRefreshedEvent</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">SQLException</span> <span class="o">{</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"starting h2 console at port 8078"</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">webServer</span> <span class="o">=</span> <span class="n">org</span><span class="o">.</span><span class="na">h2</span><span class="o">.</span><span class="na">tools</span><span class="o">.</span><span class="na">Server</span><span class="o">.</span><span class="na">createWebServer</span><span class="o">(</span><span class="s">"-webPort"</span><span class="o">,</span> <span class="s">"8078"</span><span class="o">,</span> <span class="s">"-tcpAllowOthers"</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="nd">@EventListener</span><span class="o">(</span><span class="nc">ContextClosedEvent</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stop</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"stopping h2 console at port 8078"</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">webServer</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>Port 8078로 설정하여<br />
-<code class="language-plaintext highlighter-rouge">localhost:8078</code>을 웹주소로 입력해 기존과 동일하게 접근이 가능하다.</p>
-
-<p>이제 우리가 확인해야할 Controller가 어떻게<br />
-변경되었는지 확인해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/v12/coffees"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeController</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeService</span> <span class="n">coffeeService</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeMapper</span> <span class="n">mapper</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">CoffeeController</span><span class="o">(</span><span class="nc">CoffeeService</span> <span class="n">coffeeService</span><span class="o">,</span> <span class="nc">CoffeeMapper</span> <span class="n">mapper</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">coffeeService</span> <span class="o">=</span> <span class="n">coffeeService</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">mapper</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@PostMapping</span><span class="o">()</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">createCoffee</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">CoffeeDto</span><span class="o">.</span><span class="na">Post</span><span class="o">&gt;</span> <span class="n">requestBody</span><span class="o">){</span>
-
-        <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">CoffeeDto</span><span class="o">.</span><span class="na">Response</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span>
-                <span class="n">requestBody</span>
-                        <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">post</span> <span class="o">-&gt;</span> <span class="n">coffeeService</span><span class="o">.</span><span class="na">createCoffee</span><span class="o">(</span><span class="n">mapper</span><span class="o">.</span><span class="na">coffeePostDtoToCoffee</span><span class="o">(</span><span class="n">post</span><span class="o">)))</span>
-                        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">coffee</span> <span class="o">-&gt;</span> <span class="n">mapper</span><span class="o">.</span><span class="na">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="n">coffee</span><span class="o">));</span>
-
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">result</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>정말 간단하게 되어있는 Controller 계층이다.<br />
-Post요청하나만 존재하는 클래스이고, <code class="language-plaintext highlighter-rouge">Mono</code>를 이용했다.<br />
-<code class="language-plaintext highlighter-rouge">Mono&lt;&gt;</code>로 감싼 객체를 받고, 응답을해주면 된다.</p>
-
-<p>객체를 변환하기 위해서 <code class="language-plaintext highlighter-rouge">flatMap()</code> , <code class="language-plaintext highlighter-rouge">map()</code>을 사용했고<br />
-Mono에 감싸여있는 객체 <code class="language-plaintext highlighter-rouge">CoffeeDto.Response</code>를 꺼내서<br />
-우리가 만든 mapper 클래스를 이용해 <code class="language-plaintext highlighter-rouge">Coffee</code> 객체로 변환해주고 있다.</p>
-
-<p>변환된 객체를 <code class="language-plaintext highlighter-rouge">coffeeService.createCoffee();</code>메서드에 매개변수로 넣어<br />
-Service 계층을 호출하는 모습이다. 이제 Service 계층에서는 데이터를 DB에 저장하고<br />
-다시 반환받은 객체를 <code class="language-plaintext highlighter-rouge">map();</code>메서드로 반환 타입에 맞는 형태로 변경하여</p>
-
-<p><code class="language-plaintext highlighter-rouge">ResponseEntity</code> 객체를 만들어 반환해주면 끝이다.<br />
-기존 Spring MVC와 달라진 점은 <code class="language-plaintext highlighter-rouge">Mono</code>를 사용한점만 변경되었다.</p>
-
-<p>그럼 Service 계층을 살펴보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeService</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeRepository</span> <span class="n">coffeeRepository</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">R2dbcEntityTemplate</span> <span class="n">template</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">CoffeeService</span><span class="o">(</span><span class="nc">CoffeeRepository</span> <span class="n">coffeeRepository</span><span class="o">,</span> <span class="nc">R2dbcEntityTemplate</span> <span class="n">template</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">coffeeRepository</span> <span class="o">=</span> <span class="n">coffeeRepository</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">template</span> <span class="o">=</span> <span class="n">template</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">Coffee</span><span class="o">&gt;</span> <span class="nf">createCoffee</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">Coffee</span><span class="o">&gt;</span> <span class="n">coffeeMono</span> <span class="o">=</span> <span class="n">findVerifiedCoffee</span><span class="o">(</span><span class="n">coffee</span><span class="o">.</span><span class="na">getCoffeeCode</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">then</span><span class="o">(</span><span class="n">coffeeRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">coffee</span><span class="o">));</span>
-
-        <span class="k">return</span> <span class="n">coffeeMono</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">Void</span><span class="o">&gt;</span> <span class="nf">findVerifiedCoffee</span><span class="o">(</span><span class="nc">String</span> <span class="n">coffeeCode</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">coffeeRepository</span><span class="o">.</span><span class="na">findByCoffeeCode</span><span class="o">(</span><span class="n">coffeeCode</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">findCoffee</span> <span class="o">-&gt;</span> <span class="o">{</span>
-                    <span class="k">if</span> <span class="o">(</span><span class="n">findCoffee</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                        <span class="k">return</span> <span class="nc">Mono</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">COFFEE_CODE_EXISTS</span><span class="o">));</span>
-                    <span class="o">}</span>
-                    <span class="k">return</span> <span class="nc">Mono</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
-                <span class="o">});</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>Service 계층도 기존과 동일한 코드들이고<br />
-CoffeeCode를 통해 유무를 확인하는 <code class="language-plaintext highlighter-rouge">findVerifiedCoffee();</code>메서드와<br />
-실제로 DB에 저장을하기위한 <code class="language-plaintext highlighter-rouge">createCoffee();</code>메서드가 존재한다.</p>
-
-<p>여기도 안에있는 내용들이 <code class="language-plaintext highlighter-rouge">Mono</code>를 이용해 처리한점만 다르다.</p>
-
-<p>그럼 이제 Repository 계층을 살펴보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CoffeeRepository</span> <span class="kd">extends</span> <span class="nc">R2dbcRepository</span><span class="o">&lt;</span><span class="nc">Coffee</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">Coffee</span><span class="o">&gt;</span> <span class="nf">findByCoffeeCode</span><span class="o">(</span><span class="nc">String</span> <span class="n">coffeeCode</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>기존에 Spring MVC를 사용할 때는 JDBC,JPA를 사용했지만<br />
-Spring WebFlux에서는 R2dbc를 사용하고있다.</p>
-
-<p>형식은 기존에 설정하는 것과 비슷하다.<br />
-여기서도 다른점은 <code class="language-plaintext highlighter-rouge">Mono</code>를 사용했다는 점</p>
-
-<p>이렇게 작성을 완료하고 Postman을 통해 API를 호출해보면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMjWMzoUG84NMNpT7pz0VgGN-ybnZKqlYSH5gZz5h8ljPVKuQeR_DO_ECGFSSbn1ZKojbxKb9qlYgRFDjO-D24JuRQaeQ=w777-h807" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>Spring MVC와 동일하게 요청과 응답이 오는 것을 볼 수 있다.<br />
-실제로 Postman을 통해서 여러개 요청하는 작업은 못해봤지만</p>
-
-<p>처음에 테스트해보았던 동시에 호출하였을 경우처럼<br />
-동시에 많은 요청처리가 이을 경우 확연히 다른 차이를 보일 것 같다.</p>
-
-<p><br /></p>
-
-<p>기타로 정상적으로 테스트하기 위해 필요한 코드인<br />
-<code class="language-plaintext highlighter-rouge">Coffee</code>, <code class="language-plaintext highlighter-rouge">CoffeeDto</code>, <code class="language-plaintext highlighter-rouge">CoffeeMapper</code>, <br />
-<code class="language-plaintext highlighter-rouge">BusinessLogicException</code>, <code class="language-plaintext highlighter-rouge">ExceptionCode</code>를 아래에 적어본다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@NoArgsConstructor</span>
-<span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@Table</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Coffee</span> <span class="o">{</span>
-    <span class="nd">@Id</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">coffeeId</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">price</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">coffeeCode</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">CoffeeStatus</span> <span class="n">coffeeStatus</span> <span class="o">=</span> <span class="nc">CoffeeStatus</span><span class="o">.</span><span class="na">COFFEE_FOR_SALE</span><span class="o">;</span>
-
-    <span class="nd">@CreatedDate</span>
-    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">createdAt</span><span class="o">;</span>
-
-    <span class="nd">@LastModifiedDate</span>
-    <span class="nd">@Column</span><span class="o">(</span><span class="s">"last_modified_at"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">modifiedAt</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="kd">enum</span> <span class="nc">CoffeeStatus</span> <span class="o">{</span>
-        <span class="no">COFFEE_FOR_SALE</span><span class="o">(</span><span class="s">"판매중"</span><span class="o">),</span>
-        <span class="no">COFFEE_SOLD_OUT</span><span class="o">(</span><span class="s">"판매 중지"</span><span class="o">);</span>
-
-        <span class="nd">@Getter</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">status</span><span class="o">;</span>
-
-        <span class="nc">CoffeeStatus</span><span class="o">(</span><span class="nc">String</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">status</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeDto</span> <span class="o">{</span>
-    <span class="nd">@Getter</span>
-    <span class="nd">@AllArgsConstructor</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Post</span> <span class="o">{</span>
-        <span class="nd">@NotBlank</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
-
-        <span class="nd">@NotBlank</span>
-        <span class="nd">@Pattern</span><span class="o">(</span><span class="n">regexp</span> <span class="o">=</span> <span class="s">"^([A-Za-z])(\\s?[A-Za-z])*$"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"커피명(영문)은 영문이어야 합니다(단어 사이 공백 한 칸 포함). 예) Cafe Latte"</span><span class="o">)</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
-
-        <span class="nd">@Range</span><span class="o">(</span><span class="n">min</span><span class="o">=</span> <span class="mi">100</span><span class="o">,</span> <span class="n">max</span><span class="o">=</span> <span class="mi">50000</span><span class="o">)</span>
-        <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
-
-        <span class="nd">@NotBlank</span>
-        <span class="nd">@Pattern</span><span class="o">(</span><span class="n">regexp</span> <span class="o">=</span> <span class="s">"^([A-Za-z]){3}$"</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"커피 코드는 3자리 영문이어야 합니다."</span><span class="o">)</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">coffeeCode</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CoffeeMapper</span> <span class="o">{</span>
-    <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeeDto</span><span class="o">.</span><span class="na">Post</span> <span class="n">coffeePostDto</span><span class="o">);</span>
-    <span class="nc">CoffeeDto</span><span class="o">.</span><span class="na">Response</span> <span class="nf">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">exceptionCode</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
-    <span class="no">COFFEE_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span> <span class="s">"Coffee not found"</span><span class="o">),</span>
-    <span class="no">COFFEE_CODE_EXISTS</span><span class="o">(</span><span class="mi">409</span><span class="o">,</span> <span class="s">"Coffee Code exists"</span><span class="o">);</span>
-
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
-
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
-
-    <span class="nc">ExceptionCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">code</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">code</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<hr />
-
-<p>오늘은 이렇게 SpringWebFlux를 실제 우리가<br />
-애플리케이션 계층에 적용하는 방식과 동일하게 적용해보았다.</p>
-
-<p>확실히 Spring MVC보다 사용하기 어려운 느낌이든다.<br />
-아무래도 익숙해지려면 실제 내부 프로그램도 많이 봐야할 것 같고<br />
-<code class="language-plaintext highlighter-rouge">Backpressure</code>라든가 <code class="language-plaintext highlighter-rouge">Non-Blocking</code>처리 라든가<br />
-정확히 어떻게 코드로 동작하는지 개념과 흐름 파악이 필요할 것 같다.<br />
-또한 Operator들도 많이 알아야할 것같다..ㅠㅠ</p>
-
-<p>우선 아직 Spring MVC도 애플리케이션 구현 경험이 거의 없다보니까<br />
-눈앞에 있는 기술부터 체득과 습득을하고 이후로 나아가보려한다.</p>
-
-<p>이렇게 수박 겉 핥기인 WebFlux는 여기서 끝 !</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 짜장밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[12월이 시작되었다 ! 올해도 이렇게 시간이 빨리가는 구나 점점 더빨리가는 시간이 조금 야속하다.]]></summary></entry><entry><title type="html">TIL) Spring WebFlux Project Reactor</title><link href="http://localhost:4000/til/2022/11/30/til.html" rel="alternate" type="text/html" title="TIL) Spring WebFlux Project Reactor" /><published>2022-11-30T00:00:00+09:00</published><updated>2022-11-30T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/11/30/til</id><content type="html" xml:base="http://localhost:4000/til/2022/11/30/til.html"><![CDATA[<p>어느덧 11월의 마지막이 다가왔다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP-V3f78gzYoHWe4BsoYdT3mBXrBTI7YNQJSLWZStK3WDB2VvN0qjzA3GflB1maNYmMaDLa5a3SAqzjBTNSgMxDF3ee=w1185-h921" alt="image" class="align-left" style="max-width: 50%" /></p>
-
-<p>코딩 공부를 시작한게 8월인데 벌써 4개월이 지났다니<br />
-믿기지 않는다.. 그만큼 많이 발전도 했지만<br />
-아직도 많이 부족하다고 느끼기에 시간이 더욱더 간절하게 느껴진다.</p>
-
-<p>오늘은 어제배운 Reactive 프로그램의 스트림즈의 구현체인<br />
-Project Reactor에 대해 공부해보는 시간이다.</p>
-
-<hr />
-
-<h2 id="project-reactor">Project Reactor</h2>
-
-<h3 id="project-reactor-란">Project Reactor 란?</h3>
-
-<p><a href="https://projectreactor.io/">Project Reactor</a> 줄여서 Reactor라고 부른다. 리액티브 스트림즈의 구현체 중 하나로써<br />
-Reactive 기반 Spring Web Application을 만들때 사용하는 핵심기술이다.</p>
-
-<p>리액티브 프로그래밍은 Non-Blocking통신을 지원하며, Non-Blocking이 핵심적인 특징이다. <br />
-간단하게 얘기하지면 요청 쓰레드가 차단이 되지 않는다 정도로 알면될 것 같다.</p>
-
-<p>Publisher 타입으로 Mono[0|1]와 Flux[N]이라는 두 가지 타입을 제공한다.</p>
-
-<p><br /></p>
-
-<h3 id="marble-diagram">Marble Diagram</h3>
-
-<p><strong>1). Mono</strong></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNhCC3gMyVY9U2tYfXL1Ugml0_Fey_7uS4w1fYYfafR-twQzcbefQVQDrr0dAmTnmofFKkHwbcguv_pVuYEj0mmm6Hn3g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>Marble Diagram으로 동그란것 하나를 데이터라 생각하면 쉬울 것 같다.</p>
-
-<p>흐름 순서는 위에 다이어그램을 보면 이해가 쉬울 것 같다. <br />
-Mono 시퀀스가 시작되고 데이터를 emit한다. Mono는 Mono[0|1] 즉, 0건 또는 1의<br />
-데이터만 emit 하는 Reactor 타입이기 때문에 위와 같이 표현되었다.</p>
-
-<p>그리고 Mono 시퀀스가 종료되고, Operator를 통해 데이터가 가공된다.<br />
-그리고 Downstream의 타임라인으로 전달되어<br />
-정의되어있는 해당 시퀀스를 실행하고 종료하게 되어진다.</p>
-
-<p>코드로 보면 이렇게 볼 수 있을 것 같다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Mono</span>
-                <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span>
-                        <span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">),</span>
-                        <span class="n">error</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span>
-                        <span class="o">()</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Complete"</span><span class="o">)</span>
-                <span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="c1">// 출력</span>
-<span class="no">HELLO</span><span class="o">,</span> <span class="no">REACTIVE</span>
-<span class="nc">Complete</span>
-</code></pre></div></div>
-<p>위에 코드를 보면 <code class="language-plaintext highlighter-rouge">.map();</code>메서드가 Operator의 역할이다.<br />
-<code class="language-plaintext highlighter-rouge">just();</code>에서 데이터를 emit한 후 <code class="language-plaintext highlighter-rouge">.UpperCase();</code> 대문자로 변환시키고 있다.<br />
-그리고 최종적으로 Downstream쪽에서 데이터를 전달해<br />
-<code class="language-plaintext highlighter-rouge">.subscribe();</code> 메서드로 전달받은 데이터를 처리해준 모습을 볼 수 있다.<br />
-해당 상황은 우선 Error가 발생하지 않은 경우를 테스트 해보았다.</p>
-
-<p>이제 만약 Downstream에서 Error가 발생했을 경우<br />
-비정상적인 종료를 한번 확인해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Mono</span>
-                <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">" "</span><span class="o">))</span>
-                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span>
-                        <span class="n">message</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">[</span><span class="mi">3</span><span class="o">]),</span>
-                        <span class="n">error</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"! Error : "</span><span class="o">+</span> <span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()),</span>
-                        <span class="o">()</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Complete"</span><span class="o">)</span>
-                <span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="c1">// 출력</span>
-<span class="o">!</span> <span class="nc">Error</span> <span class="o">:</span> <span class="nc">Index</span> <span class="mi">3</span> <span class="n">out</span> <span class="n">of</span> <span class="n">bounds</span> <span class="k">for</span> <span class="n">length</span> <span class="mi">2</span>
-<span class="nc">Complete</span>
-</code></pre></div></div>
-<p>위에 예제 코드를 보면 단순히 String을 배열로 쪼개서<br />
-Downstream으로 넘겨주는 코드이다.<br />
-받았을때 공백기준으로 나눴기때문에 배열방에는 2개만 존재하고<br />
-범위를 벗어나는 데이터를 조회하려고 명령을 내렸을 경우<br />
-error를 처리해주는 메서드를 만들어 표현할 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>2). Flux</strong></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNa2bYw_449zSbZ1QB7bHvPkp-iEamCVUmFSVFMs6xh0U2LZ9zmFCflb1hwKNBcdZqL4xl-pGtpMAa8KWzt3xKEWHHZHA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>기본 적인 흐름은 Mono와 전부 동일하다.<br />
-다른 점은 처리해야할 데이터가 Flux[N]개로<br />
-여러개의 데이터를 emit할 수 있는 모습을 다이어그램에서 볼 수 있다.</p>
-
-<p><br /></p>
-
-<h3 id="scheduler">Scheduler</h3>
-
-<p>Reactor에서 Scheduler는 쓰레드를 관리하는 관리자 역할이다.<br />
-즉, Reactor Sequence 상에서 처리되는 동작들을 하나 이상의 쓰레드에서<br />
-동작하도록 별도의 쓰레드를 제공해준다고 생각하면 쉬울 것 같다.</p>
-
-<p>Reactor는 기본적으로 Non-Blocking 통신을 위한 비동프로그래밍을 위해<br />
-탄생했기 때문에 여러 쓰레드를 손쉽게 관리해주는 Scheduler의 역할이 중요하다 할 수 있다.</p>
-
-<p>간단한 코드로 비교예제를 살펴보자
-먼저 Scheduler를 추가하지 않았을 경우를 살펴보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scheduler를 추가하지 않았을 경우</span>
-<span class="nd">@Slf4j</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Flux</span>
-            <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20:51:36.461 [main] DEBUG reactor.util.Loggers - Using Slf4j logging framework
-20:51:36.481 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
-20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
-20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
-20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
-20:51:36.483 [main] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
-</code></pre></div></div>
-<p>해당 프로그램을 실행시켰을때 콘솔에서 확인할 수 있는 로그이다.<br />
-Scheduler를 추가하지 않고 기존과 동일하게 사용하였고<br />
-여기서 알 수 있는 점은 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드를 사용하고 있다는 점이다.</p>
-
-<p><br /></p>
-
-<p>Scheduler를 적용한 코드를 확인해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Scheduler를 사용하였을 경우</span>
-<span class="nd">@Slf4j</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
-        <span class="nc">Flux</span>
-                <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">boundedElastic</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">doOnSubscribe</span><span class="o">(</span><span class="n">subscription</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# doOnSubscribe"</span><span class="o">))</span>
-                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
-
-        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100L</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>20:53:19.592 [main] DEBUG reactor.util.Loggers - Using Slf4j logging framework
-20:53:19.623 [main] INFO com.codestates.example.schedulers.SchedulersExample02 - # doOnSubscribe
-20:53:19.630 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
-20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
-20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
-20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
-20:53:19.631 [boundedElastic-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
-</code></pre></div></div>
-
-<p>위에 코드는 Scheduler를 사용하였을때의 코드이다.<br />
-첫번째 코드와 차이점은 <code class="language-plaintext highlighter-rouge">subscribeOn();</code>, <code class="language-plaintext highlighter-rouge">doOnSubscribe();</code>  <br />
-Operator를 추가해서 사용을 하고 있다는 점이다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">subscribeOn();</code> Operator는 <code class="language-plaintext highlighter-rouge">Schedulers.boundedElastic()</code>와 같은<br />
-Scheduler를 지정하면 구독 직후에 실행되는 쓰레드가 main 쓰레드에서 해당 쓰레드로 변경된다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">doOnSubscribe();</code>Operator는 구독 발생 직후에 Trigger되는 Operator로<br />
-구독 직후에 어떤 동작을 수행하고 싶을때 사용하는 Operator이다.</p>
-
-<p>출력 결과를 보면 알 수 있듯이 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드에서 진행 중이던 흐름이<br />
-<code class="language-plaintext highlighter-rouge">[boundedElastic-1]</code> 쓰레드로 변경된 모습을 로그로 확인해 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p>마지막으로 예제하나만 더보고 넘어가자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SchedulersExample</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
-        <span class="nc">Flux</span>
-            <span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">subscribeOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">boundedElastic</span><span class="o">())</span>
-            <span class="o">.</span><span class="na">doOnSubscribe</span><span class="o">(</span><span class="n">subscription</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# doOnSubscribe"</span><span class="o">))</span>
-
-            <span class="o">.</span><span class="na">publishOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">parallel</span><span class="o">())</span>  <span class="c1">// (1)</span>
-            <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# filter doOnNext"</span><span class="o">))</span>  <span class="c1">// (2)</span>
-
-            <span class="o">.</span><span class="na">publishOn</span><span class="o">(</span><span class="nc">Schedulers</span><span class="o">.</span><span class="na">parallel</span><span class="o">())</span>    <span class="c1">// (3)</span>
-            <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span>
-            <span class="o">.</span><span class="na">doOnNext</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# map doOnNext"</span><span class="o">))</span> <span class="c1">// (4)</span>
-
-            <span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">data</span> <span class="o">-&gt;</span> <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# onNext: {}"</span><span class="o">,</span> <span class="n">data</span><span class="o">));</span>
-
-        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">100L</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>21:03:32.441 [main] INFO com.codestates.example.schedulers.SchedulersExample - # doOnSubscribe
-21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
-21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
-21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
-21:03:32.448 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
-21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
-21:03:32.448 [parallel-2] INFO com.codestates.example.schedulers.SchedulersExample - # filter doOnNext
-21:03:32.448 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 4
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 8
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 12
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 16
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # map doOnNext
-21:03:32.451 [parallel-1] INFO com.codestates.example.schedulers.SchedulersExample - # onNext: 20
-</code></pre></div></div>
-<p>해당코드가 이전과 다른점은 <code class="language-plaintext highlighter-rouge">publishOn();</code>이라는 Operator가 추가된 예제이다.<br />
-<code class="language-plaintext highlighter-rouge">publishOn();</code>은 <code class="language-plaintext highlighter-rouge">publishOn();</code> 기준으로 Downstream쪽 쓰레드가<br />
-<code class="language-plaintext highlighter-rouge">publishOn();</code>에서 Scheduler로 지정한 쓰레드로 변경이된다. (Schedulers.parallel())</p>
-
-<p><code class="language-plaintext highlighter-rouge">doOnNext();</code> Operator는 바로앞에 위치한 Operaotr가 실행될 때<br />
-Trigger되는 Operator이다. 위에선 filter와 map을 구분짓기위해 사용했다.</p>
-
-<p>콘솔로그에서 볼 수 있듯이 <code class="language-plaintext highlighter-rouge">[main]</code>쓰레드에서 <code class="language-plaintext highlighter-rouge">[parallel-2]</code>로 쓰레드가 변경되었고<br />
-<code class="language-plaintext highlighter-rouge">[parallel-1]</code>로 변경된 모습을 볼 수 있다. 내부적으로 <code class="language-plaintext highlighter-rouge">[parallel]</code> 쓰레드의 순서는 보장되지 않는다.</p>
-
-<p><br /></p>
-
-<h3 id="operator">Operator</h3>
-
-<p>이전부터 계속 Operator를 사용한는 코드들을 보았다.<br />
-그만큼 Reactor와 Operator를 뗄래야 뗄 수 없는 관계이다.</p>
-
-<p>Operator 관련해서는 사실 지원하는 종류가 너무 많기 때문에<br />
-부가적인 Advance 공부는 추후에 해봐야할 것 같고<br />
-목록만 우선 정리 해놓으려고 한다.</p>
-
-<p>그 중에서 자주사용하고 중요한 것 들을 <span style="color:#CC00CC"><strong>보라색</strong></span>으로 표시해둔다.</p>
-
-<p>✅ <strong>새로운 Sequence를 생성하고자 할 경우 (Creating)</strong></p>
-<ul>
-  <li>just()</li>
-  <li><span style="color:#CC00CC"><strong>fromStream()</strong></span></li>
-  <li><span style="color:#CC00CC"><strong>fromIterable()</strong></span></li>
-  <li>fromArray()</li>
-  <li>range()</li>
-  <li>interval()</li>
-  <li>empty()</li>
-  <li>never</li>
-  <li>defer()</li>
-  <li>using()</li>
-  <li>generate()</li>
-  <li><span style="color:#CC00CC"><strong>create()</strong></span></li>
-</ul>
-
-<p>✅ <strong>기존 Sequence에서 변환작업이 필요한 경우 (Transforming)</strong></p>
-<ul>
-  <li><span style="color:#CC00CC"><strong>map()</strong></span></li>
-  <li><span style="color:#CC00CC"><strong>flatMap()</strong></span></li>
-  <li><span style="color:#CC00CC"><strong>concat()</strong></span></li>
-  <li>collectList()</li>
-  <li>collectMap()</li>
-  <li>merge()</li>
-  <li><span style="color:#CC00CC"><strong>zip()</strong></span></li>
-  <li>the()</li>
-  <li>switchIfEmpty</li>
-  <li>and()</li>
-  <li>when()</li>
-</ul>
-
-<p>✅ <strong>Sequence에서 내부의 동작을 확인하고자 할 경우 (Peeking)</strong></p>
-<ul>
-  <li>doOnSubscribe</li>
-  <li><span style="color:#CC00CC"><strong>doOnNext()</strong></span></li>
-  <li>doOnError()</li>
-  <li>doOnCancel()</li>
-  <li>doFirst()</li>
-  <li>doOnRequest()</li>
-  <li>doOnTerminate()</li>
-  <li>doAfterTerminate()</li>
-  <li>doOnEach()</li>
-  <li>doFinally()</li>
-  <li><span style="color:#CC00CC"><strong>log()</strong></span></li>
-</ul>
-
-<p>✅ <strong>Sequence에서 데이터를 걸러야할 경우 (Filtering)</strong></p>
-<ul>
-  <li><span style="color:#CC00CC"><strong>filter()</strong></span></li>
-  <li>ignoreElements()</li>
-  <li>distinct()</li>
-  <li><span style="color:#CC00CC"><strong>take()</strong></span></li>
-  <li>next()</li>
-  <li>skip()</li>
-  <li>sample()</li>
-  <li>single()</li>
-</ul>
-
-<p>✅ <strong>에러를 처리하고자할 경우 (Handling errors)</strong></p>
-<ul>
-  <li><span style="color:#CC00CC"><strong>error()</strong></span></li>
-  <li><span style="color:#CC00CC"><strong>timeout()</strong></span></li>
-  <li>onErrorReturn()</li>
-  <li>onErrorResume()</li>
-  <li>onErrorMap()</li>
-  <li>doFinally()</li>
-  <li><span style="color:#CC00CC"><strong>retry()</strong></span></li>
-</ul>
-
-<p><br /></p>
-
-<hr />
-
-<p>오늘은 어제보다 조금더 Spring WebFlux에 대해 알아보았고<br />
-사실 아직 Spring MVC 어떻게 대체해서 사용해야할지 크게<br />
-감이 잡히지는 않는다. 뭔가 Stream API와 비슷한 느낌이 들어 친숙하긴하지만<br />
-개념들이 많이 다른 것 처럼 느껴져서 어렵고 생소했다.</p>
-
-<p>내일 우리가 구현했던 Spring MVC 대신<br />
-Spring WebFlux 기술을 활용해서 한번 적용해보자</p>
-
-<p>오늘 공부는 여기서 끝 !!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 제육볶음, 김치찌개, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[어느덧 11월의 마지막이 다가왔다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 김밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[날씨가 갑자기 겨울로 넘어왔다… 손발이 떨릴정도로 이제 추운 날씨가 왔다.]]></summary></entry></feed>
