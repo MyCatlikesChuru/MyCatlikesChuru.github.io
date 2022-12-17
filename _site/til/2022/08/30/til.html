@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="새벽 3시에 자버렸다…. ㅎㅎ;; 고로 현재는 너무나도 졸린상태…">
+<meta property="og:description" content="새벽 3시에 자버렸다…. ㅎㅎ;; 고로 현재는 너무나도 졸린상태…">
+<link rel="canonical" href="http://localhost:4000/til/2022/08/30/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/08/30/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-08-30T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-08-30T00:00:00+09:00","datePublished":"2022-08-30T00:00:00+09:00","description":"새벽 3시에 자버렸다…. ㅎㅎ;; 고로 현재는 너무나도 졸린상태…","headline":"TIL) Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/08/30/til.html"},"url":"http://localhost:4000/til/2022/08/30/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+11</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-08-30T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 30, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>새벽 3시에 자버렸다…. ㅎㅎ;;<br>
+고로 현재는 너무나도 졸린상태…</p>
+
+<p>커피를 쏟아부어서 열심히 공부를 시작해보자!<br>
+어제는 Git에 대해서 찍먹을 해보았다.<br>
+Git의 동작원리라던가 명령어 사용법등 유익한 시간이었고<br>
+오늘은 드디어 JAVA언어를 시작해보는 시간을 가진다.</p>
+
+<hr>
+
+<h3 id="자바란">자바란?</h3>
+
+<p>1996년 1월에 세상에 나온 객체지향 프로그래밍(Object Oriented Programming, OOP)언어 이다.<br>
+운영체제에 독립적으로 실행이 가능하다. 그러므로 다양한 운영체제가 공존하는 웹 환경에 적합한 언어로<br>
+현재까지도 전 세계에서 많이 쓰이는 인기 있는 언어이다.</p>
+
+<p>나보다 1살어린 자바<br>
+그치만 나보다 똑똑한 것 같구나..</p>
+
+<p><br></p>
+
+<p><em><strong>특징</strong></em></p>
+
+<ol>
+  <li>운영체제에 독립적</li>
+  <li>객체지향 언어</li>
+  <li>함수형 프로그래밍 지원</li>
+  <li>자동 메모리 관리</li>
+</ol>
+
+<p><br></p>
+
+<p><strong><em>JVM (Java Virtual Machine)</em></strong></p>
+
+<p>자바가 운영체제에 독립적인 것은 JVM이 있기 때문에 가능한 것이다.<br>
+JVM은 자바 코드로 작성한 프로그램을 해석해 실행하는 별도의 프로그램 이다.<br>
+즉, 프로그램을 실행하는 프로그램이다!</p>
+
+<p>자바코드를 중간에 JVM이 해석해 각각 운영체재에따라 보내줄 수 있는 모습이다.<br>
+JVM의 경우 JDK나 JRE를 설치하면 자동으로 설치된다.<br>
+아무래도 자바는 JVM을 거치기 때문에 C나 C++에 비해 속도가 느린 편이라고 한다.<br>
+기본 구조가 [프로그램-OS-CPU]라고 가정하면<br>
+그사이에 [프로그램-JVM-OS-CPU]으로 JVM이 끼워져있는 느낌.</p>
+
+<p><br></p>
+
+<p><strong><em>JDK (Java Development Kit)</em></strong></p>
+
+<p>JRE (Java Runtime Environment) : JVM + 표준 클래스 라이브러리<br>
+JDK (Java Development Kit) : JRE + 개발에 필요한 도구</p>
+
+<p><br></p>
+
+<h3 id="변수와-타입"><strong>변수와 타입</strong></h3>
+
+<p><em><strong>변수 (Variable)</strong></em></p>
+
+<p>값이 변할 수 있는 데이터를 임시적으로 저장하기 위한 수단<br>
+값을 저장 할 수 있는 메모리 공간에 사람이 식별할 수 있는 이름을 붙인 것!</p>
+
+<p><code class="language-plaintext highlighter-rouge">int num;</code> 변수선언<br>
+<code class="language-plaintext highlighter-rouge">num = 0;</code> 변수할당<br>
+자바에서는 변수명을 일반적으로 camelCase를 사용한다.<br>
+ex) <code class="language-plaintext highlighter-rouge">int getNumber;</code></p>
+
+<p><br></p>
+
+<p><em><strong>상수 (Constant)</strong></em></p>
+
+<p>변하지 말아야 할 데이터를 임시적으로 저장하기 위한 수단<br>
+재할당이 금지된 변수.<br>
+ex) <code class="language-plaintext highlighter-rouge">final double PI = 3.14;</code>
+PI라는 값은 3.14로 지정되어 재할당이 금지!</p>
+
+<p>상수를 쓰는 이유?<br>
+1). 프로그램 실행되면서 값이 변하면 안될 경우 (프로그래머의 실수를 방지함)<br>
+2). 코드의 가독성을 높일 경우 (상수를 쓰면 값의 쓰임새가 명확해짐)<br>
+3). 코드 유지관리를 쉽게 하고자 하는 경우 (위의 PI라는 값을 여러군대 사용할 경우 하나만 변경하면된다)</p>
+
+<p><br></p>
+
+<p><em><strong>타입</strong></em></p>
+
+<p>값이 차지하는 메모리 공간의 크기와, 값이 저장되는 방식</p>
+
+<p><strong>기본타입</strong></p>
+
+<p>-. 값을 저장할때, 데이터의 실제 값이 저장됨<br>
+-. 정수타입, 실수타입, 문자타입, 논리타입이 포합됨<br>
+ex) <code class="language-plaintext highlighter-rouge">int a = 1;</code></p>
+
+<p>a는 실제 값을 저장하고있기에 기본타입 변수이다.</p>
+
+<p><br></p>
+
+<p><strong>참조타입</strong></p>
+
+<p>-. 값을 저장할때, 저장된 곳을 나타내는 주소값이 저장됨<br>
+-. 정수타입, 실수타입, 문자타입, 논리타입을 제외한 나머지 타입 <br>
+ex) <code class="language-plaintext highlighter-rouge">Babo you = new Babo();</code></p>
+
+<p>예를들어 바보라는 Class의 객체를 you라는 변수에 할당했을 경우<br>
+you는 참조타입 변수가 된다.</p>
+
+<p><br></p>
+
+<p><strong><em>리터럴 (Literal)</em></strong></p>
+
+<p>문자가 가리키는 값 그 자체를 의미한다.<br>
+ex) <code class="language-plaintext highlighter-rouge">int a</code>;<br>
+<code class="language-plaintext highlighter-rouge">a=1;</code></p>
+
+<p>이라고 가정했을 경우 1이 리터럴에 해당한다. 이럴경우 정수형 리터럴 1을 a에 할당했다고한다.</p>
+
+<p><br></p>
+
+<p><em><strong>정수타입</strong></em></p>
+
+<p>정수타입은 총 4개의 타입으로 분류된다. (byte,short,int,long)<br>
+각각 차지하는 메모리의 크기가 다르며, 그에 따라 나타낼 수 있는 숫자의 범위가 다르다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>타입</th>
+      <th>메모리</th>
+      <th>표현 범위</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>byte</td>
+      <td>1byte</td>
+      <td>-128 ~ 127</td>
+    </tr>
+    <tr>
+      <td>short</td>
+      <td>2byte</td>
+      <td>-32,768 ~ 32,767</td>
+    </tr>
+    <tr>
+      <td>int</td>
+      <td>3byte</td>
+      <td>~2,147,483,648 ~ 2,147,483,647</td>
+    </tr>
+    <tr>
+      <td>long</td>
+      <td>4byte</td>
+      <td>-9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<p><em><strong>실수타입</strong></em></p>
+
+<p>실수는 소수점을 가지는 값을 의미하고, 총 2개의 타입으로 분류된다 (float,double)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>타입</th>
+      <th>메모리</th>
+      <th>표현 범위</th>
+      <th>정밀도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>float</td>
+      <td>4byte</td>
+      <td>음수 : -3.4 * 10³⁸ ~ -1.4 * 10⁻⁴⁵ <br> 양수 : 1.4 * 10⁻⁴⁵ ~ 3.4 * 10³⁸</td>
+      <td>7자리</td>
+    </tr>
+    <tr>
+      <td>double</td>
+      <td>8byte</td>
+      <td>음수 : -1.8 * 10³⁰⁸ ~ -4.9 * 10⁻³²⁴ <br> 양수 : 4.9 * 10⁻³²⁴ ~ 1.8 * 10³⁰⁸</td>
+      <td>15자리</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<p><em><strong>논리타입</strong></em></p>
+
+<p>논리타입의 종류는 하나이고 boolean형 한가지만 가지게된다.<br>
+이 값은 오직 true, false값으로 나눠지고<br>
+1bit만 있으면 되지만, JVM이 다루는 데이터 최소단위가 1byte이기 때문에<br>
+boolean형은 1bye의 크기를 가집니다.<br>
+ex) <code class="language-plaintext highlighter-rouge">boolean isAdult = ture;</code></p>
+
+<p><br></p>
+
+<p><em><strong>문자타입</strong></em></p>
+
+<p>문자타입은 2byte크기의 char형 하나만 있다.<br>
+리터럴 작성시 작은 따옴표(‘‘)를 사용해아함.<br>
+ex) <code class="language-plaintext highlighter-rouge">char babo = 'y';</code></p>
+
+<p><br></p>
+
+<p><em><strong>자동 타입 변환</strong></em></p>
+
+<ol>
+  <li>바이트 크기가 작은 타입에서 큰타입으로 (byer -&gt; int)</li>
+  <li>덜 정밀한 타입에서 더 정밀한 타입으로 (정수-&gt; 실수)</li>
+</ol>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>byte(1) -&gt; short(2)/char(2) -&gt; int(4) -&gt; long(8) -&gt; float(4) -&gt; double(8)
+
+예를 들어
+
+byte a = 10;
+int b = a;
+
+라고할떄 자동 타입 변환이되어지기 때문에 따로 지정할 필요가 없다!
+
+수동 타입 반환
+
+차지하는 메모리 용량이 더큰타입에서 작은 타입으로는 자동으로 타입이 반환되어지지 않는다.
+그래서 수동으로 타입 변환해주어야한다. 이를 캐스팅(Casting)이라고 합니다.
+
+int a = 128;
+byte b = (byte)a;
+
+출력 : -128
+</code></pre></div></div>
+
+<p><br></p>
+
+<h3 id="문자열-string"><strong>문자열 (String)</strong></h3>
+
+<p><em><strong>선언방법</strong></em></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 문자열 리터럴 Taxi를 String 타입의 변수 transfer1에 할당</span>
+<span class="nc">String</span> <span class="n">transfer1</span> <span class="o">=</span> <span class="s">"Taxi"</span><span class="o">;</span>
+
+<span class="c1">// String 클래스의 인스턴스를 생성하는 방법</span>
+<span class="nc">String</span> <span class="n">transfer2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"Taxi"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>첫번째 선언 방법은 “문자열 리터럴을 직접 할당하는 방식”이고<br>
+두번째 선언 방법은 “String 클래스의 인서튼스를 생성하여 할당하는 방식”이다.<br>
+두개는 공통점과 차이점이 있는데<br>
+공통점은 참조 타입의 변수에 할당된다는 점이다.<br>
+즉, transfer1, transfer2는 실제 문자열 내용을 값으로 가지고 있는게 아니라, 문자열의<br>
+존재하는 메모리 공간 상의 주소값을 저장하고 있다.</p>
+
+<p><em><strong>참조변수인데 출력은 문자열이?</strong></em></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">transfer1</span><span class="o">);</span> <span class="c1">// "taxi"</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">transfer2</span><span class="o">);</span> <span class="c1">// "taxi"</span>
+</code></pre></div></div>
+
+<p>두 개의 문자를 출력했을 때, taxi로 출력되어진다.<br>
+이유는 String 타입의 변수를 참조하면 String 클래스의 매서드인 toString()이<br>
+자동으로 호출되어서 변수가 저장하고 있는 주소값에 위치한 인스턴스의 내용을<br>
+문자열로 변환해주기 때문.</p>
+
+<p><br></p>
+
+<p><em><strong>참조변수 비교 방법은?</strong></em></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">transfer1</span> <span class="o">=</span> <span class="s">"taxi"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">transfer2</span> <span class="o">=</span> <span class="s">"taxi"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">transfer3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"taxi"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">transfer4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"taxi"</span><span class="o">);</span>
+
+<span class="kt">boolean</span> <span class="n">comparison1</span> <span class="o">=</span> <span class="n">transfer1</span> <span class="o">==</span> <span class="s">"taxi"</span><span class="o">;</span>         <span class="c1">// true</span>
+<span class="kt">boolean</span> <span class="n">comparison2</span> <span class="o">=</span> <span class="n">transfer1</span> <span class="o">==</span> <span class="n">transfer2</span><span class="o">;</span>      <span class="c1">// true</span>
+<span class="kt">boolean</span> <span class="n">comparison3</span> <span class="o">=</span> <span class="n">transfer1</span> <span class="o">==</span> <span class="n">transfer3</span><span class="o">;</span>      <span class="c1">// false</span>
+<span class="kt">boolean</span> <span class="n">comparison4</span> <span class="o">=</span> <span class="n">transfer3</span> <span class="o">==</span> <span class="n">transfer4</span><span class="o">;</span>      <span class="c1">// false</span>
+<span class="kt">boolean</span> <span class="n">comparison5</span> <span class="o">=</span> <span class="n">transfer1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"taxi"</span><span class="o">);</span>    <span class="c1">// true</span>
+<span class="kt">boolean</span> <span class="n">comparison6</span> <span class="o">=</span> <span class="n">transfer1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">transfer3</span><span class="o">);</span> <span class="c1">// true</span>
+<span class="kt">boolean</span> <span class="n">comparison7</span> <span class="o">=</span> <span class="n">transfer3</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">transfer4</span><span class="o">);</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>위의 예시를 통해 알아보자.<br>
+우선 기본타입을 제외한 선언방식이므로 ‘참조 타입’이다.<br>
+즉, 주소값을 저장한다는 말이다. <br>
+<code class="language-plaintext highlighter-rouge">==</code> 는 주소값을 비교하는 구문이고 equals는 주소값의 내용을 비교한다.<br>
+transfer1, transfer2는 동일한 참조변수를 할당하였기에 주소값이 같다.<br>
+고로 transfer1과 transfer2를 <code class="language-plaintext highlighter-rouge">==</code> 으로 비교할 경우 true로 반환되어지는 것이다.<br>
+반대로, transfer3과 transfer4는 String 클래스의 새로운 인스턴스를<br>
+각개로 찍어낸 것이기 때문에 문자열 내용은 같더라도 참조값이 다르기때문에 false로 나타난다.<br>
+하지만 equals로 비교를할 경우 문자열 그대로 비교하는 것이기에<br>
+전부 true로 반환하는 모습을 볼 수 있다.</p>
+
+<p><br></p>
+
+<p><strong><em>String 클래스의 여러가지 매소드를 이용하는 방법을 알아보자</em></strong><br>
+<strong><em>*자세한 사용법은 Java 카테고리에서 포스팅할 예정이다.</em></strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">.charAt();</code> : 문자열의 특정 위치의 값을 꺼낼 수 있다.<br>
+<code class="language-plaintext highlighter-rouge">.compareTo();</code> :문자열을 비교후 정수로반환<br>
+<code class="language-plaintext highlighter-rouge">.concat();</code> :문자열끼리 이어붙여서 반환, + 와 동일한 역활<br>
+<code class="language-plaintext highlighter-rouge">.indexOf();</code> : 지정한 문자로 문자열의 첫번째 위치를 찾아 정수로 반환 <br>
+<code class="language-plaintext highlighter-rouge">.trim(); .strip();</code> : 공백을 제거해서 반환<br>
+<code class="language-plaintext highlighter-rouge">.toUpperCase(); .toLowerCase();</code> : 대,소문자로 변환해서 반환</p>
+
+<p>etc..</p>
+
+<p><br></p>
+
+<p><em><strong>StringTokenizer</strong></em></p>
+
+<p>StringTokenizer 클래스는 문자열을 쪼개주는 클래스이다.<br>
+그렇게 쪼개어진 문자열을 토큰(token)이라고 한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.StringTokenizer</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+	<span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"This is a string example using StringTokenizer"</span><span class="o">;</span>
+	<span class="nc">StringTokenizer</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringTokenizer</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"total tokens:"</span><span class="o">+</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">countTokens</span><span class="o">());</span>
+	<span class="c1">// 아래의 while 코드는 반복문의 한 종류인데 어떻게 작동하는지 추후 반복문 챕터에서 공부할 예정이니 걱정하지 않으셔도 됩니다.</span>
+	<span class="k">while</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">hasMoreTokens</span><span class="o">()){</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">nextToken</span><span class="o">());</span>
+	<span class="o">}</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"total tokens:"</span><span class="o">+</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">countTokens</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">int countToken();</code><br>
+-. 남아 있는 토큰개수를 반환함</p>
+
+<p><code class="language-plaintext highlighter-rouge">boolean hasMoreElements();</code> , <code class="language-plaintext highlighter-rouge">boolean hasMoreTokens(); </code><br>
+-. 두 메서드의 성능차이는 없고  boolean 타입으로 반환한다. 문자열에서 하나 이상의 토큰을<br>
+사용할경우 true, 그렇지 않으면 false.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Object nextElement();</code>, <code class="language-plaintext highlighter-rouge">String nextToken();</code><br>
+-. 토큰을 반환한다. nextElement는 객체를 반환하고, nextToken은 String을 반환한다.</p>
+
+<p><br></p>
+
+<p><em><strong>StringBuilder</strong></em></p>
+
+<p>매번 인스턴스를 만들어서 문자열을 더하기에는 매우 비효울적이다.<br>
+StringBulider로 다양한 매서드를 이용해 String을 빌딩?이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">StringBuilder</span> <span class="n">stringBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+        <span class="n">stringBuilder</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"문자열 "</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"연결"</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">stringBuilder</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">stringBuilder</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>예제로 stringBulider라는 인스턴스를 만들어 이용해보자</p>
+
+<p><br></p>
+
+<p><em><strong>StringBuffer</strong></em></p>
+
+<p>String 클래스의 인스턴스는 한 번 생성되면 그 값을 읽기만 할 수 있고, 변경은 불가능하다.<br>
+하지만 StringBuffer 클래스의 인스턴스는 그 값을 변경할 수도있고, 추가할 수도 있다.<br>
+StringBuffer 버퍼크기의 기본값은 16개의 문자를 저장할 수 있는 크기이며, 생성자를 통해<br>
+그 크기를 별도로 설정가능하다.</p>
+
+<p>덧샘(+) 연산자를 통해 보통 String 인스턴스의 문자열을 결합하면, 내용이 합쳐진 새로운<br>
+String 인스턴스를 생성한다. 따라서 문자열을 많이 결합할수록 공간이 낭비될 뿐만 아니라 속도도 느려진다.<br>
+하지만 StringBuffer 인스턴스를 사용하면 문자열을 바로 추가할 수 있고, 공간의 낭비도 없으며  <br>
+속도도 매우 빨라진다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">StringBuffer</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">(</span><span class="s">"Java"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>위와 같이 str이라는 인스턴스를 만들어 아래의 매서드를 사용해보자<br>
+<code class="language-plaintext highlighter-rouge">.append();</code> : 해당 문자열의 마지막에 문자를 연결해준다.<br>
+<code class="language-plaintext highlighter-rouge">.capacity();</code> : 메서드의 StringBuffer 인스턴스의 크기를 반환한다.<br>
+<code class="language-plaintext highlighter-rouge">.delete();</code> : 메서드의 위치를 정해 문자르 삭제하여 반환한다.<br>
+<code class="language-plaintext highlighter-rouge">.insert();</code> : append와 비슷한 역활로 원하는 위치에 지정한 문자열을 삽입한다.</p>
+
+<p><br></p>
+
+<h3 id="연산자-operator">연산자 (Operator)</h3>
+
+<p>산술 연산자는 사칙연산, 나머지 연산자가 포함된다. <br>
+(+, -, *, /, %)</p>
+
+<p>증감 연산자<br>
+<code class="language-plaintext highlighter-rouge">num1 = num1 + 1;</code><br>
+<code class="language-plaintext highlighter-rouge">num2 = num2 - 1;</code><br>
+<code class="language-plaintext highlighter-rouge">num1++</code> 은 전위형 증감연산자로 연산을 먼저 수행후 결과값 적용<br>
+<code class="language-plaintext highlighter-rouge">++num1</code> 은 후위형 증감연산자로 기존값을 먼저 적용시키고 다음에 연산을 적용 </p>
+
+<p>복합 대입 연산자<br>
+<code class="language-plaintext highlighter-rouge">num1 += num1;</code><br>
+<code class="language-plaintext highlighter-rouge">num2 -= num2;</code><br>
+비교 연산자는 <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&gt;=</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code>, <code class="language-plaintext highlighter-rouge">==</code>, <code class="language-plaintext highlighter-rouge">!=</code> 가 있다.</p>
+
+<p>초과,이상,미만,이하,같다,다르다 이렇게 비교를할 수 있고 boolean 타입으로 반환한다.<br>
+논리 연산자는 <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>, <code class="language-plaintext highlighter-rouge">||</code> 가 있고<br>
+AND연산자, OR연산자라고 한다.<br>
+기본적으로 연산자들은 우선선위가 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">우선순위</th>
+      <th>연산자</th>
+      <th>내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td>(),[]</td>
+      <td>괄호,대괄호</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td>!,~,++,–</td>
+      <td>부정/증감 연산자</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td>*,/,%</td>
+      <td>곱셈,나눗셈 연산자</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td>&lt;, &lt;=, &gt;, &gt;=</td>
+      <td>대소 비교 연산</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td>&amp;&amp;</td>
+      <td>AND 연산자</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td>ıı</td>
+      <td>OR 연산자</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td>?:</td>
+      <td>조건 연산자</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td>=,+=,-=,/=,%=</td>
+      <td>대입,할당 연산자</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="마치며">마치며…</h2>
+
+<p>오늘은 기본적인 변수와 타입에 관련해서 공부했고<br>
+더 나아가 문자열과 연산자들을 알아보았다.<br>
+사실 여러 언어를 해보았지만<br>
+모든 언어는 처음에 배우는게 같은 것 같다.<br>
+이렇게 언어에 익숙해지고 사용하다보면 <br>
+어느순간엔 편하게 코드를 작성할 때가 오겠지..?<br>
+오늘 공부는 여기서 끝!!</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br>
+<strong>오늘의 점심</strong>: 김밥, 라면</p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/til/2022/08/29/til.html" title="TIL) Git 기초">TIL) Git 기초</a><a class="next" href="/til/2022/08/31/til.html" title="TIL) Java 문법기초 - 제어문">TIL) Java 문법기초 - 제어문</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/08/26/til.html" title="TIL) Java 문법기초 - 제어문">TIL) Linux 기초</a></li>
+<li><a class="post-link" href="/til/2022/11/02/til.html" title="TIL) Java 문법기초 - 제어문">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/til/2022/09/06/til.html" title="TIL) Java 문법기초 - 제어문">TIL) Java 객체지향 - 상속, 캡슐화</a></li>
+<li><a class="post-link" href="/til/2022/10/27/til.html" title="TIL) Java 문법기초 - 제어문">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

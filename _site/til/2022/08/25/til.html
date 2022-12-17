@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) HTML,CSS 목업화면 만들어보기 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) HTML,CSS 목업화면 만들어보기">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="벌써 1주의 중간을 지난목요일! 출근했을때는 목요일이 그렇게 좋을 수가 없다 금요일이 코앞이기 때문에 ㅎㅎ 오늘은 페어 프로그래밍의 진행날이다 이번주에 학습한 HTML,CSS를 적용해 작은 목업화면을 만들어 보는 것이 목표이다.">
+<meta property="og:description" content="벌써 1주의 중간을 지난목요일! 출근했을때는 목요일이 그렇게 좋을 수가 없다 금요일이 코앞이기 때문에 ㅎㅎ 오늘은 페어 프로그래밍의 진행날이다 이번주에 학습한 HTML,CSS를 적용해 작은 목업화면을 만들어 보는 것이 목표이다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/08/25/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/08/25/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-08-25T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) HTML,CSS 목업화면 만들어보기">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-08-25T00:00:00+09:00","datePublished":"2022-08-25T00:00:00+09:00","description":"벌써 1주의 중간을 지난목요일! 출근했을때는 목요일이 그렇게 좋을 수가 없다 금요일이 코앞이기 때문에 ㅎㅎ 오늘은 페어 프로그래밍의 진행날이다 이번주에 학습한 HTML,CSS를 적용해 작은 목업화면을 만들어 보는 것이 목표이다.","headline":"TIL) HTML,CSS 목업화면 만들어보기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/08/25/til.html"},"url":"http://localhost:4000/til/2022/08/25/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) HTML,CSS 목업화면 만들어보기</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+6</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-08-25T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 25, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>벌써 1주의 중간을 지난목요일!<br>
+출근했을때는 목요일이 그렇게 좋을 수가 없다<br>
+금요일이 코앞이기 때문에 ㅎㅎ<br>
+오늘은 페어 프로그래밍의 진행날이다<br>
+이번주에 학습한 HTML,CSS를 적용해 작은<br>
+목업화면을 만들어 보는 것이 목표이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDjoQ30zuNTN8RMGQr4AayzV5cA06rFdAo3VqwP-ncv9gPbmncnY_dK29K-z1GJaVk5jmq1SPauow1UrYuaCCU0kfUzA=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>오늘 페어분과 처음 만났다.<br>
+사람 상대하는 것에 어색해하지 않는편이라<br>
+얘기가 술술 잘 나왔던 것 같다.</p>
+
+<p>궁극적인 목표인 twittler라는 화면의 레이아웃과<br>
+목업화면을 만들어보자고 상의를 했고<br>
+와이어프레임부터 오븐에서 만들어보기로 했다. 
+우선 우리가 만들 와이어프레임을 대략 이런식으로 그렸다.<br>
+부모태그들고 자식 태그를 알아볼기 쉽게 표현해두었고<br>
+각각 class와 id로 스타일이 가능하도록 변수를 지정했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNEBy6-CCPPuMi2z2Jxfxq-ak0rjLxtYHe0LCwV06Cia-KKaS410unERjVhgP5zDAz4h8UjmxCaB0WKKmvpwROgwGpx=w3024-h1620" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>위에 와이어프레임의 태그대로<br>
+순서대로 html 뼈대를 작성하기 시작했다.</p>
+
+<p>&lt;index.html&gt;</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>twittler<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">media=</span><span class="s">"screen"</span> <span class="na">href=</span><span class="s">"main.css"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- 여기에 HTML 구조를 작성하세요. 아래 코드는 예제이며, 얼마든지 바꿀 수 있습니다 --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"greeting"</span><span class="nt">&gt;</span>twittler<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"writeInput"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div&gt;</span>Username<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"usernameInput"</span> <span class="na">placeholder=</span><span class="s">"사용자를 입력하세요"</span><span class="nt">&gt;&lt;/input&gt;</span>
+      <span class="nt">&lt;div&gt;</span>Message<span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"messageInput"</span> <span class="na">placeholder=</span><span class="s">"메세지를 입력하세요"</span><span class="nt">&gt;&lt;/input&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"clickButton"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"tweetButton"</span><span class="nt">&gt;</span>Tweet!<span class="nt">&lt;/button&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"randomButton"</span><span class="nt">&gt;</span>🔄 check new tweets<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="c">&lt;!-- Tweet lists --&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"tweetlist"</span> <span class="na">class=</span><span class="s">"white"</span><span class="nt">&gt;&lt;/section&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"script.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>여러 박스들과 버튼 그리고 Input태그를 이용해 구성완료.<br>
+아무런 css없이 적용하니 대략적인 뼈대가 완성되었다.<br>
+아래의 list들은 코드스테이츠에서 script.js파일에 내용을 append시켜 두도록<br>
+사전에 준비해주셨다. 그래서 크게 어려움없이 작업할 수 있었던 것 같다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP2h-9QH5wJza8AAOOmMYmtJia6MNckk_NIa6bb8npIeYCS2V2OjSsxIIdbSAKaGacoBHxzyt8a5Kww9UdkMv3ZkIQc3Q=w3024-h1620" alt="image" class="align-left" style="max-width: 50%"></p>
+
+<p>이제 상세한 css적용의 시간!<br>
+사실 뼈대만드는 것 보다 훨씬 오래걸렸고 <br>
+디자인적 감각이 없는 나로써는…. 힘들 따름이었다.</p>
+
+<p>&lt;main.css&gt;</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#greeting {
+  font-size: 2em;
+  font-family: sans-serif;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  border-radius: 1em;
+  color: white;
+  background-color: #eee;
+  text-shadow: 0 0 5px #333;
+  text-align: center;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+#writeInput {
+  border-radius: 0.2em;
+  padding: 20px 10px 20px 40px;
+  background-color: #3fd5ff;
+  margin: 0px 0px 10px 0px;
+}
+#usernameInput {
+  width: 30%;
+  height: 20px;
+  border-radius: 0.3em;
+  margin-bottom: 10px;
+}
+#messageInput {
+  width: 85%;
+  height: 40px;
+  border-radius: 0.3em;
+  margin-bottom: 10px;
+}
+
+#clickButton {
+  border-radius: 0.2em;
+  padding: 10px;
+  background-color: #223fff;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#tweetButton {
+  width: 44%;
+  height: 40px;
+  border-radius: 0.3em;
+  overflow: hidden;
+}
+#randomButton {
+  width: 44%;
+  height: 40px;
+  border-radius: 0.3em;
+  overflow: hidden;
+}
+
+#tweetWrapper {
+}
+.white {
+  border-radius: 0.2em;
+  background-color: gainsboro;
+  padding: 0px 20px 0px 0px;
+  display: flex;
+  flex-direction: column;
+}
+.tweet__username {
+  width: 75%;
+  font-size: 20px;
+  font-weight: bold;
+}
+.tweet__createdAt {
+  width: 25%;
+  font-size: 15px;
+  color: darkgrey;
+  margin-top: -20px;
+  margin-left: auto;
+  position: static;
+}
+.tweet__message {
+  margin-bottom: 15px;
+  color: grey;
+  border-bottom: solid 1px;
+}
+</code></pre></div></div>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNAGW5t5QsrVeOyq701Vnzcms0b_tr14nIRDleE7iJQSsDQuhik2DCceedqx1-O4E32rRxE_zBua6Ya0ALpEhnIVEChRA=w3024-h1620" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>최종적으로 완성하고나니까 이러한 모습으로 표현 되었다. 여기서 새로히 알게된 것은 <br>
+border-radius: 는 네모난 테두리의 모따기를하는 기능을 해준다는 것과<br>
+overflow로 반응형으로 화면을 줄일때 text들이 벗어나는걸 가려주는 기능을 추가한 것 등.<br>
+flexbox,padding,margin,font-size,weight 등 여러가지 기능을 이용해</p>
+
+<p>css를 적용할 수 있었다.</p>
+
+<hr>
+
+<p>오늘의 과정은 이번주에 배운<br>
+아~~~주 기본적인 HTML,CSS를 다뤄보는 시간을 가졌다<br>
+자세히 알면 좋지만, 백엔드 엔지니어로서<br>
+프론트엔드에서 어떤일이 일어나고 있는지를 조금?이라도<br>
+이해해보게 된 것 같다.</p>
+
+<p><br></p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️️️️<br>
+<strong>오늘의 점심</strong>: 야채계란부침,만두,공기밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/macos/2022/08/23/OS-macOs-2.html" title="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">맥북 터미널 git언어를 한글에서 영어로 바꾸는...</a><a class="next" href="/macos/2022/08/26/OS-macOs-3.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">macOs) neofetch를 활용하여 terminal 커스터마이징</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/spring/2022/11/25/spring-environment.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">Spring) Could not resolve placeholder '환경변수명' in value "${환경변수명}" 오류</a></li>
+<li><a class="post-link" href="/it/2022/10/25/it-etc-imageurl.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">구글 드라이브로 이미지 url 적용하기</a></li>
+<li><a class="post-link" href="/til/2022/12/14/til.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">TIL) 네달차 회고</a></li>
+<li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="macOs) neofetch를 활용하여 terminal 커스터마이징">Spring) @JsonIgnore 사용하기</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

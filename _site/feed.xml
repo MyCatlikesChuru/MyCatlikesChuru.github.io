@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-16T23:33:30+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</title><link href="http://localhost:4000/til/2022/12/15/til.html" rel="alternate" type="text/html" title="TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)" /><published>2022-12-15T00:00:00+09:00</published><updated>2022-12-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/15/til.html"><![CDATA[<p><img src="" alt="image" class="align-left" style="max-width: 70%" /></p>
-
-<hr />
-
-<p>모든 교육이 끝나고 프리 프로젝트를 시작했다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-17T16:40:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</title><link href="http://localhost:4000/til/2022/12/15/til.html" rel="alternate" type="text/html" title="TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)" /><published>2022-12-15T00:00:00+09:00</published><updated>2022-12-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/15/til.html"><![CDATA[<p>모든 교육이 끝나고 프리 프로젝트를 시작했다.<br />
 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을<br />
 사용해보면서 구현을 해보고 싶었다.</p>
 
@@ -102,7 +98,7 @@ Push가 이루어질 때마다 Discord에 알림을 주는 봇을 만들었다.<
 
 <p><br /></p>
 
-<h3 id="20221216">2022.12.16</h3>
+<h3 id="20221216-금">2022.12.16 (금)</h3>
 
 <h4 id="github-관련-협업-지식습득">GitHub 관련 협업 지식습득</h4>
 
@@ -148,7 +144,7 @@ Push가 이루어질 때마다 Discord에 알림을 주는 봇을 만들었다.<
 오늘 처음으로 같이 얘기해보면서 어떻게 할지?<br />
 순서를 정하고 퍼즐맞추듯이 진행을 해보았는데<br />
 너무 합이 잘맞게 진행을 했고, 저녁늦은시간까지 다들 지친기색없이<br />
-배움에 재미에빠져서 몰두하다보니 늦은시간까지 계속 작업을 했다.</p>
+배움에 재미에빠져서 몰두하다보니 늦은시간까지 계속 작업을 했다.  ㅎ</p>
 
 <p>위있는 전략을 적용하기전에<br />
 main, develop, feat 브랜치로만 구성해 각자 개발해보면서 <br />
@@ -161,9 +157,12 @@ PR 보내고, Merge도 진행하면서 테스트를 했다.</p>
 이름은 막지으면서 스터디를 했지만 다음주 월요일 부터는 <br />
 FM으로 이름을 정하고 진행하기로 얘기를 마무리했다.</p>
 
-<p><br /></p>
+<p>갑작스러운 요청에도 다들 모여서 이렇게 연습을 할 수 있었다는 것에<br />
+너무 팀원들에게 감사했고 처음으로 맞춰보는 합이 잘맞아서 시작이 좋은 것 같다.</p>
 
-<h3 id="20221216-금">2022.12.16 (금)</h3>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
+<p>시작이 반이라는데 이미 반 이상을 넘어온 것 같은 느낌이다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
 아직 2달이라는 프로젝트 기간이 남았지만<br />
 코드스테이츠의 정식적인 교육 기간은 종료되었다.</p>
 
