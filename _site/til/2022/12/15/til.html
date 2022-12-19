@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -961,6 +961,59 @@ SonarLint라는 좋은 Plugin이 있는 것 같아<br>
 
 <h3 id="20221219-월">2022.12.19 (월)</h3>
 
+<h4 id="프로젝트를-위한-문서-작성">프로젝트를 위한 문서 작성</h4>
+
+<p>오늘부터는 프로젝트를 위한 사용자 요구사항 정의서를 작성해야한다.<br>
+정의서와 API 명세서, 테이블 명세서를 작성해야한다.</p>
+
+<p>한번씩 배웠지만 실제로 적용해보려니까 어떻게 해야할지 손이 안떨어졌다.<br>
+우리의 주제는 Stackoverflow 클론코딩이였다.</p>
+
+<p>해당 사이트를 먼저 분석하고, 어떤 기능들이 있을지 정의서에 작성을 먼저했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMkTbOFfSOQUwznqIv1z-MCAl2CDgpG3eh_ippjEPsnuiRKmmrDtOp6_g6Kf3GPE2H7EJifUEP7-8A3-ZKiErzidEq0=w1777-h864" alt="image" class="align-left" style="max-width: 60%"></p>
+
+<p>정의서 작성은 위의 큰 토클을 주제로 만들어<br>
+작은단위로 쪼개 가면서 정의서 작업을 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP8E-XiipPGjBKsugF861qw1MPhx67QrxFO9iD-a92Thsr_ek1oZ7yRkU5zW6k7DdvOmv74BqyurkbKgZ2-Xe-o9P_a=w1920-h921" alt="image" class="align-left" style="max-width: 60%"></p>
+
+<p>안에 작은 내용들을 상세하게 적지는 않았고<br>
+우선은 요구사항명, 요구사항 설명, 중요도, 비고 등에 대한 내용을 위주로 적어 나갔다.</p>
+
+<p>예를들면 아래와 같은 형식으로 적어 나갔다.</p>
+
+<ul>
+  <li>설명: <strong>사용자의 정보를 입력받아 회원 가입을 진행한다.</strong>
+</li>
+  <li>회원가입 정보: 이름/ e-mail / password /  <strong>(Captcha Todo)</strong>
+</li>
+  <li>비고
+    <ul>
+      <li>구글, 깃허브, 페이스북 로그인과 관련한 <strong>OAuth 2.0로 구현한다.(Todo)</strong>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<p>상세한 정의서 작업은 수요일까지 진행 될 것 같다.</p>
+
+<p>그리고 백엔드 팀원끼리 저녁에 모여<br>
+테이블 명세서 관련해서 어떻게 작업을 하는게 좋을지?<br>
+생각해보고 연관관계를 ERD를 통해 그려보는 시간을 가졌다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOERMWQxsDR2cI06lnHZkwFr-HwvfMiVjQy3XC6aQW_C5tU55yrPsSuMv05oBzZJEZ5pwFNfmL0nDPp7ov7rLcJq2AK=w1777-h864" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>테이블 안에있에 있는 내용은 아직 제대로 정하지 않았지만<br>
+연관관계 맵핑에 집중해서 그려보았다.</p>
+
+<p>팀원분들 2분과 저녁 4시간동안 머리를 써가며 그렸는데<br>
+확신도 없고, 이게 맞는지 안맞는지에 대한? 여부도 판단하기 너무 힘들다.</p>
+
+<p>저녁까지 시간을 계속 사용해서 공부를 해야할 필요성을 느꼈다.<br>
+정말 알면알수록 공부할게 너무 많아져서 일분일초가 부족한 느낌이 든다.</p>
+
+
 
     </div>
 
@@ -971,10 +1024,10 @@ SonarLint라는 좋은 Plugin이 있는 것 같아<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/11/til.html" title="H2 Database 다운로드 및 실행">TIL) API Documentation 1</a></li>
-<li><a class="post-link" href="/til/2022/10/06/til.html" title="H2 Database 다운로드 및 실행">TIL) DB RDMBS 2</a></li>
-<li><a class="post-link" href="/til/2022/10/26/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring Exception 2</a></li>
-<li><a class="post-link" href="/til/2022/11/10/til.html" title="H2 Database 다운로드 및 실행">TIL) JUnit 3</a></li>
+        <li><a class="post-link" href="/til/2022/11/09/til.html" title="H2 Database 다운로드 및 실행">TIL) JUnit 2</a></li>
+<li><a class="post-link" href="/til/2022/10/28/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring JDBC 기반 액세스 계층 2</a></li>
+<li><a class="post-link" href="/til/2022/11/15/til.html" title="H2 Database 다운로드 및 실행">TIL) Application 빌드, 실행</a></li>
+<li><a class="post-link" href="/til/2022/12/14/til.html" title="H2 Database 다운로드 및 실행">TIL) 네달차 회고</a></li>
 </ul>
     </div>
 <div class="post-comments">
