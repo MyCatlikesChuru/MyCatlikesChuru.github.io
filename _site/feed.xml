@@ -1,4 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-17T16:40:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</title><link href="http://localhost:4000/til/2022/12/15/til.html" rel="alternate" type="text/html" title="TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)" /><published>2022-12-15T00:00:00+09:00</published><updated>2022-12-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/15/til.html"><![CDATA[<p>모든 교육이 끝나고 프리 프로젝트를 시작했다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-19T10:44:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">H2 Database 다운로드 및 실행</title><link href="http://localhost:4000/db/2022/12/19/h2setting.html" rel="alternate" type="text/html" title="H2 Database 다운로드 및 실행" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/h2setting</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/h2setting.html"><![CDATA[<p><a href="http://www.h2database.com/html/main.html">h2 database 홈페이지</a>에 접속하면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPOrBmDtNszJ_Se_BYJ0vhdj-G60PCOB3B50Ji348fVE1atvLYUpkqGJ0N3UIoVdUdQJi6ntxmw2_tX-ptIe5Vzm4kz-Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같은 화면이 나오는데<br />
+나는 MacOS를 쓰고있어 All Platforms를 눌러주면된다.<br />
+그럼 zip파일 하나가 다운받아진다. <br />
+여기서 버젼확인을 꼭해주자. 의존라이브러리를 추가할때 해당버젼과 일치해야한다.</p>
+
+<p><strong>Gradle의 경우</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="nl">h2:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">214</span><span class="err">'</span>
+</code></pre></div></div>
+<p>와 같이 설정해 줄 수있다. 일반적으로 버전을 제외하고</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span>
+</code></pre></div></div>
+<p>로 설정하면 자동으로 가장 최신의 버전이 추가되는 것 같다.</p>
+
+<p><br /></p>
+
+<p><strong>Maven의 경우</strong></p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="c">&lt;!-- H2 데이터베이스 --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>2.1.214<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></div></div>
+<p>와 같은식으로 설정해줄 수 있다.</p>
+
+<p>해당 zip파일을 풀면 폴더하나가 나오게되는데<br />
+그안에서 bin -&gt; h2.sh 스크립트를 실행 시켜주면된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNFlqigR274WJL2PPsEN4JlD7veQFTYLJYTVb8j7I5GyT6XrqeEGzG4Mb0D9CUpT_kRJ1fmVmzGr155UxFE0eUMn4L9WQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>해당 파일 위치에서</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./h2.sh
+</code></pre></div></div>
+<p>를 실행 시켜주면 h2 data base 팝업이 발생하고  <br />
+<img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gODtoeY1H6bGiUOZQj8oP90Qh8CXysYw8Yu6BZ8MowLG0_yUB2ClmKn464zQMWxzYpitSiaI6ktPMoRVMZ1dDX72Npngg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /> 아이콘이 상단에 떠있을 것이다.</p>
+
+<p>만약 종료시키고 싶으면 <code class="language-plaintext highlighter-rouge">Ctrl + C</code>를 눌러주면된다.</p>
+
+<p>만약 스크립트가 권한에 의해 실행되지 않는다면 chmod 명령어로 권한을 <br />
+부여해주면 쉽게 해결할 수 있다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ll
+</code></pre></div></div>
+<p>권한 확인 진행을 먼저해주고</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>755 h2.sh
+</code></pre></div></div>
+<p>를 해주게되면 정상적으로 진입할 수 있을 것이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMidCvQtnMFbQLRjWIfa1fgZLuIwDoOjR6himZX4bWnbhTxm4nKQEIfD20j3PcwRSuHB4kUfP1o8IMDOdHUObIgPKYHTA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>접속 URL 같은 정보들의 경우는<br />
+gradle과 maven에 따라다르지만 resources에 정보를 설정해주면된다.<br />
+혹시나 만약 해당 화면이 발생하지 않고 하얀화면만 나오면서<br />
+진입이 안되는 분이 있으시다면<br />
+포트번호 <code class="language-plaintext highlighter-rouge">:8082</code>앞에 localhost를 붙여보면 접속이 가능할 것이다.</p>
+
+<p>gradle 같은 경우에는</p>
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring.datasource.url</span><span class="p">=</span><span class="s">jdbc:h2:tcp://localhost/~/test</span>
+<span class="py">spring.datasource.username</span><span class="p">=</span><span class="s">sa</span>
+<span class="py">spring.datasource.password</span><span class="p">=</span>
+</code></pre></div></div>
+<p>application.properties 설정을 통해<br />
+접속 관련 정보를 설정해주면 된다.</p>
+
+<p><br /></p>
+
+<p>Maven 같은 경우에도 마찬가지다</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;persistence</span> <span class="na">version=</span><span class="s">"2.2"</span>
+             <span class="na">xmlns=</span><span class="s">"http://xmlns.jcp.org/xml/ns/persistence"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+             <span class="na">xsi:schemaLocation=</span><span class="s">"http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;persistence-unit</span> <span class="na">name=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;properties&gt;</span>
+            <span class="c">&lt;!-- 필수 속성 --&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.driver"</span> <span class="na">value=</span><span class="s">"org.h2.Driver"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.user"</span> <span class="na">value=</span><span class="s">"sa"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.password"</span> <span class="na">value=</span><span class="s">""</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.url"</span> <span class="na">value=</span><span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.dialect"</span> <span class="na">value=</span><span class="s">"org.hibernate.dialect.H2Dialect"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/properties&gt;</span>
+    <span class="nt">&lt;/persistence-unit&gt;</span>
+<span class="nt">&lt;/persistence&gt;</span>
+</code></pre></div></div>
+<p>과 같은 방식으로 <code class="language-plaintext highlighter-rouge">persistence.xml</code> 설정을 통해<br />
+정보를 입력해줄 수 있다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="H2" /><summary type="html"><![CDATA[h2 database 홈페이지에 접속하면]]></summary></entry><entry><title type="html">TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</title><link href="http://localhost:4000/til/2022/12/15/til.html" rel="alternate" type="text/html" title="TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)" /><published>2022-12-15T00:00:00+09:00</published><updated>2022-12-15T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/15/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/15/til.html"><![CDATA[<p>모든 교육이 끝나고 프리 프로젝트를 시작했다.<br />
 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을<br />
 사용해보면서 구현을 해보고 싶었다.</p>
 
@@ -18,7 +108,7 @@
 이번 프로젝트는 내가 팀장으로 진행하게 되었다.<br />
 부담감은 물론있다. 하지만 그만큼 열심히해서 잘할 자신도 있다.</p>
 
-<p>그때그때 감점과 팀장으로서의 역할을 제대로 수행하고있는지?<br />
+<p>그때그때 감정과 팀장으로서의 역할을 제대로 수행하고있는지?<br />
 프로젝트 진행상황과 여러가지를 적어가보려고한다.</p>
 
 <p><br /></p>
@@ -42,7 +132,7 @@
 
 <p>지난 회사생활 7년간 가장 중요했던 의사소통 관련해서<br />
 외향적인 내가 내향적인분들과 소통하는건 항상 쉽지는 않았다.<br />
-이해를 해주고 기다려줘야하는 부분도 많았고, 정확한 원하는 의견의 표출에 소극적이었던 것을 <br />
+이해를 해주고 기다려줘야하는 부분도 많았고, 원하는 의견의 표출에 소극적이었던 것을 <br />
 많이 경험했어서, 여러 충돌이 있었던 경험도 있다.</p>
 
 <p>이러한 부분을 잘 조율해서 팀원의 성격을 먼저 천천히 파악해보고<br />
@@ -162,7 +252,117 @@ FM으로 이름을 정하고 진행하기로 얘기를 마무리했다.</p>
 
 <p>시작이 반이라는데 이미 반 이상을 넘어온 것 같은 느낌이다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
+<p><br /></p>
+
+<h3 id="20221218-일">2022.12.18 (일)</h3>
+
+<p>다음주부터 본격적인 협업이 시작될 것 같으니<br />
+미리 준비해서 팀원들과 소통일 잘되어야할 것 같아<br />
+미리 여러 컨벤션을 어떻게 사용할지?<br />
+정리가 필요할 것 같아 주말을 이용해 정리를 해보았다.</p>
+
+<p>정확히 어떻게 해야하는 것이 맞는 것인지?를 가늠하지 못해<br />
+여러 선배기수의 프로젝트를 탐방하기 시작했다.</p>
+
+<p>어느정도 비스한 형태안에서 컨벤션을 사용하는 것을 보았고<br />
+첫번째 프로젝트인 만큼 가장 많이 사용하는 컨벤션 느낌으로 팀원에게 제안해보려한다.</p>
+
+<h4 id="github-관련-정리">GitHub 관련 정리</h4>
+
+<p>첫번째로 Git Commit 컨벤션이다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[feat] : 새로운 기능을 추가할 경우
+[fix] : 버그를 고친 경우
+[design] : CSS 등 사용자 UI 디자인 변경
+[!breaking change] : 커다란 API 변경의 경우
+[!hotfix] : 치명적인 버그를 고쳐야하는 경우
+[style] : 코드 포맷변경, 세미콜론 누락, 코드수정이 없는 경우.
+[refactor] : 프로덕션 코드 리펙토링할 경우
+[comment] : 필요한 주석 추가 및 변경
+[docs] : 문서를 수정한 경우
+[test] : 테스 추가 테스트 리펙토링
+[chore] : 빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우
+[rename] : 파일 혹은 폴더명을 수정하거나 옮기는 작업만 하는 경우
+[remove] : 파일을 삭제하는 작업만 수행한 경우
+</code></pre></div></div>
+<p>커밋에 대한 규칙이 필요하기 때문에 앞에 이러한 형식으로<br />
+작업 내용에 대한 구분을 하는 것이 좋을 것 같다고 생각했다.</p>
+
+<p><br /></p>
+
+<p>두번째로는 Git Branch 컨벤션이다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main : 메인 배포 브랜치 
+release : 릴리즈 브랜치
+dev_front : 프론트엔드 브랜치
+dev_back : 백엔드 브랜치
+feat_프로젝약자+번호 : 기능개발 브랜치 ex) feat_STC001
+</code></pre></div></div>
+<p>금요일에 팀원들 거의 전부가 브랜치 전략으로 내가 구성한 전략을<br />
+사용하기로 거의 채택?이 되어진 느낌이었다.<br />
+그래서 해당 브랜치 전략으로 Git Branch 컨벤션을 만들었다.<br />
+아마 기능 개발구현 feat에 대한 내용만 잘 통일시키면 큰 문제는 없어 보인다.</p>
+
+<p><br /></p>
+
+<p>세번째로는 GitHub Issue 컨벤션이다.<br />
+우리는 GitHub를 이용해 칸반보드를 관리할 생각이다.<br />
+Issue를 이용해 라벨을 붙여 작업내용에 대한 내용과 정리를 할 수 있어<br />
+칸반보드에 사용하기 유용하다고 판단해 Issue 제목 작성에 대한 컨벤션이 필요해 보였다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[FE] 해야할 작업 제목 or 이슈 제목 ex) [FE] 회원가입 화면 구현
+[BE] 해야할 작업 제목 or 이슈 제목 ex) [BE] OAuth2 인증 구현
+</code></pre></div></div>
+
+<p>제목은 프론트엔드와 벡엔드 작업으로 구분하려한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPPj9_5nw9srv0aXXeZ-ulIZy-Cw9svEZ01OaqvC3MpGSv962jD-R5H_7RBHr87E_DGlVL35Gpfyr70zW4628NHEV12=w1920-h975" alt="image" class="align-left" style="max-width: 80%" /></p>
+
+<p>상세 내용은 작성자의 이름 라벨과 어떠한 작업인지 표시해주는 라벨을<br />
+붙여서 issue에 대한 내용을 관리하려고 한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMu6ih-YmXAN-eKxRdDb6d5E-n-CxkPPLmpJhGpTZg6KojPCU8mE6rTuYfBQ0GkgQfMQUWppWg94tOPGq2igqF_oBdKTw=w1920-h975" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPlAg-qlvom9hlzDG9GSZ9tQCk8NAKWq6rbAGY4jNlS6k_gkcCMWdkM-JnX4vsLKfsW87tv-Tp_2L-77iWpqycOif2Mdw=w1920-h975" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>대략 이러한 느낌으로 관리를 진행해보려한다.<br />
+우선 나의 생각으로만 준비한 것이기 때문에, 월요일에 팀원들의 의견을 들어보고<br />
+더 여러가지 방향으로 컨벤션관리하는 것을 적용해보려한다.</p>
+
+<p><br /></p>
+
+<h4 id="java-컨벤션-정리">Java 컨벤션 정리</h4>
+
+<p>마지막으로 Java 컨벤션 관련이다.<br />
+클라이언트 컨벤션관련해서는 프론트엔드 측에 우선 얘기는 해두었다.<br />
+아무래도 내가 프론트엔드쪽 지식이 풍부하지 않다보니… 프론트엔드 인원에서<br />
+우선 정의를 해보고 같이 의논해보는게 좋을 것 같다.</p>
+
+<p>Java 컨벤션 관련해서는 <a href="https://naver.github.io/hackday-conventions-java/">자바 컨벤션 정리 사이트</a>를 참조해서<br />
+적어 보았다. 우선 간단한 컨벤션들만 먼저 정리해두었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMftLqoXCoYCbYxdbxGYh-mmCDo5av5JiMiwQIBMIYq7UN5XI1Tv1a-uVPyGyc60cg0eKsy8MFl-eYkSLouva99kSeL=w1920-h975" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>그리고 알아보니까 컨벤션관련해서<br />
+SonarLint라는 좋은 Plugin이 있는 것 같아<br />
+팀원들끼리 같이 사용해보면 어떨까? 라는 생각이 들어 정리했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNXf0fjuWaSX475JeJFOgpA07CpvmLxcEmy8CoxOQi1_a23PcmloY9a8U5CVDEAcZPo24-TlGJTPlo-l62UQn9GB7fgUQ=w1920-h975" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>한번 사용해보니 콘솔로 위치를 알려주고 노란색으로 밑줄도 그어줘서<br />
+처음에 컨벤션이 헷갈리는 우리들에게는 정말 좋은 플러그인이 아닐까?<br />
+라는 생각을 해봤다.</p>
+
+<p><br /></p>
+
+<p>이렇게 주말에 잠깐 간단하게 컨벤션을 정리했고<br />
+월요일에 다같이 회의할때 차질없는 진행을 하고싶어 미리 정리를 하였다.<br />
+어느정도 정리하고나니까 마음이 편안.. 이제 다음주에 회의를 통해<br />
+컨벤션을 확정시키고, 협업에 대한 룰을 각자 지키면서 어플리케이션을 작업하는<br />
+일만 남은 것 같아 어느정도 속이 후련해졌다.</p>
+
+<p><br /></p>
+
+<h3 id="20221219-월">2022.12.19 (월)</h3>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
 아직 2달이라는 프로젝트 기간이 남았지만<br />
 코드스테이츠의 정식적인 교육 기간은 종료되었다.</p>
 
@@ -2206,36 +2406,4 @@ API 요청이 오면 이제 정상적으로 EC2 서버에서 작성한 프로그
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개, 스팸계란부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[저번주에는 기본적인 Cloud 운영 환경에 대한 구성들을 배워 보았다. 이번 공부에서는 3티어 아키텍처 형태로 배포하는 방법을 배울 것이고, 저번주에 EC2에 서버를 배포해보는 것까지 해봤었다.]]></summary></entry><entry><title type="html">macOs) brew update Error Another active Homebrew update process is already in progress. 문제 해결</title><link href="http://localhost:4000/macos/2022/12/04/OS-macOs-5.html" rel="alternate" type="text/html" title="macOs) brew update Error Another active Homebrew update process is already in progress. 문제 해결" /><published>2022-12-04T00:00:00+09:00</published><updated>2022-12-04T00:00:00+09:00</updated><id>http://localhost:4000/macos/2022/12/04/OS-macOs-5</id><content type="html" xml:base="http://localhost:4000/macos/2022/12/04/OS-macOs-5.html"><![CDATA[<p>Mac용 패키지 관리자 Homebrew를 사용하다가</p>
-
-<p>brew update 중 아래와 같은 에러가 발생했다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPgnf_Jlr6jF5QrJ3a1bIdej3lBiR4_o-5y7SfrHRjvujgPSqqZkSrl29Kf4TWNO2frqh1AoHoQrYmTsdS_4V134Mnzig=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Another active Homebrew update process is already <span class="k">in </span>progress.
-Please <span class="nb">wait </span><span class="k">for </span>it to finish or terminate it to <span class="k">continue</span><span class="nb">.</span>
-</code></pre></div></div>
-
-<p>내용으로보아선 프로세스가 실행중이니 기다리거나 종료해야하는 것 같다.<br />
-아마 brew update중 Ctrl+Z를 눌러 종료하거나 bash를 강제로 끌 경우 <br />
-발생하는 것 같다. 만약 다시 brew update를 진행하고 싶다면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNt4jGQKvpg6v4idw1qCOQfMrClt6WEeSjGurKDYsmUv0A6kUzSff5ib5LtR5rpktmwbejPAmrg0g50hQjoqKSAVJsM0w=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>/opt/homebrew/var/homebrew 경로에 있는<br />
-locks파일을 삭제해주면 된다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-rf</span> /opt/homebrew/var/homebrew/locks
-</code></pre></div></div>
-
-<p>터미널 명령어로 삭제를 해도 무방하다.<br />
-<strong><em>(여러 블로그를 살펴보니 homebrew 경로가 다른 것 같다.<br />
-즉, locks 파일 위치가 환경마다 다른 것 같다..)</em></strong></p>
-
-<p>그렇게 locks 폴더를 삭제 후</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew update
-</code></pre></div></div>
-<p>다시 진행 해주면 정상적으로 업데이트가 되는 것을 확인 할 수 있다.</p>
-
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="macOs" /><category term="macOs" /><summary type="html"><![CDATA[Mac용 패키지 관리자 Homebrew를 사용하다가]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 김치찌개, 스팸계란부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[저번주에는 기본적인 Cloud 운영 환경에 대한 구성들을 배워 보았다. 이번 공부에서는 3티어 아키텍처 형태로 배포하는 방법을 배울 것이고, 저번주에 EC2에 서버를 배포해보는 것까지 해봤었다.]]></summary></entry></feed>

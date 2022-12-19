@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -705,7 +705,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 이번 프로젝트는 내가 팀장으로 진행하게 되었다.<br>
 부담감은 물론있다. 하지만 그만큼 열심히해서 잘할 자신도 있다.</p>
 
-<p>그때그때 감점과 팀장으로서의 역할을 제대로 수행하고있는지?<br>
+<p>그때그때 감정과 팀장으로서의 역할을 제대로 수행하고있는지?<br>
 프로젝트 진행상황과 여러가지를 적어가보려고한다.</p>
 
 <p><br></p>
@@ -729,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>지난 회사생활 7년간 가장 중요했던 의사소통 관련해서<br>
 외향적인 내가 내향적인분들과 소통하는건 항상 쉽지는 않았다.<br>
-이해를 해주고 기다려줘야하는 부분도 많았고, 정확한 원하는 의견의 표출에 소극적이었던 것을 <br>
+이해를 해주고 기다려줘야하는 부분도 많았고, 원하는 의견의 표출에 소극적이었던 것을 <br>
 많이 경험했어서, 여러 충돌이 있었던 경험도 있다.</p>
 
 <p>이러한 부분을 잘 조율해서 팀원의 성격을 먼저 천천히 파악해보고<br>
@@ -851,21 +851,130 @@ FM으로 이름을 정하고 진행하기로 얘기를 마무리했다.</p>
 
 <p><br></p>
 
+<h3 id="20221218-일">2022.12.18 (일)</h3>
+
+<p>다음주부터 본격적인 협업이 시작될 것 같으니<br>
+미리 준비해서 팀원들과 소통일 잘되어야할 것 같아<br>
+미리 여러 컨벤션을 어떻게 사용할지?<br>
+정리가 필요할 것 같아 주말을 이용해 정리를 해보았다.</p>
+
+<p>정확히 어떻게 해야하는 것이 맞는 것인지?를 가늠하지 못해<br>
+여러 선배기수의 프로젝트를 탐방하기 시작했다.</p>
+
+<p>어느정도 비스한 형태안에서 컨벤션을 사용하는 것을 보았고<br>
+첫번째 프로젝트인 만큼 가장 많이 사용하는 컨벤션 느낌으로 팀원에게 제안해보려한다.</p>
+
+<h4 id="github-관련-정리">GitHub 관련 정리</h4>
+
+<p>첫번째로 Git Commit 컨벤션이다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[feat] : 새로운 기능을 추가할 경우
+[fix] : 버그를 고친 경우
+[design] : CSS 등 사용자 UI 디자인 변경
+[!breaking change] : 커다란 API 변경의 경우
+[!hotfix] : 치명적인 버그를 고쳐야하는 경우
+[style] : 코드 포맷변경, 세미콜론 누락, 코드수정이 없는 경우.
+[refactor] : 프로덕션 코드 리펙토링할 경우
+[comment] : 필요한 주석 추가 및 변경
+[docs] : 문서를 수정한 경우
+[test] : 테스 추가 테스트 리펙토링
+[chore] : 빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우
+[rename] : 파일 혹은 폴더명을 수정하거나 옮기는 작업만 하는 경우
+[remove] : 파일을 삭제하는 작업만 수행한 경우
+</code></pre></div></div>
+<p>커밋에 대한 규칙이 필요하기 때문에 앞에 이러한 형식으로<br>
+작업 내용에 대한 구분을 하는 것이 좋을 것 같다고 생각했다.</p>
+
+<p><br></p>
+
+<p>두번째로는 Git Branch 컨벤션이다.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main : 메인 배포 브랜치 
+release : 릴리즈 브랜치
+dev_front : 프론트엔드 브랜치
+dev_back : 백엔드 브랜치
+feat_프로젝약자+번호 : 기능개발 브랜치 ex) feat_STC001
+</code></pre></div></div>
+<p>금요일에 팀원들 거의 전부가 브랜치 전략으로 내가 구성한 전략을<br>
+사용하기로 거의 채택?이 되어진 느낌이었다.<br>
+그래서 해당 브랜치 전략으로 Git Branch 컨벤션을 만들었다.<br>
+아마 기능 개발구현 feat에 대한 내용만 잘 통일시키면 큰 문제는 없어 보인다.</p>
+
+<p><br></p>
+
+<p>세번째로는 GitHub Issue 컨벤션이다.<br>
+우리는 GitHub를 이용해 칸반보드를 관리할 생각이다.<br>
+Issue를 이용해 라벨을 붙여 작업내용에 대한 내용과 정리를 할 수 있어<br>
+칸반보드에 사용하기 유용하다고 판단해 Issue 제목 작성에 대한 컨벤션이 필요해 보였다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[FE] 해야할 작업 제목 or 이슈 제목 ex) [FE] 회원가입 화면 구현
+[BE] 해야할 작업 제목 or 이슈 제목 ex) [BE] OAuth2 인증 구현
+</code></pre></div></div>
+
+<p>제목은 프론트엔드와 벡엔드 작업으로 구분하려한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPPj9_5nw9srv0aXXeZ-ulIZy-Cw9svEZ01OaqvC3MpGSv962jD-R5H_7RBHr87E_DGlVL35Gpfyr70zW4628NHEV12=w1920-h975" alt="image" class="align-left" style="max-width: 80%"></p>
+
+<p>상세 내용은 작성자의 이름 라벨과 어떠한 작업인지 표시해주는 라벨을<br>
+붙여서 issue에 대한 내용을 관리하려고 한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMu6ih-YmXAN-eKxRdDb6d5E-n-CxkPPLmpJhGpTZg6KojPCU8mE6rTuYfBQ0GkgQfMQUWppWg94tOPGq2igqF_oBdKTw=w1920-h975" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPlAg-qlvom9hlzDG9GSZ9tQCk8NAKWq6rbAGY4jNlS6k_gkcCMWdkM-JnX4vsLKfsW87tv-Tp_2L-77iWpqycOif2Mdw=w1920-h975" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>대략 이러한 느낌으로 관리를 진행해보려한다.<br>
+우선 나의 생각으로만 준비한 것이기 때문에, 월요일에 팀원들의 의견을 들어보고<br>
+더 여러가지 방향으로 컨벤션관리하는 것을 적용해보려한다.</p>
+
+<p><br></p>
+
+<h4 id="java-컨벤션-정리">Java 컨벤션 정리</h4>
+
+<p>마지막으로 Java 컨벤션 관련이다.<br>
+클라이언트 컨벤션관련해서는 프론트엔드 측에 우선 얘기는 해두었다.<br>
+아무래도 내가 프론트엔드쪽 지식이 풍부하지 않다보니… 프론트엔드 인원에서<br>
+우선 정의를 해보고 같이 의논해보는게 좋을 것 같다.</p>
+
+<p>Java 컨벤션 관련해서는 <a href="https://naver.github.io/hackday-conventions-java/">자바 컨벤션 정리 사이트</a>를 참조해서<br>
+적어 보았다. 우선 간단한 컨벤션들만 먼저 정리해두었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMftLqoXCoYCbYxdbxGYh-mmCDo5av5JiMiwQIBMIYq7UN5XI1Tv1a-uVPyGyc60cg0eKsy8MFl-eYkSLouva99kSeL=w1920-h975" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>그리고 알아보니까 컨벤션관련해서<br>
+SonarLint라는 좋은 Plugin이 있는 것 같아<br>
+팀원들끼리 같이 사용해보면 어떨까? 라는 생각이 들어 정리했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNXf0fjuWaSX475JeJFOgpA07CpvmLxcEmy8CoxOQi1_a23PcmloY9a8U5CVDEAcZPo24-TlGJTPlo-l62UQn9GB7fgUQ=w1920-h975" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>한번 사용해보니 콘솔로 위치를 알려주고 노란색으로 밑줄도 그어줘서<br>
+처음에 컨벤션이 헷갈리는 우리들에게는 정말 좋은 플러그인이 아닐까?<br>
+라는 생각을 해봤다.</p>
+
+<p><br></p>
+
+<p>이렇게 주말에 잠깐 간단하게 컨벤션을 정리했고<br>
+월요일에 다같이 회의할때 차질없는 진행을 하고싶어 미리 정리를 하였다.<br>
+어느정도 정리하고나니까 마음이 편안.. 이제 다음주에 회의를 통해<br>
+컨벤션을 확정시키고, 협업에 대한 룰을 각자 지키면서 어플리케이션을 작업하는<br>
+일만 남은 것 같아 어느정도 속이 후련해졌다.</p>
+
+<p><br></p>
+
+<h3 id="20221219-월">2022.12.19 (월)</h3>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/12/14/til.html" title="TIL) 네달차 회고">TIL) 네달차 회고</a><span></span>
+<a class="previous" href="/til/2022/12/14/til.html" title="TIL) 네달차 회고">TIL) 네달차 회고</a><a class="next" href="/db/2022/12/19/h2setting.html" title="H2 Database 다운로드 및 실행">H2 Database 다운로드 및 실행</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/09/til.html" title="">TIL) Cloud 운영 전략</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
-<li><a class="post-link" href="/til/2022/11/09/til.html" title="">TIL) JUnit 2</a></li>
-<li><a class="post-link" href="/til/2022/11/29/til.html" title="">TIL) Spring WebFlux Reactive 프로그래밍</a></li>
+        <li><a class="post-link" href="/til/2022/11/11/til.html" title="H2 Database 다운로드 및 실행">TIL) API Documentation 1</a></li>
+<li><a class="post-link" href="/til/2022/10/06/til.html" title="H2 Database 다운로드 및 실행">TIL) DB RDMBS 2</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring Exception 2</a></li>
+<li><a class="post-link" href="/til/2022/11/10/til.html" title="H2 Database 다운로드 및 실행">TIL) JUnit 3</a></li>
 </ul>
     </div>
 <div class="post-comments">

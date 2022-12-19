@@ -710,13 +710,115 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/db/2022/12/19/h2setting.html">
+          H2 Database 다운로드 및 실행
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 19, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/db/2022/12/19/h2setting.html">
+        <p>
+        h2 database 홈페이지에 접속하면
+
+
+
+위와 같은 화면이 나오는데
+나는 MacOS를 쓰고있어 All Platforms를 눌러주면된다.
+그럼 zip파일 하나가 다운받아진다. 
+여기서 버젼확인을 꼭해주자. 의존라이브러리를 추가할때 해당버젼과 일치해야한다.
+
+Gradle의 경우
+runtimeOnly 'com.h2database:h2:2.1.214'
+
+와 같이 설정해 줄 수있다. 일반적으로 버전을 제외하고
+runtimeOnly 'com.h2database:h2
+
+로 설정하면 자동으로 가장 최신의 버전이 추가되는 것 같다.
+
+
+
+Maven의 경우
+    &lt;dependencies&gt;
+        &lt;!-... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#H2">#H2</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/til/2022/12/15/til.html">
           TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)
         </a>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 15, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/15/til.html">
         <p>
@@ -9794,10 +9896,16 @@ ssh -i 키파일.pem ubuntu@내주소
   <ul>
     <li>
       <a href="/index.html">
-        All<span>89</span>
+        All<span>90</span>
       </a>
     </li>
 
+    
+      <li>
+        <a href="/categories.html#h-DB">
+          DB <span>1</span>
+        </a>
+      </li>
     
       <li>
         <a href="/categories.html#h-IT">
