@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-20T01:06:06+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">H2 Database 다운로드 및 실행</title><link href="http://localhost:4000/db/2022/12/19/h2setting.html" rel="alternate" type="text/html" title="H2 Database 다운로드 및 실행" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/h2setting</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/h2setting.html"><![CDATA[<p>오늘은 로컬에서 테스트할때 자주 사용하는<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-20T21:43:19+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">H2 Database 다운로드 및 실행</title><link href="http://localhost:4000/db/2022/12/19/h2setting.html" rel="alternate" type="text/html" title="H2 Database 다운로드 및 실행" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/h2setting</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/h2setting.html"><![CDATA[<p>오늘은 로컬에서 테스트할때 자주 사용하는<br />
 H2 Database를 다운받아 설정해보려한다.</p>
 
 <p><a href="http://www.h2database.com/html/main.html">h2 database 홈페이지</a>에 접속하면</p>
@@ -367,6 +367,17 @@ SonarLint라는 좋은 Plugin이 있는 것 같아<br />
 
 <h3 id="20221219-월">2022.12.19 (월)</h3>
 
+<p>팀원한분이 오늘 작업과정에 참가하질 못하셨다.<br />
+여러가지 이유로 공부하기가 힘든 상황이라고 하셨다.<br />
+코드스테이츠측이랑 상담을 진행 중이라고 연락이 오셨다.</p>
+
+<p>프론트엔드분이셨고, 만약 하차를하게 되신다면 프론트측에는<br />
+2명으로 진행해야 부담이 가는 상황이 발생했다…ㅠ</p>
+
+<p>우선 최소한의 작업으로 참가해서 가능하시다면 같이 프로젝트를 마무리하자고는<br />
+얘기를 드려보았지만, 아무래도 본인의 선택이기 때문에 우리는 팀원분의<br />
+선택을 기다리면서 여러작업들을 미리해야할 것 같다.</p>
+
 <h4 id="프로젝트를-위한-문서-작성">프로젝트를 위한 문서 작성</h4>
 
 <p>오늘부터는 프로젝트를 위한 사용자 요구사항 정의서를 작성해야한다.<br />
@@ -414,7 +425,88 @@ SonarLint라는 좋은 Plugin이 있는 것 같아<br />
 확신도 없고, 이게 맞는지 안맞는지에 대한? 여부도 판단하기 너무 힘들다.</p>
 
 <p>저녁까지 시간을 계속 사용해서 공부를 해야할 필요성을 느꼈다.<br />
-정말 알면알수록 공부할게 너무 많아져서 일분일초가 부족한 느낌이 든다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
+정말 알면알수록 공부할게 너무 많아져서 일분일초가 부족한 느낌이 든다.</p>
+
+<p><br /></p>
+
+<h3 id="20221220-화">2022.12.20 (화)</h3>
+
+<p>오늘은 사용자 정의서 작성을 완성하고 <br />
+프론트엔드는 화면 정의서 작성과<br />
+백엔드는 테이블 명세서, API 명세서를 만들기로 했다.</p>
+
+<p>팀원들과 얘기를 맞춰 화요일,수요일 이렇게 이틀은 문서작업에<br />
+힘을 써보기로했다. 어느정도 우리도 작성하는 법에 익숙해져야하고<br />
+처음에 체계를 잡 갖춰놓고 충분히 토론해가며 정리하다보면<br />
+프로그램을할 때 덜 뜯어고치지 않을까?라는 생각이었다.</p>
+
+<p><br /></p>
+
+<h4 id="사용자-정의서-작성">사용자 정의서 작성</h4>
+
+<p>어제 노션을 통해서 크게 어떻게 사용자 정의서를 작성할지?<br />
+기능을 구분해주어서 정리를 완료했었다.</p>
+
+<p>정리해둔 내용을 오늘은 엑셀 스프레드시트를 이용해 표로 정리하기로 하였다.<br />
+원래는 노션의 내용만 정리하려고 했으나, 가독성이 떨어지는 관계로<br />
+팀원들과 스프레드시트 작업을 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOsZHx5fyHzaOWO2BqGZKoMJ6wTT5ZDi-LG5JC1rPiR8sCYrRMJ8IjfOqeRy20DFW2aKKM1wx_AxskKhQUrKnge5qxR9w=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>적어가다보니 내용이 엄청 많아졌다.<br />
+이 내용을 짧은 프로젝트 기간안에 전부 처리할 수 있을지는 의문이다.</p>
+
+<p>그래서 조금 제거하는 작업을해야할 것 같다는 생각이 들었고<br />
+프론트엔드, 백엔드에서 나머지 명세서같은걸 작업한 후에<br />
+범위가 너무 넓다 생각하면 하나씩 없애기로 얘기하였다.</p>
+
+<p>아마 내용을 제거하는 작업은 내일 마무리하지 않을까 싶다.</p>
+
+<p><br /></p>
+
+<h4 id="화면-정의서-작성">화면 정의서 작성</h4>
+
+<p>사용자 정의서를 토대로 우리가 만들기로 했던 내용을<br />
+화면정의서로 만들어본 사진이다. 프론트엔드쪽에서 만들어주었고<br />
+figma라는 사이트를 이용해서 작업을 했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN6UrAt4Hh28p_fYfHED8ddmhMZQTKn-IayPjD5tr0aaWitAku9UOOjfPPc3WNuO0wRC3vI7NYFSLOp1DbRdZBuuC7GOA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>화면이 총 16개정도 나왔고, 한분이 계속 불참을 하고계셔서<br />
+2명에서 작업을해야하는 상황인데, 상당히 많은 양이 나와버려서<br />
+몇개의 작업을 선정해 보류로 우선 빼두었다.</p>
+
+<p>애플리케이션의 완성을하는 것도 중요하지만<br />
+이번 프로젝트의 진정한 의미는 우리가 협업에 대한 프로세스를 익히는 것과<br />
+많은 기능을 구현하기보다는 현재 가능한한 할 수 있는 만큼의<br />
+구현의 기술을 집중해서 체득하는 것이라 생각한다.</p>
+
+<p><br /></p>
+
+<h4 id="테이블-명세서-작성">테이블 명세서 작성</h4>
+
+<p>어제 정리하지 못한 테이블 연관관계 맵핑을 진행했다.<br />
+어느정도 정리가 되었고, 우선 우리가 생각한 이론대로 맵핑을 진행했는데<br />
+후에 프로그램을 작성하다가 잘못된 관계가 발견될 것 같다는 전제를 두었다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNtHIEU2S4ekKbWaXu-ElgBvs6eccpDK--Qy_wtKKZfkT8C9XUx8aO7Ds836M-vTB8gMZIyq-4BCQViUAOqjoemQPyg_g=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이제 테이블에 대한 연관관계 맵핑을 정리하였으니</p>
+
+<p>해당 테이블을 정리할 테이블 명세서를 작성하기로 했다.<br />
+마찬가지로 구글 스프레드시트로 진행하기로 했고</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNyuo0Fg1ErL7DiQBA3t9Y8lLRwyJV2w9TYF7DzHOgb7y8fFvvECF0TvcmYIRmrd2JjKbJ28D8KzQyhkLLTfyYXQIZ_yQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>일부분만 캡처하긴했지만 아래에 우리가만든 테이블에 대한 내용을 쭉 적어내려갔다. <br />
+작성하면서 느낀건데 Type, Length 부터 Default에 어떤값이<br />
+들어가야하는지 등등… 우리가 대충은 알지만 작성하려고하니<br />
+손인 안떨어졌고 모르는 내용들이 너무 많았던 것 이다…</p>
+
+<p>어떻게 하다보니 1차적으로는 작성을 완료했고<br />
+이후에 여러사람들의 레퍼런스를 보면서 틀린게 있으면 수정할 생각이다.</p>
+
+<h3 id="20221221-수">2022.12.21 (수)</h3>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
 아직 2달이라는 프로젝트 기간이 남았지만<br />
 코드스테이츠의 정식적인 교육 기간은 종료되었다.</p>
 

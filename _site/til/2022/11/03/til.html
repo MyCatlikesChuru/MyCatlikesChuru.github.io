@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -871,7 +871,7 @@ JpaRepository로 인해 DB에 값이 저장되게 되어진다.</p>
 <p>예를 들어 우리가<br>
 매장에 커피가 3개가 등록되어있다고해보자 (아메리카노,카페라떼,헤이즐넛라떼)</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQqkAYU_59TIa660ZzyHtDhni-i-ZA6mBu5nz1OJ6KA6ESnFmopbQw8yfMIr85KE2cK10_Q6k6hGGFMOnu54JzpzpE5OQ=w1512-h807" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNOivwuY_-oMvOtMXeBMRZeCLwojYlG65osQSV4T6EEyaQzDwRdwO-eoDtwx_mc2Njn1JwZluSIiIfQo8P8wgltXJn5Hw=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>Coffee Repository를 이용해 DB에 저장한 모습이다.</p>
 
@@ -902,7 +902,7 @@ JpaRepository로 인해 DB에 값이 저장되게 되어진다.</p>
 
 <p>위와 같이 Dto를 작성했고</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQTzfqAsa2VbELiYL8VSeeVlzwfyBQO5EJfFNLAmYtp3oWyq9Z09m9MMoRQPlPdPK1nXySnEstsVlb5h3y1PvMGQQ_q=w1512-h807" alt="image" class="align-left" style="max-width: 90%"></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPmcF7IYZU9A3rD9A-oXki7bgAp65L7dayYWh6qHYbrpk8zNjDTGhcsr_DJcjdDgcQifoOv_U9Acc_KDK-xBPZlICxI=w1920-h921" alt="image" class="align-left" style="max-width: 90%"></p>
 
 <p>Postman을 통해 API 요청을 위와 같이 보내면 된다.<br>
 이렇게 보내주었을 경우 우리는 coffeeId 1번 즉, 아메리카노라는 것을<br>
@@ -974,8 +974,8 @@ JpaRepository로 인해 DB에 값이 저장되게 되어진다.</p>
 
 <p>여기서 알 수 있는 점은<br>
 우리가 Order 클래스에 양방향으로 지정한
-@OneToMany List<ordercoffee> orderCoffees  
-객체에 OrderCoffee 클래스의 값들이 List형태로 존재하게 된다.</ordercoffee></p>
+<code class="language-plaintext highlighter-rouge">@OneToMany List&lt;OrderCoffee&gt; orderCoffees</code><br>
+객체에 OrderCoffee 클래스의 값들이 List형태로 존재하게 된다.</p>
 
 <p>Order 클래스에서 별도의 findOrderCoffee 쿼리를 작성하지 않더라고<br>
 OrderCoffee의 List화 되어있는 객체를 참조하여 Coffee를 조회할 수 있다.</p>
@@ -1001,11 +1001,11 @@ OrderCoffee의 List화 되어있는 객체를 참조하여 Coffee를 조회할 �
 </code></pre></div></div>
 <p>간단하게 JpaRepository를 상속받아 JDBC와 같이<br>
 쿼리문을 작성할 수도있고 정해진 규약대로 쿼리를 날릴 수도 있다.<br>
-그중 .save();를 이용해 Order 객체를 DB에 저장하게 해주었다.</p>
+그중 <code class="language-plaintext highlighter-rouge">.save();</code>를 이용해 Order 객체를 DB에 저장하게 해주었다.</p>
 
 <p>이제 주문을 Postman으로 실행하게 될 경우</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRnmNA4pymt_R759dyUt72jbf_Bms7zIM2lE2plqvJz05MFJIva97SO1RguJ4L9t5tVnCO3iyNdwKkoftNs1xOhfqgpUQ=w1512-h807" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPkMaeB_5i_C3wwh8ZzaMs78R55WFSKUvuk-8U5RyGhlyoAPf8AdNc9-6ltANra_Tr3EdhaWSDmucuej-NYnEnVgzHZbw=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>위와 같이 주문이 잘 DB에 저장된 모습을 볼 수 있다.</p>
 
@@ -1013,7 +1013,7 @@ OrderCoffee의 List화 되어있는 객체를 참조하여 Coffee를 조회할 �
 
 <p>하지만 ! 여기서 OrderCoffee의 테이블에는</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSrJSyX1h6jXCz0y0gt23p43O_gRw39Bl5G2Iqgx1reIWlR5YTZflQ3Y5cqCmK0ffMEd5izw4EkHZfAgEFYr0PMe6LKYQ=w1512-h807" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMTOI4Sqb3ec7YCRbgTxwonIYk0lJEHybT-ePiGcXOXzU6We5DmBD76s2Ly4WULkmZWdYuNvVoA9CgXwv3svpeRRI9U2g=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>값이 저장되지 않는 모습을 볼 수 있다.</p>
 
@@ -1069,7 +1069,7 @@ JPA가 persistent 상태로 관리하고 있다가, 후에 데이터를 저장�
 <p>Order 클래스의 코드를 수정 후<br>
 다시 Postman을 통해 주문요청을 보낼 경우</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTvAacgrE_bydZh1uUd4Y6Y1N3G477EgDw3NkdPKUeGJ3cCF4jZbLGJvWQj63OQtnOEMac5K7JDTIxk9XAgWAwdl6uA=w1512-h807" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNkKT8Q1EVe0aOQ3qAt_zlloq4_ZvFBaFW11yQWfphTp_7l0-5pmdbSZqsF-uOmM_VjBziGxJaplUs3kvKGGwoVQ0eY=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>비로소 ORDER_COFFEE 테이블에 외래키로<br>
 값들이 저장되어지는 모습을 볼 수 있다.<br>
@@ -1104,10 +1104,10 @@ JPA가 persistent 상태로 관리하고 있다가, 후에 데이터를 저장�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/31/til.html" title="TIL) Spring Transaction 1">TIL) Spring Data JDBC Pagination</a></li>
-<li><a class="post-link" href="/til/2022/09/06/til.html" title="TIL) Spring Transaction 1">TIL) Java 객체지향 - 상속, 캡슐화</a></li>
-<li><a class="post-link" href="/til/2022/10/04/til.html" title="TIL) Spring Transaction 1">TIL) Network HTTP</a></li>
-<li><a class="post-link" href="/til/2022/09/19/til.html" title="TIL) Spring Transaction 1">TIL) 한달차 회고</a></li>
+        <li><a class="post-link" href="/til/2022/11/25/til.html" title="TIL) Spring Transaction 1">TIL) OAuth 2 인증 기초</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="TIL) Spring Transaction 1">TIL) Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/til/2022/12/13/til.html" title="TIL) Spring Transaction 1">TIL) Ngrok 사용하여 로컬에서 서버 실행</a></li>
+<li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="TIL) Spring Transaction 1">macOs) brew update Error Another active Homebrew update process is already in...</a></li>
 </ul>
     </div>
 <div class="post-comments">
