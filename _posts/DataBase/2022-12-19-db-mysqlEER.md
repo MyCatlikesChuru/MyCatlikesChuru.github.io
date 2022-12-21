@@ -3,7 +3,7 @@ layout: post
 title: MySQL EER 다이어그램 만드는법
 subtitle: 
 categories: DB
-tags: [DB, H2]
+tags: [DB, MySQL]
 comments: true
 published: true
 ---
