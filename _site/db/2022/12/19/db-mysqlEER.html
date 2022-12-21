@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Spring) MySQL Local 연동 하기 | LeeJellan</title>
+<title>MySQL EER 다이어그램 만드는법 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="Spring) MySQL Local 연동 하기">
+<meta property="og:title" content="MySQL EER 다이어그램 만드는법">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.">
-<meta property="og:description" content="오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.">
-<link rel="canonical" href="http://localhost:4000/spring/2022/11/15/spring-mysql.html">
-<meta property="og:url" content="http://localhost:4000/spring/2022/11/15/spring-mysql.html">
+<meta name="description" content="mysql을 로컬로 연결한 다음 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어 EER 다이어 그램을 그려주는 기능을 사용해보려한다.">
+<meta property="og:description" content="mysql을 로컬로 연결한 다음 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어 EER 다이어 그램을 그려주는 기능을 사용해보려한다.">
+<link rel="canonical" href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html">
+<meta property="og:url" content="http://localhost:4000/db/2022/12/19/db-mysqlEER.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-11-15T00:00:00+09:00">
+<meta property="article:published_time" content="2022-12-19T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Spring) MySQL Local 연동 하기">
+<meta property="twitter:title" content="MySQL EER 다이어그램 만드는법">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-15T00:00:00+09:00","datePublished":"2022-11-15T00:00:00+09:00","description":"오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.","headline":"Spring) MySQL Local 연동 하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2022/11/15/spring-mysql.html"},"url":"http://localhost:4000/spring/2022/11/15/spring-mysql.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-19T00:00:00+09:00","datePublished":"2022-12-19T00:00:00+09:00","description":"mysql을 로컬로 연결한 다음 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어 EER 다이어 그램을 그려주는 기능을 사용해보려한다.","headline":"MySQL EER 다이어그램 만드는법","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/db/2022/12/19/db-mysqlEER.html"},"url":"http://localhost:4000/db/2022/12/19/db-mysqlEER.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Spring) MySQL Local 연동 하기</h1>
-  <h2 class="post-subtitle">yml 파일 설정</h2>
+  <h1 class="post-title p-name" itemprop="name headline">MySQL EER 다이어그램 만드는법</h1>
+  <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-11-15T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 15, 2022
+    <time class="dt-published" datetime="2022-12-19T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 19, 2022
     </time>
 
     
@@ -676,145 +676,69 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#mysql">#mysql</a>
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#H2">#H2</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br>
-연결하여 사용해보려고한다.</p>
+      <p>mysql을 로컬로 연결한 다음<br>
+연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어<br>
+EER 다이어 그램을 그려주는 기능을 사용해보려한다.</p>
 
-<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br>
-저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOYP0fQrmNAzvt44jM3q1Et2sG_V4E9GqAJGCu-W4sKhMubVYnEcUGzis00H57nfRzdoVy5xVSXQv4X_vAbgIxBcTgP=w1109-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>MySQL WorkBench GUI로 작업하였고<br>
-리소스는 .yml 파일을 사용했다.</p>
+<p>워크 밴치에서 Database -&gt; Reverse Engineer를 클릭해준다.</p>
 
-<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP0zs_9MFTLo-MHuS9FPm_HsJ6_YNUggGHBwOxhN61Ft7SbD6ic_M14WrgWHI8UME4DxG0RHdUomxyTraJIR7NzvNxSkQ=w1109-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p><br></p>
+<p>설정을 진행한 다음에 continue를 눌러준다.</p>
 
-<p>1). bulid.gradle 설정</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPscP5oY0PMeTDUsQS1kKvD1r3hG10L-PEHzW7pTZK6Xot231dfv96wzKIxO2kqzO9WXLa0pxu6TIWxyDcsos1GVFVYZQ=w1109-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
-</code></pre></div></div>
+<p>쭉쭉 진행</p>
 
-<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPcPaDrNT08DemVCSislXXYTO9rc4w2qQjwuOKirkbzqYzvTW4TAAOVKJ9r7sT8h7W0DwuZgfVn1FpJlZimjzNqchNkHA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmT3UmG6D9zRRTBuGTrPPBn1AMzOguxqyJyTCiPbwzSnqYvkwa2lcq7zFy-3TB1VCBhRhCBXyPGBvN2KxBkWBnjq3NhY9Q=w3024-h1614" alt="image" class="align-left" style="max-width: 100%"></p>
+<p>EER 다이어그램으로 표시하고 싶은<br>
+스키마를 선택해줍니다.</p>
 
-<p>추가하고 Gradle Reload를 할 경우 위와 같이<br>
-라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOCcK5kxVJ7annhfMjE_M9fU6TKrpLb_oq0w1Q9uPoyPC1HUF2tStTOzOQyJoGqPN00zG-3p5w-AqAhsin33u3E0cHh=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p><br></p>
+<p>계속 진행해주시면 됩니다.</p>
 
-<p>2). .yml 파일 설정</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPMJUuXItWoog3cNtrvYUCmRuZIQE_6lX5Dj2r0PTxtX54xWDIVIza67950MG8VublQ_4Il2JjaQCQJTikDQltUtOIclQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">jpa</span><span class="pi">:</span>
-    <span class="na">hibernate</span><span class="pi">:</span>
-      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
-    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
-    <span class="na">properties</span><span class="pi">:</span>
-      <span class="na">hibernate</span><span class="pi">:</span>
-        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
-  <span class="na">datasource</span><span class="pi">:</span>
-    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
-    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
-    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
+<p>Excute를 눌러줍니다.</p>
 
-<p>두번째로 연결을위한 .yml파일 설정이다.<br>
-프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br>
-properties 확장자를 application.yml로 변경하였다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPBfp0S8a2KUpRBbzLTcRLCKe5FUetyQDEvUZKKt_c3ecwA5Mbpye2UsIw7FZxq55FSS21KMJrerY6aSy6bNwJ31-k8dQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>spring : <br>
-jpa : <br>
-에 해당하는 부분은 jpa관련 설정이다.</p>
+<p>Continue 버튼을 눌러줍니다.</p>
 
-<p>우리가 봐야할 부분은<br>
-spring :<br>
-datasource :<br>
-이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMVJw0WqySpUAV7fD1xhefV-vo4mDPIOupuzYdz9-Vc4O3KS9yjd7Epj3AcUq4lnc345g23GckEg0RtZdOQO2diYL1q=w1109-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>넣어줘야할 정보는 4가지 이다.</p>
-<ol>
-  <li>포트넘버</li>
-  <li>스키마 이름</li>
-  <li>유저네임</li>
-  <li>비밀번호</li>
-</ol>
+<p>그러면 최종적으로 EER Diagram 화면이 표시되는 모습을 볼 수 있습니다.<br>
+@ManyToOne, @OneToMany 등으로 연관관계 맵핑을<br>
+제대로 진행했는지 다이어그램으로 확인해 볼 수 있다.</p>
 
-<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br>
-아래에 어디서 찾는지 적어보겠다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTQ8kpsyLHOtqRJe4AWUM2aNJaivLTPJXYRrN0ouL1c4O408flzunjeHgxsWpz-ciRq_28B1-XViwZ9D2zNRMJFtVTE=w1512-h807" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>워크밴치(MySQL WorkBench)를 열어보면<br>
-커넥션에 관한 정보가 나온다.<br>
-없으면 연결을 한번도 하지 않은 것이기에<br>
-커넥션을 만들어주면 된다.</p>
-
-<p>커넥션을 더블클릭 해보자</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmSYYNi9Ztave6ML9l2HlQz6N0L9Qp9hExMMGC6gWibCjaC77q3_Kr13n0i3FVaKMw3Uw7i2pJEffAYTGQbXcXNJs88a=w3024-h1614" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br>
-여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br>
-비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
-
-<p>여기서 알 수 있는 정보는</p>
-
-<p><strong>포트넘버 = 3306<br>
-유저네임 = root<br>
-비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
-
-<p>이렇게 알 수 있다.</p>
-
-<p>그리고 접속을 한 다음에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AJc5JmTl-Yr7RL6BgRLfYwoprmSbmBdVuW57E1ZZZNHIkUzW7qSYqUYhsrV8oxAIaYAwRvmuBETxjvR-HdrKpeLwOww8acgNJQ=w3024-h1614" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br>
-스키마를 생성해주면 된다.</p>
-
-<p>생성한 스키마가 스키마이름이 되는 것이다.<br>
-나는 example로 설정했고<br>
-이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
-
-<p>이렇게 정리해서 정보를 적어보자면</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
-  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
-  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
-  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>이렇게 설정할 수 있을 것이다.</p>
-
-<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br>
-처음에 mysql를 다운받고 설정한 비밀번호다.<br>
-인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/11/14/til.html" title="TIL) API Documentation 2">TIL) API Documentation 2</a><a class="next" href="/til/2022/11/15/til.html" title="TIL) Application 빌드, 실행">TIL) Application 빌드, 실행</a>
+<a class="previous" href="/db/2022/12/19/db-h2setting.html" title="H2 Database 다운로드 및 실행">H2 Database 다운로드 및 실행</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/25/til.html" title="TIL) Application 빌드, 실행">TIL) Spring Exception 1</a></li>
-<li><a class="post-link" href="/til/2022/10/28/til.html" title="TIL) Application 빌드, 실행">TIL) Spring JDBC 기반 액세스 계층 2</a></li>
-<li><a class="post-link" href="/til/2022/11/22/til.html" title="TIL) Application 빌드, 실행">TIL) Spring Security 3 (권한부여)</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="TIL) Application 빌드, 실행">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
+        <li><a class="post-link" href="/til/2022/09/20/til.html" title="">TIL) Java 재귀</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="">TIL) Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/til/2022/10/24/til.html" title="">TIL) Spring MVC Serivce 계층</a></li>
+<li><a class="post-link" href="/til/2022/09/16/til.html" title="">TIL) Java Thread, JVM</a></li>
 </ul>
     </div>
 <div class="post-comments">

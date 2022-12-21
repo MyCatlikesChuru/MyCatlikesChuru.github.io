@@ -249,7 +249,7 @@
 <lastmod>2022-11-14T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/spring/2022/11/15/spring-mysql.html</loc>
+<loc>http://localhost:4000/db/2022/11/15/db-mysql.html</loc>
 <lastmod>2022-11-15T00:00:00+09:00</lastmod>
 </url>
 <url>
@@ -357,7 +357,11 @@
 <lastmod>2022-12-15T00:00:00+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/db/2022/12/19/h2setting.html</loc>
+<loc>http://localhost:4000/db/2022/12/19/db-h2setting.html</loc>
+<lastmod>2022-12-19T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/db/2022/12/19/db-mysqlEER.html</loc>
 <lastmod>2022-12-19T00:00:00+09:00</lastmod>
 </url>
 <url>

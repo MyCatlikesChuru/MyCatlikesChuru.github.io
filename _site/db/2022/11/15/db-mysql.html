@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>H2 Database 다운로드 및 실행 | LeeJellan</title>
+<title>MySQL Local 연동 하기 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="H2 Database 다운로드 및 실행">
+<meta property="og:title" content="MySQL Local 연동 하기">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오늘은 로컬에서 테스트할때 자주 사용하는 H2 Database를 다운받아 설정해보려한다.">
-<meta property="og:description" content="오늘은 로컬에서 테스트할때 자주 사용하는 H2 Database를 다운받아 설정해보려한다.">
-<link rel="canonical" href="http://localhost:4000/db/2022/12/19/h2setting.html">
-<meta property="og:url" content="http://localhost:4000/db/2022/12/19/h2setting.html">
+<meta name="description" content="오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.">
+<meta property="og:description" content="오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.">
+<link rel="canonical" href="http://localhost:4000/db/2022/11/15/db-mysql.html">
+<meta property="og:url" content="http://localhost:4000/db/2022/11/15/db-mysql.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-12-19T00:00:00+09:00">
+<meta property="article:published_time" content="2022-11-15T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="H2 Database 다운로드 및 실행">
+<meta property="twitter:title" content="MySQL Local 연동 하기">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-19T00:00:00+09:00","datePublished":"2022-12-19T00:00:00+09:00","description":"오늘은 로컬에서 테스트할때 자주 사용하는 H2 Database를 다운받아 설정해보려한다.","headline":"H2 Database 다운로드 및 실행","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/db/2022/12/19/h2setting.html"},"url":"http://localhost:4000/db/2022/12/19/h2setting.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-15T00:00:00+09:00","datePublished":"2022-11-15T00:00:00+09:00","description":"오늘은 Spring을 이용해 MySQL을 Local 환경에서 연결하여 사용해보려고한다.","headline":"MySQL Local 연동 하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/db/2022/11/15/db-mysql.html"},"url":"http://localhost:4000/db/2022/11/15/db-mysql.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">H2 Database 다운로드 및 실행</h1>
+  <h1 class="post-title p-name" itemprop="name headline">MySQL Local 연동 하기</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-12-19T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 19, 2022
+    <time class="dt-published" datetime="2022-11-15T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 15, 2022
     </time>
 
     
@@ -679,122 +679,142 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#H2">#H2</a>
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#mysql">#mysql</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오늘은 로컬에서 테스트할때 자주 사용하는<br>
-H2 Database를 다운받아 설정해보려한다.</p>
+      <p>오늘은 Spring을 이용해 MySQL을 Local 환경에서<br>
+연결하여 사용해보려고한다.</p>
 
-<p><a href="http://www.h2database.com/html/main.html">h2 database 홈페이지</a>에 접속하면</p>
+<p>기존에 H2를 사용해 테스트를 진행했었고 JPA를 사용하기때문에  <br>
+저장소만 바꿔주는 테스트를 해보려는 것이다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPOrBmDtNszJ_Se_BYJ0vhdj-G60PCOB3B50Ji348fVE1atvLYUpkqGJ0N3UIoVdUdQJi6ntxmw2_tX-ptIe5Vzm4kz-Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+<p>MySQL WorkBench GUI로 작업하였고<br>
+리소스는 .yml 파일을 사용했다.</p>
 
-<p>위와 같은 화면이 나오는데<br>
-나는 MacOS를 쓰고있어 All Platforms를 눌러주면된다.<br>
-그럼 zip파일 하나가 다운받아진다. <br>
-여기서 버젼확인을 꼭해주자. 의존라이브러리를 추가할때 해당버젼과 일치해야한다.</p>
-
-<p><strong>Gradle의 경우</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="nl">h2:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">214</span><span class="err">'</span>
-</code></pre></div></div>
-<p>와 같이 설정해 줄 수있다. 일반적으로 버전을 제외하고</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span>
-</code></pre></div></div>
-<p>로 설정하면 자동으로 가장 최신의 버전이 추가되는 것 같다.</p>
+<p>개발환경에 따른 MySQL 설치와 사용환경은 준비되어있다고 가정하겠다.</p>
 
 <p><br></p>
 
-<p><strong>Maven의 경우</strong></p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;dependencies&gt;</span>
-        <span class="c">&lt;!-- H2 데이터베이스 --&gt;</span>
-        <span class="nt">&lt;dependency&gt;</span>
-            <span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
-            <span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
-            <span class="nt">&lt;version&gt;</span>2.1.214<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;/dependencies&gt;</span>
+<p>1). bulid.gradle 설정</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
 </code></pre></div></div>
-<p>와 같은식으로 설정해줄 수 있다.</p>
 
-<p>해당 zip파일을 풀면 폴더하나가 나오게되는데<br>
-그안에서 bin -&gt; h2.sh 스크립트를 실행 시켜주면된다.</p>
+<p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNFlqigR274WJL2PPsEN4JlD7veQFTYLJYTVb8j7I5GyT6XrqeEGzG4Mb0D9CUpT_kRJ1fmVmzGr155UxFE0eUMn4L9WQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPblZtOwk13v1JuMtjCw_q4Zxe_35VFa7aTKSdeUfl6Q_giiD3K1DSTi5O9hwioe_7vFcEyled1c4jUNo1I8orXIomTQw=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>해당 파일 위치에서</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./h2.sh
-</code></pre></div></div>
-<p>를 실행 시켜주면 h2 data base 팝업이 발생하고  <br>
-<img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gODtoeY1H6bGiUOZQj8oP90Qh8CXysYw8Yu6BZ8MowLG0_yUB2ClmKn464zQMWxzYpitSiaI6ktPMoRVMZ1dDX72Npngg=w1920-h921" alt="image" class="align-left" style="max-width: 100%"> 아이콘이 상단에 떠있을 것이다.</p>
-
-<p>만약 종료시키고 싶으면 <code class="language-plaintext highlighter-rouge">Ctrl + C</code>를 눌러주면된다.</p>
-
-<p>만약 스크립트가 권한에 의해 실행되지 않는다면 chmod 명령어로 권한을 <br>
-부여해주면 쉽게 해결할 수 있다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ll
-</code></pre></div></div>
-<p>권한 확인 진행을 먼저해주고</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>755 h2.sh
-</code></pre></div></div>
-<p>를 해주게되면 정상적으로 진입할 수 있을 것이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMidCvQtnMFbQLRjWIfa1fgZLuIwDoOjR6himZX4bWnbhTxm4nKQEIfD20j3PcwRSuHB4kUfP1o8IMDOdHUObIgPKYHTA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>접속 URL 같은 정보들의 경우는<br>
-gradle과 maven에 따라다르지만 resources에 정보를 설정해주면된다.<br>
-혹시나 만약 해당 화면이 발생하지 않고 하얀화면만 나오면서<br>
-진입이 안되는 분이 있으시다면<br>
-포트번호 <code class="language-plaintext highlighter-rouge">:8082</code>앞에 localhost를 붙여보면 접속이 가능할 것이다.</p>
-
-<p>gradle 같은 경우에는</p>
-<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring.datasource.url</span><span class="p">=</span><span class="s">jdbc:h2:tcp://localhost/~/test</span>
-<span class="py">spring.datasource.username</span><span class="p">=</span><span class="s">sa</span>
-<span class="py">spring.datasource.password</span><span class="p">=</span>
-</code></pre></div></div>
-<p>application.properties 설정을 통해<br>
-접속 관련 정보를 설정해주면 된다.</p>
+<p>추가하고 Gradle Reload를 할 경우 위와 같이<br>
+라이브러리 패키지가 생기는 것을 확인할 수 있다.</p>
 
 <p><br></p>
 
-<p>Maven 같은 경우에도 마찬가지다</p>
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
-<span class="nt">&lt;persistence</span> <span class="na">version=</span><span class="s">"2.2"</span>
-             <span class="na">xmlns=</span><span class="s">"http://xmlns.jcp.org/xml/ns/persistence"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
-             <span class="na">xsi:schemaLocation=</span><span class="s">"http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;persistence-unit</span> <span class="na">name=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;properties&gt;</span>
-            <span class="c">&lt;!-- 필수 속성 --&gt;</span>
-            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.driver"</span> <span class="na">value=</span><span class="s">"org.h2.Driver"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.user"</span> <span class="na">value=</span><span class="s">"sa"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.password"</span> <span class="na">value=</span><span class="s">""</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"javax.persistence.jdbc.url"</span> <span class="na">value=</span><span class="s">"jdbc:h2:tcp://localhost/~/test"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hibernate.dialect"</span> <span class="na">value=</span><span class="s">"org.hibernate.dialect.H2Dialect"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;/properties&gt;</span>
-    <span class="nt">&lt;/persistence-unit&gt;</span>
-<span class="nt">&lt;/persistence&gt;</span>
-</code></pre></div></div>
-<p>과 같은 방식으로 <code class="language-plaintext highlighter-rouge">persistence.xml</code> 설정을 통해<br>
-정보를 입력해줄 수 있다.</p>
+<p>2). .yml 파일 설정</p>
 
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">jpa</span><span class="pi">:</span>
+    <span class="na">hibernate</span><span class="pi">:</span>
+      <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
+    <span class="na">show-sql</span><span class="pi">:</span> <span class="no">true</span>      <span class="c1"># SQL 쿼리 출력</span>
+    <span class="na">properties</span><span class="pi">:</span>
+      <span class="na">hibernate</span><span class="pi">:</span>
+        <span class="na">format_sql</span><span class="pi">:</span> <span class="no">true</span>  <span class="c1"># SQL pretty print</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
+    <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
+    <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>두번째로 연결을위한 .yml파일 설정이다.<br>
+프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br>
+properties 확장자를 application.yml로 변경하였다.</p>
+
+<p>spring : <br>
+jpa : <br>
+에 해당하는 부분은 jpa관련 설정이다.</p>
+
+<p>우리가 봐야할 부분은<br>
+spring :<br>
+datasource :<br>
+이부분이고 해당 부분에 MySQL 설정 정보를 넣어줘야한다.</p>
+
+<p>넣어줘야할 정보는 4가지 이다.</p>
+<ol>
+  <li>포트넘버</li>
+  <li>스키마 이름</li>
+  <li>유저네임</li>
+  <li>비밀번호</li>
+</ol>
+
+<p>이렇게 총 4가지의 정보를 넣어주면 되고 헷갈리는 분들을 위해<br>
+아래에 어디서 찾는지 적어보겠다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMhNZg3c_r7-tyQ6ah-HkOEeONcXSD64w0cUxE5XLW-io2P5ZFBiN76hPVzBOirmx9uSe1ZHKXh1LPJdVoKUw5EdNFM=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>워크밴치(MySQL WorkBench)를 열어보면<br>
+커넥션에 관한 정보가 나온다.<br>
+없으면 연결을 한번도 하지 않은 것이기에<br>
+커넥션을 만들어주면 된다.</p>
+
+<p>커넥션을 더블클릭 해보자</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMWmG9eP0IXOfylg3Yd7KogbYagkTaBHVVBdZ8HkYYj5U9ZGv3nsrr4jfWT-akqF_-tBnvVevuFvLxOMaJP5lnLCIfHyg=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>더블클릭을 하면 위와같은 팝업창을 확인할 수 있다.<br>
+여기서 주소는 localhost:3306 을 사용한다는 것을 알 수 있고<br>
+비밀번호를 입력하면 해당 커넥션으로 접속이 가능하다.</p>
+
+<p>여기서 알 수 있는 정보는</p>
+
+<p><strong>포트넘버 = 3306<br>
+유저네임 = root<br>
+비밀번호 = 본인이 설정한 해당 비밀번호</strong></p>
+
+<p>이렇게 알 수 있다.</p>
+
+<p>그리고 접속을 한 다음에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMyjrRQTmc6wDkRMAcH8mHN_x2desMUdZlWMJaUlk3XgnJtaB8kt8DmBJggjULMK_so9lyRIlxsiMlcq6arIxPpt6Jy=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>전체적인 화면을 볼 수 있는 Schemas에 들어가<br>
+스키마를 생성해주면 된다.</p>
+
+<p>생성한 스키마가 스키마이름이 되는 것이다.<br>
+나는 example로 설정했고<br>
+이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
+
+<p>이렇게 정리해서 정보를 적어보자면</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
+  <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
+  <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
+  <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>이렇게 설정할 수 있을 것이다.</p>
+
+<p>여기서 비밀번호를 까먹은 사람들이 많은데.. 까먹지 않도록 유의하자<br>
+처음에 mysql를 다운받고 설정한 비밀번호다.<br>
+인터넷에 비밀번호 리셋 하는법 등이 있으니 참고해보자</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/12/15/til.html" title="TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)">TIL) PreProject 진행, 팀장일지 (22.12.15 ~...</a><span></span>
+<a class="previous" href="/til/2022/11/14/til.html" title="TIL) API Documentation 2">TIL) API Documentation 2</a><a class="next" href="/til/2022/11/15/til.html" title="TIL) Application 빌드, 실행">TIL) Application 빌드, 실행</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/08/25/til.html" title="">TIL) HTML,CSS 목업화면 만들어보기</a></li>
-<li><a class="post-link" href="/til/2022/09/19/til.html" title="">TIL) 한달차 회고</a></li>
-<li><a class="post-link" href="/til/2022/12/05/til.html" title="">TIL) Cloud 운영 환경 구성 2</a></li>
-<li><a class="post-link" href="/til/2022/11/28/til.html" title="">TIL) Spring Security, JWT , OAuth 2 인증</a></li>
+        <li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="TIL) Application 빌드, 실행">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
+<li><a class="post-link" href="/til/2022/09/08/til.html" title="TIL) Application 빌드, 실행">TIL) Java 객체지향 - 추상화</a></li>
+<li><a class="post-link" href="/til/2022/12/14/til.html" title="TIL) Application 빌드, 실행">TIL) 네달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/08/29/til.html" title="TIL) Application 빌드, 실행">TIL) Git 기초</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-21T17:52:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">H2 Database 다운로드 및 실행</title><link href="http://localhost:4000/db/2022/12/19/h2setting.html" rel="alternate" type="text/html" title="H2 Database 다운로드 및 실행" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/h2setting</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/h2setting.html"><![CDATA[<p>오늘은 로컬에서 테스트할때 자주 사용하는<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-22T00:42:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
+연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어<br />
+EER 다이어 그램을 그려주는 기능을 사용해보려한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOYP0fQrmNAzvt44jM3q1Et2sG_V4E9GqAJGCu-W4sKhMubVYnEcUGzis00H57nfRzdoVy5xVSXQv4X_vAbgIxBcTgP=w1109-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>워크 밴치에서 Database -&gt; Reverse Engineer를 클릭해준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP0zs_9MFTLo-MHuS9FPm_HsJ6_YNUggGHBwOxhN61Ft7SbD6ic_M14WrgWHI8UME4DxG0RHdUomxyTraJIR7NzvNxSkQ=w1109-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>설정을 진행한 다음에 continue를 눌러준다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPscP5oY0PMeTDUsQS1kKvD1r3hG10L-PEHzW7pTZK6Xot231dfv96wzKIxO2kqzO9WXLa0pxu6TIWxyDcsos1GVFVYZQ=w1109-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>쭉쭉 진행</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPcPaDrNT08DemVCSislXXYTO9rc4w2qQjwuOKirkbzqYzvTW4TAAOVKJ9r7sT8h7W0DwuZgfVn1FpJlZimjzNqchNkHA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>EER 다이어그램으로 표시하고 싶은<br />
+스키마를 선택해줍니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOCcK5kxVJ7annhfMjE_M9fU6TKrpLb_oq0w1Q9uPoyPC1HUF2tStTOzOQyJoGqPN00zG-3p5w-AqAhsin33u3E0cHh=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>계속 진행해주시면 됩니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPMJUuXItWoog3cNtrvYUCmRuZIQE_6lX5Dj2r0PTxtX54xWDIVIza67950MG8VublQ_4Il2JjaQCQJTikDQltUtOIclQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Excute를 눌러줍니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPBfp0S8a2KUpRBbzLTcRLCKe5FUetyQDEvUZKKt_c3ecwA5Mbpye2UsIw7FZxq55FSS21KMJrerY6aSy6bNwJ31-k8dQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Continue 버튼을 눌러줍니다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMVJw0WqySpUAV7fD1xhefV-vo4mDPIOupuzYdz9-Vc4O3KS9yjd7Epj3AcUq4lnc345g23GckEg0RtZdOQO2diYL1q=w1109-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>그러면 최종적으로 EER Diagram 화면이 표시되는 모습을 볼 수 있습니다.<br />
+@ManyToOne, @OneToMany 등으로 연관관계 맵핑을<br />
+제대로 진행했는지 다이어그램으로 확인해 볼 수 있다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="H2" /><summary type="html"><![CDATA[mysql을 로컬로 연결한 다음 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어 EER 다이어 그램을 그려주는 기능을 사용해보려한다.]]></summary></entry><entry><title type="html">H2 Database 다운로드 및 실행</title><link href="http://localhost:4000/db/2022/12/19/db-h2setting.html" rel="alternate" type="text/html" title="H2 Database 다운로드 및 실행" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-h2setting</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-h2setting.html"><![CDATA[<p>오늘은 로컬에서 테스트할때 자주 사용하는<br />
 H2 Database를 다운받아 설정해보려한다.</p>
 
 <p><a href="http://www.h2database.com/html/main.html">h2 database 홈페이지</a>에 접속하면</p>
@@ -561,8 +598,7 @@ GitHub 컨벤션을 재정의했고, 브랜치도 이름을 다시 통일 시켰
 2. 칸반 보드 정리 및 마일스톤 작성 완료
 3. 깃헙 dev/front 브랜치 생성 및 초기설정 완료
 4. 연환 ) → feat/FE/Right Sidebar 진행시작
-    
-    혜원) → feat/FE/Header 진행시작
+   혜원) → feat/FE/Header 진행시작
     
 
 🔙  백엔드 작업
@@ -2282,358 +2318,4 @@ COPY ./ /usr/local/apache2/htdocs/
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 삼첩분식</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[Docker]]></summary></entry><entry><title type="html">TIL) Cloud 운영 환경 구성 2</title><link href="http://localhost:4000/til/2022/12/05/til.html" rel="alternate" type="text/html" title="TIL) Cloud 운영 환경 구성 2" /><published>2022-12-05T00:00:00+09:00</published><updated>2022-12-05T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/05/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/05/til.html"><![CDATA[<p>저번주에는 기본적인<br />
-Cloud 운영 환경에 대한 구성들을 배워 보았다.<br />
-이번 공부에서는 3티어 아키텍처 형태로 배포하는 방법을<br />
-배울 것이고, 저번주에 EC2에 서버를 배포해보는 것까지 해봤었다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMCqrjaGSYLYkne25hlMNNSGrxxCwtWjwIW1qahU8iTVkaJk3lgQwrF-ArVtHMFQcmUuojJ-JIIdF3Sujk5F4ZZuD8BHQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그 중에서도 우리는 EC2 인스턴스에<br />
-우리가 만든 Spring 프로젝트를 build하여<br />
-서버에 배포해보는 것까지 진행 했었다.</p>
-
-<p>오늘은 클라이언트(S3) 측과 데이터베이스(RDS) 측을 알아보자</p>
-
-<p><br /></p>
-
-<h3 id="클라이언트-배포">클라이언트 배포</h3>
-
-<p>우선 클라이언트의 프로젝트를 build하는 방법이<br />
-여러가지가 있는 것 같다. (java와 마찬가지로)</p>
-
-<p>그 중 터미널의 node를 이용해 build하는 작업을 진행해보자<br />
-(참고로 MacOS를 사용중)</p>
-
-<p><br /></p>
-
-<h4 id="1-프로젝트-build">1. 프로젝트 build</h4>
-
-<p>먼저 <a href="https://github.com/nvm-sh/nvm#install--update-script">nvm 설치</a>를 진행해주자.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-</code></pre></div></div>
-<p>공식 사이트에 있는 최신 버젼을 설치해주면 될 것 같다.<br />
-만약, wget을 찾을 수 없다는 알람이 뜬다면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>wget
-</code></pre></div></div>
-<p>wget을 패키지 관리자인 homebrew로 설치하면 된다.</p>
-
-<p>짤막한 지식과 검색을 통한 지식으로 정리를 해보자면<br />
-NVM은 Node Version Manager로 Node.js의 버전을 관리해주는 도구이다.  <br />
-Node.js는 브라우저 내에서 말고도 다른 환경에서도 JavaScript를 실행 시킬 수 있게<br />
-도와주는 실행창, 실행 환경이라고한다. (크롬의 js해석 엔진인 V8 엔진을 이용)</p>
-
-<p>그럼 이제 nvm 설치가 완료되었다면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nt">--version</span>
-</code></pre></div></div>
-<p>명령어로 설치가 되었는지 확인해주자.</p>
-
-<p>이제 nvm이 설치되었으니 <a href="https://nodejs.org/en/">node.js 설치</a>를 할 수 있다.  <br />
-해당 사이트에서 버전 확인이 가능하다.</p>
-
-<p>원하는 버전을 설치해줘도 되지만.. 16버전을 이용했을 때<br />
-오류가 없었기에</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install </span>16
-</code></pre></div></div>
-<p>이라고 입력해주면 16버전이 설치된다.</p>
-
-<p>최신 버전을 설치하고 싶을 경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install</span> <span class="nt">--lts</span>
-</code></pre></div></div>
-<p>를 입력해주면 최신버전이 설치가 된다.</p>
-
-<p>만약 설치를 여러개 하였을 때, 버젼을 변경해서 사용하고 싶을 경우<br />
-먼저 버전을 확인하고 싶으면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm list
-</code></pre></div></div>
-<p>명령어로 현재 설치된 버전이 확인된다.</p>
-
-<p>그리고 버전을 변경하고 싶을 경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm use 16
-</code></pre></div></div>
-<p>과 같은 식으로 현재 설치된 버전 중 선택해서 nvm use를 사용하면 변경된다.</p>
-
-<p><br /></p>
-
-<p>이제 실제로 클라이언트를 AWS를 이용해 배포해보자<br />
-우선 터미널로 우리가 만든 클라이언트 폴더에 접속한다.</p>
-
-<p>이동완료후 클라이언트 의존성 모듈을 설치해야한다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span>
-</code></pre></div></div>
-<p>npm은 Node Package Manager로 Node.js로 만들어진<br />
-프로그램을 쉽게 설치 혹은 여러기능들을 해주는 것이라 이해하면 쉬울 것 같다.</p>
-
-<p>설치가 완료되었으면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nt">-v</span>
-</code></pre></div></div>
-<p>명령어로 설치된 버전을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<p>이제 이 패키지 매니저로 우리는 build 명령을 실행할 것 인데<br />
-이전에 우리는 처음에 보았던 이그림을 볼 필요가 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMCqrjaGSYLYkne25hlMNNSGrxxCwtWjwIW1qahU8iTVkaJk3lgQwrF-ArVtHMFQcmUuojJ-JIIdF3Sujk5F4ZZuD8BHQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>현재 클라이언트와 서버가 연결되기 위해서는<br />
-build하기 전에 EC2의 주소를 이용해 환경변수로 설정해<br />
-연결을 해준 후 build를 진행해야 우리의 EC2 인스턴스와 연결되는 것 같다.</p>
-
-<p>아직 클라이언트 측의 구성이 정확히 어떻게 되어있는지 이해가 가진 않았다.<br />
-하지만 React에서 환경 변수를 사용할 경우 <code class="language-plaintext highlighter-rouge">.env</code>파일을 이용해<br />
-보안과 유지보수에 용이하게 사용하는 것 같다. (<a href="https://carmack-kim.tistory.com/111">ENV? - 출처: carmack-kim님 블로그</a>)</p>
-
-<p>우선 코드스테이츠 측에서 배포용으로 만들어준<br />
-클라이언트 프로그램에 <code class="language-plaintext highlighter-rouge">.env</code>파일에 EC2 경로를 추가해줘야한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNOxhLDZ27Sr73PjkWiOEuy7fxEbUeO8PExbopcMOhYwIE9voaaFWfTIfwUI1LRemjgPfidns6Qnaawzke-k1y8su_mvg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>내 EC2 인스턴스의 <code class="language-plaintext highlighter-rouge">퍼블릭 IPv4 DNS</code>를 입력해주면 된다.<br />
-환경 변수 설정이 끝났으면 이제 <code class="language-plaintext highlighter-rouge">npm</code>을 이용해 build를 진행해주면된다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build
-</code></pre></div></div>
-<p>를 입력해주면 build가 되어질 것이고</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMm2-cXyHyX_Dka-3eOFxiBi9Shvt6NpdXGyr4eeNvSiqYakRmHEw2IsC8VT2TjTHetmajHF85bfA8RoFaMV30SGUGA_Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">Compiled successfully</code>가 콘솔에 확인된다면<br />
-정상적으로 완료되었을 것이고 build 폴더가 생겼을 것이다.</p>
-
-<p>이제 클라이언트 프로그램이 build가 되었으니<br />
-AWS의 S3 버킷에 올리기만하면 된다.</p>
-
-<p><br /></p>
-
-<h4 id="2-build-파일-업로드">2. build 파일 업로드</h4>
-
-<p>여기서 버킷은 만들어져있다고 가정하고</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMt5DZC0u-iy00YbD24vOXQHSgoZuuE3TaqTJ9DKfV-rmiIHkzsemBccNULT5kX_op5CnQacIHp5zQqVrlpkoHVq0Hpvg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>만들어진 버킷을 보면 여러가지 확인과 설정을 할 수 있다.<br />
-객체에는 우리가 build한 파일을 업로드해주면된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP--JcVN_ro93rs0B8hRPIIlA8cCBE6S6EwLJ0t8J6FoCOkT2t2sGTXUypnYqIlnkgbzpmm2hhe5bT29_pdZrIg0EFejQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<h4 id="3-정적-웹사이트-호스팅-및-정책-설정확인">3. 정적 웹사이트 호스팅 및 정책 설정확인</h4>
-
-<p>속성에서 정적 웹 사이트 호스팅 편집이 가능하다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMuwTO1DRQvt3Cq_twhIxiSqw1TII2qdRKLPP1A5l32tOAWB9D4xT2R0aajpK14WWMR1RF9fp24Z_JH1hvhgchn4Luc=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>활성화를 눌러준 후 여러 설정을 할 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMRTfdAd-MrGvJWcOs8k6c8JsWUMENpfp8NHUYwB-wB_CcLPM9vI8MpR8NZFGUh9-MO4Pj_Jo_rIL98SAsTcQe0dO4pvw=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그리고 변경 저장을하면 엔드포인트를 확인할 수 있다.<br />
-해당 엔드포인트로 접속 시 우리가 빌드한 html을 확인할 수 있다.<br />
-하지만 만약 퍼블릭 엑세스 활성화를 하지 않았다면</p>
-
-<p>403 Forbidden 화면을 보게 될 것이다.<br />
-아래에서 설정해보자</p>
-
-<p><br /></p>
-
-<h4 id="4-퍼블릭-엑세스-활성화">4. 퍼블릭 엑세스 활성화</h4>
-
-<p>권한 텝에서 먼저</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOySHGyNBeD5ROwQcYrc7Q-LryyL0GpHOOWLW9cpO8IoJG2o0s68sAqdvbZYp07vh5vzgXQ4tz4Wx5FnXTVYJ-arLdYHg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>모든 퍼블릭 엑세스 차단 체크박스를 해제하고<br />
-변경 사항을 저장해준다.</p>
-
-<p>그리고 버킷 정책에서<br />
-편집 -&gt; 정책 생성기를 눌러</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gORyh2hy9R7NQi5ZFdxelWkB9PXqXFFkf5od8ptjyq_M2q6gMll9UJC8QAh0CWB0jNWXzOzEnN43dPeJJbeI9uPJFow=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>정책에 대한 내용을 적어준다.<br />
-해당 부분은 추후에 어떤 정책인지에 대한 내용은<br />
-어드벤스한 공부가 필요해보인다..</p>
-
-<p>우선 위와 같이 입력 완료 후<br />
-하단에 Add Statement를 눌러주면 Json 형태로 객체가 하나 나온다.<br />
-해당 코드 값을 복사해 정책 코드란에다가 붙여 넣어주면 된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO4sb2RQfnC9UAo9e3mqbNuAUAYCqlGSgh9Xi-0UL5QX5vFoKRL5G--penSCYSkN1KGUQN9LzKuR-cfxL8-qPOIjrhT=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그리고 변경 사항 저장을 눌러주면<br />
-해당 버킷에 대한 정책이 적용되어 퍼블릭 엑세스가 가능해진다.<br />
-아마 어디서든 접근이 가능하게 만들어진 것 같다.</p>
-
-<p>우선 이렇게 클라이언트에 배포를 하고 정책을 설정에 권한 부여를<br />
-할 수 있다는 흐름만 이해해야할 것 같다.</p>
-
-<p>이제 정상적으로 엔드포인트에 접속하면 우리가 만든 화면을 볼 수 있다.<br />
-여기서 알아둬야할 점은 클라이언트 S3에 설정이 끝났을 뿐<br />
-EC2에서는 S3의 엔드포인트를 config.domain에 설정해줘야한다.<br />
-설정해보기전에 RDS먼저 셋팅을 진행해보자</p>
-
-<p><br /></p>
-
-<h3 id="데이터베이스-연결">데이터베이스 연결</h3>
-
-<p>이제 RDS 인스턴스를 생성하고 연결해보자</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPt7L85pyOiBzvoUv4AoWFQRcZrAeTXi1e88euqY0WZwdeBy-fExoGosLSe_fFHmiIRcbyGesHL6tk9uH-P1LcPtRPHMQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>상단에서 RDS를 검색하여 데이터베이스 생성을 눌러준다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN269A-5fP5DuTNlzYOxjstGaW4ZQ7LhDuRqYLKO0zE0bSCrP8VS9z6hcT9CNfpacjfrb1_r44aoGEjD-HkeYCIOm5dxQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>사용하려는 데이터베이스의 엔진을 선택 !<br />
-나는 MySQL을 사용</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gORLVLuS8ordfLtooWUbgVapIf3PXVhjfSzClCSkdgFuaSgubU5LQwJs1HAIUh0GmqIBEOcCvuXN2pxthcBLJQpCtxFeA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>템플릿은 프리티어로 설정했다. 프리티어로 설정하면<br />
-MySQL의 db.t2.micro 인스턴스는 750시간이 무료사용 가능한 것 같다.<br />
-<a href="https://aws.amazon.com/ko/rds/free/">참고 - AWS 프리티어</a></p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPMDaskil2A9TqVUKLCShge25ti9mtf2nQUp67wJyOgx7ow6BFZNJQ-S1JUZAEjk_aqGqqo_ReFq4R1pTVp12HqdrnhGQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>여기서 이제 우리가 기억해야하는 부분이 나왔다.</p>
-
-<p>✅ 마스터 사용자 이름과 마스터 암호는<br />
-나중에 DB에 접근할때 꼭 필요한 값이니 기억해두거나<br />
-어딘가에 저장해두자 !</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqZjz97jIYND5PWh2kLo8O1rrpMicafKcPaDK7e4aOHR27d0apBQl3NJJ2G-ZTCiuTxoZ8wHnQ1MjwgQKaNaENBCUZBg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위에서 얘기했던 무료로 사용하기 위해 해당 옵션으로 설정</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOQ9Fc1p6L13bXI707a9Csgcs0oyQWQQvA7c4ZJs5x248-Mie6dXx8AZ04E_4_7oQjDmYuqy2Z0aixPrjjEg6wa--G5gg=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>퍼블릭 엑세스는 허용으로 해준다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMUDem6XIZCQA8hwXlATX6_JFFwo6w0ZNGrodOWnnmxjprmpjBmv1DKnJxcr3PGrahMDy_sVeqWftBU84OAozCd_WnXkQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그리고 데이터 베이스를 사용하기 위한<br />
-포트번호를 설정해둔다. 기본값은 3306이고<br />
-13306으로 변경해서 사용하려고 변경했다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOFFsQrJPtaKbAFAE6XirmNp2zBlyHRpgE4iOm9Cn1TZsxF6NHQU6N1PLVBSL-7Ay3Hyd6SiR5MrJNV7wEIeACkiiUz6w=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>추가 구성을 눌러<br />
-데이터 베이스의 이름을 설정해줄 수 있다.<br />
-이름을 지정한대로 후에 조회할때<br />
-해당 데이터 베이스 이름으로 조회가 된다. (test라고 지정했다고 가정하자)</p>
-
-<p><br /></p>
-
-<p>이제 모든 설정은 끝났으니<br />
-맨 하단에 데이터베이스 생성을 눌러 만들어주자<br />
-데이터베이스가 생성이 완료되면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN8tsT3QpYd684mkxbVNM6eWBUfuilsIcfBYaBjqCZfG4awLWyKRCR2NWeH9y4tslTrOXyOUDOfz2Mc7vWUhn6pvYEz=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>엔드 포인트와 설정했던 포트가 확인된다.<br />
-이제 우리는 이 데이터베이스로 EC2에서 접근을하면 된다.</p>
-
-<p>접근하기 이전에 정말로 정상적으로 동작되는지 확인해보고 싶다면<br />
-터미널로 확인이 가능하다.</p>
-
-<p>이전에 homebrew를 통해 MySQL을 설치했었다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>mysql
-</code></pre></div></div>
-
-<p>MYSQL이 정상적으로 설치가 완료되었다면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> <span class="o">[</span>마스터 이름] <span class="nt">--host</span> <span class="o">[</span>엔드 포인트 주소] <span class="nt">-P</span> <span class="o">[</span>포트 번호] <span class="nt">-p</span>
-</code></pre></div></div>
-<p>이렇게 입력해주면 터미널로 mysql 접속이 된다.</p>
-
-<p>예를 들어 데이터베이스 만들때 생성했던 정보가 아래와 같다고 가정해보자</p>
-
-<p>마스터 이름 : admin<br />
-마스터 비밀번호 : 1234<br />
-데이터 베이스 엔드포인트 : be-88-mycatlikeschuru.c0nwl8c1futc.ap-northeast-2.rds.amazonaws.com</p>
-
-<p>위와 같다고 가정할 때 아래와 같이 터미널에 명령을 실행시켜주면 된다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql <span class="nt">-u</span> admin <span class="nt">--host</span> be-88-mycatlikeschuru.c0nwl8c1futc.ap-northeast-2.rds.amazonaws.com <span class="nt">-P</span> 13306 <span class="nt">-p</span>
-</code></pre></div></div>
-<p>위와 같이 입력하면 비밀번호를 입력라고 나올텐데<br />
-우리가 설정했던 마스터 비밀번호 1234를 입력해주면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOglrCiBEQQTzd9iNGlQLu4azD8EDI_e2QjmV4gPddeD7GCX8znn1b6L0BZSRTPu4ssWWyEg4vu12DNRtZF3rLBTBW=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같이 mysql에 접근할 수 있는 것을 확인 할 수 있다.<br />
-실제로 <code class="language-plaintext highlighter-rouge">show databases;</code>를 입력해서<br />
-우리가 데이터베이스를 만들때 추가구성에서 넣었던 이름인<br />
-<code class="language-plaintext highlighter-rouge">test</code> 데이터베이스가 있는 것을 확인할 수 있다.</p>
-
-<p>이제 정상적으로 데이터베이스가 작동된다는 것도 확인하였고<br />
-이제 EC2에서 S3와 RDS를 연결해줘야한다.</p>
-
-<p><br /></p>
-
-<h3 id="클라이언트---서버---db">클라이언트 - 서버 - DB</h3>
-
-<p>위에서 클라이언트와 데이터베이스까지 생성하고 설정까지 끝냈다.</p>
-
-<p>EC2는 생각보다 간단하다.<br />
-여태까지 우리가 많이 설정해왔던 방식이고 익숙하기 때문이다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">.yml</code>파일이거나 혹은 <code class="language-plaintext highlighter-rouge">.properties</code>파일에 설정해주면된다.<br />
-<code class="language-plaintext highlighter-rouge">.properties</code>파일로 만들었으니 해당 기준으로 적어본다.</p>
-
-<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring.jpa.database</span><span class="p">=</span><span class="s">mysql</span>
-<span class="py">spring.jpa.database-platform</span><span class="p">=</span><span class="s">org.hibernate.dialect.MySQL5InnoDBDialect</span>
-<span class="py">spring.datasource.url</span><span class="p">=</span><span class="s">jdbc:mysql://[AWS RDS 엔드포인트]/test?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</span>
-<span class="py">spring.datasource.username</span><span class="p">=</span><span class="s">[RDS 마스터 이름]</span>
-<span class="py">spring.datasource.password</span><span class="p">=</span><span class="s">[RDS 마스터 비밀번호]</span>
-<span class="py">spring.datasource.driver-class-name</span><span class="p">=</span><span class="s">com.mysql.cj.jdbc.Driver</span>
-<span class="py">config.domain</span><span class="p">=</span><span class="s">[AWS S3 엔드포인트]</span>
-</code></pre></div></div>
-<p>위에 처럼 이제 우리가 모두 알 수 있는 정보다</p>
-
-<p>RDS를 만들었기에 엔드포인트를 알 수 있고<br />
-마스터 이름과 비밀번호도 우리가 생성했다.</p>
-
-<p>그리고 S3와 연결하기 위해 즉, 클라이언트와 연결하기위해<br />
-AWS S3 엔드포인트를 설정해주면 클라이언트에서<br />
-API 요청이 오면 이제 정상적으로 EC2 서버에서 작성한 프로그램대로<br />
-동작하는 모습을 확인할 수 있을 것이다.</p>
-
-<p><br /></p>
-
-<hr />
-
-<p>이렇게 아주 기초적인 3티어 아키텍처로<br />
-인스턴스를 만들어서 배포를 진행 해보았다.</p>
-
-<p>배포하는 과정에 엄청 공부할게 많구나라고 느꼈다.<br />
-지금은 거의 따라하는 수준이지만… 나중에는 실제로 운영을하려면<br />
-입맛에 맞게 변경하고 관리를 해야하기 때문에 AWS에 대한<br />
-공부가 필요해 보였다.</p>
-
-<p>어제 오늘 이렇게 배포를 해보면서 대략적인 감을 익혔고<br />
-같이 페어했던분이랑 너무 재밌게해서<br />
-더 오래 기억에 남을 것 같다.</p>
-
-<p>오늘 공부는 여기서 끝 !!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 김치찌개, 스팸계란부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[저번주에는 기본적인 Cloud 운영 환경에 대한 구성들을 배워 보았다. 이번 공부에서는 3티어 아키텍처 형태로 배포하는 방법을 배울 것이고, 저번주에 EC2에 서버를 배포해보는 것까지 해봤었다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 삼첩분식</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[Docker]]></summary></entry></feed>
