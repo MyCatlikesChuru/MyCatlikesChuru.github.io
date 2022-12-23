@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -1190,6 +1190,104 @@ GitHub 컨벤션을 재정의했고, 브랜치도 이름을 다시 통일 시켰
 
 <p><br></p>
 
+<h3 id="20221222-목">2022.12.22 (목)</h3>
+
+<p>오늘은 프론트엔드 백엔드 각각 파트에 맞춰서 작업을 진행하는 날이다.<br>
+오전부터 백엔드끼리 모여서 작업을 진행하기로 했다.</p>
+
+<h4 id="일정-및-todo-리스트-정리">일정 및 TODO 리스트 정리</h4>
+
+<p>서로의 역할에 대한 내용을 Issue에 적어 마일스톤과 칸반보드로<br>
+일정을 관리하기로 협의를 했다. 우선 프론트 엔드쪽만 마무리하였다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJkJMgcyfcKSzCEONpslxef22hwXt_s7YKJ7SaQaH7mYrGBYBOryBrEQjVt8pQyzEkuCnnKByVmPbhjRe_wII3izVcsQ=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo37uyzwTPU1Q0f-cBVDRzcbTI1OWdxbWkroNwhwXxBvW057IiQRF3EctxzFfb8JlPr_ht7JJtGvhYNsEM-NZ2sw44=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM8k4Y80lxCH4rV29YwWmYXies5WwcY7Aiy0GWXf_xvzl0xdzZFHtD9G4u1d7BtTaPKmW4Aqdqr6V9c3vGPr_P_DXVnHA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>쭉 해야하는 일을 전부 정리해 Todo로 올려놓고<br>
+진행중인 것들은 In Progress에 <br>
+완료한 것들은 Done에 올려 놓기로 하였다.</p>
+
+<p>일정상 뒤로 미뤄놓은 기능은 Back Log에 두었다.<br>
+일찍 개발을 마친다면 진행해볼 예정이다. 프론트엔드 일정정리를 마친다음에</p>
+
+<p>백엔드쪽도 API 명세서를 다시 작업을 하기 시작했다.<br>
+오전에 모든 API 명세서를 작성 완료하였고<br>
+명세서가 있으니 작업을 서로 어떤걸할지 뭔가 명확하게 나눠지는 느낌을 받았다.</p>
+
+<p>내용을 보고 우선 팀원들에게 의견을 물어보고<br>
+작업을 분배해드렸다. 오후 부터는 이제 개인 코딩의 시간이고<br>
+모르는 거나, 정해야할게 있을 수 있으니 디스코드에 상주하는 룰을 세웠다. (14:00~18:00)<br>
+그리고 이제 백엔드도 일정과 역할 분담을위해 마일스톤과 칸반 보드 작업을 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNHzo8QKU5q1pZKBkWyECrVLJ04_acxAmmk7RIeeiDfqufoKurNQBBDFJx5S5A_a_8upZ1gu7Plp8qpNO4p2EIxX-lYaQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><br></p>
+
+<h4 id="백엔드-서버-프로그래밍을-위한-기초-셋팅">백엔드 서버 프로그래밍을 위한 기초 셋팅</h4>
+
+<p>API별로 서로 개입없는 엔티티를 기준으로 우선 나누었다.<br>
+아마 서로 겹치는 부분들이 많아질 수도 있을 것 같아 지속적인 소통이 필요할 것 같고</p>
+
+<p>초기셋팅을 위한 프로그램을 IntelliJ 원격 연결을 이용해<br>
+작업을하기로 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPFNe6AXD1aS3Ev1wLR7w4PJYK5w9WACMXowgbll4DTMNW_de1dhfGxm9pZ1CaONUbuuQ2BA43mY4Re3nGIAHTcWigpGA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>원격으로 연결한 JetBrain Client의 화면 모습이다.<br>
+3명이 동시에 접속에 코드를 수정하기도 라이브로 지켜보는 것도 가능하다.<br>
+우선 의존라이브러리 관련 설정을 마친다음에 ERD와 테이블 명세서를 바탕으로<br>
+기본적은 Entity 필드를 채우고 연관관계 맵핑을 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPBtCw37Mhr56u8T5sg3cuwWHqujObk-9xOfthj6g95L9aQa7yE8dQ8P0GNI7I1BBoXeGOEM2MK06RBEhYyHd4z-E8B4A=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>연관관계 맵핑완료한다음 mysql을 로컬로 접속한다음에<br>
+ER 다이어그램을 그려주는 툴을 이용해 자동생성해 보았는데<br>
+이전에 우리가 ERD에서 설계한 모습과 동일하게 뽑혔다.</p>
+
+<p>왠지모르게 우리가 설계한대로 딱 들어맞으니까 기분이 좋았고<br>
+방향성을 잘 잡고 가고있구나? 라는 느낌을 받았다 ㅎㅎ..</p>
+
+<p>이렇게 오늘은 기초셋팅을 끝낸다음에<br>
+내일부터 각자의 분량을 feat 브랜치로 만들어 작업하기로했다.</p>
+
+<p><br></p>
+
+<h4 id="회의록-및-정리-1">회의록 및 정리</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>📢  공통
+
+- 릴리즈 시 모두 git pull
+- 오후 시간 14:00 ~ 18:00 내 회의방 접속 유지
+
+🖥  프론트엔드 작업
+
+1) Header 컴포넌트 디자인 및 레이아웃 작성 + 반응형 디자인 구현 완료    
+2) All Questions 컴포넌트 작업 진행 (우측 네비게이션바 등)  
+3) Sign up 페이지 레이아웃 작성 완료  
+4) right sidebar 컴포넌트 레이아웃 작성 완료    
+5) main page 레이아웃 작성중 (오늘 중 완료 예정)
+
+🔙  백엔드 작업
+
+- API 명세서 1차 작성 완료(Backlog : grey color로 표기)
+- API Controller 개발관련 백엔드 업무분장 완료(Github 내 이슈 및 칸반 업데이트 완료)
+</code></pre></div></div>
+
+<p><br></p>
+
+<h3 id="20221223-금">2022.12.23 (금)</h3>
+
+<p>오늘은 본격적으로 각자 프로그램을 하면서<br>
+API 명세서를 통해 각자 담당한 프로그램을 작성하는 날이다.</p>
+
+<p>역할분담이 명확하게 나눠져서 얼추 시작하는데는 무리가 없을 것 같다.<br>
+이제 프로그램을 작성해가면서 uri 혹은 Json 안에 내용들이 조금씩 변경 될 것 같긴하다.<br>
+그래도 가이드라인이 있으니 뭔가 빨리할 것 같은 느낌이다 ㅎㅎ</p>
+
+<p><img src="" alt="image" class="align-left" style="max-width: 100%"></p>
 
 
     </div>
@@ -1201,10 +1299,10 @@ GitHub 컨벤션을 재정의했고, 브랜치도 이름을 다시 통일 시켰
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/22/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring Security 3 (권한부여)</a></li>
-<li><a class="post-link" href="/til/2022/09/20/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 재귀</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="H2 Database 다운로드 및 실행">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
-<li><a class="post-link" href="/til/2022/10/25/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring Exception 1</a></li>
+        <li><a class="post-link" href="/til/2022/09/06/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 객체지향 - 상속, 캡슐화</a></li>
+<li><a class="post-link" href="/til/2022/09/21/til.html" title="H2 Database 다운로드 및 실행">TIL) Json</a></li>
+<li><a class="post-link" href="/til/2022/11/28/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring Security, JWT , OAuth 2 인증</a></li>
+<li><a class="post-link" href="/til/2022/11/30/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring WebFlux Project Reactor</a></li>
 </ul>
     </div>
 <div class="post-comments">

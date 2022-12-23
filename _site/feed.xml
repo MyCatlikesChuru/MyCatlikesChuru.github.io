@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-22T00:42:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-23T12:13:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어<br />
 EER 다이어 그램을 그려주는 기능을 사용해보려한다.</p>
 
@@ -35,7 +35,7 @@ EER 다이어 그램을 그려주는 기능을 사용해보려한다.</p>
 
 <p>그러면 최종적으로 EER Diagram 화면이 표시되는 모습을 볼 수 있습니다.<br />
 @ManyToOne, @OneToMany 등으로 연관관계 맵핑을<br />
-제대로 진행했는지 다이어그램으로 확인해 볼 수 있다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="H2" /><summary type="html"><![CDATA[mysql을 로컬로 연결한 다음 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어 EER 다이어 그램을 그려주는 기능을 사용해보려한다.]]></summary></entry><entry><title type="html">H2 Database 다운로드 및 실행</title><link href="http://localhost:4000/db/2022/12/19/db-h2setting.html" rel="alternate" type="text/html" title="H2 Database 다운로드 및 실행" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-h2setting</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-h2setting.html"><![CDATA[<p>오늘은 로컬에서 테스트할때 자주 사용하는<br />
+제대로 진행했는지 다이어그램으로 확인해 볼 수 있다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[mysql을 로컬로 연결한 다음 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어 EER 다이어 그램을 그려주는 기능을 사용해보려한다.]]></summary></entry><entry><title type="html">H2 Database 다운로드 및 실행</title><link href="http://localhost:4000/db/2022/12/19/db-h2setting.html" rel="alternate" type="text/html" title="H2 Database 다운로드 및 실행" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-h2setting</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-h2setting.html"><![CDATA[<p>오늘은 로컬에서 테스트할때 자주 사용하는<br />
 H2 Database를 다운받아 설정해보려한다.</p>
 
 <p><a href="http://www.h2database.com/html/main.html">h2 database 홈페이지</a>에 접속하면</p>
@@ -628,7 +628,106 @@ GitHub 컨벤션을 재정의했고, 브랜치도 이름을 다시 통일 시켰
 <p>이렇게 3일 동안 문서만 작성했지만<br />
 이제 얼추 정리되어 뭔가 하나씩 진행되는 느낌이든다 !!</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
+<p><br /></p>
+
+<h3 id="20221222-목">2022.12.22 (목)</h3>
+
+<p>오늘은 프론트엔드 백엔드 각각 파트에 맞춰서 작업을 진행하는 날이다.<br />
+오전부터 백엔드끼리 모여서 작업을 진행하기로 했다.</p>
+
+<h4 id="일정-및-todo-리스트-정리">일정 및 TODO 리스트 정리</h4>
+
+<p>서로의 역할에 대한 내용을 Issue에 적어 마일스톤과 칸반보드로<br />
+일정을 관리하기로 협의를 했다. 우선 프론트 엔드쪽만 마무리하였다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJkJMgcyfcKSzCEONpslxef22hwXt_s7YKJ7SaQaH7mYrGBYBOryBrEQjVt8pQyzEkuCnnKByVmPbhjRe_wII3izVcsQ=w1184-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo37uyzwTPU1Q0f-cBVDRzcbTI1OWdxbWkroNwhwXxBvW057IiQRF3EctxzFfb8JlPr_ht7JJtGvhYNsEM-NZ2sw44=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM8k4Y80lxCH4rV29YwWmYXies5WwcY7Aiy0GWXf_xvzl0xdzZFHtD9G4u1d7BtTaPKmW4Aqdqr6V9c3vGPr_P_DXVnHA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>쭉 해야하는 일을 전부 정리해 Todo로 올려놓고<br />
+진행중인 것들은 In Progress에 <br />
+완료한 것들은 Done에 올려 놓기로 하였다.</p>
+
+<p>일정상 뒤로 미뤄놓은 기능은 Back Log에 두었다.<br />
+일찍 개발을 마친다면 진행해볼 예정이다. 프론트엔드 일정정리를 마친다음에</p>
+
+<p>백엔드쪽도 API 명세서를 다시 작업을 하기 시작했다.<br />
+오전에 모든 API 명세서를 작성 완료하였고<br />
+명세서가 있으니 작업을 서로 어떤걸할지 뭔가 명확하게 나눠지는 느낌을 받았다.</p>
+
+<p>내용을 보고 우선 팀원들에게 의견을 물어보고<br />
+작업을 분배해드렸다. 오후 부터는 이제 개인 코딩의 시간이고<br />
+모르는 거나, 정해야할게 있을 수 있으니 디스코드에 상주하는 룰을 세웠다. (14:00~18:00)<br />
+그리고 이제 백엔드도 일정과 역할 분담을위해 마일스톤과 칸반 보드 작업을 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNHzo8QKU5q1pZKBkWyECrVLJ04_acxAmmk7RIeeiDfqufoKurNQBBDFJx5S5A_a_8upZ1gu7Plp8qpNO4p2EIxX-lYaQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<h4 id="백엔드-서버-프로그래밍을-위한-기초-셋팅">백엔드 서버 프로그래밍을 위한 기초 셋팅</h4>
+
+<p>API별로 서로 개입없는 엔티티를 기준으로 우선 나누었다.<br />
+아마 서로 겹치는 부분들이 많아질 수도 있을 것 같아 지속적인 소통이 필요할 것 같고</p>
+
+<p>초기셋팅을 위한 프로그램을 IntelliJ 원격 연결을 이용해<br />
+작업을하기로 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPFNe6AXD1aS3Ev1wLR7w4PJYK5w9WACMXowgbll4DTMNW_de1dhfGxm9pZ1CaONUbuuQ2BA43mY4Re3nGIAHTcWigpGA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>원격으로 연결한 JetBrain Client의 화면 모습이다.<br />
+3명이 동시에 접속에 코드를 수정하기도 라이브로 지켜보는 것도 가능하다.<br />
+우선 의존라이브러리 관련 설정을 마친다음에 ERD와 테이블 명세서를 바탕으로<br />
+기본적은 Entity 필드를 채우고 연관관계 맵핑을 진행했다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPBtCw37Mhr56u8T5sg3cuwWHqujObk-9xOfthj6g95L9aQa7yE8dQ8P0GNI7I1BBoXeGOEM2MK06RBEhYyHd4z-E8B4A=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>연관관계 맵핑완료한다음 mysql을 로컬로 접속한다음에<br />
+ER 다이어그램을 그려주는 툴을 이용해 자동생성해 보았는데<br />
+이전에 우리가 ERD에서 설계한 모습과 동일하게 뽑혔다.</p>
+
+<p>왠지모르게 우리가 설계한대로 딱 들어맞으니까 기분이 좋았고<br />
+방향성을 잘 잡고 가고있구나? 라는 느낌을 받았다 ㅎㅎ..</p>
+
+<p>이렇게 오늘은 기초셋팅을 끝낸다음에<br />
+내일부터 각자의 분량을 feat 브랜치로 만들어 작업하기로했다.</p>
+
+<p><br /></p>
+
+<h4 id="회의록-및-정리-1">회의록 및 정리</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>📢  공통
+
+- 릴리즈 시 모두 git pull
+- 오후 시간 14:00 ~ 18:00 내 회의방 접속 유지
+
+🖥  프론트엔드 작업
+
+1) Header 컴포넌트 디자인 및 레이아웃 작성 + 반응형 디자인 구현 완료    
+2) All Questions 컴포넌트 작업 진행 (우측 네비게이션바 등)  
+3) Sign up 페이지 레이아웃 작성 완료  
+4) right sidebar 컴포넌트 레이아웃 작성 완료    
+5) main page 레이아웃 작성중 (오늘 중 완료 예정)
+
+🔙  백엔드 작업
+
+- API 명세서 1차 작성 완료(Backlog : grey color로 표기)
+- API Controller 개발관련 백엔드 업무분장 완료(Github 내 이슈 및 칸반 업데이트 완료)
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="20221223-금">2022.12.23 (금)</h3>
+
+<p>오늘은 본격적으로 각자 프로그램을 하면서<br />
+API 명세서를 통해 각자 담당한 프로그램을 작성하는 날이다.</p>
+
+<p>역할분담이 명확하게 나눠져서 얼추 시작하는데는 무리가 없을 것 같다.<br />
+이제 프로그램을 작성해가면서 uri 혹은 Json 안에 내용들이 조금씩 변경 될 것 같긴하다.<br />
+그래도 가이드라인이 있으니 뭔가 빨리할 것 같은 느낌이다 ㅎㅎ</p>
+
+<p><img src="" alt="image" class="align-left" style="max-width: 100%" /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
 아직 2달이라는 프로젝트 기간이 남았지만<br />
 코드스테이츠의 정식적인 교육 기간은 종료되었다.</p>
 
