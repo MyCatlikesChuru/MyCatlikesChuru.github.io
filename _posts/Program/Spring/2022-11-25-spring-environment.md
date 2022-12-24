@@ -111,7 +111,7 @@ bash를 사용하고 있는 경우에는 .bashrc 파일에 등록!
 **3). 환경 변수를 등록합니다.**
 
 ```shell
-echo JWT_SECRET_KEY=LeeJaehyeok637637123231231231123
+export JWT_SECRET_KEY=LeeJaehyeok637637123231231231123
 ```
 현재 내가 등록하려는 환경변수는 `JWT_SECRET_KEY` 라는 이름으로  
 위에서 설정한다고 얘기했었고, 해당 값은 위처럼 `LeeJaehyeok637637123231231231123`을  
@@ -135,7 +135,7 @@ echo 명령어를 이용하면 지정해서 확인이 가능하다.
 내가 등록한 환경변수는 `JWT_SECRET_KEY`로 등록했기에  
 해당 명령어를 입력하면 아래와 같이 표시된다면 정상이다.  
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJh2n11ERgYKg0d3nAkDTsgg7LPqEe2CpPKYPF1Z_QrHIuceZwiBV8Yk3kndJG8x8yQFFPKWCfp-kBFUZAkkOK4WfrBg=w1512-h864){: .align-left style="max-width: 100%"}
+![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMfNazbTwjRjAfZADXUWKR8xiTD1bpSh4-XaOS7vtdlPdUsHEPzf2iotECtJ3FMEjpP0fFSoXDSzIPqUCrW6FyNPP3Gng=w1000-h921){: .align-left style="max-width: 100%"}
 
 그럼 여기까지 설정하고 조회까지 해보았으면  
 환경변수 설정에는 문제가 없는 것이다.  
