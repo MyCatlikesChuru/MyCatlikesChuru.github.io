@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Spring) CORS 설정 방법
+title: Spring) CORS 설정하기
 subtitle: Mac 환경변수 적용안되는 문제
 categories: Spring
 tags: [Spring, cors]
 comments: true
-published: false
+published: true
 ---
 
 오늘은 CORS에 대한 내용을 간단하게 적어보려한다.
@@ -29,7 +29,7 @@ public class TodoListController {
 
 <br/>
 
-2). 
+**2). 빈 객체를 만들어 설정하는 방법**
 
 ```java
 @SpringBootApplication

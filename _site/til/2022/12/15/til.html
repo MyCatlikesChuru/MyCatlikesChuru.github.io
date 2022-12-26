@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 29 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -1280,6 +1280,8 @@ ER 다이어그램을 그려주는 툴을 이용해 자동생성해 보았는데
 
 <h3 id="20221223-금">2022.12.23 (금)</h3>
 
+<h4 id="개인-코딩-집중-시간">개인 코딩 집중 시간</h4>
+
 <p>오늘은 본격적으로 각자 프로그램을 하면서<br>
 API 명세서를 통해 각자 담당한 프로그램을 작성하는 날이다.</p>
 
@@ -1287,7 +1289,303 @@ API 명세서를 통해 각자 담당한 프로그램을 작성하는 날이다.
 이제 프로그램을 작성해가면서 uri 혹은 Json 안에 내용들이 조금씩 변경 될 것 같긴하다.<br>
 그래도 가이드라인이 있으니 뭔가 빨리할 것 같은 느낌이다 ㅎㅎ</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPCsu-M8PS7EjIToFaQp-Sj1deXaVJZS8HIwQg8WObKWWmVXwhCWMfNdqDlslOyDfget8WIceClpcJxgGCGyvjjepAi=w1000-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPh3zpX0pmXcE808V1qStyobrWYWEnrWROQ7NbFSuY3VvG0Z6GmIxrMXR-C3uot3knXYIl8rDIyyT4NZlOpDW5SOpIr=w1000-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>GitHub Insights의 Network로 Branch 작업이 잘되는지 확인이 가능하다.
+모두가 각자 역할에 맞게 작업을 진행하고 있다.</p>
+
+<p>초반에 컨벤션과 브랜치 전략을 잘 정하고<br>
+연습하는 시간을 다 같이 가져가서 그런지<br>
+모두들 실수없이 작업을 잘해주고 있는 모습이다.</p>
+
+<p>내가 맡은 기능 중 오늘 작업을 완료한 것은<br>
+질문 포스팅하기, 질문한 포스팅 조회, 답변 포스팅하기 이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMoFw8zCVFy4P5w_gkzX6uk9k1dZcqlHOBGV1hSzKJw6lyfsK6fda8oPnF97CC3xCQNxC99FNLzKYTW31FP7TBC_cOSlw=w1000-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>위에 내용들은 우선 작업을 끝냈다.<br>
+작업하면서 태그 관련 내용도 겹쳐서 그부분 관련해서도 완료를 해버렸다.<br>
+그렇게 오늘 작업을 어느정도 끝마치고 클라이언트에서 로그인된 사용자로<br>
+게시글 포스팅, 답변 포스팅에 foreign key로 객체를 지정해줘야하는데<br>
+현재 Spring Security 부분을 프로그램하지 않아 Mock 데이터로 먼저 넣어두었다.</p>
+
+<p>기본적인 Spring Security 틀을 작성하였고 <br>
+나머지는 내일 마무리 해보려한다.</p>
+
+<p><br></p>
+
+<h4 id="회의록-및-정리-2">회의록 및 정리</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>📢  공통 토의사항
+
+- 기본 유저 이미지 저장방법 검토 및 URL 전달 방식 확인 필요
+- 로그인 인증 방법
+    1. 유저네임, 패스워드 프→백으로 전달
+    2. 백엔드 패스워드 암호화 및 백→프로 JWT토큰 전달
+    3. 추후 요청시 JWT토큰 포함하여 프 →백으로 전달
+    4. 백엔드 JWT토큰으로 유저 일치 판단
+
+🖥  프론트엔드 작업
+
+- Ask a Question 페이지 레이아웃 / 반응형 구현 완료
+- 메인페이지 일부 수정 및 반응형 구현 완료
+- Sign up 페이지 반응형 구현 완료
+- Header 모바일 페이지 사이즈 반응형 구현 완료(버그 픽스)
+- Left Nav 레이아웃 작성 중
+- Footer 레이아웃 영역 확보
+
+🔙  백엔드 작업
+
+- API기능 구현 완료
+    - 회원가입(signup)
+    - 질문 게시글  작성 및 확인
+    - Tags  화면 이동및 페이지네이션
+    - Users 화면 이동 및 페이지네이션
+    - 개인 프로필
+- API기능 구현 진행
+    - Spring Security 로그인 기능 및 인증 구현 중
+    - Home 화면 구현 진행 예정
+        
+        
+- 프론트 요청사항
+    - Tag, User 이동 화면 내 페이지네이션 더미데이터 최대 100개 추가 요망(5~6page)
+</code></pre></div></div>
+
+<p><br></p>
+
+<h3 id="20221224-토">2022.12.24 (토)</h3>
+
+<h4 id="spring-security-적용">Spring Security 적용</h4>
+
+<p>오늘 정규 코딩 시간은 끝이났고<br>
+이제 남은 API를 작성하면 되는데, 작성하기 전에<br>
+Spring Security를 먼저 작업해야겟다고 생각했다.</p>
+
+<p>기본적인 메서드에 대한 권한과 인증, 인가 관련해<br>
+Spring Security + JWT 기본 뼈대를 잡아갔다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP8jsOJ7ahKbNsP4G_8VxcOGOF3oBrk8kCSfK9e3Dy8RnXfFzd5x1_U16a_p2PmzwpcvdC9be0GTe-fYqgca1CDEepm=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>회원 가입 -&gt; 로그인 하였을 때, 가입된 사용자의<br>
+username과 password가 일치하면 JWT를 Header에 담아 응답해줬다.</p>
+
+<p>후에 사용자가 어떤요청을 할때 request에 JWT를 담아서 보내주면<br>
+해당 정보로 우리가 어떤 사용자인지 판단하고, 인가과정을 진행한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNJZmCtAcRUTaKAKeTp5lWFLn90IKJaHhk619eiTnlHtkVhsWB58voqE48m_X7IwKRW_yJsZGeAX9s6qc57g8asHfCpUQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>PAYLOAD안에 권한과, MemberId를 넣어 두었고<br>
+sub에는 이메일 정보를 넣어놓았다. (사실 sub에 어떤걸 넣어야 잘 만든 토큰인지 아직모르겠음)<br>
+해당 memberId로 JWT가 담긴 요청이 왔을 경우 애노테이션을 커스터마이징해<br>
+받을 수 있도록 추가해줬다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">SecurityFilterChain</span> <span class="nf">filterChain</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span>
+                <span class="o">.</span><span class="na">headers</span><span class="o">().</span><span class="na">frameOptions</span><span class="o">().</span><span class="na">sameOrigin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">csrf</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">cors</span><span class="o">(</span><span class="nc">Customizer</span><span class="o">.</span><span class="na">withDefaults</span><span class="o">())</span> <span class="c1">// corsConfigurationSource라는 이름으로 등록된 Bean을 사용한다고 정의</span>
+                <span class="o">.</span><span class="na">sessionManagement</span><span class="o">().</span><span class="na">sessionCreationPolicy</span><span class="o">(</span><span class="nc">SessionCreationPolicy</span><span class="o">.</span><span class="na">STATELESS</span><span class="o">)</span> <span class="c1">// 세션 정책 추가 (JWT사용으로 STATELESS로 설정)</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">formLogin</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// CSR 방식사용으로 formLogin 비활성화</span>
+                <span class="o">.</span><span class="na">httpBasic</span><span class="o">().</span><span class="na">disable</span><span class="o">()</span> <span class="c1">// UsernamePasswordAuthenticationFilter 등 비활성화</span>
+                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">()</span> <span class="c1">// 예외처리 기능이 작동</span>
+                <span class="o">.</span><span class="na">authenticationEntryPoint</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAuthenticationEntryPoint</span><span class="o">())</span>  <span class="c1">// 인증 실패시 처리</span>
+                <span class="o">.</span><span class="na">accessDeniedHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAccessDeniedHandler</span><span class="o">())</span> <span class="c1">// 인증 실패시 처리</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomFilterConfigurer</span><span class="o">())</span> <span class="c1">// 커스터마이징한 필터를 추가할 수 있음</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">authorizeHttpRequests</span><span class="o">(</span><span class="n">authorize</span> <span class="o">-&gt;</span> <span class="n">authorize</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="s">"/users/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/users/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">PATCH</span><span class="o">,</span> <span class="s">"/users/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="s">"/users/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="s">"/questions/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/questions/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">PATCH</span><span class="o">,</span> <span class="s">"/questions/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="s">"/questions/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="s">"/tags/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/tags/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">PATCH</span><span class="o">,</span> <span class="s">"/tags/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="s">"/tags/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="s">"/answers/**"</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/answers/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">PATCH</span><span class="o">,</span> <span class="s">"/answers/**"</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="nc">HttpMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="s">"/answers/**"</span><span class="o">).</span><span class="na">hasAnyRole</span><span class="o">(</span><span class="s">"USER"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">permitAll</span><span class="o">()</span>
+                <span class="o">);</span>
+        <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>로그인 사용자에 맞게 권한 설정도 완료하여 테스트까지 끝 !!!</p>
+
+<p>오늘은 Spring Security 작업을 다 끝낸 것만해도<br>
+너무 만족스러운 하루였고.. 직접 다시 짜보기 시작하니까 (거의 복붙이지만)<br>
+다시 머릿속에 적립이 되어지는 느낌을 받아 너무 좋았다.</p>
+
+<p><br></p>
+
+<h3 id="20221225-일">2022.12.25 (일)</h3>
+
+<p>오늘은 크리스마스~ 🎄<br>
+오전, 점심 내내 놀다가 저녁이 되서야 작업을 해본다..</p>
+
+<h4 id="투표-기능-개발">투표 기능 개발</h4>
+
+<p>어제 Spring Security 관련 테스트를 완료했고<br>
+오늘은 투표 기능을 전부 마무리하려한다. (게시글, 답변 투표 up,down)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuestionVoteService</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">QuestionVoteRepository</span> <span class="n">questionVoteRepository</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">increaseVote</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">,</span> <span class="nc">Question</span> <span class="n">question</span><span class="o">){</span>
+        <span class="nc">QuestionVote</span> <span class="n">questionVote</span> <span class="o">=</span> <span class="n">findQuestionVote</span><span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">question</span><span class="o">);</span>
+
+        <span class="k">if</span><span class="o">(</span><span class="n">questionVote</span><span class="o">.</span><span class="na">getStatus</span><span class="o">().</span><span class="na">toString</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"UP"</span><span class="o">)){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">VOTE_NOT_ALLOW</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">questionVote</span><span class="o">.</span><span class="na">getStatus</span><span class="o">().</span><span class="na">toString</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"NONE"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">questionVote</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">VoteStatus</span><span class="o">.</span><span class="na">UP</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">questionVote</span><span class="o">.</span><span class="na">getStatus</span><span class="o">().</span><span class="na">toString</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"DOWN"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">questionVote</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">VoteStatus</span><span class="o">.</span><span class="na">NONE</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">question</span><span class="o">.</span><span class="na">setQuestionVoteCount</span><span class="o">(</span><span class="n">question</span><span class="o">.</span><span class="na">getQuestionVoteCount</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">decreaseVote</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">,</span> <span class="nc">Question</span> <span class="n">question</span><span class="o">){</span>
+        <span class="nc">QuestionVote</span> <span class="n">questionVote</span> <span class="o">=</span> <span class="n">findQuestionVote</span><span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">question</span><span class="o">);</span>
+
+        <span class="k">if</span><span class="o">(</span><span class="n">questionVote</span><span class="o">.</span><span class="na">getStatus</span><span class="o">().</span><span class="na">toString</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"DOWN"</span><span class="o">)){</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">VOTE_NOT_ALLOW</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">questionVote</span><span class="o">.</span><span class="na">getStatus</span><span class="o">().</span><span class="na">toString</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"NONE"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">questionVote</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">VoteStatus</span><span class="o">.</span><span class="na">DOWN</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">questionVote</span><span class="o">.</span><span class="na">getStatus</span><span class="o">().</span><span class="na">toString</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"UP"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">questionVote</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">VoteStatus</span><span class="o">.</span><span class="na">NONE</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">question</span><span class="o">.</span><span class="na">setQuestionVoteCount</span><span class="o">(</span><span class="n">question</span><span class="o">.</span><span class="na">getQuestionVoteCount</span><span class="o">()</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">QuestionVote</span> <span class="nf">findQuestionVote</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">,</span> <span class="nc">Question</span> <span class="n">question</span><span class="o">){</span>
+        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">QuestionVote</span><span class="o">&gt;</span> <span class="n">findQuestionVote</span> <span class="o">=</span> <span class="n">questionVoteRepository</span><span class="o">.</span><span class="na">findByMemberAndQuestion</span><span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">question</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">!</span><span class="n">findQuestionVote</span><span class="o">.</span><span class="na">isPresent</span><span class="o">()</span> <span class="o">?</span> <span class="n">createVote</span><span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">question</span><span class="o">)</span> <span class="o">:</span> <span class="n">findQuestionVote</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">QuestionVote</span> <span class="nf">createVote</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">,</span> <span class="nc">Question</span> <span class="n">question</span><span class="o">){</span>
+        <span class="nc">QuestionVote</span> <span class="n">questionVote</span> <span class="o">=</span> <span class="nc">QuestionVote</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">status</span><span class="o">(</span><span class="nc">VoteStatus</span><span class="o">.</span><span class="na">NONE</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">member</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">question</span><span class="o">(</span><span class="n">question</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">questionVoteRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">questionVote</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>서비스 로직 작성에는 그렇게 큰 어려움을 겪지는 않았다.<br>
+다만 JPA가 아직 익숙하지가 않아… 쿼리를 어떻게 작성하지? 라는 <br>
+의문이 계속생겼고… 내가 원하는 엔티티의 데이터를 정리해서 가져오는 일은<br>
+그렇게 쉬운 일이 아니였다고 느꼈다…</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">QuestionVoteRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">QuestionVote</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">QuestionVote</span><span class="o">&gt;</span> <span class="nf">findByMemberAndQuestion</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">,</span> <span class="nc">Question</span> <span class="n">question</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>어떤 사용자가 눌럿는지와 어떤 질문에 눌럿는지를 확인하기 위해서<br>
+<code class="language-plaintext highlighter-rouge">findByMemberAndQuestion</code>으로 만들어 쿼리를 날려주었다.<br>
+두개의 객체와 동일한 데이터만 가져오고 싶었기 때문이다.</p>
+
+<p>JPA관련 공부를 계속하면서… 아…<br>
+내가 제대로 이해하지 못하고 사용하는 부분이 많았구나 느끼는 하루였다.  <br>
+조금더 사용에 익숙해지도록 지식습득을 계속 해야할 것 같다.</p>
+
+<p>이제 게시글, 답변 삭제,편집에 대한 API 기능만 처리해주면<br>
+얼추 사용하는데 무리없이 진행이될 것 같다.<br>
+삭제할 경우에는 연관관계되어있는 부분을 모두 제거해줘야하므로 <br>
+<code class="language-plaintext highlighter-rouge">CascadeType.REMOVE</code>에 대한 공부가 조금 필요할 것 같다는 생각이 든다.</p>
+
+<p><br></p>
+
+<h3 id="20221226-월">2022.12.26 (월)</h3>
+
+<p>프로젝트가 어느덧 절반을 달려왔다.<br>
+이제 요번주만 작업을 하면 다음주까지 제출해야하므로<br>
+이번주부터는 정말 할일이 많아질 것 같다.</p>
+
+<p>우선 배포하는 부분에 대해 … 비용이 나올 수 있어서 AWS관련 정독을 얼른 해봐야하고<br>
+테스트케이스와 유효성 검증관련된 부분은 아직 손도 못댄 상태이다.<br>
+얼른 오늘 API 개발을 마무리하고 이제 부수적인 작업들을 들어가야할 것 같다.</p>
+
+<p><br></p>
+
+<h4 id="oauth2-적용">OAuth2 적용</h4>
+
+<p>저번에주 Spring Security + JWT를 이용해 인증과 인가를 구현했었다.   <br>
+TODO로 미뤄두었던 OAuth2 소셜로그인을 구현해보려한다.<br>
+일전에 Github, kakao, naver 등 구현해본 경험이 있었고</p>
+
+<p>미리 만들어둔 템플릿으로 어찌저찌 빠른 시간안에 구현을 하였다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOfygJtsu0SVkEF87j_quI5eodo2b0DWwbsso-KyzGIRWRqjQ8GlLYQ15SkbuO78d0QYvd6wHDIt3gbPnSQ6VAGeVdp9w=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>Github 로그인도 추가하고 싶지만…<br>
+이유를 모르겠지만 scope 범위에 email이 포함되지 않는<br>
+문제가 발생해… 시간을 엄청 투자했지만 진전이 없어<br>
+구글 로그인만 우선 사용하기로 결정했다.
+추후 TODO로 다른 소셜 로그인 정보를 가져오는 방법을 시도해봐야겠다.</p>
+
+<p>우선 구글 계정으로 로그인하면 우리 DB에 정보를 저장하도록 했다.<br>
+그리고 가입된 memberId로 어느 사용자가 사용중인지 구분하도록 판단했다.<br>
+얼추 동작 확인도 전부 잘 끝났고 실제 배포환경에서 테스트해보는 일만 남은 것 같다.</p>
+
+<p>이제 오늘 저녁에는 Test 프로그램을 작성할 예정이고<br>
+Mockito를 이용해 Controller 계층만 테스트할 수 있도록 분리 후<br>
+Restdocs를 이용해 API 자동 문서화를 진행할 예정이다.</p>
+
+<p><br></p>
+
+<h4 id="회의록-및-정리-3">회의록 및 정리</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>📢  공통
+
+1. 로그아웃 관련 브라우저에서 JWT 토큰을 삭제하는 방식으로
+2. 게시글, 답변 삭제 버튼은 추가 (API는 TODO로 설계 예정)
+→ 로그인된 유저에게만 버튼이 보이도록 추가.
+3. 사용자 기본 이미지 관련되서 url로 처리 시도해볼 것
+→ 실패할 경우 폴더 경로로 지정 예정.
+
+
+진행 일정 (12.26~12.30)  
+1. 12.26 : API 개발 전수 완료 예정
+2. 12.27 : Testing 기능 작성, 클라이언트 API 테스트 진행 가능
+3. 12.28 : AWS 배포 과정 진행
+4. 12.29 ~ 12.30 : AWS 배포 및 테스팅 완료
+
+
+🖥  프론트엔드 작업
+
+1. Profile 페이지 제외 레이아웃 작성 완료
+2. API 명세서를 보고 더미 데이터 작성 후 클라이언트에 반영 예정
+3. Profile 페이지에서 default 까지만 작성( Edit, Delete Todo)
+
+
+🔙  백엔드 작업
+
+1. 홈화면 이동 API 작성 진행중
+2. Users, Tags 화면 이동 작성 완료
+3. 질문 투표, 답변 투표 기능 추가 완료
+4. OAuth2 구글 로그인 인증 완료
+5. 프로필 API 마무리 작업 진행중
+</code></pre></div></div>
+
+<p><br></p>
+
+<h3 id="20221227-화">2022.12.27 (화)</h3>
+
 
 
     </div>
@@ -1299,10 +1597,10 @@ API 명세서를 통해 각자 담당한 프로그램을 작성하는 날이다.
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="H2 Database 다운로드 및 실행">맥북 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
-<li><a class="post-link" href="/til/2022/09/20/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 재귀</a></li>
-<li><a class="post-link" href="/til/2022/09/05/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 객체지향 - 생성자, 내부 클래스</a></li>
-<li><a class="post-link" href="/til/2022/10/26/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring Exception 2</a></li>
+        <li><a class="post-link" href="/til/2022/10/13/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring DI 1</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/08/31/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 문법기초 - 제어문</a></li>
+<li><a class="post-link" href="/til/2022/10/25/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring Exception 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

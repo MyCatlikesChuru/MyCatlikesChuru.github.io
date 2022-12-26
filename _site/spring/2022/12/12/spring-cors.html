@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring DTO | LeeJellan</title>
+<title>Spring) CORS 설정하기 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring DTO">
+<meta property="og:title" content="Spring) CORS 설정하기">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="section 3가 시간한 첫번째 금요일">
-<meta property="og:description" content="section 3가 시간한 첫번째 금요일">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/21/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/21/til.html">
+<meta name="description" content="오늘은 CORS에 대한 내용을 간단하게 적어보려한다.">
+<meta property="og:description" content="오늘은 CORS에 대한 내용을 간단하게 적어보려한다.">
+<link rel="canonical" href="http://localhost:4000/spring/2022/12/12/spring-cors.html">
+<meta property="og:url" content="http://localhost:4000/spring/2022/12/12/spring-cors.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-21T00:00:00+09:00">
+<meta property="article:published_time" content="2022-12-12T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring DTO">
+<meta property="twitter:title" content="Spring) CORS 설정하기">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-21T00:00:00+09:00","datePublished":"2022-10-21T00:00:00+09:00","description":"section 3가 시간한 첫번째 금요일","headline":"TIL) Spring DTO","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/21/til.html"},"url":"http://localhost:4000/til/2022/10/21/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-12T00:00:00+09:00","datePublished":"2022-12-12T00:00:00+09:00","description":"오늘은 CORS에 대한 내용을 간단하게 적어보려한다.","headline":"Spring) CORS 설정하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2022/12/12/spring-cors.html"},"url":"http://localhost:4000/spring/2022/12/12/spring-cors.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring DTO</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+63</h2>
+  <h1 class="post-title p-name" itemprop="name headline">Spring) CORS 설정하기</h1>
+  <h2 class="post-subtitle">Mac 환경변수 적용안되는 문제</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-21T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 21, 2022
+    <time class="dt-published" datetime="2022-12-12T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 12, 2022
     </time>
 
     
@@ -676,234 +676,67 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#cors">#cors</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>section 3가 시간한 첫번째 금요일</p>
-
-<p><img src="https://ifh.cc/g/lfoBC7.gif" align="left" width="350px" height="250px">
-<br><br><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>나태해지는 요일이랄까..?<br>
-주말에 공부는할건데 금요일이되면 그냥 설렌다<br>
-오늘은 예전부터 미뤄왔던 Github IO 블로그를 꾸미고있다…<br>
-아직 너무나 생소해 조금 시간이 걸릴 것 같다.<br>
-IT기술 블로그와 옛날부터 해온 여행블로그를 전부 옮기고 싶다.</p>
-
-<hr>
-
-<p>오늘은 DTO에 대해서 공부했다.<br>
-유효성 검증과 같이 공부한걸 적어보려한다.</p>
-
-<h3 id="dto"><strong>DTO</strong></h3>
-<p>Data Transfer Object의 약자로 <br>
-애플리케이션 아키텍처 패턴의 하나이다.</p>
-
-<pre><code class="language-Java">@PostMapping
-public ResponseEntity postMember(@RequestParam("age") int age,
-                                 @RequestParam("name") String name,
-                                 @RequestParam("sex") String sex) {
-     .
-     .
-     .
-	return ..
- }
-</code></pre>
-
-<p>간단하게 위의 내용을 살펴보자<br>
-어제 배웠던 것을 생각해보면 우리는 @PostMapping을 통해<br>
-@RequestParam의 키로 값을 가져온다.<br>
-즉 POST 로 자원 요청시 키와 Value값을 보내게 되는데<br>
-그 값으로 우리가 사용할 수 있고, 서버에 저장도 하는 것이다.<br>
-현재는 3가지(나이,이름,성별)에 대해서 받아오지만<br>
-나중에 학교,전화번호 등등 여러가지 데이터가 많이 추가된다고 가정하면<br>
-Controller 클래스의 너무나 많은 RequsetParam을 사용해야한다.<br>
-그래서 나오게 된 것이 DTO 기술이다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span>
-<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">MemberDto</span> <span class="n">memberDto</span><span class="o">)</span> <span class="o">{</span>
-     <span class="o">.</span>
-     <span class="o">.</span>
-     <span class="o">.</span>
-    <span class="k">return</span> <span class="o">..</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>우선 위에서 사용한 @RequsetParam -&gt; @RequestBody로 변경한다.<br>
-그리고 MemberDto라는 클래스를 만들어 매개변수로 받아준다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberDto</span> <span class="o">{</span>
- 
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nc">String</span> <span class="nc">Name</span><span class="o">;</span>
-   
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">;</span>
-    
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>이렇게 될 경우에. 클라이언트 측에서 Json 형식으로 URI와 함께 요청을 한다면<br>
-Json의 있는 키값들이 MemberDto의 필드변수에 할당되어진다.</p>
-
-<p>*로컬환경에서 Postman으로 요청한다고 가정<br>
-POST http://localhost:8080/api/member<br>
-raw Json</p>
-
-<p>{<br>
-“age” : 22,<br>
-“Name” : “Lee”,<br>
-“sex” : “male”<br>
-}</p>
-
-<p>실제로 Json 형식으로 요청시 MemberDto 클래스의<br>
-age, Name, sex의 값이 22, Lee, male 이렇게<br>
-들어가는 것을 확인 할 수 있다.<br>
-확인 하는 방법은 getter를 메서드를 이용해 확인이 가능하다</p>
+      <p>오늘은 CORS에 대한 내용을 간단하게 적어보려한다.</p>
 
 <p><br></p>
 
-<p><strong>유효성 검증</strong><br>
-그렇다면? 위의 Json객체로 보낼때 데이터를 이상하게 보내거나<br>
-안보내면 어떻게 되는 것인가?<br>
-예를들어 아래와 같이 입력했다고 가정하자<br>
-String타입의 sex를 입력하지 않고 요청을 보냈을 경우</p>
+<p><a href="https://todobackend.com">TODO List 연습 클라이언트</a>를 이용해 로컬톰켓서버와<br>
+연결 시 CORS문제가 발생해 해결했던 코드를 올려 본다.</p>
 
-<p><strong>case 1) String 타입을 안넣었을 경우</strong></p>
-
-<p>{<br>
-“age” : “22”,<br>
-“Name” : “Lee”<br>
-}</p>
-
-<p>age = 22<br>
-Name = Lee<br>
-sex = null<br>
-이렇게 값이 매칭된다. 즉, String타입은 값이 없을 때 null로 받는다</p>
-
-<p><strong>case 2) int 타입을 안넣었을 경우</strong></p>
-
-<p>{<br>
-“name”: “Lee”,<br>
-“sex”: “male”<br>
-}</p>
-
-<p>age = 0<br>
-Name = Lee<br>
-sex = male<br>
-이렇게 결과값이 나왔다. int타입은 0으로 받는 것 같다.</p>
-
-<p><strong>case 3) Integer 타입을 안넣었을 경우</strong><br>
-만약에 위에 처럼 Json 객체 요청시<br>
-age가 private Integer age; 라고 가정하였을 경우에는<br>
-500번 Internal Server Error가 발생하고<br>
-Spring 애플리케이션에서는 NullPointerException이 발생한다<br>
-무언가 타입에 따라 값이 있어도되고 없어도되는 무언가가 있는 것 같은데</p>
-
-<p>원시자료형과 참조자료형의 차이인지… <br>
-조금더 심도있는 공부가 필요해보인다..<br>
-우선은 위에 요청이 들어왔을때 기준으로 한번 가볍게 알아보았고<br>
-이제 유효성 검증을 통해 원하는 데이터가 들어오지 않을 경우<br>
-코드를 실행시키지 않을 수 있다.</p>
-
-<p>1). 우선 위에 예제 코드에서 @Vaild를 Dto 매개변수 앞에 달아주고</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span>
-<span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@Vaild</span> <span class="nd">@RequestBody</span> <span class="nc">MemberDto</span> <span class="n">memberDto</span><span class="o">)</span> <span class="o">{</span>
-     <span class="o">.</span>
-     <span class="o">.</span>
-     <span class="o">.</span>
-    <span class="k">return</span> <span class="o">..</span>
+<p><strong>1). 어노테이션으로 설정하는 방법</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">"https://todobackend.com"</span><span class="o">)</span>
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListController</span> <span class="o">{</span>
+    <span class="o">...</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p><br>
-2). Dto 클래스의 원하는 유효성 검증 애노테이션으로 조건을 설정한다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberDto</span> <span class="o">{</span>
-    <span class="nd">@Min</span><span class="o">(</span><span class="mi">100</span><span class="o">)</span>
-    <span class="nd">@Max</span><span class="o">(</span><span class="mi">50000</span><span class="o">)</span> <span class="c1">// 100~50000사이에만 price 유혀성 검사 통과</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-    
-    <span class="nd">@Pattern</span><span class="o">(</span><span class="n">regexp</span> <span class="o">=</span> <span class="s">"^([A-Za-z])(\\s?[A-Za-z])*$"</span><span class="o">,</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s">"글자사이의 공백이 1개가 초과하거나 ,알파벳이 아닌 글자가 들어왔습니다"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="nc">Name</span><span class="o">;</span>
-    
-    <span class="nd">@NotBlank</span> <span class="c1">// 공백만으로 구성되있지 않아야한다.</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">;</span>
-    
-<span class="o">}</span>
-</code></pre></div></div>
-<p>@Vaild<br>
--&gt; 유효성 검증을 적용해주는 애노테이션<br>
-DTO 앞에 @Vaild를 붙여 클래스를 유효성 검증해줌 만약 유효성검증에 실패하면 요청은 거부(reject)된다.</p>
-
-<p>implementation ‘org.springframework.boot:spring-boot-starter-validation’<br>
--&gt; 그레이들 의존성주입</p>
-
-<p>@Validated<br>
--&gt; @Vaild와 같이 유효성 검증하도록 해줌. 하지만 위치가 서로다름<br>
--&gt; @Valid는 DTO 필드에서 검사하는데, @Valdated는 맵핑 매서드 매개변수에다 쓴다<br>
-ex) @PatchMapping(“/{coffee-id}”) public ResponseEntity patchCoffee(@PathVariable(“coffee-id”)</p>
-
-<p>@Min(1) long coffeeId) -&gt; @Min을 사용하는 예제.</p>
-
-<p><em>문자열관련</em><br>
--&gt; @NotBlank : null, 공백, 스페이스 값 모두 허용하지 않음<br>
--&gt; @NotSpace : 공백을 허용하지 않음<br>
--&gt; @NotNull : null을 허용하지 않음<br>
--&gt; @Null : Null만 가능<br>
--&gt; @Size(min=1, max=3) : 문자열의 최소 길이, 최대 길이 제한</p>
-
-<p><em>숫자를 다룰때</em><br>
--&gt; @Min(1) : 값이 최소 1이상이어야하는 유효성 검사 통과<br>
--&gt; @Max(500) : 값이 최대 500이하로 값이 와야 유효성 검사 통과<br>
--&gt; @Range(min=1, max=500) : 범위안에 값이 오면 유효성 검사 통과<br>
--&gt; @Positive : 양수만 허용<br>
--&gt; @PositiveOrZero : 양수와 0만 허용<br>
--&gt; @Negative : 음수만 허용<br>
--&gt; @NegativeOrZero : 음수와 0만 허용</p>
-
-<p><em>정규식 관련</em><br>
--&gt;@Email: 이메일 정보가 비어있는지 검증<br>
--&gt;@Pattern: 특정 패턴을 정규식으로 표현 (@Pattern(regex = “^010-\\d{3,4}-\\d{4}$”)</p>
-
-<hr>
-
-<p>오늘은 DTO의 쓰임새와<br>
-유효성 검증에 대한 프로그램을 간단하게 알아보았다.<br>
-그 중에서도 특히 Pattern의 정규식관련된 부분은<br>
-앞으로 지속적인 학습이 필요해보인다. 아직은 생소해서<br>
-어떻게 검사가되는지 각 해당하는 특수문자의 내용을 이해할 수 있도록<br>
-주말에 공부해보려한다</p>
-
-<p>오늘 공부는 끝!</p>
 
 <p><br></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 오징어 덮밥</p>
+<p><strong>2). 빈 객체를 만들어 설정하는 방법</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodolistApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">TodolistApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">WebMvcConfigurer</span> <span class="nf">corsConfigurer</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">WebMvcConfigurer</span><span class="o">()</span> <span class="o">{</span>
+			<span class="nd">@Override</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addCorsMappings</span><span class="o">(</span><span class="nc">CorsRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">registry</span><span class="o">.</span><span class="na">addMapping</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">allowedOrigins</span><span class="o">(</span><span class="s">"https://todobackend.com/"</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">};</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/20/til.html" title="TIL) Spring MVC Controller 계층">TIL) Spring MVC Controller 계층</a><a class="next" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">Jekyll GitHub Page 댓글, 파비콘 꾸미기...</a>
+<a class="previous" href="/til/2022/12/09/til.html" title="TIL) Cloud 운영 전략">TIL) Cloud 운영 전략</a><a class="next" href="/til/2022/12/12/til.html" title="TIL) 프로젝트 연습, 준비">TIL) 프로젝트 연습, 준비</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/linux/unix/2022/07/27/server-ubunto.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">Permission denied (publickey) 우분투 에러 조치</a></li>
-<li><a class="post-link" href="/til/2022/09/13/til.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">TIL) Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
-<li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
-<li><a class="post-link" href="/spring/2022/08/03/spring-port.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">Spring) Web server failed to start. Port 8080 was already in use...</a></li>
+        <li><a class="post-link" href="/til/2022/11/14/til.html" title="TIL) 프로젝트 연습, 준비">TIL) API Documentation 2</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="TIL) 프로젝트 연습, 준비">TIL) Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/til/2022/09/16/til.html" title="TIL) 프로젝트 연습, 준비">TIL) Java Thread, JVM</a></li>
+<li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="TIL) 프로젝트 연습, 준비">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
 </ul>
     </div>
 <div class="post-comments">
