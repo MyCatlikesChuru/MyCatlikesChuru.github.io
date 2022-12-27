@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Spring) CORS 설정하기 | LeeJellan</title>
+<title>GIT) pull rebase 사용해 병합하기 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="Spring) CORS 설정하기">
+<meta property="og:title" content="GIT) pull rebase 사용해 병합하기">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오늘은 CORS에 대한 내용을 간단하게 적어보려한다.">
-<meta property="og:description" content="오늘은 CORS에 대한 내용을 간단하게 적어보려한다.">
-<link rel="canonical" href="http://localhost:4000/spring/2022/12/12/spring-cors.html">
-<meta property="og:url" content="http://localhost:4000/spring/2022/12/12/spring-cors.html">
+<meta name="description" content="자주 사용하는 git pull --rebase에 대해 정리해보려한다.">
+<meta property="og:description" content="자주 사용하는 git pull --rebase에 대해 정리해보려한다.">
+<link rel="canonical" href="http://localhost:4000/git/2022/12/27/git-rebase.html">
+<meta property="og:url" content="http://localhost:4000/git/2022/12/27/git-rebase.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-12-12T00:00:00+09:00">
+<meta property="article:published_time" content="2022-12-27T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Spring) CORS 설정하기">
+<meta property="twitter:title" content="GIT) pull rebase 사용해 병합하기">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-12T00:00:00+09:00","datePublished":"2022-12-12T00:00:00+09:00","description":"오늘은 CORS에 대한 내용을 간단하게 적어보려한다.","headline":"Spring) CORS 설정하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2022/12/12/spring-cors.html"},"url":"http://localhost:4000/spring/2022/12/12/spring-cors.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-27T00:00:00+09:00","datePublished":"2022-12-27T00:00:00+09:00","description":"자주 사용하는 git pull --rebase에 대해 정리해보려한다.","headline":"GIT) pull rebase 사용해 병합하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/git/2022/12/27/git-rebase.html"},"url":"http://localhost:4000/git/2022/12/27/git-rebase.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Spring) CORS 설정하기</h1>
-  <h2 class="post-subtitle">Mac 환경변수 적용안되는 문제</h2>
+  <h1 class="post-title p-name" itemprop="name headline">GIT) pull rebase 사용해 병합하기</h1>
+  <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-12-12T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 12, 2022
+    <time class="dt-published" datetime="2022-12-27T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 27, 2022
     </time>
 
     
@@ -679,48 +679,75 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#cors">#cors</a>
+<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오늘은 CORS에 대한 내용을 간단하게 적어보려한다.</p>
+      <p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
+
+<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br>
+pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br>
+통합을 해서 사용하는 브랜치라고 가정하자.</p>
+
+<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br>
+누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br>
+가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
+
+<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br>
+<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
 
 <p><br></p>
 
-<p><a href="https://todobackend.com">TODO List 연습 클라이언트</a>를 이용해 로컬톰켓서버와<br>
-연결 시 CORS문제가 발생해 해결했던 코드를 올려 본다.</p>
+<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
 
-<p><strong>1). 어노테이션으로 설정하는 방법</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">"https://todobackend.com"</span><span class="o">)</span>
-<span class="nd">@RestController</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListController</span> <span class="o">{</span>
-    <span class="o">...</span>
-<span class="o">}</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
 </code></pre></div></div>
+<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
+
+<p>그럴 경우에는</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
+</code></pre></div></div>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br>
+이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br>
+참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
+
+<p>수정을 다완료 하고 나면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
+</code></pre></div></div>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br>
+만약 다음에 수정할게 없다면</p>
 
 <p><br></p>
 
-<p><strong>2). 빈 객체를 만들어 설정하는 방법</strong></p>
+<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br>
+이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootApplication</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodolistApplication</span> <span class="o">{</span>
-
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">TodolistApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
-	<span class="o">}</span>
-	<span class="nd">@Bean</span>
-	<span class="kd">public</span> <span class="nc">WebMvcConfigurer</span> <span class="nf">corsConfigurer</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="k">new</span> <span class="nf">WebMvcConfigurer</span><span class="o">()</span> <span class="o">{</span>
-			<span class="nd">@Override</span>
-			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addCorsMappings</span><span class="o">(</span><span class="nc">CorsRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
-				<span class="n">registry</span><span class="o">.</span><span class="na">addMapping</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">allowedOrigins</span><span class="o">(</span><span class="s">"https://todobackend.com/"</span><span class="o">);</span>
-			<span class="o">}</span>
-		<span class="o">};</span>
-	<span class="o">}</span>
-<span class="o">}</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
 </code></pre></div></div>
+<p>를 입력해주면 push를 할 수 있는데</p>
+
+<p>아래와 같은 에러에 마주하였을 경우에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
+</code></pre></div></div>
+<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
+
+<p><br>
+<br>
+<br></p>
 
 
 
@@ -728,15 +755,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/12/09/til.html" title="TIL) Cloud 운영 전략">TIL) Cloud 운영 전략</a><a class="next" href="/til/2022/12/12/til.html" title="TIL) 프로젝트 연습, 준비">TIL) 프로젝트 연습, 준비</a>
+<a class="previous" href="/db/2022/12/19/db-mysqlEER.html" title="MySQL EER 다이어그램 만드는법">MySQL EER 다이어그램 만드는법</a><a class="next" href="/spring/2022/12/27/spring-JunitSecure.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">Spring) Security Test 코드 작성시 UserDetails...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html" title="TIL) 프로젝트 연습, 준비">Spring) Security Test 코드 작성시 UserDetails 설정</a></li>
-<li><a class="post-link" href="/spring/2022/11/25/spring-environment.html" title="TIL) 프로젝트 연습, 준비">Spring) Could not resolve placeholder '환경변수명' in value "${환경변수명}" 오류</a></li>
-<li><a class="post-link" href="/til/2022/09/22/til.html" title="TIL) 프로젝트 연습, 준비">TIL) Java 자료구조 Stack, Queue</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="TIL) 프로젝트 연습, 준비">TIL) Java Algorithm 3</a></li>
+        <li><a class="post-link" href="/til/2022/11/23/til.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">TIL) JWT 기초</a></li>
+<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
+<li><a class="post-link" href="/til/2022/11/04/til.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">TIL) Spring Transaction 1</a></li>
+<li><a class="post-link" href="/til/2022/09/06/til.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">TIL) Java 객체지향 - 상속, 캡슐화</a></li>
 </ul>
     </div>
 <div class="post-comments">
