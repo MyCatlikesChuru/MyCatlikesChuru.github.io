@@ -17,14 +17,10 @@ X
 (_posts/OS/macOs/2022-11-27-OS-macOs-4.md,d/f/df52698433e11f42b15242cf2081a62c3b3c5251
 X
 (_posts/OS/macOs/2022-12-04-OS-macOs-5.md,7/9/7994a58e8678a0a57e62bd1bd447f962c1b98d5b
-V
-&_posts/DataBase/2022-11-15-db-mysql.md,9/d/9d4b070211f853744d54fccc677b0de3d63552ba
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-22-til.md,1/c/1c10dc7ea405b8e6b8a4818759540b11ba45e9ea
 Z
 *_posts/DataBase/2022-12-19-db-h2setting.md,0/c/0cc907d10ce9ffe6a979e6d8b4f60a8c0ca6d765
-Y
-)_posts/DataBase/2022-12-19-db-mysqlEER.md,9/2/924b7fdeb0265a31408965575ac5a9cac53d2527
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-25-til.md,b/3/b35ab19f76942c8a6ebd8703086a5be1357d6b37
 ]
