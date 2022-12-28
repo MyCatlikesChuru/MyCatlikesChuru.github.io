@@ -710,6 +710,104 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html">
+          MySQL EC2에 설치후 WorkBench 접속하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 28, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/db/2022/12/28/db-mysqlEC2.html">
+        <p>
+        EC2에 MySQL을 설치한다음
+WorkBench로 접속하려는데 설정한 내용을 정리해보려한다.
+MySQL 설치과정은 생략하겠다.
+
+
+
+📌 yml 파일 설정
+
+우선 EC2에 배포한 스프링 .yml 파일 설정이다.
+기존과 동일하게 localhost:3306으로 설정을 해주었고
+
+스키마 이름은 stackover라는 이름으로지 지정했다.
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul # 포트넘버, 스키마이름
+   ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html">
           Spring) Security Test 코드 작성시 UserDetails 설정
         </a>
@@ -10311,14 +10409,14 @@ ssh -i 키파일.pem ubuntu@내주소
   <ul>
     <li>
       <a href="/index.html">
-        All<span>94</span>
+        All<span>95</span>
       </a>
     </li>
 
     
       <li>
         <a href="/categories.html#h-DB">
-          DB <span>3</span>
+          DB <span>4</span>
         </a>
       </li>
     

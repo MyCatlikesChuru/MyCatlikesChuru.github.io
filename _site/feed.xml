@@ -1,4 +1,200 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-27T18:16:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Spring) Security Test 코드 작성시 UserDetails 설정</title><link href="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html" rel="alternate" type="text/html" title="Spring) Security Test 코드 작성시 UserDetails 설정" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/12/27/spring-JunitSecure</id><content type="html" xml:base="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html"><![CDATA[<p>오늘 겪은 문제를 정리해보려한다.<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-28T21:23:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL EC2에 설치후 WorkBench 접속하기</title><link href="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html" rel="alternate" type="text/html" title="MySQL EC2에 설치후 WorkBench 접속하기" /><published>2022-12-28T00:00:00+09:00</published><updated>2022-12-28T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/28/db-mysqlEC2</id><content type="html" xml:base="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html"><![CDATA[<p>EC2에 MySQL을 설치한다음<br />
+WorkBench로 접속하려는데 설정한 내용을 정리해보려한다.<br />
+MySQL 설치과정은 생략하겠다.</p>
+
+<p><br /></p>
+
+<h4 id="-yml-파일-설정">📌 yml 파일 설정</h4>
+
+<p>우선 EC2에 배포한 스프링 <code class="language-plaintext highlighter-rouge">.yml</code> 파일 설정이다.<br />
+기존과 동일하게 <code class="language-plaintext highlighter-rouge">localhost:3306</code>으로 설정을 해주었고</p>
+
+<p>스키마 이름은 stackover라는 이름으로지 지정했다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">datasource</span><span class="pi">:</span>
+    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
+    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">${MYSQL_ID}</span> <span class="c1"># 유저네임</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">${MYSQL_PASSWORD}</span> <span class="c1"># 비밀번호</span>
+</code></pre></div></div>
+
+<p>환경변수를 사용해 유저이름과 비밀번호를 지정해줬다.</p>
+
+<p><br /></p>
+
+<h4 id="-ec2-설정">📌 EC2 설정</h4>
+
+<p><strong>첫번쨰</strong>로 EC2 보안그룹의 인바운드 규칙을 설정해줘야한다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN095iTdhlGaDzXDoZONY9_byOM5RVo22mey2JsVdznjSR1iAFXH3SeeTRFq2MaN2FCRYRU7O8iAwqpF0rpulNSiOhkKg=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>MYSQL을 선택하고 0.0.0.0/0 을 지정해주었다.</p>
+
+<p><br /></p>
+
+<p><strong>두번째</strong>로는 EC2의 <code class="language-plaintext highlighter-rouge">mysqld.cnf</code> 파일의 내용을 수정해줘야한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/mysql/mysql.conf.d
+</code></pre></div></div>
+<p>해당 경로에 진입하면 <code class="language-plaintext highlighter-rouge">mysqld.conf</code> 파일을 열 수 있고</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi mysqld.cnf
+</code></pre></div></div>
+<p>sudo를 이용해야 저장이 가능하다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOPpSA6Dj0VxEP0QUnOJuYtmaV64BdOTsIT_o2mvPCkZHCKxSQaPSVtVXAc4UZqFLGDwoyFIrAOfKw8_9fq_2oG6lFG=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>파일의 bind-address를 <code class="language-plaintext highlighter-rouge">0.0.0.0</code>으로 설정 해주었고<br />
+mysqlx-bind-address는 주석처리를 해주었다.</p>
+
+<p><br /></p>
+
+<p><strong>세번째</strong>로는 User 계정을 생성하고<br />
+해당 계정에 권한을 부여해주었다.</p>
+
+<p>✅ <strong>mysql 접속</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</code></pre></div></div>
+<p>처음에는 root 계정으로 진입하면 mysql에 접속이 가능하다.<br />
+만약 root 계정에 비밀번호를 설정하지 않았을 경우에는</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root
+</code></pre></div></div>
+<p>명령어로 접근한 다음에</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER USER <span class="s1">'root'</span>@<span class="s1">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'yourPassword'</span><span class="p">;</span>
+</code></pre></div></div>
+<p>yourPassword에 원하는 비밀번호를 입력해 root 계정에<br />
+비밀번호를 설정해 줄 수 있다.</p>
+
+<p><br /></p>
+
+<p>✅ <strong>유저 생성</strong><br />
+이제 mysql에 접속이 완료되었다면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT user,authentication_string,plugin,host FROM mysql.user<span class="p">;</span>
+</code></pre></div></div>
+<p>명령어로 등록된 user 정보를 확인할 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO-FEGjAwEuSnVLX_OZnmrstM6XDpJZRgPzMGhUCNxJJmQ-ob0QO97XihuOkInNrM8Iy0-9WSM9bBu9z1kaeUmBM_cErg=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>user가 현재 내가 만들어둔 계정이고 기본으로는 root가 있다.<br />
+그리고 host를 %로 변경해주면 외부에서도 진입이 가능해진다.</p>
+
+<p>이제 계정을 하나 만들어보자</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create user 유저이름@‘%’ identified by ‘비밀번호’<span class="p">;</span>
+</code></pre></div></div>
+<p>유저이름과 비밀번호를 입력해 계정을 생성할 수 있다.<br />
+만약 비밀번호를 변경하고 싶은경우 위에서 root계정 비밀번호를 변경할 때<br />
+사용했던 명령어를 입력해주면 비밀번호를 변경할 수 있다.</p>
+
+<p><br /></p>
+
+<p>✅ <strong>유저 삭제</strong><br />
+혹시나 유저를 삭제하고 싶은 경우에는</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drop user 유저이름@localhost<span class="p">;</span>
+</code></pre></div></div>
+<p>과 같이 입력해주면 삭제가 가능핟.</p>
+
+<p>✅ <strong>유저 권한부여</strong><br />
+이제 유저를 만들었으니<br />
+유저에 대한 권한을 설정해주면 된다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grant all privileges on <span class="k">*</span>.<span class="k">*</span> to ‘유저이름’@‘%’<span class="p">;</span>
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flush privileges<span class="p">;</span>
+</code></pre></div></div>
+<p>정상적으로 처리가 완료되었다면 쿼리가 날라갔다고 메세지가 나온다.</p>
+
+<p>전부 완료를 하고나면 <code class="language-plaintext highlighter-rouge">quit</code>로 mysql을 나온다음에<br />
+우분투 터미널에서</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart mysql
+</code></pre></div></div>
+<p>해당 명령어를 입력해 mysql을 재실행 시켜주자</p>
+
+<p>위 과정이 전부 완료되었다면<br />
+방금 만든 계정과 비밀번호, 그리고 EC2 공개 IP를 이용해</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNtl81ccvr2i_SPrMZV_lXTrzZ82HmAX4GffSwHZ0ZRV69bgx16OnwlRwzCVC5YdY1AZL3XQU4lMfH71k-aaMFMmcaIOA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 정상적으로 WorkBench에 접속할 수 있을 것이다!!!</p>
+
+<p><br /></p>
+
+<p>혹시나 아래와 같은 알람이 발생한 경우에는<br />
+<code class="language-plaintext highlighter-rouge">Unable to connect to localhost</code></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNjgebqbY9sS3D33Pd29TXwqg6DDU4JIE9Go_c3XFDnw_1RgPPaIsywivrZapu1dPIvXURNgUn-mwRKe4kMYuh2uyuOGw=w1000-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>나와 같은 경우에는 EC2 인바운드 규칙 설정과 <br />
+<code class="language-plaintext highlighter-rouge">mysqld.conf</code> 설정한 값이 맞지 않아서 였다.<br />
+혹시나 참고차 올려본다.</p>
+
+<p><br /></p>
+
+<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry><entry><title type="html">GIT) pull rebase 사용해 병합하기</title><link href="http://localhost:4000/git/2022/12/27/git-rebase.html" rel="alternate" type="text/html" title="GIT) pull rebase 사용해 병합하기" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/git/2022/12/27/git-rebase</id><content type="html" xml:base="http://localhost:4000/git/2022/12/27/git-rebase.html"><![CDATA[<p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
+
+<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br />
+pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br />
+통합을 해서 사용하는 브랜치라고 가정하자.</p>
+
+<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br />
+누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br />
+가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
+
+<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br />
+<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
+
+<p><br /></p>
+
+<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
+</code></pre></div></div>
+<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
+
+<p>그럴 경우에는</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
+</code></pre></div></div>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br />
+이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br />
+참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
+
+<p>수정을 다완료 하고 나면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
+</code></pre></div></div>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br />
+만약 다음에 수정할게 없다면</p>
+
+<p><br /></p>
+
+<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br />
+이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
+</code></pre></div></div>
+<p>를 입력해주면 push를 할 수 있는데</p>
+
+<p>아래와 같은 에러에 마주하였을 경우에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
+</code></pre></div></div>
+<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
+
+<p><br />
+<br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[자주 사용하는 git pull --rebase에 대해 정리해보려한다.]]></summary></entry><entry><title type="html">Spring) Security Test 코드 작성시 UserDetails 설정</title><link href="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html" rel="alternate" type="text/html" title="Spring) Security Test 코드 작성시 UserDetails 설정" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/12/27/spring-JunitSecure</id><content type="html" xml:base="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html"><![CDATA[<p>오늘 겪은 문제를 정리해보려한다.<br />
 Spring Security + JWT + OAuth2 인증,인가를 사용하여<br />
 정상적으로 API 작동까지 Postman으로 마친 상태이다.</p>
 
@@ -305,69 +501,7 @@ Session Attrs에 아래와 같이 우리가 만든<br />
 <br />
 <br /></p>
 
-<p><a href="https://sejoung.github.io/2020/11/2020-11-19-spring-security/#spring-security-test-code-%EC%9E%91%EC%84%B1%EC%8B%9C-UserDetails%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C">Test코드 작성시 UserDetails 참고 레퍼런스</a>, <a href="https://jungguji.github.io/2020/06/09/Spring-Controller-Test%EC%8B%9C-CSRF-%EC%84%A4%EC%A0%95/">csrf 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[오늘 겪은 문제를 정리해보려한다. Spring Security + JWT + OAuth2 인증,인가를 사용하여 정상적으로 API 작동까지 Postman으로 마친 상태이다.]]></summary></entry><entry><title type="html">GIT) pull rebase 사용해 병합하기</title><link href="http://localhost:4000/git/2022/12/27/git-rebase.html" rel="alternate" type="text/html" title="GIT) pull rebase 사용해 병합하기" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/git/2022/12/27/git-rebase</id><content type="html" xml:base="http://localhost:4000/git/2022/12/27/git-rebase.html"><![CDATA[<p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
-
-<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br />
-pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br />
-통합을 해서 사용하는 브랜치라고 가정하자.</p>
-
-<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br />
-누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br />
-가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
-
-<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br />
-<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
-
-<p><br /></p>
-
-<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
-</code></pre></div></div>
-<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
-
-<p>그럴 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
-</code></pre></div></div>
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br />
-이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br />
-참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
-
-<p>수정을 다완료 하고 나면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
-</code></pre></div></div>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br />
-만약 다음에 수정할게 없다면</p>
-
-<p><br /></p>
-
-<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br />
-이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
-</code></pre></div></div>
-<p>를 입력해주면 push를 할 수 있는데</p>
-
-<p>아래와 같은 에러에 마주하였을 경우에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
-</code></pre></div></div>
-<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[자주 사용하는 git pull --rebase에 대해 정리해보려한다.]]></summary></entry><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
+<p><a href="https://sejoung.github.io/2020/11/2020-11-19-spring-security/#spring-security-test-code-%EC%9E%91%EC%84%B1%EC%8B%9C-UserDetails%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C">Test코드 작성시 UserDetails 참고 레퍼런스</a>, <a href="https://jungguji.github.io/2020/06/09/Spring-Controller-Test%EC%8B%9C-CSRF-%EC%84%A4%EC%A0%95/">csrf 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[오늘 겪은 문제를 정리해보려한다. Spring Security + JWT + OAuth2 인증,인가를 사용하여 정상적으로 API 작동까지 Postman으로 마친 상태이다.]]></summary></entry><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어<br />
 EER 다이어 그램을 그려주는 기능을 사용해보려한다.</p>
 
@@ -2169,309 +2303,4 @@ Spring MVC관련 계층 프로그램은 이제<br />
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 제육볶음, 스팸부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[드디어 정규과정이 다 끝이 났다. 4개월이란 짧은 시간에 정말 많은 것을 배웠고 모든 기술을 구현할 수 있는 능력은 없지만 작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.]]></summary></entry><entry><title type="html">TIL) Cloud 운영 전략</title><link href="http://localhost:4000/til/2022/12/09/til.html" rel="alternate" type="text/html" title="TIL) Cloud 운영 전략" /><published>2022-12-09T00:00:00+09:00</published><updated>2022-12-09T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/09/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/09/til.html"><![CDATA[<h3 id="proxy-server">Proxy Server</h3>
-
-<p>프록시 서버는 클라이언트가 서버와 소통할 때<br />
-서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록<br />
-해주는 대리 서버라고 생각하면 간단하다.</p>
-
-<p><strong>1). Forward Proxy</strong></p>
-
-<p>클라이언트 가까이에 위치한 프록시 서버다.<br />
-클라이언트를 대신해 서버에 요청을 전달해준다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMnENrT4W97MGhsCoY41GXXR2exz07o-Ftd6n5xNT5FsDCQA2-bKk1EkIPg1xG3Ziuonj4jBh9yFy3kLW35p_mYG1d7=w1920-h921" alt="image" class="align-left" style="max-width: 80%" /></p>
-
-<p>장점</p>
-<ul>
-  <li>캐싱을 통해 빠른 서비스 이용이 가능하다</li>
-  <li>보안 (서버에서 프록시서버 IP를 받기때문에 클라이언트 IP를 숨길 수 있다)</li>
-</ul>
-
-<p><br /></p>
-
-<p><strong>2). Reverse Proxy</strong></p>
-
-<p>서버 가까이에 위치한 프록시 서버다.<br />
-서버를 대신해서 클라이언트에 응답을 제공해준다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN3VUWC1TvwBt7n1ovAf-TPeX_VITPkt4aYr7_Nuf273yVBYeaq0oUo5sHfd-Npoe-w3HAY6kaY792Baqa5L01NYcYW=w1920-h921" alt="image" class="align-left" style="max-width: 80%" /></p>
-
-<ul>
-  <li>분산처리 (여러대의 서버로 요청을 나누어 전달 후 처리, ex) 로드밸랜서)</li>
-  <li>보안 (클라이언트에게 서버 IP가 노출되지 않는다)</li>
-</ul>
-
-<p><br /></p>
-
-<h3 id="load-balancer">Load Balancer</h3>
-<p>로드 밸런서는 서버에 가해지는 부하(Load)를 분산(Balance) 해주는<br />
-장치 또는 기술을 통칭한다.</p>
-
-<p>하나의 서버에 클라이언트의 잦은 요청이 있으면<br />
-서버의 과부하가 온다. 과부하로 인해서 서버가 원할하게 서비스를 제공하지<br />
-못하는 경우가 발생하기 때문에, 이와 같은 문제를 해결하기 위한<br />
-로드 밸린스 방식으로는 크게 2가지가 존재한다.</p>
-
-<p><br /></p>
-
-<p><strong>✅ 로드 밸런서 방식</strong></p>
-
-<p><strong>1). Scale up</strong><br />
-물리적으로 서버의 사양을 높이는 하드웨어적 방법이다.<br />
-서버 수를 늘리지 않고 프로그램 구현있어 변화가 필요없다는 장점이 있다.</p>
-
-<p>하지만 굉장히 높은 비용이 발생하고, 하드웨어의 업그레이드는<br />
-한계가 있다는 단점이 있다.</p>
-
-<p><strong>2). Scale out</strong><br />
-서버의 갯수를 늘려 서버의 줄 부하를 분산시키는 방법이다.<br />
-많은 요청이 오더라도 여러대의 서버가 나눠서 처리를 하기 떄문에<br />
-서버의 사양을 높이지 않고도 비교적 저렴한 방법으로 부하를 처리할 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>✅ 로드 밸런서 알고리즘</strong></p>
-
-<p><strong>1). 라운드로빈 방식 (Round Robin Method)</strong><br />
-서버에 들어온 요청을 순서대로 돌아가며 배정하는 방식</p>
-
-<p><strong>2). 가중 라운드로빈 방식 (Weighted Round Robin Method)</strong><br />
-각각의 서버마다 가중치를 매기고 가중치가 높은 서버에 클라이언트 요청을 우선 배분하는 방식이다.</p>
-
-<p><strong>3). IP 해시 방식 (IP Hash Method)</strong><br />
-클라이언트의 IP 주소를 특정 서버로 매핑하여 요청을 처리하는 방식이다.</p>
-
-<p><strong>4). 최소 연결 방식 (Least Connection Method)</strong><br />
-요청이 들어온 시점에 가장 적은 연결상태를 보이는 서버에 우선적으로 트래픽을 배분하는 방식이다.</p>
-
-<p><strong>5). 최소 리스폰타임 (Least Response Time Method)</strong><br />
-서버에 현재 연결 상태와 응답시긴을 모두 고려하여 트래픽을 배분하는 방식이다.</p>
-
-<p><br /></p>
-
-<p><strong>✅ 로드 밸런서 종류</strong></p>
-
-<p>로드 벨런서는 클라이언트의 요청을 어떤 것을 기준으로<br />
-분산시키느냐에 따라 종류가 나눠진다.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">로드 밸런서 종류</th>
-      <th style="text-align: left">로드 밸런싱의 기준</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">L2</td>
-      <td style="text-align: left">데이터 전송 계층에서 Mac 주소를 바탕으로 로드 밸런싱을 한다.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">L3</td>
-      <td style="text-align: left">네트워크 계층에서 IP 주소를 바탕으로 로드 밸런싱을 한다.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">L4</td>
-      <td style="text-align: left">전송 계층에서 IP주소와 Port를 바탕으로 로드 밸런싱을 한다.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">L7</td>
-      <td style="text-align: left">응용 계층에서 클라이언트의 요청을 바탕으로 로드 밸런싱을 한다.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><br /></p>
-
-<p><strong>✅ Auto Scaling</strong></p>
-
-<p>오토 스케일링은 Scale out 방식으로 서버를 증설할 때<br />
-자동으로 서버를 관리해주는 기능이다.<br />
-클라이언트의 요청이 많아져 서버의 처리 요구량이 증가하면 새 리소스를<br />
-자동으로 추하고 반대로 처리 요구량이 줄어들면 리소스를 감소시켜<br />
-적절한 분산 환경을 만들어준다.</p>
-
-<p><br /></p>
-
-<h3 id="web-server">Web Server</h3>
-
-<h4 id="tomcat">Tomcat</h4>
-
-<p>톰캣은 스프링 학습하면서도 많이 보았을 것이다.<br />
-Apache 회사에서 개발한 서블릿 컨테이너만 있는 오픈소스 웹 애플리케이션 서비이다.</p>
-
-<p>우리가 흔히 <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> 의존라이브러리를 설정해주면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM9BsZsYaMRKMNzpvRyIJ8x1e_QHfIL7G3lRFVPR5032Zy9WiYHkN968M8hq7geCpfSYH9AC0G8N496-KSCb84A34sepQ=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>외부 라이브러리에 추가된 모습을 볼 수 있다.</p>
-
-<p><br /></p>
-
-<h4 id="jetty">Jetty</h4>
-
-<p>제티는 이클립스 재단의 HTTP 서버이자 자바 서블릿 컨테이너이다.<br />
-우리는 스프링 웹에 내장되어 있는 톰켓을 사용했지만<br />
-Jetty 서버로 변경하여 사용하는 것도 가능하다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
-	<span class="n">implementation</span> <span class="o">(</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
-		<span class="n">exclude</span> <span class="nl">module:</span> <span class="err">'</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">tomcat</span><span class="err">'</span>
-	<span class="o">}</span>
-	<span class="n">implementation</span> <span class="o">(</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">jetty</span><span class="err">'</span><span class="o">)</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>기존의 톰켓 서버를 제외시키고, Jetty의 의존라이브러리를 추가해주면된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM4Q_56HQcx6ER0D9G9vc_AzQ_8_XrDREbC2LuRI1onRPzYvqLRzIIAG9jqfKepfooEmAcKuLKWqQLqjckdnKhxsUCs=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>gradle 리로드완료하면 외부라이브러리에서 Tomcat은 없어지고<br />
-jetty가 추가된 모습을 확인할 수가 있다.</p>
-
-<p>마찬가지로 애플리케이션을 로컬에서 실행하면 <br />
-콘솔에 <code class="language-plaintext highlighter-rouge">Jetty started on port(s) 8080</code>를 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<h4 id="nginx-proxy-server">NginX (Proxy Server)</h4>
-
-<p>NginX는 가볍고 높은 성능을 보이는 오픈소스 웹 서버 소프트웨어이다.<br />
-Tomcat과 Jetty가 Java 서블릿 컨테이너 혹은 웹 애플리케이션 서버였다면<br />
-NginX는 웹 서버로 클라이언트에게 정적 리소스를 빠르게 응답하기 위한 웹서버로 사용할 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOG2uzsclZ4QWPxVAe_uxKcedgoaUBgThcMRAT424RV8K7dLYr9RTnqxzVnbtWUkm6Ovs1fmsRs7A7EAgNcEovLGs2bTA=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같은 구조를 만든다고 가정하고 로컬환경에서 테스트를 해보자</p>
-
-<p>MacOs 기준으로 설명해본다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>nginx
-</code></pre></div></div>
-<p>homebrew를 이용해 nginx를 설치해준다.<br />
-설치가 완료되면 <code class="language-plaintext highlighter-rouge">brew list</code> 명령어로 설치리스트를 확인할 수 있다.</p>
-
-<p>NginX 서버를 실행시키는 방법은</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services start nginx
-</code></pre></div></div>
-<p>해당 명령어를 입력하면 서버가 실행된다.<br />
-MacOS기준으로 기본 포트는 <code class="language-plaintext highlighter-rouge">localhost:8080</code>로 접속이 가능하다. 접속 성공 시에는 콘솔에  <br />
-<code class="language-plaintext highlighter-rouge">==&gt; Successfully started nginx (label: homebrew.mxcl.nginx)</code><br />
-해당 문구를 확인할 수 있다.</p>
-
-<p>만약 서버를 종료하고 싶다면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services stop nginx
-</code></pre></div></div>
-<p>해당 명령어를 입력해주면 된다.</p>
-
-<p>당연하게도 포트 변경도 가능하다.<br />
-<code class="language-plaintext highlighter-rouge">nginx.conf</code>파일을 찾아서 변경해주면 된다.<br />
-homebrew로 설치하였다면 <code class="language-plaintext highlighter-rouge">/opt/homebrew/etc/nginx/nginx.conf</code><br />
-해당 경로에 존재할 확률이 높다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNeZvcQvQB3AXd4W2johu0UXke69vIktUKMB9ZCIWk3-U1-ZZEMEqf1zJcXXLqtOzRARHIow3uCQYvxVJevdtJorh-w=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>해당 파일을 vi, nano 편집기로 수정하여도 되고<br />
-직접 열어 수정해도 된다.</p>
-
-<p>파일에서 http &gt; server &gt; listen의 포트번호가<br />
-8080으로 되어있을 텐데 해당 포트를 바꿔주면 된다.<br />
-나는 80으로 변경하여 사용했다.</p>
-
-<p>그리고 location에서 proxy_pass 관련 내용을 추가해주면 된다.</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
-		listen       80; # 포트 변경
-...
-		location / {
-				...
-				proxy_pass http://localhost:8080; # 요청을 8080 포트로 넘깁니다.
-				proxy_set_header X-Real-IP $remote_addr;
-				proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-				proxy_set_header Host $http_host;
-		}
-}
-</code></pre></div></div>
-
-<p>다시 nginx를 실행 시키고, 스프링 부트를 실행시킨다음<br />
-<code class="language-plaintext highlighter-rouge">localhost:80</code>에 접속 요청을 하면<br />
-SpringBoot로 서버를 띄운 화면으로 넘어가는 것을 확인할 수 있을 것이다.</p>
-
-<p><br /></p>
-
-<h4 id="nginx-load-balancer">NginX (Load Balancer)</h4>
-
-<p>위에서 NginX로 프록시 서버를 만들어서 Spring Web 서버와 연결해보는 것 까지 해보았다.<br />
-NginX를 이용해 로컬환경에서 로드 벨런싱을 구성할 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPbhOAOVSac7VnsgOd7t4bBzA3D7UlzJQGluLPU_4874TJYacn9Jp7MvB4AuwI0cKCtT3kMfDyslCcYClK7J6f4iQ0b=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>해당 구성도 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일의 설정을 변경해서<br />
-로드벨런싱이 되도록 구성할 수 있다.<br />
-<a href="https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/">NginX 로드벨런싱 레퍼런스</a>를 참고해서 작성해보자</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-http {
-    ...
-    
-    # 로드 벨런싱 테스트를 위한 추가 (22.12.09)
-    upstream backend {
-        server localhost:8080;
-        server localhost:8081;
-    }
-    # 여기 위까지 추가
-
-    server {
-        listen       80;
-        server_name  localhost;
-
-        #charset koi8-r;
-
-        #access_log  logs/host.access.log  main;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-	    
-	    # 로드 밸런싱 테스트를 위한 추가 (22.12.09)
-	    proxy_pass http://backend;    
-	    
-        }
-        ...
-    }
-    ...
-}
-</code></pre></div></div>
-<p>로드 벨런싱을 위한 추가라고 붙은 주석이 달린 곳을 보면된다.<br />
-스프링 톰켓 서버를 8080, 8081로 애플리케이션으로 실행 시켜둔 다음에<br />
-nginx 서버를 80으로 실행 시키고 접속 요청을 하였을 경우</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMKVdGhcGq-yZafA-Yn63bYoQPXPy66rpCBac1Xkzm4czEkxlMaLbtVs-uIpxJ9Jb5zrusAmMAHT38Mlfcu0c7sjJ6z_A=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>이렇게 작성한 화면이 띄워지게 된다.<br />
-여기서 화면을 구분하기 위해 PID값을 추가해 줬다.<br />
-보면 알 수 있듯이 2개의 서버중 33861 PID 값을 가진 화면을 불러왔다.</p>
-
-<p>여러번 새로고침을 반복하면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPOoMHE0tlxe7V1CdRoQCdJmIN7tcTL1QwqUY4OwiudZff34WNG0Ss4s1HVGHXJyqp6vwdzWDNhjx6epx8Qh4RgGDBycw=w3024-h1620" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>이번엔 33818 PID 값을 가진 화면을 불러왔다.<br />
-이렇게 클라이언트에서 nginx 서버에 요청 시<br />
-로드 벨런싱이 적용되어 동작하는걸 눈으로 확인해 볼 수 있다.</p>
-
-<p><br /></p>
-
-<hr />
-
-<p>이렇게 오늘은 클라우드 운영 전략에 대해 간단하게 알아보았다.<br />
-백엔드 공부를 시작하면서 늘 걱정이었던게<br />
-서버가 터지는 것을 어떻게 방지하지? 라는 의문이 있었고<br />
-환경적으로 이렇게 설정할 수 있구나라는걸 많이 배운 것 같다.</p>
-
-<p>이러한 전략들 외에 실제로 웹 요청이 많을때 프로그램 코드적으로는<br />
-어떻게 해야 잘 짤 수 있을까도 많이 고민해보면 좋을 것 같다. (WebFlux라든가..)</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 간장계란밥, 김치찌개</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[Proxy Server]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 제육볶음, 스팸부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[드디어 정규과정이 다 끝이 났다. 4개월이란 짧은 시간에 정말 많은 것을 배웠고 모든 기술을 구현할 수 있는 능력은 없지만 작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.]]></summary></entry></feed>
