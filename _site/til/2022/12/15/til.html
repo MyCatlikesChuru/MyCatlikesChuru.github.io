@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 32 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 39 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -1674,6 +1674,234 @@ API 유효성 검토를 계속 진행해보면 될 것 같다.</p>
 7. 시간 처리 작업 진행 (sec, min, hour, day, month, year) (👤 박종식)
 </code></pre></div></div>
 
+<p><br></p>
+
+<h4 id="레포지토리가-삭제되었다-">레포지토리가 삭제되었다 😰</h4>
+
+<p>모든 일정이 끝나고 각자 작업을 진행하던중<br>
+이전에 프로젝트에 참여가 적었던 클라이언트 측 분이<br>
+실수로 Github 레포지토리를 삭제를 하였다….</p>
+
+<p>얼른 긴급히 모여서 수복하는데 집중을 하였다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gM227vgAHW3CtlqLKiBKm9g0m_8C1Rmg1sc1RY1qfCsr0EybyAgRMWo3ENW62fuzvZCf57L2n3yh7PflUWbIwlOVipxIQ=w1114-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>코드스테이측 Organization에 속해있는 레포지토리라<br>
+우리가 어떻게 만들고 할 수가 없는 상태였고…<br>
+급하게 임시 대피 레포지토리를 내 계정에 파놓아서 <br>
+코드를 취합하는데 집중했다.  다행히 로컬에 모두가 가지고 있는 프로그램을 <br>
+푸쉬해서 PR하여 합치는데 큰 무리는 없었고, 최종적으로 합쳐진 프로그램을 가지고<br>
+브랜치를 나눠 작업을하다가, 다음날 코드스테이츠 측에서 답변이 오면 <br>
+후속 조치를 하기로하고 각자 다시 작업에 들어갔다.</p>
+
+<p>너무 깜짝놀라기도했고,, 이런 상황을 겪고나니 어떻게 대처를 해야할지?<br>
+경험하게되는 좋은(?)시간이 었던 것 같다.<br>
+팀원들이 저녁에 다들 바쁠텐데 전부모여서 작업을해줘서 너무 고마웠고</p>
+
+<p><br></p>
+
+<h3 id="20221228-수">2022.12.28 (수)</h3>
+
+<h4 id="aws-셋팅">AWS 셋팅</h4>
+
+<p>오늘은 오전부터 AWS 셋팅을 진행할 것 같다. <br>
+비용이 나오면 안되기 때문에 S3, EC2, RDS 프리티어를 꼼꼼히<br>
+팀원들과 읽어보기로 하였다. 우선 팀장인 내계정으로 만들기로 정했고<br>
+너무 많이 사용하기보다는 우선 EC2 인스턴스를 만들어, 클라이언트, DB를 해결하려한다.</p>
+
+<p>EC2에 스프링 톰캣서버를 사용해 서버를 배포하고<br>
+Nginx를 사용해 클라이언트와 서버를 연결할 생각이다.<br>
+DB는 EC2에 mysql을 다운받아 사용하려한다.</p>
+
+<p>오늘은 EC2에 mysql을 다운 받고<br>
+스프링 빌드파일을 배포해 DB에 저장과 연결되는 것 까지는 완료했다.<br>
+<a href="https://mycatlikeschuru.github.io/db/2022/12/28/db-mysqlEC2.html">EC2 mysql과 WorkBench 연결</a>에 문제가 있어<br>
+문제 해결방법을 포스팅 해두었다.</p>
+
+<p>이번에 배포를 해보면서 정말 많은걸 배웠고, 계속 오류가 발생하니<br>
+찾고 해결하고 진행하고를 무한 반복한 것 같다..</p>
+
+<p>그래도 Mysql을 EC2에 사용할 수 있도록 셋팅하는거 하나는 확실히<br>
+배운 것 같아 뿌듯 했다.</p>
+
+<p><br></p>
+
+<h4 id="회의록-및-정리-5">회의록 및 정리</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>👥  참여 인원 : 이재혁, 이동우, 박종식, 박연환, 김혜원, 박평환
+
+📢  공통
+
+- EC2 퍼블릭 IPv4 주소 매일 변동 가능성 인지
+- EC2 MySQL 상 더미데이터 주입
+- 클라이언트 간단한 빌드파일 프→백으로 전달 및 백엔드 cors 테스트 진행예정
+- API테스트 가능시간 아직 미정
+
+🖥  프론트엔드 작업
+
+1. Ask questions 페이지 유효성 검사
+2. signup input 유효성 검사 (백엔드에서 보내준 정규표현식이 통과 안 되는 이슈 있음)
+3. Post 페이지 로그아웃 상태에서도 게시물을 볼 수 있게 수정
+4. 로그인 페이지 로직 구현중 ( + 로그인 토큰 유효기간 30분에 따른 로그인/로그아웃 구현 필요)
+5. 푸터 작업 진행 
+
+🔙  백엔드 작업
+
+1. AWS EC2 인스턴스 생성
+
+📌  AWS 작업전 체크 사항
+
+*AWS 자료 조사
+
+1. 프리티어 무료 제공 범위 체크
+2. GitHub에 인스턴스 관련된 키 등등 (❌  절대 올리지 말것 ❌ )
+- 운영환경 설정 내역:
+    - EC2
+        - Ubuntu, 22.04 LTS (HVM), SSD Volume Type , 64비트(x86)
+        - t2.mirco
+        - 스토리지(볼륨) - 30GiB
+        - IO 2백만개, 스냅샷 1GB, 대역폭 100GB
+    
+
+✅  인스턴스 초기 셋팅 
+
+- Git Setting &amp; Github Connecting
+    - ssh키 생성 : ssh-keygen
+    - 공개키 github 계정 내 등록 : Setting → SSH and GPG keys 
+    `cat ~/.ssh/id_rsa.pub`
+    - Repository clone
+- Java installation
+    - Open JDK 설치
+        - `sudo apt update`
+        - `sudo apt install openjdk-11-jre-headless`
+- Build
+    - `./gradlew build`
+    - 에러 발생 →`./gradlew` → `sudo chmod 777 ./gradlew`
+    무한 반복 → FileZilla로 직접 build 파일 넣어줌
+    - java -jar build/libs/stackoverflowclone-0.0.1-SNAPSHOT.jar
+    - 환경 변수 설정 `vi ~/.bshrc` 파일 설정(JWT, OAuth 2.0)
+- EC2 인바운드 설정
+    - 사용자 TCP 8080
+    - HTTP 80
+    - HTTPS 443
+    - MySQL 3306
+- MySQL 설치
+    - `sudo apt-get install mysql-server`
+    - `mysql --version`
+    - `sudo systemctl start mysql`
+    - MySql 계정: root, user
+    - 실행: `mysql -uroot -p` : mysql -u root team37
+    - name : seb password : team37 (seb)
+- MySQL 환경설정
+    - application-server.yml 생성 후 JDBC datasource 설정
+        - db 스키마, username, password 작성
+    - 외부접속 허용
+        - cd/etc/mysql/mysql.conf.d
+        - sudo vi mysqld.cnf
+        - bind-address 127.0.0.1 → 0.0.0.0 수정
+        - sudo systemctl restart mysql
+    - MySQL 계정생성 및 권한 부여(외부접속 허용)
+    - EC2 인바운드 추가
+        - 
+    - 
+
+*코드 적으로 변경해야할 것
+
+1. 불필요한 시스템로그 주석처리, 삭제
+2. profile 설정을 해야함 (배포용, 로컬용 분리)
+3. DB 변경 → yml 설정 변경 필요
+
+✅  아키텍쳐 구성
+
+방법1. S3 ↔  EC2 ↔  RDS
+
+방법2. EC2 사용. (NginX, mysql 다운)
+</code></pre></div></div>
+
+<p>오늘 구성, 진행 과정을 회의록에 적어보면서 기록을 하였다.<br>
+추후에 내 블로그에 여러 방법들에 대한 포스팅을 해야<br>
+정말로 내가 잘 찾아쓸 수 있을 것 같다.</p>
+
+<p><br></p>
+
+<h3 id="20221229-목">2022.12.29 (목)</h3>
+
+<h4 id="nginx-도메인-연결">NginX 도메인 연결</h4>
+
+<p>클라이언트를 연결하기 위해 빌드된 파일을 클라이언트에서 전달해줬다. <br>
+서버쪽에서는 NginX 서버를 EC2에 다운 받아 도메인과 연결해줬다.</p>
+
+<p>도메인은 ‘내 도메인 한국’이라는 곳에서 받았고<br>
+EC2 클라우딩 컴퓨터의 주소를 연결해두었다.</p>
+
+<p>설치하는 과정은 간단했지만… 셋팅하는 과정은 쉽지않았다..<br>
+팀원들과 여러가지 시도를 계속해보고 바꿔가면서 테스트를 해보았고<br>
+최종적으로는 Nginx에서 클라이언트 화면이 잘표시되었고<br>
+API를 요청할때 스프링 톰켓서버로 API 요청이 정상적으로 잘 들어왔다.</p>
+
+<p><br></p>
+
+<h4 id="cors-에러-조치">CORS 에러 조치</h4>
+
+<p>하지만… CORS에러가 발생했고… 이를 해결하는데 정말 <br>
+많은 시간와 의논을 나누며 테스트를 해보았던 것 같다.</p>
+
+<p>최종적으로는 CorsFilter를 빈으로 등록하고 구현해주었다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityCorsConfig</span> <span class="o">{</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">CorsFilter</span> <span class="nf">corsFilter</span><span class="o">(){</span>
+        <span class="nc">UrlBasedCorsConfigurationSource</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UrlBasedCorsConfigurationSource</span><span class="o">();</span>
+        <span class="nc">CorsConfiguration</span> <span class="n">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CorsConfiguration</span><span class="o">();</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">setAllowCredentials</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">addAllowedOriginPattern</span><span class="o">(</span><span class="s">"http://localhost:3000"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">addAllowedOriginPattern</span><span class="o">(</span><span class="s">"http://stackoverflowpre.p-e.kr"</span><span class="o">);</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">addAllowedHeader</span><span class="o">(</span><span class="s">"*"</span><span class="o">);</span> <span class="c1">//특정 header만 허용</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">addAllowedMethod</span><span class="o">(</span><span class="s">"*"</span><span class="o">);</span> <span class="c1">//특정 메소드만 허용 //</span>
+        <span class="n">config</span><span class="o">.</span><span class="na">addExposedHeader</span><span class="o">(</span><span class="s">"Authorization"</span><span class="o">);</span>
+        <span class="n">source</span><span class="o">.</span><span class="na">registerCorsConfiguration</span><span class="o">(</span><span class="s">"/**"</span><span class="o">,</span> <span class="n">config</span><span class="o">);</span> <span class="c1">//corsConfiguration으로 등록</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">CorsFilter</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>로컬에서 테스트하고 있는 클라이언트 주소와 EC2 도메인 주소<br>
+그리고 addExposedHeader를 추가해주었다.</p>
+
+<p>addExposedHeader를 추가하지 않았을 때에는 JWT 토큰이<br>
+response Header에 담기기는 하지만… 클라이언트 측에서<br>
+undefined가 받아와진다고하여 추가해주게 되었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomFilterConfigurer</span> <span class="kd">extends</span> <span class="nc">AbstractHttpConfigurer</span><span class="o">&lt;</span><span class="nc">CustomFilterConfigurer</span><span class="o">,</span><span class="nc">HttpSecurity</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">builder</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+      <span class="nc">AuthenticationManager</span> <span class="n">authenticationManager</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">getSharedObject</span><span class="o">(</span><span class="nc">AuthenticationManager</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// AuthenticationManager 객체얻기</span>
+  
+      <span class="nc">JwtAuthenticationFilter</span> <span class="n">jwtAuthenticationFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JwtAuthenticationFilter</span><span class="o">(</span><span class="n">authenticationManager</span><span class="o">,</span> <span class="n">jwtTokenizer</span><span class="o">);</span> <span class="c1">// JwtAuthenticationFilter 객체만들기 (생성하면서 DI하기)</span>
+  
+      <span class="n">jwtAuthenticationFilter</span><span class="o">.</span><span class="na">setFilterProcessesUrl</span><span class="o">(</span><span class="s">"/users/login"</span><span class="o">);</span>
+      <span class="n">jwtAuthenticationFilter</span><span class="o">.</span><span class="na">setAuthenticationSuccessHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAuthenticationSuccessHandler</span><span class="o">());</span>
+      <span class="n">jwtAuthenticationFilter</span><span class="o">.</span><span class="na">setAuthenticationFailureHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">MemberAuthenticationFailureHandler</span><span class="o">());</span>
+  
+      <span class="nc">JwtVerificationFilter</span> <span class="n">jwtVerificationFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JwtVerificationFilter</span><span class="o">(</span><span class="n">jwtTokenizer</span><span class="o">,</span> <span class="n">authorityUtils</span><span class="o">);</span>
+  
+      <span class="n">builder</span>
+              <span class="o">.</span><span class="na">addFilter</span><span class="o">(</span><span class="n">corsFilter</span><span class="o">)</span> <span class="c1">// &lt;- corsFilter 추가</span>
+              <span class="o">.</span><span class="na">addFilter</span><span class="o">(</span><span class="n">jwtAuthenticationFilter</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">addFilterAfter</span><span class="o">(</span><span class="n">jwtVerificationFilter</span><span class="o">,</span> <span class="nc">OAuth2LoginAuthenticationFilter</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>최종적으로 SecurityFilter에 CorsFilter를 DI받아 추가를 진행해주었다.<br>
+이렇게 설정을 완료하고나니까 CORS 에러가 말끔히 사라졌다!! <br>
+이전에 @CrossOrigin 어노테이션 사용밖에 해보지않았는데 <br>
+이런 방법으로 CorsFilter를 사용해 하는 방법도 있구나 세삼 새로웠다.</p>
+
+<p><br></p>
+
+<h3 id="20221230-금">2022.12.30 (금)</h3>
 
 
     </div>
@@ -1685,10 +1913,10 @@ API 유효성 검토를 계속 진행해보면 될 것 같다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/24/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring MVC Serivce 계층</a></li>
-<li><a class="post-link" href="/til/2022/11/15/til.html" title="H2 Database 다운로드 및 실행">TIL) Application 빌드, 실행</a></li>
-<li><a class="post-link" href="/til/2022/10/27/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
-<li><a class="post-link" href="/til/2022/12/02/til.html" title="H2 Database 다운로드 및 실행">TIL) Cloud 운영 환경 구성 1</a></li>
+        <li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="H2 Database 다운로드 및 실행">H2 Database 다운로드 및 실행</a></li>
+<li><a class="post-link" href="/linux/unix/2022/07/27/server-ubunto.html" title="H2 Database 다운로드 및 실행">Permission denied (publickey) 우분투 에러 조치</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="H2 Database 다운로드 및 실행">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+<li><a class="post-link" href="/til/2022/12/14/til.html" title="H2 Database 다운로드 및 실행">TIL) 네달차 회고</a></li>
 </ul>
     </div>
 <div class="post-comments">
