@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Java Algorithm 1 | LeeJellan</title>
+<title>AWS EC2 NginX 클라이언트 배포 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Java Algorithm 1">
+<meta property="og:title" content="AWS EC2 NginX 클라이언트 배포">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="앞에서 본격 코딩 테스트를 위한 예열인 재귀와 자료구조에 대해 공부했었다. 세삼 알고리즘이 왜 어렵고 사람들이 골아파하며 눈물을 훔치는지 이제 알았다.">
-<meta property="og:description" content="앞에서 본격 코딩 테스트를 위한 예열인 재귀와 자료구조에 대해 공부했었다. 세삼 알고리즘이 왜 어렵고 사람들이 골아파하며 눈물을 훔치는지 이제 알았다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/09/27/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/09/27/til.html">
+<meta name="description" content="✅ NGINX 이용하여 클라이언트 배포하기">
+<meta property="og:description" content="✅ NGINX 이용하여 클라이언트 배포하기">
+<link rel="canonical" href="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html">
+<meta property="og:url" content="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-09-27T00:00:00+09:00">
+<meta property="article:published_time" content="2022-12-29T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Java Algorithm 1">
+<meta property="twitter:title" content="AWS EC2 NginX 클라이언트 배포">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-09-27T00:00:00+09:00","datePublished":"2022-09-27T00:00:00+09:00","description":"앞에서 본격 코딩 테스트를 위한 예열인 재귀와 자료구조에 대해 공부했었다. 세삼 알고리즘이 왜 어렵고 사람들이 골아파하며 눈물을 훔치는지 이제 알았다.","headline":"TIL) Java Algorithm 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/09/27/til.html"},"url":"http://localhost:4000/til/2022/09/27/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-29T00:00:00+09:00","datePublished":"2022-12-29T00:00:00+09:00","description":"✅ NGINX 이용하여 클라이언트 배포하기","headline":"AWS EC2 NginX 클라이언트 배포","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"},"url":"http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Java Algorithm 1</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+39</h2>
+  <h1 class="post-title p-name" itemprop="name headline">AWS EC2 NginX 클라이언트 배포</h1>
+  <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-09-27T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Sep 27, 2022
+    <time class="dt-published" datetime="2022-12-29T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 29, 2022
     </time>
 
     
@@ -676,276 +676,196 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>앞에서 본격 코딩 테스트를 위한<br>
-예열인 재귀와 자료구조에 대해 공부했었다.<br>
-세삼 알고리즘이 왜 어렵고 사람들이 골아파하며<br>
-눈물을 훔치는지 이제 알았다.</p>
+      <h3 id="-nginx-이용하여-클라이언트-배포하기">✅ NGINX 이용하여 클라이언트 배포하기</h3>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRGsNNbDVuE__YaVubtKASBzXdwwSSuZhmDtCTKJu9XPCfljM8qnsnDWiqU9ht0nvRs39dvTqU=w3024-h1728" alt="image" class="align-left" style="max-width: 50%"></p>
+<p><a href="https://velog.io/@gudcks0305/%EB%B0%B0%ED%8F%AC-Cloud-Compute-%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">클라우딩 컴퓨터 배포 참고레퍼런스</a>를 토대로<br>
+공부하고 테스트해본 기록을 적어보려한다.</p>
 
-<p>당장 내가 문제를 풀 수 없다는 것은 알고있었는데<br>
-이정도의 벽이 있을 줄이야…<br>
-웹 개발에 대한 지식을 공부하기전에 쓴맛을 보고간다.<br>
-내가할 수 있는 공부를 마치고 알고리즘 공부도<br>
-본격적으로 해볼 생각이다.</p>
+<p>우리 코스에 한분이 작성하신 글이고<br>
+헤매고있는 나에게 빛줄기를 내려주셨다…🥹</p>
 
-<p>그때까지 화이팅</p>
+<p>우선 우리팀에서 생각한 아키텍처이다.<br>
+정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.</p>
 
-<hr>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN7pzIQwGbZHGCEUS4jHehIs9yAoOY3RHwfGUqiNHJgziufPka455gX63ZA492CwBarFgJwzDiqJx6XRydBBBJCWJJYNA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>오늘은 코딩테스트 준비를 위한<br>
-알고리즘방법 및 여러가지 지식들을 쭉 훑어볼 생각이다.<br>
-이 지식을 토대로 내일부터 알고리즘 문제를<br>
-푸는 시간을 페어와 가질 것 같다.</p>
-
-<p>오늘은 개념 정도만 이해하고 정리하는 수준으로 넘겨야 할 것 같다.</p>
+<p>AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만… <br>
+프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아<br>
+꼼꼼히 홈페이지 사양을 읽어보긴했지만,,, 아직 미숙한 우리들에게 사고를<br>
+미연에 방지하고자 EC2만 빌린다음에 진행하려고한다.</p>
 
 <p><br></p>
 
-<h2 id="시간-복잡도-time-complexity"><strong>시간 복잡도 (Time Complexity)</strong></h2>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmQQB7pd1i8N89KsjpvzZC3S3lKnSi9AoRKGG0F2HK2KtfY83Jz1ClCRiCyA8tudLECcPOcA2UE=w3024-h1728" alt="image" class="align-left" style="max-width: 80%"></p>
-
-<p>우리는 문제를 풀다보면 효율적인 방법을 찾기 마련이다.<br>
-불필요한 구문은 지워주고 줄일수 있는 코드는 리펙토링을 한다.<br>
-시간복잡도를 고려한다는 의미는<br>
-입력값에 변화에 따라 연산을 실행할 때, 연산 횟수에 비해 시간이 얼마만큼 걸리는가?와 같다.</p>
-
-<p><strong>표기법</strong></p>
-
-<ul>
-  <li>Big-O(빅-오) : 최악을 고려한 표기</li>
-  <li>Big-Ω(빅-오메가) : 최선을 고려한 표기</li>
-  <li>Big-θ(빅-세타) : 중간(편균)을 고려한 표기</li>
-</ul>
-
-<p>우리는 알고리즘을 작성할때 최악의 기준으로 작성을 하는 연습을 하기 때문에<br>
-Big-O 표기법을 가장 많이 사용하게 된다.<br>
-백준 알고리즘 문제를 풀 경우에도 최악을 가정한 입력값을 주고 문제풀이를 시키는 경우가 많은 것 처럼.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>이름</th>
-      <th>constant</th>
-      <th>logarithmic</th>
-      <th>linear</th>
-      <th>quadratic</th>
-      <th>exponential</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>표기법</td>
-      <td>O(1)</td>
-      <td>O(log n)</td>
-      <td>O(n)</td>
-      <td>O(n^2)</td>
-      <td>O(2^n)</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>&lt;—————작음 (빠름)   시간복잡도 정도   (느림) 큼 —————&gt;</p>
-
-<p><strong>O(1) - constant complexity</strong><br>
-입격값의 크기와 관계 없이, 즉시 출력값을 얻어낼 수 있는 정도의<br>
-시간 복잡도를 가진 알고리즘을 표기한다.</p>
-
-<p>ex)</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">};</span>
-<span class="kt">int</span> <span class="n">results</span> <span class="o">=</span> <span class="n">test</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">results</span><span class="o">);</span> <span class="c1">// 1</span>
+<h4 id="-작업-환경">📌 작업 환경</h4>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NGINX version : nginx/1.22.1
+EC2 인스턴스 유형 : Ubuntu, 22.04 LTS (HVM), SSD Volume Type , 64비트(x86)  
+JDK : openjdk version 11.0.17
+작업 컴퓨터 OS : macOS Monterey 12.6
 </code></pre></div></div>
 
-<p>입력값이 아무리 커져도 같은 출력값을 얻어낼 수 있다.<br>
-즉, 배열의 길이가 수백개가 되더라도 index에 접근해 값을 반환할 수 있다.</p>
+<p><br></p>
 
-<p><strong>O(n)- linear **complexity</strong>**<br>
-입력값이 증가함에 따라 시간 또한 같은 비율로 증가하는 것을 의미한다.<br>
-예를 들어 for문을 쓰는 경우와 같다.</p>
+<h4 id="-nginx-설치">📌 NGINX 설치</h4>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-<span class="c1">// 실행내용</span>
-<span class="o">}</span>
+<p>EC2 인스턴스에 Nginx를 설치해줘야한다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>nginx
+</code></pre></div></div>
+<p>업데이트를 해주고 nginx를 설치해주면 된다.</p>
+
+<p>설치가 완료되었다면 <code class="language-plaintext highlighter-rouge">nginx -version</code>을 입력하면<br>
+<code class="language-plaintext highlighter-rouge">nginx version: nginx/1.22.1</code>와 같이 버젼이 <br>
+나오면 정상적으로 설치된 것이다.</p>
+
+<p><br></p>
+
+<h4 id="-nginx-시작-종료">📌 NGINX 시작, 종료</h4>
+
+<p>1). 시작 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx start
 </code></pre></div></div>
 
-<p>n의 수량이 늘어나는 만큼 같은 비율로 시간이 증가한다.</p>
+<p><br></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-<span class="c1">// 실행내용</span>
-<span class="o">}</span>
-
-<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-<span class="c1">// 실행내용</span>
-<span class="o">}</span>
+<p>2). 중지 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx stop
 </code></pre></div></div>
 
-<p>만약 두개의 for문이 있을 경우에는 O(2n)과 같이 표기한다고 생각할 수도있다.<br>
-하지만 Big-O표기법으로는 O(n)으로 동일하게 표현한다.</p>
+<p><br></p>
 
-<p><strong>O(log n) - logarithmic complexity</strong><br>
-BST자료 구조에서 배웠던 것과 같다.<br>
-경우의 수를 절반씩 줄여가면 탐색하는 알고리즘의 시간복잡도를 표현한다.</p>
-
-<p><strong>O(n^2) - quadratic complexity</strong><br>
-입력값이 증가함에 따라 시간이 n의 제곱수의 비율로<br>
-증가하는 알고리즘을 표현할때 쓰는 표기법이다.<br>
-예를 들어 다중 for문 같은 경우이다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-<span class="c1">// 실행내용</span>
-    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-    <span class="c1">// 실행내용</span>
-	<span class="o">}</span>
-<span class="o">}</span>
+<p>3). 상태 확인 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx status
 </code></pre></div></div>
 
-<p>n이 증가함에따라 안의 있는 for문까지 제곱의 비율로<br>
-늘어나는 것을 볼 수 있다.</p>
+<p><br></p>
 
-<p><strong>O(2^n) - exponential complexity</strong><br>
-가장 느린 복잡도를 가지며, 2배씩 늘어나는 특성을 가지고 있다.<br>
-피보나치 수열의 재귀와 같은 문제가 이에 해당한다.<br>
-해당 함수를 여러번 실행하는 만큼 해당 시간복잡도가 배로되면 늘어나는 셈이기 때문이다.</p>
+<p>4). 설정파일 테스트 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nginx <span class="nt">-t</span> 
+</code></pre></div></div>
 
 <p><br></p>
 
-<h2 id="탐욕-알고리즘-greedy"><strong>탐욕 알고리즘 (Greedy)</strong></h2>
+<p>5). 재시작 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx restart
+</code></pre></div></div>
 
-<p>탐욕 알고리즘은 쉽게 말해 당장 눈앞에 보이는<br>
-최적의 상황만을 쫓아 최종적인 해당을 도출해내는 방법이다.<br>
-탐욕 알고리즘 작성 단계는 아래와 같이 구분된다.</p>
+<p>이렇게 5가지를 이용해 중지,시작 및 상태확인이 가능하다.</p>
 
-<ul>
-  <li>선택 절차</li>
-  <li>적절성 검사</li>
-  <li>해답 검사</li>
-</ul>
+<p>처음에 Start 명령어로 시작을한다면 <br>
+기본 페이지인 아래의 화면이 나올 것이다. <br>
+도메인 주소는 당연히 EC 인스턴스의 IPv4를 입력해주면된다.</p>
 
-<p>탐욕 알고리즘의 조건을 성립하려면 2가지가 있어야한다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDQyLIrueFY34ZhChcQqOsepcLPLrsa-qd8SRR-U_eG55nRUstLL8aOqIAjkjg84o68D2be4WfoeOlMewuzCKEmjHv=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<ul>
-  <li>탐욕적 선택 속성 : 앞의 선택이 이후의 선택에 영향을 주지 않는다.</li>
-  <li>최적 부분 구조 : 문제에 대한 최종 해결 방법은 부분 문제에 대한 최적 문제 해결 방법으로 구성된다.</li>
-</ul>
+<p>기본 설정 PORT가 80이기 때문에<br>
+<code class="language-plaintext highlighter-rouge">http://3.35.174.126</code> 으로 입력하여도 접속이 가능한 것이다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSWC7ALW5mJluS_VfB0vaM8HlWCKnc_P4XDmXIIfNJ6HuyFld3EsJsCm9nV6ObeZWwS2SuYjmY=w3024-h1728" alt="image" class="align-left" style="max-width: 60%"></p>
-
-<p>탐욕의 알고리즘 예시로는<br>
-빵집에서 빵을 고르려는데 담을 수 있는 통의 양은 정해져있고<br>
-각기 다른 가격과 무게를 가진 빵들을 고르는 사람의 기준으로<br>
-최적으로 담을 수 있도록 문제를 푸는 것을 가장 대표적인 예시로 들고있다.</p>
+<p>해당 html 파일의 주소에 접속하고 싶다면<br>
+<code class="language-plaintext highlighter-rouge">/usr/share/nginx/html</code> 경로로 이동하면 <br>
+<code class="language-plaintext highlighter-rouge">index.html</code>과 <code class="language-plaintext highlighter-rouge">50x.html</code>을 확인할 수 있다.</p>
 
 <p><br></p>
 
-<h2 id="구현-implementation"><strong>구현 (Implementation)</strong></h2>
+<h4 id="-nginx-설정">📌 NGINX 설정</h4>
 
-<p>알고리즘을 푼다는 것은, 내가 생각한 문제해결과정을<br>
-컴퓨터적 사고로 변환하여 코드로 구현하는 것 과 같다.<br>
-여러 문제들은 여러 카테고리로 묶여지게된다.</p>
+<p><code class="language-plaintext highlighter-rouge">/etc/nginx</code> 폴더에 설정 관련파일들을 찾아볼 수 있다.</p>
 
-<p>우리는 여러 문제들을 보고 구현하기가 힘들어 지는 경우가 많고<br>
-구현 능력을 보는 대표적인 사례로 시뮬레이션과 완전탐색이 있다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPlZj5J-OVdyUfWtLi-3GsOpph99bcO6chVUREqjXeqUdIDkUOKwDuTaIgeCapp2Qls01XhQ1J7hcVYQA0VCaSmXCmlDQ=w1656-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<h3 id="시뮬레이션-simulation"><strong>시뮬레이션 (Simulation)</strong></h3>
+<p>여기서 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일에 설정을 시작해주면 된다.<br>
+<code class="language-plaintext highlighter-rouge">nginx.conf</code>파일에는 기본적으로 <code class="language-plaintext highlighter-rouge">conf.d</code> 폴더안의 <code class="language-plaintext highlighter-rouge">.conf</code>파일들을<br>
+읽을 수 있도록 코드가 작성되어 있어, <code class="language-plaintext highlighter-rouge">conf.d</code> 폴더에 새로운 <code class="language-plaintext highlighter-rouge">.conf</code>파일을<br>
+만들어서 사용 설정이 가능하다.<br>
+(<code class="language-plaintext highlighter-rouge">include /etc/nginx/conf.d/*.conf;</code> 이런 코드가 있다.)</p>
 
-<p>시뮬레이션은 말과 같은 내용이며<br>
-모든 과정과 조건이 제시된다. 그 과정을 거친 결과가 무엇인지<br>
-확인하는 알고리즘이다.<br>
-<a href="https://www.acmicpc.net/problem/14891">톱니바퀴</a> 문제같은 유형을 시뮬레이션 알고리즘과 같다고 볼 수 있다.</p>
+<p><code class="language-plaintext highlighter-rouge">conf.d</code>폴더에는 <code class="language-plaintext highlighter-rouge">default.conf</code> 파일이 있다. <br>
+해당 파일을 수정하여 사용해도되고, 새로운 <code class="language-plaintext highlighter-rouge">.conf</code>파일을 만들어도 된다.</p>
 
-<p><br></p>
+<p>나와 같은 경우는 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일은 초기설정 그대로 두고<br>
+<code class="language-plaintext highlighter-rouge">conf.d</code>폴더에 1).<code class="language-plaintext highlighter-rouge">client.conf</code> , 2).<code class="language-plaintext highlighter-rouge">server.conf</code> 두개를 만들었다.</p>
 
-<h2 id="완전-탐색-알고리즘-brute-force-algorithm"><strong>완전 탐색 알고리즘 (Brute-Force Algorithm)</strong></h2>
+<p><strong>1). client.conf</strong></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+  server_name stackoverflowpre.p-e.kr;
+  root /home/ubuntu/preproject/seb41_pre_037/client/build;
+  index index.html index.htm;
+  try_files $uri $uri/ /index.html;
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+</code></pre></div></div>
+<p>server_name에는 <a href="https://xn--220b31d95hq8o.xn--3e0b707e/">내 도메인 한국</a>에서 받은 <br>
+도메인(stackoverflowpre.p-e.kr)으로 적어주었고  <br>
+EC2 IPv4 주소와 연결되어있다.</p>
 
-<p>영여로 직역하면 무차별 대입 알고리즘이라는 뜻이다.<br>
-즉, 모든 값을 대입하여 문제를 푸는 방법을 얘기한다.<br>
-모든 가능성을 시도하여 문제를 해결하는 방법이며<br>
-최적의 솔루션이 아니라는 말과 같다고 볼 수 있다.</p>
-
-<p>공간복잡도와 시간복잡도의 요소를 고려하지 않고 최악의 시나리오를<br>
-취하더라도 솔류션을 찾으려고하는 방법을 뜻한다.</p>
-
-<p>1). 프로세스 속도를 높이는데 사용할 수 있는 다른 알고리즘이 없을때<br>
-2). 문제를 해결하는 여러 솔류션이 있고, 각 솔류션을 확인해야할 때</p>
-
-<p>위 의 두가지 경우의 주로 완전 탐색 알고리즘을 사용한다.</p>
-
-<p>주로 사용하는 패턴은</p>
-
-<ul>
-  <li>문자열의 패턴의 매칭을 찾을 경우.</li>
-  <li>선택 정렬 알고리즘의 경우</li>
-  <li>버블 정렬 알고리즘의 경우</li>
-  <li>Tree 자료 구조의 완전탐색 알고리즘의 경우 (BFS, DFS)</li>
-  <li>동적 프로그래밍 알고리즘의 경우</li>
-</ul>
+<p>root에는 프론트엔드쪽 빌드된 파일이 올라가있는 경로이다.</p>
 
 <p><br></p>
 
-<h2 id="이진-탐색-알고리즘-binary-search-algorithm"><strong>이진 탐색 알고리즘 (Binary Search Algorithm)</strong></h2>
+<p><strong>2). server.conf</strong></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream preServer {
+        ip_hash;
+        server 127.0.0.1:8080;
+}
 
-<p>이진 탐색 알고리즘은 관련성 높은 결과를 정리해두고<br>
-원하는 정보를 찾을때 사용하는 알고리즘 방법이다.<br>
-이진 탐색 알고리즘과 같이<br>
-우리는 탐색을 할때 여러가지 알고리즘을 사용한다.<br>
-(선형 탐색 알고리즘, 해시 탐색 알고리즘)</p>
+server {
 
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmRftTcBkEOao_bjAqCk7WYwLafRFcK2LNJ4PrTUUvpneK2wOPGQS_idW1OSa4DhGWTCzjigzko=w3024-h1728" alt="image" class="align-left" style="max-width: 60%"></p>
+        server_name stackoverflowpre.p-e.kr;
+        location / {
 
-<p>가장 간단한 예시로 우리는 8이라는 값을 찾기위해<br>
-해당 배열의 중간부터 탐색해볼 수 있다.<br>
-이후에 5~9의 중간인 7을 탐색후, 7~9의 중간인 8를 도출 해낼 수 있다.<br>
-이렇게 총 3회의 걸쳐 찾을 수 있다.</p>
+            proxy_pass http://preServer; # 위 upstream 에서 설정한 이름
 
-<p>하지만 위에서 배운 완전탐색으로는 8번의 걸쳐야 찾을 수 있게 되는 것이다.<br>
-여기서 알 수 있는 이진탐색알고리즘의 한계가 있다.</p>
+            proxy_set_header    HOST $http_host;
 
-<ul>
-  <li>배열에서만 구현할 수 있다.</li>
-  <li>정렬되어 있어야만 구현할 수 있다.<br>
--&gt; 정렬되어있지 않아 정렬을한다면 이진탐색알고리즘을 사용해도 효율이 높지않다.</li>
-</ul>
+            proxy_set_header    X-Real-IP $remote_addr;
 
-<p><br></p>
+            proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
 
-<hr>
+            proxy_set_header    X-Forwarded-Proto $scheme;
 
-<p>오늘은 알고리즘의 대략적인 방법들을 알아보았다.<br>
-위의 방법을 어떻게 프로그램으로 구현할 수 있는지는 아직도<br>
-어렵고 많은 연습들이 필요할 것 같다.<br>
-오늘 공부는 여기서 끝!</p>
+            proxy_redirect  off;
+            charset utf-8;
+        }
 
-<p><br></p>
+}
+</code></pre></div></div>
+<p>preServer에 <code class="language-plaintext highlighter-rouge">localhost:8080</code>인 <code class="language-plaintext highlighter-rouge">127.0.0.1:8080</code>을 설정해주었고 (스프링 톰켓서버)<br>
+server_name에는 동일하게 도메인을 넣어주었다.</p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️  <br>
-<strong>오늘의 점심</strong>: 삽겹살, 공기밥</p>
+<p>이제 jar 빌드파일을 실행시켜놓고 <br>
+<code class="language-plaintext highlighter-rouge">sudo service nginx start </code> 명령어를 입력해주면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP7Sh6YFwUrS61qHgvcTyuBFnYthfSnOon6P1upWJ51Brs04kAsppAbtReYthNfYC4poomu4WMycAhF6xnd6bN9sVF8OQ=w1656-h864" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>우리가 만들어 놓은 <code class="language-plaintext highlighter-rouge">index.html</code> 화면이 보이기 시작하면서  <br>
+정삭적으로 배포환경에서 동작하는지 확인이 가능하다 !! <br>
+(스택오버플로우 클론코딩을 한 도메인이다)</p>
+
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/09/26/til.html" title="TIL) Java Algorithm BFS, DFS">TIL) Java Algorithm BFS, DFS</a><a class="next" href="/til/2022/09/28/til.html" title="TIL) Java Algorithm 2">TIL) Java Algorithm 2</a>
+<a class="previous" href="/db/2022/12/28/db-mysqlEC2.html" title="MySQL EC2에 설치후 WorkBench 접속하기">MySQL EC2에 설치후 WorkBench 접속하기</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/17/til.html" title="TIL) Java Algorithm 2">TIL) 인증, 보안 기초</a></li>
-<li><a class="post-link" href="/til/2022/12/07/til.html" title="TIL) Java Algorithm 2">TIL) 배포 자동화 AWS Pipeline</a></li>
-<li><a class="post-link" href="/til/2022/12/15/til.html" title="TIL) Java Algorithm 2">TIL) PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
-<li><a class="post-link" href="/til/2022/09/19/til.html" title="TIL) Java Algorithm 2">TIL) 한달차 회고</a></li>
+        <li><a class="post-link" href="/til/2022/09/01/til.html" title="">TIL) Java 문법기초 - 배열</a></li>
+<li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="">Spring) @JsonIgnore 사용하기</a></li>
+<li><a class="post-link" href="/til/2022/12/02/til.html" title="">TIL) Cloud 운영 환경 구성 1</a></li>
+<li><a class="post-link" href="/til/2022/12/07/til.html" title="">TIL) 배포 자동화 AWS Pipeline</a></li>
 </ul>
     </div>
 <div class="post-comments">

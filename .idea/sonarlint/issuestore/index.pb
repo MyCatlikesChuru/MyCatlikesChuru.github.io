@@ -29,8 +29,6 @@ Z
 -_posts/TIL/BootCamp/2022-08/2022-08-26-til.md,b/7/b79d18e088ac89983c93afeb426528e3ee060e62
 ]
 -_posts/TIL/BootCamp/2022-08/2022-08-25-til.md,0/3/035d7bead592f1746457d93dcd1f631157f97426
-f
-6_posts/Program/Spring/2022-12-27-spring-JunitSecure.md,7/f/7fe9f39bc030ab3cc364fd33ab50342171831932
 _
 /_posts/Program/Spring/2022-12-12-spring-cors.md,3/c/3c648878842476127dfe42060799e25e1b07c616
 Y

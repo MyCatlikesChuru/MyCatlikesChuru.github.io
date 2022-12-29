@@ -1,4 +1,168 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-29T22:27:40+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL EC2에 설치후 WorkBench 접속하기</title><link href="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html" rel="alternate" type="text/html" title="MySQL EC2에 설치후 WorkBench 접속하기" /><published>2022-12-28T00:00:00+09:00</published><updated>2022-12-28T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/28/db-mysqlEC2</id><content type="html" xml:base="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html"><![CDATA[<p>EC2에 MySQL을 설치한다음<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-30T00:37:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">AWS EC2 NginX 클라이언트 배포</title><link href="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html" rel="alternate" type="text/html" title="AWS EC2 NginX 클라이언트 배포" /><published>2022-12-29T00:00:00+09:00</published><updated>2022-12-29T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2022/12/29/server-NginX</id><content type="html" xml:base="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"><![CDATA[<h3 id="-nginx-이용하여-클라이언트-배포하기">✅ NGINX 이용하여 클라이언트 배포하기</h3>
+
+<p><a href="https://velog.io/@gudcks0305/%EB%B0%B0%ED%8F%AC-Cloud-Compute-%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">클라우딩 컴퓨터 배포 참고레퍼런스</a>를 토대로<br />
+공부하고 테스트해본 기록을 적어보려한다.</p>
+
+<p>우리 코스에 한분이 작성하신 글이고<br />
+헤매고있는 나에게 빛줄기를 내려주셨다…🥹</p>
+
+<p>우선 우리팀에서 생각한 아키텍처이다.<br />
+정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN7pzIQwGbZHGCEUS4jHehIs9yAoOY3RHwfGUqiNHJgziufPka455gX63ZA492CwBarFgJwzDiqJx6XRydBBBJCWJJYNA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만… <br />
+프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아<br />
+꼼꼼히 홈페이지 사양을 읽어보긴했지만,,, 아직 미숙한 우리들에게 사고를<br />
+미연에 방지하고자 EC2만 빌린다음에 진행하려고한다.</p>
+
+<p><br /></p>
+
+<h4 id="-작업-환경">📌 작업 환경</h4>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NGINX version : nginx/1.22.1
+EC2 인스턴스 유형 : Ubuntu, 22.04 LTS (HVM), SSD Volume Type , 64비트(x86)  
+JDK : openjdk version 11.0.17
+작업 컴퓨터 OS : macOS Monterey 12.6
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="-nginx-설치">📌 NGINX 설치</h4>
+
+<p>EC2 인스턴스에 Nginx를 설치해줘야한다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>nginx
+</code></pre></div></div>
+<p>업데이트를 해주고 nginx를 설치해주면 된다.</p>
+
+<p>설치가 완료되었다면 <code class="language-plaintext highlighter-rouge">nginx -version</code>을 입력하면<br />
+<code class="language-plaintext highlighter-rouge">nginx version: nginx/1.22.1</code>와 같이 버젼이 <br />
+나오면 정상적으로 설치된 것이다.</p>
+
+<p><br /></p>
+
+<h4 id="-nginx-시작-종료">📌 NGINX 시작, 종료</h4>
+
+<p>1). 시작 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx start
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>2). 중지 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx stop
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>3). 상태 확인 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx status
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>4). 설정파일 테스트 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nginx <span class="nt">-t</span> 
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>5). 재시작 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx restart
+</code></pre></div></div>
+
+<p>이렇게 5가지를 이용해 중지,시작 및 상태확인이 가능하다.</p>
+
+<p>처음에 Start 명령어로 시작을한다면 <br />
+기본 페이지인 아래의 화면이 나올 것이다. <br />
+도메인 주소는 당연히 EC 인스턴스의 IPv4를 입력해주면된다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDQyLIrueFY34ZhChcQqOsepcLPLrsa-qd8SRR-U_eG55nRUstLL8aOqIAjkjg84o68D2be4WfoeOlMewuzCKEmjHv=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>기본 설정 PORT가 80이기 때문에<br />
+<code class="language-plaintext highlighter-rouge">http://3.35.174.126</code> 으로 입력하여도 접속이 가능한 것이다.</p>
+
+<p>해당 html 파일의 주소에 접속하고 싶다면<br />
+<code class="language-plaintext highlighter-rouge">/usr/share/nginx/html</code> 경로로 이동하면 <br />
+<code class="language-plaintext highlighter-rouge">index.html</code>과 <code class="language-plaintext highlighter-rouge">50x.html</code>을 확인할 수 있다.</p>
+
+<p><br /></p>
+
+<h4 id="-nginx-설정">📌 NGINX 설정</h4>
+
+<p><code class="language-plaintext highlighter-rouge">/etc/nginx</code> 폴더에 설정 관련파일들을 찾아볼 수 있다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPlZj5J-OVdyUfWtLi-3GsOpph99bcO6chVUREqjXeqUdIDkUOKwDuTaIgeCapp2Qls01XhQ1J7hcVYQA0VCaSmXCmlDQ=w1656-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>여기서 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일에 설정을 시작해주면 된다.<br />
+<code class="language-plaintext highlighter-rouge">nginx.conf</code>파일에는 기본적으로 <code class="language-plaintext highlighter-rouge">conf.d</code> 폴더안의 <code class="language-plaintext highlighter-rouge">.conf</code>파일들을<br />
+읽을 수 있도록 코드가 작성되어 있어, <code class="language-plaintext highlighter-rouge">conf.d</code> 폴더에 새로운 <code class="language-plaintext highlighter-rouge">.conf</code>파일을<br />
+만들어서 사용 설정이 가능하다.<br />
+(<code class="language-plaintext highlighter-rouge">include /etc/nginx/conf.d/*.conf;</code> 이런 코드가 있다.)</p>
+
+<p><code class="language-plaintext highlighter-rouge">conf.d</code>폴더에는 <code class="language-plaintext highlighter-rouge">default.conf</code> 파일이 있다. <br />
+해당 파일을 수정하여 사용해도되고, 새로운 <code class="language-plaintext highlighter-rouge">.conf</code>파일을 만들어도 된다.</p>
+
+<p>나와 같은 경우는 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일은 초기설정 그대로 두고<br />
+<code class="language-plaintext highlighter-rouge">conf.d</code>폴더에 1).<code class="language-plaintext highlighter-rouge">client.conf</code> , 2).<code class="language-plaintext highlighter-rouge">server.conf</code> 두개를 만들었다.</p>
+
+<p><strong>1). client.conf</strong></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+  server_name stackoverflowpre.p-e.kr;
+  root /home/ubuntu/preproject/seb41_pre_037/client/build;
+  index index.html index.htm;
+  try_files $uri $uri/ /index.html;
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+</code></pre></div></div>
+<p>server_name에는 <a href="https://xn--220b31d95hq8o.xn--3e0b707e/">내 도메인 한국</a>에서 받은 <br />
+도메인(stackoverflowpre.p-e.kr)으로 적어주었고  <br />
+EC2 IPv4 주소와 연결되어있다.</p>
+
+<p>root에는 프론트엔드쪽 빌드된 파일이 올라가있는 경로이다.</p>
+
+<p><br /></p>
+
+<p><strong>2). server.conf</strong></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream preServer {
+        ip_hash;
+        server 127.0.0.1:8080;
+}
+
+server {
+
+        server_name stackoverflowpre.p-e.kr;
+        location / {
+
+            proxy_pass http://preServer; # 위 upstream 에서 설정한 이름
+
+            proxy_set_header    HOST $http_host;
+
+            proxy_set_header    X-Real-IP $remote_addr;
+
+            proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+
+            proxy_set_header    X-Forwarded-Proto $scheme;
+
+            proxy_redirect  off;
+            charset utf-8;
+        }
+
+}
+</code></pre></div></div>
+<p>preServer에 <code class="language-plaintext highlighter-rouge">localhost:8080</code>인 <code class="language-plaintext highlighter-rouge">127.0.0.1:8080</code>을 설정해주었고 (스프링 톰켓서버)<br />
+server_name에는 동일하게 도메인을 넣어주었다.</p>
+
+<p>이제 jar 빌드파일을 실행시켜놓고 <br />
+<code class="language-plaintext highlighter-rouge">sudo service nginx start </code> 명령어를 입력해주면</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP7Sh6YFwUrS61qHgvcTyuBFnYthfSnOon6P1upWJ51Brs04kAsppAbtReYthNfYC4poomu4WMycAhF6xnd6bN9sVF8OQ=w1656-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우리가 만들어 놓은 <code class="language-plaintext highlighter-rouge">index.html</code> 화면이 보이기 시작하면서  <br />
+정삭적으로 배포환경에서 동작하는지 확인이 가능하다 !! <br />
+(스택오버플로우 클론코딩을 한 도메인이다)</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Linux/Unix" /><category term="Linux" /><category term="Unix" /><summary type="html"><![CDATA[✅ NGINX 이용하여 클라이언트 배포하기]]></summary></entry><entry><title type="html">MySQL EC2에 설치후 WorkBench 접속하기</title><link href="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html" rel="alternate" type="text/html" title="MySQL EC2에 설치후 WorkBench 접속하기" /><published>2022-12-28T00:00:00+09:00</published><updated>2022-12-28T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/28/db-mysqlEC2</id><content type="html" xml:base="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html"><![CDATA[<p>EC2에 MySQL을 설치한다음<br />
 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다.<br />
 MySQL 설치과정은 생략하겠다.</p>
 
@@ -132,69 +296,7 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 
 <p><br /></p>
 
-<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry><entry><title type="html">GIT) pull rebase 사용해 병합하기</title><link href="http://localhost:4000/git/2022/12/27/git-rebase.html" rel="alternate" type="text/html" title="GIT) pull rebase 사용해 병합하기" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/git/2022/12/27/git-rebase</id><content type="html" xml:base="http://localhost:4000/git/2022/12/27/git-rebase.html"><![CDATA[<p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
-
-<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br />
-pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br />
-통합을 해서 사용하는 브랜치라고 가정하자.</p>
-
-<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br />
-누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br />
-가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
-
-<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br />
-<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
-
-<p><br /></p>
-
-<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
-</code></pre></div></div>
-<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
-
-<p>그럴 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
-</code></pre></div></div>
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br />
-이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br />
-참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
-
-<p>수정을 다완료 하고 나면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
-</code></pre></div></div>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br />
-만약 다음에 수정할게 없다면</p>
-
-<p><br /></p>
-
-<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br />
-이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
-</code></pre></div></div>
-<p>를 입력해주면 push를 할 수 있는데</p>
-
-<p>아래와 같은 에러에 마주하였을 경우에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
-</code></pre></div></div>
-<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[자주 사용하는 git pull --rebase에 대해 정리해보려한다.]]></summary></entry><entry><title type="html">Spring) Security Test 코드 작성시 UserDetails 설정</title><link href="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html" rel="alternate" type="text/html" title="Spring) Security Test 코드 작성시 UserDetails 설정" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/12/27/spring-JunitSecure</id><content type="html" xml:base="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html"><![CDATA[<p>오늘 겪은 문제를 정리해보려한다.<br />
+<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry><entry><title type="html">Spring) Security Test 코드 작성시 UserDetails 설정</title><link href="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html" rel="alternate" type="text/html" title="Spring) Security Test 코드 작성시 UserDetails 설정" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/12/27/spring-JunitSecure</id><content type="html" xml:base="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html"><![CDATA[<p>오늘 겪은 문제를 정리해보려한다.<br />
 Spring Security + JWT + OAuth2 인증,인가를 사용하여<br />
 정상적으로 API 작동까지 Postman으로 마친 상태이다.</p>
 
@@ -501,7 +603,69 @@ Session Attrs에 아래와 같이 우리가 만든<br />
 <br />
 <br /></p>
 
-<p><a href="https://sejoung.github.io/2020/11/2020-11-19-spring-security/#spring-security-test-code-%EC%9E%91%EC%84%B1%EC%8B%9C-UserDetails%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C">Test코드 작성시 UserDetails 참고 레퍼런스</a>, <a href="https://jungguji.github.io/2020/06/09/Spring-Controller-Test%EC%8B%9C-CSRF-%EC%84%A4%EC%A0%95/">csrf 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[오늘 겪은 문제를 정리해보려한다. Spring Security + JWT + OAuth2 인증,인가를 사용하여 정상적으로 API 작동까지 Postman으로 마친 상태이다.]]></summary></entry><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
+<p><a href="https://sejoung.github.io/2020/11/2020-11-19-spring-security/#spring-security-test-code-%EC%9E%91%EC%84%B1%EC%8B%9C-UserDetails%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C">Test코드 작성시 UserDetails 참고 레퍼런스</a>, <a href="https://jungguji.github.io/2020/06/09/Spring-Controller-Test%EC%8B%9C-CSRF-%EC%84%A4%EC%A0%95/">csrf 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[오늘 겪은 문제를 정리해보려한다. Spring Security + JWT + OAuth2 인증,인가를 사용하여 정상적으로 API 작동까지 Postman으로 마친 상태이다.]]></summary></entry><entry><title type="html">GIT) pull rebase 사용해 병합하기</title><link href="http://localhost:4000/git/2022/12/27/git-rebase.html" rel="alternate" type="text/html" title="GIT) pull rebase 사용해 병합하기" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/git/2022/12/27/git-rebase</id><content type="html" xml:base="http://localhost:4000/git/2022/12/27/git-rebase.html"><![CDATA[<p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
+
+<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br />
+pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br />
+통합을 해서 사용하는 브랜치라고 가정하자.</p>
+
+<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br />
+누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br />
+가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
+
+<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br />
+<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
+
+<p><br /></p>
+
+<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
+</code></pre></div></div>
+<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
+
+<p>그럴 경우에는</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
+</code></pre></div></div>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br />
+이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br />
+참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
+
+<p>수정을 다완료 하고 나면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
+</code></pre></div></div>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br />
+만약 다음에 수정할게 없다면</p>
+
+<p><br /></p>
+
+<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br />
+이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
+</code></pre></div></div>
+<p>를 입력해주면 push를 할 수 있는데</p>
+
+<p>아래와 같은 에러에 마주하였을 경우에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
+</code></pre></div></div>
+<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
+
+<p><br />
+<br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[자주 사용하는 git pull --rebase에 대해 정리해보려한다.]]></summary></entry><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어<br />
 EER 다이어 그램을 그려주는 기능을 사용해보려한다.</p>
 
@@ -1639,7 +1803,9 @@ API 유효성 검토를 계속 진행해보면 될 것 같다.</p>
 
 <p>너무 깜짝놀라기도했고,, 이런 상황을 겪고나니 어떻게 대처를 해야할지?<br />
 경험하게되는 좋은(?)시간이 었던 것 같다.<br />
-팀원들이 저녁에 다들 바쁠텐데 전부모여서 작업을해줘서 너무 고마웠고</p>
+팀원들이 저녁에 다들 바쁠텐데 전부모여서 작업을해줘서 너무 고마웠고  <br />
+실수하신분도 경험으로 남아, 앞으로 좀더 주의하게되는 기회를 얻게 된 것 같아서 <br />
+개인적으로는 도움이 되셨을거라고 생각한다 !!</p>
 
 <p><br /></p>
 
@@ -2145,42 +2311,7 @@ docker를 이용해 사용을 해줄 수도있을 것 같다는 생각이든다.
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️<br />
-<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 어제 만들었던 TODO List 프로젝트를 로컬환경에 띄우고 외부에서 접속할 수 있도록 하려한다. AWS EC2같은 클라우딩 서비스에 배포를 하지 않아도 외부에서 접속이가능하니 프론트엔드쪽과 협업할때 매우 좋을 것 같다.]]></summary></entry><entry><title type="html">Spring) CORS 설정하기</title><link href="http://localhost:4000/spring/2022/12/12/spring-cors.html" rel="alternate" type="text/html" title="Spring) CORS 설정하기" /><published>2022-12-12T00:00:00+09:00</published><updated>2022-12-12T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/12/12/spring-cors</id><content type="html" xml:base="http://localhost:4000/spring/2022/12/12/spring-cors.html"><![CDATA[<p>오늘은 CORS에 대한 내용을 간단하게 적어보려한다.</p>
-
-<p><br /></p>
-
-<p><a href="https://todobackend.com">TODO List 연습 클라이언트</a>를 이용해 로컬톰켓서버와<br />
-연결 시 CORS문제가 발생해 해결했던 코드를 올려 본다.</p>
-
-<p><strong>1). 어노테이션으로 설정하는 방법</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">"https://todobackend.com"</span><span class="o">)</span>
-<span class="nd">@RestController</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListController</span> <span class="o">{</span>
-    <span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>2). 빈 객체를 만들어 설정하는 방법</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootApplication</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodolistApplication</span> <span class="o">{</span>
-
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">TodolistApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
-	<span class="o">}</span>
-	<span class="nd">@Bean</span>
-	<span class="kd">public</span> <span class="nc">WebMvcConfigurer</span> <span class="nf">corsConfigurer</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="k">new</span> <span class="nf">WebMvcConfigurer</span><span class="o">()</span> <span class="o">{</span>
-			<span class="nd">@Override</span>
-			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addCorsMappings</span><span class="o">(</span><span class="nc">CorsRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
-				<span class="n">registry</span><span class="o">.</span><span class="na">addMapping</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">allowedOrigins</span><span class="o">(</span><span class="s">"https://todobackend.com/"</span><span class="o">);</span>
-			<span class="o">}</span>
-		<span class="o">};</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="cors" /><summary type="html"><![CDATA[오늘은 CORS에 대한 내용을 간단하게 적어보려한다.]]></summary></entry><entry><title type="html">TIL) 프로젝트 연습, 준비</title><link href="http://localhost:4000/til/2022/12/12/til.html" rel="alternate" type="text/html" title="TIL) 프로젝트 연습, 준비" /><published>2022-12-12T00:00:00+09:00</published><updated>2022-12-12T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/12/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/12/til.html"><![CDATA[<p>드디어 정규과정이 다 끝이 났다.<br />
+<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 어제 만들었던 TODO List 프로젝트를 로컬환경에 띄우고 외부에서 접속할 수 있도록 하려한다. AWS EC2같은 클라우딩 서비스에 배포를 하지 않아도 외부에서 접속이가능하니 프론트엔드쪽과 협업할때 매우 좋을 것 같다.]]></summary></entry><entry><title type="html">TIL) 프로젝트 연습, 준비</title><link href="http://localhost:4000/til/2022/12/12/til.html" rel="alternate" type="text/html" title="TIL) 프로젝트 연습, 준비" /><published>2022-12-12T00:00:00+09:00</published><updated>2022-12-12T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/12/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/12/til.html"><![CDATA[<p>드디어 정규과정이 다 끝이 났다.<br />
 4개월이란 짧은 시간에 정말 많은 것을 배웠고<br />
 모든 기술을 구현할 수 있는 능력은 없지만<br />
 작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.</p>
