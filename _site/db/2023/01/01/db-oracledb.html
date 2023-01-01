@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>TIL) Spring JDBC 기반 액세스 계층 2 | LeeJellan</title>
+<title>Oracle Database 무료 인스턴스 생성과 접속 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="TIL) Spring JDBC 기반 액세스 계층 2">
+<meta property="og:title" content="Oracle Database 무료 인스턴스 생성과 접속">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="어느새 벌써 한주가 끝났다.">
-<meta property="og:description" content="어느새 벌써 한주가 끝났다.">
-<link rel="canonical" href="http://localhost:4000/til/2022/10/28/til.html">
-<meta property="og:url" content="http://localhost:4000/til/2022/10/28/til.html">
+<meta name="description" content="오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.">
+<meta property="og:description" content="오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.">
+<link rel="canonical" href="http://localhost:4000/db/2023/01/01/db-oracledb.html">
+<meta property="og:url" content="http://localhost:4000/db/2023/01/01/db-oracledb.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-10-28T00:00:00+09:00">
+<meta property="article:published_time" content="2023-01-01T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="TIL) Spring JDBC 기반 액세스 계층 2">
+<meta property="twitter:title" content="Oracle Database 무료 인스턴스 생성과 접속">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-10-28T00:00:00+09:00","datePublished":"2022-10-28T00:00:00+09:00","description":"어느새 벌써 한주가 끝났다.","headline":"TIL) Spring JDBC 기반 액세스 계층 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/10/28/til.html"},"url":"http://localhost:4000/til/2022/10/28/til.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-01T00:00:00+09:00","datePublished":"2023-01-01T00:00:00+09:00","description":"오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.","headline":"Oracle Database 무료 인스턴스 생성과 접속","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/db/2023/01/01/db-oracledb.html"},"url":"http://localhost:4000/db/2023/01/01/db-oracledb.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">TIL) Spring JDBC 기반 액세스 계층 2</h1>
-  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+70</h2>
+  <h1 class="post-title p-name" itemprop="name headline">Oracle Database 무료 인스턴스 생성과 접속</h1>
+  <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-10-28T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Oct 28, 2022
+    <time class="dt-published" datetime="2023-01-01T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 01, 2023
     </time>
 
     
@@ -676,191 +676,155 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>어느새 벌써 한주가 끝났다.</p>
+      <p>오늘은 <a href="https://www.oracle.com/kr/cloud/free/">Oracle Cloud 무료 데이터베이스</a>를 생성해보려한다.</p>
 
-<p>코드스테이츠 시작 전부터 5개월 동안<br>
-제대로 쉬지 못하고 공부를 지속하다보니 살짝 번아웃이<br>
-오긴하는 것 같다.. 공부는 즐겁고 얼른 이 기술을 습득해<br>
-적용하고 싶지만,, 너무 오랫동안 여행을 가지 못해서<br>
-어디론가 훌쩍 떠나고 싶다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSBGqdkMkYbzBmUzeLdSEzgYHBaRbLNMmENQpr1mjJdIXzRObuGsIxR3g7G770hOSSAJTkT3Gc=w1512-h810" align="left"></p>
-
-<p><br><br><br><br><br><br><br><br><br><br><br></p>
-
-<p>그래도 목표에 도달하기위해 열심히 해보자 !!</p>
-
-<hr>
-
-<p>어제는 Spring data JDBC를 사용하는 연습을 해보았다.</p>
-
-<p>몇일전까지는 이해가 되서 재밌었는데,,<br>
-급격한 난이도 상승으로 인한  즐거움과 어지러움이 공존했다.</p>
-
-<p>요는 JDBC 사용법이 어려웠던 것 보다는<br>
-Database, Service, Dto, Mapper, Controller의 연동과<br>
-데이터 전달흐름을 정확히 캐치하기가 어려운게 너무 컷었다.</p>
-
-<p>그도 그럴 것이 이 모든 내용을 일주일안에<br>
-전부 학습한 내용이라 그런 것 같다는 생각이 들었다.</p>
-
-<p>그래도 오늘 배운 것을 차근차근 정리해보자</p>
+<p>회원 가입과 카드 등록은 되어있다 가정하고<br>
+인스턴스 생성전에 구획생성과 VCN 네트워크 생성<br>
+그리고 인스턴스를 생성하는 과정을 적어보려한다.<br>
+<a href="https://hoing.io/archives/318">Oracle 무료 인스턴스 참고 레퍼런스</a>를 토대로 작업하였습니다.</p>
 
 <p><br></p>
 
-<h3 id="domain-driven-design">Domain Driven Design</h3>
+<h3 id="-구획-생성">📌 구획 생성</h3>
 
-<p>Domain Driven Design는 DDD라고 줄여 불른다.<br>
-우리말로 도메인 주도 설계 정도로 해석할 수 있는데<br>
-용어의 의미 그대로 도메인 위주의 설계 기법을 의미한다.</p>
+<p>VM 생성 전에 구획을 먼저 생성해야한다.<br>
+구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.</p>
 
-<p><strong>Aggregate란?</strong><br>
-관련 도메인을 하나의 군집으로 묶은 것을 의미한다.<br>
-예를들어 커피주문을 앱으로 만든다고 가정하 였을 경우</p>
-
-<p>회원 (회원Id, 회원이름, 회원이메일 등..)<br>
-주문 (주문Id, 주문시간, 주문상태 등..)<br>
-음료 (음료Id, 음료종류, 음료가격, 음료조리시간 등..)</p>
-
-<p>이렇게 3개의 군집(회원,주문,음료)로 나는 것을 Aggregate라고 한다.</p>
-
-<p><strong>Aggregate route란?</strong><br>
-Aggregate route는 말그대로 군집중에 기준이 되는 뿌리. 즉 정보다<br>
-객체를 참조하기 위한 기준이되는 값이라고 생각하면 간단할 것 같다.<br>
-말 뜻에서 오듯이 변경이되지 않는 값으로 잡아야한다. (ex: id)</p>
-
-<p>한마디 정리 : Aggregate의 대표다 !</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNs_7nfk_gmvLEvuBwFQHxq_WeESvVrrNgHncikIguZT5WSDBFRWJouafXAfIAnVKgSH8daI2o4KyS-YzP_fNz25gBp=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p><br></p>
 
-<h3 id="entity-설계">Entity 설계</h3>
-<p>이전에 학습했던 RDBMS 챕터에서<br>
-ERD(Entity Relationship Diagram) 설계할때 잠깐 공부했었다.<br>
-1:1, 1:N, N:N 관계를 정의하고, 외래키(foreign key)로<br>
-다른 Entity를 Join해 값을 참조가 가능했었다.</p>
+<h3 id="-vcn-네트워크-생성">📌 VCN 네트워크 생성</h3>
 
-<p>우리가 예제로 만들 애플리케이션의 Entity의 관계를 정의하고<br>
-프로그램을 시작하는게 좋을 것 같다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPQ25gr2990xuN0OLF_Qr90USye42bZ6DbogZyuabsYL-OejRkV1p7C3LfLIa3X8BF5dgwz7eyH5zr20LtMPIO8nRjHjA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<h3 id="오늘-배운-것을-적어보자-">오늘 배운 것을 적어보자 !</h3>
+<p>먼저 아까 생성한 구획을 먼저 선택한다음<br>
+VCN 마법사를 시작한다.</p>
 
-<p><strong>1). AggregateReference</strong><br>
--. JDBC 라이브러리 안에 들어있는 인터페이스이다.<br>
--. Table 왜래키처럼 다른 클래스의 Aggregate Route를 참조할 수 있는 방법이다.</p>
+<p><br></p>
 
-<p><strong>2). @Table</strong><br>
--. Table의 이름을 정의하는 어노테이션이다.<br>
--. .sql 파일에 정의된 테이블의 이름과 연결해준다고 생각하면 될 것 같다.<br>
--. @Table이 설정이 안되어 있을 경우 클래스이름과 동일한 테이블을 연결해준다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN4OZ_5VRp8kmYeue1N02iMuXfeOZln12KRSuhL_PifDDhaNnn04SjU50HgsoewLDs6y8QAapnbFdv-GGZlSNSp9rSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p><strong>3). @MappedCollection</strong><br>
--. Entity 클래스 간의 연관 관계를 맺어주는 어노테이션이다.</p>
+<p>VCN 마법사 시작 클릭</p>
 
-<p>1,2,3번에 대한 예제를 프로그램으로 살펴보자</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE IF NOT EXISTS ORDERS (
-    ORDER_ID bigint NOT NULL AUTO_INCREMENT,
-    MEMBER_ID bigint NOT NULL,
-    PRIMARY KEY (ORDER_ID),
-    FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER(MEMBER_ID)
-);
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJqkxzAgS17AG9KpQ1OtqlFWGHiBgNCpvx7ydTjS4MjBJ1jb4a12pnVVnO5Th7cckoNEPKhQmajAVdg02USWVmeLsW=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>VCN 이름을 설정하고 다음 클릭</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZctP8XvWQbWqzGbVm-w77_ba-OS6OrBJb46yB5-zZv1IxFQDJ9z4q80NN8B-4D2O3qMINEhwKwEaA65i_zTR4aDLa=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>생성 버튼을 눌러 리소스 생성을 완료합니다.</p>
+
+<p><br></p>
+
+<h3 id="-인스턴스-생성">📌 인스턴스 생성</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNGOpUG5JQk1Y20qWPgcKom-VzhRcFsYcez9OIcBXBhA1q6MjLkamcxo3FMef5Uhsg1FdpF8fD0x6dydtnJl3GAjIyoIA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>VM 인스턴스 생성을 눌러 줍니다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1m0uwf3jt9p5biT_6GwYRrmuWIoUXdvRUlZ0HbDrbWTYrj1VK4ci1QVvZhNRVNuKISN1FAY2l3rI7Fyap86OMc6E1EA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>인스턴스 이름과 이전에 생성한 구획을 선택해줍니다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdIXghpgxv_vlEivea2ZDnBtqZT-NuITqQPLie9l8He0bfkDT-Of9-oZUhU783AMfII_LhhfdlcLjwMNKIYZz1c37o7w=w1524-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이미지와 Shape 선택이 가능하고<br>
+항상 무료 적격이라 적혀있는 것을 선택해서 사용해주면된다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo3-KkV26L9DztTmGJe7RvC3TpnqdtJ_TuMqP8fQwXvxfrpIKJH8pSbmXrPtmaHYtX1oresm5LE13S4bx5tot7rF5qUQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>네트워킹도 마찬가지로 이전에 만들어둔 VCN 네트워크를<br>
+선택해주시면 됩니다.</p>
+
+<p>만약 구획생성과 네트워킹을 만들어주지 않았다면<br>
+인스턴스 생성을하여도 에러가 발생합니다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOEnVFm0OsNdlUigDiwml8a2oJrXHpmUdMcf1PLn7PSX0fIHhR77mwY1-pbOOsFqz_Ld4ydtHu7l_TeA0f4AN17rBy2Q=w1524-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>SSH 키를 추가해줘야하는데<br>
+이전에 Github를 사용하신분들은 공용키가 이미 있을 것이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
 </code></pre></div></div>
-<p>SQL구문으로 ORDERS 테이블을 만들었고<br>
-내부의 ORDER_ID, MEMBER_ID를 컬럼을 만들었다.<br>
-각각 기본키와 외래키로 등록하였다.</p>
+
+<p>명령어를 입력해 공용 ssh를 붙여넣어주시면 됩니다. <br>
+만약 없다면 생성을 해주시면 되는데, 해당 내용은 스킵하겠습니다.</p>
+
+<p>부트 볼륨과 같은 경우에는 100GB까지 최대로 사용가능하고<br>
+50GB씩 2개의 인스턴스를 만들어 나눠사용할 수도 있습니다.</p>
+
+<p>이제 설정을 끝냈으면, 생성을 눌러 최종완료를 해주시면 됩니다.</p>
 
 <p><br></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@Table</span><span class="o">(</span><span class="s">"ORDERS"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
-    <span class="nd">@Id</span>
-    <span class="kd">private</span> <span class="kt">long</span> <span class="n">orderId</span><span class="o">;</span>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo2CptbsDAon2CtX6-RAqpmRSSTa7z3m9LWRW9JCFCdVbgMoJTOb9hisTz1OHSLY0EkNb9cXhzDeMauPpUOxUqBrtAXQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-    <span class="kd">private</span> <span class="nc">AggregateReference</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="n">memberId</span><span class="o">;</span>
-
-    <span class="nd">@MappedCollection</span><span class="o">(</span><span class="n">idColumn</span> <span class="o">=</span> <span class="s">"ORDER_ID"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">CoffeeRef</span><span class="o">&gt;</span> <span class="n">orderCoffees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>우리가 DB와 연결하기위해 Repository 인터페이스를 만들었고<br>
-Spring data JDBC 기술을 이용하는 CrudRepository 인터페이스를 상속받아<br>
-DB에 접근하여 CRUD를 사용했었다.</p>
-
-<p>Order 클래스는 우리가 객체를 만들어<br>
-값을 저장해둔다음. 해당 객체를 CrudRepository의<br>
-메서드를 이용해 .save();를하여 객체를 넘겨주면<br>
-우리가 위에서 정의해둔 테이블에 값이 저장되게 되어진다.</p>
-
-<p>1).
-여기서 @Table의 역할을 알 수 있다. 
-.save();를 진행할떄, 어느 테이블에 저장을해야할지<br>
-알수가 없다. 그것을 지정해주는 애노테이션으로
-Table이 ORDERS로 지정된 테이블을 연결해준다.<br>
-@Table을 안붙여줬을 경우 자동으로 클래스이름의 테이블을 찾아간다.</p>
-
-<p>2). AggregateReference 타입으로 만든 memberId라는 값은<br>
-Member 클래스의 Long으로 지정된 Id값을 참조할 수 있게된다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">new</span> <span class="nc">AggregateReference</span><span class="o">.</span><span class="na">IdOnlyAggregateReference</span><span class="o">();</span>
-</code></pre></div></div>
-<p>위의 코드를 이용해 Order 객체를 생성할 때, 어떤 Member가 선택했는지<br>
-전달받은 Id를 위의 메서드 안에 넣어 준 객체를 이용해서 만들어주면된다.</p>
-
-<p>그렇게 만들어진 order클래스 객체의 memberId값으로<br>
-memberRepository에 접근해 Id를 이용해 객체를 찾고<br>
-다른 값들도 가져올 수 있게 되는 것이다.</p>
-
-<p>3). @MappedCollection
-N:N 관계의 경우 중간 Entity 클래스가 하나 필요하다.<br>
-Order - OrderCoffee - Coffee (1 : N : 1)과 같은 그림이다.<br>
-그 중간 클래스는 CoffeeRef고 테이블은 ORDER_COFFEE로 정했다.</p>
-
-<p>idColumn, keyColumn에 대한 설정이 필요하고
-List를 사용할 경우 2개다 지정해야하며, Set을 싸용할 경우 IdColumn만 지정해도 사용가능하다.</p>
-
-<p>idColumn은 CoffeeRef에서 사용할 외래키를 적어주면된다.<br>
-CoffeeRef(N): Order(1)이기 때문에<br>
-ORDER_ID를 참조하게 적어주면된다.</p>
-
-<p>keyColumn은 외래키를 포함하고 있는 테이블의 기본키를 컬럼명을 지정하면된다.<br>
-현재 같은 경우 keyColumn = “ORDER_COFFEE_ID”로 적어주면 되는 것이다.</p>
-
-<hr>
-
-<p>이렇게 오늘은 Spring data JDBC에 대해 알아보았다.<br>
-사실 몇개는 간단하게 느껴졌는데<br>
-연관 관계 Mapping은 아직 익숙치않아서 그런지<br>
-조금 많이 어렵게 느껴졌다.<br>
-다음주에 실습이 또 있는데 실습을 통해서 익숙해지도록 노력해야겠다.</p>
+<p>이제 인스턴스 정보에 가서 확인해보시면<br>
+내가만든 인스턴스를 확인해 볼 수 있다.</p>
 
 <p><br></p>
 
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️<br>
-<strong>오늘의 점심</strong>: 불고기, 계란부침, 밥</p>
+<h3 id="-인스턴스-접속하기">📌 인스턴스 접속하기</h3>
+
+<p>이제 인스턴스를 만들었으니 접속을하는법을 알아보자<br>
+우리는 공용 SSH로 인스턴스를 만들었다.</p>
+
+<p>$HOME/.ssh 경로에 private key가 저장되어 있기 때문에 <br>
+암호를 입력하지 않아도 원격 서버에 접속할 수 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh ubuntu@주소
+</code></pre></div></div>
+
+<p>만약 private key가 $HOME/.ssh 경로에 위치하지 않은 경우</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> private key path ubuntu@주소
+</code></pre></div></div>
+<p>를 입력해주면 접속이 가능하다.</p>
+
+<p>터미널에서 입력시</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN0U_vZhmyBCubkA_yUqYCkiETMcUZtOnZLVXoUTz9DjMI_17cNV1t6S7kLe2Ajxg3hGFEed9nmR6d7kK4Ha7nvpTyeAw=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>와 같이 정상적으로 인스턴스에 접속한 모습을 볼 수 있다 !!</p>
+
+<p><br></p>
+
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/10/27/til.html" title="TIL) Spring JDBC 기반 액세스 계층 1">TIL) Spring JDBC 기반 액세스 계층...</a><a class="next" href="/til/2022/10/31/til.html" title="TIL) Spring Data JDBC Pagination">TIL) Spring Data JDBC Pagination</a>
+<a class="previous" href="/linux/unix/2022/12/29/server-NginX.html" title="AWS EC2 NginX 클라이언트 배포">AWS EC2 NginX 클라이언트 배포</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/14/til.html" title="TIL) Spring Data JDBC Pagination">TIL) API Documentation 2</a></li>
-<li><a class="post-link" href="/til/2022/12/07/til.html" title="TIL) Spring Data JDBC Pagination">TIL) 배포 자동화 AWS Pipeline</a></li>
-<li><a class="post-link" href="/til/2022/11/15/til.html" title="TIL) Spring Data JDBC Pagination">TIL) Application 빌드, 실행</a></li>
-<li><a class="post-link" href="/til/2022/10/13/til.html" title="TIL) Spring Data JDBC Pagination">TIL) Spring DI 1</a></li>
+        <li><a class="post-link" href="/til/2022/11/29/til.html" title="">TIL) Spring WebFlux Reactive 프로그래밍</a></li>
+<li><a class="post-link" href="/til/2022/09/27/til.html" title="">TIL) Java Algorithm 1</a></li>
+<li><a class="post-link" href="/til/2022/09/01/til.html" title="">TIL) Java 문법기초 - 배열</a></li>
+<li><a class="post-link" href="/til/2022/10/27/til.html" title="">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

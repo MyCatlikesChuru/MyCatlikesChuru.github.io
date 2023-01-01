@@ -1,4 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-01T18:01:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">AWS EC2 NginX 클라이언트 배포</title><link href="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html" rel="alternate" type="text/html" title="AWS EC2 NginX 클라이언트 배포" /><published>2022-12-29T00:00:00+09:00</published><updated>2022-12-29T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2022/12/29/server-NginX</id><content type="html" xml:base="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"><![CDATA[<h3 id="-nginx-이용하여-클라이언트-배포하기">✅ NGINX 이용하여 클라이언트 배포하기</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-01T22:56:18+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Oracle Database 무료 인스턴스 생성과 접속</title><link href="http://localhost:4000/db/2023/01/01/db-oracledb.html" rel="alternate" type="text/html" title="Oracle Database 무료 인스턴스 생성과 접속" /><published>2023-01-01T00:00:00+09:00</published><updated>2023-01-01T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/01/db-oracledb</id><content type="html" xml:base="http://localhost:4000/db/2023/01/01/db-oracledb.html"><![CDATA[<p>오늘은 <a href="https://www.oracle.com/kr/cloud/free/">Oracle Cloud 무료 데이터베이스</a>를 생성해보려한다.</p>
+
+<p>회원 가입과 카드 등록은 되어있다 가정하고<br />
+인스턴스 생성전에 구획생성과 VCN 네트워크 생성<br />
+그리고 인스턴스를 생성하는 과정을 적어보려한다.<br />
+<a href="https://hoing.io/archives/318">Oracle 무료 인스턴스 참고 레퍼런스</a>를 토대로 작업하였습니다.</p>
+
+<p><br /></p>
+
+<h3 id="-구획-생성">📌 구획 생성</h3>
+
+<p>VM 생성 전에 구획을 먼저 생성해야한다.<br />
+구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNs_7nfk_gmvLEvuBwFQHxq_WeESvVrrNgHncikIguZT5WSDBFRWJouafXAfIAnVKgSH8daI2o4KyS-YzP_fNz25gBp=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<h3 id="-vcn-네트워크-생성">📌 VCN 네트워크 생성</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPQ25gr2990xuN0OLF_Qr90USye42bZ6DbogZyuabsYL-OejRkV1p7C3LfLIa3X8BF5dgwz7eyH5zr20LtMPIO8nRjHjA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>먼저 아까 생성한 구획을 먼저 선택한다음<br />
+VCN 마법사를 시작한다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN4OZ_5VRp8kmYeue1N02iMuXfeOZln12KRSuhL_PifDDhaNnn04SjU50HgsoewLDs6y8QAapnbFdv-GGZlSNSp9rSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>VCN 마법사 시작 클릭</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJqkxzAgS17AG9KpQ1OtqlFWGHiBgNCpvx7ydTjS4MjBJ1jb4a12pnVVnO5Th7cckoNEPKhQmajAVdg02USWVmeLsW=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>VCN 이름을 설정하고 다음 클릭</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZctP8XvWQbWqzGbVm-w77_ba-OS6OrBJb46yB5-zZv1IxFQDJ9z4q80NN8B-4D2O3qMINEhwKwEaA65i_zTR4aDLa=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>생성 버튼을 눌러 리소스 생성을 완료합니다.</p>
+
+<p><br /></p>
+
+<h3 id="-인스턴스-생성">📌 인스턴스 생성</h3>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNGOpUG5JQk1Y20qWPgcKom-VzhRcFsYcez9OIcBXBhA1q6MjLkamcxo3FMef5Uhsg1FdpF8fD0x6dydtnJl3GAjIyoIA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>VM 인스턴스 생성을 눌러 줍니다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1m0uwf3jt9p5biT_6GwYRrmuWIoUXdvRUlZ0HbDrbWTYrj1VK4ci1QVvZhNRVNuKISN1FAY2l3rI7Fyap86OMc6E1EA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>인스턴스 이름과 이전에 생성한 구획을 선택해줍니다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdIXghpgxv_vlEivea2ZDnBtqZT-NuITqQPLie9l8He0bfkDT-Of9-oZUhU783AMfII_LhhfdlcLjwMNKIYZz1c37o7w=w1524-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이미지와 Shape 선택이 가능하고<br />
+항상 무료 적격이라 적혀있는 것을 선택해서 사용해주면된다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo3-KkV26L9DztTmGJe7RvC3TpnqdtJ_TuMqP8fQwXvxfrpIKJH8pSbmXrPtmaHYtX1oresm5LE13S4bx5tot7rF5qUQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>네트워킹도 마찬가지로 이전에 만들어둔 VCN 네트워크를<br />
+선택해주시면 됩니다.</p>
+
+<p>만약 구획생성과 네트워킹을 만들어주지 않았다면<br />
+인스턴스 생성을하여도 에러가 발생합니다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOEnVFm0OsNdlUigDiwml8a2oJrXHpmUdMcf1PLn7PSX0fIHhR77mwY1-pbOOsFqz_Ld4ydtHu7l_TeA0f4AN17rBy2Q=w1524-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>SSH 키를 추가해줘야하는데<br />
+이전에 Github를 사용하신분들은 공용키가 이미 있을 것이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+</code></pre></div></div>
+
+<p>명령어를 입력해 공용 ssh를 붙여넣어주시면 됩니다. <br />
+만약 없다면 생성을 해주시면 되는데, 해당 내용은 스킵하겠습니다.</p>
+
+<p>부트 볼륨과 같은 경우에는 100GB까지 최대로 사용가능하고<br />
+50GB씩 2개의 인스턴스를 만들어 나눠사용할 수도 있습니다.</p>
+
+<p>이제 설정을 끝냈으면, 생성을 눌러 최종완료를 해주시면 됩니다.</p>
+
+<p><br /></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo2CptbsDAon2CtX6-RAqpmRSSTa7z3m9LWRW9JCFCdVbgMoJTOb9hisTz1OHSLY0EkNb9cXhzDeMauPpUOxUqBrtAXQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이제 인스턴스 정보에 가서 확인해보시면<br />
+내가만든 인스턴스를 확인해 볼 수 있다.</p>
+
+<p><br /></p>
+
+<h3 id="-인스턴스-접속하기">📌 인스턴스 접속하기</h3>
+
+<p>이제 인스턴스를 만들었으니 접속을하는법을 알아보자<br />
+우리는 공용 SSH로 인스턴스를 만들었다.</p>
+
+<p>$HOME/.ssh 경로에 private key가 저장되어 있기 때문에 <br />
+암호를 입력하지 않아도 원격 서버에 접속할 수 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh ubuntu@주소
+</code></pre></div></div>
+
+<p>만약 private key가 $HOME/.ssh 경로에 위치하지 않은 경우</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> private key path ubuntu@주소
+</code></pre></div></div>
+<p>를 입력해주면 접속이 가능하다.</p>
+
+<p>터미널에서 입력시</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN0U_vZhmyBCubkA_yUqYCkiETMcUZtOnZLVXoUTz9DjMI_17cNV1t6S7kLe2Ajxg3hGFEed9nmR6d7kK4Ha7nvpTyeAw=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>와 같이 정상적으로 인스턴스에 접속한 모습을 볼 수 있다 !!</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.]]></summary></entry><entry><title type="html">AWS EC2 NginX 클라이언트 배포</title><link href="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html" rel="alternate" type="text/html" title="AWS EC2 NginX 클라이언트 배포" /><published>2022-12-29T00:00:00+09:00</published><updated>2022-12-29T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2022/12/29/server-NginX</id><content type="html" xml:base="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"><![CDATA[<h3 id="-nginx-이용하여-클라이언트-배포하기">✅ NGINX 이용하여 클라이언트 배포하기</h3>
 
 <p><a href="https://velog.io/@gudcks0305/%EB%B0%B0%ED%8F%AC-Cloud-Compute-%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">클라우딩 컴퓨터 배포 참고레퍼런스</a>를 토대로<br />
 공부하고 테스트해본 기록을 적어보려한다.</p>
@@ -296,7 +419,69 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 
 <p><br /></p>
 
-<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry><entry><title type="html">Spring) Security Test 코드 작성시 UserDetails 설정</title><link href="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html" rel="alternate" type="text/html" title="Spring) Security Test 코드 작성시 UserDetails 설정" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/12/27/spring-JunitSecure</id><content type="html" xml:base="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html"><![CDATA[<p>오늘 겪은 문제를 정리해보려한다.<br />
+<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry><entry><title type="html">GIT) pull rebase 사용해 병합하기</title><link href="http://localhost:4000/git/2022/12/27/git-rebase.html" rel="alternate" type="text/html" title="GIT) pull rebase 사용해 병합하기" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/git/2022/12/27/git-rebase</id><content type="html" xml:base="http://localhost:4000/git/2022/12/27/git-rebase.html"><![CDATA[<p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
+
+<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br />
+pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br />
+통합을 해서 사용하는 브랜치라고 가정하자.</p>
+
+<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br />
+누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br />
+가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
+
+<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br />
+<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
+
+<p><br /></p>
+
+<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
+</code></pre></div></div>
+<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
+
+<p>그럴 경우에는</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
+</code></pre></div></div>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br />
+이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br />
+참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
+
+<p>수정을 다완료 하고 나면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
+</code></pre></div></div>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br />
+만약 다음에 수정할게 없다면</p>
+
+<p><br /></p>
+
+<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br />
+이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
+</code></pre></div></div>
+<p>를 입력해주면 push를 할 수 있는데</p>
+
+<p>아래와 같은 에러에 마주하였을 경우에는</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
+</code></pre></div></div>
+<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
+
+<p><br />
+<br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[자주 사용하는 git pull --rebase에 대해 정리해보려한다.]]></summary></entry><entry><title type="html">Spring) Security Test 코드 작성시 UserDetails 설정</title><link href="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html" rel="alternate" type="text/html" title="Spring) Security Test 코드 작성시 UserDetails 설정" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/spring/2022/12/27/spring-JunitSecure</id><content type="html" xml:base="http://localhost:4000/spring/2022/12/27/spring-JunitSecure.html"><![CDATA[<p>오늘 겪은 문제를 정리해보려한다.<br />
 Spring Security + JWT + OAuth2 인증,인가를 사용하여<br />
 정상적으로 API 작동까지 Postman으로 마친 상태이다.</p>
 
@@ -603,69 +788,7 @@ Session Attrs에 아래와 같이 우리가 만든<br />
 <br />
 <br /></p>
 
-<p><a href="https://sejoung.github.io/2020/11/2020-11-19-spring-security/#spring-security-test-code-%EC%9E%91%EC%84%B1%EC%8B%9C-UserDetails%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C">Test코드 작성시 UserDetails 참고 레퍼런스</a>, <a href="https://jungguji.github.io/2020/06/09/Spring-Controller-Test%EC%8B%9C-CSRF-%EC%84%A4%EC%A0%95/">csrf 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[오늘 겪은 문제를 정리해보려한다. Spring Security + JWT + OAuth2 인증,인가를 사용하여 정상적으로 API 작동까지 Postman으로 마친 상태이다.]]></summary></entry><entry><title type="html">GIT) pull rebase 사용해 병합하기</title><link href="http://localhost:4000/git/2022/12/27/git-rebase.html" rel="alternate" type="text/html" title="GIT) pull rebase 사용해 병합하기" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/git/2022/12/27/git-rebase</id><content type="html" xml:base="http://localhost:4000/git/2022/12/27/git-rebase.html"><![CDATA[<p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
-
-<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br />
-pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br />
-통합을 해서 사용하는 브랜치라고 가정하자.</p>
-
-<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br />
-누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br />
-가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
-
-<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br />
-<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
-
-<p><br /></p>
-
-<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
-</code></pre></div></div>
-<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
-
-<p>그럴 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
-</code></pre></div></div>
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br />
-이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br />
-참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
-
-<p>수정을 다완료 하고 나면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
-</code></pre></div></div>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br />
-만약 다음에 수정할게 없다면</p>
-
-<p><br /></p>
-
-<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br />
-이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
-</code></pre></div></div>
-<p>를 입력해주면 push를 할 수 있는데</p>
-
-<p>아래와 같은 에러에 마주하였을 경우에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
-</code></pre></div></div>
-<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[자주 사용하는 git pull --rebase에 대해 정리해보려한다.]]></summary></entry><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
+<p><a href="https://sejoung.github.io/2020/11/2020-11-19-spring-security/#spring-security-test-code-%EC%9E%91%EC%84%B1%EC%8B%9C-UserDetails%EA%B0%80-%ED%95%84%EC%9A%94%ED%95%A0%EB%95%8C">Test코드 작성시 UserDetails 참고 레퍼런스</a>, <a href="https://jungguji.github.io/2020/06/09/Spring-Controller-Test%EC%8B%9C-CSRF-%EC%84%A4%EC%A0%95/">csrf 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[오늘 겪은 문제를 정리해보려한다. Spring Security + JWT + OAuth2 인증,인가를 사용하여 정상적으로 API 작동까지 Postman으로 마친 상태이다.]]></summary></entry><entry><title type="html">MySQL EER 다이어그램 만드는법</title><link href="http://localhost:4000/db/2022/12/19/db-mysqlEER.html" rel="alternate" type="text/html" title="MySQL EER 다이어그램 만드는법" /><published>2022-12-19T00:00:00+09:00</published><updated>2022-12-19T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/19/db-mysqlEER</id><content type="html" xml:base="http://localhost:4000/db/2022/12/19/db-mysqlEER.html"><![CDATA[<p>mysql을 로컬로 연결한 다음<br />
 연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어<br />
 EER 다이어 그램을 그려주는 기능을 사용해보려한다.</p>
 
@@ -2052,6 +2175,8 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 
 <h4 id="readme-작성">Readme 작성</h4>
 
+<hr />
+
 <div align="center">
   <img width="80%" src="https://content.presspage.com/uploads/2658/c1920_logo-stackoverflow-banner.jpg?64224" alt="roobits" />
 </div>
@@ -2305,6 +2430,8 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
   </tbody>
 </table>
 
+<hr />
+
 <p><br /></p>
 
 <p>이러한 느낌으로 작성을 해보려한다.<br />
@@ -2314,7 +2441,7 @@ Github IO 블로그를 쓰면서 MarkDown 문법에 익수해졌던 것이 <br /
 <p>아직 프론트엔드측 작업 취합이 되지 않아 백엔드쪽만 먼저 넣을 수 있는  <br />
 내용을 적어 놓고, 월요일에 테스트를 마친다음에 작성을 완료하려한다.</p>
 
-<p>그리고 HTTPS를 적용하려고 하였지만…
+<p>그리고 HTTPS를 적용하려고 하였지만…<br />
 AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 진행이 안되어 <br />
 적용하지 못해서 조금 아쉬웠다. 많은 사람이 Oracle Cloud를 사용한다고 <br />
 하여서 나도 계정을 가입해놓고 이제 나만의 서버를 만들어보려한다.</p>
@@ -2656,356 +2783,4 @@ docker를 이용해 사용을 해줄 수도있을 것 같다는 생각이든다.
 <p><br /></p>
 
 <p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️<br />
-<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 어제 만들었던 TODO List 프로젝트를 로컬환경에 띄우고 외부에서 접속할 수 있도록 하려한다. AWS EC2같은 클라우딩 서비스에 배포를 하지 않아도 외부에서 접속이가능하니 프론트엔드쪽과 협업할때 매우 좋을 것 같다.]]></summary></entry><entry><title type="html">TIL) 프로젝트 연습, 준비</title><link href="http://localhost:4000/til/2022/12/12/til.html" rel="alternate" type="text/html" title="TIL) 프로젝트 연습, 준비" /><published>2022-12-12T00:00:00+09:00</published><updated>2022-12-12T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/12/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/12/til.html"><![CDATA[<p>드디어 정규과정이 다 끝이 났다.<br />
-4개월이란 짧은 시간에 정말 많은 것을 배웠고<br />
-모든 기술을 구현할 수 있는 능력은 없지만<br />
-작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.</p>
-
-<p>프로젝트때 내가 중점적으로 적용하고 공부해보려는 것은</p>
-<ol>
-  <li>Spring MVC</li>
-  <li>Spring AOP</li>
-  <li>Spring JPA</li>
-  <li>Spring Security(JWT, OAuth2)</li>
-  <li>계층별 테스트코드 작성</li>
-  <li>API 문서 자동화</li>
-  <li>배포 자동화</li>
-  <li>docker를 이용한 배포환경 통일화</li>
-</ol>
-
-<p>이렇게 8개 정도를 정말 숙달할 정도로 연습해보려한다.<br />
-현재 1번~4번까지는 어느정도 연습이 되어있지만<br />
-자세한 계층구조를 파악하는 목적을 두고 있다.</p>
-
-<p>5~8번까지는 실제 애플리케이션 동작들을 간편하게 사용하는 목적으로<br />
-이용할 가능성이크고 특히 아직 익숙하지 않은 docker에 대해선<br />
-팀원들과 상의해 정말 꼭 통일된 환경을 만들어서 작업을 해보고 싶다.</p>
-
-<p>이렇게 프로그램 작성과 적용하여 내부내용까지 정말 <br />
-이번 기회에 확실히 체득하고 내 것으로 만들 계획이다.</p>
-
-<p><br /></p>
-
-<h3 id="간단한-프로젝트-만들어서-해보기">간단한 프로젝트 만들어서 해보기</h3>
-
-<p>본격적으로 팀원이 정해지기전에<br />
-혼자 어느정도 만들어보는 시간을 가지는 시간이 주어졌다.</p>
-
-<p>오늘은 Todo List를 구현하는 프로그램을 만들어 보려한다.<br />
-클라이언트는 이미 오픈으로 제공되어 있는 <a href="https://todobackend.com/">Todo-Backend</a>사이트를 이용해<br />
-서버와 H2 데이터베이스를 이용해 작성해볼 생각이다.</p>
-
-<p>로컬 환경에서 테스트를 하고자한다면</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://todobackend.com/client/index.html?http://localhost:8080
-</code></pre></div></div>
-<p>해당 URL로 접속 시 TODO LIST에 대한 GET 요청이 이루어질 것이다.<br />
-GET,POST,PATCH,DELETE 까지 적용해보자</p>
-
-<p>우선 먼저 내가 사용할 기술들에 대한<br />
-의존 라이브러리를 추가해주었다.<br />
-내장 톰켓 서버를 사용할 것이고, H2를 사용할 거다.<br />
-그리고 Mapper를 이용할 것이고, DB에 접근하는 기술은 JPA를 사용할 것이다.<br />
-그리고 편의를 위한 롬복과, 테스트 코드 작성을 위한 의존라이브러리</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">jpa</span><span class="err">'</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">validation</span><span class="err">'</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="nl">mapstruct:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="o">:</span><span class="n">gson</span><span class="err">'</span>
-
-	<span class="n">compileOnly</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
-	<span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span><span class="err">'</span>
-	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
-	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="n">mapstruct</span><span class="o">-</span><span class="nl">processor:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
-
-	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>이 정도를 추가해볼 수 있을 것 같다.</p>
-
-<p><br /></p>
-
-<p>이제 의존라이브러리 설정을 다해주었으니<br />
-웹 애플리케이션 계층 구조를 Controller, Service, Repository로 만들어<br />
-적절한 구현과 역할을 나눠주자.</p>
-
-<p>우선 Controller 부터 작성 했다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span><span class="err">\</span>
-<span class="nd">@RestController</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListController</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TodoListService</span> <span class="n">todoListService</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TodoListMapper</span> <span class="n">todoListMapper</span><span class="o">;</span>
-
-    <span class="nd">@PostMapping</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">createList</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">TodoListDto</span> <span class="n">todoListDto</span><span class="o">){</span>
-
-        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">createTodoList</span><span class="o">(</span><span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListDtoToTodoList</span><span class="o">(</span><span class="n">todoListDto</span><span class="o">));</span>
-        <span class="nc">TodoListResponseDto</span> <span class="n">todoListResponseDto</span> <span class="o">=</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListToTodoListResponseDto</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoListResponseDto</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@GetMapping</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getLists</span><span class="o">(){</span>
-
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">&gt;</span> <span class="n">todoLists</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">getLists</span><span class="o">();</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoLists</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/{listId}"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">getList</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
-
-        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">getList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
-        <span class="nc">TodoListResponseDto</span> <span class="n">todoListResponseDto</span> <span class="o">=</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListToTodoListResponseDto</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoListResponseDto</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@PatchMapping</span><span class="o">(</span><span class="s">"/{listId}"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">updateList</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">listId</span><span class="o">,</span>
-                                     <span class="nd">@RequestBody</span> <span class="nc">TodoListDto</span> <span class="n">todoListDto</span><span class="o">){</span>
-
-        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="n">todoListService</span><span class="o">.</span><span class="na">changeTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">,</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListDtoToTodoList</span><span class="o">(</span><span class="n">todoListDto</span><span class="o">));</span>
-        <span class="nc">TodoListResponseDto</span> <span class="n">todoListResponseDto</span> <span class="o">=</span> <span class="n">todoListMapper</span><span class="o">.</span><span class="na">todoListToTodoListResponseDto</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="n">todoListResponseDto</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">OK</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@DeleteMapping</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">deleteLists</span><span class="o">(){</span>
-
-        <span class="n">todoListService</span><span class="o">.</span><span class="na">deleteTodoLists</span><span class="o">();</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@DeleteMapping</span><span class="o">(</span><span class="s">"/{listId}"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">deleteList</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
-
-        <span class="n">todoListService</span><span class="o">.</span><span class="na">deleteTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>크게 어려운 기술들은 없다.<br />
-총 6개의 API로 가장 간단한 동작들만하는 메서드이다.</p>
-
-<p>Entity 클래스 작성이다.<br />
-JPA기술을 사용하기 때문에 해당 관련 설정을 해주어야한다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
-<span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@NoArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoList</span> <span class="o">{</span>
-
-    <span class="nd">@Id</span>
-    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">todoOrder</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">completed</span><span class="o">;</span>
-
-
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getCompleted</span><span class="o">(){</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">completed</span><span class="o">;</span>
-    <span class="o">}</span>
-
-<span class="o">}</span>
-</code></pre></div></div>
-<p>4개의 필드변수가 존재하고 <br />
-테이블을 4개만 사용할 예정이다.</p>
-
-<p>Repository 계층이다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TodoListRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">,</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>JpaRepository를 상속받고, 우리가 Entity클래스로 지정한 <br />
-<code class="language-plaintext highlighter-rouge">TodoList</code>와 Id 타입인 <code class="language-plaintext highlighter-rouge">Long</code>을 타입매개변수로 넣어주자</p>
-
-<p>이제 Controller에서 주고받는 데이터를<br />
-맵핑해주는 Dto 클래스를 만들어보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListDto</span> <span class="o">{</span>
-
-    <span class="nd">@NotBlank</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"제목은 공백이 아니어야 합니다."</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">order</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">completed</span><span class="o">;</span>
-
-
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">getCompleted</span><span class="o">(){</span>
-        <span class="k">return</span> <span class="n">completed</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListResponseDto</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">todoOrder</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">completed</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>첫번째 Dto는 Json객체로 요청이 왔을때<br />
-맵핑을하도록 작성해주었다.<br />
-아직 Valid 대한 예외처리는 적용하지 못한 상태이다.</p>
-
-<p>두번째 Dto는 최종적으로 Reponse의 Body로 응답해줄<br />
-Json객체를 만들기위해 맵핑해주는 Dto객체이다.</p>
-
-<p>그리고 Mapper 클래스를 만들어보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TodoListMapper</span> <span class="o">{</span>
-    <span class="k">default</span> <span class="nc">TodoList</span> <span class="nf">todoListDtoToTodoList</span><span class="o">(</span><span class="nc">TodoListDto</span> <span class="n">todoListDto</span><span class="o">){</span>
-        <span class="k">if</span> <span class="o">(</span> <span class="n">todoListDto</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="nc">TodoList</span> <span class="n">todoList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TodoList</span><span class="o">();</span>
-
-        <span class="n">todoList</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span> <span class="n">todoListDto</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()</span> <span class="o">);</span>
-        <span class="n">todoList</span><span class="o">.</span><span class="na">setTodoOrder</span><span class="o">(</span><span class="n">todoListDto</span><span class="o">.</span><span class="na">getOrder</span><span class="o">());</span>
-        <span class="n">todoList</span><span class="o">.</span><span class="na">setCompleted</span><span class="o">(</span> <span class="n">todoListDto</span><span class="o">.</span><span class="na">getCompleted</span><span class="o">());</span>
-
-        <span class="k">return</span> <span class="n">todoList</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="nc">TodoListResponseDto</span> <span class="nf">todoListToTodoListResponseDto</span><span class="o">(</span><span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>Mapper를 통해서 <code class="language-plaintext highlighter-rouge">TodoListDto</code>객체를 <code class="language-plaintext highlighter-rouge">TodoList</code> 클래스로<br />
-<code class="language-plaintext highlighter-rouge">TodoList</code>객체를 <code class="language-plaintext highlighter-rouge">TodoListResponseDto</code>클래스로 변경해준다.</p>
-
-<p>이제 간단한 서비스로직에 대한 예외처리를 위한<br />
-클래스를 만들어 보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
-    <span class="no">LIST_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span><span class="s">"TodoList Not Found"</span><span class="o">);</span>
-
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
-
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
-
-    <span class="nc">ExceptionCode</span><span class="o">(</span><span class="kt">int</span> <span class="n">code</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">code</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServiceLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span><span class="o">{</span>
-    <span class="nd">@Getter</span>
-    <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">ServiceLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">){</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">exceptionCode</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>이제 해당 커스텀 코드로 예외를 발생시킬 것이다.<br />
-리스트의 존재여부와 같은 예외가 발생하면<br />
-해당 예외를 발생시켜 추후에 Advice로 잡아서 처리해줄 수 있다.</p>
-
-<p>이제 마지막으로 Service 로직을 작성해보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="nd">@Transactional</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListService</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TodoListRepository</span> <span class="n">todoListRepository</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nc">TodoList</span> <span class="nf">createTodoList</span><span class="o">(</span><span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">){</span>
-        <span class="k">return</span> <span class="nf">saveTodoList</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
-
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">TodoList</span> <span class="nf">getList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
-        <span class="k">return</span> <span class="nf">findTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">&gt;</span> <span class="nf">getLists</span><span class="o">(){</span>
-        <span class="k">return</span> <span class="n">todoListRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">TodoList</span> <span class="nf">changeTodoList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">,</span> <span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">){</span>
-        <span class="nc">TodoList</span> <span class="n">findTodoList</span> <span class="o">=</span> <span class="n">findTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
-
-        <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">todoList</span><span class="o">.</span><span class="na">getTitle</span><span class="o">()).</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">title</span> <span class="o">-&gt;</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="n">title</span><span class="o">));</span>
-        <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">todoList</span><span class="o">.</span><span class="na">getTodoOrder</span><span class="o">()).</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">todoOrder</span> <span class="o">-&gt;</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">setTodoOrder</span><span class="o">(</span><span class="n">todoOrder</span><span class="o">));</span>
-        <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">todoList</span><span class="o">.</span><span class="na">getCompleted</span><span class="o">()).</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">completed</span> <span class="o">-&gt;</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">setCompleted</span><span class="o">(</span><span class="n">completed</span><span class="o">));</span>
-
-        <span class="k">return</span> <span class="nf">saveTodoList</span><span class="o">(</span><span class="n">findTodoList</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteTodoLists</span><span class="o">(){</span>
-        <span class="n">todoListRepository</span><span class="o">.</span><span class="na">deleteAll</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteTodoList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">){</span>
-        <span class="n">findTodoList</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
-        <span class="n">todoListRepository</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
-    <span class="o">}</span>
-
-
-    <span class="kd">private</span> <span class="nc">TodoList</span> <span class="nf">findTodoList</span><span class="o">(</span><span class="nc">Long</span> <span class="n">listId</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">&gt;</span> <span class="n">findTodoList</span> <span class="o">=</span> <span class="n">todoListRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">listId</span><span class="o">);</span>
-
-        <span class="k">return</span> <span class="n">findTodoList</span><span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">ServiceLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">LIST_NOT_FOUND</span><span class="o">));</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="nc">TodoList</span> <span class="nf">saveTodoList</span><span class="o">(</span><span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">todoListRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">todoList</span><span class="o">);</span>
-    <span class="o">}</span>
-
-<span class="o">}</span>
-</code></pre></div></div>
-<p>아주 기본적인 서비스로직을 구현했다.<br />
-트랜잭션 전파관련해 건드릴 만한 서비스도 존재하지 않아<br />
-클래스단에 @Transactional을 붙여주었다.</p>
-
-<p>JPA 기술을 이용해 <code class="language-plaintext highlighter-rouge">TodoList</code>객체만 보내주면<br />
-DB에 맵핑이 되어진다.</p>
-
-<p><br /></p>
-
-<p>이렇게 간단하게 API요청과 응답에 대한 내용은<br />
-전부 처리가 완료되었다.</p>
-
-<p>이제부터 좀더 다듬어야할 부분은</p>
-<ol>
-  <li>유효성 검증에 처리 추가</li>
-  <li>유효성 검증 실패에 따른 Advice 클래스 작성 필요</li>
-  <li>계층별 테스트 케이스 만들기</li>
-  <li>API 문서 자동화 해보기</li>
-</ol>
-
-<p>이렇게 코드를 추가해 볼 수 있을 것 같다.<br />
-그리고 현재 로컬서버에서만 작동할 수 있게 되어있는데<br />
-Ngrok를 이용해 로컬 환경에 접근할 수 있게 터널링 해주는 프로그램도<br />
-이용해 볼 수 있을 것 같다.</p>
-
-<p>우선적으로 터널링을 이용해 테스트를 해본다음<br />
-위에 4가지 기능들을 구현할 시간이 주어진다면 내일 이어서 작업해볼 예정이다.</p>
-
-<p><br /></p>
-
-<hr />
-
-<p>오늘은 이렇게 간단하게 웹계층을 만들어보는 시간을 가졌다.<br />
-Spring MVC관련 계층 프로그램은 이제<br />
-다른 프로그램을 보지않고도 할 수 있는 정도가 되었다.</p>
-
-<p>하지만 예외를 처리하는 Advice 클래스 구현이라든가<br />
-테스트 관련 계층은 문법이 생각나지않아 한번씩 보면서 작성을 해야한다…</p>
-
-<p>오늘 공부는 여기서 끝 !!</p>
-
-<p><br /></p>
-
-<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️<br />
-<strong>오늘의 점심</strong>: 제육볶음, 스팸부침, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[드디어 정규과정이 다 끝이 났다. 4개월이란 짧은 시간에 정말 많은 것을 배웠고 모든 기술을 구현할 수 있는 능력은 없지만 작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.]]></summary></entry></feed>
+<strong>오늘의 점심</strong>: 라면, 밥</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[오늘은 어제 만들었던 TODO List 프로젝트를 로컬환경에 띄우고 외부에서 접속할 수 있도록 하려한다. AWS EC2같은 클라우딩 서비스에 배포를 하지 않아도 외부에서 접속이가능하니 프론트엔드쪽과 협업할때 매우 좋을 것 같다.]]></summary></entry></feed>
