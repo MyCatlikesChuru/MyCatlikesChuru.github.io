@@ -39,3 +39,7 @@ V
 &_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
 f
 6_posts/Program/Spring/2022-12-27-spring-JunitSecure.md,7/f/7fe9f39bc030ab3cc364fd33ab50342171831932
+`
+0_posts/OS/Linux(Unix)/2022-12-29-server-build.md,3/0/304bef088ebfa503a07d18b3928a616b7c57cdd7
+]
+-_posts/TIL/BootCamp/2022-12/2022-12-15-til.md,2/c/2c99e6d4074260cefdae74f954331bd4e77d3003

@@ -144,5 +144,18 @@ ssh -i private key path ubuntu@주소
 
 <br/>
 
+FileZilla를 통해서도 접속이 가능하다.   
+
+![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNNwSW2rB9___rqmhE9ee14DuQbywCDLJsaQY9D9nUls2WpBa9DsFwQ2tVE-3hj33naagXa8NPqAbdt8njgA5D9Weh_Ww=w3024-h1728){: .align-left style="max-width: 100%"}
+
+SFTP - SSH 프로토콜을 선택해준다음에   
+호스트는 인스턴스 주소를 입력해주면 된다.
+그리고 키파일을 공개키가 아닌 `id_rsa` private key를 선택해주면  
+정상적으로 접속할 수 있는 모습을 확인해 볼 수 있다.
+
+
+
+<br/>
+
 [Oracle 무료 인스턴스 참고 레퍼런스]: https://hoing.io/archives/318  
 [Oracle Cloud 무료 데이터베이스]:https://www.oracle.com/kr/cloud/free/
