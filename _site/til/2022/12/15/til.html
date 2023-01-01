@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 39 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 45 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -1905,6 +1905,291 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 
 <h3 id="20221230-금">2022.12.30 (금)</h3>
 
+<p>이번주만 지나고 다음주 월요일이되면<br>
+프로프로젝트가 종료된다.</p>
+
+<p>서버쪽에서는 우선 어느정도 테스트는 완료해서 프론트엔드 측에서<br>
+테스트가 가능할때 같이 문제가 있는지? 유효성 검증에 문제될 만한 것이 있는지<br>
+체크를 해보면 된다. 오늘은 정리차원에서 테스트 + GitHub README 파일을<br>
+작성해보기로 하였다.</p>
+
+<p><br></p>
+
+<h4 id="readme-작성">Readme 작성</h4>
+
+<div align="center">
+  <img width="80%" src="https://content.presspage.com/uploads/2658/c1920_logo-stackoverflow-banner.jpg?64224" alt="roobits">
+</div>
+
+<p><br></p>
+
+<ul>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">팀 명</code> :</strong>  🌡 37℃</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">프로젝트 명</code> :</strong> Stackoverflow</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">프로젝트 기간</code> :</strong> 2022.12.15 - 2023.01.02</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">한줄 소개</code> :</strong> Stackoverflow !  개발자간의 질의응답 커뮤니티입니다.</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">팀원</code> :</strong> 이재혁(팀장), 이동우, 박종식, 박연환(부팀장), 김혜원, 박평환</li>
+  <li>
+<strong><code class="language-plaintext highlighter-rouge">배포 링크</code> :</strong> <a href="http://stackoverflowpre.p-e.kr/">🌐 stackoverflowpre.p-e.kr</a>
+</li>
+</ul>
+
+<p><br></p>
+
+<h4 id="-team">💼 Team</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">이재혁<br>(BE, 팀장)</th>
+      <th style="text-align: center">이동우<br>(BE)</th>
+      <th style="text-align: center">박종식<br>(BE)</th>
+      <th style="text-align: center">박연환<br>(FE)</th>
+      <th style="text-align: center">김혜원<br>(FE)</th>
+      <th style="text-align: center">박평환 <br>(FE)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img alt="이재혁" src="https://avatars.githubusercontent.com/u/95069395?v=4" height="100" width="100"></td>
+      <td style="text-align: center"><img alt="이동우" src="https://avatars.githubusercontent.com/u/110949256?v=4" height="100" width="100"></td>
+      <td style="text-align: center"><img alt="박종식" src="https://avatars.githubusercontent.com/u/57285707?v=4" height="100" width="100"></td>
+      <td style="text-align: center"><img alt="박연환" src="https://avatars.githubusercontent.com/u/81786662?v=4" height="100" width="100"></td>
+      <td style="text-align: center"><img alt="김혜원" src="https://avatars.githubusercontent.com/u/111227745?v=4" height="100" width="100"></td>
+      <td style="text-align: center"><img alt="박평환" src="https://avatars.githubusercontent.com/u/110876643?v=4" height="100" width="100"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/MyCatlikesChuru">@MyCatlikesChuru</a></td>
+      <td style="text-align: center"><a href="https://github.com/eastmeet">@eastmeet</a></td>
+      <td style="text-align: center"><a href="https://github.com/jongsic17">@jongsic17</a></td>
+      <td style="text-align: center"><a href="https://github.com/yeonhwan">@yeonhwan</a></td>
+      <td style="text-align: center"><a href="https://github.com/zemma0618">@zemma0618</a></td>
+      <td style="text-align: center"><a href="https://github.com/Parkpyunghwan">@Parkpyunghwan</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">- 로그인 등 인증 처리<br>- OAuth2 인증 처리<br>- 질문 등록,조회,삭제<br>투표 관리 기능<br>- 답변 등록, 투표 기능<br>- 예외처리 로직 구현<br>- 게시글,답변 유효성<br>검증 처리 구현<br>- 프로필 이미지 관리<br>- 배포환경 구축<br>(EC2,NginX,MySQL)</td>
+      <td style="text-align: center">- 메인화면 API <br>- 검색 기능  <br>- 게시글 정렬 기능 <br>- User 화면 API <br>- Tag 화면 API<br>- 배포환경 구축<br>(EC2,NginX,MySQL)</td>
+      <td style="text-align: center">- 회원 등록,삭제<br>- 프로필 API<br>- 회원가입 유효성 체크<br>- 시간관리 기능 추가<br>- 배포환경 구축<br>(EC2,NginX,MySQL) </td>
+      <td style="text-align: center">- 연환님 시작<br>-  <br>- <br>- </td>
+      <td style="text-align: center">- 혜원님 시작<br>- <br>- </td>
+      <td style="text-align: center">- 평환님 시작<br>- <br>- </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<h4 id="-️-tools-"><span style=""> ⚙️ <strong>Tools</strong> </span></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Github</th>
+      <th style="text-align: center">Discord</th>
+      <th style="text-align: center">Notion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img alt="github logo" src="https://techstack-generator.vercel.app/github-icon.svg" width="65" height="65"></td>
+      <td style="text-align: center"><img alt="Discord logo" src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/62595384e89d1d54d704ece7_3437c10597c1526c3dbd98c737c2bcae.svg" height="65" width="65"></td>
+      <td style="text-align: center"><img alt="Notion logo" src="https://www.notion.so/cdn-cgi/image/format=auto,width=640,quality=100/front-static/shared/icons/notion-app-icon-3d.png" height="65" width="65"></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="--front-end-"><span style=""> 🖥 <strong>Front-end</strong> </span></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Html</th>
+      <th style="text-align: center">JavaScript</th>
+      <th style="text-align: center">React</th>
+      <th style="text-align: center">Styled-<br>Components</th>
+      <th style="text-align: center">esLint</th>
+      <th style="text-align: center">Prettier</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img alt="Html" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/440px-HTML5_logo_and_wordmark.svg.png" width="65" height="65"></td>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/js-icon.svg" alt="icon" width="75" height="75"></div>
+</td>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/react-icon.svg" alt="icon" width="65" height="65"></div>
+</td>
+      <td style="text-align: center"><img src="https://styled-components.com/logo.png" alt="styled-components icon" width="65" height="65"></td>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/eslint-icon.svg" alt="icon" width="65" height="65"></div>
+</td>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/prettier-icon.svg" alt="icon" width="65" height="65"></div>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="--back-end-"><span style="">🔒  <strong>Back-end</strong> </span></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Java</th>
+      <th style="text-align: center">mySQL</th>
+      <th style="text-align: center">NginX</th>
+      <th style="text-align: center">AWS</th>
+      <th style="text-align: center">Spring</th>
+      <th style="text-align: center">Spring<br>Boot</th>
+      <th style="text-align: center">JWT</th>
+      <th style="text-align: center">Spring<br>Security</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/java-icon.svg" alt="icon" width="65" height="65"></div>
+</td>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="icon" width="65" height="65"></div>
+</td>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/nginx-icon.svg" alt="icon" width="65" height="65"></div>
+</td>
+      <td style="text-align: center">
+<div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/aws-icon.svg" alt="icon" width="65" height="65"></div>
+</td>
+      <td style="text-align: center"><img alt="spring logo" src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" height="50" width="50"></td>
+      <td style="text-align: center"><img alt="spring-boot logo" src="https://t1.daumcdn.net/cfile/tistory/27034D4F58E660F616" width="65" height="65"></td>
+      <td style="text-align: center"><img alt="spring-boot logo" src="https://play-lh.googleusercontent.com/3C-hB-KWoyWzZjUnRsXUPu-bqB3HUHARMLjUe9OmPoHa6dQdtJNW30VrvwQ1m7Pln3A" width="65" height="65"></td>
+      <td style="text-align: center"><img alt="spring-boot logo" src="https://blog.kakaocdn.net/dn/dIQDQP/btqZ09ESd8T/0ibqtotW52OaJS8HznXDQK/img.png" width="65" height="65"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<h4 id="-pages--features">🌟 Pages &amp; Features</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">메인 페이지</th>
+      <th style="text-align: center">로그인 / 회원가입 페이지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMciFufe3DDYPDneBfWtpy6bwE2AtGUQTxoqzrG-AfGiNlkIf82VtSNNs7SvizEevuTz-fnr1GIp7WAlPbBj7scuUiVrA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></td>
+      <td style="text-align: center"><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMciFufe3DDYPDneBfWtpy6bwE2AtGUQTxoqzrG-AfGiNlkIf82VtSNNs7SvizEevuTz-fnr1GIp7WAlPbBj7scuUiVrA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>구글 OAuth2 인증</strong></td>
+      <td style="text-align: center"><strong>질문 게시글 작성</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img width="100%" src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMciFufe3DDYPDneBfWtpy6bwE2AtGUQTxoqzrG-AfGiNlkIf82VtSNNs7SvizEevuTz-fnr1GIp7WAlPbBj7scuUiVrA=w1920-h921"></td>
+      <td style="text-align: center"><img width="100%" src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMciFufe3DDYPDneBfWtpy6bwE2AtGUQTxoqzrG-AfGiNlkIf82VtSNNs7SvizEevuTz-fnr1GIp7WAlPbBj7scuUiVrA=w1920-h921"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<h4 id="-user-flow">👩🏻‍💻 User flow</h4>
+<p><img width="70%" alt="💎 루비츠 User Flow" src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMFiYTy_nkRtFRp-OhnoaVjOpYmget-BUXcOmo_yXJGANmXTKZEykOqpiWclYKJF9-yoP8P158sPsdSIFv8bvR1BLE4zg=w1170-h921"></p>
+
+<p><br></p>
+
+<h4 id="-db-diagram">🔖 DB Diagram</h4>
+<p><img width="70%" alt="💎 루비츠 User Flow" src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNUG5VGS1_jfmUiRwPNPpvIbhXDwhZbKnZeaEDX_e_6K51YX5dQCgjzGDpjyl0hZW22DeLm2LPe2C-dF6KZm_i8CZGNCw=w1920-h921"></p>
+
+<p><br></p>
+
+<h4 id="-git">📎 Git</h4>
+<h4 id="branch">Branch</h4>
+<p><code class="language-plaintext highlighter-rouge">main</code> : 서비스 운영 브랜치입니다.<br>
+<code class="language-plaintext highlighter-rouge">release</code> : 메인 브랜치 배포전 릴리즈 브랜치입니다.<br>
+<code class="language-plaintext highlighter-rouge">dev/front</code> : 프론트엔드 개발 환경 브랜치입니다.<br>
+<code class="language-plaintext highlighter-rouge">dev/back</code> : 백엔드 개발 환경 브랜치입니다.<br>
+<code class="language-plaintext highlighter-rouge">feat/역할군/개발명</code> : 기능 개발 브랜치 입니다. ex) feat/BE/security</p>
+
+<p><img width="50%" src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPRcd6ABuDdMcynR6HuiG9x19VUEIEgZ22ux_TWOCwIbb_0bOlWJc1Ka7Ut_ljdzInElTXQf-IT1A-UnqGNjx5CTdse=w1920-h864"></p>
+
+<p><br></p>
+
+<h4 id="commit--message">Commit  Message</h4>
+<p>|Message|설명|
+|:—:|:—|
+|[feat]|새로운 기능을 추가할 경우 ex) [feat] 로그인 기능 추가|
+|[fix]|버그를 고친 경우|
+|[design]|CSS 등 사용자 UI 디자인 변경|
+|[!breaking change]|커다란 API 변경의 경우|
+|[!hotfix]|치명적인 버그를 고쳐야하는 경우|
+|[style]|코드 포맷변경, 세미콜론 누락, 코드수정이 없는 경우.|
+|[refactor] |프로덕션 코드 리펙토링할 경우|
+|[comment]|필요한 주석 추가 및 변경|
+|[docs]|문서를 수정한 경우|
+|[test]|테스트 코드 작업을할 경우|
+|[chore]|빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우|
+|[rename]|파일 혹은 폴더명을 수정하거나 옮기는 작업만 하는 경우|
+|[remove]|삭제하는 작업만 수행한 경우|
+|[init]|브랜치 초기화 및 초기셋팅 관련된 설정일 경우|</p>
+
+<p><br></p>
+
+<p>이러한 느낌으로 작성을 해보려한다.<br>
+Github IO 블로그를 쓰면서 MarkDown 문법에 익수해졌던 것이<br>
+어느정도 도움이 많이되서 수월하게 작업을 했던 것 같다.</p>
+
+<p>아직 프론트엔드측 작업 취합이 되지 않아 백엔드쪽만 먼저 넣을 수 있는<br>
+내용을 적어 놓고, 월요일에 테스트를 마친다음에 작성을 완료하려한다.</p>
+
+<p>그리고 HTTPS를 적용하려고 하였지만…
+AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 진행이 안되어<br>
+적용하지 못해서 조금 아쉬웠다. 많은 사람이 Oracle Cloud를 사용한다고<br>
+하여서 나도 계정을 가입해놓고 이제 나만의 서버를 만들어보려한다.</p>
+
+<p><br></p>
+
+<h4 id="회의록-및-정리-6">회의록 및 정리</h4>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ****회의록 (2022.12.30 , 금)
+
+👥  참여 인원 : 이재혁, 이동우, 박종식, 박연환, 김혜원, 박평환
+
+📢  공통
+
+1. [READMD.md](http://READMD.md) 파일 작성 필요
+→ GIF 동작별 플로우 진행 캡처
+→ 기술 스택 및 아키텍처 정리
+
+🖥  프론트엔드 작업
+
+1. 포스트 페이지 거의 구현 완료(게시물 vote/downvote, delete 기능 추가 예정)
+2. 프로필 페이지도 거의 구현 완료 (user post 기능 추가 예정)
+3. 구글 로그인 로그아웃 작업중
+4. 우축 Relative 목록 추가, 자잘한 버그 수정
+5. 구글 로그인 작동되게 설정함
+6. 리팩토링 작업 중
+
+🔙  백엔드 작업
+
+1. HTTPS 적용해보기(Let’s Encrypt)
+    1. Cerbot PPA 추가
+    → sudo apt install software-properties-common
+    → sudo add-apt-repository universe
+    → sudo add-apt-repository ppa:certbot/certbot
+    2. 서버의 용량 문제로 적용 pass….ㅠㅠ
+    
+2. 코드 리뷰하기
+</code></pre></div></div>
+
 
     </div>
 
@@ -1915,10 +2200,10 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/02/til.html" title="H2 Database 다운로드 및 실행">TIL) Cloud 운영 환경 구성 1</a></li>
-<li><a class="post-link" href="/til/2022/10/27/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring JDBC 기반 액세스 계층 1</a></li>
-<li><a class="post-link" href="/linux/unix/2022/07/27/server-ubunto.html" title="H2 Database 다운로드 및 실행">Permission denied (publickey) 우분투 에러 조치</a></li>
-<li><a class="post-link" href="/til/2022/08/31/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 문법기초 - 제어문</a></li>
+        <li><a class="post-link" href="/til/2022/09/13/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
+<li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="H2 Database 다운로드 및 실행">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
+<li><a class="post-link" href="/til/2022/08/30/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자</a></li>
+<li><a class="post-link" href="/til/2022/09/08/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 객체지향 - 추상화</a></li>
 </ul>
     </div>
 <div class="post-comments">
@@ -2099,7 +2384,7 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 
   <div class="wrapper">
     <div class="site-footer-inner">
-<div>Unpublished Work <span class="copyleft">©</span> 2017-2022 LEE JAEHYEOK</div>
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 LEE JAEHYEOK</div>
       <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
       generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
       another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
