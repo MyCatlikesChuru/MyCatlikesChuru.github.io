@@ -15,6 +15,8 @@ published: true
 이제 기본으로 제공하는 Code Highlight(코드 하이라이트)   
 변경하는 법을 알아보려한다.
 
+
+
 <br/>
 
 ### Jekyll 코드 하이라이트 적용
