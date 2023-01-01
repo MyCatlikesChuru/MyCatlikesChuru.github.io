@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Oracle 물
+title: Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선
 subtitle: 
 categories: DB
 tags: [DB, Oracle]
@@ -8,141 +8,136 @@ comments: true
 published: true
 ---
 
-오늘은 [Oracle Cloud 무료 데이터베이스]를 생성해보려한다.  
+[Oracle Cloud Free Tier 무료 인스턴스 생성과 접속]을 통해서  
+오라클 평생 무료 인스턴스를 직접 만들어 보았다.   
 
-회원 가입과 카드 등록은 되어있다 가정하고  
-인스턴스 생성전에 구획생성과 VCN 네트워크 생성  
-그리고 인스턴스를 생성하는 과정을 적어보려한다.  
-[Oracle 무료 인스턴스 참고 레퍼런스]를 토대로 작업하였습니다.
+하지만 인스턴스를 만들면서 느낀건데 램이 1GB로  
+여러가지 설치를하고 사용하기에는 너무 무리가 있어보이는 사양을 확인할 수가 있다.    
 
+AMD 기반으로 만들었기 때문에 사양이 낮은 무료 인스턴스를 사용하고 있지만  
+몇 가지 설정을 통해 시스템을 원할히 돌아가게 셋팅을할 수가 있다.  
+
+한번 알아보자  
+
+#### 📌 현재 인스턴스 사양
+
+```text
+이미지 : Ubuntu 22.04
+구성 : (AMD) VM.Standard.E2.1.Micro / 1 core OCPU, 1GB Memory
+```
 
 <br/>
 
-### 📌 구획 생성  
+#### 📌 기초 셋팅  
 
-VM 생성 전에 구획을 먼저 생성해야한다.  
-구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.  
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNs_7nfk_gmvLEvuBwFQHxq_WeESvVrrNgHncikIguZT5WSDBFRWJouafXAfIAnVKgSH8daI2o4KyS-YzP_fNz25gBp=w3024-h1728){: .align-left style="max-width: 100%"}
+```shell
+sudo apt update
+```
+가장 먼저 시스템 업데이트를 해준다.  
 
 <br/>  
 
-### 📌 VCN 네트워크 생성  
+```text
+sudo apt install -y nano
+```
+nano 편집기를 다운받아 편하게 사용해보자
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPQ25gr2990xuN0OLF_Qr90USye42bZ6DbogZyuabsYL-OejRkV1p7C3LfLIa3X8BF5dgwz7eyH5zr20LtMPIO8nRjHjA=w3024-h1728){: .align-left style="max-width: 100%"}
+<br/>  
 
-먼저 아까 생성한 구획을 먼저 선택한다음  
-VCN 마법사를 시작한다.  
+#### 📌 SWAP 공간 생성  
 
-<br/>
+오라클 클라우드 AMD 인스턴스는 위에서 얘기했듯이  
+1GB RAM을 제공한다. 이것저것 설치하다보면 금방 RAM이 부족에 부딪힌다.  
+상대적으로 넉넉한 HDD 저장공간의 일부를 RAM 공간으로 활용이 가능하다.  
 
-
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN4OZ_5VRp8kmYeue1N02iMuXfeOZln12KRSuhL_PifDDhaNnn04SjU50HgsoewLDs6y8QAapnbFdv-GGZlSNSp9rSA=w3024-h1728){: .align-left style="max-width: 100%"}
-
-VCN 마법사 시작 클릭
-
-<br/>
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJqkxzAgS17AG9KpQ1OtqlFWGHiBgNCpvx7ydTjS4MjBJ1jb4a12pnVVnO5Th7cckoNEPKhQmajAVdg02USWVmeLsW=w3024-h1728){: .align-left style="max-width: 100%"}
-
-VCN 이름을 설정하고 다음 클릭  
-
-<br/>
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZctP8XvWQbWqzGbVm-w77_ba-OS6OrBJb46yB5-zZv1IxFQDJ9z4q80NN8B-4D2O3qMINEhwKwEaA65i_zTR4aDLa=w3024-h1728){: .align-left style="max-width: 100%"}
-
-생성 버튼을 눌러 리소스 생성을 완료합니다.  
-
-<br/>
-
-### 📌 인스턴스 생성
-
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNGOpUG5JQk1Y20qWPgcKom-VzhRcFsYcez9OIcBXBhA1q6MjLkamcxo3FMef5Uhsg1FdpF8fD0x6dydtnJl3GAjIyoIA=w3024-h1728){: .align-left style="max-width: 100%"}
-
-VM 인스턴스 생성을 눌러 줍니다.
-
-<br/>
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1m0uwf3jt9p5biT_6GwYRrmuWIoUXdvRUlZ0HbDrbWTYrj1VK4ci1QVvZhNRVNuKISN1FAY2l3rI7Fyap86OMc6E1EA=w3024-h1728){: .align-left style="max-width: 100%"}
-
-인스턴스 이름과 이전에 생성한 구획을 선택해줍니다.
-
-<br/>
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdIXghpgxv_vlEivea2ZDnBtqZT-NuITqQPLie9l8He0bfkDT-Of9-oZUhU783AMfII_LhhfdlcLjwMNKIYZz1c37o7w=w1524-h1728){: .align-left style="max-width: 100%"}
-
-이미지와 Shape 선택이 가능하고  
-항상 무료 적격이라 적혀있는 것을 선택해서 사용해주면된다.  
-
-<br/>
-
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo3-KkV26L9DztTmGJe7RvC3TpnqdtJ_TuMqP8fQwXvxfrpIKJH8pSbmXrPtmaHYtX1oresm5LE13S4bx5tot7rF5qUQ=w3024-h1728){: .align-left style="max-width: 100%"}
-
-네트워킹도 마찬가지로 이전에 만들어둔 VCN 네트워크를  
-선택해주시면 됩니다.  
-
-만약 구획생성과 네트워킹을 만들어주지 않았다면  
-인스턴스 생성을하여도 에러가 발생합니다.
-
-<br/>
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOEnVFm0OsNdlUigDiwml8a2oJrXHpmUdMcf1PLn7PSX0fIHhR77mwY1-pbOOsFqz_Ld4ydtHu7l_TeA0f4AN17rBy2Q=w1524-h1728){: .align-left style="max-width: 100%"}
-
-SSH 키를 추가해줘야하는데  
-이전에 Github를 사용하신분들은 공용키가 이미 있을 것이다.  
-
+**1). 스왑공간**
 
 ```shell
-cat ~/.ssh/id_rsa.pub
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
 ```
-
-명령어를 입력해 공용 ssh를 붙여넣어주시면 됩니다.   
-만약 없다면 생성을 해주시면 되는데, 해당 내용은 스킵하겠습니다.
-
-부트 볼륨과 같은 경우에는 100GB까지 최대로 사용가능하고  
-50GB씩 2개의 인스턴스를 만들어 나눠사용할 수도 있습니다.
-
-이제 설정을 끝냈으면, 생성을 눌러 최종완료를 해주시면 됩니다.
-
-
-<br/>
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo2CptbsDAon2CtX6-RAqpmRSSTa7z3m9LWRW9JCFCdVbgMoJTOb9hisTz1OHSLY0EkNb9cXhzDeMauPpUOxUqBrtAXQ=w3024-h1728){: .align-left style="max-width: 100%"}
-
-이제 인스턴스 정보에 가서 확인해보시면  
-내가만든 인스턴스를 확인해 볼 수 있다.  
-
-
-<br/>
-
-### 📌 인스턴스 접속하기  
-
-이제 인스턴스를 만들었으니 접속을하는법을 알아보자  
-우리는 공용 SSH로 인스턴스를 만들었다.
-
-$HOME/.ssh 경로에 private key가 저장되어 있기 때문에   
-암호를 입력하지 않아도 원격 서버에 접속할 수 있다.
+를 순서대로 입력을 해주게 된다면
 
 ```shell
-ssh ubuntu@주소
+Setting up swapspace version 1, size = 2 GiB (2147479552 bytes)
+no label, UUID=8f85218d-329c-4eec-bf11-5d87964c5f0d
 ```
-
-만약 private key가 $HOME/.ssh 경로에 위치하지 않은 경우
-```shell
-ssh -i private key path ubuntu@주소
-```
-를 입력해주면 접속이 가능하다. 
-
-터미널에서 입력시
-
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN0U_vZhmyBCubkA_yUqYCkiETMcUZtOnZLVXoUTz9DjMI_17cNV1t6S7kLe2Ajxg3hGFEed9nmR6d7kK4Ha7nvpTyeAw=w3024-h1728){: .align-left style="max-width: 100%"}
-
-와 같이 정상적으로 인스턴스에 접속한 모습을 볼 수 있다 !!
+위와 같이 스왑공간이 정상적으로 생성되었다고 메세지가 뜬다.  
 
 <br/>
 
-[Oracle 무료 인스턴스 참고 레퍼런스]: https://hoing.io/archives/318  
-[Oracle Cloud 무료 데이터베이스]:https://www.oracle.com/kr/cloud/free/
+**2). 스왑시작**  
+
+```shell
+sudo swapon /swapfile
+```
+위 명령어로 스왑을 시작한다.  
+
+<br/>  
+
+**3). 스왑생성 확인**
+
+```shell
+sudo swapon --show
+```
+명령어로 정상적으로 작동하는지 확인이 가능하다
+
+```shell
+NAME      TYPE SIZE USED PRIO
+/swapfile file   2G   0B   -2
+```
+와 같은식으로 확인이되며, 2GB의 스왑공간이 확보되었다고 표시된다.
+
+<br/>  
+
+```shell
+free -h
+```
+명령어를 통해 시스템에서 사용할 수 있는  
+메모리 공간을 확인할 수 있다.  
+
+<br/>  
+
+**4). 스왑공간 시스템 고정**
+
+스왑공간은 시스템이 재시작되면 초기화가 진행되므로  
+스왑공간을 그대로 남아있게하기 위해서 간단한 셋팅값을 지정해주어야 한다.
+
+```shell
+sudo nano /etc/fstab
+```
+
+를 입력해 nano 편집기로 fstab 파일을 수정해줄 수 있다.  
+
+```shell
+LABEL=cloudimg-rootfs   /        ext4   discard,errors=remount-ro       0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+/swapfile swap swap defaults 0 0
+```
+최종적으로는 맨 아래의 `/swapfile swap swap defaults 0 0`를  
+입력한후 저장해주면 된다. nano 편집기 저장방법은 `ctrl+s`한 다음에 `ctrl+x`를  
+입력해주면 정상적으로 저장될 것 이다.
+
+이렇게 설정을 완료하면 스왑공간이 기본값으로 활성화 되어  
+시스템을 재시작하여도 문제없다 !
+
+<br/>
+
+#### 📌 시간설정  
+
+마지막으로 서버의 시간을 설정해줄 수 있다.  
+
+```shell
+sudo timedatectl set-timezone Asia/Seoul
+```
+
+<br/>
+
+✨ 참고 블로그   
+[클라우드 성능 개선 참고 레퍼런스 1], [클라우드 성능 개선 참고 레퍼런스 2]
+
+
+[클라우드 성능 개선 참고 레퍼런스 1]: https://yeon-kr.tistory.com/174 
+[클라우드 성능 개선 참고 레퍼런스 2]: https://blog.hangyeong.com/1773#%EC%8B%9C%EC%8A%A4%ED%85%9C_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8
+[Oracle Cloud Free Tier 무료 인스턴스 생성과 접속]: https://mycatlikeschuru.github.io/db/2023/01/01/db-oracledb.html
