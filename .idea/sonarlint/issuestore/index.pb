@@ -37,3 +37,5 @@ Y
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
 V
 &_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
+f
+6_posts/Program/Spring/2022-12-27-spring-JunitSecure.md,7/f/7fe9f39bc030ab3cc364fd33ab50342171831932

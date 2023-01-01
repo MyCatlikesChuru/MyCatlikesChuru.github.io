@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 45 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 47 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -1903,6 +1903,34 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 
 <p><br></p>
 
+<h4 id="회의록-및-정리-6">회의록 및 정리</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>👥  참여 인원 : 이재혁, 이동우, 박종식, 박연환, 김혜원, 박평환
+
+📢  공통
+
+- 프론트, 백 연말 일정 정리
+
+🖥  프론트엔드 작업
+
+1. 빌드한 파일과 거의 유사 (회원가입, 로그인, 포스트 검색 기능, 정렬, 질문 작성 등등…)
+2. 로그인해야 질문 작성할 수 있게 함
+3. 유저 검색 기능 추가해야 
+4. 로그인 구현 성공
+5. vote 기능 / 답변 작성 기능 / 게시물 삭제 기능 / 유저 상세페이지 구현 중
+6. 이미지 소스를 데이터 사용해서 표현하기
+7. 버그 수정
+8. 404 에러 페이지 구현 진행중
+
+🔙  백엔드 작업
+
+1. EC2 내 Nginx 설치 및 환경설정 완료
+    - config 파일(client, sever) 생성
+    - IP 의존성을 해결하기 위한 Elastic IP 생성 및 설정 고려 필요
+</code></pre></div></div>
+
+<p><br></p>
+
 <h3 id="20221230-금">2022.12.30 (금)</h3>
 
 <p>이번주만 지나고 다음주 월요일이되면<br>
@@ -2125,40 +2153,91 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 <p><br></p>
 
 <h4 id="commit--message">Commit  Message</h4>
-<p>|Message|설명|
-|:—:|:—|
-|[feat]|새로운 기능을 추가할 경우 ex) [feat] 로그인 기능 추가|
-|[fix]|버그를 고친 경우|
-|[design]|CSS 등 사용자 UI 디자인 변경|
-|[!breaking change]|커다란 API 변경의 경우|
-|[!hotfix]|치명적인 버그를 고쳐야하는 경우|
-|[style]|코드 포맷변경, 세미콜론 누락, 코드수정이 없는 경우.|
-|[refactor] |프로덕션 코드 리펙토링할 경우|
-|[comment]|필요한 주석 추가 및 변경|
-|[docs]|문서를 수정한 경우|
-|[test]|테스트 코드 작업을할 경우|
-|[chore]|빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우|
-|[rename]|파일 혹은 폴더명을 수정하거나 옮기는 작업만 하는 경우|
-|[remove]|삭제하는 작업만 수행한 경우|
-|[init]|브랜치 초기화 및 초기셋팅 관련된 설정일 경우|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Message</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">[feat]</td>
+      <td style="text-align: left">새로운 기능을 추가할 경우 ex) [feat] 로그인 기능 추가</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[fix]</td>
+      <td style="text-align: left">버그를 고친 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[design]</td>
+      <td style="text-align: left">CSS 등 사용자 UI 디자인 변경</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[!breaking change]</td>
+      <td style="text-align: left">커다란 API 변경의 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[!hotfix]</td>
+      <td style="text-align: left">치명적인 버그를 고쳐야하는 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[style]</td>
+      <td style="text-align: left">코드 포맷변경, 세미콜론 누락, 코드수정이 없는 경우.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[refactor]</td>
+      <td style="text-align: left">프로덕션 코드 리펙토링할 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[comment]</td>
+      <td style="text-align: left">필요한 주석 추가 및 변경</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[docs]</td>
+      <td style="text-align: left">문서를 수정한 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[test]</td>
+      <td style="text-align: left">테스트 코드 작업을할 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[chore]</td>
+      <td style="text-align: left">빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[rename]</td>
+      <td style="text-align: left">파일 혹은 폴더명을 수정하거나 옮기는 작업만 하는 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[remove]</td>
+      <td style="text-align: left">삭제하는 작업만 수행한 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[init]</td>
+      <td style="text-align: left">브랜치 초기화 및 초기셋팅 관련된 설정일 경우</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><br></p>
 
 <p>이러한 느낌으로 작성을 해보려한다.<br>
-Github IO 블로그를 쓰면서 MarkDown 문법에 익수해졌던 것이<br>
+Github IO 블로그를 쓰면서 MarkDown 문법에 익수해졌던 것이 <br>
 어느정도 도움이 많이되서 수월하게 작업을 했던 것 같다.</p>
 
-<p>아직 프론트엔드측 작업 취합이 되지 않아 백엔드쪽만 먼저 넣을 수 있는<br>
+<p>아직 프론트엔드측 작업 취합이 되지 않아 백엔드쪽만 먼저 넣을 수 있는  <br>
 내용을 적어 놓고, 월요일에 테스트를 마친다음에 작성을 완료하려한다.</p>
 
 <p>그리고 HTTPS를 적용하려고 하였지만…
-AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 진행이 안되어<br>
-적용하지 못해서 조금 아쉬웠다. 많은 사람이 Oracle Cloud를 사용한다고<br>
+AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 진행이 안되어 <br>
+적용하지 못해서 조금 아쉬웠다. 많은 사람이 Oracle Cloud를 사용한다고 <br>
 하여서 나도 계정을 가입해놓고 이제 나만의 서버를 만들어보려한다.</p>
 
 <p><br></p>
 
-<h4 id="회의록-및-정리-6">회의록 및 정리</h4>
+<h4 id="회의록-및-정리-7">회의록 및 정리</h4>
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ****회의록 (2022.12.30 , 금)
 
 👥  참여 인원 : 이재혁, 이동우, 박종식, 박연환, 김혜원, 박평환
@@ -2190,6 +2269,10 @@ AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 
 2. 코드 리뷰하기
 </code></pre></div></div>
 
+<p><br></p>
+
+<h3 id="20220102-월">2022.01.02 (월)</h3>
+
 
     </div>
 
@@ -2200,10 +2283,10 @@ AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/13/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
-<li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="H2 Database 다운로드 및 실행">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
-<li><a class="post-link" href="/til/2022/08/30/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자</a></li>
-<li><a class="post-link" href="/til/2022/09/08/til.html" title="H2 Database 다운로드 및 실행">TIL) Java 객체지향 - 추상화</a></li>
+        <li><a class="post-link" href="/til/2022/09/30/til.html" title="H2 Database 다운로드 및 실행">TIL) Network Basic</a></li>
+<li><a class="post-link" href="/til/2022/11/14/til.html" title="H2 Database 다운로드 및 실행">TIL) API Documentation 2</a></li>
+<li><a class="post-link" href="/til/2022/12/13/til.html" title="H2 Database 다운로드 및 실행">TIL) Ngrok 사용하여 로컬에서 서버 실행</a></li>
+<li><a class="post-link" href="/til/2022/12/01/til.html" title="H2 Database 다운로드 및 실행">TIL) Spring WebFlux 구현하기</a></li>
 </ul>
     </div>
 <div class="post-comments">

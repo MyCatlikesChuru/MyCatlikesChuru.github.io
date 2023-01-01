@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-01T16:10:11+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">AWS EC2 NginX 클라이언트 배포</title><link href="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html" rel="alternate" type="text/html" title="AWS EC2 NginX 클라이언트 배포" /><published>2022-12-29T00:00:00+09:00</published><updated>2022-12-29T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2022/12/29/server-NginX</id><content type="html" xml:base="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"><![CDATA[<h3 id="-nginx-이용하여-클라이언트-배포하기">✅ NGINX 이용하여 클라이언트 배포하기</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-01T18:01:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">AWS EC2 NginX 클라이언트 배포</title><link href="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html" rel="alternate" type="text/html" title="AWS EC2 NginX 클라이언트 배포" /><published>2022-12-29T00:00:00+09:00</published><updated>2022-12-29T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2022/12/29/server-NginX</id><content type="html" xml:base="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"><![CDATA[<h3 id="-nginx-이용하여-클라이언트-배포하기">✅ NGINX 이용하여 클라이언트 배포하기</h3>
 
 <p><a href="https://velog.io/@gudcks0305/%EB%B0%B0%ED%8F%AC-Cloud-Compute-%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">클라우딩 컴퓨터 배포 참고레퍼런스</a>를 토대로<br />
 공부하고 테스트해본 기록을 적어보려한다.</p>
@@ -2010,6 +2010,34 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 
 <p><br /></p>
 
+<h4 id="회의록-및-정리-6">회의록 및 정리</h4>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>👥  참여 인원 : 이재혁, 이동우, 박종식, 박연환, 김혜원, 박평환
+
+📢  공통
+
+- 프론트, 백 연말 일정 정리
+
+🖥  프론트엔드 작업
+
+1. 빌드한 파일과 거의 유사 (회원가입, 로그인, 포스트 검색 기능, 정렬, 질문 작성 등등…)
+2. 로그인해야 질문 작성할 수 있게 함
+3. 유저 검색 기능 추가해야 
+4. 로그인 구현 성공
+5. vote 기능 / 답변 작성 기능 / 게시물 삭제 기능 / 유저 상세페이지 구현 중
+6. 이미지 소스를 데이터 사용해서 표현하기
+7. 버그 수정
+8. 404 에러 페이지 구현 진행중
+
+🔙  백엔드 작업
+
+1. EC2 내 Nginx 설치 및 환경설정 완료
+    - config 파일(client, sever) 생성
+    - IP 의존성을 해결하기 위한 Elastic IP 생성 및 설정 고려 필요
+</code></pre></div></div>
+
+<p><br /></p>
+
 <h3 id="20221230-금">2022.12.30 (금)</h3>
 
 <p>이번주만 지나고 다음주 월요일이되면<br />
@@ -2209,40 +2237,91 @@ undefined가 받아와진다고하여 추가해주게 되었다.</p>
 <p><br /></p>
 
 <h4 id="commit--message">Commit  Message</h4>
-<p>|Message|설명|
-|:—:|:—|
-|[feat]|새로운 기능을 추가할 경우 ex) [feat] 로그인 기능 추가|
-|[fix]|버그를 고친 경우|
-|[design]|CSS 등 사용자 UI 디자인 변경|
-|[!breaking change]|커다란 API 변경의 경우|
-|[!hotfix]|치명적인 버그를 고쳐야하는 경우|
-|[style]|코드 포맷변경, 세미콜론 누락, 코드수정이 없는 경우.|
-|[refactor] |프로덕션 코드 리펙토링할 경우|
-|[comment]|필요한 주석 추가 및 변경|
-|[docs]|문서를 수정한 경우|
-|[test]|테스트 코드 작업을할 경우|
-|[chore]|빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우|
-|[rename]|파일 혹은 폴더명을 수정하거나 옮기는 작업만 하는 경우|
-|[remove]|삭제하는 작업만 수행한 경우|
-|[init]|브랜치 초기화 및 초기셋팅 관련된 설정일 경우|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Message</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">[feat]</td>
+      <td style="text-align: left">새로운 기능을 추가할 경우 ex) [feat] 로그인 기능 추가</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[fix]</td>
+      <td style="text-align: left">버그를 고친 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[design]</td>
+      <td style="text-align: left">CSS 등 사용자 UI 디자인 변경</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[!breaking change]</td>
+      <td style="text-align: left">커다란 API 변경의 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[!hotfix]</td>
+      <td style="text-align: left">치명적인 버그를 고쳐야하는 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[style]</td>
+      <td style="text-align: left">코드 포맷변경, 세미콜론 누락, 코드수정이 없는 경우.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[refactor]</td>
+      <td style="text-align: left">프로덕션 코드 리펙토링할 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[comment]</td>
+      <td style="text-align: left">필요한 주석 추가 및 변경</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[docs]</td>
+      <td style="text-align: left">문서를 수정한 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[test]</td>
+      <td style="text-align: left">테스트 코드 작업을할 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[chore]</td>
+      <td style="text-align: left">빌드 테스트 업데이트, 패키지 매니저를 설정하는 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[rename]</td>
+      <td style="text-align: left">파일 혹은 폴더명을 수정하거나 옮기는 작업만 하는 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[remove]</td>
+      <td style="text-align: left">삭제하는 작업만 수행한 경우</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[init]</td>
+      <td style="text-align: left">브랜치 초기화 및 초기셋팅 관련된 설정일 경우</td>
+    </tr>
+  </tbody>
+</table>
 
 <p><br /></p>
 
 <p>이러한 느낌으로 작성을 해보려한다.<br />
-Github IO 블로그를 쓰면서 MarkDown 문법에 익수해졌던 것이<br />
+Github IO 블로그를 쓰면서 MarkDown 문법에 익수해졌던 것이 <br />
 어느정도 도움이 많이되서 수월하게 작업을 했던 것 같다.</p>
 
-<p>아직 프론트엔드측 작업 취합이 되지 않아 백엔드쪽만 먼저 넣을 수 있는<br />
+<p>아직 프론트엔드측 작업 취합이 되지 않아 백엔드쪽만 먼저 넣을 수 있는  <br />
 내용을 적어 놓고, 월요일에 테스트를 마친다음에 작성을 완료하려한다.</p>
 
 <p>그리고 HTTPS를 적용하려고 하였지만…
-AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 진행이 안되어<br />
-적용하지 못해서 조금 아쉬웠다. 많은 사람이 Oracle Cloud를 사용한다고<br />
+AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 진행이 안되어 <br />
+적용하지 못해서 조금 아쉬웠다. 많은 사람이 Oracle Cloud를 사용한다고 <br />
 하여서 나도 계정을 가입해놓고 이제 나만의 서버를 만들어보려한다.</p>
 
 <p><br /></p>
 
-<h4 id="회의록-및-정리-6">회의록 및 정리</h4>
+<h4 id="회의록-및-정리-7">회의록 및 정리</h4>
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ****회의록 (2022.12.30 , 금)
 
 👥  참여 인원 : 이재혁, 이동우, 박종식, 박연환, 김혜원, 박평환
@@ -2272,7 +2351,11 @@ AWS 프리티어 인스턴스의 램이 느려서 그런지… 계속 하다가 
     2. 서버의 용량 문제로 적용 pass….ㅠㅠ
     
 2. 코드 리뷰하기
-</code></pre></div></div>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="20220102-월">2022.01.02 (월)</h3>]]></content><author><name>LEE JAEHYEOK</name></author><category term="TIL" /><category term="TIL" /><category term="부트캠프" /><category term="코드스테이츠" /><summary type="html"><![CDATA[모든 교육이 끝나고 프리 프로젝트를 시작했다. 프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을 사용해보면서 구현을 해보고 싶었다.]]></summary></entry><entry><title type="html">TIL) 네달차 회고</title><link href="http://localhost:4000/til/2022/12/14/til.html" rel="alternate" type="text/html" title="TIL) 네달차 회고" /><published>2022-12-14T00:00:00+09:00</published><updated>2022-12-14T00:00:00+09:00</updated><id>http://localhost:4000/til/2022/12/14/til</id><content type="html" xml:base="http://localhost:4000/til/2022/12/14/til.html"><![CDATA[<p>4달 동안의 교육과정이 끝났다. <br />
 아직 2달이라는 프로젝트 기간이 남았지만<br />
 코드스테이츠의 정식적인 교육 기간은 종료되었다.</p>
 
