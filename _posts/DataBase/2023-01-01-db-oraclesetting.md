@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Oracle Free Tier 무료 인스턴스 생성과 접속
+title: Oracle 물
 subtitle: 
 categories: DB
 tags: [DB, Oracle]
