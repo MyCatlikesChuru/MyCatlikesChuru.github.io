@@ -27,8 +27,6 @@ Y
 )_posts/DataBase/2022-12-19-db-mysqlEER.md,9/2/924b7fdeb0265a31408965575ac5a9cac53d2527
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
-V
-&_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
 f
 6_posts/Program/Spring/2022-12-27-spring-JunitSecure.md,7/f/7fe9f39bc030ab3cc364fd33ab50342171831932
 `
@@ -111,3 +109,7 @@ f
 -_posts/TIL/BootCamp/2022-11/2022-11-30-til.md,e/4/e4546366b660818d63972c30f8d32fb5783e8c2b
 ]
 -_posts/TIL/BootCamp/2022-12/2022-12-01-til.md,7/5/7561dca151dd1dfbdc15af2bddd9bf90ac4b310b
+]
+-_posts/DataBase/2023-01-08-db-redissetting.md,c/6/c60385c7632b9c210016b8a31d632719b1017ba5
+]
+-_posts/TIL/BootCamp/2022-12/2022-12-08-til.md,d/8/d8aaab243d54b1e8301e5207897b4b2173f8912d

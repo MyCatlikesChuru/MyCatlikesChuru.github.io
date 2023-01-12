@@ -141,10 +141,11 @@ test라는 키의 value를 조회한다.
 
 <br/>
 
-📌 Redis 여러개의 필드  
+### 📌 Redis 여러개의 필드  
 
 redis의 hashes 자료구조에는  
 Key와 Field 용어가 나온다.  
+
 ```text
 Hash Key1
      ᄂ Hash Sub Key1 (=Field1)
@@ -208,6 +209,8 @@ hgetall을 key값과 입력하면 전체 조회가 된다.
 
 여러개의 필드를 한번에 삭제할 수도 있고  
 하나씩 지정해서 삭제할 수도 있다.
+
+
 
 
 <br/>  
