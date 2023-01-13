@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GIT) pull rebase 사용해 병합하기
+title: Git pull rebase 사용해 병합하기
 subtitle:
 categories: GIT
 tags: [GIT, GITHUB]
