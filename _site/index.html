@@ -710,6 +710,418 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/db/2023/01/15/db-redis.html">
+          Redis JWT Refresh Token 관리 및 재발행
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+      </div>
+      <a class="post-excerpt" href="/db/2023/01/15/db-redis.html">
+        <p>
+        Redis에 대한 간단한 CS지식과 
+Redis 설치 및 CLI 사용법을 알아보았었다.
+
+오늘은 이제 나의 사용 목적인 프로젝트에 도입을 해보려한다. 
+JWT Refresh Token관리와 좋아요,조회수 등 
+빈번히 update가 일어나는 항목에 대해서 관리하는 차원에서 
+캐시서버인 Redis를 사용해보려한다.
+
+그 중에서도 Redis 사용에 대한 코드와
+JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해
+초점을 두고 작성했기에 많은 코드들이 생략되어 있다는점 참고 부탁드린다.
+
+✅ 작업환경
+
+Spring Boot 2.7.7
+java 11 
+macOS Ventura 13.1
+로컬 환경에서 테스트 진행
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/git/2023/01/12/git-commitmessage.html">
+          Git 이전 Commit Message 수정하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/git/2023/01/12/git-commitmessage.html">
+        <p>
+        📌 CLI로 변경
+
+만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우
+
+git rebase -i HEAD~3        
+
+를 입력해서 커밋메세지가 수정이 가능하다. 
+~3은 가장최신부터 수정하고자하는 커밋 수량이다
+
+Pick이라고 되어있는 부분을 reword로 변경한 다음 
+커밋메세지를 수정해주면 반영된다.
+
+
+
+📌 IntelliJ로 변경
+
+IDE를 사용하면 vi,nano 편집기를 이용하는 것보다
+훨씬 수월하게 작업할 수 있다.
+
+하단의 Git 탭에서 커밋메세지를 변경하고자하는
+커밋을 눌러 오른쪽 클릭을하자
+
+
+
+Interactively Rebase from Here를 눌러주자
+
+
+
+그러면 Rebasing ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/git/2023/01/12/git-cherrypick.html">
+          Git Cherry-Pick으로 Commit 옮기기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/git/2023/01/12/git-cherrypick.html">
+        <p>
+        📌 Cherry-Pick
+
+작업을 하던중 다른 브랜치에 Commit을 해버렸다…
+
+팀원 모두가 개발 중인 브랜치 : develop
+현재 내가 개발하는 브랜치 : feat/BE/ljh
+
+이렇게 두가지로 운영중이었다.
+
+
+
+사진에서 볼 수 있듯이… develop 브랜치에 커밋을 두개나 해버린상황
+#14, #3 으로된 제목의 커밋이다..
+feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
+
+해당 커밋을 복사해서 옮길 수 있는 방법이 Cherry-Pick이다.
+본격적으로 사용법을 알아보자
+
+
+
+📌 Commit Hash 값
+
+첫번째로 내가 잘못올릴 커밋의 해쉬값을 알아야한다.
+
+내가 커밋을 잘못올린 브랜치(deve... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/db/2023/01/08/db-redissetting.html">
+          Redis CLI 설치 및 사용방법
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 08, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/db/2023/01/08/db-redissetting.html">
+        <p>
+        Redis는 Remote Dictionary Server의 약자로 
+key:value로 값을 저장하는 NoSQL이다. 
+인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..
+
+
+
+비관계형 데이터 베이스 관리 시스템(DBMS)이며
+캐시서버로 많이 이용된다.  
+캐시는 한번 읽어온 데이터를 임의의 공간에 저장하여
+다음에 읽을 때는 빠르게 결과값을 받을 수 있도록 도와주는 공간이다.
+
+
+
+학습의 목적은 JWT Refresh Token 관리 목적과
+좋아요,혹은 조회수 같은 자주 업데이트가 일어나는 데이터를
+RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.
+
+본격적으로 알아보기전에 CLI를 통해 ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html">
           Jekyll Github IO 블로그 코드 하이라이트
         </a>
@@ -1330,7 +1742,7 @@ Test 코드를 작성중 Spring Security 문제와 부딪히게 된 것 !!
 
 <h2 class="post-title">
         <a class="post-link" href="/git/2022/12/27/git-rebase.html">
-          GIT) pull rebase 사용해 병합하기
+          Git pull rebase 사용해 병합하기
         </a>
       </h2>
       <div class="post-meta">
@@ -10822,20 +11234,20 @@ ssh -i 키파일.pem ubuntu@내주소
   <ul>
     <li>
       <a href="/index.html">
-        All<span>99</span>
+        All<span>103</span>
       </a>
     </li>
 
     
       <li>
         <a href="/categories.html#h-DB">
-          DB <span>6</span>
+          DB <span>8</span>
         </a>
       </li>
     
       <li>
         <a href="/categories.html#h-GIT">
-          GIT <span>1</span>
+          GIT <span>3</span>
         </a>
       </li>
     

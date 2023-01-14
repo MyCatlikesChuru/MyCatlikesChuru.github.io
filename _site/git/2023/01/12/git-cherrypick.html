@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name .. | LeeJellan</title>
+<title>Git Cherry-Pick으로 Commit 옮기기 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..">
+<meta property="og:title" content="Git Cherry-Pick으로 Commit 옮기기">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오늘 공부하다가 막혔던 부분이 있어서 도움이 될까 싶어 적어본다.">
-<meta property="og:description" content="오늘 공부하다가 막혔던 부분이 있어서 도움이 될까 싶어 적어본다.">
-<link rel="canonical" href="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html">
-<meta property="og:url" content="http://localhost:4000/macos/2022/11/27/OS-macOs-4.html">
+<meta name="description" content="📌 Cherry-Pick">
+<meta property="og:description" content="📌 Cherry-Pick">
+<link rel="canonical" href="http://localhost:4000/git/2023/01/12/git-cherrypick.html">
+<meta property="og:url" content="http://localhost:4000/git/2023/01/12/git-cherrypick.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-11-27T00:00:00+09:00">
+<meta property="article:published_time" content="2023-01-12T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..">
+<meta property="twitter:title" content="Git Cherry-Pick으로 Commit 옮기기">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-11-27T00:00:00+09:00","datePublished":"2022-11-27T00:00:00+09:00","description":"오늘 공부하다가 막혔던 부분이 있어서 도움이 될까 싶어 적어본다.","headline":"macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/macos/2022/11/27/OS-macOs-4.html"},"url":"http://localhost:4000/macos/2022/11/27/OS-macOs-4.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-12T00:00:00+09:00","datePublished":"2023-01-12T00:00:00+09:00","description":"📌 Cherry-Pick","headline":"Git Cherry-Pick으로 Commit 옮기기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/git/2023/01/12/git-cherrypick.html"},"url":"http://localhost:4000/git/2023/01/12/git-cherrypick.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">macOs) Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Git Cherry-Pick으로 Commit 옮기기</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-11-27T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Nov 27, 2022
+    <time class="dt-published" datetime="2023-01-12T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 12, 2023
     </time>
 
     
@@ -678,142 +678,152 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </p>
-<div class="post-tags"><a class="post-tag" href="/tags.html#macOs">#macOs</a></div></header>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+</div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오늘 공부하다가 막혔던 부분이 있어서 <br>
-도움이 될까 싶어 적어본다.</p>
+      <h3 id="-cherry-pick">📌 Cherry-Pick</h3>
 
-<h3 id="apache-웹-서버">APACHE 웹 서버</h3>
+<p>작업을 하던중 다른 브랜치에 Commit을 해버렸다…</p>
 
-<p>아파치 HTTP 서버(Apache HTTP Server)는 <br>
-아파치 소프트웨어 재단에서 관리하는 오픈 소스, 크로스 플랫폼 HTTP 웹 서버 소프트웨어다. <br>
-BSD, 리눅스 등 유닉스 계열 뿐 아니라 마이크로소프트 윈도우나 노벨 넷웨어 <br>
-같은 기종에서도 무료로 운용할 수 있다고 한다. <strong>[<a href="https://ko.wikipedia.org/wiki/%EC%95%84%ED%8C%8C%EC%B9%98_HTTP_%EC%84%9C%EB%B2%84">출처 - 위키백과</a>]</strong></p>
+<p><strong>팀원 모두가 개발 중인 브랜치</strong> : <code class="language-plaintext highlighter-rouge">develop</code><br>
+<strong>현재 내가 개발하는 브랜치</strong> : <code class="language-plaintext highlighter-rouge">feat/BE/ljh</code></p>
 
-<p>Mac 환경에서 Apache 웹서버를 사용해보려하다 오류가 발생했다.<br>
-오류를 얘기하기전 우선 설치 과정을 아래의 사이트를 참고했다.<br>
-<strong>[<a href="https://www.javatpoint.com/how-to-install-apache-on-mac">Apache 설치 방법 - 참고사이트</a>]</strong></p>
+<p>이렇게 두가지로 운영중이었다.</p>
 
-<p><br></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/212029237-9092798b-deca-43ea-8a8d-d99591ca7963.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>homebrew를 이용한 설치방법이고<br>
-Mac 사용 유저라면 익히 알고 있을 것이다.</p>
+<p>사진에서 볼 수 있듯이… <code class="language-plaintext highlighter-rouge">develop</code> 브랜치에 커밋을 두개나 해버린상황<br>
+#14, #3 으로된 제목의 커밋이다..<br>
+<code class="language-plaintext highlighter-rouge">feat/BE/ljh</code>  브랜치로 커밋을 옮겨야하는 상황이다.</p>
 
-<p>설치를 완료한다음 <br>
-문제는 아파치 서버를 실행/종료 시키기위해서<br>
-<code class="language-plaintext highlighter-rouge">sudo apachectl start</code> 명령어와 <code class="language-plaintext highlighter-rouge">sudo apachectl stop</code> 명령어를<br>
-사용하게 되는데… AH00558 코드로된 알람이 발생했다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN62e1LojunarrQo9k4FcmeNqC9ijlkjf5awlNKzQI_PdKk04LLPQ5yk6g__OopFMDQBwdZx6DY0LSvVorJxOp-zOJz=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AH00558: httpd: Could not reliably determine the server<span class="s1">'s fully qualified domain name, using MacBook-Pro.local. Set the '</span>ServerName<span class="s1">' directive globally to suppress this message
-</span></code></pre></div></div>
-
-<p>오류는 그렇다 쳐도, 기본 적으로 localhost에 접속하면<br>
-<code class="language-plaintext highlighter-rouge">It works!</code> 화면이 노출되지 않았다.<br>
-localhost:8080에 접속해야지만 화면이 노출되었고<br>
-설정을 바꿀 필요가 있다고 느껴졌다.</p>
+<p>해당 커밋을 복사해서 옮길 수 있는 방법이 Cherry-Pick이다.<br>
+본격적으로 사용법을 알아보자</p>
 
 <p><br></p>
 
-<p><strong>1). httpd.conf 파일 찾기</strong></p>
+<h3 id="-commit-hash-값">📌 Commit Hash 값</h3>
 
-<p>설정을 변경하기 위해서는 <code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일을 수정해줘야한다.<br>
-해당 파일 경로를 찾기위해 여러가지 블로그를 찾아보았는데</p>
+<p>첫번째로 내가 잘못올릴 커밋의 해쉬값을 알아야한다.</p>
 
-<p>사람마다 여러가지 경로로 수정을 하는걸 보았다.</p>
+<p>내가 커밋을 잘못올린 브랜치(<code class="language-plaintext highlighter-rouge">develop</code>)에서<br>
+<code class="language-plaintext highlighter-rouge">git log</code>를 입력해 커밋의 해쉬값을 알 수 있다.</p>
 
-<p><code class="language-plaintext highlighter-rouge">/etc/apache2/httpd.conf</code><br>
-<code class="language-plaintext highlighter-rouge">/private/etc/apache2/httpd.conf</code><br>
-와 같은 경로로 수정한 사람들도 있는 것 같다.<br>
-하지만 나와 같은 경우는 제대로 반영되지 않았고…</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 7525f9a220700884994e53e90babc345d199e10e <span class="o">(</span>HEAD -&gt; develop<span class="o">)</span>
+Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
+Date:   Thu Jan 12 18:02:48 2023 +0900
 
-<p>어떠한 차이인지는 아직 불분명하지만 내가 수정했던 경로는 아래와 같다.  <br>
-📌<code class="language-plaintext highlighter-rouge">/opt/homebrew/etc/httpd/httpd.conf</code>📌 <br>
-아마 homebrew를 통해 실행하는 것이기 때문이지 않을까? 라는 생각을 해본다.</p>
+    <span class="c">#14 - Responseder, TokenPrvider 역할 추가</span>
+    
+    1. 로그인 시 응답 가능하도록 Responder 추가
+    2. JWT 관련 예외발생시 Json 객체로 반환안되는 문제 수정
+    3. HttpServletRequest 객체로 AccessToken 가져오도록 TokenProvider에게 역할 이전
+       <span class="o">(</span>추후 RefreshToken으로 AccessToken 발급시 통일성있게 사용을 위함<span class="o">)</span>
 
-<p><code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일을 찾는데 처음에 애먹어서 시간을 많이 쓴 것 같다.</p>
 
-<p>파일을 찾았으면 이제 shell에서 vi 편집기로 값을 수정해주면된다.</p>
+commit cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b
+Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
+Date:   Thu Jan 12 17:58:46 2023 +0900
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /opt/homebrew/etc/httpd/httpd.conf
+    <span class="c">#3 - LoginResponseDto 추가</span>
+    
+    1. 로그인 시 응답 가능하도록 ResponseDto 추가
+
+</code></pre></div></div>
+
+<p>나는 총 2개의 커밋을 했고<br>
+첫번째 커밋은 <code class="language-plaintext highlighter-rouge">7525f9a220700884994e53e90babc345d199e10e</code>로<br>
+<code class="language-plaintext highlighter-rouge">7525f9a</code>와 같이 7자리로 표현할 수도 있다.</p>
+
+<p>두번째 커밋은 <code class="language-plaintext highlighter-rouge">cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b</code>이다.</p>
+
+<p>이 두가지 커밋을 이제 <code class="language-plaintext highlighter-rouge">feat/BE/ljh</code>라는<br>
+브랜치로 옮기고 싶은 상황이다.</p>
+
+<p><br></p>
+
+<h3 id="-cherry-pick-사용하여-커밋-옮기기">📌 Cherry-Pick 사용하여 커밋 옮기기</h3>
+
+<p>먼저 브랜치 체크아웃을 진행하자.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout feat/BE/ljh
 </code></pre></div></div>
 
 <p><br></p>
 
-<p><strong>2). Port 80 으로 변경하기</strong></p>
+<p>이제 하나씩 Cherry-Pick 명령어를 사용해 옮겨보자</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git cherry-pick cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b
+</code></pre></div></div>
+<p>를 입력해주면되고, 만약 실행하였을때 정상적으로 <br>
+완료가되면 이상이 없겠지만, 혹시나</p>
 
-<p>편집기를 열고 아래와 같은 Listen을 찾아준다.</p>
+<p>아래와 같이 conflict가 발생하게 될 수 있다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gORqVAKzYaFjaoXLq83Ak0sGng40EHF8WVydfPVIjppJZmhGs4t0OrLSVy1DHYY9EIRGQhxH_-z9ZjpH3vk4pQ87LJw=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Auto-merging server/src/main/java/codestates/frogroup/indiego/domain/member/entity/dto/MemberDto.java
+CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict <span class="k">in </span>server/src/main/java/codestates/frogroup/indiego/domain/member/entity/dto/MemberDto.java
+error: could not apply cd49c93... <span class="c">#3 - LoginResponseDto 추가</span>
+hint: After resolving the conflicts, mark them with
+hint: <span class="s2">"git add/rm &lt;pathspec&gt;"</span>, <span class="k">then </span>run
+hint: <span class="s2">"git cherry-pick --continue"</span><span class="nb">.</span>
+hint: You can instead skip this commit with <span class="s2">"git cherry-pick --skip"</span><span class="nb">.</span>
+hint: To abort and get back to the state before <span class="s2">"git cherry-pick"</span>,
+hint: run <span class="s2">"git cherry-pick --abort"</span><span class="nb">.</span>
+</code></pre></div></div>
+<p>hint 안내에 따라 진행할수가 있다. <br>
+우선 CONFLICT가 발생한 부분을 로그로 알려준다.<br>
+나와 같은 경우는 <code class="language-plaintext highlighter-rouge">MemberDto</code> 충돌이 나왔다고 위에 나와있다.</p>
 
-<p>아마 기본적으로 8080으로 설정되어있을 것이다.<br>
-#으로 주석처리를 해준다음, 아래에서 <code class="language-plaintext highlighter-rouge">Listen 80</code>으로 설정해주었다.</p>
+<p>해당 클래스로 가면 인텔리제이에서 충돌난 부분을 표시해준다. <br>
+충돌난 부분을 코드를 수정해 우선 해결해주고<br>
+<code class="language-plaintext highlighter-rouge">git add .</code>를 진행후 <code class="language-plaintext highlighter-rouge">git cherry-pick --continue</code>를 진행하면된다.<br>
+마치 rebase하는 과정과 매우 흡사하다.</p>
 
-<p><br></p>
-
-<p><strong>3). localhost로 변경 하기</strong></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPs7EdAAcTa5O8pd94AvHA4Xm35986PySX8c4-VPFePRIVUKV9gcprEIMgt2eUROtV1mzX81Jg28vZWB1uwBUojZzYRUg=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>위의 사진과 같이 ServerName을 localhost로 설정해주면 된다.</p>
-
-<p><br></p>
-
-<p><strong>4). 결과 확인하기</strong></p>
-
-<p>아파치 웹서버 실행 명령어인<br>
-<code class="language-plaintext highlighter-rouge">sudo apachectl start</code>,<code class="language-plaintext highlighter-rouge">sudo apachectl stop</code>를 입력해도</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPGBufrgNA1K5hfte_Sx0sWMhWjy68Hyk4rkeLTFPKCySEyCz8RbT_bHP87qMbdj3-6tOMxat_CzXCuPpjV1cIP4pg7IA=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>더 이상 AH00558 오류가 발생하지 않는 모습이다.</p>
-
-<p><br></p>
-
-<p>아파치 웹서버를 실행 시켜놓은 상태에서</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMnn1GHsEbByqR_FSstRzZCjQqJaBJmIQEjuaQvXf8cR0CJlXhpV-DxhntogF7qgq01lz4cTFYEjlAtZz8viUulgc7tGg=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>localhost를 입력하여 접속할 경우<br>
-이제 드디어 <code class="language-plaintext highlighter-rouge">It works</code> 화면을 볼 수 있게 된다 !!</p>
+<p>충돌부분이 전부 해결되었으면 nano편집기로 저장할건지를 물어본다.<br>
+ctrl + s, ctrl + x 를 눌러줘 저장을해준다.</p>
 
 <p><br></p>
 
-<p><strong>5). html 파일 로딩하기</strong></p>
+<p>완료를 했다면.. <code class="language-plaintext highlighter-rouge">git log</code>를 입력하면 <br>
+<code class="language-plaintext highlighter-rouge">develop</code>브랜치에 있던 커밋이 <code class="language-plaintext highlighter-rouge">feat/BE/ljh</code>로 복사된 것을 <br>
+볼 수 있을 것이다 !!!!!</p>
 
-<p>이 부분은 참고차 한번 적어본다.<br>
-아파치 웹서버에 내가 만든 html 파일을 적용 시키고싶을때</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit a5d3ef8d6110d838c896ba3125c351eb5b611623 <span class="o">(</span>HEAD -&gt; feat/BE/ljh<span class="o">)</span>
+Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
+Date:   Thu Jan 12 17:58:46 2023 +0900
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPTW_3KvqtDpHZUUx6KVVDK5UuXQKDQkRtsORvvWo2uO2mNbH5yBzOGtWQ5dvYNyCEbR4YUKP4L0_WC7VPilQyvywpa_A=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+    1. 로그인 시 응답 가능하도록 ResponseDto 추가
 
-<p><code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일에서 <code class="language-plaintext highlighter-rouge">DocumentRoot</code>를 수정해주면 html 파일을 사용할 수 있다.</p>
+</code></pre></div></div>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO7lUL65h8BldRSUqB3uhe1yp1KkeQH7B0alNJKxo9-MEgSt4FDg4TESq6--_sPid77Hr3wFTnyjlymHN_ew5HCBRp8BQ=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>예를 들어서 index.html 이라는 파일을 만들어 위의 경로에 파일을 두었을때</p>
-
-<p>기존에 localhost:80 접속 시 <code class="language-plaintext highlighter-rouge">It wroks!</code>로 나왔던 화면이<br>
-내가 만든 화면으로 대체된 모습을 볼 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOYsWcYBTVzuM4XeKO4-rRiiiIa5HHhpGvB3If3dB2skNJ8cHMMhasTc_yCL8-rlpKpKDeWkW7tZqAAn6JbkNB0BAReXA=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>이 화면은 테스트용으로 만든 화면이고<br>
-정상적으로 파일이 접속된 모습을 볼 수 있다.<br>
-이후 부터는 폴더경로를 만들어 html 파일에 접근하면된다.</p>
+<p>해쉬값을 보아하니 복사보다는 새로 만들어진 느낌이다. <br>
+이렇게 옮기려고하는 커밋을 모두 옮기면 된다.</p>
 
 <p><br></p>
 
-<hr>
+<h3 id="-잘못올린-커밋-삭제">📌 잘못올린 커밋 삭제</h3>
 
-<p>혹시나 싶어 <a href="https://mainia.tistory.com/5490">WindowOS 해결 방법 - 출처 mainia님</a> 찾다가 좋은글인 것 같아 올려본다.<br>
-좀 더 자세한 내용을 보고싶다면 <a href="https://velog.io/@diduya/macOS%EC%97%90-Homebrew%EB%A1%9C-Apache-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0">내가 참고한 해결 방법 - 출처 diduya님</a> 포스팅을 봐도<br>
-좋은 해결법이될 것 같다.</p>
+<p><code class="language-plaintext highlighter-rouge">develop</code> 브랜치에 잘못올린 커밋을 삭제해줘야한다. <br>
+Cherry-Pick을 했다고 자동으로 삭제가되진 않는다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">develop</code> 브랜치로 체크아웃을하여</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset HEAD^
+</code></pre></div></div>
+
+<p>를 입력하면 가장 최근인 HEAD의 커밋이 삭제되어진다.</p>
+
+<p>혹시나 인텔리제이를 사용하고 있다면<br>
+하단에 Git에 들어가서</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212040809-3a14a459-78b8-42a4-9558-b42c83cd9f30.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>삭제하려고 하는 커밋에 오른쪽 마우스를 클릭해<br>
+Drop Commit을 눌러주면 된다.</p>
 
 <p><br>
+<br>
 <br></p>
 
 
@@ -821,15 +831,15 @@ localhost:8080에 접속해야지만 화면이 노출되었고<br>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/til/2022/11/25/til.html" title="TIL) OAuth 2 인증 기초">TIL) OAuth 2 인증 기초</a><a class="next" href="/til/2022/11/28/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) Spring Security, JWT , OAuth...</a>
+<a class="previous" href="/db/2023/01/08/db-redissetting.html" title="Redis CLI 설치 및 사용방법">Redis CLI 설치 및 사용방법</a><a class="next" href="/git/2023/01/12/git-commitmessage.html" title="Git 이전 Commit Message 수정하기">Git 이전 Commit Message 수정하기</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/01/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) Spring WebFlux 구현하기</a></li>
-<li><a class="post-link" href="/til/2022/11/07/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) Spring Transaction 2 , Event 비동기 적용</a></li>
-<li><a class="post-link" href="/spring/2022/11/25/spring-environment.html" title="TIL) Spring Security, JWT , OAuth 2 인증">Spring) Could not resolve placeholder '환경변수명' in value "${환경변수명}" 오류</a></li>
-<li><a class="post-link" href="/til/2022/09/19/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) 한달차 회고</a></li>
+        <li><a class="post-link" href="/til/2022/11/29/til.html" title="Git 이전 Commit Message 수정하기">TIL) Spring WebFlux Reactive 프로그래밍</a></li>
+<li><a class="post-link" href="/til/2022/10/05/til.html" title="Git 이전 Commit Message 수정하기">TIL) DB RDMBS 1</a></li>
+<li><a class="post-link" href="/db/2023/01/01/db-oracledb.html" title="Git 이전 Commit Message 수정하기">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
+<li><a class="post-link" href="/til/2022/08/31/til.html" title="Git 이전 Commit Message 수정하기">TIL) Java 문법기초 - 제어문</a></li>
 </ul>
     </div>
 <div class="post-comments">
