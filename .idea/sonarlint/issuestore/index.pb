@@ -27,8 +27,6 @@ Y
 )_posts/DataBase/2022-12-19-db-mysqlEER.md,9/2/924b7fdeb0265a31408965575ac5a9cac53d2527
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
-f
-6_posts/Program/Spring/2022-12-27-spring-JunitSecure.md,7/f/7fe9f39bc030ab3cc364fd33ab50342171831932
 `
 0_posts/OS/Linux(Unix)/2022-12-29-server-build.md,3/0/304bef088ebfa503a07d18b3928a616b7c57cdd7
 a

@@ -1,4 +1,491 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-15T01:41:50+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Redis JWT Refresh Token 관리 및 재발행</title><link href="http://localhost:4000/db/2023/01/15/db-redis.html" rel="alternate" type="text/html" title="Redis JWT Refresh Token 관리 및 재발행" /><published>2023-01-15T00:00:00+09:00</published><updated>2023-01-15T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/15/db-redis</id><content type="html" xml:base="http://localhost:4000/db/2023/01/15/db-redis.html"><![CDATA[<p>Redis에 대한 간단한 CS지식과 <br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-15T21:38:18+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Spring) AWS S3 FileUpload 하여 URL로 관리하기</title><link href="http://localhost:4000/spring/2023/01/15/spring-fileupload.html" rel="alternate" type="text/html" title="Spring) AWS S3 FileUpload 하여 URL로 관리하기" /><published>2023-01-15T00:00:00+09:00</published><updated>2023-01-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/15/spring-fileupload</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/15/spring-fileupload.html"><![CDATA[<p>오늘은 AWS S3에 파일 업로드를 하는<br />
+예제를 다뤄보려한다.</p>
+
+<p>구글에서 여러가지 블로그를 돌아다니며 학습했고<br />
+순서와 코드에 대해 정리해보려한다. <br />
+내가 작성한 코드는 <a href="https://github.com/MyCatlikesChuru/ImageFileUpload">GitHub 레포지토리</a>로 공유해본다.</p>
+
+<p><br /></p>
+
+<h3 id="-작업-환경">✅ 작업 환경</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AWS S3 버킷
+Spring Boot 2.7.7  
+Java 11 
+macOs Monterey 12.6 버전 
+로컬환경에서 테스트 진행
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="-작업-순서-및-준비">📌 작업 순서 및 준비</h3>
+
+<p>내가 구상하려고 생각하는 아키텍처를 그려보았다.<br />
+순서를 간단히 짚고 넘어가자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212537839-f1ebee39-3c06-449e-b3f0-359bb3c3d1c6.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>1). 클라이언트에서 이미지파일을 업로드 요청<br />
+-&gt; multipart/form-data 타입으로 요청<br />
+-&gt; Key=file / value=이미지 형태로 요청을 보냄</p>
+
+<p>2). 요청을 받은 서버에서 파일을 AWS S3 버킷에 저장함.<br />
+-&gt; 전달 받은 파일을 AWS 저장소에 원하는 폴더에 저장함.<br />
+-&gt; 저장완료후 DataBase에 URL을 저장함.</p>
+
+<p>3). 저장이 정상적으로 처리되었다고 클라이언트에 응답함.<br />
+-&gt; 만약 저장에 실패 및 예외가 발생했을 때는 예외처리하여 응답해줌</p>
+
+<p>❗️코드가 길어질 것을 우려해 DB에 저장하는 과정은 생략합니다!<br />
+AWS S3에 저장되고 URL을 추출하는 과정만 담으려합니다.</p>
+
+<p><br /></p>
+
+<h3 id="-aws-s3-생성">📌 AWS S3 생성</h3>
+
+<p>첫번째로 해야할 것이 S3 버킷을 생성해야한다. <br />
+여러가지 글을 참고해보면 쉽게 만들 수 있을 것이다. <br />
+그래도 이러한 과정을 적어보려한다.</p>
+
+<p>나와 같은 경우는 프리티어 계정이 있기에 무료로 만들어 사용했다. <br />
+무료 기준에 넘어가지만 않게 잘 사용하면 무리는 없을 것 같다.</p>
+
+<p>본격적으로 만들어보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538169-ec74cc60-1060-40d0-8e44-df280f9571dc.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>버킷 이름과 리전을 선택해주자.<br />
+한국에 있기때문에 서울리전을 선택했다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538230-331609e3-66e3-4d2d-8f55-aa7cb22b4792.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우선 엑세스 차단의 체크박스는 해제시켜두었고<br />
+이에따라 아래 경고문구가 뜬다. 해당부분을 체크해줘야<br />
+버킷을 만들 수 있다.</p>
+
+<p>이미지를 클라이언트에 공용으로 사용할 것이기 때문에 <br />
+우선은 퍼블릭 액세서를 차단하지 않았다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538236-33952455-c626-4cad-99df-69af51b0ecf2.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538244-c3dbfff3-1865-4a8f-9b49-1874cd5ca7c0.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이외 설정은 기본으로 두고 버킷 생성을 진행하면 <br />
+버킷이 만들어진 것을 볼 수 있다.</p>
+
+<p>해당 버킷에서 폴더를 만들어 관리를 할 수 있다.<br />
+나는 프로필사진을 모아놓는 폴더에 <br />
+이미지 업로드한 파일을 관리하려한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538533-35027900-bebf-458b-b258-bd28fe7a5025.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>버킷에서 폴더 만들기를 눌러 만들어 줄 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538576-c6629514-ad7d-406f-9c39-3b9ce24562e8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>만들게될 경우 위와 같은 폴더가 생기는 것을 볼 수 있다. <br />
+최종적으로 위에 폴더에 이미지를 올려볼 예정이다.</p>
+
+<p><br /></p>
+
+<h3 id="-iam-설정">📌 IAM 설정</h3>
+
+<p>IAM -&gt; 엑세스 관리 -&gt; 사용자 -&gt; 사용자 추가를 눌러 줍니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538540-44bf93ef-9803-4f48-9f86-827a3d36f4fe.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>사용자이름을 원하는대로 설정하고 <br />
+엑세스 키 체크 박스를 체크한다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538545-cdcaad32-3f64-4a44-b73d-6c534338cb6b.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>다음으로 넘어가 기존 정책 직접 연결에서<br />
+<code class="language-plaintext highlighter-rouge">AmazonS3FullAcess</code>를 추가해준다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538553-619d2f40-f900-4376-a9f7-c79633571007.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>다음을 눌러 넘어가준다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538556-b8fff09d-fe94-4dc2-bdfc-58f3625efee0.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>사용자 만들기 추가</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538557-7d71c867-db35-4be6-bd34-a1b9fc4a99e9.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>지정한 사용자이름으로 엑세스 키ID와 비밀 엑세스 키가 발급된다. <br />
+이 두가지가 중요하다. 후에 연결할때 사용되니 따로 저장해두자</p>
+
+<p>이 키는 절대로 Github에 올리거나 공유되면 안되는 키값이니 <br />
+주의해서 관리하도록 하자</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212538560-2247c35c-3d06-46c3-b4ef-215f9e8ca6ac.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>최종적으로 IAM 사용자가 만들어진 것을 확인할 수 있다. <br />
+해당 키값으로 S3에 접근이 가능해졌고 <br />
+이제 코드를 작성해 이미지를 올려보도록 하자</p>
+
+<p><br /></p>
+
+<h3 id="-코드-작성">📌 코드 작성</h3>
+
+<h4 id="-기본-셋팅">🛠 기본 셋팅</h4>
+
+<p><code class="language-plaintext highlighter-rouge">application.yml</code> 을 설정해주자</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">servlet</span><span class="pi">:</span>
+    <span class="na">multipart</span><span class="pi">:</span>
+      <span class="na">max-file-size</span><span class="pi">:</span> <span class="s">10MB</span>
+      <span class="na">max-request-size</span><span class="pi">:</span> <span class="s">10MB</span>
+<span class="na">cloud</span><span class="pi">:</span>
+  <span class="na">aws</span><span class="pi">:</span>
+    <span class="na">credentials</span><span class="pi">:</span>
+      <span class="na">access-key</span><span class="pi">:</span> <span class="s">${S3_ACCESS_KEY}</span>
+      <span class="na">secret-key</span><span class="pi">:</span> <span class="s">${S3_SECRET_KEY}</span>
+    <span class="na">s3</span><span class="pi">:</span>
+      <span class="na">bucket</span><span class="pi">:</span> <span class="s">indiego-fileupload/profileimage</span>
+    <span class="na">region</span><span class="pi">:</span>
+      <span class="na">static</span><span class="pi">:</span> <span class="s">ap-northeast-2</span>
+    <span class="na">stack</span><span class="pi">:</span>
+      <span class="na">auto</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div></div>
+
+<p>처음으로는 servlet의 multipart 용량 사이즈를 지정해주었다. <br />
+10MB 이상을 넘지못하도록 지정했고, 넘은 파일이 올 경우에<br />
+예외처리는 가장 맨 아래에서 알아보자</p>
+
+<p>위에서 S3 설정했던 것과 같이 <br />
+region은 서울(ap-northeast-2)로 지정<br />
+bucket은 나의 버킷이름인 indiego-fileupload에 <br />
+폴더 경로인 /profileimage를 붙여주었다.</p>
+
+<p>그리고 acees-key, secret-key에 대한 설정은 <br />
+환경변수로 사용할 수 있고 지정해두었다. 각자 환경에 맞게<br />
+값을 환경변수에 넣고 사용하거나 하드코딩으로 해두어도된다.(깃에올리지만 말것..)</p>
+
+<p><br /></p>
+
+<p>그리고 build.gradle을 설정해주자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">cloud</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="nl">aws:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="na">RELEASE</span><span class="err">'</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>다음으로는<br />
+AmazonS3Config 클래스를 작성해보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AmazonS3Config</span> <span class="o">{</span>
+    
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${cloud.aws.credentials.access-key}"</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">accessKey</span><span class="o">;</span>
+
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${cloud.aws.credentials.secret-key}"</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">secretKey</span><span class="o">;</span>
+
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${cloud.aws.region.static}"</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">region</span><span class="o">;</span>
+
+	<span class="nd">@Bean</span>
+	<span class="kd">public</span> <span class="nc">AmazonS3Client</span> <span class="nf">amazonS3Client</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">BasicAWSCredentials</span> <span class="n">awsCreds</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BasicAWSCredentials</span><span class="o">(</span><span class="n">accessKey</span><span class="o">,</span> <span class="n">secretKey</span><span class="o">);</span>
+		<span class="k">return</span> <span class="o">(</span><span class="nc">AmazonS3Client</span><span class="o">)</span> <span class="nc">AmazonS3ClientBuilder</span><span class="o">.</span><span class="na">standard</span><span class="o">()</span>
+			<span class="o">.</span><span class="na">withRegion</span><span class="o">(</span><span class="n">region</span><span class="o">)</span>
+			<span class="o">.</span><span class="na">withCredentials</span><span class="o">(</span><span class="k">new</span> <span class="nc">AWSStaticCredentialsProvider</span><span class="o">(</span><span class="n">awsCreds</span><span class="o">))</span>
+			<span class="o">.</span><span class="na">build</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">AmazonS3Client</code>타입으로 빈을 만들어 주었다. <br />
+이용된 정보는 환경변수에 설정했던 값들이 이용되었다.
+이렇게까지만 설정해놓고 스프링 부트가 잘 실행되는지 확인해보자</p>
+
+<p><br /></p>
+
+<h4 id="-문제발생-처리">🐞 문제발생 처리</h4>
+
+<p>실행중 여러가지 예외들을 만나게 될 수 있다. <br />
+내가 만든 예외들의 해결방법을 적어본다.</p>
+
+<p><strong>1). AmazonClientException 문제</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">com</span><span class="o">.</span><span class="na">amazonaws</span><span class="o">.</span><span class="na">AmazonClientException</span><span class="o">:</span> <span class="no">EC2</span> <span class="nc">Instance</span> <span class="nc">Metadata</span> <span class="nc">Service</span> <span class="n">is</span> <span class="n">disabled</span>
+</code></pre></div></div>
+
+<p>위와 같은 예외가 콘솔에 찍혀있었다.<br />
+<a href="https://h-kkaemi.tistory.com/24">AmazonClientException 참고 레퍼런스</a>를 참고해서 해결해보았다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212529483-83bdd3c5-1ec1-499e-a7b9-9e4d4143866b.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>첫번째로 구성편집에서  VM Option을 추가해<br />
+<code class="language-plaintext highlighter-rouge">-Dcom.amazonaws.sdk.disableEc2Metadata=true</code>를 추가해주었다.</p>
+
+<p>그리고 yml 파일 로깅 설정을</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logging</span><span class="pi">:</span>
+  <span class="na">level</span><span class="pi">:</span>
+    <span class="na">com</span><span class="pi">:</span>
+      <span class="na">amazonaws</span><span class="pi">:</span>
+        <span class="na">util</span><span class="pi">:</span>
+          <span class="na">EC2MetadataUtils</span><span class="pi">:</span> <span class="s">error</span>
+</code></pre></div></div>
+
+<p>위와 같이 설정해준다면, 더이상 오류 메세지는 보이지 않을 것이다.</p>
+
+<p><br /></p>
+
+<p><strong>2). AmazonS3Exception 문제</strong></p>
+
+<p>이번에 발생한 문제는 버킷에서 ACLs를 허용하지<br />
+않았다는 문구가 출력외었다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.amazonaws.services.s3.model.AmazonS3Exception: The bucket does not allow ACLs
+</code></pre></div></div>
+
+<p>해당 문제도 AWS S3 버킷의</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212529451-bd253a0e-7033-44a9-9749-8704c9223db3.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>ACL을 활성화시켜두었더니 해결되었다.</p>
+
+<p><br /></p>
+
+<h4 id="-코드-작성-1">🛠 코드 작성</h4>
+
+<p>첫번째로 Controller를 작성해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.image.fileupload.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.image.fileupload.service.AwsS3Service</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.image.fileupload.service.ImageUploadService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.RequiredArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.extern.slf4j.Slf4j</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+
+<span class="nd">@Slf4j</span>
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/upload"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UploadController</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ImageUploadService</span> <span class="n">awsS3Service</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">UploadController</span><span class="o">(</span><span class="nc">AwsS3Service</span> <span class="n">awsS3Service</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">awsS3Service</span> <span class="o">=</span> <span class="n">awsS3Service</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@PostMapping</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">saveImage</span><span class="o">(</span><span class="nd">@RequestParam</span> <span class="nc">MultipartFile</span> <span class="n">file</span><span class="o">){</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"multipartFile = {}"</span><span class="o">,</span> <span class="n">file</span><span class="o">);</span>
+        <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">awsS3Service</span><span class="o">.</span><span class="na">StoreImage</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"url = {}"</span><span class="o">,</span><span class="n">url</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">url</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>사이사이에 로그로 값을 확인할 수 있도록 찍어두었다. <br />
+key = file / value = 이미지 로 받아오는 방법이다.<br />
+Spring에서는 MultipartFile 형식으로 받아올 수 있다. <br />
+물론 HttpServletReqeust에서도 꺼내올 수 있다.</p>
+
+<p>여기서 MutipartFile 타입으로 받아온 file 객체를 로그로 찍어보면<br />
+<code class="language-plaintext highlighter-rouge">StandardMultipartFile@57413913</code>와 같은 형태로 오는게 확인이 가능하다.</p>
+
+<p><br /></p>
+
+<p>이제 서비스 로직을 작성해보자 <br />
+AWS S3 외에 다른 저장소를 사용할 수 있게에 <br />
+인터페이스를 하나 만들었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
+	<span class="nc">String</span> <span class="nf">StoreImage</span><span class="o">(</span><span class="nc">MultipartFile</span> <span class="n">img</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>해당 인터페이스를 구현체로 <br />
+AwsS3Service 클래스를 만들었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AwsS3Service</span> <span class="kd">implements</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">AmazonS3</span> <span class="n">amazonS3</span><span class="o">;</span>
+
+	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${cloud.aws.s3.bucket}"</span><span class="o">)</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">bucketName</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">StoreImage</span><span class="o">(</span><span class="nc">MultipartFile</span> <span class="n">file</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">validateFileExists</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">originalFilename</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">getOriginalFilename</span><span class="o">();</span>
+		<span class="nc">String</span> <span class="n">storeFileName</span> <span class="o">=</span> <span class="n">createStoreFileName</span><span class="o">(</span><span class="n">originalFilename</span><span class="o">);</span>
+
+		<span class="k">try</span> <span class="o">(</span><span class="nc">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">amazonS3</span><span class="o">.</span><span class="na">putObject</span><span class="o">(</span><span class="k">new</span> <span class="nc">PutObjectRequest</span><span class="o">(</span><span class="n">bucketName</span><span class="o">,</span> <span class="n">storeFileName</span><span class="o">,</span> <span class="n">inputStream</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="o">.</span><span class="na">withCannedAcl</span><span class="o">(</span><span class="nc">CannedAccessControlList</span><span class="o">.</span><span class="na">PublicRead</span><span class="o">));</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">();</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="n">amazonS3</span><span class="o">.</span><span class="na">getUrl</span><span class="o">(</span><span class="n">bucketName</span><span class="o">,</span> <span class="n">storeFileName</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">validateFileExists</span><span class="o">(</span><span class="nc">MultipartFile</span> <span class="n">multipartFile</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">multipartFile</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">RuntimeException</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">createStoreFileName</span><span class="o">(</span><span class="nc">String</span> <span class="n">originalFilename</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">extractExt</span><span class="o">(</span><span class="n">originalFilename</span><span class="o">);</span>
+		<span class="nc">String</span> <span class="n">uuid</span> <span class="o">=</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+		<span class="k">return</span> <span class="n">uuid</span> <span class="o">+</span> <span class="s">"."</span> <span class="o">+</span> <span class="n">ext</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">String</span> <span class="nf">extractExt</span><span class="o">(</span><span class="nc">String</span> <span class="n">originalFilename</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">originalFilename</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s">"."</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">originalFilename</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>여기서 AmazonS3 를 DI 받아 <code class="language-plaintext highlighter-rouge">.putObject();</code> 메서드를 이용해 <br />
+AWS S3 저장소에 저장을할 수 있게되어진다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">.putObject();</code>의 매개변수들로는<br />
+(버킷 이름과, 파일이름, MultipartFile inputsStream 객체, ObjectMetaData 객체)<br />
+를 넣어 주면 정상적으로 파일이 업로드가 되어질 것이다.</p>
+
+<p>그리고 외부에 공개할 이미지이기 때문에<br />
+<code class="language-plaintext highlighter-rouge">.withCannedAcl(CannedAccessControlList.PublicRead)</code>를 걸어주었다.</p>
+
+<p>나와 같은 경우에 파일이름같은 경우는 <br />
+기존에 받은 originalFilename을 UUID를 이용해 <br />
+종복될 확률이 매우 낮게 파일이름을 변경해주고 마지막에는<br />
+확장자 데이터를 뽑아 붙여주게 되어 파일이름을 완성시켜주었다.</p>
+
+<p>예를들자면 <code class="language-plaintext highlighter-rouge">e491b9f6-c528-4a47-bd5c-0381aad21ed5.png</code>와 같이 <br />
+파일이름이 만들어지게 되는 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p>여기까지 작성을 헀다면 이제 클라이언트 쪽에서 <br />
+이미지를 보내 AWS S3에 저장되는 모습을 확인해볼 수 있다.</p>
+
+<p>클라이언트을 SSR 방식으로<br />
+thymeleaf를 이용해 만들어줄 수도 있지만</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212540211-2ec688c8-b5c4-4630-8b45-56f08ae246f9.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>포스트맨을 통해서도 전송이 가능하다. <br />
+multipart/form-data 형식으로 설정해준다음. <br />
+Body에 Key,Value를 설정해주면된다.</p>
+
+<p>Key값 설정시에는 오른쪽에 Text가아닌 File로 변경해주어야한다.<br />
+그러면 Value에 이미지를 선택할 수 있는 창이나온다. <br />
+창을 눌러 현재 데스크탑에서 올릴 이미지를 선택해준다.</p>
+
+<p>그리고 API를 요청보내게 된다면</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212540224-4a1655bc-b22f-4694-a948-dcb7d368e697.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>내가 지정했던 indiego-fileupload 버킷에<br />
+profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장자로 <br />
+객체가 올라가있는 모습을 확인할 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212540227-70c09e05-f781-4a21-9236-8f60b8872d04.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>객체를 눌러 들어가면 객체 URL이 나오게되는데<br />
+해당 URL을 꺼내서 클라이언트 측에 전달하고 우리 DB에 저장하면된다.</p>
+
+<p>꺼내는 코드는 이미 위에 작성되어있다.<br />
+<code class="language-plaintext highlighter-rouge">amazonS3.getUrl(bucketName, storeFileName).toString();</code> 코드로 <br />
+<code class="language-plaintext highlighter-rouge">getUrl();</code> 메서드를 이용해 꺼내올 수 있다. 해당 값을 String으로 <br />
+반환해주고 해당값을 이제 우리가 원하는 목적에 맞게 사용하면된다.</p>
+
+<p>나와 같은 경우에는 반환한 URL을 text/plain으로 반환해주었고<br />
+위에 Postman으로 보면 잘 반환된 것을 확인할 수가있다.</p>
+
+<p><br /></p>
+
+<h3 id="-파일-사이즈-예외처리">📌 파일 사이즈 예외처리</h3>
+
+<p>처음에 설정했던 yml 파일에 10MB로<br />
+용량을 제한해두었었다.</p>
+
+<p>만약 정말로 사이즈가 넘게 된다면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded<span class="p">;</span> nested exception is java.lang.IllegalStateException:
+</code></pre></div></div>
+
+<p>와 같은 예외가 발생하게 될 것이고 <br />
+해당 예외를 처리하기위해서 간단한 예외처리 로직을 구현해보았다.</p>
+
+<p>@ControllerAdvice를 이용해서<br />
+<code class="language-plaintext highlighter-rouge">MaxUploadSizeExceededException</code>예외를 잡을 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ControllerAdvice</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalExceptionHandler</span> <span class="o">{</span>
+
+    <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="nc">Exception</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">protected</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorResponse</span><span class="o">&gt;</span> <span class="nf">handleException</span><span class="o">(</span><span class="nc">MaxUploadSizeExceededException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"MaxUploadSizeExceededException"</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# 예외처리 잡음"</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="nc">ErrorResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">ErrorResponse</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">internalServerError</span><span class="o">().</span><span class="na">body</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@JsonInclude</span><span class="o">(</span><span class="nc">JsonInclude</span><span class="o">.</span><span class="na">Include</span><span class="o">.</span><span class="na">NON_NULL</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ErrorResponse</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="nf">ErrorResponse</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">,</span> <span class="kt">int</span> <span class="n">status</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">status</span> <span class="o">=</span> <span class="n">status</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="nc">ErrorResponse</span> <span class="nf">of</span><span class="o">(</span><span class="nc">MaxUploadSizeExceededException</span> <span class="n">maxUploadSizeExceededException</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">ErrorResponse</span><span class="o">(</span><span class="n">maxUploadSizeExceededException</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span><span class="mi">500</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>ErrorResponse에 대한 내용은 우선 대강 정의해보았다. <br />
+어떻게 반환할지에대해서는 커스터마이징을 통해서 <br />
+입맛에 맞게 변경해보면 좋을 것 같다.</p>
+
+<p><br />
+<br /></p>
+
+<p>✨ 참고 블로그 <br />
+<a href="https://antdev.tistory.com/93#recentEntries">AWS S3, FileUpload 참고 레퍼런스</a>, <a href="https://victorydntmd.tistory.com/334">FileUpload 관련 참고 블로그 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="S3" /><summary type="html"><![CDATA[오늘은 AWS S3에 파일 업로드를 하는 예제를 다뤄보려한다.]]></summary></entry><entry><title type="html">Redis JWT Refresh Token 관리 및 재발행</title><link href="http://localhost:4000/db/2023/01/14/db-redis.html" rel="alternate" type="text/html" title="Redis JWT Refresh Token 관리 및 재발행" /><published>2023-01-14T00:00:00+09:00</published><updated>2023-01-14T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/14/db-redis</id><content type="html" xml:base="http://localhost:4000/db/2023/01/14/db-redis.html"><![CDATA[<p>Redis에 대한 간단한 CS지식과 <br />
 <a href="https://mycatlikeschuru.github.io/db/2023/01/08/db-redissetting.html">Redis 설치 및 CLI 사용법</a>을 알아보았었다.</p>
 
 <p>오늘은 이제 나의 사용 목적인 프로젝트에 도입을 해보려한다. <br />
@@ -423,7 +910,43 @@ Spring Security에 대한 내용을 어느정도 선수지식으로 가지고 �
 <a href="https://hudi.blog/refresh-token-in-spring-boot-with-redis/">Redis Jpa 사용 레퍼런스</a>, <a href="https://wildeveloperetrain.tistory.com/32">Redis 사용방법 2가지 레퍼런스</a></p>
 
 <p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry><entry><title type="html">Git Cherry-Pick으로 Commit 옮기기</title><link href="http://localhost:4000/git/2023/01/12/git-cherrypick.html" rel="alternate" type="text/html" title="Git Cherry-Pick으로 Commit 옮기기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-cherrypick</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-cherrypick.html"><![CDATA[<h3 id="-cherry-pick">📌 Cherry-Pick</h3>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry><entry><title type="html">Git 이전 Commit Message 수정하기</title><link href="http://localhost:4000/git/2023/01/12/git-commitmessage.html" rel="alternate" type="text/html" title="Git 이전 Commit Message 수정하기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-commitmessage</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-commitmessage.html"><![CDATA[<h3 id="-cli로-변경">📌 CLI로 변경</h3>
+
+<p>만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> HEAD~3        
+</code></pre></div></div>
+<p>를 입력해서 커밋메세지가 수정이 가능하다. <br />
+<code class="language-plaintext highlighter-rouge">~3</code>은 가장최신부터 수정하고자하는 커밋 수량이다</p>
+
+<p>Pick이라고 되어있는 부분을 reword로 변경한 다음 <br />
+커밋메세지를 수정해주면 반영된다.</p>
+
+<p><br /></p>
+
+<h3 id="-intellij로-변경">📌 IntelliJ로 변경</h3>
+
+<p>IDE를 사용하면 vi,nano 편집기를 이용하는 것보다<br />
+훨씬 수월하게 작업할 수 있다.</p>
+
+<p>하단의 Git 탭에서 커밋메세지를 변경하고자하는<br />
+커밋을 눌러 오른쪽 클릭을하자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212041524-5d07ce20-07d1-4299-96e0-866fc2857dfb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Interactively Rebase from Here</code>를 눌러주자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212041533-03319280-6850-4b08-8cfe-f8918c7013d8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>그러면 Rebasing Commits 팝업이 노출되는데 <br />
+원하는 커밋 메시지 이름으로 변경한 다음에</p>
+
+<p>START REBASING을 눌러주면 <br />
+변경된 커밋 메세지로 반영된 모습을 확인할 수 있다.</p>
+
+<p><br />
+<br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry><entry><title type="html">Git Cherry-Pick으로 Commit 옮기기</title><link href="http://localhost:4000/git/2023/01/12/git-cherrypick.html" rel="alternate" type="text/html" title="Git Cherry-Pick으로 Commit 옮기기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-cherrypick</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-cherrypick.html"><![CDATA[<h3 id="-cherry-pick">📌 Cherry-Pick</h3>
 
 <p>작업을 하던중 다른 브랜치에 Commit을 해버렸다…</p>
 
@@ -562,43 +1085,7 @@ Drop Commit을 눌러주면 된다.</p>
 
 <p><br />
 <br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 Cherry-Pick]]></summary></entry><entry><title type="html">Git 이전 Commit Message 수정하기</title><link href="http://localhost:4000/git/2023/01/12/git-commitmessage.html" rel="alternate" type="text/html" title="Git 이전 Commit Message 수정하기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-commitmessage</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-commitmessage.html"><![CDATA[<h3 id="-cli로-변경">📌 CLI로 변경</h3>
-
-<p>만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> HEAD~3        
-</code></pre></div></div>
-<p>를 입력해서 커밋메세지가 수정이 가능하다. <br />
-<code class="language-plaintext highlighter-rouge">~3</code>은 가장최신부터 수정하고자하는 커밋 수량이다</p>
-
-<p>Pick이라고 되어있는 부분을 reword로 변경한 다음 <br />
-커밋메세지를 수정해주면 반영된다.</p>
-
-<p><br /></p>
-
-<h3 id="-intellij로-변경">📌 IntelliJ로 변경</h3>
-
-<p>IDE를 사용하면 vi,nano 편집기를 이용하는 것보다<br />
-훨씬 수월하게 작업할 수 있다.</p>
-
-<p>하단의 Git 탭에서 커밋메세지를 변경하고자하는<br />
-커밋을 눌러 오른쪽 클릭을하자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041524-5d07ce20-07d1-4299-96e0-866fc2857dfb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">Interactively Rebase from Here</code>를 눌러주자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041533-03319280-6850-4b08-8cfe-f8918c7013d8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그러면 Rebasing Commits 팝업이 노출되는데 <br />
-원하는 커밋 메시지 이름으로 변경한 다음에</p>
-
-<p>START REBASING을 눌러주면 <br />
-변경된 커밋 메세지로 반영된 모습을 확인할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry><entry><title type="html">Redis CLI 설치 및 사용방법</title><link href="http://localhost:4000/db/2023/01/08/db-redissetting.html" rel="alternate" type="text/html" title="Redis CLI 설치 및 사용방법" /><published>2023-01-08T00:00:00+09:00</published><updated>2023-01-08T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/08/db-redissetting</id><content type="html" xml:base="http://localhost:4000/db/2023/01/08/db-redissetting.html"><![CDATA[<p><strong>Redis</strong>는 <strong>Remote Dictionary Server</strong>의 약자로 <br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 Cherry-Pick]]></summary></entry><entry><title type="html">Redis CLI 설치 및 사용방법</title><link href="http://localhost:4000/db/2023/01/08/db-redissetting.html" rel="alternate" type="text/html" title="Redis CLI 설치 및 사용방법" /><published>2023-01-08T00:00:00+09:00</published><updated>2023-01-08T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/08/db-redissetting</id><content type="html" xml:base="http://localhost:4000/db/2023/01/08/db-redissetting.html"><![CDATA[<p><strong>Redis</strong>는 <strong>Remote Dictionary Server</strong>의 약자로 <br />
 <code class="language-plaintext highlighter-rouge">key:value</code>로 값을 저장하는 NoSQL이다. <br />
 인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..</p>
 
@@ -1375,66 +1862,4 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 
 <p><br /></p>
 
-<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry><entry><title type="html">Git pull rebase 사용해 병합하기</title><link href="http://localhost:4000/git/2022/12/27/git-rebase.html" rel="alternate" type="text/html" title="Git pull rebase 사용해 병합하기" /><published>2022-12-27T00:00:00+09:00</published><updated>2022-12-27T00:00:00+09:00</updated><id>http://localhost:4000/git/2022/12/27/git-rebase</id><content type="html" xml:base="http://localhost:4000/git/2022/12/27/git-rebase.html"><![CDATA[<p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
-
-<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br />
-pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br />
-통합을 해서 사용하는 브랜치라고 가정하자.</p>
-
-<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br />
-누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br />
-가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
-
-<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br />
-<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
-
-<p><br /></p>
-
-<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
-</code></pre></div></div>
-<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
-
-<p>그럴 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
-</code></pre></div></div>
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br />
-이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br />
-참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
-
-<p>수정을 다완료 하고 나면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
-</code></pre></div></div>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br />
-만약 다음에 수정할게 없다면</p>
-
-<p><br /></p>
-
-<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br />
-이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
-</code></pre></div></div>
-<p>를 입력해주면 push를 할 수 있는데</p>
-
-<p>아래와 같은 에러에 마주하였을 경우에는</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
-</code></pre></div></div>
-<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[자주 사용하는 git pull --rebase에 대해 정리해보려한다.]]></summary></entry></feed>
+<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry></feed>
