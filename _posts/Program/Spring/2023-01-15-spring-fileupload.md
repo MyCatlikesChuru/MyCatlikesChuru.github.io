@@ -202,10 +202,13 @@ bucket은 나의 버킷이름인 indiego-fileupload에
 
 ```java
 dependencies {
+        ...
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+        ...
 }
 ```
-
+기본적인 Spring web, Lombok 같은   
+의존 라이브러리도 설정해주어야한다.
 
 다음으로는  
 AmazonS3Config 클래스를 작성해보자.
@@ -235,7 +238,7 @@ public class AmazonS3Config {
 ```
 
 `AmazonS3Client`타입으로 빈을 만들어 주었다.   
-이용된 정보는 환경변수에 설정했던 값들이 이용되었다.
+이용된 정보는 환경변수에 설정했던 값들이 이용되었다.  
 이렇게까지만 설정해놓고 스프링 부트가 잘 실행되는지 확인해보자  
 
 <br/>
