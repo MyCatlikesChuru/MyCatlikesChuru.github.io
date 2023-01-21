@@ -14,7 +14,7 @@ published: true
 
 <br/>
 
-✅ 작업환경
+### ✅ 작업환경
 
 ```text
 Spring Boot 2.7.7  
@@ -26,7 +26,7 @@ macOs Monterey 12.6 버전
 
 <br/>
 
-📌 에러 확인 및 해결
+### 📌 에러 확인 및 해결
 
 첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다.   
 메일을 보내는 주체는 Google의 gmail을 이용하려한다.
