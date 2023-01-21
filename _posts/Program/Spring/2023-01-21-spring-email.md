@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring) org.springframework.mail.MailAuthenticationException 문제 해결
+title: Spring) MailAuthenticationException 문제 해결
 subtitle: 
 categories: Spring
 tags: [Spring, email]
@@ -173,7 +173,7 @@ ex) abcdefghijklmnop
 <br/>
 <br/>
 
-✨ 참고 블로그
+✨ 참고 블로그  
 [문제 해결 참고 블로그]  
 
 <br/>
