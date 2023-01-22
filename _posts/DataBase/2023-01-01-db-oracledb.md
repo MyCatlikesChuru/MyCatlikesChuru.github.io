@@ -135,7 +135,8 @@ ssh ubuntu@주소
 ssh -i [private key path] ubuntu@주소
 ```
 를 입력해주면 접속이 가능하다.
-\[private key path\]에는 경로를 입력해주면 된다.
+\[private key path\]에는 경로를 입력해주면 된다.  
+_(나와 같은 경우는 ex)ssh -i /.ssh ubuntu@ip주소)_
 
 터미널에서 입력시
 

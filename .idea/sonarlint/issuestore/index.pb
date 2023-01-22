@@ -123,9 +123,7 @@ Z
 -_posts/IT/Git/2023-01-12-git-commitmessage.md,5/9/59d1573a93b4ebe2f7027dc2577f93c3d369d58d
 V
 &_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
-^
-._posts/DataBase/2023-01-01-db-oraclesetting.md,a/6/a6e7fb45ceea838f26b3962bb966aa50da08006f
-Y
-)_posts/DataBase/2023-01-01-db-oracledb.md,0/a/0a678c4456105860bdbb4294ffdf06d8949c00d5
 e
 5_posts/Program/Spring/2023-01-15-spring-fileupload.md,7/a/7a8fe96a9cb275e65b9bff1ef878b72958623016
+`
+0_posts/Program/Spring/2023-01-21-spring-email.md,4/0/4003a83f50a56034980e5a64091a978fad90ed2b
