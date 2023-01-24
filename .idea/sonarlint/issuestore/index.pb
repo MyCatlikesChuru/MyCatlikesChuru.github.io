@@ -35,8 +35,6 @@ a
 0_posts/OS/Linux(Unix)/2022-12-29-server-NginX.md,c/f/cf37e282c6c257befd147a49c0f3dda3a88f69b7
 V
 &_posts/DataBase/2022-11-15-db-mysql.md,9/d/9d4b070211f853744d54fccc677b0de3d63552ba
-Y
-)_posts/DataBase/2022-12-28-db-mysqlEC2.md,5/c/5c67792b4e2e3b4e76d2308747c6236a42f57ec7
 X
 (_posts/OS/macOs/2022-12-04-OS-macOs-5.md,7/9/7994a58e8678a0a57e62bd1bd447f962c1b98d5b
 X
@@ -125,5 +123,5 @@ V
 &_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
 e
 5_posts/Program/Spring/2023-01-15-spring-fileupload.md,7/a/7a8fe96a9cb275e65b9bff1ef878b72958623016
-`
-0_posts/Program/Spring/2023-01-21-spring-email.md,4/0/4003a83f50a56034980e5a64091a978fad90ed2b
+^
+._posts/DataBase/2023-01-01-db-oraclesetting.md,a/6/a6e7fb45ceea838f26b3962bb966aa50da08006f
