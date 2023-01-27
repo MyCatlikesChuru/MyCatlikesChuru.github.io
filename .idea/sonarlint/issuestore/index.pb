@@ -121,3 +121,7 @@ V
 &_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
 e
 5_posts/Program/Spring/2023-01-15-spring-fileupload.md,7/a/7a8fe96a9cb275e65b9bff1ef878b72958623016
+Y
+)_posts/DataBase/2022-12-28-db-mysqlEC2.md,5/c/5c67792b4e2e3b4e76d2308747c6236a42f57ec7
+`
+0_posts/Program/Spring/2023-01-21-spring-email.md,4/0/4003a83f50a56034980e5a64091a978fad90ed2b

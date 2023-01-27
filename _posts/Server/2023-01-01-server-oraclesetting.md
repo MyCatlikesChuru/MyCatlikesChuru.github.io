@@ -140,4 +140,4 @@ sudo timedatectl set-timezone Asia/Seoul
 
 [클라우드 성능 개선 참고 레퍼런스 1]: https://yeon-kr.tistory.com/174 
 [클라우드 성능 개선 참고 레퍼런스 2]: https://blog.hangyeong.com/1773#%EC%8B%9C%EC%8A%A4%ED%85%9C_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8
-[Oracle Cloud Free Tier 무료 인스턴스 생성과 접속]: https://mycatlikeschuru.github.io/db/2023/01/01/db-oracledb.html
+[Oracle Cloud Free Tier 무료 인스턴스 생성과 접속]: https://mycatlikeschuru.github.io/server/2023/01/01/server-oraclecloud.html
