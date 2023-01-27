@@ -54,7 +54,7 @@ sudo apt-get install nginx
 
 <br/>  
 
-#### 📌 NGINX 시작, 종료   
+#### 📌 NGINX 시작, 종료, 삭제
 
 1). 시작 명령어
 ```shell
@@ -88,6 +88,18 @@ sudo nginx -t
 ```shell
 sudo service nginx restart
 ```
+
+<br/>
+
+6). nginx 설치 삭제 명령어 
+```shell
+apt-get remove --purge nginx nginx-full nginx-common 
+```
+폴더부터 전부 삭제하는 방법이니 뭔가 꼬였다 싶을때  
+경건한마음으로 삭제했다가 다시시도해봐도될 것 같다.
+
+<br/>
+
 
 이렇게 5가지를 이용해 중지,시작 및 상태확인이 가능하다.
 

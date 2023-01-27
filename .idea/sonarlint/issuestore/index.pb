@@ -27,12 +27,6 @@ Y
 )_posts/DataBase/2022-12-19-db-mysqlEER.md,9/2/924b7fdeb0265a31408965575ac5a9cac53d2527
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
-`
-0_posts/OS/Linux(Unix)/2022-12-29-server-build.md,3/0/304bef088ebfa503a07d18b3928a616b7c57cdd7
-a
-1_posts/OS/Linux(Unix)/2022-07-27-server-ubunto.md,5/e/5e2791caa2c7564a33e34d457fd80c9cffd83355
-`
-0_posts/OS/Linux(Unix)/2022-12-29-server-NginX.md,c/f/cf37e282c6c257befd147a49c0f3dda3a88f69b7
 V
 &_posts/DataBase/2022-11-15-db-mysql.md,9/d/9d4b070211f853744d54fccc677b0de3d63552ba
 X
@@ -111,8 +105,6 @@ f
 6_posts/Program/Spring/2022-12-27-spring-JunitSecure.md,7/f/7fe9f39bc030ab3cc364fd33ab50342171831932
 _
 /_posts/Program/Spring/2022-08-03-spring-port.md,5/8/584165a1ed1e2aa469363248242dcd5be212f0b6
-V
-&_posts/DataBase/2023-01-14-db-redis.md,f/d/fd52633bda33cc5efb624d3a5faf45662ef73b14
 Z
 *_posts/IT/Git/2023-01-12-git-cherrypick.md,f/c/fc89102aa66e60bca997955717b7939ac04bae4f
 ]
@@ -125,3 +117,5 @@ Y
 )_posts/DataBase/2022-12-28-db-mysqlEC2.md,5/c/5c67792b4e2e3b4e76d2308747c6236a42f57ec7
 `
 0_posts/Program/Spring/2023-01-21-spring-email.md,4/0/4003a83f50a56034980e5a64091a978fad90ed2b
+V
+&_posts/DataBase/2023-01-14-db-redis.md,f/d/fd52633bda33cc5efb624d3a5faf45662ef73b14
