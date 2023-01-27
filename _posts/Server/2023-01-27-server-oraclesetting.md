@@ -5,7 +5,7 @@ subtitle:
 categories: Server
 tags: [Server, Oracle]
 comments: true
-published: false
+published: true
 ---
 
 오늘은 Oracle Cloud 서버에  
