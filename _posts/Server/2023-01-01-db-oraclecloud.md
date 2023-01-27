@@ -2,13 +2,13 @@
 layout: post
 title: Oracle Cloud Free Tier 무료 인스턴스 생성과 접속
 subtitle: 
-categories: DB
-tags: [DB, Oracle]
+categories: Server
+tags: [Server, Oracle]
 comments: true
 published: true
 ---
 
-오늘은 [Oracle Cloud 무료 데이터베이스]를 생성해보려한다.  
+오늘은 [Oracle Cloud 무료 서버]를 생성해보려한다.  
 
 회원 가입과 카드 등록은 되어있다 가정하고  
 인스턴스 생성전에 구획생성과 VCN 네트워크 생성  
@@ -160,4 +160,4 @@ SFTP - SSH 프로토콜을 선택해준다음에
 <br/>
 
 [Oracle 무료 인스턴스 참고 레퍼런스]: https://hoing.io/archives/318  
-[Oracle Cloud 무료 데이터베이스]:https://www.oracle.com/kr/cloud/free/
+[Oracle Cloud 무료 서버]:https://www.oracle.com/kr/cloud/free/

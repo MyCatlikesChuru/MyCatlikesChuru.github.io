@@ -113,8 +113,6 @@ _
 /_posts/Program/Spring/2022-08-03-spring-port.md,5/8/584165a1ed1e2aa469363248242dcd5be212f0b6
 V
 &_posts/DataBase/2023-01-14-db-redis.md,f/d/fd52633bda33cc5efb624d3a5faf45662ef73b14
-]
--_posts/DataBase/2023-01-08-db-redissetting.md,c/6/c60385c7632b9c210016b8a31d632719b1017ba5
 Z
 *_posts/IT/Git/2023-01-12-git-cherrypick.md,f/c/fc89102aa66e60bca997955717b7939ac04bae4f
 ]
@@ -123,5 +121,3 @@ V
 &_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
 e
 5_posts/Program/Spring/2023-01-15-spring-fileupload.md,7/a/7a8fe96a9cb275e65b9bff1ef878b72958623016
-^
-._posts/DataBase/2023-01-01-db-oraclesetting.md,a/6/a6e7fb45ceea838f26b3962bb966aa50da08006f
