@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -646,6 +647,309 @@ document.addEventListener('DOMContentLoaded', function(event) {
   <div class="pagination">
   <!-- Post list links -->
   <ul class="post-list">
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html">
+          Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 28, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/linux/unix/2023/01/28/server-nginxerror.html">
+        <p>
+        https 관련 설정을 만지다가
+nginx를 실행하는데 아래와 같은 에러가 발생했다.
+$ sudo service nginx start
+Job for nginx.service failed because the control process exited with error code.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+
+터미널에 나온대로 systemctl status nginx.service를 
+입력하여 로그를 확인해봤다.
+
+$ systemctl status nginx.service
+× nginx.ser... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/server/2023/01/27/server-oraclesetting.html">
+          Oracle Cloud 외부 접속 설정
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 27, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/server/2023/01/27/server-oraclesetting.html">
+        <p>
+        오늘은 Oracle Cloud 서버에
+nginx에 클라이언트를 배포해 외부에서 접속하고
+WorkBench를 이용해 mysql을 접속하려한다.
+
+외부접속관련해 설정을 정리해보려한다.
+
+
+
+📌 UFW vs iptables
+
+iptables를 이용해 방화벽 설정을 할 수 있다.
+
+sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
+
+와 같이 입력해주면 설정이 가능하다. 
+UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고
+수준높은 방화벽 구성에는 iptables를 사용해야한다.
+
+
+
+📌 UFW 활성/비활성
+
+1). UFW 활성화
+
+sudo ufw enable
+
+
+
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2023/01/21/spring-email.html">
+          Spring) MailAuthenticationException 문제 해결
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 21, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2023/01/21/spring-email.html">
+        <p>
+        오늘은 회원가입시 이메일 전송 로직을 확인중
+org.springframework.mail.MailAuthenticationException와 같은
+예외를 만났고 해당관련 해결방법을 적어가보려한다.
+
+
+
+✅ 작업환경
+
+Spring Boot 2.7.7  
+Java 11 
+macOs Monterey 12.6 버전 
+로컬환경에서 테스트 진행
+
+
+
+
+📌 에러 확인 및 해결
+
+첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. 
+메일을 보내는 주체는 Google의 gmail을 이용하려한다.
+
+implementation 'org.springframework.boot:spring-boot-starter-mail... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#email">#email</a>
+</div>
+    </li>
 <li>
       
 
@@ -1331,7 +1635,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2023/01/01/db-oraclesetting.html">
+        <a class="post-link" href="/server/2023/01/01/server-oraclesetting.html">
           Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선
         </a>
       </h2>
@@ -1339,7 +1643,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 01, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2023/01/01/db-oraclesetting.html">
+      <a class="post-excerpt" href="/server/2023/01/01/server-oraclesetting.html">
         <p>
         Oracle Cloud Free Tier 무료 인스턴스 생성과 접속을 통해서
 오라클 평생 무료 인스턴스를 직접 만들어 보았다.
@@ -1366,7 +1670,7 @@ sud... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
 </div>
     </li>
 <li>
@@ -1433,7 +1737,7 @@ sud... <span class="read_more">Read More</span>
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2023/01/01/db-oracledb.html">
+        <a class="post-link" href="/server/2023/01/01/server-oraclecloud.html">
           Oracle Cloud Free Tier 무료 인스턴스 생성과 접속
         </a>
       </h2>
@@ -1441,9 +1745,9 @@ sud... <span class="read_more">Read More</span>
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 01, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2023/01/01/db-oracledb.html">
+      <a class="post-excerpt" href="/server/2023/01/01/server-oraclecloud.html">
         <p>
-        오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.
+        오늘은 Oracle Cloud 무료 서버를 생성해보려한다.
 
 회원 가입과 카드 등록은 되어있다 가정하고
 인스턴스 생성전에 구획생성과 VCN 네트워크 생성
@@ -1484,11 +1788,11 @@ VCN 이름을 설정하고 다음 클릭
 
 
 
-생성 버튼을 눌러 리소스... <span class="read_more">Read More</span>
+생성 버튼을 눌러 리소스 생성을... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
 </div>
     </li>
 <li>
@@ -11344,14 +11648,14 @@ ssh -i 키파일.pem ubuntu@내주소
   <ul>
     <li>
       <a href="/index.html">
-        All<span>104</span>
+        All<span>107</span>
       </a>
     </li>
 
     
       <li>
         <a href="/categories.html#h-DB">
-          DB <span>8</span>
+          DB <span>6</span>
         </a>
       </li>
     
@@ -11375,13 +11679,19 @@ ssh -i 키파일.pem ubuntu@내주소
     
       <li>
         <a href="/categories.html#h-Linux/Unix">
-          Linux/Unix <span>2</span>
+          Linux/Unix <span>3</span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/categories.html#h-Server">
+          Server <span>3</span>
         </a>
       </li>
     
       <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>6</span>
+          Spring <span>7</span>
         </a>
       </li>
     

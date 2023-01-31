@@ -728,7 +728,7 @@ JDK : openjdk version 11.0.17
 
 <p><br></p>
 
-<h4 id="-nginx-시작-종료">📌 NGINX 시작, 종료</h4>
+<h4 id="-nginx-시작-종료-삭제">📌 NGINX 시작, 종료, 삭제</h4>
 
 <p>1). 시작 명령어</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx start
@@ -757,6 +757,16 @@ JDK : openjdk version 11.0.17
 <p>5). 재시작 명령어</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx restart
 </code></pre></div></div>
+
+<p><br></p>
+
+<p>6). nginx 설치 삭제 명령어</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get remove <span class="nt">--purge</span> nginx nginx-full nginx-common 
+</code></pre></div></div>
+<p>폴더부터 전부 삭제하는 방법이니 뭔가 꼬였다 싶을때<br>
+경건한마음으로 삭제했다가 다시시도해봐도될 것 같다.</p>
+
+<p><br></p>
 
 <p>이렇게 5가지를 이용해 중지,시작 및 상태확인이 가능하다.</p>
 
@@ -857,15 +867,15 @@ server_name에는 동일하게 도메인을 넣어주었다.</p>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/db/2022/12/28/db-mysqlEC2.html" title="MySQL EC2에 설치후 WorkBench 접속하기">MySQL EC2에 설치후 WorkBench 접속하기</a><a class="next" href="/db/2023/01/01/db-oracledb.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">Oracle Cloud Free Tier 무료 인스턴스...</a>
+<a class="previous" href="/db/2022/12/28/db-mysqlEC2.html" title="MySQL EC2에 설치후 WorkBench 접속하기">MySQL EC2에 설치후 WorkBench 접속하기</a><a class="next" href="/server/2023/01/01/server-oraclecloud.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">Oracle Cloud Free Tier 무료 인스턴스...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/23/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) Java 자료구조 Graph, Tree, BST</a></li>
-<li><a class="post-link" href="/til/2022/11/25/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) OAuth 2 인증 기초</a></li>
-<li><a class="post-link" href="/til/2022/11/10/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) JUnit 3</a></li>
-<li><a class="post-link" href="/til/2022/09/14/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) Java 컬렉션 문제풀이</a></li>
+        <li><a class="post-link" href="/til/2022/09/15/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+<li><a class="post-link" href="/til/2022/11/28/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) Spring Security, JWT , OAuth 2 인증</a></li>
+<li><a class="post-link" href="/til/2022/10/19/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) 두달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/10/13/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">TIL) Spring DI 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

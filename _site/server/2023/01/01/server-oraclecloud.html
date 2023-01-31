@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선 | LeeJellan</title>
+<title>Oracle Cloud Free Tier 무료 인스턴스 생성과 접속 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">
+<meta property="og:title" content="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속을 통해서 오라클 평생 무료 인스턴스를 직접 만들어 보았다.">
-<meta property="og:description" content="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속을 통해서 오라클 평생 무료 인스턴스를 직접 만들어 보았다.">
-<link rel="canonical" href="http://localhost:4000/db/2023/01/01/db-oraclesetting.html">
-<meta property="og:url" content="http://localhost:4000/db/2023/01/01/db-oraclesetting.html">
+<meta name="description" content="오늘은 Oracle Cloud 무료 서버를 생성해보려한다.">
+<meta property="og:description" content="오늘은 Oracle Cloud 무료 서버를 생성해보려한다.">
+<link rel="canonical" href="http://localhost:4000/server/2023/01/01/server-oraclecloud.html">
+<meta property="og:url" content="http://localhost:4000/server/2023/01/01/server-oraclecloud.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2023-01-01T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">
+<meta property="twitter:title" content="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-01T00:00:00+09:00","datePublished":"2023-01-01T00:00:00+09:00","description":"Oracle Cloud Free Tier 무료 인스턴스 생성과 접속을 통해서 오라클 평생 무료 인스턴스를 직접 만들어 보았다.","headline":"Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/db/2023/01/01/db-oraclesetting.html"},"url":"http://localhost:4000/db/2023/01/01/db-oraclesetting.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-01T00:00:00+09:00","datePublished":"2023-01-01T00:00:00+09:00","description":"오늘은 Oracle Cloud 무료 서버를 생성해보려한다.","headline":"Oracle Cloud Free Tier 무료 인스턴스 생성과 접속","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/server/2023/01/01/server-oraclecloud.html"},"url":"http://localhost:4000/server/2023/01/01/server-oraclecloud.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
@@ -679,128 +679,149 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p><a href="https://mycatlikeschuru.github.io/db/2023/01/01/db-oracledb.html">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a>을 통해서<br>
-오라클 평생 무료 인스턴스를 직접 만들어 보았다.</p>
+      <p>오늘은 <a href="https://www.oracle.com/kr/cloud/free/">Oracle Cloud 무료 서버</a>를 생성해보려한다.</p>
 
-<p>하지만 인스턴스를 만들면서 느낀건데 램이 1GB로<br>
-여러가지 설치를하고 사용하기에는 너무 무리가 있어보이는 사양을 확인할 수가 있다.</p>
-
-<p>AMD 기반으로 만들었기 때문에 사양이 낮은 무료 인스턴스를 사용하고 있지만<br>
-몇 가지 설정을 통해 시스템을 원할히 돌아가게 셋팅을할 수가 있다.</p>
-
-<p>한번 알아보자</p>
-
-<h4 id="-현재-인스턴스-사양">📌 현재 인스턴스 사양</h4>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>이미지 : Ubuntu 22.04
-구성 : (AMD) VM.Standard.E2.1.Micro / 1 core OCPU, 1GB Memory
-</code></pre></div></div>
+<p>회원 가입과 카드 등록은 되어있다 가정하고<br>
+인스턴스 생성전에 구획생성과 VCN 네트워크 생성<br>
+그리고 인스턴스를 생성하는 과정을 적어보려한다.<br>
+<a href="https://hoing.io/archives/318">Oracle 무료 인스턴스 참고 레퍼런스</a>를 토대로 작업하였습니다.</p>
 
 <p><br></p>
 
-<h4 id="-기초-셋팅">📌 기초 셋팅</h4>
+<h3 id="-구획-생성">📌 구획 생성</h3>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
-</code></pre></div></div>
-<p>가장 먼저 시스템 업데이트를 해준다.</p>
+<p>VM 생성 전에 구획을 먼저 생성해야한다.<br>
+구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.</p>
 
-<p><br></p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install -y nano
-</code></pre></div></div>
-<p>nano 편집기를 다운받아 편하게 사용해보자</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNs_7nfk_gmvLEvuBwFQHxq_WeESvVrrNgHncikIguZT5WSDBFRWJouafXAfIAnVKgSH8daI2o4KyS-YzP_fNz25gBp=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p><br></p>
 
-<h4 id="-swap-공간-생성">📌 SWAP 공간 생성</h4>
+<h3 id="-vcn-네트워크-생성">📌 VCN 네트워크 생성</h3>
 
-<p>오라클 클라우드 AMD 인스턴스는 위에서 얘기했듯이<br>
-1GB RAM을 제공한다. 이것저것 설치하다보면 금방 RAM이 부족에 부딪힌다.<br>
-상대적으로 넉넉한 HDD 저장공간의 일부를 RAM 공간으로 활용이 가능하다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPQ25gr2990xuN0OLF_Qr90USye42bZ6DbogZyuabsYL-OejRkV1p7C3LfLIa3X8BF5dgwz7eyH5zr20LtMPIO8nRjHjA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p><strong>1). 스왑공간</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>fallocate <span class="nt">-l</span> 2G /swapfile
-<span class="nb">sudo chmod </span>600 /swapfile
-<span class="nb">sudo </span>mkswap /swapfile
-</code></pre></div></div>
-<p>를 순서대로 입력을 해주게 된다면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Setting up swapspace version 1, size <span class="o">=</span> 2 GiB <span class="o">(</span>2147479552 bytes<span class="o">)</span>
-no label, <span class="nv">UUID</span><span class="o">=</span>8f85218d-329c-4eec-bf11-5d87964c5f0d
-</code></pre></div></div>
-<p>위와 같이 스왑공간이 정상적으로 생성되었다고 메세지가 뜬다.</p>
+<p>먼저 아까 생성한 구획을 먼저 선택한다음<br>
+VCN 마법사를 시작한다.</p>
 
 <p><br></p>
 
-<p><strong>2). 스왑시작</strong></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN4OZ_5VRp8kmYeue1N02iMuXfeOZln12KRSuhL_PifDDhaNnn04SjU50HgsoewLDs6y8QAapnbFdv-GGZlSNSp9rSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>swapon /swapfile
-</code></pre></div></div>
-<p>위 명령어로 스왑을 시작한다.</p>
+<p>VCN 마법사 시작 클릭</p>
 
 <p><br></p>
 
-<p><strong>3). 스왑생성 확인</strong></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJqkxzAgS17AG9KpQ1OtqlFWGHiBgNCpvx7ydTjS4MjBJ1jb4a12pnVVnO5Th7cckoNEPKhQmajAVdg02USWVmeLsW=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>swapon <span class="nt">--show</span>
-</code></pre></div></div>
-<p>명령어로 정상적으로 작동하는지 확인이 가능하다</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      TYPE SIZE USED PRIO
-/swapfile file   2G   0B   <span class="nt">-2</span>
-</code></pre></div></div>
-<p>와 같은식으로 확인이되며, 2GB의 스왑공간이 확보되었다고 표시된다.</p>
+<p>VCN 이름을 설정하고 다음 클릭</p>
 
 <p><br></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>free <span class="nt">-h</span>
-</code></pre></div></div>
-<p>명령어를 통해 시스템에서 사용할 수 있는<br>
-메모리 공간을 확인할 수 있다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZctP8XvWQbWqzGbVm-w77_ba-OS6OrBJb46yB5-zZv1IxFQDJ9z4q80NN8B-4D2O3qMINEhwKwEaA65i_zTR4aDLa=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>생성 버튼을 눌러 리소스 생성을 완료합니다.</p>
 
 <p><br></p>
 
-<p><strong>4). 스왑공간 시스템 고정</strong></p>
+<h3 id="-인스턴스-생성">📌 인스턴스 생성</h3>
 
-<p>스왑공간은 시스템이 재시작되면 초기화가 진행되므로<br>
-스왑공간을 그대로 남아있게하기 위해서 간단한 셋팅값을 지정해주어야 한다.</p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNGOpUG5JQk1Y20qWPgcKom-VzhRcFsYcez9OIcBXBhA1q6MjLkamcxo3FMef5Uhsg1FdpF8fD0x6dydtnJl3GAjIyoIA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nano /etc/fstab
-</code></pre></div></div>
-
-<p>를 입력해 nano 편집기로 fstab 파일을 수정해줄 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LABEL</span><span class="o">=</span>cloudimg-rootfs   /        ext4   discard,errors<span class="o">=</span>remount-ro       0 1
-<span class="nv">LABEL</span><span class="o">=</span>UEFI      /boot/efi       vfat    <span class="nb">umask</span><span class="o">=</span>0077      0 1
-/swapfile swap swap defaults 0 0
-</code></pre></div></div>
-<p>최종적으로는 맨 아래의 <code class="language-plaintext highlighter-rouge">/swapfile swap swap defaults 0 0</code>를<br>
-입력한후 저장해주면 된다. nano 편집기 저장방법은 <code class="language-plaintext highlighter-rouge">ctrl+s</code>한 다음에 <code class="language-plaintext highlighter-rouge">ctrl+x</code>를<br>
-입력해주면 정상적으로 저장될 것 이다.</p>
-
-<p>이렇게 설정을 완료하면 스왑공간이 기본값으로 활성화 되어<br>
-시스템을 재시작하여도 문제없다 !</p>
+<p>VM 인스턴스 생성을 눌러 줍니다.</p>
 
 <p><br></p>
 
-<h4 id="-시간설정">📌 시간설정</h4>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1m0uwf3jt9p5biT_6GwYRrmuWIoUXdvRUlZ0HbDrbWTYrj1VK4ci1QVvZhNRVNuKISN1FAY2l3rI7Fyap86OMc6E1EA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>마지막으로 서버의 시간을 설정해줄 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>timedatectl set-timezone Asia/Seoul
-</code></pre></div></div>
+<p>인스턴스 이름과 이전에 생성한 구획을 선택해줍니다.</p>
 
 <p><br></p>
 
-<p>✨ 참고 블로그 <br>
-<a href="https://yeon-kr.tistory.com/174">클라우드 성능 개선 참고 레퍼런스 1</a>, <a href="https://blog.hangyeong.com/1773#%EC%8B%9C%EC%8A%A4%ED%85%9C_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8">클라우드 성능 개선 참고 레퍼런스 2</a></p>
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdIXghpgxv_vlEivea2ZDnBtqZT-NuITqQPLie9l8He0bfkDT-Of9-oZUhU783AMfII_LhhfdlcLjwMNKIYZz1c37o7w=w1524-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이미지와 Shape 선택이 가능하고<br>
+항상 무료 적격이라 적혀있는 것을 선택해서 사용해주면된다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo3-KkV26L9DztTmGJe7RvC3TpnqdtJ_TuMqP8fQwXvxfrpIKJH8pSbmXrPtmaHYtX1oresm5LE13S4bx5tot7rF5qUQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>네트워킹도 마찬가지로 이전에 만들어둔 VCN 네트워크를<br>
+선택해주시면 됩니다.</p>
+
+<p>만약 구획생성과 네트워킹을 만들어주지 않았다면<br>
+인스턴스 생성을하여도 에러가 발생합니다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOEnVFm0OsNdlUigDiwml8a2oJrXHpmUdMcf1PLn7PSX0fIHhR77mwY1-pbOOsFqz_Ld4ydtHu7l_TeA0f4AN17rBy2Q=w1524-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>SSH 키를 추가해줘야하는데<br>
+이전에 Github를 사용하신분들은 공용키가 이미 있을 것이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+</code></pre></div></div>
+
+<p>명령어를 입력해 공용 ssh를 붙여넣어주시면 됩니다. <br>
+만약 없다면 생성을 해주시면 되는데, 해당 내용은 스킵하겠습니다.</p>
+
+<p>부트 볼륨과 같은 경우에는 100GB까지 최대로 사용가능하고<br>
+50GB씩 2개의 인스턴스를 만들어 나눠사용할 수도 있습니다.</p>
+
+<p>이제 설정을 끝냈으면, 생성을 눌러 최종완료를 해주시면 됩니다.</p>
+
+<p><br></p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo2CptbsDAon2CtX6-RAqpmRSSTa7z3m9LWRW9JCFCdVbgMoJTOb9hisTz1OHSLY0EkNb9cXhzDeMauPpUOxUqBrtAXQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이제 인스턴스 정보에 가서 확인해보시면<br>
+내가만든 인스턴스를 확인해 볼 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="-인스턴스-접속하기">📌 인스턴스 접속하기</h3>
+
+<p>이제 인스턴스를 만들었으니 접속을하는법을 알아보자<br>
+우리는 공용 SSH로 인스턴스를 만들었다.</p>
+
+<p>$HOME/.ssh 경로에 private key가 저장되어 있기 때문에 <br>
+암호를 입력하지 않아도 원격 서버에 접속할 수 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh ubuntu@주소
+</code></pre></div></div>
+
+<p>만약 private key가 $HOME/.ssh 경로에 위치하지 않은 경우</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> <span class="o">[</span>private key path] ubuntu@주소
+</code></pre></div></div>
+<p>를 입력해주면 접속이 가능하다.
+[private key path]에는 경로를 입력해주면 된다.<br>
+<em>(나와 같은 경우는 ex)ssh -i /.ssh ubuntu@ip주소)</em></p>
+
+<p>터미널에서 입력시</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN0U_vZhmyBCubkA_yUqYCkiETMcUZtOnZLVXoUTz9DjMI_17cNV1t6S7kLe2Ajxg3hGFEed9nmR6d7kK4Ha7nvpTyeAw=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>와 같이 정상적으로 인스턴스에 접속한 모습을 볼 수 있다 !!</p>
+
+<p><br></p>
+
+<p>FileZilla를 통해서도 접속이 가능하다.</p>
+
+<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNNwSW2rB9___rqmhE9ee14DuQbywCDLJsaQY9D9nUls2WpBa9DsFwQ2tVE-3hj33naagXa8NPqAbdt8njgA5D9Weh_Ww=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>SFTP - SSH 프로토콜을 선택해준다음에   <br>
+호스트는 인스턴스 주소를 입력해주면 된다.<br>
+그리고 키파일을 공개키가 아닌 <code class="language-plaintext highlighter-rouge">id_rsa</code> private key를 선택해주면<br>
+정상적으로 접속할 수 있는 모습을 확인해 볼 수 있다.</p>
+
+<p><br></p>
 
 
 
@@ -808,15 +829,15 @@ no label, <span class="nv">UUID</span><span class="o">=</span>8f85218d-329c-4eec
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/db/2023/01/01/db-oracledb.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">Oracle Cloud Free Tier 무료 인스턴스...</a><a class="next" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="Jekyll Github IO 블로그 코드 하이라이트">Jekyll Github IO 블로그 코드 하이라이트...</a>
+<a class="previous" href="/linux/unix/2022/12/29/server-NginX.html" title="AWS EC2 NginX 클라이언트 배포">AWS EC2 NginX 클라이언트 배포</a><a class="next" href="/server/2023/01/01/server-oraclesetting.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">Oracle Cloud Ubuntu 22.04 1GB 램...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/spring/2023/01/15/spring-fileupload.html" title="Jekyll Github IO 블로그 코드 하이라이트">Spring) AWS S3 FileUpload 하여 URL로 관리하기</a></li>
-<li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="Jekyll Github IO 블로그 코드 하이라이트">Git pull rebase 사용해 병합하기</a></li>
-<li><a class="post-link" href="/til/2022/12/07/til.html" title="Jekyll Github IO 블로그 코드 하이라이트">TIL) 배포 자동화 AWS Pipeline</a></li>
-<li><a class="post-link" href="/til/2022/11/22/til.html" title="Jekyll Github IO 블로그 코드 하이라이트">TIL) Spring Security 3 (권한부여)</a></li>
+        <li><a class="post-link" href="/til/2022/12/13/til.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">TIL) Ngrok 사용하여 로컬에서 서버 실행</a></li>
+<li><a class="post-link" href="/git/2023/01/12/git-cherrypick.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">Git Cherry-Pick으로 Commit 옮기기</a></li>
+<li><a class="post-link" href="/til/2022/09/15/til.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">TIL) Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+<li><a class="post-link" href="/db/2022/12/19/db-mysqlEER.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">MySQL EER 다이어그램 만드는법</a></li>
 </ul>
     </div>
 <div class="post-comments">

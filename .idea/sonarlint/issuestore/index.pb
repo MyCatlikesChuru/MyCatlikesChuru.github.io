@@ -117,5 +117,3 @@ Y
 )_posts/DataBase/2022-12-28-db-mysqlEC2.md,5/c/5c67792b4e2e3b4e76d2308747c6236a42f57ec7
 `
 0_posts/Program/Spring/2023-01-21-spring-email.md,4/0/4003a83f50a56034980e5a64091a978fad90ed2b
-V
-&_posts/DataBase/2023-01-14-db-redis.md,f/d/fd52633bda33cc5efb624d3a5faf45662ef73b14

@@ -1,4 +1,326 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-15T21:38:18+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Spring) AWS S3 FileUpload 하여 URL로 관리하기</title><link href="http://localhost:4000/spring/2023/01/15/spring-fileupload.html" rel="alternate" type="text/html" title="Spring) AWS S3 FileUpload 하여 URL로 관리하기" /><published>2023-01-15T00:00:00+09:00</published><updated>2023-01-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/15/spring-fileupload</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/15/spring-fileupload.html"><![CDATA[<p>오늘은 AWS S3에 파일 업로드를 하는<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-28T03:04:12+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.</title><link href="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html" rel="alternate" type="text/html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server." /><published>2023-01-28T00:00:00+09:00</published><updated>2023-01-28T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2023/01/28/server-nginxerror</id><content type="html" xml:base="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"><![CDATA[<p>https 관련 설정을 만지다가<br />
+nginx를 실행하는데 아래와 같은 에러가 발생했다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>service nginx start
+Job <span class="k">for </span>nginx.service failed because the control process exited with error code.
+See <span class="s2">"systemctl status nginx.service"</span> and <span class="s2">"journalctl -xeu nginx.service"</span> <span class="k">for </span>details.
+</code></pre></div></div>
+<p>터미널에 나온대로 <code class="language-plaintext highlighter-rouge">systemctl status nginx.service</code>를 <br />
+입력하여 로그를 확인해봤다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl status nginx.service
+× nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded <span class="o">(</span>/lib/systemd/system/nginx.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+     Active: failed <span class="o">(</span>Result: exit-code<span class="o">)</span> since Sat 2023-01-28 02:54:33 KST<span class="p">;</span> 14s ago
+       Docs: man:nginx<span class="o">(</span>8<span class="o">)</span>
+    Process: 11722 <span class="nv">ExecStartPre</span><span class="o">=</span>/usr/sbin/nginx <span class="nt">-t</span> <span class="nt">-q</span> <span class="nt">-g</span> daemon on<span class="p">;</span> master_process on<span class="p">;</span> <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+    Process: 11723 <span class="nv">ExecStart</span><span class="o">=</span>/usr/sbin/nginx <span class="nt">-g</span> daemon on<span class="p">;</span> master_process on<span class="p">;</span> <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE<span class="o">)</span>
+        CPU: 27ms
+
+Jan 28 02:54:32 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</span>emerg] <span class="nb">bind</span><span class="o">()</span> to 0.0.0.0:80 failed <span class="o">(</span>98: Unknown error<span class="o">)</span>
+Jan 28 02:54:32 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</span>emerg] <span class="nb">bind</span><span class="o">()</span> to <span class="o">[</span>::]:80 failed <span class="o">(</span>98: Unknown error<span class="o">)</span>
+Jan 28 02:54:32 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</span>emerg] <span class="nb">bind</span><span class="o">()</span> to 0.0.0.0:80 failed <span class="o">(</span>98: Unknown error<span class="o">)</span>
+Jan 28 02:54:32 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</span>emerg] <span class="nb">bind</span><span class="o">()</span> to <span class="o">[</span>::]:80 failed <span class="o">(</span>98: Unknown error<span class="o">)</span>
+Jan 28 02:54:33 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</span>emerg] <span class="nb">bind</span><span class="o">()</span> to 0.0.0.0:80 failed <span class="o">(</span>98: Unknown error<span class="o">)</span>
+Jan 28 02:54:33 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</span>emerg] <span class="nb">bind</span><span class="o">()</span> to <span class="o">[</span>::]:80 failed <span class="o">(</span>98: Unknown error<span class="o">)</span>
+Jan 28 02:54:33 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</span>emerg] still could not <span class="nb">bind</span><span class="o">()</span>
+Jan 28 02:54:33 instance-20230101-2217 systemd[1]: nginx.service: Control process exited, <span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE
+Jan 28 02:54:33 instance-20230101-2217 systemd[1]: nginx.service: Failed with result <span class="s1">'exit-code'</span><span class="nb">.</span>
+Jan 28 02:54:33 instance-20230101-2217 systemd[1]: Failed to start A high performance web server and a reverse proxy server.
+</code></pre></div></div>
+
+<p>위와 같은 에러 코드들이 나왔다. <br />
+<code class="language-plaintext highlighter-rouge">Failed to start A high performance web server and a reverse proxy server.</code>를<br />
+키워드로 검색하니 <a href="https://stackoverflow.com/questions/51525710/nginx-failed-to-start-a-high-performance-web-server-and-a-reverse-proxy-server">Stackoverflow 해결 레퍼런스</a>로 문제 해결이 가능했다.</p>
+
+<p>나와 같은 경우는</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>fuser <span class="nt">-k</span> 80/tcp
+<span class="nb">sudo </span>systemctl restart nginx
+</code></pre></div></div>
+<p>를 입력하여주니 오류가 해결되었다.</p>
+
+<p>내용을 보자하니.. 이미 실행 80으로 실행중인 포트가 있었던 것..<br />
+<code class="language-plaintext highlighter-rouge">sudo lsof -i:80</code>를 입력해서 한번 확인후</p>
+
+<p>위에 명령어처럼 해당하는 포트를 중지시켜주자!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Linux/Unix" /><category term="Linux" /><category term="Unix" /><summary type="html"><![CDATA[https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.]]></summary></entry><entry><title type="html">Oracle Cloud 외부 접속 설정</title><link href="http://localhost:4000/server/2023/01/27/server-oraclesetting.html" rel="alternate" type="text/html" title="Oracle Cloud 외부 접속 설정" /><published>2023-01-27T00:00:00+09:00</published><updated>2023-01-27T00:00:00+09:00</updated><id>http://localhost:4000/server/2023/01/27/server-oraclesetting</id><content type="html" xml:base="http://localhost:4000/server/2023/01/27/server-oraclesetting.html"><![CDATA[<p>오늘은 Oracle Cloud 서버에<br />
+nginx에 클라이언트를 배포해 외부에서 접속하고<br />
+WorkBench를 이용해 mysql을 접속하려한다.</p>
+
+<p>외부접속관련해 설정을 정리해보려한다.</p>
+
+<p><br /></p>
+
+<h3 id="-ufw-vs-iptables">📌 UFW vs iptables</h3>
+
+<p>iptables를 이용해 방화벽 설정을 할 수 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>iptables <span class="nt">-I</span> INPUT 1 <span class="nt">-p</span> tcp <span class="nt">--dport</span> 80 <span class="nt">-j</span> ACCEPT
+</code></pre></div></div>
+<p>와 같이 입력해주면 설정이 가능하다. <br />
+UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고<br />
+수준높은 방화벽 구성에는 iptables를 사용해야한다.</p>
+
+<p><br /></p>
+
+<h3 id="-ufw-활성비활성">📌 UFW 활성/비활성</h3>
+
+<p><strong>1). UFW 활성화</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw <span class="nb">enable</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>2). UFW 비활성화</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw disable
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>3). UFW 상태확인</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw status verbose
+</code></pre></div></div>
+
+<p>상태확인 명령어를 입력하면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
+Logging: on <span class="o">(</span>low<span class="o">)</span>
+Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
+New profiles: skip
+
+To                         Action      From
+<span class="nt">--</span>                         <span class="nt">------</span>      <span class="nt">----</span>
+3306/tcp                   ALLOW IN    Anywhere
+80/tcp                     ALLOW IN    Anywhere
+3306/tcp <span class="o">(</span>v6<span class="o">)</span>              ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
+80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
+</code></pre></div></div>
+<p>와 같이 허용한 포트에 대해 표시가된다. ex) 80, 3306<br />
+위에서 확인이 가능하듯, 기본룰은</p>
+
+<p>incoming는 전부 거부(deny)<br />
+outgoing은 전부 허가(allow)<br />
+로 UFW에 기본으로 설정되어있는 룰이다.</p>
+
+<p><br /></p>
+
+<h3 id="-ufw-허용차단-룰추가">📌 UFW 허용,차단 룰추가</h3>
+
+<p><strong>1). http 80번 포 TCP,UDP 포트를 모두허용</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>2). http 80번 포 TCP 포트만 허용</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/tcp
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>3). http 80번 포 UDP 포트만 허용</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/udp
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>반대로 차단과 같은 경우에는 allow자리에 <br />
+<code class="language-plaintext highlighter-rouge">deny</code> 명령어를 입력해주면 된다.</p>
+
+<p><br /></p>
+
+<h3 id="-ufw-허용차단-룰-삭제">📌 UFW 허용,차단 룰 삭제</h3>
+
+<p>위에서 <code class="language-plaintext highlighter-rouge">allow</code>, <code class="language-plaintext highlighter-rouge">deny</code>명령어를 이용해 <br />
+허용과 차단 룰을 추가해주었다. <br />
+<code class="language-plaintext highlighter-rouge">sudo ufw status verbose</code>로 조회하였을 경우에<br />
+아래와 같이 조회되었다고 가정했을때</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
+Logging: on <span class="o">(</span>low<span class="o">)</span>
+Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
+New profiles: skip
+
+To                         Action      From
+<span class="nt">--</span>                         <span class="nt">------</span>      <span class="nt">----</span>
+80/tcp                     ALLOW IN    Anywhere
+80                         DENY IN     Anywhere
+80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
+80 <span class="o">(</span>v6<span class="o">)</span>                    DENY IN     Anywhere <span class="o">(</span>v6<span class="o">)</span>
+</code></pre></div></div>
+<p>해당 정책들을 삭제하고 싶은 경우에는</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete deny 80
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete allow 80/tcp
+</code></pre></div></div>
+<p>와 같은 방식으로 <code class="language-plaintext highlighter-rouge">delete</code> 명령어를 이용해 룰을 삭제할 수 있다.</p>
+
+<p><br /></p>
+
+<p>✨ 참고 블로그 <br />
+<a href="https://kibua20.tistory.com/124">클라우드 방화벽 설정 참고 레퍼런스</a>, <a href="https://webdir.tistory.com/206">우분투 UFW 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Server" /><category term="Server" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.]]></summary></entry><entry><title type="html">Spring) MailAuthenticationException 문제 해결</title><link href="http://localhost:4000/spring/2023/01/21/spring-email.html" rel="alternate" type="text/html" title="Spring) MailAuthenticationException 문제 해결" /><published>2023-01-21T00:00:00+09:00</published><updated>2023-01-21T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/21/spring-email</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/21/spring-email.html"><![CDATA[<p>오늘은 회원가입시 이메일 전송 로직을 확인중<br />
+<code class="language-plaintext highlighter-rouge">org.springframework.mail.MailAuthenticationException</code>와 같은<br />
+예외를 만났고 해당관련 해결방법을 적어가보려한다.</p>
+
+<p><br /></p>
+
+<h3 id="-작업환경">✅ 작업환경</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Spring Boot 2.7.7  
+Java 11 
+macOs Monterey 12.6 버전 
+로컬환경에서 테스트 진행
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="-에러-확인-및-해결">📌 에러 확인 및 해결</h3>
+
+<p>첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. <br />
+메일을 보내는 주체는 Google의 gmail을 이용하려한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">mail</span><span class="err">'</span>
+</code></pre></div></div>
+<p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/package-summary.html">org.springframewokr.mail</a>, <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/javamail/package-summary.html">org.springframewokr.javamail</a> 패키지를 사용한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">JavaMailSender</code> 인터페이스의 <code class="language-plaintext highlighter-rouge">send();</code>메서드를<br />
+Override 하여 구현하였고 테스트 진행도중 아래와 같은 예외를 만나게 되었다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2023-01-21 15:40:59.934 ERROR 281 --- [         task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void codestates.frogroup.indiego.global.email.event.MemberRegistrationEventListener.listen(codestates.frogroup.indiego.global.email.event.MemberRegistrationApplicationEvent) throws java.lang.Exception
+
+org.springframework.mail.MailAuthenticationException: Authentication failed; nested exception is javax.mail.AuthenticationFailedException: 534-5.7.9 Application-specific password required. Learn more at
+534 5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor t1-20020a63d241000000b004c974bb9a4esm11189895pgi.83 - gsmtp
+</code></pre></div></div>
+
+<p>내용을 잘 읽어보니, 인증에 실패하였고<br />
+<code class="language-plaintext highlighter-rouge">Application-specific password required</code> 애플리케이션의 스펙에 맞는<br />
+비밀번호를 요구한다고한다. 그리고 참고용 주소를 하나가 콘솔에 찍혀있다.<br />
+<a href="https://support.google.com/accounts/answer/185833?visit_id=638098789197662028-710657186&amp;p=InvalidSecondFactor&amp;rd=1">앱 비밀번호로 로그인</a>관련 주소이며, 정말 친절한 Spring… 감동..</p>
+
+<p>예외가 발생한 코드를 쭉 따라가다 보면<br />
+<code class="language-plaintext highlighter-rouge">JavaMailSender</code>인터페이스의</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doSend</span><span class="o">(</span><span class="nc">MimeMessage</span><span class="o">[]</span> <span class="n">mimeMessages</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">originalMessages</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">MailException</span> <span class="o">{</span>
+		<span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">,</span> <span class="nc">Exception</span><span class="o">&gt;</span> <span class="n">failedMessages</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
+		<span class="nc">Transport</span> <span class="n">transport</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mimeMessages</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+				<span class="c1">// Check transport connection first...</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">transport</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">transport</span><span class="o">.</span><span class="na">isConnected</span><span class="o">())</span> <span class="o">{</span>
+					<span class="k">if</span> <span class="o">(</span><span class="n">transport</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+						<span class="k">try</span> <span class="o">{</span>
+							<span class="n">transport</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+						<span class="o">}</span>
+						<span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+							<span class="c1">// Ignore - we're reconnecting anyway</span>
+						<span class="o">}</span>
+						<span class="n">transport</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+					<span class="o">}</span>
+					<span class="k">try</span> <span class="o">{</span>
+						<span class="n">transport</span> <span class="o">=</span> <span class="n">connectTransport</span><span class="o">();</span>
+					<span class="o">}</span>
+					<span class="k">catch</span> <span class="o">(</span><span class="nc">AuthenticationFailedException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+						<span class="k">throw</span> <span class="k">new</span> <span class="nf">MailAuthenticationException</span><span class="o">(</span><span class="n">ex</span><span class="o">);</span>
+					<span class="o">}</span>
+					<span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+						<span class="c1">// Effectively, all remaining messages failed...</span>
+						<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">mimeMessages</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+							<span class="nc">Object</span> <span class="n">original</span> <span class="o">=</span> <span class="o">(</span><span class="n">originalMessages</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">originalMessages</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">:</span> <span class="n">mimeMessages</span><span class="o">[</span><span class="n">j</span><span class="o">]);</span>
+							<span class="n">failedMessages</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">original</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+						<span class="o">}</span>
+						<span class="k">throw</span> <span class="k">new</span> <span class="nf">MailSendException</span><span class="o">(</span><span class="s">"Mail server connection failed"</span><span class="o">,</span> <span class="n">ex</span><span class="o">,</span> <span class="n">failedMessages</span><span class="o">);</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+        <span class="o">}</span>        
+                
+                <span class="o">...</span> <span class="n">생략</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<p>구현체인 <code class="language-plaintext highlighter-rouge">JavaMailSenderImpl</code>의 아래의 메서드에서 <br />
+<code class="language-plaintext highlighter-rouge">connectTransport();</code> 메서드를 호출할 때 예외가 발생한 것을 볼 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">protected</span> <span class="nc">Transport</span> <span class="nf">connectTransport</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">MessagingException</span> <span class="o">{</span>
+		<span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">getUsername</span><span class="o">();</span>
+		<span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">getPassword</span><span class="o">();</span>
+		<span class="k">if</span> <span class="o">(</span><span class="s">""</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">username</span><span class="o">))</span> <span class="o">{</span>  <span class="c1">// probably from a placeholder</span>
+			<span class="n">username</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+			<span class="k">if</span> <span class="o">(</span><span class="s">""</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">password</span><span class="o">))</span> <span class="o">{</span>  <span class="c1">// in conjunction with "" username, this means no password to use</span>
+				<span class="n">password</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="nc">Transport</span> <span class="n">transport</span> <span class="o">=</span> <span class="n">getTransport</span><span class="o">(</span><span class="n">getSession</span><span class="o">());</span>
+		<span class="n">transport</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">getHost</span><span class="o">(),</span> <span class="n">getPort</span><span class="o">(),</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">transport</span><span class="o">;</span>
+	<span class="o">}</span>
+</code></pre></div></div>
+<p>해당 코드에서도 <code class="language-plaintext highlighter-rouge">transport.connect();</code> 메서드 안에서<br />
+host, port, user, password의 정보로 연결 시도를 하는데 정보가 맞지않아 <br />
+연결이 정상적으로 실행되지 않을 경우에 <code class="language-plaintext highlighter-rouge">AuthenticationFailedException</code> 예외가 <br />
+발생하는 거이라고 추측이된다… 좀더 어드벤스한 공부는 추후해 해봐야할 것 같다.</p>
+
+<p><br /></p>
+
+<p>그래서 스프링에서 친절하게 알려준 콘솔내용대로 해결을 해보자.</p>
+
+<p>현재 yml 설정 파일이다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mail</span><span class="pi">:</span>
+  <span class="na">smtp</span><span class="pi">:</span>
+    <span class="na">host</span><span class="pi">:</span> <span class="s">smtp.gmail.com</span>
+    <span class="na">port</span><span class="pi">:</span> <span class="m">587</span>
+    <span class="na">username</span><span class="pi">:</span> <span class="s">${GOOGLE_ID}</span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">${GOOGLE_PASSWORD}</span>
+    <span class="na">auth</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">starttls</span><span class="pi">:</span>
+      <span class="na">enable</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">subject</span><span class="pi">:</span>
+    <span class="na">member</span><span class="pi">:</span>
+      <span class="na">registration</span><span class="pi">:</span> <span class="s">개굴단의 인디고 서비스에 성공적으로 가입하셨습니다.</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span>
+      <span class="na">member</span><span class="pi">:</span>
+        <span class="na">join</span><span class="pi">:</span> <span class="s">email-registration-member</span>
+</code></pre></div></div>
+<p>환경변수를 이용해 설정해두었고<br />
+username에는 구글 이메일 주소를 넣었고<br />
+password에는 구글 비밀번호를 넣었었다.</p>
+
+<p>여기서 비밀번호 스펙이 맞지않다고 예외가 발생한 것이였고<br />
+<a href="https://support.google.com/accounts/answer/185833?visit_id=638098789197662028-710657186&amp;p=InvalidSecondFactor&amp;rd=1">앱 비밀번호로 로그인</a>으로 접속해 앱 비밀번호를 설정해주었다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/213848506-5245e665-d3ef-4c2d-901d-94c49ef6f696.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>최종적으로 비밀번호를 받게된다면<br />
+16자의 비밀번호를 발급받게 될 것이고</p>
+
+<p>password 환경변수에 공백없이 16자를 입력해주면 된다.<br />
+ex) abcdefghijklmnop</p>
+
+<p><br /></p>
+
+<p>수정을 하고 다시 회원가입 서비스를 진행해보았다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/213848511-98c77ad0-50b7-4470-8665-538d73155427.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>간단한 템플릿으로 우선 테스트를 진행했고 <br />
+회원가입을한 유저의 메일로 정상적으로 회원가입 안내 메일이 보내진 것을 확인해볼 수 있다!!</p>
+
+<p><br />
+<br /></p>
+
+<p>✨ 참고 블로그<br />
+<a href="https://kijuk.tistory.com/162?category=1056346">문제 해결 참고 블로그</a></p>
+
+<p><br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="email" /><summary type="html"><![CDATA[오늘은 회원가입시 이메일 전송 로직을 확인중 org.springframework.mail.MailAuthenticationException와 같은 예외를 만났고 해당관련 해결방법을 적어가보려한다.]]></summary></entry><entry><title type="html">Spring) AWS S3 FileUpload 하여 URL로 관리하기</title><link href="http://localhost:4000/spring/2023/01/15/spring-fileupload.html" rel="alternate" type="text/html" title="Spring) AWS S3 FileUpload 하여 URL로 관리하기" /><published>2023-01-15T00:00:00+09:00</published><updated>2023-01-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/15/spring-fileupload</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/15/spring-fileupload.html"><![CDATA[<p>오늘은 AWS S3에 파일 업로드를 하는<br />
 예제를 다뤄보려한다.</p>
 
 <p>구글에서 여러가지 블로그를 돌아다니며 학습했고<br />
@@ -182,9 +504,13 @@ bucket은 나의 버킷이름인 indiego-fileupload에 <br />
 <p>그리고 build.gradle을 설정해주자.</p>
 
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+        <span class="o">...</span>
 	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">cloud</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="nl">aws:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="na">RELEASE</span><span class="err">'</span>
+        <span class="o">...</span>
 <span class="o">}</span>
 </code></pre></div></div>
+<p>기본적인 Spring web, Lombok 같은 <br />
+의존 라이브러리도 설정해주어야한다.</p>
 
 <p>다음으로는<br />
 AmazonS3Config 클래스를 작성해보자.</p>
@@ -213,7 +539,7 @@ AmazonS3Config 클래스를 작성해보자.</p>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">AmazonS3Client</code>타입으로 빈을 만들어 주었다. <br />
-이용된 정보는 환경변수에 설정했던 값들이 이용되었다.
+이용된 정보는 환경변수에 설정했던 값들이 이용되었다.<br />
 이렇게까지만 설정해놓고 스프링 부트가 잘 실행되는지 확인해보자</p>
 
 <p><br /></p>
@@ -910,43 +1236,7 @@ Spring Security에 대한 내용을 어느정도 선수지식으로 가지고 �
 <a href="https://hudi.blog/refresh-token-in-spring-boot-with-redis/">Redis Jpa 사용 레퍼런스</a>, <a href="https://wildeveloperetrain.tistory.com/32">Redis 사용방법 2가지 레퍼런스</a></p>
 
 <p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry><entry><title type="html">Git 이전 Commit Message 수정하기</title><link href="http://localhost:4000/git/2023/01/12/git-commitmessage.html" rel="alternate" type="text/html" title="Git 이전 Commit Message 수정하기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-commitmessage</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-commitmessage.html"><![CDATA[<h3 id="-cli로-변경">📌 CLI로 변경</h3>
-
-<p>만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> HEAD~3        
-</code></pre></div></div>
-<p>를 입력해서 커밋메세지가 수정이 가능하다. <br />
-<code class="language-plaintext highlighter-rouge">~3</code>은 가장최신부터 수정하고자하는 커밋 수량이다</p>
-
-<p>Pick이라고 되어있는 부분을 reword로 변경한 다음 <br />
-커밋메세지를 수정해주면 반영된다.</p>
-
-<p><br /></p>
-
-<h3 id="-intellij로-변경">📌 IntelliJ로 변경</h3>
-
-<p>IDE를 사용하면 vi,nano 편집기를 이용하는 것보다<br />
-훨씬 수월하게 작업할 수 있다.</p>
-
-<p>하단의 Git 탭에서 커밋메세지를 변경하고자하는<br />
-커밋을 눌러 오른쪽 클릭을하자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041524-5d07ce20-07d1-4299-96e0-866fc2857dfb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">Interactively Rebase from Here</code>를 눌러주자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041533-03319280-6850-4b08-8cfe-f8918c7013d8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그러면 Rebasing Commits 팝업이 노출되는데 <br />
-원하는 커밋 메시지 이름으로 변경한 다음에</p>
-
-<p>START REBASING을 눌러주면 <br />
-변경된 커밋 메세지로 반영된 모습을 확인할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry><entry><title type="html">Git Cherry-Pick으로 Commit 옮기기</title><link href="http://localhost:4000/git/2023/01/12/git-cherrypick.html" rel="alternate" type="text/html" title="Git Cherry-Pick으로 Commit 옮기기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-cherrypick</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-cherrypick.html"><![CDATA[<h3 id="-cherry-pick">📌 Cherry-Pick</h3>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry><entry><title type="html">Git Cherry-Pick으로 Commit 옮기기</title><link href="http://localhost:4000/git/2023/01/12/git-cherrypick.html" rel="alternate" type="text/html" title="Git Cherry-Pick으로 Commit 옮기기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-cherrypick</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-cherrypick.html"><![CDATA[<h3 id="-cherry-pick">📌 Cherry-Pick</h3>
 
 <p>작업을 하던중 다른 브랜치에 Commit을 해버렸다…</p>
 
@@ -1085,7 +1375,43 @@ Drop Commit을 눌러주면 된다.</p>
 
 <p><br />
 <br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 Cherry-Pick]]></summary></entry><entry><title type="html">Redis CLI 설치 및 사용방법</title><link href="http://localhost:4000/db/2023/01/08/db-redissetting.html" rel="alternate" type="text/html" title="Redis CLI 설치 및 사용방법" /><published>2023-01-08T00:00:00+09:00</published><updated>2023-01-08T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/08/db-redissetting</id><content type="html" xml:base="http://localhost:4000/db/2023/01/08/db-redissetting.html"><![CDATA[<p><strong>Redis</strong>는 <strong>Remote Dictionary Server</strong>의 약자로 <br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 Cherry-Pick]]></summary></entry><entry><title type="html">Git 이전 Commit Message 수정하기</title><link href="http://localhost:4000/git/2023/01/12/git-commitmessage.html" rel="alternate" type="text/html" title="Git 이전 Commit Message 수정하기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-commitmessage</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-commitmessage.html"><![CDATA[<h3 id="-cli로-변경">📌 CLI로 변경</h3>
+
+<p>만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> HEAD~3        
+</code></pre></div></div>
+<p>를 입력해서 커밋메세지가 수정이 가능하다. <br />
+<code class="language-plaintext highlighter-rouge">~3</code>은 가장최신부터 수정하고자하는 커밋 수량이다</p>
+
+<p>Pick이라고 되어있는 부분을 reword로 변경한 다음 <br />
+커밋메세지를 수정해주면 반영된다.</p>
+
+<p><br /></p>
+
+<h3 id="-intellij로-변경">📌 IntelliJ로 변경</h3>
+
+<p>IDE를 사용하면 vi,nano 편집기를 이용하는 것보다<br />
+훨씬 수월하게 작업할 수 있다.</p>
+
+<p>하단의 Git 탭에서 커밋메세지를 변경하고자하는<br />
+커밋을 눌러 오른쪽 클릭을하자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212041524-5d07ce20-07d1-4299-96e0-866fc2857dfb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Interactively Rebase from Here</code>를 눌러주자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212041533-03319280-6850-4b08-8cfe-f8918c7013d8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>그러면 Rebasing Commits 팝업이 노출되는데 <br />
+원하는 커밋 메시지 이름으로 변경한 다음에</p>
+
+<p>START REBASING을 눌러주면 <br />
+변경된 커밋 메세지로 반영된 모습을 확인할 수 있다.</p>
+
+<p><br />
+<br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry><entry><title type="html">Redis CLI 설치 및 사용방법</title><link href="http://localhost:4000/db/2023/01/08/db-redissetting.html" rel="alternate" type="text/html" title="Redis CLI 설치 및 사용방법" /><published>2023-01-08T00:00:00+09:00</published><updated>2023-01-08T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/08/db-redissetting</id><content type="html" xml:base="http://localhost:4000/db/2023/01/08/db-redissetting.html"><![CDATA[<p><strong>Redis</strong>는 <strong>Remote Dictionary Server</strong>의 약자로 <br />
 <code class="language-plaintext highlighter-rouge">key:value</code>로 값을 저장하는 NoSQL이다. <br />
 인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..</p>
 
@@ -1314,122 +1640,7 @@ key : like / value : 10<br />
 <code class="language-plaintext highlighter-rouge">-</code>를 붙여서 처리해주면 된다.</p>
 
 <p>혹시나 버전에따라 적용이 안되어질 수 있으니<br />
-잘 확인해서 적용해보자 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Jekyll" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><category term="GitHub Pages" /><summary type="html"><![CDATA[현재 내가 운영중인 Github.io 블로그의 테마는 YAT 이라는 테마이다.]]></summary></entry><entry><title type="html">Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선</title><link href="http://localhost:4000/db/2023/01/01/db-oraclesetting.html" rel="alternate" type="text/html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선" /><published>2023-01-01T00:00:00+09:00</published><updated>2023-01-01T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/01/db-oraclesetting</id><content type="html" xml:base="http://localhost:4000/db/2023/01/01/db-oraclesetting.html"><![CDATA[<p><a href="https://mycatlikeschuru.github.io/db/2023/01/01/db-oracledb.html">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a>을 통해서<br />
-오라클 평생 무료 인스턴스를 직접 만들어 보았다.</p>
-
-<p>하지만 인스턴스를 만들면서 느낀건데 램이 1GB로<br />
-여러가지 설치를하고 사용하기에는 너무 무리가 있어보이는 사양을 확인할 수가 있다.</p>
-
-<p>AMD 기반으로 만들었기 때문에 사양이 낮은 무료 인스턴스를 사용하고 있지만<br />
-몇 가지 설정을 통해 시스템을 원할히 돌아가게 셋팅을할 수가 있다.</p>
-
-<p>한번 알아보자</p>
-
-<h4 id="-현재-인스턴스-사양">📌 현재 인스턴스 사양</h4>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>이미지 : Ubuntu 22.04
-구성 : (AMD) VM.Standard.E2.1.Micro / 1 core OCPU, 1GB Memory
-</code></pre></div></div>
-
-<p><br /></p>
-
-<h4 id="-기초-셋팅">📌 기초 셋팅</h4>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
-</code></pre></div></div>
-<p>가장 먼저 시스템 업데이트를 해준다.</p>
-
-<p><br /></p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install -y nano
-</code></pre></div></div>
-<p>nano 편집기를 다운받아 편하게 사용해보자</p>
-
-<p><br /></p>
-
-<h4 id="-swap-공간-생성">📌 SWAP 공간 생성</h4>
-
-<p>오라클 클라우드 AMD 인스턴스는 위에서 얘기했듯이<br />
-1GB RAM을 제공한다. 이것저것 설치하다보면 금방 RAM이 부족에 부딪힌다.<br />
-상대적으로 넉넉한 HDD 저장공간의 일부를 RAM 공간으로 활용이 가능하다.</p>
-
-<p><strong>1). 스왑공간</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>fallocate <span class="nt">-l</span> 2G /swapfile
-<span class="nb">sudo chmod </span>600 /swapfile
-<span class="nb">sudo </span>mkswap /swapfile
-</code></pre></div></div>
-<p>를 순서대로 입력을 해주게 된다면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Setting up swapspace version 1, size <span class="o">=</span> 2 GiB <span class="o">(</span>2147479552 bytes<span class="o">)</span>
-no label, <span class="nv">UUID</span><span class="o">=</span>8f85218d-329c-4eec-bf11-5d87964c5f0d
-</code></pre></div></div>
-<p>위와 같이 스왑공간이 정상적으로 생성되었다고 메세지가 뜬다.</p>
-
-<p><br /></p>
-
-<p><strong>2). 스왑시작</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>swapon /swapfile
-</code></pre></div></div>
-<p>위 명령어로 스왑을 시작한다.</p>
-
-<p><br /></p>
-
-<p><strong>3). 스왑생성 확인</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>swapon <span class="nt">--show</span>
-</code></pre></div></div>
-<p>명령어로 정상적으로 작동하는지 확인이 가능하다</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      TYPE SIZE USED PRIO
-/swapfile file   2G   0B   <span class="nt">-2</span>
-</code></pre></div></div>
-<p>와 같은식으로 확인이되며, 2GB의 스왑공간이 확보되었다고 표시된다.</p>
-
-<p><br /></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>free <span class="nt">-h</span>
-</code></pre></div></div>
-<p>명령어를 통해 시스템에서 사용할 수 있는<br />
-메모리 공간을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>4). 스왑공간 시스템 고정</strong></p>
-
-<p>스왑공간은 시스템이 재시작되면 초기화가 진행되므로<br />
-스왑공간을 그대로 남아있게하기 위해서 간단한 셋팅값을 지정해주어야 한다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nano /etc/fstab
-</code></pre></div></div>
-
-<p>를 입력해 nano 편집기로 fstab 파일을 수정해줄 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LABEL</span><span class="o">=</span>cloudimg-rootfs   /        ext4   discard,errors<span class="o">=</span>remount-ro       0 1
-<span class="nv">LABEL</span><span class="o">=</span>UEFI      /boot/efi       vfat    <span class="nb">umask</span><span class="o">=</span>0077      0 1
-/swapfile swap swap defaults 0 0
-</code></pre></div></div>
-<p>최종적으로는 맨 아래의 <code class="language-plaintext highlighter-rouge">/swapfile swap swap defaults 0 0</code>를<br />
-입력한후 저장해주면 된다. nano 편집기 저장방법은 <code class="language-plaintext highlighter-rouge">ctrl+s</code>한 다음에 <code class="language-plaintext highlighter-rouge">ctrl+x</code>를<br />
-입력해주면 정상적으로 저장될 것 이다.</p>
-
-<p>이렇게 설정을 완료하면 스왑공간이 기본값으로 활성화 되어<br />
-시스템을 재시작하여도 문제없다 !</p>
-
-<p><br /></p>
-
-<h4 id="-시간설정">📌 시간설정</h4>
-
-<p>마지막으로 서버의 시간을 설정해줄 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>timedatectl set-timezone Asia/Seoul
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>✨ 참고 블로그 <br />
-<a href="https://yeon-kr.tistory.com/174">클라우드 성능 개선 참고 레퍼런스 1</a>, <a href="https://blog.hangyeong.com/1773#%EC%8B%9C%EC%8A%A4%ED%85%9C_%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8">클라우드 성능 개선 참고 레퍼런스 2</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="Oracle" /><summary type="html"><![CDATA[Oracle Cloud Free Tier 무료 인스턴스 생성과 접속을 통해서 오라클 평생 무료 인스턴스를 직접 만들어 보았다.]]></summary></entry><entry><title type="html">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</title><link href="http://localhost:4000/db/2023/01/01/db-oracledb.html" rel="alternate" type="text/html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속" /><published>2023-01-01T00:00:00+09:00</published><updated>2023-01-01T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/01/db-oracledb</id><content type="html" xml:base="http://localhost:4000/db/2023/01/01/db-oracledb.html"><![CDATA[<p>오늘은 <a href="https://www.oracle.com/kr/cloud/free/">Oracle Cloud 무료 데이터베이스</a>를 생성해보려한다.</p>
+잘 확인해서 적용해보자 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Jekyll" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><category term="GitHub Pages" /><summary type="html"><![CDATA[현재 내가 운영중인 Github.io 블로그의 테마는 YAT 이라는 테마이다.]]></summary></entry><entry><title type="html">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</title><link href="http://localhost:4000/server/2023/01/01/server-oraclecloud.html" rel="alternate" type="text/html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속" /><published>2023-01-01T00:00:00+09:00</published><updated>2023-01-01T00:00:00+09:00</updated><id>http://localhost:4000/server/2023/01/01/server-oraclecloud</id><content type="html" xml:base="http://localhost:4000/server/2023/01/01/server-oraclecloud.html"><![CDATA[<p>오늘은 <a href="https://www.oracle.com/kr/cloud/free/">Oracle Cloud 무료 서버</a>를 생성해보려한다.</p>
 
 <p>회원 가입과 카드 등록은 되어있다 가정하고<br />
 인스턴스 생성전에 구획생성과 VCN 네트워크 생성<br />
@@ -1545,7 +1756,8 @@ VCN 마법사를 시작한다.</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> <span class="o">[</span>private key path] ubuntu@주소
 </code></pre></div></div>
 <p>를 입력해주면 접속이 가능하다.
-[private key path]에는 경로를 입력해주면 된다.</p>
+[private key path]에는 경로를 입력해주면 된다.<br />
+<em>(나와 같은 경우는 ex)ssh -i /.ssh ubuntu@ip주소)</em></p>
 
 <p>터미널에서 입력시</p>
 
@@ -1564,302 +1776,4 @@ VCN 마법사를 시작한다.</p>
 그리고 키파일을 공개키가 아닌 <code class="language-plaintext highlighter-rouge">id_rsa</code> private key를 선택해주면<br />
 정상적으로 접속할 수 있는 모습을 확인해 볼 수 있다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.]]></summary></entry><entry><title type="html">AWS EC2 NginX 클라이언트 배포</title><link href="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html" rel="alternate" type="text/html" title="AWS EC2 NginX 클라이언트 배포" /><published>2022-12-29T00:00:00+09:00</published><updated>2022-12-29T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2022/12/29/server-NginX</id><content type="html" xml:base="http://localhost:4000/linux/unix/2022/12/29/server-NginX.html"><![CDATA[<h3 id="-nginx-이용하여-클라이언트-배포하기">✅ NGINX 이용하여 클라이언트 배포하기</h3>
-
-<p><a href="https://velog.io/@gudcks0305/%EB%B0%B0%ED%8F%AC-Cloud-Compute-%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0">클라우딩 컴퓨터 배포 참고레퍼런스</a>를 토대로<br />
-공부하고 테스트해본 기록을 적어보려한다.</p>
-
-<p>우리 코스에 한분이 작성하신 글이고<br />
-헤매고있는 나에게 빛줄기를 내려주셨다…🥹</p>
-
-<p>우선 우리팀에서 생각한 아키텍처이다.<br />
-정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN7pzIQwGbZHGCEUS4jHehIs9yAoOY3RHwfGUqiNHJgziufPka455gX63ZA492CwBarFgJwzDiqJx6XRydBBBJCWJJYNA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만… <br />
-프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아<br />
-꼼꼼히 홈페이지 사양을 읽어보긴했지만,,, 아직 미숙한 우리들에게 사고를<br />
-미연에 방지하고자 EC2만 빌린다음에 진행하려고한다.</p>
-
-<p><br /></p>
-
-<h4 id="-작업-환경">📌 작업 환경</h4>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NGINX version : nginx/1.22.1
-EC2 인스턴스 유형 : Ubuntu, 22.04 LTS (HVM), SSD Volume Type , 64비트(x86)  
-JDK : openjdk version 11.0.17
-작업 컴퓨터 OS : macOS Monterey 12.6
-</code></pre></div></div>
-
-<p><br /></p>
-
-<h4 id="-nginx-설치">📌 NGINX 설치</h4>
-
-<p>EC2 인스턴스에 Nginx를 설치해줘야한다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>nginx
-</code></pre></div></div>
-<p>업데이트를 해주고 nginx를 설치해주면 된다.</p>
-
-<p>설치가 완료되었다면 <code class="language-plaintext highlighter-rouge">nginx -version</code>을 입력하면<br />
-<code class="language-plaintext highlighter-rouge">nginx version: nginx/1.22.1</code>와 같이 버젼이 <br />
-나오면 정상적으로 설치된 것이다.</p>
-
-<p><br /></p>
-
-<h4 id="-nginx-시작-종료">📌 NGINX 시작, 종료</h4>
-
-<p>1). 시작 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx start
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>2). 중지 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx stop
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>3). 상태 확인 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx status
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>4). 설정파일 테스트 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nginx <span class="nt">-t</span> 
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>5). 재시작 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx restart
-</code></pre></div></div>
-
-<p>이렇게 5가지를 이용해 중지,시작 및 상태확인이 가능하다.</p>
-
-<p>처음에 Start 명령어로 시작을한다면 <br />
-기본 페이지인 아래의 화면이 나올 것이다. <br />
-도메인 주소는 당연히 EC 인스턴스의 IPv4를 입력해주면된다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDQyLIrueFY34ZhChcQqOsepcLPLrsa-qd8SRR-U_eG55nRUstLL8aOqIAjkjg84o68D2be4WfoeOlMewuzCKEmjHv=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>기본 설정 PORT가 80이기 때문에<br />
-<code class="language-plaintext highlighter-rouge">http://3.35.174.126</code> 으로 입력하여도 접속이 가능한 것이다.</p>
-
-<p>해당 html 파일의 주소에 접속하고 싶다면<br />
-<code class="language-plaintext highlighter-rouge">/usr/share/nginx/html</code> 경로로 이동하면 <br />
-<code class="language-plaintext highlighter-rouge">index.html</code>과 <code class="language-plaintext highlighter-rouge">50x.html</code>을 확인할 수 있다.</p>
-
-<p><br /></p>
-
-<h4 id="-nginx-설정">📌 NGINX 설정</h4>
-
-<p><code class="language-plaintext highlighter-rouge">/etc/nginx</code> 폴더에 설정 관련파일들을 찾아볼 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPlZj5J-OVdyUfWtLi-3GsOpph99bcO6chVUREqjXeqUdIDkUOKwDuTaIgeCapp2Qls01XhQ1J7hcVYQA0VCaSmXCmlDQ=w1656-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>여기서 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일에 설정을 시작해주면 된다.<br />
-<code class="language-plaintext highlighter-rouge">nginx.conf</code>파일에는 기본적으로 <code class="language-plaintext highlighter-rouge">conf.d</code> 폴더안의 <code class="language-plaintext highlighter-rouge">.conf</code>파일들을<br />
-읽을 수 있도록 코드가 작성되어 있어, <code class="language-plaintext highlighter-rouge">conf.d</code> 폴더에 새로운 <code class="language-plaintext highlighter-rouge">.conf</code>파일을<br />
-만들어서 사용 설정이 가능하다.<br />
-(<code class="language-plaintext highlighter-rouge">include /etc/nginx/conf.d/*.conf;</code> 이런 코드가 있다.)</p>
-
-<p><code class="language-plaintext highlighter-rouge">conf.d</code>폴더에는 <code class="language-plaintext highlighter-rouge">default.conf</code> 파일이 있다. <br />
-해당 파일을 수정하여 사용해도되고, 새로운 <code class="language-plaintext highlighter-rouge">.conf</code>파일을 만들어도 된다.</p>
-
-<p>나와 같은 경우는 <code class="language-plaintext highlighter-rouge">nginx.conf</code> 파일은 초기설정 그대로 두고<br />
-<code class="language-plaintext highlighter-rouge">conf.d</code>폴더에 1).<code class="language-plaintext highlighter-rouge">client.conf</code> , 2).<code class="language-plaintext highlighter-rouge">server.conf</code> 두개를 만들었다.</p>
-
-<p><strong>1). client.conf</strong></p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
-  server_name stackoverflowpre.p-e.kr;
-  root /home/ubuntu/preproject/seb41_pre_037/client/build;
-  index index.html index.htm;
-  try_files $uri $uri/ /index.html;
-  location / {
-    try_files $uri $uri/ /index.html;
-  }
-}
-</code></pre></div></div>
-<p>server_name에는 <a href="https://xn--220b31d95hq8o.xn--3e0b707e/">내 도메인 한국</a>에서 받은 <br />
-도메인(stackoverflowpre.p-e.kr)으로 적어주었고  <br />
-EC2 IPv4 주소와 연결되어있다.</p>
-
-<p>root에는 프론트엔드쪽 빌드된 파일이 올라가있는 경로이다.</p>
-
-<p><br /></p>
-
-<p><strong>2). server.conf</strong></p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream preServer {
-        ip_hash;
-        server 127.0.0.1:8080;
-}
-
-server {
-
-        server_name stackoverflowpre.p-e.kr;
-        location / {
-
-            proxy_pass http://preServer; # 위 upstream 에서 설정한 이름
-
-            proxy_set_header    HOST $http_host;
-
-            proxy_set_header    X-Real-IP $remote_addr;
-
-            proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-
-            proxy_set_header    X-Forwarded-Proto $scheme;
-
-            proxy_redirect  off;
-            charset utf-8;
-        }
-
-}
-</code></pre></div></div>
-<p>preServer에 <code class="language-plaintext highlighter-rouge">localhost:8080</code>인 <code class="language-plaintext highlighter-rouge">127.0.0.1:8080</code>을 설정해주었고 (스프링 톰켓서버)<br />
-server_name에는 동일하게 도메인을 넣어주었다.</p>
-
-<p>이제 jar 빌드파일을 실행시켜놓고 <br />
-<code class="language-plaintext highlighter-rouge">sudo service nginx start </code> 명령어를 입력해주면</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP7Sh6YFwUrS61qHgvcTyuBFnYthfSnOon6P1upWJ51Brs04kAsppAbtReYthNfYC4poomu4WMycAhF6xnd6bN9sVF8OQ=w1656-h864" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>우리가 만들어 놓은 <code class="language-plaintext highlighter-rouge">index.html</code> 화면이 보이기 시작하면서  <br />
-정삭적으로 배포환경에서 동작하는지 확인이 가능하다 !! <br />
-(스택오버플로우 클론코딩을 한 도메인이다)</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Linux/Unix" /><category term="Linux" /><category term="Unix" /><summary type="html"><![CDATA[✅ NGINX 이용하여 클라이언트 배포하기]]></summary></entry><entry><title type="html">MySQL EC2에 설치후 WorkBench 접속하기</title><link href="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html" rel="alternate" type="text/html" title="MySQL EC2에 설치후 WorkBench 접속하기" /><published>2022-12-28T00:00:00+09:00</published><updated>2022-12-28T00:00:00+09:00</updated><id>http://localhost:4000/db/2022/12/28/db-mysqlEC2</id><content type="html" xml:base="http://localhost:4000/db/2022/12/28/db-mysqlEC2.html"><![CDATA[<p>EC2에 MySQL을 설치한다음<br />
-WorkBench로 접속하려는데 설정한 내용을 정리해보려한다.<br />
-MySQL 설치과정은 생략하겠다.</p>
-
-<p><br /></p>
-
-<h4 id="-yml-파일-설정">📌 yml 파일 설정</h4>
-
-<p>우선 EC2에 배포한 스프링 <code class="language-plaintext highlighter-rouge">.yml</code> 파일 설정이다.<br />
-기존과 동일하게 <code class="language-plaintext highlighter-rouge">localhost:3306</code>으로 설정을 해주었고</p>
-
-<p>스키마 이름은 stackover라는 이름으로지 지정했다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">datasource</span><span class="pi">:</span>
-    <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
-    <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
-    <span class="na">username</span><span class="pi">:</span> <span class="s">${MYSQL_ID}</span> <span class="c1"># 유저네임</span>
-    <span class="na">password</span><span class="pi">:</span> <span class="s">${MYSQL_PASSWORD}</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
-
-<p>환경변수를 사용해 유저이름과 비밀번호를 지정해줬다.</p>
-
-<p><br /></p>
-
-<h4 id="-ec2-설정">📌 EC2 설정</h4>
-
-<p><strong>첫번쨰</strong>로 EC2 보안그룹의 인바운드 규칙을 설정해줘야한다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN095iTdhlGaDzXDoZONY9_byOM5RVo22mey2JsVdznjSR1iAFXH3SeeTRFq2MaN2FCRYRU7O8iAwqpF0rpulNSiOhkKg=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>MYSQL을 선택하고 0.0.0.0/0 을 지정해주었다.</p>
-
-<p><br /></p>
-
-<p><strong>두번째</strong>로는 EC2의 <code class="language-plaintext highlighter-rouge">mysqld.cnf</code> 파일의 내용을 수정해줘야한다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/mysql/mysql.conf.d
-</code></pre></div></div>
-<p>해당 경로에 진입하면 <code class="language-plaintext highlighter-rouge">mysqld.conf</code> 파일을 열 수 있고</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi mysqld.cnf
-</code></pre></div></div>
-<p>sudo를 이용해야 저장이 가능하다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOPpSA6Dj0VxEP0QUnOJuYtmaV64BdOTsIT_o2mvPCkZHCKxSQaPSVtVXAc4UZqFLGDwoyFIrAOfKw8_9fq_2oG6lFG=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>파일의 bind-address를 <code class="language-plaintext highlighter-rouge">0.0.0.0</code>으로 설정 해주었고<br />
-mysqlx-bind-address는 주석처리를 해주었다.</p>
-
-<p><br /></p>
-
-<p><strong>세번째</strong>로는 User 계정을 생성하고<br />
-해당 계정에 권한을 부여해주었다.</p>
-
-<p>✅ <strong>mysql 접속</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
-</code></pre></div></div>
-<p>처음에는 root 계정으로 진입하면 mysql에 접속이 가능하다.<br />
-만약 root 계정에 비밀번호를 설정하지 않았을 경우에는</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root
-</code></pre></div></div>
-<p>명령어로 접근한 다음에</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER USER <span class="s1">'root'</span>@<span class="s1">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'yourPassword'</span><span class="p">;</span>
-</code></pre></div></div>
-<p>yourPassword에 원하는 비밀번호를 입력해 root 계정에<br />
-비밀번호를 설정해 줄 수 있다.</p>
-
-<p><br /></p>
-
-<p>✅ <strong>유저 생성</strong><br />
-이제 mysql에 접속이 완료되었다면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT user,authentication_string,plugin,host FROM mysql.user<span class="p">;</span>
-</code></pre></div></div>
-<p>명령어로 등록된 user 정보를 확인할 수 있다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO-FEGjAwEuSnVLX_OZnmrstM6XDpJZRgPzMGhUCNxJJmQ-ob0QO97XihuOkInNrM8Iy0-9WSM9bBu9z1kaeUmBM_cErg=w1920-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>user가 현재 내가 만들어둔 계정이고 기본으로는 root가 있다.<br />
-그리고 host를 %로 변경해주면 외부에서도 진입이 가능해진다.</p>
-
-<p>이제 계정을 하나 만들어보자</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create user 유저이름@‘%’ identified by ‘비밀번호’<span class="p">;</span>
-</code></pre></div></div>
-<p>유저이름과 비밀번호를 입력해 계정을 생성할 수 있다.<br />
-만약 비밀번호를 변경하고 싶은경우 위에서 root계정 비밀번호를 변경할 때<br />
-사용했던 명령어를 입력해주면 비밀번호를 변경할 수 있다.</p>
-
-<p><br /></p>
-
-<p>✅ <strong>유저 삭제</strong><br />
-혹시나 유저를 삭제하고 싶은 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drop user 유저이름@localhost<span class="p">;</span>
-</code></pre></div></div>
-<p>과 같이 입력해주면 삭제가 가능핟.</p>
-
-<p>✅ <strong>유저 권한부여</strong><br />
-이제 유저를 만들었으니<br />
-유저에 대한 권한을 설정해주면 된다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grant all privileges on <span class="k">*</span>.<span class="k">*</span> to ‘유저이름’@‘%’<span class="p">;</span>
-</code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flush privileges<span class="p">;</span>
-</code></pre></div></div>
-<p>정상적으로 처리가 완료되었다면 쿼리가 날라갔다고 메세지가 나온다.</p>
-
-<p>전부 완료를 하고나면 <code class="language-plaintext highlighter-rouge">quit</code>로 mysql을 나온다음에<br />
-우분투 터미널에서</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart mysql
-</code></pre></div></div>
-<p>해당 명령어를 입력해 mysql을 재실행 시켜주자</p>
-
-<p>위 과정이 전부 완료되었다면<br />
-방금 만든 계정과 비밀번호, 그리고 EC2 공개 IP를 이용해</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNtl81ccvr2i_SPrMZV_lXTrzZ82HmAX4GffSwHZ0ZRV69bgx16OnwlRwzCVC5YdY1AZL3XQU4lMfH71k-aaMFMmcaIOA=w1920-h921" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위와 같이 정상적으로 WorkBench에 접속할 수 있을 것이다!!!</p>
-
-<p><br /></p>
-
-<p>혹시나 아래와 같은 알람이 발생한 경우에는<br />
-<code class="language-plaintext highlighter-rouge">Unable to connect to localhost</code></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNjgebqbY9sS3D33Pd29TXwqg6DDU4JIE9Go_c3XFDnw_1RgPPaIsywivrZapu1dPIvXURNgUn-mwRKe4kMYuh2uyuOGw=w1000-h920" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>나와 같은 경우에는 EC2 인바운드 규칙 설정과 <br />
-<code class="language-plaintext highlighter-rouge">mysqld.conf</code> 설정한 값이 맞지 않아서 였다.<br />
-혹시나 참고차 올려본다.</p>
-
-<p><br /></p>
-
-<p><a href="https://changun516.tistory.com/55">에러 해결 참고 레퍼런스</a>, <a href="https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9">MySQL 외부 접속 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[EC2에 MySQL을 설치한다음 WorkBench로 접속하려는데 설정한 내용을 정리해보려한다. MySQL 설치과정은 생략하겠다.]]></summary></entry></feed>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Server" /><category term="Server" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 무료 서버를 생성해보려한다.]]></summary></entry></feed>

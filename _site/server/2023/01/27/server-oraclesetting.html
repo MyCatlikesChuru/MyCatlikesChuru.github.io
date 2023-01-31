@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Oracle Cloud Free Tier 무료 인스턴스 생성과 접속 | LeeJellan</title>
+<title>Oracle Cloud 외부 접속 설정 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">
+<meta property="og:title" content="Oracle Cloud 외부 접속 설정">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.">
-<meta property="og:description" content="오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.">
-<link rel="canonical" href="http://localhost:4000/db/2023/01/01/db-oracledb.html">
-<meta property="og:url" content="http://localhost:4000/db/2023/01/01/db-oracledb.html">
+<meta name="description" content="오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.">
+<meta property="og:description" content="오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.">
+<link rel="canonical" href="http://localhost:4000/server/2023/01/27/server-oraclesetting.html">
+<meta property="og:url" content="http://localhost:4000/server/2023/01/27/server-oraclesetting.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-01-01T00:00:00+09:00">
+<meta property="article:published_time" content="2023-01-27T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">
+<meta property="twitter:title" content="Oracle Cloud 외부 접속 설정">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-01T00:00:00+09:00","datePublished":"2023-01-01T00:00:00+09:00","description":"오늘은 Oracle Cloud 무료 데이터베이스를 생성해보려한다.","headline":"Oracle Cloud Free Tier 무료 인스턴스 생성과 접속","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/db/2023/01/01/db-oracledb.html"},"url":"http://localhost:4000/db/2023/01/01/db-oracledb.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-27T00:00:00+09:00","datePublished":"2023-01-27T00:00:00+09:00","description":"오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.","headline":"Oracle Cloud 외부 접속 설정","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/server/2023/01/27/server-oraclesetting.html"},"url":"http://localhost:4000/server/2023/01/27/server-oraclesetting.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Oracle Cloud 외부 접속 설정</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2023-01-01T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 01, 2023
+    <time class="dt-published" datetime="2023-01-27T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Jan 27, 2023
     </time>
 
     
@@ -679,148 +679,135 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>오늘은 <a href="https://www.oracle.com/kr/cloud/free/">Oracle Cloud 무료 데이터베이스</a>를 생성해보려한다.</p>
+      <p>오늘은 Oracle Cloud 서버에<br>
+nginx에 클라이언트를 배포해 외부에서 접속하고<br>
+WorkBench를 이용해 mysql을 접속하려한다.</p>
 
-<p>회원 가입과 카드 등록은 되어있다 가정하고<br>
-인스턴스 생성전에 구획생성과 VCN 네트워크 생성<br>
-그리고 인스턴스를 생성하는 과정을 적어보려한다.<br>
-<a href="https://hoing.io/archives/318">Oracle 무료 인스턴스 참고 레퍼런스</a>를 토대로 작업하였습니다.</p>
-
-<p><br></p>
-
-<h3 id="-구획-생성">📌 구획 생성</h3>
-
-<p>VM 생성 전에 구획을 먼저 생성해야한다.<br>
-구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNs_7nfk_gmvLEvuBwFQHxq_WeESvVrrNgHncikIguZT5WSDBFRWJouafXAfIAnVKgSH8daI2o4KyS-YzP_fNz25gBp=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p>외부접속관련해 설정을 정리해보려한다.</p>
 
 <p><br></p>
 
-<h3 id="-vcn-네트워크-생성">📌 VCN 네트워크 생성</h3>
+<h3 id="-ufw-vs-iptables">📌 UFW vs iptables</h3>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPQ25gr2990xuN0OLF_Qr90USye42bZ6DbogZyuabsYL-OejRkV1p7C3LfLIa3X8BF5dgwz7eyH5zr20LtMPIO8nRjHjA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p>iptables를 이용해 방화벽 설정을 할 수 있다.</p>
 
-<p>먼저 아까 생성한 구획을 먼저 선택한다음<br>
-VCN 마법사를 시작한다.</p>
-
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN4OZ_5VRp8kmYeue1N02iMuXfeOZln12KRSuhL_PifDDhaNnn04SjU50HgsoewLDs6y8QAapnbFdv-GGZlSNSp9rSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>VCN 마법사 시작 클릭</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>iptables <span class="nt">-I</span> INPUT 1 <span class="nt">-p</span> tcp <span class="nt">--dport</span> 80 <span class="nt">-j</span> ACCEPT
+</code></pre></div></div>
+<p>와 같이 입력해주면 설정이 가능하다. <br>
+UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고<br>
+수준높은 방화벽 구성에는 iptables를 사용해야한다.</p>
 
 <p><br></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJqkxzAgS17AG9KpQ1OtqlFWGHiBgNCpvx7ydTjS4MjBJ1jb4a12pnVVnO5Th7cckoNEPKhQmajAVdg02USWVmeLsW=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<h3 id="-ufw-활성비활성">📌 UFW 활성/비활성</h3>
 
-<p>VCN 이름을 설정하고 다음 클릭</p>
+<p><strong>1). UFW 활성화</strong></p>
 
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZctP8XvWQbWqzGbVm-w77_ba-OS6OrBJb46yB5-zZv1IxFQDJ9z4q80NN8B-4D2O3qMINEhwKwEaA65i_zTR4aDLa=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>생성 버튼을 눌러 리소스 생성을 완료합니다.</p>
-
-<p><br></p>
-
-<h3 id="-인스턴스-생성">📌 인스턴스 생성</h3>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNGOpUG5JQk1Y20qWPgcKom-VzhRcFsYcez9OIcBXBhA1q6MjLkamcxo3FMef5Uhsg1FdpF8fD0x6dydtnJl3GAjIyoIA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>VM 인스턴스 생성을 눌러 줍니다.</p>
-
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1m0uwf3jt9p5biT_6GwYRrmuWIoUXdvRUlZ0HbDrbWTYrj1VK4ci1QVvZhNRVNuKISN1FAY2l3rI7Fyap86OMc6E1EA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>인스턴스 이름과 이전에 생성한 구획을 선택해줍니다.</p>
-
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdIXghpgxv_vlEivea2ZDnBtqZT-NuITqQPLie9l8He0bfkDT-Of9-oZUhU783AMfII_LhhfdlcLjwMNKIYZz1c37o7w=w1524-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>이미지와 Shape 선택이 가능하고<br>
-항상 무료 적격이라 적혀있는 것을 선택해서 사용해주면된다.</p>
-
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo3-KkV26L9DztTmGJe7RvC3TpnqdtJ_TuMqP8fQwXvxfrpIKJH8pSbmXrPtmaHYtX1oresm5LE13S4bx5tot7rF5qUQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>네트워킹도 마찬가지로 이전에 만들어둔 VCN 네트워크를<br>
-선택해주시면 됩니다.</p>
-
-<p>만약 구획생성과 네트워킹을 만들어주지 않았다면<br>
-인스턴스 생성을하여도 에러가 발생합니다.</p>
-
-<p><br></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOEnVFm0OsNdlUigDiwml8a2oJrXHpmUdMcf1PLn7PSX0fIHhR77mwY1-pbOOsFqz_Ld4ydtHu7l_TeA0f4AN17rBy2Q=w1524-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>SSH 키를 추가해줘야하는데<br>
-이전에 Github를 사용하신분들은 공용키가 이미 있을 것이다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw <span class="nb">enable</span>
 </code></pre></div></div>
 
-<p>명령어를 입력해 공용 ssh를 붙여넣어주시면 됩니다. <br>
-만약 없다면 생성을 해주시면 되는데, 해당 내용은 스킵하겠습니다.</p>
-
-<p>부트 볼륨과 같은 경우에는 100GB까지 최대로 사용가능하고<br>
-50GB씩 2개의 인스턴스를 만들어 나눠사용할 수도 있습니다.</p>
-
-<p>이제 설정을 끝냈으면, 생성을 눌러 최종완료를 해주시면 됩니다.</p>
-
 <p><br></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo2CptbsDAon2CtX6-RAqpmRSSTa7z3m9LWRW9JCFCdVbgMoJTOb9hisTz1OHSLY0EkNb9cXhzDeMauPpUOxUqBrtAXQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><strong>2). UFW 비활성화</strong></p>
 
-<p>이제 인스턴스 정보에 가서 확인해보시면<br>
-내가만든 인스턴스를 확인해 볼 수 있다.</p>
-
-<p><br></p>
-
-<h3 id="-인스턴스-접속하기">📌 인스턴스 접속하기</h3>
-
-<p>이제 인스턴스를 만들었으니 접속을하는법을 알아보자<br>
-우리는 공용 SSH로 인스턴스를 만들었다.</p>
-
-<p>$HOME/.ssh 경로에 private key가 저장되어 있기 때문에 <br>
-암호를 입력하지 않아도 원격 서버에 접속할 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh ubuntu@주소
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw disable
 </code></pre></div></div>
 
-<p>만약 private key가 $HOME/.ssh 경로에 위치하지 않은 경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> <span class="o">[</span>private key path] ubuntu@주소
+<p><br></p>
+
+<p><strong>3). UFW 상태확인</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw status verbose
 </code></pre></div></div>
-<p>를 입력해주면 접속이 가능하다.
-[private key path]에는 경로를 입력해주면 된다.</p>
 
-<p>터미널에서 입력시</p>
+<p>상태확인 명령어를 입력하면</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN0U_vZhmyBCubkA_yUqYCkiETMcUZtOnZLVXoUTz9DjMI_17cNV1t6S7kLe2Ajxg3hGFEed9nmR6d7kK4Ha7nvpTyeAw=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
+Logging: on <span class="o">(</span>low<span class="o">)</span>
+Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
+New profiles: skip
 
-<p>와 같이 정상적으로 인스턴스에 접속한 모습을 볼 수 있다 !!</p>
+To                         Action      From
+<span class="nt">--</span>                         <span class="nt">------</span>      <span class="nt">----</span>
+3306/tcp                   ALLOW IN    Anywhere
+80/tcp                     ALLOW IN    Anywhere
+3306/tcp <span class="o">(</span>v6<span class="o">)</span>              ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
+80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
+</code></pre></div></div>
+<p>와 같이 허용한 포트에 대해 표시가된다. ex) 80, 3306<br>
+위에서 확인이 가능하듯, 기본룰은</p>
+
+<p>incoming는 전부 거부(deny)<br>
+outgoing은 전부 허가(allow)<br>
+로 UFW에 기본으로 설정되어있는 룰이다.</p>
 
 <p><br></p>
 
-<p>FileZilla를 통해서도 접속이 가능하다.</p>
+<h3 id="-ufw-허용차단-룰추가">📌 UFW 허용,차단 룰추가</h3>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNNwSW2rB9___rqmhE9ee14DuQbywCDLJsaQY9D9nUls2WpBa9DsFwQ2tVE-3hj33naagXa8NPqAbdt8njgA5D9Weh_Ww=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><strong>1). http 80번 포 TCP,UDP 포트를 모두허용</strong></p>
 
-<p>SFTP - SSH 프로토콜을 선택해준다음에   <br>
-호스트는 인스턴스 주소를 입력해주면 된다.<br>
-그리고 키파일을 공개키가 아닌 <code class="language-plaintext highlighter-rouge">id_rsa</code> private key를 선택해주면<br>
-정상적으로 접속할 수 있는 모습을 확인해 볼 수 있다.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80
+</code></pre></div></div>
 
 <p><br></p>
+
+<p><strong>2). http 80번 포 TCP 포트만 허용</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/tcp
+</code></pre></div></div>
+
+<p><br></p>
+
+<p><strong>3). http 80번 포 UDP 포트만 허용</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/udp
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>반대로 차단과 같은 경우에는 allow자리에 <br>
+<code class="language-plaintext highlighter-rouge">deny</code> 명령어를 입력해주면 된다.</p>
+
+<p><br></p>
+
+<h3 id="-ufw-허용차단-룰-삭제">📌 UFW 허용,차단 룰 삭제</h3>
+
+<p>위에서 <code class="language-plaintext highlighter-rouge">allow</code>, <code class="language-plaintext highlighter-rouge">deny</code>명령어를 이용해 <br>
+허용과 차단 룰을 추가해주었다. <br>
+<code class="language-plaintext highlighter-rouge">sudo ufw status verbose</code>로 조회하였을 경우에<br>
+아래와 같이 조회되었다고 가정했을때</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
+Logging: on <span class="o">(</span>low<span class="o">)</span>
+Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
+New profiles: skip
+
+To                         Action      From
+<span class="nt">--</span>                         <span class="nt">------</span>      <span class="nt">----</span>
+80/tcp                     ALLOW IN    Anywhere
+80                         DENY IN     Anywhere
+80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
+80 <span class="o">(</span>v6<span class="o">)</span>                    DENY IN     Anywhere <span class="o">(</span>v6<span class="o">)</span>
+</code></pre></div></div>
+<p>해당 정책들을 삭제하고 싶은 경우에는</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete deny 80
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete allow 80/tcp
+</code></pre></div></div>
+<p>와 같은 방식으로 <code class="language-plaintext highlighter-rouge">delete</code> 명령어를 이용해 룰을 삭제할 수 있다.</p>
+
+<p><br></p>
+
+<p>✨ 참고 블로그 <br>
+<a href="https://kibua20.tistory.com/124">클라우드 방화벽 설정 참고 레퍼런스</a>, <a href="https://webdir.tistory.com/206">우분투 UFW 설정 참고 레퍼런스</a></p>
 
 
 
@@ -828,15 +815,15 @@ VCN 마법사를 시작한다.</p>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/linux/unix/2022/12/29/server-NginX.html" title="AWS EC2 NginX 클라이언트 배포">AWS EC2 NginX 클라이언트 배포</a><a class="next" href="/db/2023/01/01/db-oraclesetting.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">Oracle Cloud Ubuntu 22.04 1GB 램...</a>
+<a class="previous" href="/spring/2023/01/21/spring-email.html" title="Spring) MailAuthenticationException 문제 해결">Spring) MailAuthenticationException 문제 해결</a><a class="next" href="/linux/unix/2023/01/28/server-nginxerror.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">Nginx 에러 조치 , Failed to...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">macOs) neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/til/2022/11/18/til.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">TIL) Spring Security 1 (기초)</a></li>
-<li><a class="post-link" href="/til/2022/11/22/til.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">TIL) Spring Security 3 (권한부여)</a></li>
-<li><a class="post-link" href="/til/2022/11/14/til.html" title="Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선">TIL) API Documentation 2</a></li>
+        <li><a class="post-link" href="/til/2022/11/08/til.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">TIL) JUnit 1</a></li>
+<li><a class="post-link" href="/git/2023/01/12/git-commitmessage.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">Git 이전 Commit Message 수정하기</a></li>
+<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">macOs) neofetch를 활용하여 terminal 커스터마이징</a></li>
+<li><a class="post-link" href="/til/2022/11/02/til.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
 </ul>
     </div>
 <div class="post-comments">
