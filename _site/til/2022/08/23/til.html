@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) HTML,CSS 기초 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="TIL) HTML,CSS 기초">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="1주차 화요일. 오늘은 아침에 일어나기 유난히 힘들었다. 일어나자마자 에스프레소 샷2잔을 내리 먹었다.">
+<meta property="og:description" content="1주차 화요일. 오늘은 아침에 일어나기 유난히 힘들었다. 일어나자마자 에스프레소 샷2잔을 내리 먹었다.">
+<link rel="canonical" href="http://localhost:4000/til/2022/08/23/til.html">
+<meta property="og:url" content="http://localhost:4000/til/2022/08/23/til.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-08-23T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="TIL) HTML,CSS 기초">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-08-23T00:00:00+09:00","datePublished":"2022-08-23T00:00:00+09:00","description":"1주차 화요일. 오늘은 아침에 일어나기 유난히 힘들었다. 일어나자마자 에스프레소 샷2잔을 내리 먹었다.","headline":"TIL) HTML,CSS 기초","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/til/2022/08/23/til.html"},"url":"http://localhost:4000/til/2022/08/23/til.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">TIL) HTML,CSS 기초</h1>
+  <h2 class="post-subtitle">코드스테이츠 백엔드 부트캠프 D+4</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2022-08-23T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Aug 23, 2022
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>1주차 화요일.<br>
+오늘은 아침에 일어나기 유난히 힘들었다.<br>
+일어나자마자 에스프레소 샷2잔을 내리 먹었다.</p>
+
+<p>이제 공부시간이니 잠을 깨고 집중해보려한다.<br>
+어제는 컴퓨터가 무엇인지? 웹 클라이언트와 웹서버<br>
+Java 개발환경 설정까지 완료해서 Hello World를 띄어보았다.<br>
+오늘은 HTML과 CSS 챕터이다.<br>
+백엔드 과정인데 프론트엔드 교육이 있는 이유는<br>
+너무나도 당연하게 현업에서 프론트엔드와 소통해야할 경우 많고<br>
+작업간의 겹쳐있는 부분이 있기에 알아두면 무조건 좋다.<br>
+기존의 내 직종에서도 소통이 얼마나 중요한지 나는 느껴보았기 때문에<br>
+확실하게 공부해서 현업소통시 문제없도록 준비해갈 생각이다.</p>
+
+<p><br></p>
+
+<p>집을 짓는다고 가정할때</p>
+
+<p>HTML : 집의 구조, 뼈대를 만들고 (구조)<br>
+CSS : 집을 꾸미고, 이쁘게 만들고 (스타일)<br>
+JS : 집 내부의 밤이되면 켜지는 전구를 설치 (상호작용) <br>
+이라고 생각하면 간단할 것 같다.</p>
+
+<p><br></p>
+
+<h3 id="html-hypertext-markup-language"><strong>HTML (HyperText Markup Language)</strong></h3>
+
+<p>HTML은 tag의 집합이라 생각하면 된다.<br>
+Tag: 부등호(&lt;&gt;)로 묶인 HTML의 기본 구성 요소 <br>
+ex) <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>,<code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> etc..</p>
+
+<p><br></p>
+
+<p><strong>Tree Structure</strong></p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+
+        <span class="nt">&lt;p&gt;&lt;p&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<p><strong>Tag</strong></p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div&gt;</span> : 한줄을 차지합니다.  
+<span class="nt">&lt;span&gt;</span> : 컨텐츠 크기만큼 공간을 차지합니다.  
+div vs span : 한줄을 차지하냐 아니냐의 차이.
+
+<span class="nt">&lt;section&gt;</span> : 웹 페이지의 큰 의미 단위가 될 수 있는 어떤 것이든 묶어서 하나의 구역을 구분  
+<span class="nt">&lt;h1&gt;</span>~<span class="nt">&lt;h6&gt;</span> : 제목  
+<span class="nt">&lt;strong&gt;</span> : 문장의 일부분을 강조 ex) **주의 !!**  
+<span class="nt">&lt;em&gt;</span> : 구어체의 강조 ex) _얼른 !!_  
+<span class="nt">&lt;mark&gt;</span> : 텍스트의 형광펜처럼 하이파리트 표시  ex) 고양이  
+<span class="nt">&lt;sub&gt;</span> : 아랫첨자 텍스트 표시, 수학,과학등 ex) 2H₂   
+<span class="nt">&lt;del&gt;</span> : 텍스트의 가운데라인 추가 ex) ~나는~
+<span class="nt">&lt;q&gt;</span> : 문단안의 짧은 인용구, 따음표추가됨 ex) "나무위키는 좋습니다"
+<span class="nt">&lt;blockquote&gt;</span> : 다른 출처로부터 인용된 블록을 정의
+<span class="nt">&lt;bdo</span> <span class="na">dir=</span><span class="s">"rtl"</span><span class="nt">&gt;</span> : 텍스트의 방향성을 정의 ex) "요세하녕안"
+<span class="nt">&lt;abbr&gt;</span> : "W3C","HTML"등과 같이 단어의 축약형(abbreviation)이나
+머리글자로된 단어를 정의할떄 사용
+
+<span class="nt">&lt;pre&gt;</span> : 요소 내의 텍스트를 그대로 표시
+<span class="nt">&lt;hr&gt;</span> : 가로줄 넣기 / style = "border: 선종류,굵기,색상"
+<span class="nt">&lt;br&gt;</span> : 줄바꿈 넣기
+<span class="nt">&lt;img&gt;</span> : 이미지 삽입. / img = "" : 주소
+<span class="nt">&lt;a&gt;</span> : 링크 삽입. / href = "" : 주소  / target = "" : 탭지정
+<span class="nt">&lt;ul&gt;</span>,<span class="nt">&lt;ol&gt;</span>,<span class="nt">&lt;li&gt;</span> : 리스트
+<span class="nt">&lt;input&gt;</span> : 입력 폼 / type ="radio" name="" : 여러버튼중 선택 / type = "checkbox" : 체크박스
+<span class="nt">&lt;textarea&gt;</span> : 입력 폼, 줄바뀜이됨
+<span class="nt">&lt;button&gt;</span> : 버튼
+</code></pre></div></div>
+
+<p>*HTML 연습!!* -&gt; <a href="https://www.w3schools.com/html/html_exercises.asp">HTML Exercises</a>사이트</p>
+
+<p><br></p>
+
+<h3 id="css-cascading-style-sheets"><strong>CSS (Cascading Style Sheets)</strong></h3>
+
+<p>웹 페이지 스타일 및 레이아웃을 정의하는 스타일시트 언어.<br>
+<em><strong>UI (사용자 인터페이스 / User Interface)</strong></em><br>
+컴퓨터와 교류하기 위한 연결고리.<br>
+예를 들어, 트위터를 트윗할때 글작성 후 버튼만 누르지 누구도 CLI(터미널)을 사용하지 않는다.<br>
+사용자가 쉽게 컴퓨터에게 의도한 행동을 명령할 수 있게 만든 인터페이스 앞에 “사용자”를 붙여<br>
+<strong>사용자 인터페이스</strong>라고 한다.</p>
+
+<p><em><strong>UX (좋은 사용자 경험 / User Experience)</strong></em><br>
+UX는 직관적이고 쉬운 UI에서 나온다.<br>
+UX를 신중하게 고려하여 구성된 UI는 사용자 입장에서 좀 더 편리하고<br>
+직관적으로 어플리케이션을 사용할 수 있도록 도울 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/216758189-31d7ed44-0b0a-4b43-ba60-615d9a77d595.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"index.css"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>HTML과 CSS파일 연결 방법 index.css라고 지정된파일을 연결함으로서 CSS가 적용됨<br>
+CSS 적용 방법 중 위와 같이 외부의 index.css라는 파일을 불러와서 사용하는 방식을<br>
+<strong>외부 스타일 시트</strong>라고 합니다. 이외에 같은 줄에서 스타일 적용하는 <strong>인라인 스타일</strong>,<br>
+별도의 파일을 구분하지 않고 style 태그 내에 작성하는 <strong>내부 스타일 시트</strong>가 있습니다.</p>
+
+<p>✔︎관심사 분리 측면에 있어 인라인 스타일, 내부 스타일 시트는 권장하지 않는 방법</p>
+
+<p><br></p>
+
+<h4 id="셀렉터-selector"><strong>셀렉터 (selector)</strong></h4>
+
+<p>기본적인 태그로 셀렉팅할 수 있고, id, Class붙여서 스타일링을 적용할 수도 있다.</p>
+
+<p><em><strong>태그로 셀렉터 지정</strong></em></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h4 {
+  color: red;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;index.css&gt; &lt;index.html의 h4태그를 전부 red로 바꿈&gt;</code></p>
+
+<p><br></p>
+
+<p><em><strong>id로 셀렉터 지정</strong></em></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#navigation-title {
+  color: red;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;index.css 파일&gt; &lt;index.html의 navigation-title이라는 id의 태크만 red로 바꿈&gt;</code></p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h4</span> <span class="na">id=</span><span class="s">"navigation-title"</span><span class="nt">&gt;</span>This is the navigation section.<span class="nt">&lt;/h4&gt;</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;index.html 파일&gt;</code></p>
+
+<p><br></p>
+
+<p><em><strong>Class로 셀렉터 지정</strong></em></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.menu-item {
+  text-decoration: underline;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;index.css파일&gt; &lt;index.html의 menu-item이라는 class의 태그만 밑줄침&gt;</code></p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>Mac<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>iPhone<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>iPad<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;index.html 파일&gt;</code></p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/216758191-4a4465eb-8436-4af7-930f-a75f709c0522.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이 외에도 엄청 다양한 셀렉터 들이있다.<br>
+attribute, 후손, 자식, 인접 형제 등 이러한 것들이 있다고 알아두기만 하자.</p>
+
+<p><br></p>
+
+<p><em><strong>색상</strong></em></p>
+
+<p>글자의 색상을 변경하는 속성</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.red {
+  color: #ff0000;
+}
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.box {
+  color: #155724; /* 글자 색상 */
+  background-color: #d4edda; /* 배경 색상 */
+  border-color: #c3e6cb; /* 테두리 색상 */
+}
+</code></pre></div></div>
+
+<p><br></p>
+
+<p><em><strong>글꼴</strong></em></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.emphasize {
+  font-family: "SF Pro KR", "MalgunGothic", "Verdana";
+}
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>*구글폰트 -&gt; https://fonts.google.com/</p>
+
+<p><br></p>
+
+<p><em><strong>크기</strong></em></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.title {
+  font-size: 24px;
+}
+</code></pre></div></div>
+
+<ul>
+  <li>절대 단위: px, pt 등</li>
+  <li>상대 단위: %, em, rem, ch, vw, vh 등</li>
+</ul>
+
+<p>기기나 브라우저 사이즈 등 환경에 영향받지 않는 절대적 크기 = px(픽셀)을 자주사용<br>
+일반적인 상대적인 경우 = rem</p>
+
+<p><br></p>
+
+<p><em><strong>기타 스타일링</strong></em></p>
+
+<ul>
+  <li>굵기: font-weight</li>
+  <li>밑줄, 가로줄: text-decoration</li>
+  <li>자간: letter-spacing</li>
+  <li>행간: line-height</li>
+</ul>
+
+<p><br></p>
+
+<p><em><strong>정렬</strong></em></p>
+
+<p>가로정렬 text-align / left, right, center, justifty(양쪽 정렬)<br>
+세로정렬 vertical-align / 부모 요소의 display 속성이 반드시 table-cell이어야한다.</p>
+
+<p><br></p>
+
+<h4 id="박스-모델"><strong>박스 모델</strong></h4>
+
+<p>모든 콘텐츠는 고유한 영역이 있다.<br>
+박스는 항상 직사각형이고, 너비(witdth)와 높이(height)를 가진다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>Basic document flow<span class="nt">&lt;/h1&gt;</span>
+	<span class="nt">&lt;p&gt;</span>I am a basic block level element. My adjacent block level elements sit on new lines below me.<span class="nt">&lt;/p&gt;&lt;p&gt;</span>By default we span 100% of the width of our parent element, and we are as tall as our child content. Our total width and height is our content + padding + border width/height.<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;p&gt;</span>We are separated by our margins. Because of margin collapsing, we are separated by the width of one of our margins, not both.<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;p&gt;</span>inline elements <span class="nt">&lt;span&gt;</span>like this one<span class="nt">&lt;/span&gt;</span> and <span class="nt">&lt;span&gt;</span>this one<span class="nt">&lt;/span&gt;</span> sit on the same line as one another, and adjacent text nodes, if there is space on the same line. Overflowing inline elements will <span class="nt">&lt;span&gt;</span>wrap onto a new line if possible (like this one containing text)<span class="nt">&lt;/span&gt;</span>, or just go on to a new line if not<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<p>[코드] HTML 예시</p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 {
+  background: gray;
+  width: 60%;
+}
+
+p {
+  background: rgba(255,84,104,0.3);
+  width: 80%;
+  height: 200px;
+}
+
+span {
+  background: yellow;
+  width: 100px;
+  height: 100px;
+}
+</code></pre></div></div>
+
+<p>[코드] CSS 예시</p>
+
+<p>block : 줄바꿈이 되는 박스<br>
+inline, inline-block : 옆으로 붙는 박스</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/216758193-f0b80643-1f25-4af4-80fb-c205ce3991d3.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><br></p>
+
+<h4 id="박스를-구성하는-요소"><strong>박스를 구성하는 요소</strong></h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/216758196-5d760bdb-b35f-4f92-baaa-1c6aa9d32e0c.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><em><strong>border (테두리)</strong></em></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+  border: 1px solid red;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 1px 빨간색 실선 추가&gt;</code></p>
+
+<p>border : 1px solid red;<br>
+의 코드에서 순서는 아래와 같다.<br>
+border-width(테두리 두께), border-style(테두리 스타일), border-color(테두리 색상)</p>
+
+<p><br></p>
+
+<p><em><strong>margin (바깥 여백)</strong></em></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+  margin: 10px 20px 30px 40px;
+}
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 상하좌우에 여백을 추가&gt;</code></p>
+
+<p>top이 10px, right이 20px, bottom이 30px, left이 40px 으로 적용된다.<br>
+상하좌우 순서이다.</p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+  margin: 10px 20px;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 위아래, 좌우 각각 여백 추가&gt;</code><br>
+top,bottom이 10px / left,right 20px 으로 적용된다.</p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+  margin: 10px;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;p 태그의 모든 방향에 여백 추가&gt;</code><br>
+top,bottom,left,right 전부 10px로 적용된다.</p>
+
+<p><br></p>
+
+<p><em><strong>padding (안쪽 여백)</strong></em></p>
+
+<p>테두리와 컨텐츠 사이라 생각하면 편하다!</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+  padding: 10px 20px 30px 40px;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 상하좌우에 여백을 추가&gt;</code><br>
+margin과 동일한 순서로 적용됨.</p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+  padding: 10px 20px 30px 40px;
+  border: 1px solid red;
+  background-color: lightyellow;
+}
+</code></pre></div></div>
+<p><em><strong>박스를 벗어나는 콘턴체 처리</strong></em><br>
+박스 크기보다 콘텐츠 크기가 더큰 경우!<br>
+콘텐츠가 박스 바깥으로 빠져나오게된다.</p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+  height: 40px;
+  overflow: auto;
+}
+</code></pre></div></div>
+
+<p>overflow 속성을 적용함으로서 스크롤을 추가할 수도 있고 가릴 수도 있다.!<br>
+overflow : auto; (콘텐츠가 넘치는경우 스크롤 생성)<br>
+overflow : hidden; (콘텐츠가 넘치는경우 가림)<br>
+overflow-x / overflow-y로 관리도 가능.<br>
+여백 설정을 고려하지 않은 박스 크기설정은<br>
+안쪽에 있는 박스가 밖에있는 박스크기를 벗어날 수 있다.</p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* {
+  box-sizing: border-box;
+}
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">&lt;모든 요소에 box-sizing: border-box를 추가&gt;</code><br>
+이렇게 모든요소에 적용을 하면, 모든 박스에서 여백과 테두리를 포함한 크기로 계산된다. <br>
+일반적으로 box-sizing은 HTML문서 전체에 적용한다.</p>
+
+<p><br></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#inner {
+  width: 100%;
+  height: 200px;
+  border: 2px solid green;
+  background-color: lightgreen;
+  padding: 30px;
+}
+</code></pre></div></div>
+<p>위에 코드라고 가정했을 경우<br>
+box-sizing을 추가하지 않았을경우와 추가했을 경우를 나타내보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/216758198-bdfa14be-5e9f-421f-89f6-605d57e253a2.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>맨위와 같이 box-sizing을 추가하지 않았을경우<br>
+content(300x200) 파란색 박스가 그대로 300px,200px로 적용되었다.</p>
+
+<p>하지만!<br>
+아래와 같이 box-sizing을 추가하였을 경우<br>
+content(212x136) 파란색 박스가 212px, 136px로 줄어든 모습을 볼 수있다.<br>
+이 이유는 border사이즈와 padding사이즈를 포함한 크기로 계산되었기 때문이다.</p>
+
+<p>*CSS 연습!!!!* -&gt; <a href="https://www.w3schools.com/css/css_exercises.asp">CSS Exercises</a></p>
+
+<p><br></p>
+
+<p>오늘의 공부는 이렇게 끝냈다.<br>
+기본적은 HTML,CSS를 다루는 법을 배웠고<br>
+개념적인 내용들과 실습까지 해볼 수 있는 커리큘럼이<br>
+Urclass에 마련되어있어서 어렵지 않게 진행할 수 있었다.<br>
+사실 기존에 공부할때 어느정도 봤던 내용들이라 이해가 쉬웠기도했고<br>
+그 내용을 한번더 정리하는 느낌으로 꼼꼼하게 읽으니 <br>
+알던 태그들도 조금도 정확하게 인지할 수 있던 것 같다.</p>
+
+<p><span style="color:#994C00"><strong>오늘의 커피량</strong></span>: ☕️ ☕️ ☕️ ☕️️️️<br>
+<strong>오늘의 점심</strong>: 김치찌개, 소시지계란부침, 만두, 공기밥</p>
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/macos/2022/08/23/OS-macOs-2.html" title="맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법">맥북 터미널 git언어를 한글에서 영어로 바꾸는...</a><a class="next" href="/til/2022/08/25/til.html" title="TIL) HTML,CSS 목업화면 만들어보기">TIL) HTML,CSS 목업화면 만들어보기</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html" title="TIL) HTML,CSS 목업화면 만들어보기">Nginx 에러 조치 , Failed to start A high performance web server...</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="TIL) HTML,CSS 목업화면 만들어보기">TIL) Spring Exception 2</a></li>
+<li><a class="post-link" href="/til/2022/11/23/til.html" title="TIL) HTML,CSS 목업화면 만들어보기">TIL) JWT 기초</a></li>
+<li><a class="post-link" href="/til/2022/09/16/til.html" title="TIL) HTML,CSS 목업화면 만들어보기">TIL) Java Thread, JVM</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

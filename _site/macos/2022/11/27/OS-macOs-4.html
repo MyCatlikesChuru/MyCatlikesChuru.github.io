@@ -707,7 +707,7 @@ Mac 사용 유저라면 익히 알고 있을 것이다.</p>
 <code class="language-plaintext highlighter-rouge">sudo apachectl start</code> 명령어와 <code class="language-plaintext highlighter-rouge">sudo apachectl stop</code> 명령어를<br>
 사용하게 되는데… AH00558 코드로된 알람이 발생했다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN62e1LojunarrQo9k4FcmeNqC9ijlkjf5awlNKzQI_PdKk04LLPQ5yk6g__OopFMDQBwdZx6DY0LSvVorJxOp-zOJz=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/216759118-f58645f6-414c-4b2d-9be9-94727b0b1142.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AH00558: httpd: Could not reliably determine the server<span class="s1">'s fully qualified domain name, using MacBook-Pro.local. Set the '</span>ServerName<span class="s1">' directive globally to suppress this message
 </span></code></pre></div></div>
@@ -748,7 +748,7 @@ localhost:8080에 접속해야지만 화면이 노출되었고<br>
 
 <p>편집기를 열고 아래와 같은 Listen을 찾아준다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gORqVAKzYaFjaoXLq83Ak0sGng40EHF8WVydfPVIjppJZmhGs4t0OrLSVy1DHYY9EIRGQhxH_-z9ZjpH3vk4pQ87LJw=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/216759122-8c2ff1ce-894e-43e0-a1db-acdaa0b292f7.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>아마 기본적으로 8080으로 설정되어있을 것이다.<br>
 #으로 주석처리를 해준다음, 아래에서 <code class="language-plaintext highlighter-rouge">Listen 80</code>으로 설정해주었다.</p>
@@ -757,7 +757,7 @@ localhost:8080에 접속해야지만 화면이 노출되었고<br>
 
 <p><strong>3). localhost로 변경 하기</strong></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPs7EdAAcTa5O8pd94AvHA4Xm35986PySX8c4-VPFePRIVUKV9gcprEIMgt2eUROtV1mzX81Jg28vZWB1uwBUojZzYRUg=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/216759124-eb641624-5c55-47e5-ae4f-efc77d131343.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>위의 사진과 같이 ServerName을 localhost로 설정해주면 된다.</p>
 
@@ -768,7 +768,7 @@ localhost:8080에 접속해야지만 화면이 노출되었고<br>
 <p>아파치 웹서버 실행 명령어인<br>
 <code class="language-plaintext highlighter-rouge">sudo apachectl start</code>,<code class="language-plaintext highlighter-rouge">sudo apachectl stop</code>를 입력해도</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPGBufrgNA1K5hfte_Sx0sWMhWjy68Hyk4rkeLTFPKCySEyCz8RbT_bHP87qMbdj3-6tOMxat_CzXCuPpjV1cIP4pg7IA=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/216759127-26dc0ee9-6673-4504-bd66-fdcdf7ad0118.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>더 이상 AH00558 오류가 발생하지 않는 모습이다.</p>
 
@@ -776,7 +776,7 @@ localhost:8080에 접속해야지만 화면이 노출되었고<br>
 
 <p>아파치 웹서버를 실행 시켜놓은 상태에서</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMnn1GHsEbByqR_FSstRzZCjQqJaBJmIQEjuaQvXf8cR0CJlXhpV-DxhntogF7qgq01lz4cTFYEjlAtZz8viUulgc7tGg=w3024-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/216759128-c9763920-58d3-4927-8bb2-430d5bdd2d61.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>localhost를 입력하여 접속할 경우<br>
 이제 드디어 <code class="language-plaintext highlighter-rouge">It works</code> 화면을 볼 수 있게 된다 !!</p>
@@ -788,18 +788,22 @@ localhost:8080에 접속해야지만 화면이 노출되었고<br>
 <p>이 부분은 참고차 한번 적어본다.<br>
 아파치 웹서버에 내가 만든 html 파일을 적용 시키고싶을때</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPTW_3KvqtDpHZUUx6KVVDK5UuXQKDQkRtsORvvWo2uO2mNbH5yBzOGtWQ5dvYNyCEbR4YUKP4L0_WC7VPilQyvywpa_A=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/216759129-91990078-e1a7-4f7f-a7bf-9d3c81bc2604.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p><code class="language-plaintext highlighter-rouge">httpd.conf</code> 파일에서 <code class="language-plaintext highlighter-rouge">DocumentRoot</code>를 수정해주면 html 파일을 사용할 수 있다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO7lUL65h8BldRSUqB3uhe1yp1KkeQH7B0alNJKxo9-MEgSt4FDg4TESq6--_sPid77Hr3wFTnyjlymHN_ew5HCBRp8BQ=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/216759130-a5356e3a-8b03-4f18-af5b-f5c6ad370f4e.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>예를 들어서 index.html 이라는 파일을 만들어 위의 경로에 파일을 두었을때</p>
+
+<p><br></p>
 
 <p>기존에 localhost:80 접속 시 <code class="language-plaintext highlighter-rouge">It wroks!</code>로 나왔던 화면이<br>
 내가 만든 화면으로 대체된 모습을 볼 수 있다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOYsWcYBTVzuM4XeKO4-rRiiiIa5HHhpGvB3If3dB2skNJ8cHMMhasTc_yCL8-rlpKpKDeWkW7tZqAAn6JbkNB0BAReXA=w1184-h1728" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/216759133-d990ed8a-5e63-41d4-a611-ba9ae9009612.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>이 화면은 테스트용으로 만든 화면이고<br>
 정상적으로 파일이 접속된 모습을 볼 수 있다.<br>
@@ -826,10 +830,10 @@ localhost:8080에 접속해야지만 화면이 노출되었고<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html" title="TIL) Spring Security, JWT , OAuth 2 인증">Spring) Security Test 코드 작성시 UserDetails 설정</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="TIL) Spring Security, JWT , OAuth 2 인증">맥북 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
-<li><a class="post-link" href="/git/2023/01/12/git-cherrypick.html" title="TIL) Spring Security, JWT , OAuth 2 인증">Git Cherry-Pick으로 Commit 옮기기</a></li>
-<li><a class="post-link" href="/til/2022/12/14/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) 네달차 회고</a></li>
+        <li><a class="post-link" href="/til/2022/10/19/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) 두달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/10/04/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) Network HTTP</a></li>
+<li><a class="post-link" href="/til/2022/09/13/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
+<li><a class="post-link" href="/til/2022/11/17/til.html" title="TIL) Spring Security, JWT , OAuth 2 인증">TIL) 인증, 보안 기초</a></li>
 </ul>
     </div>
 <div class="post-comments">
