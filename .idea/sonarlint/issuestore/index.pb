@@ -27,10 +27,6 @@ Y
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
 V
 &_posts/DataBase/2022-11-15-db-mysql.md,9/d/9d4b070211f853744d54fccc677b0de3d63552ba
-X
-(_posts/OS/macOs/2022-12-04-OS-macOs-5.md,7/9/7994a58e8678a0a57e62bd1bd447f962c1b98d5b
-X
-(_posts/OS/macOs/2022-11-27-OS-macOs-4.md,d/f/df52698433e11f42b15242cf2081a62c3b3c5251
 f
 6_posts/Program/Spring/2022-11-25-spring-environment.md,2/b/2b8f6cd4e26b8df73c881491d10b1b1c581c37b7
 ]
