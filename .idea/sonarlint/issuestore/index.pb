@@ -6,8 +6,6 @@
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-03-til.md,3/6/364fb4924b11fc8efff6cd1ae5a62f62e737925a
 ]
--_posts/TIL/BootCamp/2022-08/2022-08-31-til.md,5/9/594a5a066551cfe13228024f790c462525591197
-]
 -_posts/TIL/BootCamp/2022-11/2022-11-18-til.md,4/8/4804e4102e1c638c88d3da431b4c0dd2277f5ff6
 Z
 *_posts/DataBase/2022-12-19-db-h2setting.md,0/c/0cc907d10ce9ffe6a979e6d8b4f60a8c0ca6d765
@@ -111,3 +109,17 @@ Y
 )_posts/DataBase/2022-12-28-db-mysqlEC2.md,5/c/5c67792b4e2e3b4e76d2308747c6236a42f57ec7
 `
 0_posts/Program/Spring/2023-01-21-spring-email.md,4/0/4003a83f50a56034980e5a64091a978fad90ed2b
+]
+-_posts/DataBase/2023-01-08-db-redissetting.md,c/6/c60385c7632b9c210016b8a31d632719b1017ba5
+`
+0_posts/Server/2023-01-01-server-oraclesetting.md,b/3/b3969b28a84a5ded361eccd410d034eef443272b
+`
+0_posts/Server/2023-01-27-server-oraclesetting.md,6/4/6415f40ac5bb2874e6a1eddc7630a56429062a07
+`
+0_posts/OS/Linux(Unix)/2023-01-28-server-NginX.md,a/5/a5087d54eb322c98b21fae737611ccc9e8411aea
+e
+5_posts/OS/Linux(Unix)/2023-01-28-server-nginxerror.md,6/0/6002ce98ff1847f9b9521eefaa86e508f2b9a9c2
+`
+0_posts/OS/Linux(Unix)/2022-12-29-server-build.md,3/0/304bef088ebfa503a07d18b3928a616b7c57cdd7
+`
+0_posts/OS/Linux(Unix)/2022-12-29-server-NginX.md,c/f/cf37e282c6c257befd147a49c0f3dda3a88f69b7
