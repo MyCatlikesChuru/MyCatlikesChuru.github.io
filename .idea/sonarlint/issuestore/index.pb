@@ -19,8 +19,6 @@ Z
 -_posts/TIL/BootCamp/2022-08/2022-08-26-til.md,b/7/b79d18e088ac89983c93afeb426528e3ee060e62
 _
 /_posts/Program/Spring/2022-12-12-spring-cors.md,3/c/3c648878842476127dfe42060799e25e1b07c616
-Y
-)_posts/DataBase/2022-12-19-db-mysqlEER.md,9/2/924b7fdeb0265a31408965575ac5a9cac53d2527
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
 f
