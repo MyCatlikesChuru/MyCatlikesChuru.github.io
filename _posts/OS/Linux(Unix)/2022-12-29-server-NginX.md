@@ -19,7 +19,7 @@ published: true
 우선 우리팀에서 생각한 아키텍처이다.  
 정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN7pzIQwGbZHGCEUS4jHehIs9yAoOY3RHwfGUqiNHJgziufPka455gX63ZA492CwBarFgJwzDiqJx6XRydBBBJCWJJYNA=w1920-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217410837-977c2254-795b-4973-ba01-149c5251c520.png){: .align-left style="max-width: 100%"}
 
 AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만...   
 프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아  
@@ -107,7 +107,7 @@ apt-get remove --purge nginx nginx-full nginx-common
 기본 페이지인 아래의 화면이 나올 것이다.   
 도메인 주소는 당연히 EC 인스턴스의 IPv4를 입력해주면된다.
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPDQyLIrueFY34ZhChcQqOsepcLPLrsa-qd8SRR-U_eG55nRUstLL8aOqIAjkjg84o68D2be4WfoeOlMewuzCKEmjHv=w1920-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217410844-376f47ef-fad4-4115-a781-897aa5395a60.png){: .align-left style="max-width: 100%"}
 
 기본 설정 PORT가 80이기 때문에  
 `http://3.35.174.126` 으로 입력하여도 접속이 가능한 것이다.
@@ -122,7 +122,7 @@ apt-get remove --purge nginx nginx-full nginx-common
 
 `/etc/nginx` 폴더에 설정 관련파일들을 찾아볼 수 있다.
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPlZj5J-OVdyUfWtLi-3GsOpph99bcO6chVUREqjXeqUdIDkUOKwDuTaIgeCapp2Qls01XhQ1J7hcVYQA0VCaSmXCmlDQ=w1656-h864){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217410846-bda74601-4845-4d19-9105-176b256ba748.png){: .align-left style="max-width: 100%"}
 
 
 여기서 `nginx.conf` 파일에 설정을 시작해주면 된다.  
@@ -192,7 +192,7 @@ server_name에는 동일하게 도메인을 넣어주었다.
 이제 jar 빌드파일을 실행시켜놓고   
 `sudo service nginx start ` 명령어를 입력해주면
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP7Sh6YFwUrS61qHgvcTyuBFnYthfSnOon6P1upWJ51Brs04kAsppAbtReYthNfYC4poomu4WMycAhF6xnd6bN9sVF8OQ=w1656-h864){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217410847-e9f0d2b4-4312-4005-8153-1c51bc90eaac.png){: .align-left style="max-width: 100%"}
 
 우리가 만들어 놓은 `index.html` 화면이 보이기 시작하면서    
 정삭적으로 배포환경에서 동작하는지 확인이 가능하다 !!   

@@ -111,8 +111,6 @@ e
 5_posts/OS/Linux(Unix)/2023-01-28-server-nginxerror.md,6/0/6002ce98ff1847f9b9521eefaa86e508f2b9a9c2
 `
 0_posts/OS/Linux(Unix)/2022-12-29-server-build.md,3/0/304bef088ebfa503a07d18b3928a616b7c57cdd7
-`
-0_posts/OS/Linux(Unix)/2022-12-29-server-NginX.md,c/f/cf37e282c6c257befd147a49c0f3dda3a88f69b7
 V
 &_posts/DataBase/2023-01-14-db-redis.md,f/d/fd52633bda33cc5efb624d3a5faf45662ef73b14
 X
