@@ -37,7 +37,7 @@ git pull origin dev/back
 ```shell
 git pull origin dev/back --rebase
 ```
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOqQhmglDI2UIHVJDTnu_WjQLPnk7ACMDkNhUQ8pUmoiPsPtl5a6FiYF24npWp_kUbadQXyjMgiXwYr8GY8sO1zc7DT=w1000-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217531072-d4b655ed-f047-411b-af49-a08eb274b0b3.png){: .align-left style="max-width: 100%"}
 
 위와 같이 입력을 해주면, 파일이 합쳐진 것이고  
 이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다.   
@@ -49,7 +49,7 @@ git pull origin dev/back --rebase
 git rebase --continue
 ```
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOWB8ml5xWzFozG2oMTnw1eaXLbQ1b_QIq1MrWs-tKPmPDH2ZmzkNog4m6Cc6uanCpaDIl1sM7xJdtwTbHSXZzfm_oaZw=w1000-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217531087-2ad4738a-4cc0-408a-a48b-6c3dbdda892b.png){: .align-left style="max-width: 100%"}
 
 를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.  
 만약 다음에 수정할게 없다면
@@ -66,7 +66,7 @@ git push origin feat/BE/security
 
 아래와 같은 에러에 마주하였을 경우에는
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdfaYWqeGvo785fk05WiwizoOoQKdb9R5ikh015iBPfyVqi-YAhsbhv-Quy79xtXbxja6tJxRaWX_QyBbvp_I_sGBj0A=w1920-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217531097-98d18b4c-42a4-430e-9832-00bd654669c9.png){: .align-left style="max-width: 100%"}
 
 합쳐진게 전부 잘 수정했다고 가정하면
 ```shell
