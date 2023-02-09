@@ -714,7 +714,7 @@ MySQL 설치과정은 생략하겠다.</p>
 
 <p><strong>첫번쨰</strong>로 EC2 보안그룹의 인바운드 규칙을 설정해줘야한다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN095iTdhlGaDzXDoZONY9_byOM5RVo22mey2JsVdznjSR1iAFXH3SeeTRFq2MaN2FCRYRU7O8iAwqpF0rpulNSiOhkKg=w1920-h920" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/217404927-3bdf0452-5ab6-4580-8ff5-c8c7273f3b13.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>MYSQL을 선택하고 0.0.0.0/0 을 지정해주었다.</p>
 
@@ -730,7 +730,7 @@ MySQL 설치과정은 생략하겠다.</p>
 </code></pre></div></div>
 <p>sudo를 이용해야 저장이 가능하다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOPpSA6Dj0VxEP0QUnOJuYtmaV64BdOTsIT_o2mvPCkZHCKxSQaPSVtVXAc4UZqFLGDwoyFIrAOfKw8_9fq_2oG6lFG=w1920-h920" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/217404926-1ee85e87-0d10-45c2-93c0-19082093d5e9.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>파일의 bind-address를 <code class="language-plaintext highlighter-rouge">0.0.0.0</code>으로 설정 해주었고<br>
 mysqlx-bind-address는 주석처리를 해주었다.</p>
@@ -764,7 +764,7 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 </code></pre></div></div>
 <p>명령어로 등록된 user 정보를 확인할 수 있다.</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO-FEGjAwEuSnVLX_OZnmrstM6XDpJZRgPzMGhUCNxJJmQ-ob0QO97XihuOkInNrM8Iy0-9WSM9bBu9z1kaeUmBM_cErg=w1920-h920" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/217404921-fd7b50ad-3296-494f-b58a-35555a97a3bd.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>user가 현재 내가 만들어둔 계정이고 기본으로는 root가 있다.<br>
 그리고 host를 %로 변경해주면 외부에서도 진입이 가능해진다.</p>
@@ -815,7 +815,7 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 <p>위 과정이 전부 완료되었다면<br>
 방금 만든 계정과 비밀번호, 그리고 EC2 공개 IP를 이용해</p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNtl81ccvr2i_SPrMZV_lXTrzZ82HmAX4GffSwHZ0ZRV69bgx16OnwlRwzCVC5YdY1AZL3XQU4lMfH71k-aaMFMmcaIOA=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/217404915-9c0bb24d-3a4d-4157-ac80-5b0e1fd0ee5d.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>위와 같이 정상적으로 WorkBench에 접속할 수 있을 것이다!!!</p>
 
@@ -824,7 +824,7 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 <p>혹시나 아래와 같은 알람이 발생한 경우에는<br>
 <code class="language-plaintext highlighter-rouge">Unable to connect to localhost</code></p>
 
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNjgebqbY9sS3D33Pd29TXwqg6DDU4JIE9Go_c3XFDnw_1RgPPaIsywivrZapu1dPIvXURNgUn-mwRKe4kMYuh2uyuOGw=w1000-h920" alt="image" class="align-left" style="max-width: 100%"></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/217404923-6bc0f0fa-0c22-47fa-92c3-a46b897c74e5.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>나와 같은 경우에는 EC2 인바운드 규칙 설정과 <br>
 <code class="language-plaintext highlighter-rouge">mysqld.conf</code> 설정한 값이 맞지 않아서 였다.<br>
@@ -845,10 +845,10 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/spring/2023/01/15/spring-fileupload.html" title="AWS EC2 NginX 클라이언트 배포">Spring) AWS S3 FileUpload 하여 URL로 관리하기</a></li>
-<li><a class="post-link" href="/til/2022/09/06/til.html" title="AWS EC2 NginX 클라이언트 배포">TIL) Java 객체지향 - 상속, 캡슐화</a></li>
-<li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="AWS EC2 NginX 클라이언트 배포">Jekyll Github IO 블로그 코드 하이라이트</a></li>
-<li><a class="post-link" href="/til/2022/11/28/til.html" title="AWS EC2 NginX 클라이언트 배포">TIL) Spring Security, JWT , OAuth 2 인증</a></li>
+        <li><a class="post-link" href="/til/2022/10/11/til.html" title="AWS EC2 NginX 클라이언트 배포">TIL) Spring Basic 1</a></li>
+<li><a class="post-link" href="/til/2022/09/15/til.html" title="AWS EC2 NginX 클라이언트 배포">TIL) Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+<li><a class="post-link" href="/til/2022/11/09/til.html" title="AWS EC2 NginX 클라이언트 배포">TIL) JUnit 2</a></li>
+<li><a class="post-link" href="/til/2022/12/01/til.html" title="AWS EC2 NginX 클라이언트 배포">TIL) Spring WebFlux 구현하기</a></li>
 </ul>
     </div>
 <div class="post-comments">
