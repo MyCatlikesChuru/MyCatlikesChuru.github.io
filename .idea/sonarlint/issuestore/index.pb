@@ -7,8 +7,6 @@
 -_posts/TIL/BootCamp/2022-11/2022-11-03-til.md,3/6/364fb4924b11fc8efff6cd1ae5a62f62e737925a
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-18-til.md,4/8/4804e4102e1c638c88d3da431b4c0dd2277f5ff6
-Z
-*_posts/DataBase/2022-12-19-db-h2setting.md,0/c/0cc907d10ce9ffe6a979e6d8b4f60a8c0ca6d765
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-14-til.md,e/2/e24499e14e612b77b7b4dbe8b1728d50dd133346
 ]
@@ -21,8 +19,6 @@ _
 /_posts/Program/Spring/2022-12-12-spring-cors.md,3/c/3c648878842476127dfe42060799e25e1b07c616
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
-f
-6_posts/Program/Spring/2022-11-25-spring-environment.md,2/b/2b8f6cd4e26b8df73c881491d10b1b1c581c37b7
 D
 assets/css/main.scss,3/9/39a50fefad724cd0aa7b6ec792325957ea1751b3
 F

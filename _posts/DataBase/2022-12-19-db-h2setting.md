@@ -14,7 +14,7 @@ H2 Database를 다운받아 설정해보려한다.
 
 [h2 database 홈페이지]에 접속하면  
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPOrBmDtNszJ_Se_BYJ0vhdj-G60PCOB3B50Ji348fVE1atvLYUpkqGJ0N3UIoVdUdQJi6ntxmw2_tX-ptIe5Vzm4kz-Q=w1920-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217752289-86f04451-8164-49df-b9de-826ba6bf5264.png){: .align-left style="max-width: 100%"}
 
 위와 같은 화면이 나오는데  
 나는 MacOS를 쓰고있어 All Platforms를 눌러주면된다.  
@@ -50,14 +50,14 @@ runtimeOnly 'com.h2database:h2
 해당 zip파일을 풀면 폴더하나가 나오게되는데  
 그안에서 bin -> h2.sh 스크립트를 실행 시켜주면된다.
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNFlqigR274WJL2PPsEN4JlD7veQFTYLJYTVb8j7I5GyT6XrqeEGzG4Mb0D9CUpT_kRJ1fmVmzGr155UxFE0eUMn4L9WQ=w1920-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217752303-1d0737ec-84df-4fcc-8c05-5e5d12c3a90e.png){: .align-left style="max-width: 100%"}
 
 해당 파일 위치에서  
 ```shell
 ./h2.sh
 ```
 를 실행 시켜주면 h2 data base 팝업이 발생하고    
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gODtoeY1H6bGiUOZQj8oP90Qh8CXysYw8Yu6BZ8MowLG0_yUB2ClmKn464zQMWxzYpitSiaI6ktPMoRVMZ1dDX72Npngg=w1920-h921){: .align-left style="max-width: 100%"} 아이콘이 상단에 떠있을 것이다.
+![image](https://user-images.githubusercontent.com/95069395/217752305-2b795af1-57d9-426d-965a-50e9fbdc42c6.png){: .align-left style="max-width: 100%"} 아이콘이 상단에 떠있을 것이다.
 
 만약 종료시키고 싶으면 `Ctrl + C`를 눌러주면된다.  
 
@@ -73,7 +73,7 @@ chmod 755 h2.sh
 ```
 를 해주게되면 정상적으로 진입할 수 있을 것이다.
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMidCvQtnMFbQLRjWIfa1fgZLuIwDoOjR6himZX4bWnbhTxm4nKQEIfD20j3PcwRSuHB4kUfP1o8IMDOdHUObIgPKYHTA=w1920-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217752309-02ac4522-d3df-45d1-8137-7398a77a51bb.png){: .align-left style="max-width: 100%"}
 
 접속 URL 같은 정보들의 경우는  
 gradle과 maven에 따라다르지만 resources에 정보를 설정해주면된다.  

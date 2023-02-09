@@ -135,7 +135,7 @@ echo 명령어를 이용하면 지정해서 확인이 가능하다.
 내가 등록한 환경변수는 `JWT_SECRET_KEY`로 등록했기에  
 해당 명령어를 입력하면 아래와 같이 표시된다면 정상이다.  
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMfNazbTwjRjAfZADXUWKR8xiTD1bpSh4-XaOS7vtdlPdUsHEPzf2iotECtJ3FMEjpP0fFSoXDSzIPqUCrW6FyNPP3Gng=w1000-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217752905-f7b69d86-b55d-45ba-9fa2-f31365620324.png){: .align-left style="max-width: 100%"}
 
 그럼 여기까지 설정하고 조회까지 해보았으면  
 환경변수 설정에는 문제가 없는 것이다.  
@@ -152,13 +152,13 @@ echo 명령어를 이용하면 지정해서 확인이 가능하다.
 실제로 환경변수는 잘 적용되어있었고  
 환경변수가 적용되지 않았던 이유는 <span style="color:#F04965">**IDE Restart**</span>를 하지 않았던 문제였다.
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNQCKU6FpLklbn9HwlXNB15z8k77FNAGe0aGtURuUgAQxxwBdQD5RP_qiE5wrluKo6XwD61r9x3JbIxnQlpzdIxb-tl4Q=w1512-h864){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217752907-41ce8961-0054-43c1-8103-29cfcca15954.png){: .align-left style="max-width: 100%"}
 
 Restart 하는 방법은 먼저 상단의 `File`에서  
 `Invaildate Caches`를 눌러준다.  
 
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOq9qiFokRYmFR5OoFF3OVqGXqXL1QiRwBXUhE_PPCn1IiFPqGfYuDBF-wnApzQ99xla-dQA1B9WteBeCJ0OUEi3uGhUw=w1512-h864){: .align-left style="max-width: 60%"}
+![image](https://user-images.githubusercontent.com/95069395/217752914-3e6eff77-ba43-4e05-a254-bd8b0e82208e.png){: .align-left style="max-width: 60%"}
 
 그리고 `INVALIDATE AND RESTART` 버튼을 눌러주면 된다.  
 그러면 IDE가 자동적으로 재시작될 것이고  
