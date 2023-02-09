@@ -13,7 +13,7 @@ published: true
 간혹 SpringBoot 애플리케이션 실행 시 아래와 같은 에러가 발생할 때가 있다.  
 `Web server failed to start. Port 8080 was already in use.`
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOFKFwEPyH4_7jurd39N3DVi3THGwMbPs_dJTrUqvTM8pfJN1LsHFbrTv2QH4X74XeEypEkUkaXl2uns6jYE0fTI10XwA=w1185-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217753264-216747da-dd0a-4652-8842-074ef2032188.png){: .align-left style="max-width: 100%"}
 
 8080포트가 이미 사용중이란 뜻.  
 실제로 여러개의 서버를 켜두었거나.. 꺼져있지만 제대로 안꺼졌다는 뜻이다.  
@@ -30,7 +30,7 @@ Spotlight (⌘Command + SpaceBar)를 열어 터미널을 검색.
 lsof -PiTCP -sTCP:LISTEN
 ```
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPt2Ly-DDPVkFTKjureI8xqavnbgou9aAY3lM-hnoTfWRsUE57pIrtJhdIckagsaWTnsHQpPLvk64QKFHWeH5SssOBrqg=w1920-h921){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217753268-1c6cdc9b-0116-4061-a5d6-cf10ffa034d8.png){: .align-left style="max-width: 100%"}
 
 이렇게 사용중인 포트가 쭉 나온다.  
 여기서 PID란 값과 TCP 란값 옆의 PORT 숫자를 기억해야한다.
