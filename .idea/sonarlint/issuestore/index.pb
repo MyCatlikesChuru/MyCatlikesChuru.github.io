@@ -115,8 +115,6 @@ X
 (_posts/OS/macOs/2022-11-27-OS-macOs-4.md,d/f/df52698433e11f42b15242cf2081a62c3b3c5251
 a
 1_posts/OS/Linux(Unix)/2022-07-27-server-ubunto.md,5/e/5e2791caa2c7564a33e34d457fd80c9cffd83355
-^
-._posts/Server/2023-01-01-server-oraclecloud.md,3/7/3710297bee3fe8d5d8b663bcd6c7e149c341e60e
 ]
 -_posts/TIL/BootCamp/2022-12/2022-12-06-til.md,a/f/af256a3e8789a25d309f53ef74c47811d3135447
 ]

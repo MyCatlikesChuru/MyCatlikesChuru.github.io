@@ -23,13 +23,13 @@ published: true
 VM 생성 전에 구획을 먼저 생성해야한다.  
 구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.  
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNs_7nfk_gmvLEvuBwFQHxq_WeESvVrrNgHncikIguZT5WSDBFRWJouafXAfIAnVKgSH8daI2o4KyS-YzP_fNz25gBp=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751342-152445d0-fe21-4311-80fe-a8a64c90ca13.png){: .align-left style="max-width: 100%"}
 
 <br/>  
 
 ### 📌 VCN 네트워크 생성  
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPQ25gr2990xuN0OLF_Qr90USye42bZ6DbogZyuabsYL-OejRkV1p7C3LfLIa3X8BF5dgwz7eyH5zr20LtMPIO8nRjHjA=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751354-482bf07f-640e-4ae3-bb9b-5cce4ef7fa7e.png){: .align-left style="max-width: 100%"}
 
 먼저 아까 생성한 구획을 먼저 선택한다음  
 VCN 마법사를 시작한다.  
@@ -38,19 +38,19 @@ VCN 마법사를 시작한다.
 
 
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN4OZ_5VRp8kmYeue1N02iMuXfeOZln12KRSuhL_PifDDhaNnn04SjU50HgsoewLDs6y8QAapnbFdv-GGZlSNSp9rSA=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751372-759eef76-1e3b-4490-a425-b4ee58cb6540.png){: .align-left style="max-width: 100%"}
 
 VCN 마법사 시작 클릭
 
 <br/>
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJqkxzAgS17AG9KpQ1OtqlFWGHiBgNCpvx7ydTjS4MjBJ1jb4a12pnVVnO5Th7cckoNEPKhQmajAVdg02USWVmeLsW=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751383-d315761d-6825-49df-a01c-ab5f42721432.png){: .align-left style="max-width: 100%"}
 
 VCN 이름을 설정하고 다음 클릭  
 
 <br/>
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZctP8XvWQbWqzGbVm-w77_ba-OS6OrBJb46yB5-zZv1IxFQDJ9z4q80NN8B-4D2O3qMINEhwKwEaA65i_zTR4aDLa=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751389-3f48f988-0483-4b5f-9ba7-809822a3f9cb.png){: .align-left style="max-width: 100%"}
 
 생성 버튼을 눌러 리소스 생성을 완료합니다.  
 
@@ -59,19 +59,19 @@ VCN 이름을 설정하고 다음 클릭
 ### 📌 인스턴스 생성
 
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNGOpUG5JQk1Y20qWPgcKom-VzhRcFsYcez9OIcBXBhA1q6MjLkamcxo3FMef5Uhsg1FdpF8fD0x6dydtnJl3GAjIyoIA=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751393-e4c0c83f-a25e-4a21-bfa4-bc896b541579.png){: .align-left style="max-width: 100%"}
 
 VM 인스턴스 생성을 눌러 줍니다.
 
 <br/>
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1m0uwf3jt9p5biT_6GwYRrmuWIoUXdvRUlZ0HbDrbWTYrj1VK4ci1QVvZhNRVNuKISN1FAY2l3rI7Fyap86OMc6E1EA=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751395-bd0a7184-c369-4d92-bd3e-3e289bc4117c.png){: .align-left style="max-width: 100%"}
 
 인스턴스 이름과 이전에 생성한 구획을 선택해줍니다.
 
 <br/>
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdIXghpgxv_vlEivea2ZDnBtqZT-NuITqQPLie9l8He0bfkDT-Of9-oZUhU783AMfII_LhhfdlcLjwMNKIYZz1c37o7w=w1524-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751397-f0633bb2-9f41-4565-b41b-6db79ff0207b.png){: .align-left style="max-width: 100%"}
 
 이미지와 Shape 선택이 가능하고  
 항상 무료 적격이라 적혀있는 것을 선택해서 사용해주면된다.  
@@ -79,7 +79,7 @@ VM 인스턴스 생성을 눌러 줍니다.
 <br/>
 
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo3-KkV26L9DztTmGJe7RvC3TpnqdtJ_TuMqP8fQwXvxfrpIKJH8pSbmXrPtmaHYtX1oresm5LE13S4bx5tot7rF5qUQ=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751399-50988a2c-4831-40ec-a79f-90f1dbe7d837.png){: .align-left style="max-width: 100%"}
 
 네트워킹도 마찬가지로 이전에 만들어둔 VCN 네트워크를  
 선택해주시면 됩니다.  
@@ -89,7 +89,7 @@ VM 인스턴스 생성을 눌러 줍니다.
 
 <br/>
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOEnVFm0OsNdlUigDiwml8a2oJrXHpmUdMcf1PLn7PSX0fIHhR77mwY1-pbOOsFqz_Ld4ydtHu7l_TeA0f4AN17rBy2Q=w1524-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751402-d4de2a99-2591-4217-b226-5514c7f2f972.png){: .align-left style="max-width: 100%"}
 
 SSH 키를 추가해줘야하는데  
 이전에 Github를 사용하신분들은 공용키가 이미 있을 것이다.  
@@ -110,7 +110,7 @@ cat ~/.ssh/id_rsa.pub
 
 <br/>
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo2CptbsDAon2CtX6-RAqpmRSSTa7z3m9LWRW9JCFCdVbgMoJTOb9hisTz1OHSLY0EkNb9cXhzDeMauPpUOxUqBrtAXQ=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751405-23e9c3ac-d72a-480a-a916-45b2f05ae3e7.png){: .align-left style="max-width: 100%"}
 
 이제 인스턴스 정보에 가서 확인해보시면  
 내가만든 인스턴스를 확인해 볼 수 있다.  
@@ -140,7 +140,7 @@ _(나와 같은 경우는 ex)ssh -i /.ssh ubuntu@ip주소)_
 
 터미널에서 입력시
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN0U_vZhmyBCubkA_yUqYCkiETMcUZtOnZLVXoUTz9DjMI_17cNV1t6S7kLe2Ajxg3hGFEed9nmR6d7kK4Ha7nvpTyeAw=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751406-423c4acc-c4d0-47d9-bb82-c3ec88b55c10.png){: .align-left style="max-width: 100%"}
 
 와 같이 정상적으로 인스턴스에 접속한 모습을 볼 수 있다 !!
 
@@ -148,7 +148,7 @@ _(나와 같은 경우는 ex)ssh -i /.ssh ubuntu@ip주소)_
 
 FileZilla를 통해서도 접속이 가능하다.   
 
-![image](https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNNwSW2rB9___rqmhE9ee14DuQbywCDLJsaQY9D9nUls2WpBa9DsFwQ2tVE-3hj33naagXa8NPqAbdt8njgA5D9Weh_Ww=w3024-h1728){: .align-left style="max-width: 100%"}
+![image](https://user-images.githubusercontent.com/95069395/217751408-98d77bdb-dcd3-48fd-b019-dc9968f6a565.png){: .align-left style="max-width: 100%"}
 
 SFTP - SSH 프로토콜을 선택해준다음에     
 호스트는 인스턴스 주소를 입력해주면 된다.  
