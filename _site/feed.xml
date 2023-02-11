@@ -1,4 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-09T16:38:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.</title><link href="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html" rel="alternate" type="text/html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server." /><published>2023-01-28T00:00:00+09:00</published><updated>2023-01-28T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2023/01/28/server-nginxerror</id><content type="html" xml:base="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"><![CDATA[<p>https 관련 설정을 만지다가<br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-11T19:57:55+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Algorithm) 폰켓몬 (Java:프로그래머스)</title><link href="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html" rel="alternate" type="text/html" title="Algorithm) 폰켓몬 (Java:프로그래머스)" /><published>2023-02-11T00:00:00+09:00</published><updated>2023-02-11T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/11/algo-ponketmon</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"><![CDATA[]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">MySQL replace 함수사용하여 일괄 변경하기</title><link href="http://localhost:4000/db/2023/02/09/db-mysqlreplace.html" rel="alternate" type="text/html" title="MySQL replace 함수사용하여 일괄 변경하기" /><published>2023-02-09T00:00:00+09:00</published><updated>2023-02-09T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/02/09/db-mysqlreplace</id><content type="html" xml:base="http://localhost:4000/db/2023/02/09/db-mysqlreplace.html"><![CDATA[<p>예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서  <br />
+MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/217779406-6b06d791-ae7a-4f77-b89d-e68c3c63e8af.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서<br />
+사진주소를 가져와서 DB에 저장하기때문에 남아있고<br />
+일반으로 회원가입한 유저는 위에 12가지 기본이미지를 랜덤으로 배정받게되는데<br />
+보는거처럼 사진 원본파일이 구글드라이브에서 날라가서 표시가안되는 모습이다.</p>
+
+<p>처음했던 프로젝트이기도하고 사진관리하는 방법이 너무 miss인 것 같다. <br />
+우선 데이터베이스에 회원으로 가입되어있는 멤버가 100명정도 가입되어있는데 <br />
+해당 데이터를 조작하기위해서 Replace라는 함수를 이용해 일괄 변경하기로 정했다.</p>
+
+<p><br /></p>
+
+<h3 id="-replace-함수-사용">📌 Replace 함수 사용</h3>
+
+<p>WorkBench 열어서 강제로 SQL을 만들어 변경할려고한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/217779419-2cc32d98-7a95-4ebd-ad58-da1cadcf0395.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>member라는 테이블에 image 컬럼의 데이터를 바꾸는 것이다. <br />
+(❗️ 현재 이미지 주소 종류를 12가지로 한정지어놔서 가능한 작업이다.<br />
+만약 종류가 각기달랐다면 다른방법을 알아봐야했을 것이다.)</p>
+
+<p><br /></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span> FROM member<span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span><span class="p">;</span>
+</code></pre></div></div>
+<p>Table : member<br />
+Column : image</p>
+
+<p>변경하고자 하는 데이터는 image의 Text값을 변경하는 것이다.<br />
+<code class="language-plaintext highlighter-rouge">REPLACE('문자열','기존문자열','변경문자열')</code> 형식으로 쿼리를 날려주면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span> FROM member<span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOg7R_zu1d5ondnz2mF9Mfs5POsyaYwY0bpBfzQmTCA5iNpVhU3rycNjteK9RZKX0_dsQLXn1AGkA_MtfZJKeSJ03vOJg=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765442-ddf39075-30c9-45a1-9d55-806b35c9c991.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPE5xpI0-lxEqtHYRm-avwUL1X2y8HUz_CtZoT2afckhm77Y_hZfo5N7xB6VP2bDxsiIT4DcFRwe8wSc5-y9BFHYfhe=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765447-d8b3c96e-42d2-4b4d-9660-df536e82a48e.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPEZNW9ORtC6bMAw54VDZFQ3IaDPrGVWFKi18kERIrAxuE8N8MmbZhtol2Ujxvyrz21Ows7-0_4P8cz_sJlXYPvVu4z=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765450-c1e29534-8974-45c3-ba3d-0d98dc3ac4c7.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOUcWn-HIk4JoOiMBxVqMc458drW7579JOqVcfR3Nq7eHs2WZV1URKdSy7iAEnrteP-19yw4B7xAAphkiPKu4fAez8j3g=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765456-26f2ac03-91a6-4b4d-a14c-ab6275d49022.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMY6Ju7pO_FZp5hyfYdjKljdMAFlS5nCtbnvfJfXXqG52kH_WvYSqNsi7ClGgYVgmK8Gav_XdM_tCc5liRtQD8bZq4Ryg=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765459-d95c0338-5ced-4689-9afb-61d917e0c4ad.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP3vIemuwNCa2gLq8QFxJ0mvEUyH90NCzzCdEh6zkRFmQvF6_MHHo8N46VTTP58ovW3ikNSXN281NhTcbDaBfESUl6eUw=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765462-8b65713a-f436-405e-812d-c7b906bcb8e8.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMzNhh9XTiXBHg_K4sHjKxhNVZTpihvtXFyGa_pR2L3j2ymHy6w9uDu5Pqmjo_-PPl40kIJENWVqGGfVE7-o1vMxMS0Zg=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765465-83f95069-d4be-4418-a7ee-f569b235f665.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOnvAfzDjdq54wfaQ3aQnYMNbfCsFwZVvyBIxEzKYw7LUtT7SnlxkIyZnkXyxrN2y8N5CuXVCLdNdloEMYYl7PPTBotWA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765469-2a34827e-f18c-4bca-aa49-ab3c698c46ce.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOeqDCgTYyD4_NlylK0EE-y1Fn0lj364mopuRJbuN4JvWP2eQGBJt6Ygv48nrlnHiuiq2Dkgz3ep7XILzUgT_lVAN1VpA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765473-c7044900-f16b-407c-a27e-939c7c8a2e17.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPKgEG4sHNVV90PQrE5jn37skBOV5Qp7M3czg2sShhPYx46ybBb0KhQ37mcxGl6H6E_1xVdAhna7aAJGi8qp1oYGCWMMw=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765476-31afe366-b1d2-4ee8-92f4-7d254a7616d2.png'</span><span class="o">)</span><span class="p">;</span>
+UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNXn3Qy3cjHid6lgXk6cT9J78rm98pYCgumlTWAHENmA_Q3ujH3MxEbMBYp_lHBLM8rpIU51BtZnzaIKi3CiEsrqcDKQA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765478-e9cbd679-d241-4a42-b285-f334b0b22241.png'</span><span class="o">)</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>쿼리를 만들고 테이블에 정상적으로 변경되는지 확인까지 완료!</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/217785372-71da8902-27fb-42ed-97ee-d171e916a983.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>다시 사이트가 제대로된 이미지로 표현되는 것을 볼 수 있다. <br />
+쿼리 실행시 1175 에러가 발생한다면 -&gt; <a href="https://jwgye.tistory.com/31">Update시 에러코드 1175 처리</a>블로그를 참고해보자</p>
+
+<p><br /></p>
+
+<p>이렇게 테이블의 컬럼자체 내용을 바꿔끼워야할 경우에<br />
+REPLACE를 사용하는 것보단 Table Data export를 사용해 csv파일에서 <br />
+일괄변경하여 수정한다음 import해서 데이터를 갈아끼워주는것이 훨씬더 효율적인 것 같다.</p>
+
+<p><br />
+<br />
+<br /></p>
+
+<p>✨ 참고 블로그
+<a href="https://leenow.tistory.com/13">Mysql Replace 함수 사용법 레퍼런스</a></p>
+
+<p><br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서 MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…]]></summary></entry><entry><title type="html">Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.</title><link href="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html" rel="alternate" type="text/html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server." /><published>2023-01-28T00:00:00+09:00</published><updated>2023-01-28T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2023/01/28/server-nginxerror</id><content type="html" xml:base="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"><![CDATA[<p>https 관련 설정을 만지다가<br />
 nginx를 실행하는데 아래와 같은 에러가 발생했다.</p>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>service nginx start
 Job <span class="k">for </span>nginx.service failed because the control process exited with error code.
@@ -1610,171 +1683,4 @@ key : like / value : 10<br />
 <a href="https://freeblogger.tistory.com/10">Redis 참고 레퍼런스 1</a>, <a href="https://wlswoo.tistory.com/44">Redis 참고 레퍼런스 2</a>, <a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&amp;blogId=wideeyed&amp;logNo=221428664697">Redis Hash 참고 레퍼런스</a>, <a href="https://server-talk.tistory.com/472">Redis 우분투 설치 레퍼런스</a></p>
 
 <p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis는 Remote Dictionary Server의 약자로 key:value로 값을 저장하는 NoSQL이다. 인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..]]></summary></entry><entry><title type="html">Jekyll Github IO 블로그 코드 하이라이트</title><link href="http://localhost:4000/jekyll/2023/01/02/it-jekyll-codehighlight.html" rel="alternate" type="text/html" title="Jekyll Github IO 블로그 코드 하이라이트" /><published>2023-01-02T00:00:00+09:00</published><updated>2023-01-02T00:00:00+09:00</updated><id>http://localhost:4000/jekyll/2023/01/02/it-jekyll-codehighlight</id><content type="html" xml:base="http://localhost:4000/jekyll/2023/01/02/it-jekyll-codehighlight.html"><![CDATA[<p>현재 내가 운영중인 Github.io 블로그의<br />
-테마는 YAT 이라는 테마이다.</p>
-
-<p>이전에 <a href="https://mycatlikeschuru.github.io/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html">YAT 테마 댓글 기능, 파비콘 추가</a>하는 방법까지 알아보았다.<br />
-이제 기본으로 제공하는 Code Highlight(코드 하이라이트) <br />
-변경하는 법을 알아보려한다.</p>
-
-<p><br /></p>
-
-<h3 id="jekyll-코드-하이라이트-적용">Jekyll 코드 하이라이트 적용</h3>
-
-<p>코드 하이라이트 적용은 매우 간단하다.</p>
-
-<p>나와 같은 경우에는 <a href="https://highlightjs.org/static/demo/">highlight.js demo</a> 사이트에서 <br />
-마음에 드는 코드하이라이트의 이름만 설정해주면 된다.</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
-</code></pre></div></div>
-<p>해당 경로의 <code class="language-plaintext highlighter-rouge">code-highlight.html</code> 파일에서</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
-<p>link 태그 맨끝에 <code class="language-plaintext highlighter-rouge">atom-one-dark.min.css</code>로 되어있는 모습을 볼 수 있다. <br />
-기존에는 <code class="language-plaintext highlighter-rouge">deault.min.css</code>로 되어있을 텐데, 이부분을 위 사이트에서<br />
-마음에 드는 코드 하이라이트 이름으로 가져와 주면된다.</p>
-
-<p>다만 주의할점은 띄어쓰기가 되어있느느 부분은<br />
-<code class="language-plaintext highlighter-rouge">-</code>를 붙여서 처리해주면 된다.</p>
-
-<p>혹시나 버전에따라 적용이 안되어질 수 있으니<br />
-잘 확인해서 적용해보자 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Jekyll" /><category term="Jekyll" /><category term="yat" /><category term="테마적용" /><category term="GitHub Pages" /><summary type="html"><![CDATA[현재 내가 운영중인 Github.io 블로그의 테마는 YAT 이라는 테마이다.]]></summary></entry><entry><title type="html">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</title><link href="http://localhost:4000/server/2023/01/01/server-oraclecloud.html" rel="alternate" type="text/html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속" /><published>2023-01-01T00:00:00+09:00</published><updated>2023-01-01T00:00:00+09:00</updated><id>http://localhost:4000/server/2023/01/01/server-oraclecloud</id><content type="html" xml:base="http://localhost:4000/server/2023/01/01/server-oraclecloud.html"><![CDATA[<p>오늘은 <a href="https://www.oracle.com/kr/cloud/free/">Oracle Cloud 무료 서버</a>를 생성해보려한다.</p>
-
-<p>회원 가입과 카드 등록은 되어있다 가정하고<br />
-인스턴스 생성전에 구획생성과 VCN 네트워크 생성<br />
-그리고 인스턴스를 생성하는 과정을 적어보려한다.<br />
-<a href="https://hoing.io/archives/318">Oracle 무료 인스턴스 참고 레퍼런스</a>를 토대로 작업하였습니다.</p>
-
-<p><br /></p>
-
-<h3 id="-구획-생성">📌 구획 생성</h3>
-
-<p>VM 생성 전에 구획을 먼저 생성해야한다.<br />
-구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNs_7nfk_gmvLEvuBwFQHxq_WeESvVrrNgHncikIguZT5WSDBFRWJouafXAfIAnVKgSH8daI2o4KyS-YzP_fNz25gBp=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<h3 id="-vcn-네트워크-생성">📌 VCN 네트워크 생성</h3>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPQ25gr2990xuN0OLF_Qr90USye42bZ6DbogZyuabsYL-OejRkV1p7C3LfLIa3X8BF5dgwz7eyH5zr20LtMPIO8nRjHjA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>먼저 아까 생성한 구획을 먼저 선택한다음<br />
-VCN 마법사를 시작한다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN4OZ_5VRp8kmYeue1N02iMuXfeOZln12KRSuhL_PifDDhaNnn04SjU50HgsoewLDs6y8QAapnbFdv-GGZlSNSp9rSA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>VCN 마법사 시작 클릭</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPJqkxzAgS17AG9KpQ1OtqlFWGHiBgNCpvx7ydTjS4MjBJ1jb4a12pnVVnO5Th7cckoNEPKhQmajAVdg02USWVmeLsW=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>VCN 이름을 설정하고 다음 클릭</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMZctP8XvWQbWqzGbVm-w77_ba-OS6OrBJb46yB5-zZv1IxFQDJ9z4q80NN8B-4D2O3qMINEhwKwEaA65i_zTR4aDLa=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>생성 버튼을 눌러 리소스 생성을 완료합니다.</p>
-
-<p><br /></p>
-
-<h3 id="-인스턴스-생성">📌 인스턴스 생성</h3>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNGOpUG5JQk1Y20qWPgcKom-VzhRcFsYcez9OIcBXBhA1q6MjLkamcxo3FMef5Uhsg1FdpF8fD0x6dydtnJl3GAjIyoIA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>VM 인스턴스 생성을 눌러 줍니다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1m0uwf3jt9p5biT_6GwYRrmuWIoUXdvRUlZ0HbDrbWTYrj1VK4ci1QVvZhNRVNuKISN1FAY2l3rI7Fyap86OMc6E1EA=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>인스턴스 이름과 이전에 생성한 구획을 선택해줍니다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOdIXghpgxv_vlEivea2ZDnBtqZT-NuITqQPLie9l8He0bfkDT-Of9-oZUhU783AMfII_LhhfdlcLjwMNKIYZz1c37o7w=w1524-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>이미지와 Shape 선택이 가능하고<br />
-항상 무료 적격이라 적혀있는 것을 선택해서 사용해주면된다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPo3-KkV26L9DztTmGJe7RvC3TpnqdtJ_TuMqP8fQwXvxfrpIKJH8pSbmXrPtmaHYtX1oresm5LE13S4bx5tot7rF5qUQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>네트워킹도 마찬가지로 이전에 만들어둔 VCN 네트워크를<br />
-선택해주시면 됩니다.</p>
-
-<p>만약 구획생성과 네트워킹을 만들어주지 않았다면<br />
-인스턴스 생성을하여도 에러가 발생합니다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMOEnVFm0OsNdlUigDiwml8a2oJrXHpmUdMcf1PLn7PSX0fIHhR77mwY1-pbOOsFqz_Ld4ydtHu7l_TeA0f4AN17rBy2Q=w1524-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>SSH 키를 추가해줘야하는데<br />
-이전에 Github를 사용하신분들은 공용키가 이미 있을 것이다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
-</code></pre></div></div>
-
-<p>명령어를 입력해 공용 ssh를 붙여넣어주시면 됩니다. <br />
-만약 없다면 생성을 해주시면 되는데, 해당 내용은 스킵하겠습니다.</p>
-
-<p>부트 볼륨과 같은 경우에는 100GB까지 최대로 사용가능하고<br />
-50GB씩 2개의 인스턴스를 만들어 나눠사용할 수도 있습니다.</p>
-
-<p>이제 설정을 끝냈으면, 생성을 눌러 최종완료를 해주시면 됩니다.</p>
-
-<p><br /></p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNo2CptbsDAon2CtX6-RAqpmRSSTa7z3m9LWRW9JCFCdVbgMoJTOb9hisTz1OHSLY0EkNb9cXhzDeMauPpUOxUqBrtAXQ=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>이제 인스턴스 정보에 가서 확인해보시면<br />
-내가만든 인스턴스를 확인해 볼 수 있다.</p>
-
-<p><br /></p>
-
-<h3 id="-인스턴스-접속하기">📌 인스턴스 접속하기</h3>
-
-<p>이제 인스턴스를 만들었으니 접속을하는법을 알아보자<br />
-우리는 공용 SSH로 인스턴스를 만들었다.</p>
-
-<p>$HOME/.ssh 경로에 private key가 저장되어 있기 때문에 <br />
-암호를 입력하지 않아도 원격 서버에 접속할 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh ubuntu@주소
-</code></pre></div></div>
-
-<p>만약 private key가 $HOME/.ssh 경로에 위치하지 않은 경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> <span class="o">[</span>private key path] ubuntu@주소
-</code></pre></div></div>
-<p>를 입력해주면 접속이 가능하다.
-[private key path]에는 경로를 입력해주면 된다.<br />
-<em>(나와 같은 경우는 ex)ssh -i /.ssh ubuntu@ip주소)</em></p>
-
-<p>터미널에서 입력시</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN0U_vZhmyBCubkA_yUqYCkiETMcUZtOnZLVXoUTz9DjMI_17cNV1t6S7kLe2Ajxg3hGFEed9nmR6d7kK4Ha7nvpTyeAw=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>와 같이 정상적으로 인스턴스에 접속한 모습을 볼 수 있다 !!</p>
-
-<p><br /></p>
-
-<p>FileZilla를 통해서도 접속이 가능하다.</p>
-
-<p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNNwSW2rB9___rqmhE9ee14DuQbywCDLJsaQY9D9nUls2WpBa9DsFwQ2tVE-3hj33naagXa8NPqAbdt8njgA5D9Weh_Ww=w3024-h1728" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>SFTP - SSH 프로토콜을 선택해준다음에   <br />
-호스트는 인스턴스 주소를 입력해주면 된다.<br />
-그리고 키파일을 공개키가 아닌 <code class="language-plaintext highlighter-rouge">id_rsa</code> private key를 선택해주면<br />
-정상적으로 접속할 수 있는 모습을 확인해 볼 수 있다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Server" /><category term="Server" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 무료 서버를 생성해보려한다.]]></summary></entry></feed>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis는 Remote Dictionary Server의 약자로 key:value로 값을 저장하는 NoSQL이다. 인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..]]></summary></entry></feed>

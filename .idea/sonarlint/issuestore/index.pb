@@ -131,8 +131,6 @@ Y
 )_posts/DataBase/2022-12-19-db-mysqlEER.md,9/2/924b7fdeb0265a31408965575ac5a9cac53d2527
 V
 &_posts/IT/Git/2022-12-27-git-rebase.md,8/7/875b46dfa44e1fed831ea87f49f715861f1ee054
-;
-_config.yml,c/d/cd089ae45ce870c45e434019e8f1ed4f066cd425
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 ]
