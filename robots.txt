@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mycatlikeschuru.github.io/sitemap.xml
