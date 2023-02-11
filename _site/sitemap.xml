@@ -1,30 +1,607 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://mycatlikeschuru.github.io/</loc><lastmod>2022-11-27T11:36:32+00:00</lastmod><changefreq>daily</changefreq><priority>1.00</priority></url>
-<url><loc>https://mycatlikeschuru.github.io/algorithm/2023/02/11/algo-ponketmon.html</loc><lastmod>2022-11-27T11:36:32+00:00</lastmod><changefreq>daily</changefreq><priority>0.85</priority></url>
-<url><loc>https://mycatlikeschuru.github.io/db/2023/02/09/db-mysqlreplace.html</loc><lastmod>2022-11-27T11:36:33+00:00</lastmod><changefreq>daily</changefreq><priority>0.85</priority></url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-<!--    포문으로 자동화할 방법이 필요 -->
-<!--    {% for post in site.posts %}-->
-<!--    <url>-->
-<!--        <loc>{{ site.url }}{{ post.url }}</loc>-->
-<!--        {% if post.lastmod == null %}-->
-<!--        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>-->
-<!--        {% else %}-->
-<!--        <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>-->
-<!--        {% endif %}-->
 
-<!--        {% if post.sitemap.changefreq == null %}-->
-<!--        <changefreq>weekly</changefreq>-->
-<!--        {% else %}-->
-<!--        <changefreq>{{ post.sitemap.changefreq }}</changefreq>-->
-<!--        {% endif %}-->
+<url>
+  <loc>https://mycatlikeschuru.github.io/</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/about.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/categories.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/algorithm/2023/02/11/algo-ponketmon.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/tags.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/db/2023/02/09/db-mysqlreplace.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/linux/unix/2023/01/28/server-nginxerror.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/server/2023/01/27/server-oraclesetting.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/spring/2023/01/21/spring-email.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/spring/2023/01/15/spring-fileupload.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/db/2023/01/14/db-redis.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/git/2023/01/12/git-commitmessage.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/git/2023/01/12/git-cherrypick.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/db/2023/01/08/db-redissetting.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/jekyll/2023/01/02/it-jekyll-codehighlight.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/server/2023/01/01/server-oraclesetting.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/server/2023/01/01/server-oraclecloud.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/linux/unix/2022/12/29/server-NginX.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/db/2022/12/28/db-mysqlEC2.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/spring/2022/12/27/spring-JunitSecure.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/git/2022/12/27/git-rebase.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/db/2022/12/19/db-mysqlEER.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/db/2022/12/19/db-h2setting.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/15/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/14/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/13/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/12/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/spring/2022/12/12/spring-cors.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/09/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/08/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/07/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/06/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/05/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/macos/2022/12/04/OS-macOs-5.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/02/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/12/01/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/30/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/29/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/28/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/macos/2022/11/27/OS-macOs-4.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/25/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/spring/2022/11/25/spring-environment.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/24/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/23/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/22/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/21/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/18/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/17/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/16/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/15/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/db/2022/11/15/db-mysql.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/14/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/11/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/10/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/09/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/08/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/07/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/04/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/03/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/02/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/11/01/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/31/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/28/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/27/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/26/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/25/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/it/2022/10/25/it-etc-imageurl.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/24/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/21/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/20/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/19/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/18/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/17/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/14/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/13/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/12/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/11/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/07/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/06/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/05/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/10/04/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/30/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/29/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/28/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/27/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/26/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/23/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/22/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/21/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/20/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/19/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/16/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/15/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/14/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/13/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/08/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/07/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/06/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/05/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/02/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/09/01/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/31/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/30/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/29/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/26/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/macos/2022/08/26/OS-macOs-3.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/25/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/24/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/23/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/macos/2022/08/23/OS-macOs-2.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/22/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/19/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/til/2022/08/18/til.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/spring/2022/08/03/spring-port.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/spring/2022/08/03/spring-json.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/macos/2022/08/03/OS-macOs-1.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/linux/unix/2022/07/27/server-ubunto.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://mycatlikeschuru.github.io/index.html</loc>
+  <lastmod>2023-02-11T12:09:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
 
-<!--        {% if post.sitemap.priority == null %}-->
-<!--        <priority>0.5</priority>-->
-<!--        {% else %}-->
-<!--        <priority>{{ post.sitemap.priority }}</priority>-->
-<!--        {% endif %}-->
-<!--    </url>-->
-<!--    {% endfor %}-->
+
 </urlset>
