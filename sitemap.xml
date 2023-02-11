@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://mycatlikeschuru.github.io/</loc><lastmod>2022-11-27T11:36:32+00:00</lastmod><changefreq>daily</changefreq><priority>1.00</priority></url>
-<url><loc>https://mycatlikeschuru.github.io/algorithm/2023/02/11/algo-ponketmon.html</loc><lastmod>2022-11-27T11:36:32+00:00</lastmod><changefreq>daily</changefreq><priority>0.85</priority></url>
-<url><loc>https://mycatlikeschuru.github.io/db/2023/02/09/db-mysqlreplace.html</loc><lastmod>2022-11-27T11:36:33+00:00</lastmod><changefreq>daily</changefreq><priority>0.85</priority></url>
+    {% for post in site.posts %}
+    <url>
+        <loc>{{ site.url }}{{ post.url }}</loc>
+        {% if post.lastmod == null %}
+        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+        {% else %}
+        <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
+        {% endif %}
 
-<!--    포문으로 자동화할 방법이 필요 -->
-<!--    {% for post in site.posts %}-->
-<!--    <url>-->
-<!--        <loc>{{ site.url }}{{ post.url }}</loc>-->
-<!--        {% if post.lastmod == null %}-->
-<!--        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>-->
-<!--        {% else %}-->
-<!--        <lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>-->
-<!--        {% endif %}-->
+        {% if post.sitemap.changefreq == null %}
+        <changefreq>weekly</changefreq>
+        {% else %}
+        <changefreq>{{ post.sitemap.changefreq }}</changefreq>
+        {% endif %}
 
-<!--        {% if post.sitemap.changefreq == null %}-->
-<!--        <changefreq>weekly</changefreq>-->
-<!--        {% else %}-->
-<!--        <changefreq>{{ post.sitemap.changefreq }}</changefreq>-->
-<!--        {% endif %}-->
+        {% if post.sitemap.priority == null %}
+        <priority>0.5</priority>
+        {% else %}
+        <priority>{{ post.sitemap.priority }}</priority>
+        {% endif %}
 
-<!--        {% if post.sitemap.priority == null %}-->
-<!--        <priority>0.5</priority>-->
-<!--        {% else %}-->
-<!--        <priority>{{ post.sitemap.priority }}</priority>-->
-<!--        {% endif %}-->
-<!--    </url>-->
-<!--    {% endfor %}-->
+    </url>
+    {% endfor %}
 </urlset>
