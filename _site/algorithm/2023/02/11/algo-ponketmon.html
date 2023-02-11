@@ -12,8 +12,8 @@
 <meta property="og:title" content="[Programmers - Java] 폰켓몬">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
-<meta property="og:description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
+<meta name="description" content="📌 문제 : 폰켓몬">
+<meta property="og:description" content="📌 문제 : 폰켓몬">
 <link rel="canonical" href="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html">
 <meta property="og:url" content="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html">
 <meta property="og:site_name" content="LeeJellan">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="[Programmers - Java] 폰켓몬">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-02-11T00:00:00+09:00","datePublished":"2023-02-11T00:00:00+09:00","description":"안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !","headline":"[Programmers - Java] 폰켓몬","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"},"url":"http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-02-11T00:00:00+09:00","datePublished":"2023-02-11T00:00:00+09:00","description":"📌 문제 : 폰켓몬","headline":"[Programmers - Java] 폰켓몬","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"},"url":"http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">[Programmers - Java] 폰켓몬 </h1>
+  <h1 class="post-title p-name" itemprop="name headline">[Programmers - Java] 폰켓몬</h1>
   <h2 class="post-subtitle">고득점 Kit (해시 - Level 1)</h2>
 
   <p class="post-meta">
@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
@@ -685,7 +685,148 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      
+      <h2 id="-문제--폰켓몬">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/1845">폰켓몬</a>
+</h2>
+
+<p>2023-02-11 기준 풀이</p>
+
+<h2 id="-문제-설명">📖 문제 설명</h2>
+
+<p>당신은 폰켓몬을 잡기 위한 오랜 여행 끝에, 홍 박사님의 연구실에 도착했습니다. 홍 박사님은 당신에게 자신의 연구실에 있는 총 N 마리의 폰켓몬 중에서 N/2마리를 가져가도 좋다고 했습니다.<br>
+홍 박사님 연구실의 폰켓몬은 종류에 따라 번호를 붙여 구분합니다. 따라서 같은 종류의 폰켓몬은 같은 번호를 가지고 있습니다. 예를 들어 연구실에 총 4마리의 폰켓몬이 있고, 각 폰켓몬의 종류 번호가 [3번, 1번, 2번, 3번]이라면 이는 3번 폰켓몬 두 마리, 1번 폰켓몬 한 마리, 2번 폰켓몬 한 마리가 있음을 나타냅니다. 이때, 4마리의 폰켓몬 중 2마리를 고르는 방법은 다음과 같이 6가지가 있습니다.</p>
+
+<ol>
+<li>첫 번째(3번), 두 번째(1번) 폰켓몬을 선택</li>
+<li>첫 번째(3번), 세 번째(2번) 폰켓몬을 선택</li>
+<li>첫 번째(3번), 네 번째(3번) 폰켓몬을 선택</li>
+<li>두 번째(1번), 세 번째(2번) 폰켓몬을 선택</li>
+<li>두 번째(1번), 네 번째(3번) 폰켓몬을 선택</li>
+<li>세 번째(2번), 네 번째(3번) 폰켓몬을 선택</li>
+</ol>
+
+<p>이때, 첫 번째(3번) 폰켓몬과 네 번째(3번) 폰켓몬을 선택하는 방법은 한 종류(3번 폰켓몬 두 마리)의 폰켓몬만 가질 수 있지만, 다른 방법들은 모두 두 종류의 폰켓몬을 가질 수 있습니다. 따라서 위 예시에서 가질 수 있는 폰켓몬 종류 수의 최댓값은 2가 됩니다.<br>
+당신은 최대한 다양한 종류의 폰켓몬을 가지길 원하기 때문에, 최대한 많은 종류의 폰켓몬을 포함해서 N/2마리를 선택하려 합니다. N마리 폰켓몬의 종류 번호가 담긴 배열 nums가 매개변수로 주어질 때, N/2마리의 폰켓몬을 선택하는 방법 중, 가장 많은 종류의 폰켓몬을 선택하는 방법을 찾아, 그때의 폰켓몬 종류 번호의 개수를 return 하도록 solution 함수를 완성해주세요.</p>
+
+<h4 id="제한사항">제한사항</h4>
+
+<ul>
+<li>nums는 폰켓몬의 종류 번호가 담긴 1차원 배열입니다.</li>
+<li>nums의 길이(N)는 1 이상 10,000 이하의 자연수이며, 항상 짝수로 주어집니다.</li>
+<li>폰켓몬의 종류 번호는 1 이상 200,000 이하의 자연수로 나타냅니다.</li>
+<li>가장 많은 종류의 폰켓몬을 선택하는 방법이 여러 가지인 경우에도, 선택할 수 있는 폰켓몬 종류 개수의 최댓값 하나만 return 하면 됩니다.</li>
+</ul>
+
+<hr>
+
+<h4 id="입출력-예">입출력 예</h4>
+
+<table class="table">
+        <thead>
+<tr>
+<th>nums</th>
+<th>result</th>
+</tr>
+</thead>
+        <tbody>
+<tr>
+<td>[3,1,2,3]</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[3,3,3,2,2,4]</td>
+<td>3</td>
+</tr>
+<tr>
+<td>[3,3,3,2,2,2]</td>
+<td>2</td>
+</tr>
+</tbody>
+      </table>
+
+<h4 id="입출력-예-설명">입출력 예 설명</h4>
+
+<p>입출력 예 #1<br>
+문제의 예시와 같습니다.</p>
+
+<p>입출력 예 #2<br>
+6마리의 폰켓몬이 있으므로, 3마리의 폰켓몬을 골라야 합니다.<br>
+가장 많은 종류의 폰켓몬을 고르기 위해서는 3번 폰켓몬 한 마리, 2번 폰켓몬 한 마리, 4번 폰켓몬 한 마리를 고르면 되며, 따라서 3을 return 합니다.</p>
+
+<p>입출력 예 #3<br>
+6마리의 폰켓몬이 있으므로, 3마리의 폰켓몬을 골라야 합니다.<br>
+가장 많은 종류의 폰켓몬을 고르기 위해서는 3번 폰켓몬 한 마리와 2번 폰켓몬 두 마리를 고르거나, 혹은 3번 폰켓몬 두 마리와 2번 폰켓몬 한 마리를 고르면 됩니다. 따라서 최대 고를 수 있는 폰켓몬 종류의 수는 2입니다.</p>
+
+<hr>
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<p>문제에서 요구하는 사항을 살펴보자</p>
+
+<ul>
+  <li>연구실에서 N/2마리의 폰켓몬을 가져갈 수 있다.</li>
+  <li>가져갈 수 있는 폰켓몬 종류 수의 최댓값을 구해야한다.</li>
+</ul>
+
+<p>이 두가지가 이번 문제에 가장 핵심 키워드라고 볼 수 있다.  <br>
+폰켓몬이 주어지는 배열 nums은 항상 짝수로 주어지며  <br>
+N은 주어지는 폰켓몬의 총 수량이고 만약</p>
+
+<p><strong>연구소에 4마리가 있을 경우 : 2마리를 가져갈 수 있음</strong><br>
+<strong>연구소에 6마리가 있을 경우 : 3마리를 가져갈 수 있음</strong>  <br>
+<strong>연구소에 8마리가 있을 경우 : 4마리를 가져갈 수 있음</strong><br>
+.<br>
+.<br>
+.</p>
+
+<p>이렇게 가정을해볼 수 있다.</p>
+
+<p>4마리의 포켓몬, 3가지 종류의 포켓몬이 존재한다고 (피카츄,파이리,꼬북이)<br>
+숫자가아닌 포켓몬이 있다고 생각하고 가정해보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/218260250-f2879d9d-4a6a-4b55-971a-33ff2dafd295.png" alt="image" class="align-left" style="max-width: 75%"></p>
+
+<p>연구소에는 4마리가 존재한다. 그럼 나는 2마리를 가져갈 수 있고  <br>
+총 가져갈 수 있는 경우의 수는 6가지가 나오게 된다.<br>
+무조건 2마리밖에 가져가지 못하기 때문에<br>
+<span style="color:#0066CC"> <strong>포켓몬의 종류가 아무리 많든 최대로 2종류의 포켓몬만을 가져갈 수 있다.</strong> </span></p>
+
+<p><br></p>
+
+<p>6마리일 경우에도 마찬가지다. 기본적으로 N/3이기 때문에 3마리만 가져갈 수 있다.<br>
+종류가 다양하다고 가정하면 3마리만 가져갈 수 있기 때문에 3종류가 최댓값일 것이고, <br>
+종류가 다양하지 않다면 중복된 포켓몬을 제거해주면 최대로 가져갈 수 있는 종류의 값이 나올 것이다.</p>
+
+<p>코드로 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 골라야하는 폰켓몬 수, 즉 종류가 서로다를 경우 최대 종류의 개수</span>
+        <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">;</span>
+
+        <span class="c1">// 같은 종류의 폰켓몬은 제거한 후 hash로 저장</span>
+        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span>
+        <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">forEach</span><span class="o">(</span><span class="n">num</span> <span class="o">-&gt;</span> <span class="n">hashSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">));</span>
+
+        <span class="c1">// 중복이 제거된 폰켓몬 종류가 최대 종류의 개수보다 많을 경우 -&gt; 최대종류의 개수 리턴</span>
+        <span class="c1">// 중복이 제거된 폰켓몬 종류가 최대 종류의 개수보다 적을 경우 -&gt; 적은종류의 개수 리턴</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="o">?</span> <span class="n">max</span> <span class="o">:</span> <span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">max</code>값은 종류의 최대값을 표현했다. <br>
+위에서 설명했듯이 내가 가져갈 수 잇는 폰켓몬의 최대는 <br>
+<code class="language-plaintext highlighter-rouge">nums</code>로 주어지는 폰켓몬 수량의 절반이다.</p>
+
+<p>중복을 제거하기위해 <code class="language-plaintext highlighter-rouge">HashSet</code>을 이용하였다. <br>
+사실 <code class="language-plaintext highlighter-rouge">stream</code>의 <code class="language-plaintext highlighter-rouge">distinct</code>를 이용해 중복을 제거해줄 수도 있지만<br>
+문제풀이 방향이 해시이기 때문에 위와 같은 방법으로 풀이를 했다.</p>
+
+<p>마지막으로 <code class="language-plaintext highlighter-rouge">hashSet</code>의 중복이 제거된 폰켓몬의 수량이 <br>
+최대 수량보다 크다면 최대수량을 리턴하고 <br>
+작다면 중복이 제거된 <code class="language-plaintext highlighter-rouge">hashSet</code>의 수량을 리턴하여 반환하도록 하였다.</p>
+
 
 
     </div>
@@ -697,10 +838,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/07/til.html" title="">TIL) DB RDMBS 3</a></li>
-<li><a class="post-link" href="/til/2022/11/14/til.html" title="">TIL) API Documentation 2</a></li>
-<li><a class="post-link" href="/db/2023/01/14/db-redis.html" title="">Redis JWT Refresh Token 관리 및 재발행</a></li>
-<li><a class="post-link" href="/db/2022/12/19/db-mysqlEER.html" title="">MySQL EER 다이어그램 만드는법</a></li>
+        <li><a class="post-link" href="/til/2022/09/28/til.html" title="">TIL) Java Algorithm 2</a></li>
+<li><a class="post-link" href="/til/2022/11/10/til.html" title="">TIL) JUnit 3</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="">TIL) Spring Exception 2</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="">TIL) Spring DTO</a></li>
 </ul>
     </div>
 <div class="post-comments">
