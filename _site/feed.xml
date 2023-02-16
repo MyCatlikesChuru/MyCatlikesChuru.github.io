@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-11T22:37:36+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 폰켓몬</title><link href="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html" rel="alternate" type="text/html" title="[Programmers - Java] 폰켓몬" /><published>2023-02-11T00:00:00+09:00</published><updated>2023-02-11T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/11/algo-ponketmon</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"><![CDATA[<h2 id="-문제--폰켓몬">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/1845">폰켓몬</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-17T03:10:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Spring) 단위 테스트 JPA metamodel must not be empty!</title><link href="http://localhost:4000/spring/2023/02/17/spring-test.html" rel="alternate" type="text/html" title="Spring) 단위 테스트 JPA metamodel must not be empty!" /><published>2023-02-17T00:00:00+09:00</published><updated>2023-02-17T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/02/17/spring-test</id><content type="html" xml:base="http://localhost:4000/spring/2023/02/17/spring-test.html"><![CDATA[<h3 id="-문제발생-및-원인">✅ 문제발생 및 원인</h3>
+
+<p>Controller 단위 테슽 진행하려고 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code><br />
+어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: JPA metamodel must not be empty!
+</code></pre></div></div>
+
+<p>원인을 파악중 Entity들의 생성,수정 LocalDateTime을 자동으로<br />
+관리해주는 <code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>어노테이션을 <code class="language-plaintext highlighter-rouge">@SpringBootApplication</code>클래스에<br />
+등록해 놓은 거이 위의 에러의 요인이였다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableJpaAuditing</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JaritalkApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">JaritalkApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>은 JPA관련 Bean들을 필요로하는데 <br />
+<code class="language-plaintext highlighter-rouge">@WebMvcTest</code>같은 단위테스트는 JPA관련 Bean들을 로드하지 않기 때문이다.</p>
+
+<p><br /></p>
+
+<h3 id="-해결-방법">📌 해결 방법</h3>
+
+<p><strong>1. Configuration 분리</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableJpaAuditing</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JpaAuditingConfiguration</span> <span class="o">{</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code> 어노테이션을 새로운 클래스를 만들어<br />
+빈으로 등록해주면 된다.</p>
+
+<p><br /></p>
+
+<p><strong>2. MockBean 추가</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@WebMvcTest</span><span class="o">(</span><span class="n">controllers</span> <span class="o">=</span> <span class="nc">CommunityController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">class</span> <span class="nc">CommunityControllerTest</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>테스트하려고 하는 클래스에 <code class="language-plaintext highlighter-rouge">JpaMetamodelMappingContext</code> <br />
+<code class="language-plaintext highlighter-rouge">@MockBean</code>을 추가해주면된다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[✅ 문제발생 및 원인]]></summary></entry><entry><title type="html">[Programmers - Java] 폰켓몬</title><link href="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html" rel="alternate" type="text/html" title="[Programmers - Java] 폰켓몬" /><published>2023-02-11T00:00:00+09:00</published><updated>2023-02-11T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/11/algo-ponketmon</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"><![CDATA[<h2 id="-문제--폰켓몬">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/1845">폰켓몬</a></h2>
 
 <p>2023-02-11 기준 풀이</p>
 
@@ -1447,7 +1498,43 @@ Spring Security에 대한 내용을 어느정도 선수지식으로 가지고 �
 <a href="https://hudi.blog/refresh-token-in-spring-boot-with-redis/">Redis Jpa 사용 레퍼런스</a>, <a href="https://wildeveloperetrain.tistory.com/32">Redis 사용방법 2가지 레퍼런스</a></p>
 
 <p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry><entry><title type="html">Git Cherry-Pick으로 Commit 옮기기</title><link href="http://localhost:4000/git/2023/01/12/git-cherrypick.html" rel="alternate" type="text/html" title="Git Cherry-Pick으로 Commit 옮기기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-cherrypick</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-cherrypick.html"><![CDATA[<h3 id="-cherry-pick">📌 Cherry-Pick</h3>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry><entry><title type="html">Git 이전 Commit Message 수정하기</title><link href="http://localhost:4000/git/2023/01/12/git-commitmessage.html" rel="alternate" type="text/html" title="Git 이전 Commit Message 수정하기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-commitmessage</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-commitmessage.html"><![CDATA[<h3 id="-cli로-변경">📌 CLI로 변경</h3>
+
+<p>만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> HEAD~3        
+</code></pre></div></div>
+<p>를 입력해서 커밋메세지가 수정이 가능하다. <br />
+<code class="language-plaintext highlighter-rouge">~3</code>은 가장최신부터 수정하고자하는 커밋 수량이다</p>
+
+<p>Pick이라고 되어있는 부분을 reword로 변경한 다음 <br />
+커밋메세지를 수정해주면 반영된다.</p>
+
+<p><br /></p>
+
+<h3 id="-intellij로-변경">📌 IntelliJ로 변경</h3>
+
+<p>IDE를 사용하면 vi,nano 편집기를 이용하는 것보다<br />
+훨씬 수월하게 작업할 수 있다.</p>
+
+<p>하단의 Git 탭에서 커밋메세지를 변경하고자하는<br />
+커밋을 눌러 오른쪽 클릭을하자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212041524-5d07ce20-07d1-4299-96e0-866fc2857dfb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Interactively Rebase from Here</code>를 눌러주자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/212041533-03319280-6850-4b08-8cfe-f8918c7013d8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>그러면 Rebasing Commits 팝업이 노출되는데 <br />
+원하는 커밋 메시지 이름으로 변경한 다음에</p>
+
+<p>START REBASING을 눌러주면 <br />
+변경된 커밋 메세지로 반영된 모습을 확인할 수 있다.</p>
+
+<p><br />
+<br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry><entry><title type="html">Git Cherry-Pick으로 Commit 옮기기</title><link href="http://localhost:4000/git/2023/01/12/git-cherrypick.html" rel="alternate" type="text/html" title="Git Cherry-Pick으로 Commit 옮기기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-cherrypick</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-cherrypick.html"><![CDATA[<h3 id="-cherry-pick">📌 Cherry-Pick</h3>
 
 <p>작업을 하던중 다른 브랜치에 Commit을 해버렸다…</p>
 
@@ -1586,238 +1673,4 @@ Drop Commit을 눌러주면 된다.</p>
 
 <p><br />
 <br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 Cherry-Pick]]></summary></entry><entry><title type="html">Git 이전 Commit Message 수정하기</title><link href="http://localhost:4000/git/2023/01/12/git-commitmessage.html" rel="alternate" type="text/html" title="Git 이전 Commit Message 수정하기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-commitmessage</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-commitmessage.html"><![CDATA[<h3 id="-cli로-변경">📌 CLI로 변경</h3>
-
-<p>만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> HEAD~3        
-</code></pre></div></div>
-<p>를 입력해서 커밋메세지가 수정이 가능하다. <br />
-<code class="language-plaintext highlighter-rouge">~3</code>은 가장최신부터 수정하고자하는 커밋 수량이다</p>
-
-<p>Pick이라고 되어있는 부분을 reword로 변경한 다음 <br />
-커밋메세지를 수정해주면 반영된다.</p>
-
-<p><br /></p>
-
-<h3 id="-intellij로-변경">📌 IntelliJ로 변경</h3>
-
-<p>IDE를 사용하면 vi,nano 편집기를 이용하는 것보다<br />
-훨씬 수월하게 작업할 수 있다.</p>
-
-<p>하단의 Git 탭에서 커밋메세지를 변경하고자하는<br />
-커밋을 눌러 오른쪽 클릭을하자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041524-5d07ce20-07d1-4299-96e0-866fc2857dfb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">Interactively Rebase from Here</code>를 눌러주자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041533-03319280-6850-4b08-8cfe-f8918c7013d8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그러면 Rebasing Commits 팝업이 노출되는데 <br />
-원하는 커밋 메시지 이름으로 변경한 다음에</p>
-
-<p>START REBASING을 눌러주면 <br />
-변경된 커밋 메세지로 반영된 모습을 확인할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry><entry><title type="html">Redis CLI 설치 및 사용방법</title><link href="http://localhost:4000/db/2023/01/08/db-redissetting.html" rel="alternate" type="text/html" title="Redis CLI 설치 및 사용방법" /><published>2023-01-08T00:00:00+09:00</published><updated>2023-01-08T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/08/db-redissetting</id><content type="html" xml:base="http://localhost:4000/db/2023/01/08/db-redissetting.html"><![CDATA[<p><strong>Redis</strong>는 <strong>Remote Dictionary Server</strong>의 약자로 <br />
-<code class="language-plaintext highlighter-rouge">key:value</code>로 값을 저장하는 NoSQL이다. <br />
-인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/211693910-59b5da13-847e-4313-aed9-ce48a76c7434.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>비관계형 데이터 베이스 관리 시스템(DBMS)이며<br />
-캐시서버로 많이 이용된다.  <br />
-캐시는 한번 읽어온 데이터를 임의의 공간에 저장하여<br />
-다음에 읽을 때는 빠르게 결과값을 받을 수 있도록 도와주는 공간이다.</p>
-
-<p><br /></p>
-
-<p>학습의 목적은 JWT Refresh Token 관리 목적과<br />
-좋아요,혹은 조회수 같은 자주 업데이트가 일어나는 데이터를<br />
-RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.</p>
-
-<p>본격적으로 알아보기전에 CLI를 통해 설치와 기본적인 명령어를 익혀보자</p>
-
-<p><br /></p>
-
-<h3 id="-redis-설치">📌 Redis 설치</h3>
-
-<p>맥을 사용하는 유저라면 brew를 사용할 텐데</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>redis
-</code></pre></div></div>
-<p>를 입력하면 redis 설치가 가능하다.</p>
-
-<p><br /></p>
-
-<h3 id="-redis-시작-종료">📌 Redis 시작, 종료</h3>
-
-<p>기본 적인 redis 시작 명렁어이다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services start redis
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">==&gt; Successfully started redis (label: homebrew.mxcl.redis)</code><br />
-와 같이 표현되면 정상적으로 실행 된 것이다.</p>
-
-<p><br /></p>
-
-<p>시작이완료되고 아래 명령어를 입력하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redis-cli
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">127.0.0.1:6379&gt;</code>과 같이 <code class="language-plaintext highlighter-rouge">localhost:6379</code>로<br />
-접속되었다는 표시가 나올 거다.</p>
-
-<p><br /></p>
-
-<p>redis 종료, 재시작 명렁어이다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services stop redis
-</code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services restart redis
-</code></pre></div></div>
-
-<p>nginx, httpd 등 시작명령어가 비슷하고 익숙할 것이다.</p>
-
-<p><br /></p>
-
-<h3 id="-redis-crud">📌 Redis CRUD</h3>
-
-<p><strong>1). 현재의 키값을 확인</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; keys <span class="k">*</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>2). key / value 형태로 저장 (한개만)</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; <span class="nb">set test </span>a
-</code></pre></div></div>
-<p>test : key 값이된다.<br />
-a : value 값이된다.<br />
-즉 test라는 키의 a라는 value로 저장!</p>
-
-<p><br /></p>
-
-<p><strong>3). key / value 형태로 저장 (여러개 한번에)</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; mset test1 a test2 b
-</code></pre></div></div>
-<p>와 같이 입력하게 될 경우, test1,test2 라는 키가 생기고<br />
-a,b라는 value가 생긴다.</p>
-
-<p><br /></p>
-
-<p><strong>4). key의 value를 조회</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; get <span class="nb">test</span>
-</code></pre></div></div>
-<p>test라는 키의 value를 조회한다. <br />
-위에서 a로 지정했으니 a로 출력된다.</p>
-
-<p><br /></p>
-
-<p><strong>5). 소멸시간 지정해서 저장하기</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; setex <span class="nb">test </span>10 a
-</code></pre></div></div>
-<p>와 같이 지정하게 될 경우, test라는 키값은<br />
-10초동안만 존재하게 된다.<br />
-10초후에 자동으로 소멸되며 조회를해도 찾을 수 없다.</p>
-
-<p><br /></p>
-
-<p><strong>6). 키와 값 삭제하기</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; del <span class="nb">test</span>
-</code></pre></div></div>
-<p>키값을 입력해 만들어둔 키를 삭제할 수 있다. <br />
-삭제가 완료되면 <code class="language-plaintext highlighter-rouge">(integer) 1</code>와 같이 표시된다.</p>
-
-<p><br /></p>
-
-<p><strong>7). 모든 키와 값 삭제하기</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; flushall
-</code></pre></div></div>
-<p>모든 키와 값을 삭제해주는 명령어다</p>
-
-<p><br /></p>
-
-<p><strong>8). 키의 소멸 시간 확인하기</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; ttl <span class="nb">test</span>
-</code></pre></div></div>
-<p>ttl 다음에 키값을 입력하면 현재 남은 시간을 확인할 수 있다. <br />
-초단위로 표시되며, 계속 입력하면 초가 줄어드는걸 볼 수 있다.</p>
-
-<p><br /></p>
-
-<h3 id="-redis-여러개의-필드">📌 Redis 여러개의 필드</h3>
-
-<p>redis의 hashes 자료구조에는<br />
-Key와 Field 용어가 나온다.</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hash Key1
-     ᄂ Hash Sub Key1 (=Field1)
-     ᄂ Hash Sub Key2 (=Field2)
-</code></pre></div></div>
-<p>와 같은 구조로 하나의 Key값에 여러가지<br />
-Field를 저장을 할수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>1). 하나의 키로 여러개 필드 저장</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hset dhfif718@naver.com token <span class="s2">"value1"</span> like <span class="s2">"10"</span>
-</code></pre></div></div>
-<p>HSET 명령어를 이용할 수 있다.</p>
-
-<p>dhfif718@naver.com 라는 Key값에</p>
-
-<p>key : token / value : value1<br />
-key : like / value : 10<br />
-이라는 필드로 저장이 되어진 것이다.</p>
-
-<p>어떻게 보면 dhfif718@naver.com Key의 필드는 token과 like가 되는 셈이다.</p>
-
-<p><br /></p>
-
-<p><strong>2). 조회하는 방법</strong></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hget dhfif718@naver.com like
-</code></pre></div></div>
-
-<p>조회를할때 위와 같은 방법으로 조회하게되면<br />
-10이라는 값이 출력되게 되어진다.</p>
-
-<p>만약 전체 필드를 조회하고 싶다면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hgetall dhfif718@naver.com
-</code></pre></div></div>
-<p>hgetall을 key값과 입력하면 전체 조회가 된다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1<span class="o">)</span> <span class="s2">"token"</span>
-2<span class="o">)</span> <span class="s2">"value1"</span>
-3<span class="o">)</span> <span class="s2">"like"</span>
-4<span class="o">)</span> <span class="s2">"10"</span>
-</code></pre></div></div>
-<p>와 같은 방식으로 출력되어진다.</p>
-
-<p><br /></p>
-
-<p><strong>3). 삭제하는 방법</strong></p>
-
-<p>마지막으로 삭제하는 방법이다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hdel dhfif718@naver.com token like
-</code></pre></div></div>
-
-<p>여러개의 필드를 한번에 삭제할 수도 있고<br />
-하나씩 지정해서 삭제할 수도 있다.</p>
-
-<p><br /><br />
-<br /></p>
-
-<p>✨ 참고 블로그 <br />
-<a href="https://freeblogger.tistory.com/10">Redis 참고 레퍼런스 1</a>, <a href="https://wlswoo.tistory.com/44">Redis 참고 레퍼런스 2</a>, <a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&amp;blogId=wideeyed&amp;logNo=221428664697">Redis Hash 참고 레퍼런스</a>, <a href="https://server-talk.tistory.com/472">Redis 우분투 설치 레퍼런스</a></p>
-
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis는 Remote Dictionary Server의 약자로 key:value로 값을 저장하는 NoSQL이다. 인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..]]></summary></entry></feed>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 Cherry-Pick]]></summary></entry></feed>
