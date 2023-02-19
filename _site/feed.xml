@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-20T00:53:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 프린터</title><link href="http://localhost:4000/algorithm/2023/02/20/algo-printer.html" rel="alternate" type="text/html" title="[Programmers - Java] 프린터" /><published>2023-02-20T00:00:00+09:00</published><updated>2023-02-20T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/20/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/20/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-20T01:03:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 프린터</title><link href="http://localhost:4000/algorithm/2023/02/20/algo-printer.html" rel="alternate" type="text/html" title="[Programmers - Java] 프린터" /><published>2023-02-20T00:00:00+09:00</published><updated>2023-02-20T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/20/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/20/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -150,7 +150,7 @@ A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 �
 </ol>
 
 <p>그리고 최종적을 인쇄가 완료되면 담는 List를 만들어주었다.<br />
-문서의 위치는 0부터 채워넣어주었다. <br />
+문서의 위치 Queue는 0부터 채워넣어주었다. <br />
 Queue를 이용에 앞에서부터 poll();하여 해당 값이<br />
 현재 가지고 있는 Queue에서 가장크거나 큰값이랑 같은지 비교를하여<br />
 통과를하면 인쇄완료 List에 문서의 위치를 저장하는 방식이다.</p>
