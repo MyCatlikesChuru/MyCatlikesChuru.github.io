@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Programmers - Java] 프린터"
-subtitle: 고득점 Kit (스택/큐 - Level 2)
+subtitle: 고득점 Kit (스택,큐 - Level 2)
 categories: Algorithm
 tags: [Algorithm, Programmers]
 comments: true
