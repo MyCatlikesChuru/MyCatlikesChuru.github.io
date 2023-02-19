@@ -7,22 +7,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Git pull rebase 사용해 병합하기 | LeeJellan</title>
+<title>[Programmers - Java] 프린터 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="Git pull rebase 사용해 병합하기">
+<meta property="og:title" content="[Programmers - Java] 프린터">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="자주 사용하는 git pull --rebase에 대해 정리해보려한다.">
-<meta property="og:description" content="자주 사용하는 git pull --rebase에 대해 정리해보려한다.">
-<link rel="canonical" href="http://localhost:4000/git/2022/12/27/git-rebase.html">
-<meta property="og:url" content="http://localhost:4000/git/2022/12/27/git-rebase.html">
+<meta name="description" content="📌 문제 : 프린터">
+<meta property="og:description" content="📌 문제 : 프린터">
+<link rel="canonical" href="http://localhost:4000/algorithm/2023/02/20/algo-printer.html">
+<meta property="og:url" content="http://localhost:4000/algorithm/2023/02/20/algo-printer.html">
 <meta property="og:site_name" content="LeeJellan">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-12-27T00:00:00+09:00">
+<meta property="article:published_time" content="2023-02-20T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Git pull rebase 사용해 병합하기">
+<meta property="twitter:title" content="[Programmers - Java] 프린터">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2022-12-27T00:00:00+09:00","datePublished":"2022-12-27T00:00:00+09:00","description":"자주 사용하는 git pull --rebase에 대해 정리해보려한다.","headline":"Git pull rebase 사용해 병합하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/git/2022/12/27/git-rebase.html"},"url":"http://localhost:4000/git/2022/12/27/git-rebase.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-02-20T00:00:00+09:00","datePublished":"2023-02-20T00:00:00+09:00","description":"📌 문제 : 프린터","headline":"[Programmers - Java] 프린터","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/algorithm/2023/02/20/algo-printer.html"},"url":"http://localhost:4000/algorithm/2023/02/20/algo-printer.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,11 +635,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">Git pull rebase 사용해 병합하기</h1>
-  <h2 class="post-subtitle"></h2>
+  <h1 class="post-title p-name" itemprop="name headline">[Programmers - Java] 프린터</h1>
+  <h2 class="post-subtitle">고득점 Kit (스택/큐 - Level 2)</h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2022-12-27T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Dec 27, 2022
+    <time class="dt-published" datetime="2023-02-20T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 20, 2023
     </time>
 
     
@@ -676,78 +676,177 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
   </p>
 <div class="post-tags">
-<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>자주 사용하는 <code class="language-plaintext highlighter-rouge">git pull --rebase</code>에 대해 정리해보려한다.</p>
+      <h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a>
+</h2>
 
-<p>협업을 같이하다보면 지속적으로 업데이트를 하기 위해서<br>
-pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
+<h3 id="-문제-설명">📖 문제 설명</h3>
 
-<p><code class="language-plaintext highlighter-rouge">dev/back</code> 이라는 브랜치가 백엔드끼리<br>
-통합을 해서 사용하는 브랜치라고 가정하자.</p>
+<p>일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.</p>
+<div class="highlight"><pre class="codehilite"><code>1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.
+2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.
+3. 그렇지 않으면 J를 인쇄합니다.
+</code></pre></div>
+<p>예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있고 중요도가 2 1 3 2 라면 C D A B 순으로 인쇄하게 됩니다.</p>
 
-<p>내가 작업하는 브랜치는 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>라고 하였을때<br>
-누군가 <code class="language-plaintext highlighter-rouge">dev/back</code>에 작업을 하고 Pull Reqeust하여 Merge를 했다고<br>
-가정을 해보면. 현재 <code class="language-plaintext highlighter-rouge">dev/back</code> 브랜치의 프로그램이 가장 최신본이다.</p>
+<p>내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 알고 싶습니다. 위의 예에서 C는 1번째로, A는 3번째로 인쇄됩니다.</p>
 
-<p>내가 작업하고있는 브랜치를 최신화 시키고 싶을때<br>
-<code class="language-plaintext highlighter-rouge">dev/back</code>에 있는 브랜치를 Pull해오면 된다.</p>
+<p>현재 대기목록에 있는 문서의 중요도가 순서대로 담긴 배열 priorities와 내가 인쇄를 요청한 문서가 현재 대기목록의 어떤 위치에 있는지를 알려주는 location이 매개변수로 주어질 때, 내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 return 하도록 solution 함수를 작성해주세요.</p>
+
+<h4 id="제한사항">제한사항</h4>
+
+<ul>
+<li>현재 대기목록에는 1개 이상 100개 이하의 문서가 있습니다.</li>
+<li>인쇄 작업의 중요도는 1~9로 표현하며 숫자가 클수록 중요하다는 뜻입니다.</li>
+<li>location은 0 이상 (현재 대기목록에 있는 작업 수 - 1) 이하의 값을 가지며 대기목록의 가장 앞에 있으면 0, 두 번째에 있으면 1로 표현합니다.</li>
+</ul>
+
+<h4 id="입출력-예">입출력 예</h4>
+
+<table class="table">
+        <thead>
+<tr>
+<th>priorities</th>
+<th>location</th>
+<th>return</th>
+</tr>
+</thead>
+        <tbody>
+<tr>
+<td>[2, 1, 3, 2]</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>[1, 1, 9, 1, 1, 1]</td>
+<td>0</td>
+<td>5</td>
+</tr>
+</tbody>
+      </table>
+
+<h4 id="입출력-예-설명">입출력 예 설명</h4>
+
+<p>예제 #1</p>
+<p>문제에 나온 예와 같습니다.</p>
+
+<p>예제 #2</p>
+<p>6개의 문서(A, B, C, D, E, F)가 인쇄 대기목록에 있고 중요도가 1 1 9 1 1 1 이므로 C D E F A B 순으로 인쇄합니다. </p>
+
+<p><a href="http://www.csc.kth.se/contest/nwerc/2006/problems/nwerc06.pdf" target="_blank" rel="noopener">출처</a></p>
+
+<hr>
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<p>문제내용이 얼핏 어려울지 몰라도, 천천히 읽어보면 답이보인다. <br>
+문제 부터 파악을 해보자</p>
+
+<p>이 문제의 핵심은 중요도가 높은 문서는 프린트를 하고<br>
+인쇄 진행을하는 순서의 문서가 중요도가 대기목록보다 낮으면 <br>
+대기목록의 마지막으로 보내지는게 핵심이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/219957856-f278355c-33bd-49b1-b466-0888d9d3265e.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>위의 그림대로 우선 프로그래밍을 진행하였다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">대기목록 -&gt; 인쇄진행 -&gt; 확인후 대기목록 or 프린트완료 List로 이동</code><br>
+이렇게를 큰틀로 잡고 진행하였고 첫번째 예제인 <code class="language-plaintext highlighter-rouge">[2, 1, 3, 2]</code>를 한번 봐보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/219957560-50050212-afe0-4621-95c9-cc4cdda5d21c.gif" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>위의 GIF처럼 중요도가 높으면 인쇄 List로 이동하고<br>
+중요도가 낮으면 대기목록 맨뒤로 이동을 한다.</p>
+
+<p>최종적으로 반환해야하는 값은 Location에 따라 결정된다. <br>
+Locaiton과 같은 경우는 처음에 목록이 만들어졌을때의 목록위치다. <br>
+제한사항에서 보면 0부터 시작한다는 것을 알 수 있고</p>
+
+<p>예를들어 Location = 2 라고 가정할 경우 <br>
+문서이름 A,B,C,D라고 정해졌으면 0,1,2,3의 위치로
+C문서를 가르키게된다. 즉, C문서가 몇번째로 인쇄가 되어지냐?<br>
+라는게 이번 문제풀이의 답이 되어지겠다. <br>
+위에 그림에서 보듯이 C는 첫번째로 반환되어지기 때문에 return = 1이 된다.</p>
 
 <p><br></p>
 
-<p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
+<p>좀 더 쉽게 두번째 예제를 보자
+<code class="language-plaintext highlighter-rouge">[1, 1, 9, 1, 1, 1]</code></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
-</code></pre></div></div>
-<p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
+<p><img src="https://user-images.githubusercontent.com/95069395/219958614-ac20ff5a-b105-431b-85fb-0f03a16cc3f4.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<p>그럴 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
-</code></pre></div></div>
-<p><img src="https://user-images.githubusercontent.com/95069395/217531072-d4b655ed-f047-411b-af49-a08eb274b0b3.png" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br>
-이제 합쳐진 파일에서 겹친 부분을 수정을 해주면 된다. <br>
-참고로 브랜치 이름이 e1604ec 이렇게 바뀐 모습을 볼 수 있다.</p>
-
-<p>수정을 다완료 하고 나면</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
-</code></pre></div></div>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/217531087-2ad4738a-4cc0-408a-a48b-6c3dbdda892b.png" alt="image" class="align-left" style="max-width: 100%"></p>
-
-<p>를 입력해줘서 다음 rebase할 커밋으로 넘어가주면 된다.<br>
-만약 다음에 수정할게 없다면</p>
+<p>처음에 문서가 이렇게 있을 것이다. Location이 0이라는 뜻은 <br>
+A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 후면</p>
 
 <p><br></p>
 
-<p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br>
-이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
+<p><img src="https://user-images.githubusercontent.com/95069395/219958616-d79f0380-bd2d-4fb2-9dbd-49692dfe7729.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
+<p>위에 처럼 인쇄가 되어질 것이다. <br>
+그러면 최종적으로 A라는 문서가 어느 위치에 있는지?<br>
+1부터 시작되어 5번째로 인쇄가 되어지기 때문에<br>
+5라는 값을 반환해주면 된다.</p>
+
+<p>여기까지 문제 이해와 설명부분이였고 코드로 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// 문제의 핵심.</span>
+    <span class="c1">// 높은 숫자가 중요도가 높은 것이다.</span>
+    <span class="c1">// 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.</span>
+    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">important</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 우선순위를 담는 Queue</span>
+    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 문서를 위치를 담는 Queue</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 프린트를 완료한 List</span>
+    <span class="kt">int</span> <span class="n">maxDoc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="c1">// 우선순위, 문서를 Queue에 담는다.</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">priorities</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">priorities</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Queue의 담긴게 없으면 반복문을 탈출</span>
+        <span class="nc">Integer</span> <span class="n">print</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 중요도를 하나씩 빼온다</span>
+        <span class="nc">Integer</span> <span class="n">target</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 문서위치를 하나씩 빼온다</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">maxDoc</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span> <span class="c1">// 현재 우선순위가 가장 높은 숫자</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">print</span> <span class="o">&gt;=</span> <span class="n">maxDoc</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">print</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 우선순위를 마지막에 넣는다.</span>
+            <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 문서위치를 마지막에 넣는다.</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre></div></div>
-<p>를 입력해주면 push를 할 수 있는데</p>
+<p>더 깔끔한 풀이가 분명 가능할 것 같다. <br>
+우선 내가 풀이한 방법을 설명해보자면</p>
 
-<p>아래와 같은 에러에 마주하였을 경우에는</p>
+<p>Queue를 2개를 만들었다.</p>
+<ol>
+  <li>우선순위를 담는 Queue</li>
+  <li>문서의 위치를 담는 Queue</li>
+</ol>
 
-<p><img src="https://user-images.githubusercontent.com/95069395/217531097-98d18b4c-42a4-430e-9832-00bd654669c9.png" alt="image" class="align-left" style="max-width: 100%"></p>
+<p>그리고 최종적을 인쇄가 완료되면 담는 List를 만들어주었다.<br>
+문서의 위치는 0부터 채워넣어주었다. <br>
+Queue를 이용에 앞에서부터 poll();하여 해당 값이<br>
+현재 가지고 있는 Queue에서 가장크거나 큰값이랑 같은지 비교를하여<br>
+통과를하면 인쇄완료 List에 문서의 위치를 저장하는 방식이다.</p>
 
-<p>합쳐진게 전부 잘 수정했다고 가정하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
-</code></pre></div></div>
-<p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
-
-<p><br>
-<br>
-<br></p>
+<p>최종적으로 문서의 위치가 저장되면 location 값과 같은<br>
+index를 가져와 +1을 하여 반환해주었다.</p>
 
 
 
@@ -755,15 +854,15 @@ pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/db/2022/12/19/db-mysqlEER.html" title="MySQL EER 다이어그램 만드는법">MySQL EER 다이어그램 만드는법</a><a class="next" href="/spring/2022/12/27/spring-JunitSecure.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">Spring) Security Test 코드 작성시 UserDetails...</a>
+<a class="previous" href="/spring/2023/02/17/spring-test.html" title="Spring) 단위 테스트 JPA metamodel must not be empty!">Spring) 단위 테스트 JPA metamodel must...</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/git/2023/01/12/git-cherrypick.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">Git Cherry-Pick으로 Commit 옮기기</a></li>
-<li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">macOs) brew update Error Another active Homebrew update process is already in...</a></li>
-<li><a class="post-link" href="/server/2023/01/27/server-oraclesetting.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">Oracle Cloud 외부 접속 설정</a></li>
-<li><a class="post-link" href="/til/2022/09/23/til.html" title="Spring) Security Test 코드 작성시 UserDetails 설정">TIL) Java 자료구조 Graph, Tree, BST</a></li>
+        <li><a class="post-link" href="/til/2022/09/19/til.html" title="">TIL) 한달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/09/13/til.html" title="">TIL) Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
+<li><a class="post-link" href="/til/2022/11/02/til.html" title="">TIL) Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -11,7 +11,7 @@ published: true
 
 ### ✅ 문제발생 및 원인
 
-Controller 단위 테슽 진행하려고 `@WebMvcTest`  
+Controller 단위 테스트를 진행하려고 `@WebMvcTest`  
 어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.  
 
 ```text

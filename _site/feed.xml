@@ -1,6 +1,164 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-17T16:13:07+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">Spring) 단위 테스트 JPA metamodel must not be empty!</title><link href="http://localhost:4000/spring/2023/02/17/spring-test.html" rel="alternate" type="text/html" title="Spring) 단위 테스트 JPA metamodel must not be empty!" /><published>2023-02-17T00:00:00+09:00</published><updated>2023-02-17T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/02/17/spring-test</id><content type="html" xml:base="http://localhost:4000/spring/2023/02/17/spring-test.html"><![CDATA[<h3 id="-문제발생-및-원인">✅ 문제발생 및 원인</h3>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-20T00:53:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 프린터</title><link href="http://localhost:4000/algorithm/2023/02/20/algo-printer.html" rel="alternate" type="text/html" title="[Programmers - Java] 프린터" /><published>2023-02-20T00:00:00+09:00</published><updated>2023-02-20T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/20/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/20/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
 
-<p>Controller 단위 테슽 진행하려고 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code><br />
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.</p>
+<div class="highlight"><pre class="codehilite"><code>1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.
+2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.
+3. 그렇지 않으면 J를 인쇄합니다.
+</code></pre></div>
+<p>예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있고 중요도가 2 1 3 2 라면 C D A B 순으로 인쇄하게 됩니다.</p>
+
+<p>내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 알고 싶습니다. 위의 예에서 C는 1번째로, A는 3번째로 인쇄됩니다.</p>
+
+<p>현재 대기목록에 있는 문서의 중요도가 순서대로 담긴 배열 priorities와 내가 인쇄를 요청한 문서가 현재 대기목록의 어떤 위치에 있는지를 알려주는 location이 매개변수로 주어질 때, 내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 return 하도록 solution 함수를 작성해주세요.</p>
+
+<h4 id="제한사항">제한사항</h4>
+
+<ul>
+<li>현재 대기목록에는 1개 이상 100개 이하의 문서가 있습니다.</li>
+<li>인쇄 작업의 중요도는 1~9로 표현하며 숫자가 클수록 중요하다는 뜻입니다.</li>
+<li>location은 0 이상 (현재 대기목록에 있는 작업 수 - 1) 이하의 값을 가지며 대기목록의 가장 앞에 있으면 0, 두 번째에 있으면 1로 표현합니다.</li>
+</ul>
+
+<h4 id="입출력-예">입출력 예</h4>
+
+<table class="table">
+        <thead><tr>
+<th>priorities</th>
+<th>location</th>
+<th>return</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>[2, 1, 3, 2]</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>[1, 1, 9, 1, 1, 1]</td>
+<td>0</td>
+<td>5</td>
+</tr>
+</tbody>
+      </table>
+
+<h4 id="입출력-예-설명">입출력 예 설명</h4>
+
+<p>예제 #1</p>
+<p>문제에 나온 예와 같습니다.</p>
+
+<p>예제 #2</p>
+<p>6개의 문서(A, B, C, D, E, F)가 인쇄 대기목록에 있고 중요도가 1 1 9 1 1 1 이므로 C D E F A B 순으로 인쇄합니다. </p>
+
+<p><a href="http://www.csc.kth.se/contest/nwerc/2006/problems/nwerc06.pdf" target="_blank" rel="noopener">출처</a></p>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<p>문제내용이 얼핏 어려울지 몰라도, 천천히 읽어보면 답이보인다. <br />
+문제 부터 파악을 해보자</p>
+
+<p>이 문제의 핵심은 중요도가 높은 문서는 프린트를 하고<br />
+인쇄 진행을하는 순서의 문서가 중요도가 대기목록보다 낮으면 <br />
+대기목록의 마지막으로 보내지는게 핵심이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/219957856-f278355c-33bd-49b1-b466-0888d9d3265e.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위의 그림대로 우선 프로그래밍을 진행하였다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">대기목록 -&gt; 인쇄진행 -&gt; 확인후 대기목록 or 프린트완료 List로 이동</code><br />
+이렇게를 큰틀로 잡고 진행하였고 첫번째 예제인 <code class="language-plaintext highlighter-rouge">[2, 1, 3, 2]</code>를 한번 봐보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/219957560-50050212-afe0-4621-95c9-cc4cdda5d21c.gif" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위의 GIF처럼 중요도가 높으면 인쇄 List로 이동하고<br />
+중요도가 낮으면 대기목록 맨뒤로 이동을 한다.</p>
+
+<p>최종적으로 반환해야하는 값은 Location에 따라 결정된다. <br />
+Locaiton과 같은 경우는 처음에 목록이 만들어졌을때의 목록위치다. <br />
+제한사항에서 보면 0부터 시작한다는 것을 알 수 있고</p>
+
+<p>예를들어 Location = 2 라고 가정할 경우 <br />
+문서이름 A,B,C,D라고 정해졌으면 0,1,2,3의 위치로
+C문서를 가르키게된다. 즉, C문서가 몇번째로 인쇄가 되어지냐?<br />
+라는게 이번 문제풀이의 답이 되어지겠다. <br />
+위에 그림에서 보듯이 C는 첫번째로 반환되어지기 때문에 return = 1이 된다.</p>
+
+<p><br /></p>
+
+<p>좀 더 쉽게 두번째 예제를 보자
+<code class="language-plaintext highlighter-rouge">[1, 1, 9, 1, 1, 1]</code></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/219958614-ac20ff5a-b105-431b-85fb-0f03a16cc3f4.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>처음에 문서가 이렇게 있을 것이다. Location이 0이라는 뜻은 <br />
+A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 후면</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/219958616-d79f0380-bd2d-4fb2-9dbd-49692dfe7729.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위에 처럼 인쇄가 되어질 것이다. <br />
+그러면 최종적으로 A라는 문서가 어느 위치에 있는지?<br />
+1부터 시작되어 5번째로 인쇄가 되어지기 때문에<br />
+5라는 값을 반환해주면 된다.</p>
+
+<p>여기까지 문제 이해와 설명부분이였고 코드로 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
+
+    <span class="c1">// 문제의 핵심.</span>
+    <span class="c1">// 높은 숫자가 중요도가 높은 것이다.</span>
+    <span class="c1">// 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.</span>
+    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">important</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 우선순위를 담는 Queue</span>
+    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 문서를 위치를 담는 Queue</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 프린트를 완료한 List</span>
+    <span class="kt">int</span> <span class="n">maxDoc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+    <span class="c1">// 우선순위, 문서를 Queue에 담는다.</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">priorities</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">priorities</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="k">while</span> <span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Queue의 담긴게 없으면 반복문을 탈출</span>
+        <span class="nc">Integer</span> <span class="n">print</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 중요도를 하나씩 빼온다</span>
+        <span class="nc">Integer</span> <span class="n">target</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 문서위치를 하나씩 빼온다</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">maxDoc</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span> <span class="c1">// 현재 우선순위가 가장 높은 숫자</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">print</span> <span class="o">&gt;=</span> <span class="n">maxDoc</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">print</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 우선순위를 마지막에 넣는다.</span>
+            <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 문서위치를 마지막에 넣는다.</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>더 깔끔한 풀이가 분명 가능할 것 같다. <br />
+우선 내가 풀이한 방법을 설명해보자면</p>
+
+<p>Queue를 2개를 만들었다.</p>
+<ol>
+  <li>우선순위를 담는 Queue</li>
+  <li>문서의 위치를 담는 Queue</li>
+</ol>
+
+<p>그리고 최종적을 인쇄가 완료되면 담는 List를 만들어주었다.<br />
+문서의 위치는 0부터 채워넣어주었다. <br />
+Queue를 이용에 앞에서부터 poll();하여 해당 값이<br />
+현재 가지고 있는 Queue에서 가장크거나 큰값이랑 같은지 비교를하여<br />
+통과를하면 인쇄완료 List에 문서의 위치를 저장하는 방식이다.</p>
+
+<p>최종적으로 문서의 위치가 저장되면 location 값과 같은<br />
+index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 프린터]]></summary></entry><entry><title type="html">Spring) 단위 테스트 JPA metamodel must not be empty!</title><link href="http://localhost:4000/spring/2023/02/17/spring-test.html" rel="alternate" type="text/html" title="Spring) 단위 테스트 JPA metamodel must not be empty!" /><published>2023-02-17T00:00:00+09:00</published><updated>2023-02-17T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/02/17/spring-test</id><content type="html" xml:base="http://localhost:4000/spring/2023/02/17/spring-test.html"><![CDATA[<h3 id="-문제발생-및-원인">✅ 문제발생 및 원인</h3>
+
+<p>Controller 단위 테스트를 진행하려고 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code><br />
 어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: JPA metamodel must not be empty!
@@ -1534,143 +1692,4 @@ Spring Security에 대한 내용을 어느정도 선수지식으로 가지고 �
 
 <p><br />
 <br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry><entry><title type="html">Git Cherry-Pick으로 Commit 옮기기</title><link href="http://localhost:4000/git/2023/01/12/git-cherrypick.html" rel="alternate" type="text/html" title="Git Cherry-Pick으로 Commit 옮기기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-cherrypick</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-cherrypick.html"><![CDATA[<h3 id="-cherry-pick">📌 Cherry-Pick</h3>
-
-<p>작업을 하던중 다른 브랜치에 Commit을 해버렸다…</p>
-
-<p><strong>팀원 모두가 개발 중인 브랜치</strong> : <code class="language-plaintext highlighter-rouge">develop</code><br />
-<strong>현재 내가 개발하는 브랜치</strong> : <code class="language-plaintext highlighter-rouge">feat/BE/ljh</code></p>
-
-<p>이렇게 두가지로 운영중이었다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212029237-9092798b-deca-43ea-8a8d-d99591ca7963.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>사진에서 볼 수 있듯이… <code class="language-plaintext highlighter-rouge">develop</code> 브랜치에 커밋을 두개나 해버린상황<br />
-#14, #3 으로된 제목의 커밋이다..<br />
-<code class="language-plaintext highlighter-rouge">feat/BE/ljh</code>  브랜치로 커밋을 옮겨야하는 상황이다.</p>
-
-<p>해당 커밋을 복사해서 옮길 수 있는 방법이 Cherry-Pick이다.<br />
-본격적으로 사용법을 알아보자</p>
-
-<p><br /></p>
-
-<h3 id="-commit-hash-값">📌 Commit Hash 값</h3>
-
-<p>첫번째로 내가 잘못올릴 커밋의 해쉬값을 알아야한다.</p>
-
-<p>내가 커밋을 잘못올린 브랜치(<code class="language-plaintext highlighter-rouge">develop</code>)에서<br />
-<code class="language-plaintext highlighter-rouge">git log</code>를 입력해 커밋의 해쉬값을 알 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 7525f9a220700884994e53e90babc345d199e10e <span class="o">(</span>HEAD -&gt; develop<span class="o">)</span>
-Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
-Date:   Thu Jan 12 18:02:48 2023 +0900
-
-    <span class="c">#14 - Responseder, TokenPrvider 역할 추가</span>
-    
-    1. 로그인 시 응답 가능하도록 Responder 추가
-    2. JWT 관련 예외발생시 Json 객체로 반환안되는 문제 수정
-    3. HttpServletRequest 객체로 AccessToken 가져오도록 TokenProvider에게 역할 이전
-       <span class="o">(</span>추후 RefreshToken으로 AccessToken 발급시 통일성있게 사용을 위함<span class="o">)</span>
-
-
-commit cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b
-Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
-Date:   Thu Jan 12 17:58:46 2023 +0900
-
-    <span class="c">#3 - LoginResponseDto 추가</span>
-    
-    1. 로그인 시 응답 가능하도록 ResponseDto 추가
-
-</code></pre></div></div>
-
-<p>나는 총 2개의 커밋을 했고<br />
-첫번째 커밋은 <code class="language-plaintext highlighter-rouge">7525f9a220700884994e53e90babc345d199e10e</code>로<br />
-<code class="language-plaintext highlighter-rouge">7525f9a</code>와 같이 7자리로 표현할 수도 있다.</p>
-
-<p>두번째 커밋은 <code class="language-plaintext highlighter-rouge">cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b</code>이다.</p>
-
-<p>이 두가지 커밋을 이제 <code class="language-plaintext highlighter-rouge">feat/BE/ljh</code>라는<br />
-브랜치로 옮기고 싶은 상황이다.</p>
-
-<p><br /></p>
-
-<h3 id="-cherry-pick-사용하여-커밋-옮기기">📌 Cherry-Pick 사용하여 커밋 옮기기</h3>
-
-<p>먼저 브랜치 체크아웃을 진행하자.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout feat/BE/ljh
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>이제 하나씩 Cherry-Pick 명령어를 사용해 옮겨보자</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git cherry-pick cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b
-</code></pre></div></div>
-<p>를 입력해주면되고, 만약 실행하였을때 정상적으로 <br />
-완료가되면 이상이 없겠지만, 혹시나</p>
-
-<p>아래와 같이 conflict가 발생하게 될 수 있다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Auto-merging server/src/main/java/codestates/frogroup/indiego/domain/member/entity/dto/MemberDto.java
-CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict <span class="k">in </span>server/src/main/java/codestates/frogroup/indiego/domain/member/entity/dto/MemberDto.java
-error: could not apply cd49c93... <span class="c">#3 - LoginResponseDto 추가</span>
-hint: After resolving the conflicts, mark them with
-hint: <span class="s2">"git add/rm &lt;pathspec&gt;"</span>, <span class="k">then </span>run
-hint: <span class="s2">"git cherry-pick --continue"</span><span class="nb">.</span>
-hint: You can instead skip this commit with <span class="s2">"git cherry-pick --skip"</span><span class="nb">.</span>
-hint: To abort and get back to the state before <span class="s2">"git cherry-pick"</span>,
-hint: run <span class="s2">"git cherry-pick --abort"</span><span class="nb">.</span>
-</code></pre></div></div>
-<p>hint 안내에 따라 진행할수가 있다. <br />
-우선 CONFLICT가 발생한 부분을 로그로 알려준다.<br />
-나와 같은 경우는 <code class="language-plaintext highlighter-rouge">MemberDto</code> 충돌이 나왔다고 위에 나와있다.</p>
-
-<p>해당 클래스로 가면 인텔리제이에서 충돌난 부분을 표시해준다. <br />
-충돌난 부분을 코드를 수정해 우선 해결해주고<br />
-<code class="language-plaintext highlighter-rouge">git add .</code>를 진행후 <code class="language-plaintext highlighter-rouge">git cherry-pick --continue</code>를 진행하면된다.<br />
-마치 rebase하는 과정과 매우 흡사하다.</p>
-
-<p>충돌부분이 전부 해결되었으면 nano편집기로 저장할건지를 물어본다.<br />
-ctrl + s, ctrl + x 를 눌러줘 저장을해준다.</p>
-
-<p><br /></p>
-
-<p>완료를 했다면.. <code class="language-plaintext highlighter-rouge">git log</code>를 입력하면 <br />
-<code class="language-plaintext highlighter-rouge">develop</code>브랜치에 있던 커밋이 <code class="language-plaintext highlighter-rouge">feat/BE/ljh</code>로 복사된 것을 <br />
-볼 수 있을 것이다 !!!!!</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit a5d3ef8d6110d838c896ba3125c351eb5b611623 <span class="o">(</span>HEAD -&gt; feat/BE/ljh<span class="o">)</span>
-Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
-Date:   Thu Jan 12 17:58:46 2023 +0900
-
-    1. 로그인 시 응답 가능하도록 ResponseDto 추가
-
-</code></pre></div></div>
-
-<p>해쉬값을 보아하니 복사보다는 새로 만들어진 느낌이다. <br />
-이렇게 옮기려고하는 커밋을 모두 옮기면 된다.</p>
-
-<p><br /></p>
-
-<h3 id="-잘못올린-커밋-삭제">📌 잘못올린 커밋 삭제</h3>
-
-<p><code class="language-plaintext highlighter-rouge">develop</code> 브랜치에 잘못올린 커밋을 삭제해줘야한다. <br />
-Cherry-Pick을 했다고 자동으로 삭제가되진 않는다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">develop</code> 브랜치로 체크아웃을하여</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset HEAD^
-</code></pre></div></div>
-
-<p>를 입력하면 가장 최근인 HEAD의 커밋이 삭제되어진다.</p>
-
-<p>혹시나 인텔리제이를 사용하고 있다면<br />
-하단에 Git에 들어가서</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212040809-3a14a459-78b8-42a4-9558-b42c83cd9f30.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>삭제하려고 하는 커밋에 오른쪽 마우스를 클릭해<br />
-Drop Commit을 눌러주면 된다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 Cherry-Pick]]></summary></entry></feed>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry></feed>
