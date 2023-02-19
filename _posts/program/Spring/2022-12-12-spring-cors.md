@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Spring) CORS 설정하기
-subtitle: Mac 환경변수 적용안되는 문제
+title: "[Spring] CORS 설정하기"
+subtitle: 
 categories: Spring
 tags: [Spring, cors]
 comments: true

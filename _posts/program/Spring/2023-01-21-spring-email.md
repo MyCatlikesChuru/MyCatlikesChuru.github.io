@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring) MailAuthenticationException 문제 해결
+title: "[Spring] MailAuthenticationException 문제 해결"
 subtitle: 
 categories: Spring
 tags: [Spring, email]

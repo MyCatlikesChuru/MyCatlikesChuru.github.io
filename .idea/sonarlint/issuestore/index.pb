@@ -145,8 +145,6 @@ f
 6_posts/Program/Spring/2022-11-25-spring-environment.md,2/b/2b8f6cd4e26b8df73c881491d10b1b1c581c37b7
 b
 2_posts/Program/Spring/2022-11-16-spring-servlet.md,1/c/1cc6ecb94834cb0541915562d5cef8de0f7c5a92
-_
-/_posts/program/Spring/2022-08-03-spring-port.md,1/8/182b27226899515bd5d43236c45e258bd8ee9a5b
 ]
 -_posts/til/BootCamp/2022-11/2022-11-23-til.md,e/6/e6aec34c4ce7c17c22d8eb23ba962e842c15916d
 ]

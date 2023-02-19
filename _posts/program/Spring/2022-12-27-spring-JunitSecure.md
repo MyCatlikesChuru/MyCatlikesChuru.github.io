@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Spring) Security Test 코드 작성시 UserDetails 설정
-subtitle: Mac 환경변수 적용안되는 문제
+title: "[Spring] Security Test 코드 작성시 UserDetails 설정"
+subtitle: 
 categories: Spring
 tags: [Spring, JUnit]
 comments: true

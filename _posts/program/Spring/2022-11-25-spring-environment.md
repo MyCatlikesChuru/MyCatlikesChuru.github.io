@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring) Could not resolve placeholder '환경변수명' in value "${환경변수명}" 오류
+title: "[Spring] Could not resolve placeholder '환경변수명' in value ${환경변수명} 오류"
 subtitle: Mac 환경변수 적용안되는 문제
 categories: Spring
 tags: [Spring, zsh]

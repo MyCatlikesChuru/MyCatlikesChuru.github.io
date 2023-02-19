@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-20T01:03:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 프린터</title><link href="http://localhost:4000/algorithm/2023/02/20/algo-printer.html" rel="alternate" type="text/html" title="[Programmers - Java] 프린터" /><published>2023-02-20T00:00:00+09:00</published><updated>2023-02-20T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/20/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/20/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-20T01:13:23+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 프린터</title><link href="http://localhost:4000/algorithm/2023/02/19/algo-printer.html" rel="alternate" type="text/html" title="[Programmers - Java] 프린터" /><published>2023-02-19T00:00:00+09:00</published><updated>2023-02-19T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/19/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/19/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -81,9 +81,9 @@ Locaiton과 같은 경우는 처음에 목록이 만들어졌을때의 목록위
 제한사항에서 보면 0부터 시작한다는 것을 알 수 있고</p>
 
 <p>예를들어 Location = 2 라고 가정할 경우 <br />
-문서이름 A,B,C,D라고 정해졌으면 0,1,2,3의 위치로
-C문서를 가르키게된다. 즉, C문서가 몇번째로 인쇄가 되어지냐?<br />
-라는게 이번 문제풀이의 답이 되어지겠다. <br />
+문서이름 A,B,C,D라고 정해졌으면 0,1,2,3의 위치로<br />
+C문서를 가르키게된다. 즉, C문서가 몇번째로 인쇄가 되어지냐?  <br />
+라는게 이번 문제풀이의 답이 되어지겠다.  <br />
 위에 그림에서 보듯이 C는 첫번째로 반환되어지기 때문에 return = 1이 된다.</p>
 
 <p><br /></p>
@@ -156,7 +156,7 @@ Queue를 이용에 앞에서부터 poll();하여 해당 값이<br />
 통과를하면 인쇄완료 List에 문서의 위치를 저장하는 방식이다.</p>
 
 <p>최종적으로 문서의 위치가 저장되면 location 값과 같은<br />
-index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 프린터]]></summary></entry><entry><title type="html">Spring) 단위 테스트 JPA metamodel must not be empty!</title><link href="http://localhost:4000/spring/2023/02/17/spring-test.html" rel="alternate" type="text/html" title="Spring) 단위 테스트 JPA metamodel must not be empty!" /><published>2023-02-17T00:00:00+09:00</published><updated>2023-02-17T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/02/17/spring-test</id><content type="html" xml:base="http://localhost:4000/spring/2023/02/17/spring-test.html"><![CDATA[<h3 id="-문제발생-및-원인">✅ 문제발생 및 원인</h3>
+index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 프린터]]></summary></entry><entry><title type="html">[Spring] 단위 테스트 JPA metamodel must not be empty!</title><link href="http://localhost:4000/spring/2023/02/17/spring-test.html" rel="alternate" type="text/html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!" /><published>2023-02-17T00:00:00+09:00</published><updated>2023-02-17T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/02/17/spring-test</id><content type="html" xml:base="http://localhost:4000/spring/2023/02/17/spring-test.html"><![CDATA[<h3 id="-문제발생-및-원인">✅ 문제발생 및 원인</h3>
 
 <p>Controller 단위 테스트를 진행하려고 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code><br />
 어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.</p>
@@ -582,7 +582,7 @@ To                         Action      From
 <p><br /></p>
 
 <p>✨ 참고 블로그 <br />
-<a href="https://kibua20.tistory.com/124">클라우드 방화벽 설정 참고 레퍼런스</a>, <a href="https://webdir.tistory.com/206">우분투 UFW 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Server" /><category term="Server" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.]]></summary></entry><entry><title type="html">Spring) MailAuthenticationException 문제 해결</title><link href="http://localhost:4000/spring/2023/01/21/spring-email.html" rel="alternate" type="text/html" title="Spring) MailAuthenticationException 문제 해결" /><published>2023-01-21T00:00:00+09:00</published><updated>2023-01-21T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/21/spring-email</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/21/spring-email.html"><![CDATA[<p>오늘은 회원가입시 이메일 전송 로직을 확인중<br />
+<a href="https://kibua20.tistory.com/124">클라우드 방화벽 설정 참고 레퍼런스</a>, <a href="https://webdir.tistory.com/206">우분투 UFW 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Server" /><category term="Server" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.]]></summary></entry><entry><title type="html">[Spring] MailAuthenticationException 문제 해결</title><link href="http://localhost:4000/spring/2023/01/21/spring-email.html" rel="alternate" type="text/html" title="[Spring] MailAuthenticationException 문제 해결" /><published>2023-01-21T00:00:00+09:00</published><updated>2023-01-21T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/21/spring-email</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/21/spring-email.html"><![CDATA[<p>오늘은 회원가입시 이메일 전송 로직을 확인중<br />
 <code class="language-plaintext highlighter-rouge">org.springframework.mail.MailAuthenticationException</code>와 같은<br />
 예외를 만났고 해당관련 해결방법을 적어가보려한다.</p>
 
@@ -739,7 +739,7 @@ ex) abcdefghijklmnop</p>
 <a href="https://kijuk.tistory.com/162?category=1056346">문제 해결 참고 블로그</a></p>
 
 <p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="email" /><summary type="html"><![CDATA[오늘은 회원가입시 이메일 전송 로직을 확인중 org.springframework.mail.MailAuthenticationException와 같은 예외를 만났고 해당관련 해결방법을 적어가보려한다.]]></summary></entry><entry><title type="html">Spring) AWS S3 FileUpload 하여 URL로 관리하기</title><link href="http://localhost:4000/spring/2023/01/15/spring-fileupload.html" rel="alternate" type="text/html" title="Spring) AWS S3 FileUpload 하여 URL로 관리하기" /><published>2023-01-15T00:00:00+09:00</published><updated>2023-01-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/15/spring-fileupload</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/15/spring-fileupload.html"><![CDATA[<p>오늘은 AWS S3에 파일 업로드를 하는<br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="email" /><summary type="html"><![CDATA[오늘은 회원가입시 이메일 전송 로직을 확인중 org.springframework.mail.MailAuthenticationException와 같은 예외를 만났고 해당관련 해결방법을 적어가보려한다.]]></summary></entry><entry><title type="html">[Spring] AWS S3 FileUpload 하여 URL로 관리하기</title><link href="http://localhost:4000/spring/2023/01/15/spring-fileupload.html" rel="alternate" type="text/html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기" /><published>2023-01-15T00:00:00+09:00</published><updated>2023-01-15T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/15/spring-fileupload</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/15/spring-fileupload.html"><![CDATA[<p>오늘은 AWS S3에 파일 업로드를 하는<br />
 예제를 다뤄보려한다.</p>
 
 <p>구글에서 여러가지 블로그를 돌아다니며 학습했고<br />

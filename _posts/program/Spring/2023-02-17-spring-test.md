@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring) 단위 테스트 JPA metamodel must not be empty! 
+title: "[Spring] 단위 테스트 JPA metamodel must not be empty!"
 subtitle: 
 categories: Spring
 tags: [Spring, JUnit]

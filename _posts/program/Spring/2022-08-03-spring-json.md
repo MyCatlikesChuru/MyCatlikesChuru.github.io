@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring) @JsonIgnore 사용하기
+title: "[Spring] @JsonIgnore 사용하기"
 subtitle:
 categories: Spring
 tags: [Spring]

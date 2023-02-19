@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring) Web server failed to start. Port 8080 was already in use 에러조치
+title: "[Spring] Web server failed to start. Port 8080 was already in use 에러조치"
 subtitle:
 categories: Spring
 tags: [Spring, shell]
