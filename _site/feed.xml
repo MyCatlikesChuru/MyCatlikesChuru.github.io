@@ -1,4 +1,207 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-22T03:13:33+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 프린터</title><link href="http://localhost:4000/algorithm/2023/02/19/algo-printer.html" rel="alternate" type="text/html" title="[Programmers - Java] 프린터" /><published>2023-02-19T00:00:00+09:00</published><updated>2023-02-19T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/19/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/19/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-22T18:13:46+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 주식가격</title><link href="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html" rel="alternate" type="text/html" title="[Programmers - Java] 주식가격" /><published>2023-02-22T00:00:00+09:00</published><updated>2023-02-22T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/22/algo-stockprice</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html"><![CDATA[<h2 id="-문제--주식가격">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42584">주식가격</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.</p>
+
+<h4 id="제한사항">제한사항</h4>
+
+<ul>
+<li>prices의 각 가격은 1 이상 10,000 이하인 자연수입니다.</li>
+<li>prices의 길이는 2 이상 100,000 이하입니다.</li>
+</ul>
+
+<h4 id="입출력-예">입출력 예</h4>
+<table class="table">
+        <thead><tr>
+<th>prices</th>
+<th>return</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>[1, 2, 3, 2, 3]</td>
+<td>[4, 3, 1, 1, 0]</td>
+</tr>
+</tbody>
+      </table>
+
+<h4 id="입출력-예-설명">입출력 예 설명</h4>
+
+<ul>
+<li>1초 시점의 ₩1은 끝까지 가격이 떨어지지 않았습니다.</li>
+<li>2초 시점의 ₩2은 끝까지 가격이 떨어지지 않았습니다.</li>
+<li>3초 시점의 ₩3은 1초뒤에 가격이 떨어집니다. 따라서 1초간 가격이 떨어지지 않은 것으로 봅니다.</li>
+<li>4초 시점의 ₩2은 1초간 가격이 떨어지지 않았습니다.</li>
+<li>5초 시점의 ₩3은 0초간 가격이 떨어지지 않았습니다.</li>
+</ul>
+
+<p>※ 공지 - 2019년 2월 28일 지문이 리뉴얼되었습니다.</p>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
+
+<p>해당 문제를 이중 for문을 이용해 풀면 간단하다. <br />
+순환하는 값과 다음값을 비교해 작은 값이 있으면 <br />
+위치를 계산해서 리턴해주면 간단하게 풀리는 문제이다.</p>
+
+<p>이중 반복문을 사용하게 될 경우 O(n²)의 시간 복잡도를 가지며 <br />
+prices 배열의 길이가 늘어날수록 시간 복잡도가 배로 증가하기때문에 좋지 않다.</p>
+
+<p>해당 문제에서 요구하는 <code class="language-plaintext highlighter-rouge">Stack</code> 자료구조를 이용해 풀어보자.</p>
+
+<p><br /></p>
+
+<p>우선 문제를 이해하기위해서 아래의 그림을 살펴보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220566032-10c63ebf-fc8b-48ce-bab4-3830706e8c81.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>prices라는 가격이 담긴 배열을 주어준다음에 해당 가격이 언제 떨어지는지 체크하는 문제이다.  <br />
+떨어지지 않을 경우에는 배열 끝까지 시간초를 더한값을 담아줘야한다. <br />
+해당 예제에서는 3번째 그림인 3에서 2로 넘어갈때 가격이 떨어지므로 1이란 값이 반환된 것이다.</p>
+
+<p><br /></p>
+
+<p>이제 문제를 이해했으니, Stack을 이용해 문제를 풀어보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220570853-d38f6244-e89d-48a3-8678-e81489c86221.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>answer라는 배열을 만들어 리턴할 것인데, 어떻게 만들어줘야할지 정해보자</p>
+
+<ol>
+  <li><strong>주식가격이 떨어지지 않는 가격들</strong> -&gt; <code class="language-plaintext highlighter-rouge">[배열길이 - 1 - 인덱스번호]</code></li>
+  <li><strong>주식가격이 떨어진 가격들</strong> -&gt; <code class="language-plaintext highlighter-rouge">[떨어진 가격의 인덱스번호 - 높은가격의 인덱스번호]</code></li>
+</ol>
+
+<p>이렇게 정의할 수 있을 것 같다. 여기서 <span style="color:#F04965"><strong>중요한건 주식가격이 떨어지지</strong> </span><br />
+<span style="color:#F04965"><strong>않는 가격들만 Stack 안에 저장할 예정이다.</strong></span><br />
+즉, 떨어진 가격은 Stack에서 제외시킬 것이다.</p>
+
+<p>여기서 1번을 보충 설명하보자면 현재 <code class="language-plaintext highlighter-rouge">int[] prices</code>의 배열의 길이는 <code class="language-plaintext highlighter-rouge">5</code>이다.<br />
+만약 주식가격이 떨어지지 않았다면 배열의 끝까지 초를 더할 것이다.<br />
+그렇다는건 (배열의 길이 - 1)에서 본인의 인덱스번호만 뺴주게된다면 <br />
+몇초가 걸리는지 계산을 할 수 있다.</p>
+
+<p><br /></p>
+
+<p>처음부터 시작해보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564078-60d4352f-fed8-4dd6-ab48-f6853d835f73.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>Stack에는 떨어지지않는 가격의<br />
+인덱스 번호를 차례대로 쌓아올릴 예정이다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564084-969fd14d-7cd6-4d42-9241-cf4c507375e8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>첫번쨰로 전에 있는 값들을 while문을 돌려 비교할 것이다.<br />
+현재는 아무런 값이 없기때문에 다음 가격으로 넘어갈 것이다.</p>
+
+<p>넘어가기전에  가격이 <code class="language-plaintext highlighter-rouge">1</code>인 인덱스 번호인 <code class="language-plaintext highlighter-rouge">0</code>값을 Stack에 저장한다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564090-9b076766-0a72-4a44-81ef-fb7375b2402f.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>두번째 사이클이다. 첫번째와 동일하게 <br />
+숫자 <code class="language-plaintext highlighter-rouge">2</code>값의 전에 값중 높은값이 있는지 찾아낸다.<br />
+만약 없을 경우 또 다음 가격으로 넘어간다.</p>
+
+<p>물론 똑같이 인덱스 번호를 Stack에 저장한다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564093-4dcbc4a3-8d79-47c1-bc91-cc994f7dcadb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>세번째 사이클도 두번째 사이클과 동일하다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220570858-bb8b794c-f4a6-49ec-a79d-c8da3d78ec61.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>네번째 사이클에서는 숫자 <code class="language-plaintext highlighter-rouge">2</code>인 값보다 높은 값(<code class="language-plaintext highlighter-rouge">3</code>)이 존재한다. <br />
+높은 값이 존재하므로 Stack에서는 높은 가격의 인덱스 번호를 <code class="language-plaintext highlighter-rouge">pop();</code>으로 제거한다.  <br />
+(앞에 있는 0,1인덱스의 값도 비교해서 높은가격이 있다면 제거한다.)</p>
+
+<p>그리고 <code class="language-plaintext highlighter-rouge">int[] answer</code> 배열에는 가격이 몇초안에 떨어졌는지 담아줘야한다. <br />
+처음에 얘기했던 공식을 적용하면 된다. 여기서는</p>
+
+<p>떨어진 가격 : <code class="language-plaintext highlighter-rouge">2</code> -&gt; 인덱스 번호 : <code class="language-plaintext highlighter-rouge">3</code><br />
+높은가격 : <code class="language-plaintext highlighter-rouge">3</code> -&gt; 인덱스 번호 : <code class="language-plaintext highlighter-rouge">2</code> <br />
+와 같이 볼 수 있고 <code class="language-plaintext highlighter-rouge">떨어진 가격 - 본인 인덱스번호(높은가격)</code>의 차이인 <code class="language-plaintext highlighter-rouge">1</code>초를 <br />
+반환하는 배열에 담아줄 수 있다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564100-5f78c105-1835-4357-a63e-bcdbf05a1f3f.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>그리고 다음 사이클에서 비교할 수 있게, Stack에 <br />
+낮은 가격이였던 2의 인덱스값 <code class="language-plaintext highlighter-rouge">3</code>을 저장해준다.</p>
+
+<p>위에서도 얘기했듯이 가격의 떨어진 인덱스들만 Stack에서 제외시키는 작업이다.<br />
+즉, 낮은 가격인 2의 값도 다음 사이클에서 비교할 수 있게 저장해줘야한다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564102-3b24ed7d-41be-4742-8f11-140ea961385b.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이후부터는 전의 사이클들과 동일하게 진행되고 <br />
+마지막 사이클이기 때문에 Stack에 떨어지지 않은 가격의 <br />
+인덱스 번호들만 남은 상태이며, <code class="language-plaintext highlighter-rouge">int[] answer</code> 배열에는 떨어진 가격의 <br />
+시간이 담겨 있기 때문에 이제 남은 작업은 떨어지지 않은 가격을 배열에 담아주면된다.</p>
+
+<p><br /></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564105-7cb76078-2c4d-40b8-b7dc-1525755d179c.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>담아주는 과정은 맨위에서 설명했던 내용과 동일하다.  <br />
+떨어지지 않은 가격들은 배열을 끝까지 순회하기 때문에 <br />
+<code class="language-plaintext highlighter-rouge">[배열길이 - 1 - 인덱스번호]</code>를 한값을 <code class="language-plaintext highlighter-rouge">int[] answer</code>배열에 담아주면된다. <br />
+<code class="language-plaintext highlighter-rouge">Stack</code> 자료구조 특성상 마지막의 값부터 <code class="language-plaintext highlighter-rouge">peek()</code>,<code class="language-plaintext highlighter-rouge">pop()</code>해올 수 있기 때문에  <br />
+배열의 마지막부터 값을 계산해서 반환해주면 문제 풀이는 끝난다.</p>
+
+<p><br /></p>
+
+<h3 id="-코드">👨🏻‍💻 코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">];</span> <span class="c1">// 반환할 배열</span>
+        <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="c1">// 값이 떨어지는 주식의 시간을 저장</span>
+            <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">()])</span> <span class="o">{</span>
+                <span class="n">answer</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">()]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span> <span class="c1">// 반환배열에 떨어지는 시간 초 저장</span>
+                <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span> <span class="c1">// 값이 떨어진 초는 제거</span>
+            <span class="o">}</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> <span class="c1">// 값이 떨어지지않은 주식의 시간초를 저장</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="c1">// 값이 떨어지지않은 주식들, 마지막 인덱스부터 차례대로 빼오기</span>
+            <span class="kt">int</span> <span class="n">last</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+            <span class="n">answer</span><span class="o">[</span><span class="n">last</span><span class="o">]</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">last</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>여기서 유의 깊게 봐야할 부분은 <code class="language-plaintext highlighter-rouge">stack.push(i);</code><br />
+순회가 끝나면 Stack에 인덱스값을 저장해주는 부분이다.</p>
+
+<p>그리고 while문의 조건을 통해서 현재 순회하는 인덱스의 값보다 <br />
+전에 Stack에 쌓여있는 인덱스 번호의 값중 큰값이 존재한다면 <br />
+<code class="language-plaintext highlighter-rouge">answer[stack.peek()] = i - stack.peek();</code>를 하여 초값을 계산하고 <br />
+<code class="language-plaintext highlighter-rouge">stack.pop();</code>하여 Stack에서 제거시켜주게된다. 위에 그림에서 설명했던 부분과 동일하다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 주식가격]]></summary></entry><entry><title type="html">[Programmers - Java] 프린터</title><link href="http://localhost:4000/algorithm/2023/02/19/algo-printer.html" rel="alternate" type="text/html" title="[Programmers - Java] 프린터" /><published>2023-02-19T00:00:00+09:00</published><updated>2023-02-19T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/19/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/19/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -57,6 +260,8 @@
 
 <h2 id="-문제-풀이">🗝 문제 풀이</h2>
 
+<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
+
 <p>문제내용이 얼핏 어려울지 몰라도, 천천히 읽어보면 답이보인다. <br />
 문제 부터 파악을 해보자</p>
 
@@ -105,39 +310,46 @@ A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 �
 1부터 시작되어 5번째로 인쇄가 되어지기 때문에<br />
 5라는 값을 반환해주면 된다.</p>
 
+<p><br /></p>
+
+<h3 id="-코드">👨🏻‍💻 코드</h3>
+
 <p>여기까지 문제 이해와 설명부분이였고 코드로 살펴보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
-    <span class="c1">// 문제의 핵심.</span>
-    <span class="c1">// 높은 숫자가 중요도가 높은 것이다.</span>
-    <span class="c1">// 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.</span>
-    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">important</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 우선순위를 담는 Queue</span>
-    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 문서를 위치를 담는 Queue</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 프린트를 완료한 List</span>
-    <span class="kt">int</span> <span class="n">maxDoc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 문제의 핵심.</span>
+        <span class="c1">// 높은 숫자가 중요도가 높은 것이다.</span>
+        <span class="c1">// 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">important</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 우선순위를 담는 Queue</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 문서를 위치를 담는 Queue</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 프린트를 완료한 List</span>
+        <span class="kt">int</span> <span class="n">maxDoc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="c1">// 우선순위, 문서를 Queue에 담는다.</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">priorities</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">priorities</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-        <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Queue의 담긴게 없으면 반복문을 탈출</span>
-        <span class="nc">Integer</span> <span class="n">print</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 중요도를 하나씩 빼온다</span>
-        <span class="nc">Integer</span> <span class="n">target</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 문서위치를 하나씩 빼온다</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">maxDoc</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span> <span class="c1">// 현재 우선순위가 가장 높은 숫자</span>
+        <span class="c1">// 우선순위, 문서를 Queue에 담는다.</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">priorities</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">priorities</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
         <span class="o">}</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">print</span> <span class="o">&gt;=</span> <span class="n">maxDoc</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">print</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 우선순위를 마지막에 넣는다.</span>
-            <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 문서위치를 마지막에 넣는다.</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
 
-    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Queue의 담긴게 없으면 반복문을 탈출</span>
+            <span class="nc">Integer</span> <span class="n">print</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 중요도를 하나씩 빼온다</span>
+            <span class="nc">Integer</span> <span class="n">target</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 문서위치를 하나씩 빼온다</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">maxDoc</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span> <span class="c1">// 현재 우선순위가 가장 높은 숫자</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">print</span> <span class="o">&gt;=</span> <span class="n">maxDoc</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">print</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 우선순위를 마지막에 넣는다.</span>
+                <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 문서위치를 마지막에 넣는다.</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>더 깔끔한 풀이가 분명 가능할 것 같다. <br />
@@ -279,6 +491,8 @@ index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><nam
 
 <h2 id="-문제-풀이">🗝 문제 풀이</h2>
 
+<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
+
 <p>문제에서 요구하는 사항을 살펴보자</p>
 
 <ul>
@@ -314,6 +528,10 @@ N은 주어지는 폰켓몬의 총 수량이고 만약</p>
 <p>6마리일 경우에도 마찬가지다. 기본적으로 N/3이기 때문에 3마리만 가져갈 수 있다.<br />
 종류가 다양하다고 가정하면 3마리만 가져갈 수 있기 때문에 3종류가 최댓값일 것이고, <br />
 종류가 다양하지 않다면 중복된 포켓몬을 제거해주면 최대로 가져갈 수 있는 종류의 값이 나올 것이다.</p>
+
+<p><br /></p>
+
+<h3 id="-코드">👨🏻‍💻 코드</h3>
 
 <p>코드로 살펴보자</p>
 
@@ -1656,40 +1874,4 @@ Spring Security에 대한 내용을 어느정도 선수지식으로 가지고 �
 <a href="https://hudi.blog/refresh-token-in-spring-boot-with-redis/">Redis Jpa 사용 레퍼런스</a>, <a href="https://wildeveloperetrain.tistory.com/32">Redis 사용방법 2가지 레퍼런스</a></p>
 
 <p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry><entry><title type="html">Git 이전 Commit Message 수정하기</title><link href="http://localhost:4000/git/2023/01/12/git-commitmessage.html" rel="alternate" type="text/html" title="Git 이전 Commit Message 수정하기" /><published>2023-01-12T00:00:00+09:00</published><updated>2023-01-12T00:00:00+09:00</updated><id>http://localhost:4000/git/2023/01/12/git-commitmessage</id><content type="html" xml:base="http://localhost:4000/git/2023/01/12/git-commitmessage.html"><![CDATA[<h3 id="-cli로-변경">📌 CLI로 변경</h3>
-
-<p>만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">-i</span> HEAD~3        
-</code></pre></div></div>
-<p>를 입력해서 커밋메세지가 수정이 가능하다. <br />
-<code class="language-plaintext highlighter-rouge">~3</code>은 가장최신부터 수정하고자하는 커밋 수량이다</p>
-
-<p>Pick이라고 되어있는 부분을 reword로 변경한 다음 <br />
-커밋메세지를 수정해주면 반영된다.</p>
-
-<p><br /></p>
-
-<h3 id="-intellij로-변경">📌 IntelliJ로 변경</h3>
-
-<p>IDE를 사용하면 vi,nano 편집기를 이용하는 것보다<br />
-훨씬 수월하게 작업할 수 있다.</p>
-
-<p>하단의 Git 탭에서 커밋메세지를 변경하고자하는<br />
-커밋을 눌러 오른쪽 클릭을하자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041524-5d07ce20-07d1-4299-96e0-866fc2857dfb.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">Interactively Rebase from Here</code>를 눌러주자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212041533-03319280-6850-4b08-8cfe-f8918c7013d8.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>그러면 Rebasing Commits 팝업이 노출되는데 <br />
-원하는 커밋 메시지 이름으로 변경한 다음에</p>
-
-<p>START REBASING을 눌러주면 <br />
-변경된 커밋 메세지로 반영된 모습을 확인할 수 있다.</p>
-
-<p><br />
-<br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="GIT" /><category term="GIT" /><category term="GITHUB" /><summary type="html"><![CDATA[📌 CLI로 변경]]></summary></entry></feed>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry></feed>

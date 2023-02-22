@@ -69,6 +69,8 @@ published: true
 
 ## 🗝 문제 풀이
 
+### ☀️ 풀이 방법
+
 문제내용이 얼핏 어려울지 몰라도, 천천히 읽어보면 답이보인다.   
 문제 부터 파악을 해보자   
 
@@ -116,42 +118,49 @@ A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 �
 위에 처럼 인쇄가 되어질 것이다.   
 그러면 최종적으로 A라는 문서가 어느 위치에 있는지?  
 1부터 시작되어 5번째로 인쇄가 되어지기 때문에  
-5라는 값을 반환해주면 된다.   
+5라는 값을 반환해주면 된다.    
+
+<br/>  
+
+### 👨🏻‍💻 코드
 
 여기까지 문제 이해와 설명부분이였고 코드로 살펴보자  
 
 ```java
-public int solution(int[] priorities, int location) {
+import java.util.*;
 
-    // 문제의 핵심.
-    // 높은 숫자가 중요도가 높은 것이다.
-    // 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.
-    Queue<Integer> important = new LinkedList<>(); // 우선순위를 담는 Queue
-    Queue<Integer> document = new LinkedList<>(); // 문서를 위치를 담는 Queue
-    List<Integer> result = new ArrayList<>(); // 프린트를 완료한 List
-    int maxDoc = 0;
+class Solution {
+    public int solution(int[] priorities, int location) {
+        // 문제의 핵심.
+        // 높은 숫자가 중요도가 높은 것이다.
+        // 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.
+        Queue<Integer> important = new LinkedList<>(); // 우선순위를 담는 Queue
+        Queue<Integer> document = new LinkedList<>(); // 문서를 위치를 담는 Queue
+        List<Integer> result = new ArrayList<>(); // 프린트를 완료한 List
+        int maxDoc = 0;
 
-    // 우선순위, 문서를 Queue에 담는다.
-    for (int i=0; i<priorities.length; i++) {
-        important.add(priorities[i]);
-        document.add(i);
-    }
-
-    while (important.size() != 0) { // Queue의 담긴게 없으면 반복문을 탈출
-        Integer print = important.poll(); // 대기열의 중요도를 하나씩 빼온다
-        Integer target = document.poll(); // 대기열의 문서위치를 하나씩 빼온다
-        if(important.size() >= 1) {
-            maxDoc = important.stream().mapToInt(i -> i).max().getAsInt(); // 현재 우선순위가 가장 높은 숫자
+        // 우선순위, 문서를 Queue에 담는다.
+        for (int i=0; i<priorities.length; i++) {
+            important.add(priorities[i]);
+            document.add(i);
         }
-        if(print >= maxDoc) {
-            result.add(target); // 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.
-        } else {
-            important.add(print); // 우선순위가 아닐경우 우선순위를 마지막에 넣는다.
-            document.add(target); // 우선순위가 아닐경우 문서위치를 마지막에 넣는다.
-        }
-    }
 
-    return result.indexOf(location) + 1;
+        while (important.size() != 0) { // Queue의 담긴게 없으면 반복문을 탈출
+            Integer print = important.poll(); // 대기열의 중요도를 하나씩 빼온다
+            Integer target = document.poll(); // 대기열의 문서위치를 하나씩 빼온다
+            if(important.size() >= 1) {
+                maxDoc = important.stream().mapToInt(i -> i).max().getAsInt(); // 현재 우선순위가 가장 높은 숫자
+            }
+            if(print >= maxDoc) {
+                result.add(target); // 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.
+            } else {
+                important.add(print); // 우선순위가 아닐경우 우선순위를 마지막에 넣는다.
+                document.add(target); // 우선순위가 아닐경우 문서위치를 마지막에 넣는다.
+            }
+        }
+
+        return result.indexOf(location) + 1;
+    }
 }
 ```
 더 깔끔한 풀이가 분명 가능할 것 같다.   

@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
@@ -747,6 +747,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h2 id="-문제-풀이">🗝 문제 풀이</h2>
 
+<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
+
 <p>문제내용이 얼핏 어려울지 몰라도, 천천히 읽어보면 답이보인다. <br>
 문제 부터 파악을 해보자</p>
 
@@ -795,39 +797,46 @@ A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 �
 1부터 시작되어 5번째로 인쇄가 되어지기 때문에<br>
 5라는 값을 반환해주면 된다.</p>
 
+<p><br></p>
+
+<h3 id="-코드">👨🏻‍💻 코드</h3>
+
 <p>여기까지 문제 이해와 설명부분이였고 코드로 살펴보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
-    <span class="c1">// 문제의 핵심.</span>
-    <span class="c1">// 높은 숫자가 중요도가 높은 것이다.</span>
-    <span class="c1">// 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.</span>
-    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">important</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 우선순위를 담는 Queue</span>
-    <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 문서를 위치를 담는 Queue</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 프린트를 완료한 List</span>
-    <span class="kt">int</span> <span class="n">maxDoc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 문제의 핵심.</span>
+        <span class="c1">// 높은 숫자가 중요도가 높은 것이다.</span>
+        <span class="c1">// 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">important</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 우선순위를 담는 Queue</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 문서를 위치를 담는 Queue</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 프린트를 완료한 List</span>
+        <span class="kt">int</span> <span class="n">maxDoc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="c1">// 우선순위, 문서를 Queue에 담는다.</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">priorities</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-        <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">priorities</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-        <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Queue의 담긴게 없으면 반복문을 탈출</span>
-        <span class="nc">Integer</span> <span class="n">print</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 중요도를 하나씩 빼온다</span>
-        <span class="nc">Integer</span> <span class="n">target</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 문서위치를 하나씩 빼온다</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">maxDoc</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span> <span class="c1">// 현재 우선순위가 가장 높은 숫자</span>
+        <span class="c1">// 우선순위, 문서를 Queue에 담는다.</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">priorities</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">priorities</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
         <span class="o">}</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">print</span> <span class="o">&gt;=</span> <span class="n">maxDoc</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">print</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 우선순위를 마지막에 넣는다.</span>
-            <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 문서위치를 마지막에 넣는다.</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
 
-    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Queue의 담긴게 없으면 반복문을 탈출</span>
+            <span class="nc">Integer</span> <span class="n">print</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 중요도를 하나씩 빼온다</span>
+            <span class="nc">Integer</span> <span class="n">target</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 문서위치를 하나씩 빼온다</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">maxDoc</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span> <span class="c1">// 현재 우선순위가 가장 높은 숫자</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">print</span> <span class="o">&gt;=</span> <span class="n">maxDoc</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">print</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 우선순위를 마지막에 넣는다.</span>
+                <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 문서위치를 마지막에 넣는다.</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 <p>더 깔끔한 풀이가 분명 가능할 것 같다. <br>
@@ -854,15 +863,15 @@ index를 가져와 +1을 하여 반환해주었다.</p>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/spring/2023/02/17/spring-test.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[Spring] 단위 테스트 JPA metamodel must...</a><span></span>
+<a class="previous" href="/spring/2023/02/17/spring-test.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[Spring] 단위 테스트 JPA metamodel must...</a><a class="next" href="/algorithm/2023/02/22/algo-stockprice.html" title="[Programmers - Java] 주식가격">[Programmers - Java] 주식가격</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/11/algo-ponketmon.html" title="">[Programmers - Java] 폰켓몬</a></li>
-<li><a class="post-link" href="/til/2022/08/23/til.html" title="">[TIL] HTML,CSS 기초</a></li>
-<li><a class="post-link" href="/til/2022/11/17/til.html" title="">[TIL] 인증, 보안 기초</a></li>
-<li><a class="post-link" href="/til/2022/08/22/til.html" title="">[TIL] 개발환경 셋팅하기</a></li>
+        <li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="[Programmers - Java] 주식가격">[Programmers - Java] 프린터</a></li>
+<li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[Programmers - Java] 주식가격">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
+<li><a class="post-link" href="/til/2022/10/18/til.html" title="[Programmers - Java] 주식가격">[TIL] Spring AOP 2</a></li>
+<li><a class="post-link" href="/til/2022/09/16/til.html" title="[Programmers - Java] 주식가격">[TIL] Java Thread, JVM</a></li>
 </ul>
     </div>
 <div class="post-comments">

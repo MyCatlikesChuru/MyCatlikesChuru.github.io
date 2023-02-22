@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[Programmers - Java] 주식가격 | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="[Programmers - Java] 주식가격">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="📌 문제 : 주식가격">
+<meta property="og:description" content="📌 문제 : 주식가격">
+<link rel="canonical" href="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html">
+<meta property="og:url" content="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-02-22T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="[Programmers - Java] 주식가격">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-02-22T00:00:00+09:00","datePublished":"2023-02-22T00:00:00+09:00","description":"📌 문제 : 주식가격","headline":"[Programmers - Java] 주식가격","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html"},"url":"http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">[Programmers - Java] 주식가격</h1>
+  <h2 class="post-subtitle">고득점 Kit (스택,큐 - Level 2)</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-02-22T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 22, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="-문제--주식가격">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42584">주식가격</a>
+</h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.</p>
+
+<h4 id="제한사항">제한사항</h4>
+
+<ul>
+<li>prices의 각 가격은 1 이상 10,000 이하인 자연수입니다.</li>
+<li>prices의 길이는 2 이상 100,000 이하입니다.</li>
+</ul>
+
+<h4 id="입출력-예">입출력 예</h4>
+<table class="table">
+        <thead>
+<tr>
+<th>prices</th>
+<th>return</th>
+</tr>
+</thead>
+        <tbody>
+<tr>
+<td>[1, 2, 3, 2, 3]</td>
+<td>[4, 3, 1, 1, 0]</td>
+</tr>
+</tbody>
+      </table>
+
+<h4 id="입출력-예-설명">입출력 예 설명</h4>
+
+<ul>
+<li>1초 시점의 ₩1은 끝까지 가격이 떨어지지 않았습니다.</li>
+<li>2초 시점의 ₩2은 끝까지 가격이 떨어지지 않았습니다.</li>
+<li>3초 시점의 ₩3은 1초뒤에 가격이 떨어집니다. 따라서 1초간 가격이 떨어지지 않은 것으로 봅니다.</li>
+<li>4초 시점의 ₩2은 1초간 가격이 떨어지지 않았습니다.</li>
+<li>5초 시점의 ₩3은 0초간 가격이 떨어지지 않았습니다.</li>
+</ul>
+
+<p>※ 공지 - 2019년 2월 28일 지문이 리뉴얼되었습니다.</p>
+
+<hr>
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
+
+<p>해당 문제를 이중 for문을 이용해 풀면 간단하다. <br>
+순환하는 값과 다음값을 비교해 작은 값이 있으면 <br>
+위치를 계산해서 리턴해주면 간단하게 풀리는 문제이다.</p>
+
+<p>이중 반복문을 사용하게 될 경우 O(n²)의 시간 복잡도를 가지며 <br>
+prices 배열의 길이가 늘어날수록 시간 복잡도가 배로 증가하기때문에 좋지 않다.</p>
+
+<p>해당 문제에서 요구하는 <code class="language-plaintext highlighter-rouge">Stack</code> 자료구조를 이용해 풀어보자.</p>
+
+<p><br></p>
+
+<p>우선 문제를 이해하기위해서 아래의 그림을 살펴보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220566032-10c63ebf-fc8b-48ce-bab4-3830706e8c81.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>prices라는 가격이 담긴 배열을 주어준다음에 해당 가격이 언제 떨어지는지 체크하는 문제이다.  <br>
+떨어지지 않을 경우에는 배열 끝까지 시간초를 더한값을 담아줘야한다. <br>
+해당 예제에서는 3번째 그림인 3에서 2로 넘어갈때 가격이 떨어지므로 1이란 값이 반환된 것이다.</p>
+
+<p><br></p>
+
+<p>이제 문제를 이해했으니, Stack을 이용해 문제를 풀어보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220570853-d38f6244-e89d-48a3-8678-e81489c86221.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>answer라는 배열을 만들어 리턴할 것인데, 어떻게 만들어줘야할지 정해보자</p>
+
+<ol>
+  <li>
+<strong>주식가격이 떨어지지 않는 가격들</strong> -&gt; <code class="language-plaintext highlighter-rouge">[배열길이 - 1 - 인덱스번호]</code>
+</li>
+  <li>
+<strong>주식가격이 떨어진 가격들</strong> -&gt; <code class="language-plaintext highlighter-rouge">[떨어진 가격의 인덱스번호 - 높은가격의 인덱스번호]</code>
+</li>
+</ol>
+
+<p>이렇게 정의할 수 있을 것 같다. 여기서 <span style="color:#F04965"><strong>중요한건 주식가격이 떨어지지</strong> </span><br>
+<span style="color:#F04965"><strong>않는 가격들만 Stack 안에 저장할 예정이다.</strong></span><br>
+즉, 떨어진 가격은 Stack에서 제외시킬 것이다.</p>
+
+<p>여기서 1번을 보충 설명하보자면 현재 <code class="language-plaintext highlighter-rouge">int[] prices</code>의 배열의 길이는 <code class="language-plaintext highlighter-rouge">5</code>이다.<br>
+만약 주식가격이 떨어지지 않았다면 배열의 끝까지 초를 더할 것이다.<br>
+그렇다는건 (배열의 길이 - 1)에서 본인의 인덱스번호만 뺴주게된다면 <br>
+몇초가 걸리는지 계산을 할 수 있다.</p>
+
+<p><br></p>
+
+<p>처음부터 시작해보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564078-60d4352f-fed8-4dd6-ab48-f6853d835f73.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>Stack에는 떨어지지않는 가격의<br>
+인덱스 번호를 차례대로 쌓아올릴 예정이다.</p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564084-969fd14d-7cd6-4d42-9241-cf4c507375e8.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>첫번쨰로 전에 있는 값들을 while문을 돌려 비교할 것이다.<br>
+현재는 아무런 값이 없기때문에 다음 가격으로 넘어갈 것이다.</p>
+
+<p>넘어가기전에  가격이 <code class="language-plaintext highlighter-rouge">1</code>인 인덱스 번호인 <code class="language-plaintext highlighter-rouge">0</code>값을 Stack에 저장한다.</p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564090-9b076766-0a72-4a44-81ef-fb7375b2402f.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>두번째 사이클이다. 첫번째와 동일하게 <br>
+숫자 <code class="language-plaintext highlighter-rouge">2</code>값의 전에 값중 높은값이 있는지 찾아낸다.<br>
+만약 없을 경우 또 다음 가격으로 넘어간다.</p>
+
+<p>물론 똑같이 인덱스 번호를 Stack에 저장한다.</p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564093-4dcbc4a3-8d79-47c1-bc91-cc994f7dcadb.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>세번째 사이클도 두번째 사이클과 동일하다.</p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220570858-bb8b794c-f4a6-49ec-a79d-c8da3d78ec61.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>네번째 사이클에서는 숫자 <code class="language-plaintext highlighter-rouge">2</code>인 값보다 높은 값(<code class="language-plaintext highlighter-rouge">3</code>)이 존재한다. <br>
+높은 값이 존재하므로 Stack에서는 높은 가격의 인덱스 번호를 <code class="language-plaintext highlighter-rouge">pop();</code>으로 제거한다.  <br>
+(앞에 있는 0,1인덱스의 값도 비교해서 높은가격이 있다면 제거한다.)</p>
+
+<p>그리고 <code class="language-plaintext highlighter-rouge">int[] answer</code> 배열에는 가격이 몇초안에 떨어졌는지 담아줘야한다. <br>
+처음에 얘기했던 공식을 적용하면 된다. 여기서는</p>
+
+<p>떨어진 가격 : <code class="language-plaintext highlighter-rouge">2</code> -&gt; 인덱스 번호 : <code class="language-plaintext highlighter-rouge">3</code><br>
+높은가격 : <code class="language-plaintext highlighter-rouge">3</code> -&gt; 인덱스 번호 : <code class="language-plaintext highlighter-rouge">2</code> <br>
+와 같이 볼 수 있고 <code class="language-plaintext highlighter-rouge">떨어진 가격 - 본인 인덱스번호(높은가격)</code>의 차이인 <code class="language-plaintext highlighter-rouge">1</code>초를 <br>
+반환하는 배열에 담아줄 수 있다.</p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564100-5f78c105-1835-4357-a63e-bcdbf05a1f3f.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>그리고 다음 사이클에서 비교할 수 있게, Stack에 <br>
+낮은 가격이였던 2의 인덱스값 <code class="language-plaintext highlighter-rouge">3</code>을 저장해준다.</p>
+
+<p>위에서도 얘기했듯이 가격의 떨어진 인덱스들만 Stack에서 제외시키는 작업이다.<br>
+즉, 낮은 가격인 2의 값도 다음 사이클에서 비교할 수 있게 저장해줘야한다.</p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564102-3b24ed7d-41be-4742-8f11-140ea961385b.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>이후부터는 전의 사이클들과 동일하게 진행되고 <br>
+마지막 사이클이기 때문에 Stack에 떨어지지 않은 가격의 <br>
+인덱스 번호들만 남은 상태이며, <code class="language-plaintext highlighter-rouge">int[] answer</code> 배열에는 떨어진 가격의 <br>
+시간이 담겨 있기 때문에 이제 남은 작업은 떨어지지 않은 가격을 배열에 담아주면된다.</p>
+
+<p><br></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/220564105-7cb76078-2c4d-40b8-b7dc-1525755d179c.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>담아주는 과정은 맨위에서 설명했던 내용과 동일하다.  <br>
+떨어지지 않은 가격들은 배열을 끝까지 순회하기 때문에 <br>
+<code class="language-plaintext highlighter-rouge">[배열길이 - 1 - 인덱스번호]</code>를 한값을 <code class="language-plaintext highlighter-rouge">int[] answer</code>배열에 담아주면된다. <br>
+<code class="language-plaintext highlighter-rouge">Stack</code> 자료구조 특성상 마지막의 값부터 <code class="language-plaintext highlighter-rouge">peek()</code>,<code class="language-plaintext highlighter-rouge">pop()</code>해올 수 있기 때문에  <br>
+배열의 마지막부터 값을 계산해서 반환해주면 문제 풀이는 끝난다.</p>
+
+<p><br></p>
+
+<h3 id="-코드">👨🏻‍💻 코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">];</span> <span class="c1">// 반환할 배열</span>
+        <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="c1">// 값이 떨어지는 주식의 시간을 저장</span>
+            <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">prices</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">()])</span> <span class="o">{</span>
+                <span class="n">answer</span><span class="o">[</span><span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">()]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span> <span class="c1">// 반환배열에 떨어지는 시간 초 저장</span>
+                <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span> <span class="c1">// 값이 떨어진 초는 제거</span>
+            <span class="o">}</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> <span class="c1">// 값이 떨어지지않은 주식의 시간초를 저장</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="c1">// 값이 떨어지지않은 주식들, 마지막 인덱스부터 차례대로 빼오기</span>
+            <span class="kt">int</span> <span class="n">last</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+            <span class="n">answer</span><span class="o">[</span><span class="n">last</span><span class="o">]</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">last</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>여기서 유의 깊게 봐야할 부분은 <code class="language-plaintext highlighter-rouge">stack.push(i);</code><br>
+순회가 끝나면 Stack에 인덱스값을 저장해주는 부분이다.</p>
+
+<p>그리고 while문의 조건을 통해서 현재 순회하는 인덱스의 값보다 <br>
+전에 Stack에 쌓여있는 인덱스 번호의 값중 큰값이 존재한다면 <br>
+<code class="language-plaintext highlighter-rouge">answer[stack.peek()] = i - stack.peek();</code>를 하여 초값을 계산하고 <br>
+<code class="language-plaintext highlighter-rouge">stack.pop();</code>하여 Stack에서 제거시켜주게된다. 위에 그림에서 설명했던 부분과 동일하다.</p>
+
+<p><br></p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/algorithm/2023/02/19/algo-printer.html" title="[Programmers - Java] 프린터">[Programmers - Java] 프린터</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/db/2023/01/14/db-redis.html" title="">Redis JWT Refresh Token 관리 및 재발행</a></li>
+<li><a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html" title="">MySQL EC2에 설치후 WorkBench 접속하기</a></li>
+<li><a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html" title="">[Spring] Security Test 코드 작성시 UserDetails 설정</a></li>
+<li><a class="post-link" href="/til/2022/08/19/til.html" title="">[TIL] 부트캠프 시작과 마음가짐</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
