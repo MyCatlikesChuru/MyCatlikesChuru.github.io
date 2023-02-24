@@ -735,7 +735,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>총 12개의 동전을 거슬러줘야 최선의 선택일 것이다.<br>
 500원짜리가 부족해 동전을 마구준다면 분명 화날 것이 분명.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">changeMoney</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">changeMoney</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// 1원, 5원, 10원, 50원, 100원, 500원 동전 수량만큼 반환하기</span>
     <span class="c1">// 큰수부터 나누어 떨어지는 몫을 구해 동전 수량에 넣기</span>
     <span class="c1">// 나머지값으로 다음 수의 몫을 구하</span>
@@ -750,7 +767,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">currentCoin</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>coin이라는 거슬러줄 수 있는 동전의 종류와<br>
 총 거슬러줘야하는 금액을 k라는 매개변수로 전달해주게된다.<br>
@@ -769,7 +787,30 @@ document.addEventListener('DOMContentLoaded', function(event) {
 해당 지시사항대로 이행해 내가 얻은 점수를 판별하는?<br>
 문제이기 때문에 주어진 문제의 케이스만 잘 처리하면 되는 문제였다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">game</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">board</span><span class="o">,</span> <span class="nc">String</span> <span class="n">operation</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="nc">Integer</span> <span class="nf">game</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">board</span><span class="o">,</span> <span class="nc">String</span> <span class="n">operation</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// TODO:</span>
     <span class="kt">int</span> <span class="n">ud</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="kt">int</span> <span class="n">rl</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
@@ -790,7 +831,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>해당 문제에서는 주어진 배열의 점수가 매겨져있다.<br>
 그리고 이동명령을 내리는 문자열이 주어지며<br>
@@ -815,7 +857,29 @@ document.addEventListener('DOMContentLoaded', function(event) {
 해당 잔돈을 거슬러줄 수 있는 경우의 수가 몇가지가 되는가?<br>
 이 부분이 핵심 문제 였고, 나는 아래와 같이 표현했다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">long</span> <span class="nf">dp</span><span class="o">(</span><span class="kt">int</span> <span class="n">money</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">long</span> <span class="nf">dp</span><span class="o">(</span><span class="kt">int</span> <span class="n">money</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// 목표금액의 경우의수를 담기위한 배열</span>
     <span class="kt">long</span><span class="o">[]</span> <span class="n">numberOfCase</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">long</span><span class="o">[</span><span class="n">money</span><span class="o">+</span><span class="mi">1</span><span class="o">];</span>
     <span class="c1">// 첫번째 인덱스는 자기자신의 숫자의 경우에 수로 1로 고정</span>
@@ -835,7 +899,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">}</span>
 	<span class="k">return</span> <span class="n">numberOfCase</span><span class="o">[</span><span class="n">money</span><span class="o">];</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>예제로</p>
 
@@ -889,10 +954,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/db/2023/01/08/db-redissetting.html" title="[TIL] Java Algorithm 3">Redis CLI 설치 및 사용방법</a></li>
-<li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="[TIL] Java Algorithm 3">Jekyll Github IO 블로그 코드 하이라이트</a></li>
-<li><a class="post-link" href="/til/2022/08/25/til.html" title="[TIL] Java Algorithm 3">[TIL] HTML,CSS 목업화면 만들어보기</a></li>
-<li><a class="post-link" href="/it/2022/10/25/it-etc-imageurl.html" title="[TIL] Java Algorithm 3">구글 드라이브로 이미지 url 적용하기</a></li>
+        <li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="[TIL] Java Algorithm 3">[Spring] @JsonIgnore 사용하기</a></li>
+<li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[TIL] Java Algorithm 3">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
+<li><a class="post-link" href="/til/2022/12/08/til.html" title="[TIL] Java Algorithm 3">[TIL] 배포 자동화 GitHub Actions</a></li>
+<li><a class="post-link" href="/til/2022/09/20/til.html" title="[TIL] Java Algorithm 3">[TIL] Java 재귀</a></li>
 </ul>
     </div>
 <div class="post-comments">

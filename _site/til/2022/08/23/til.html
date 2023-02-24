@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -719,7 +719,18 @@ ex) <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>,<code
 <p><br></p>
 
 <p><strong>Tree Structure</strong></p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;head&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 
 <span class="nt">&lt;body&gt;</span>
@@ -728,12 +739,41 @@ ex) <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>,<code
         <span class="nt">&lt;p&gt;&lt;p&gt;</span>
     <span class="nt">&lt;div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
 <p><strong>Tag</strong></p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div&gt;</span> : 한줄을 차지합니다.  
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;div&gt;</span> : 한줄을 차지합니다.  
 <span class="nt">&lt;span&gt;</span> : 컨텐츠 크기만큼 공간을 차지합니다.  
 div vs span : 한줄을 차지하냐 아니냐의 차이.
 
@@ -759,7 +799,8 @@ div vs span : 한줄을 차지하냐 아니냐의 차이.
 <span class="nt">&lt;input&gt;</span> : 입력 폼 / type ="radio" name="" : 여러버튼중 선택 / type = "checkbox" : 체크박스
 <span class="nt">&lt;textarea&gt;</span> : 입력 폼, 줄바뀜이됨
 <span class="nt">&lt;button&gt;</span> : 버튼
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>*HTML 연습!!* -&gt; <a href="https://www.w3schools.com/html/html_exercises.asp">HTML Exercises</a>사이트</p>
 
@@ -781,8 +822,12 @@ UX를 신중하게 고려하여 구성된 UI는 사용자 입장에서 좀 더 �
 
 <p><img src="https://user-images.githubusercontent.com/95069395/216758189-31d7ed44-0b0a-4b43-ba60-615d9a77d595.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"index.css"</span> <span class="nt">/&gt;</span>
-</code></pre></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"index.css"</span> <span class="nt">/&gt;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>HTML과 CSS파일 연결 방법 index.css라고 지정된파일을 연결함으로서 CSS가 적용됨<br>
 CSS 적용 방법 중 위와 같이 외부의 index.css라는 파일을 불러와서 사용하는 방식을<br>
@@ -799,47 +844,78 @@ CSS 적용 방법 중 위와 같이 외부의 index.css라는 파일을 불러�
 
 <p><em><strong>태그로 셀렉터 지정</strong></em></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h4 {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>h4 {
   color: red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;index.css&gt; &lt;index.html의 h4태그를 전부 red로 바꿈&gt;</code></p>
 
 <p><br></p>
 
 <p><em><strong>id로 셀렉터 지정</strong></em></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#navigation-title {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>#navigation-title {
   color: red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;index.css 파일&gt; &lt;index.html의 navigation-title이라는 id의 태크만 red로 바꿈&gt;</code></p>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h4</span> <span class="na">id=</span><span class="s">"navigation-title"</span><span class="nt">&gt;</span>This is the navigation section.<span class="nt">&lt;/h4&gt;</span>
-</code></pre></div></div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;h4</span> <span class="na">id=</span><span class="s">"navigation-title"</span><span class="nt">&gt;</span>This is the navigation section.<span class="nt">&lt;/h4&gt;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;index.html 파일&gt;</code></p>
 
 <p><br></p>
 
 <p><em><strong>Class로 셀렉터 지정</strong></em></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.menu-item {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>.menu-item {
   text-decoration: underline;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;index.css파일&gt; &lt;index.html의 menu-item이라는 class의 태그만 밑줄침&gt;</code></p>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;ul&gt;</span>
 	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/li&gt;</span>
         <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>Mac<span class="nt">&lt;/li&gt;</span>
 	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>iPhone<span class="nt">&lt;/li&gt;</span>
 	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-item"</span><span class="nt">&gt;</span>iPad<span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ul&gt;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;index.html 파일&gt;</code></p>
 
 <p><br></p>
@@ -855,26 +931,46 @@ attribute, 후손, 자식, 인접 형제 등 이러한 것들이 있다고 알�
 
 <p>글자의 색상을 변경하는 속성</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.red {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>.red {
   color: #ff0000;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.box {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>.box {
   color: #155724; /* 글자 색상 */
   background-color: #d4edda; /* 배경 색상 */
   border-color: #c3e6cb; /* 테두리 색상 */
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
 <p><em><strong>글꼴</strong></em></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.emphasize {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>.emphasize {
   font-family: "SF Pro KR", "MalgunGothic", "Verdana";
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -884,10 +980,16 @@ attribute, 후손, 자식, 인접 형제 등 이러한 것들이 있다고 알�
 
 <p><em><strong>크기</strong></em></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.title {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>.title {
   font-size: 24px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <ul>
   <li>절대 단위: px, pt 등</li>
@@ -922,17 +1024,42 @@ attribute, 후손, 자식, 인접 형제 등 이러한 것들이 있다고 알�
 <p>모든 콘텐츠는 고유한 영역이 있다.<br>
 박스는 항상 직사각형이고, 너비(witdth)와 높이(height)를 가진다.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>Basic document flow<span class="nt">&lt;/h1&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;h1&gt;</span>Basic document flow<span class="nt">&lt;/h1&gt;</span>
 	<span class="nt">&lt;p&gt;</span>I am a basic block level element. My adjacent block level elements sit on new lines below me.<span class="nt">&lt;/p&gt;&lt;p&gt;</span>By default we span 100% of the width of our parent element, and we are as tall as our child content. Our total width and height is our content + padding + border width/height.<span class="nt">&lt;/p&gt;</span>
 	<span class="nt">&lt;p&gt;</span>We are separated by our margins. Because of margin collapsing, we are separated by the width of one of our margins, not both.<span class="nt">&lt;/p&gt;</span>
 	<span class="nt">&lt;p&gt;</span>inline elements <span class="nt">&lt;span&gt;</span>like this one<span class="nt">&lt;/span&gt;</span> and <span class="nt">&lt;span&gt;</span>this one<span class="nt">&lt;/span&gt;</span> sit on the same line as one another, and adjacent text nodes, if there is space on the same line. Overflowing inline elements will <span class="nt">&lt;span&gt;</span>wrap onto a new line if possible (like this one containing text)<span class="nt">&lt;/span&gt;</span>, or just go on to a new line if not<span class="nt">&lt;/p&gt;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>[코드] HTML 예시</p>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td>
+<td class="rouge-code"><pre>h1 {
   background: gray;
   width: 60%;
 }
@@ -948,7 +1075,8 @@ span {
   width: 100px;
   height: 100px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>[코드] CSS 예시</p>
 
@@ -965,10 +1093,16 @@ inline, inline-block : 옆으로 붙는 박스</p>
 
 <p><em><strong>border (테두리)</strong></em></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>p {
   border: 1px solid red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 1px 빨간색 실선 추가&gt;</code></p>
 
 <p>border : 1px solid red;<br>
@@ -979,10 +1113,16 @@ border-width(테두리 두께), border-style(테두리 스타일), border-color(
 
 <p><em><strong>margin (바깥 여백)</strong></em></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>p {
   margin: 10px 20px 30px 40px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 상하좌우에 여백을 추가&gt;</code></p>
 
@@ -991,19 +1131,31 @@ border-width(테두리 두께), border-style(테두리 스타일), border-color(
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>p {
   margin: 10px 20px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 위아래, 좌우 각각 여백 추가&gt;</code><br>
 top,bottom이 10px / left,right 20px 으로 적용된다.</p>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>p {
   margin: 10px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;p 태그의 모든 방향에 여백 추가&gt;</code><br>
 top,bottom,left,right 전부 10px로 적용된다.</p>
 
@@ -1013,32 +1165,53 @@ top,bottom,left,right 전부 10px로 적용된다.</p>
 
 <p>테두리와 컨텐츠 사이라 생각하면 편하다!</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>p {
   padding: 10px 20px 30px 40px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;p 태그에 상하좌우에 여백을 추가&gt;</code><br>
 margin과 동일한 순서로 적용됨.</p>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>p {
   padding: 10px 20px 30px 40px;
   border: 1px solid red;
   background-color: lightyellow;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><em><strong>박스를 벗어나는 콘턴체 처리</strong></em><br>
 박스 크기보다 콘텐츠 크기가 더큰 경우!<br>
 콘텐츠가 박스 바깥으로 빠져나오게된다.</p>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre>p {
   height: 40px;
   overflow: auto;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>overflow 속성을 적용함으로서 스크롤을 추가할 수도 있고 가릴 수도 있다.!<br>
 overflow : auto; (콘텐츠가 넘치는경우 스크롤 생성)<br>
@@ -1049,24 +1222,40 @@ overflow-x / overflow-y로 관리도 가능.<br>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre>* {
   box-sizing: border-box;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;모든 요소에 box-sizing: border-box를 추가&gt;</code><br>
 이렇게 모든요소에 적용을 하면, 모든 박스에서 여백과 테두리를 포함한 크기로 계산된다. <br>
 일반적으로 box-sizing은 HTML문서 전체에 적용한다.</p>
 
 <p><br></p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#inner {
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre>#inner {
   width: 100%;
   height: 200px;
   border: 2px solid green;
   background-color: lightgreen;
   padding: 30px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위에 코드라고 가정했을 경우<br>
 box-sizing을 추가하지 않았을경우와 추가했을 경우를 나타내보자</p>
 
@@ -1105,10 +1294,10 @@ Urclass에 마련되어있어서 어렵지 않게 진행할 수 있었다.<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/15/til.html" title="[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계">[TIL] Application 빌드, 실행</a></li>
+        <li><a class="post-link" href="/til/2022/11/14/til.html" title="[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계">[TIL] API Documentation 2</a></li>
+<li><a class="post-link" href="/til/2022/09/06/til.html" title="[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계">[TIL] Java 객체지향 - 상속, 캡슐화</a></li>
 <li><a class="post-link" href="/til/2022/09/20/til.html" title="[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계">[TIL] Java 재귀</a></li>
-<li><a class="post-link" href="/til/2022/10/17/til.html" title="[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계">[TIL] Spring AOP 1</a></li>
-<li><a class="post-link" href="/til/2022/11/07/til.html" title="[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계">[TIL] Spring Transaction 2 , Event 비동기 적용</a></li>
+<li><a class="post-link" href="/til/2022/12/09/til.html" title="[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계">[TIL] Cloud 운영 전략</a></li>
 </ul>
     </div>
 <div class="post-comments">

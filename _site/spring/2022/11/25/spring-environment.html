@@ -698,7 +698,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
 코드에서 @Value 어노테이션으로 application.yml 파일의 <br>
 설정된 값들을 사용하려고하였다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
 
     <span class="nd">@Getter</span>
@@ -707,7 +718,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     
     <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>사용하려고 하는 대상은 SecretKey이고<br>
 중요한 정보이기 때문에 <strong>시스템 환경변수</strong>를 사용해<br>
@@ -715,11 +727,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p><br></p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jwt</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="na">jwt</span><span class="pi">:</span>
   <span class="na">secret-key</span><span class="pi">:</span> <span class="s">${JWT_SECRET_KEY}</span>       <span class="c1"># 환경 변수로 설정했음</span>
   <span class="na">access-token-expiration-minutes</span><span class="pi">:</span> <span class="m">30</span>
   <span class="na">refresh-token-expiration-minutes</span><span class="pi">:</span> <span class="m">420</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 ${환경변수명} 으로 지정을하였고<br>
 만약 테스트를 실행한다면 @Value가 .yml의 경로를 찾아<br>
@@ -727,8 +746,12 @@ JWT_SECRET_KEY라고 설정된 환경변수를 가져와야한다.</p>
 
 <p>하지만 테스트를 실행했을때</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtTokenizer': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'JWT_SECRET_KEY' in value "${JWT_SECRET_KEY}"
-</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtTokenizer': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'JWT_SECRET_KEY' in value "${JWT_SECRET_KEY}"
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위와 같은 에러가 발생했고…. 무언가 환경변수를<br>
 제대로 가져오지 못한다고 생각이 들었다.</p>
 
@@ -753,8 +776,12 @@ JWT_SECRET_KEY라고 설정된 환경변수를 가져와야한다.</p>
 <h3 id="macos-환경-변수-적용법">MacOS 환경 변수 적용법</h3>
 
 <p><strong>1). 현재 사용하고 있는 Shell을 확인</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$SHELL</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">echo</span> <span class="nv">$SHELL</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>사용하고 있는 터미널에서 위를 입력해준다.</p>
 
 <p>만약 zsh Shell을 사용하고 있을 경우에는  -&gt; /bin/zsh<br>
@@ -767,23 +794,35 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
 <p><strong>2). 사용하고 있는 Shell에 따른 등록</strong></p>
 
 <p>vi 편집기 사용법을 알고있다고 가정하겠습니다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.zshrc
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>vi ~/.zshrc
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>만약 zsh를 사용하고 있는 경우에는 .zshrc 파일에 환경 변수를<br>
 등록해줘야합니다.</p>
 
 <p><br></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.bashrc
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>vi ~/.bashrc
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>bash를 사용하고 있는 경우에는 .bashrc 파일에 등록!</p>
 
 <p><br></p>
 
 <p><strong>3). 환경 변수를 등록합니다.</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">JWT_SECRET_KEY</span><span class="o">=</span>LeeJaehyeok637637123231231231123
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">export </span><span class="nv">JWT_SECRET_KEY</span><span class="o">=</span>LeeJaehyeok637637123231231231123
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>현재 내가 등록하려는 환경변수는 <code class="language-plaintext highlighter-rouge">JWT_SECRET_KEY</code> 라는 이름으로<br>
 위에서 설정한다고 얘기했었고, 해당 값은 위처럼 <code class="language-plaintext highlighter-rouge">LeeJaehyeok637637123231231231123</code>을<br>
 사용하려고 값을 임의로 설정해서 넣어주었다.</p>
@@ -791,15 +830,23 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
 <p><br></p>
 
 <p><strong>4). 환경 변수 확인.</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printenv</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">printenv</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>printenv 명령어를 입려하면 우선 <br>
 전체 적용된 환경변수 목록이 나온다.<br>
 그 중에 우리가 적용한 JWT_SECRET_KEY가 있으면<br>
 정상적으로 잘 적용되었다고 볼 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$JWT_SECRET_KEY</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">echo</span> <span class="nv">$JWT_SECRET_KEY</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>echo 명령어를 이용하면 지정해서 확인이 가능하다.<br>
 내가 등록한 환경변수는 <code class="language-plaintext highlighter-rouge">JWT_SECRET_KEY</code>로 등록했기에<br>
 해당 명령어를 입력하면 아래와 같이 표시된다면 정상이다.</p>
@@ -834,7 +881,24 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
 환경변수의 값을 가져오는 것이 확인이 가능하다.</p>
 
 <p>실제로 출력해서 확인해보고 싶을 경우</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
 
     <span class="nd">@Getter</span>
@@ -849,12 +913,29 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
     <span class="o">}</span>
     <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>Spring Boot 실행시 출력으로 값을 확인해 볼 수 있다.</p>
 
 <p>혹은 실제로 환경변수를 클래스를 이용해 가져오고 싶다면</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
     
     <span class="o">...</span> <span class="n">이상</span> <span class="n">생략</span>
@@ -868,7 +949,8 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
     <span class="o">}</span>
     
     <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">import org.springframework.core.env.Environment;</code> 패키지를 improt하여<br>
 <code class="language-plaintext highlighter-rouge">.getProperty();</code> 메서드로 환경변수를 가져올 수 있다.</p>
 
@@ -880,12 +962,20 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
 
 <p>만약 zsh, bash를 변경해보고 싶으신 분은<br>
 1). zsh를 기본으로 사용하고 싶은경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chsh <span class="nt">-s</span> /bin/zsh
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>chsh <span class="nt">-s</span> /bin/zsh
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>2). bash를 기본으로 사용하고 싶은경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chsh <span class="nt">-s</span> /bin/bash
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>chsh <span class="nt">-s</span> /bin/bash
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>입력후 현재 노트북 비밀번호를 입력해주시면 됩니다.</p>
 
 <hr>
@@ -900,10 +990,10 @@ bash Shell을 사용하고 있을 경우에는 -&gt; /bin/bash</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/20/til.html" title="[TIL] OAuth 2 인증 기초">[TIL] Java 재귀</a></li>
-<li><a class="post-link" href="/til/2022/10/25/til.html" title="[TIL] OAuth 2 인증 기초">[TIL] Spring Exception 1</a></li>
-<li><a class="post-link" href="/til/2022/10/05/til.html" title="[TIL] OAuth 2 인증 기초">[TIL] DB RDMBS 1</a></li>
-<li><a class="post-link" href="/spring/2023/01/15/spring-fileupload.html" title="[TIL] OAuth 2 인증 기초">[Spring] AWS S3 FileUpload 하여 URL로 관리하기</a></li>
+        <li><a class="post-link" href="/til/2022/11/02/til.html" title="[TIL] OAuth 2 인증 기초">[TIL] Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/til/2022/11/07/til.html" title="[TIL] OAuth 2 인증 기초">[TIL] Spring Transaction 2 , Event 비동기 적용</a></li>
+<li><a class="post-link" href="/til/2022/11/18/til.html" title="[TIL] OAuth 2 인증 기초">[TIL] Spring Security 1 (기초)</a></li>
+<li><a class="post-link" href="/til/2022/10/27/til.html" title="[TIL] OAuth 2 인증 기초">[TIL] Spring JDBC 기반 액세스 계층 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

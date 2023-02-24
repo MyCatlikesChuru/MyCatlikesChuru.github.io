@@ -12,8 +12,8 @@
 <meta property="og:title" content="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content='https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.'>
-<meta property="og:description" content='https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.'>
+<meta name="description" content='https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. 1 2 3 $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.'>
+<meta property="og:description" content='https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. 1 2 3 $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.'>
 <link rel="canonical" href="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html">
 <meta property="og:url" content="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html">
 <meta property="og:site_name" content="LeeJellan">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-28T00:00:00+09:00","datePublished":"2023-01-28T00:00:00+09:00","description":"https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See &quot;systemctl status nginx.service&quot; and &quot;journalctl -xeu nginx.service&quot; for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.","headline":"Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"},"url":"http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-01-28T00:00:00+09:00","datePublished":"2023-01-28T00:00:00+09:00","description":"https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. 1 2 3 $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See &quot;systemctl status nginx.service&quot; and &quot;journalctl -xeu nginx.service&quot; for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.","headline":"Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"},"url":"http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -687,14 +687,41 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
       <p>https 관련 설정을 만지다가<br>
 nginx를 실행하는데 아래와 같은 에러가 발생했다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>service nginx start
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>service nginx start
 Job <span class="k">for </span>nginx.service failed because the control process exited with error code.
 See <span class="s2">"systemctl status nginx.service"</span> and <span class="s2">"journalctl -xeu nginx.service"</span> <span class="k">for </span>details.
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>터미널에 나온대로 <code class="language-plaintext highlighter-rouge">systemctl status nginx.service</code>를 <br>
 입력하여 로그를 확인해봤다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl status nginx.service
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>systemctl status nginx.service
 × nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded <span class="o">(</span>/lib/systemd/system/nginx.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
      Active: failed <span class="o">(</span>Result: exit-code<span class="o">)</span> since Sat 2023-01-28 02:54:33 KST<span class="p">;</span> 14s ago
@@ -713,16 +740,22 @@ Jan 28 02:54:33 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</s
 Jan 28 02:54:33 instance-20230101-2217 systemd[1]: nginx.service: Control process exited, <span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE
 Jan 28 02:54:33 instance-20230101-2217 systemd[1]: nginx.service: Failed with result <span class="s1">'exit-code'</span><span class="nb">.</span>
 Jan 28 02:54:33 instance-20230101-2217 systemd[1]: Failed to start A high performance web server and a reverse proxy server.
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같은 에러 코드들이 나왔다. <br>
 <code class="language-plaintext highlighter-rouge">Failed to start A high performance web server and a reverse proxy server.</code>를<br>
 키워드로 검색하니 <a href="https://stackoverflow.com/questions/51525710/nginx-failed-to-start-a-high-performance-web-server-and-a-reverse-proxy-server">Stackoverflow 해결 레퍼런스</a>로 문제 해결이 가능했다.</p>
 
 <p>나와 같은 경우는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>fuser <span class="nt">-k</span> 80/tcp
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>fuser <span class="nt">-k</span> 80/tcp
 <span class="nb">sudo </span>systemctl restart nginx
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력하여주니 오류가 해결되었다.</p>
 
 <p>내용을 보자하니.. 이미 실행 80으로 실행중인 포트가 있었던 것..<br>
@@ -741,10 +774,10 @@ Jan 28 02:54:33 instance-20230101-2217 systemd[1]: Failed to start A high perfor
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="MySQL replace 함수사용하여 일괄 변경하기">[Programmers - Java] 주식가격</a></li>
-<li><a class="post-link" href="/til/2022/10/07/til.html" title="MySQL replace 함수사용하여 일괄 변경하기">[TIL] DB RDMBS 3</a></li>
-<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="MySQL replace 함수사용하여 일괄 변경하기">[macOs] neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/spring/2022/11/25/spring-environment.html" title="MySQL replace 함수사용하여 일괄 변경하기">[Spring] Could not resolve placeholder '환경변수명' in value ${환경변수명} 오류</a></li>
+        <li><a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html" title="MySQL replace 함수사용하여 일괄 변경하기">[Spring] Security Test 코드 작성시 UserDetails 설정</a></li>
+<li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="MySQL replace 함수사용하여 일괄 변경하기">[Programmers - Java] 주식가격</a></li>
+<li><a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html" title="MySQL replace 함수사용하여 일괄 변경하기">MySQL EC2에 설치후 WorkBench 접속하기</a></li>
+<li><a class="post-link" href="/til/2022/12/06/til.html" title="MySQL replace 함수사용하여 일괄 변경하기">[TIL] 배포 컨테이너 Docker</a></li>
 </ul>
     </div>
 <div class="post-comments">

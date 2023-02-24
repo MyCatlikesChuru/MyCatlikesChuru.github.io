@@ -804,7 +804,25 @@ N은 주어지는 폰켓몬의 총 수량이고 만약</p>
 
 <p>코드로 살펴보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
 <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
@@ -820,7 +838,8 @@ N은 주어지는 폰켓몬의 총 수량이고 만약</p>
         <span class="k">return</span> <span class="o">(</span><span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="o">?</span> <span class="n">max</span> <span class="o">:</span> <span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">max</code>값은 종류의 최대값을 표현했다. <br>
 위에서 설명했듯이 내가 가져갈 수 잇는 폰켓몬의 최대는 <br>
 <code class="language-plaintext highlighter-rouge">nums</code>로 주어지는 폰켓몬 수량의 절반이다.</p>
@@ -844,10 +863,10 @@ N은 주어지는 폰켓몬의 총 수량이고 만약</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/02/til.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[TIL] Java 객체지향 - 클래스, 필드, 메서드</a></li>
-<li><a class="post-link" href="/db/2022/12/19/db-mysqlEER.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">MySQL EER 다이어그램 만드는법</a></li>
-<li><a class="post-link" href="/til/2022/11/04/til.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[TIL] Spring Transaction 1</a></li>
-<li><a class="post-link" href="/til/2022/09/14/til.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[TIL] Java 컬렉션 문제풀이</a></li>
+        <li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[Spring] @JsonIgnore 사용하기</a></li>
+<li><a class="post-link" href="/til/2022/11/11/til.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[TIL] API Documentation 1</a></li>
+<li><a class="post-link" href="/til/2022/09/21/til.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[TIL] Json</a></li>
+<li><a class="post-link" href="/til/2022/11/28/til.html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!">[TIL] Spring Security, JWT , OAuth 2 인증</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -728,11 +728,19 @@ merge : 상대방의 작업물과 나의 작업물을 취합하는 과정<br>
 
 <p>.gitconfig라는 파일에 유저이름과, 이메일을 설정해줘야한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> user.name <span class="s2">"나의 사용자 이름"</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git config <span class="nt">--global</span> user.name <span class="s2">"나의 사용자 이름"</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> user.email <span class="s2">"내 이메일 주소"</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git config <span class="nt">--global</span> user.email <span class="s2">"내 이메일 주소"</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 입력 시 gitconfig파일에 나의 이름과 이메일을 설정할 수 있다.<br>
 나의 사용자 이름은 Git Hub의 username과 동일하게 설정했다.<br>
@@ -740,18 +748,30 @@ merge : 상대방의 작업물과 나의 작업물을 취합하는 과정<br>
 
 <p>최종설정!</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> user.name “Lee Jaehyeok”
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git config <span class="nt">--global</span> user.name “Lee Jaehyeok”
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> user.email <span class="s2">"dhfif718@gmail.com"</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git config <span class="nt">--global</span> user.email <span class="s2">"dhfif718@gmail.com"</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOuMs2zQAXFN7zhVLafVft-zpZmg1AahQ3aFMNclkeuzd9agRyx8qSGvsGNkIihxkjsPLe18F2jxY1ryESvwTeBZyDHLQ=w1280-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>여기서 내가 설정한 것들이 들어갔는지 확인해보려면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.gitconfig
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">cat</span> ~/.gitconfig
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>cat명령어를 이용해 .gitconfig파일에 접근하면<br>
 확인이 가능하다!!</p>
@@ -761,8 +781,12 @@ merge : 상대방의 작업물과 나의 작업물을 취합하는 과정<br>
 <p>추가로 vi편집기가 익숙하지 않다면 추후에 merge commit 확인 메세지가 나올때<br>
 nano편집기를 사용하고 싶다면 아래의 명령어를 추가하면 된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> core.editor nano
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git config <span class="nt">--global</span> core.editor nano
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <h3 id="ssh-등록하기"><strong>SSH 등록하기</strong></h3>
 
@@ -779,13 +803,21 @@ Secure Shell의 줄임말로, 보완이 강화된 shell 접속을 뜻한다.</p>
 -. public key, 공개되어도 비교적 안전한 Key이다.<br>
 -. 접속하려는 Remote Machine의 authorized.keys에 입력하여 사용한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ssh-keygen
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위의 명령어를 통해서 id_rsa와 id_rsa.pub 페어를 생성!</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>생성된 공개키값을 확인한 후에 복사한다음</p>
 
@@ -872,10 +904,10 @@ Local 작업환경에도 Work space(working tree), Staging Area, Local Repositor
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
-<li><a class="post-link" href="/db/2023/01/08/db-redissetting.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">Redis CLI 설치 및 사용방법</a></li>
-<li><a class="post-link" href="/til/2022/09/28/til.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">[TIL] Java Algorithm 2</a></li>
-<li><a class="post-link" href="/til/2022/11/29/til.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">[TIL] Spring WebFlux Reactive 프로그래밍</a></li>
+        <li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">H2 Database 다운로드 및 실행</a></li>
+<li><a class="post-link" href="/linux/unix/2022/12/29/server-NginX.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">AWS EC2 NginX 클라이언트 배포</a></li>
+<li><a class="post-link" href="/til/2022/12/12/til.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">[TIL] 프로젝트 연습, 준비</a></li>
+<li><a class="post-link" href="/spring/2022/12/12/spring-cors.html" title="[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자">[Spring] CORS 설정하기</a></li>
 </ul>
     </div>
 <div class="post-comments">

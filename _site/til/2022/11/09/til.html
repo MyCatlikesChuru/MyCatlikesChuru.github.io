@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -715,7 +715,20 @@ JSON 객체를 주고 응답받는 방식을 사용했었다.</p>
 <p><strong>@AutoConfigureMockMvc</strong> 어노테이션은 Controller 테스트를 위한 애플리케이션의<br>
 자동 구성 작업을 해준다. 이중 우리는 MockMvc 같은 클래스의 기능을 사용할 것이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>    
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@SpringBootTest</span>    
 <span class="nd">@AutoConfigureMockMvc</span>  
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ControllerTest</span> <span class="o">{</span>
     <span class="nd">@Autowired</span>
@@ -726,7 +739,8 @@ JSON 객체를 주고 응답받는 방식을 사용했었다.</p>
         <span class="o">...</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>테스트 파일의 @SpringBootTest 어노테이션 붙여<br>
 Application Context를 생성하고<br>
 MockMvc클래스를 사용하기 위한 어노테이션 @AutoConfigureMockMvc를<br>
@@ -736,14 +750,24 @@ MockMvc클래스를 사용하기 위한 어노테이션 @AutoConfigureMockMvc를
 POST, GET, DELETE, PATCH 등<br>
 핸들러 메서드들을 자유롭게 이용할 수 있게 되어진다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ResultActions</span> <span class="n">actions</span> <span class="o">=</span>
         <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span>                       
             <span class="n">post</span><span class="o">(</span><span class="s">"/api/coffees"</span><span class="o">)</span> 
                 <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span> 
                 <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span> 
                 <span class="o">.</span><span class="na">content</span><span class="o">(</span><span class="n">content</span><span class="o">)</span> 
         <span class="o">);</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>간단한 코드 예제를 살펴보자 perform을 통해<br>
 uri와 핸들러 메서드 방식 설정을해주고<br>
 응답받을 객체 타입 .accept();<br>
@@ -756,8 +780,12 @@ api가 호출되게 되어진다.</p>
 후에 검증하는 용도로 사용되어진다.</p>
 
 <p>핸들러 메서드(post(),get(),patech())를 사용하기 위해서는</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">MockMvcRequestBuilders</span><span class="o">.*;</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">servlet</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">MockMvcRequestBuilders</span><span class="o">.*;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>MockMvcRequestBuliders를 import해야 사용이 가능하다.</p>
 
@@ -767,22 +795,40 @@ api가 호출되게 되어진다.</p>
 
 <p>여기서 우리는 JSON 객체를 주고받는 것으로 설정했고<br>
 Json 객체를 만들기 위해 Google Json 라이브러리를 사용했다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="o">:</span><span class="nl">gson:</span><span class="mf">2.8</span><span class="o">.</span><span class="mi">7</span><span class="err">'</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="o">:</span><span class="nl">gson:</span><span class="mf">2.8</span><span class="o">.</span><span class="mi">7</span><span class="err">'</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>사용법은 간단하다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Autowired</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Autowired</span>
 <span class="kd">private</span> <span class="nc">Gson</span> <span class="n">gson</span><span class="o">;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>필드의 Gson 객체를 주입받도록 설정 후</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">CoffeeDto</span><span class="o">.</span><span class="na">Post</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Coffee</span><span class="o">.</span><span class="na">Post</span><span class="o">(</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">CoffeeDto</span><span class="o">.</span><span class="na">Post</span> <span class="n">post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Coffee</span><span class="o">.</span><span class="na">Post</span><span class="o">(</span>
         <span class="s">"아메리카노"</span><span class="o">,</span>
         <span class="s">"Americano"</span><span class="o">,</span>
         <span class="mi">4500</span>
 <span class="o">);</span>
 <span class="nc">String</span> <span class="n">content</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">toJson</span><span class="o">(</span><span class="n">post</span><span class="o">);</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>우리가 Dto 용도로 만들었던 클래스의<br>
 해당 타입의 맞는 객체를 gson.toJson(); 안에 넣어주면<br>
 String 타입으로 반환되게 되어진다.</p>
@@ -795,13 +841,22 @@ String 타입으로 반환되게 되어진다.</p>
 <p>위에서 언급했던 ResultAction 타입의 객체로<br>
 여러가지 검증 메서드들을 사용할 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MvcResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actions</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">MvcResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isCreated</span><span class="o">())</span>
         <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.korName"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getKorName</span><span class="o">()))</span>
         <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.engName"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getEngName</span><span class="o">()))</span>
         <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">jsonPath</span><span class="o">(</span><span class="s">"$.data.price"</span><span class="o">).</span><span class="na">value</span><span class="o">(</span><span class="n">post</span><span class="o">.</span><span class="na">getPrice</span><span class="o">()))</span>
         <span class="o">.</span><span class="na">andReturn</span><span class="o">();</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>.andExpect(); 메서드로 검증을 할 수 있다.<br>
 actions객체는 ResultAction 타입이며</p>
 
@@ -812,8 +867,12 @@ jsonPath().value() -&gt; 응답받은 Json 객체의 데이터를 검증</p>
 MvcResult 클래스 타입으로 반환되는데<br>
 해당 클래스의 메서드로 Json 객체를 문자열로 출력하는 것도 가능하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">().</span><span class="na">getContentAsString</span><span class="o">());</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">().</span><span class="na">getContentAsString</span><span class="o">());</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위와 같이 getResponse().getContentAsString(); 메서드를<br>
 이용하여 실제 어떻게 응답받았는지 출력해볼 수 있다</p>
 
@@ -849,7 +908,24 @@ Configuration을 Spring이 자동으로 해주게 된다.<br>
 그리고 해당 어노테이션은 @Transactional을 포함하고 있기에<br>
 위에서 설명했던 rollback 처리까지 되어진다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@DataJpaTest</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@DataJpaTest</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeRepositoryTest</span> <span class="o">{</span>
     <span class="nd">@Autowired</span>
     <span class="kd">private</span> <span class="nc">CoffeeRepository</span> <span class="n">coffeeRepository</span><span class="o">;</span>
@@ -864,7 +940,8 @@ Configuration을 Spring이 자동으로 해주게 된다.<br>
         <span class="o">...</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>사용 방법은 Controller보다 간단하다. <br>
 JPA를 상속받는 Repository를 의존성 주입시킨 객체를 이용하고</p>
 
@@ -900,10 +977,10 @@ Test 클래스가 만들어 진다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="[TIL] JUnit 3">[macOs] neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/til/2022/09/06/til.html" title="[TIL] JUnit 3">[TIL] Java 객체지향 - 상속, 캡슐화</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="[TIL] JUnit 3">[TIL] Java Algorithm 3</a></li>
-<li><a class="post-link" href="/til/2022/12/02/til.html" title="[TIL] JUnit 3">[TIL] Cloud 운영 환경 구성 1</a></li>
+        <li><a class="post-link" href="/til/2022/12/05/til.html" title="[TIL] JUnit 3">[TIL] Cloud 운영 환경 구성 2</a></li>
+<li><a class="post-link" href="/spring/2023/01/21/spring-email.html" title="[TIL] JUnit 3">[Spring] MailAuthenticationException 문제 해결</a></li>
+<li><a class="post-link" href="/til/2022/11/16/til.html" title="[TIL] JUnit 3">[TIL] 세달차 회고</a></li>
+<li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="[TIL] JUnit 3">[Programmers - Java] 프린터</a></li>
 </ul>
     </div>
 <div class="post-comments">

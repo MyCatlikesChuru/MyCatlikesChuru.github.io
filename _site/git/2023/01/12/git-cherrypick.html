@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
@@ -712,7 +712,29 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>내가 커밋을 잘못올린 브랜치(<code class="language-plaintext highlighter-rouge">develop</code>)에서<br>
 <code class="language-plaintext highlighter-rouge">git log</code>를 입력해 커밋의 해쉬값을 알 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 7525f9a220700884994e53e90babc345d199e10e <span class="o">(</span>HEAD -&gt; develop<span class="o">)</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td>
+<td class="rouge-code"><pre>commit 7525f9a220700884994e53e90babc345d199e10e <span class="o">(</span>HEAD -&gt; develop<span class="o">)</span>
 Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
 Date:   Thu Jan 12 18:02:48 2023 +0900
 
@@ -732,7 +754,8 @@ Date:   Thu Jan 12 17:58:46 2023 +0900
     
     1. 로그인 시 응답 가능하도록 ResponseDto 추가
 
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>나는 총 2개의 커밋을 했고<br>
 첫번째 커밋은 <code class="language-plaintext highlighter-rouge">7525f9a220700884994e53e90babc345d199e10e</code>로<br>
@@ -748,20 +771,39 @@ Date:   Thu Jan 12 17:58:46 2023 +0900
 <h3 id="-cherry-pick-사용하여-커밋-옮기기">📌 Cherry-Pick 사용하여 커밋 옮기기</h3>
 
 <p>먼저 브랜치 체크아웃을 진행하자.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout feat/BE/ljh
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git checkout feat/BE/ljh
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
 <p>이제 하나씩 Cherry-Pick 명령어를 사용해 옮겨보자</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git cherry-pick cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git cherry-pick cd49c93bd4905f6d1f4a19d8438ab4c4d6b6d15b
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력해주면되고, 만약 실행하였을때 정상적으로 <br>
 완료가되면 이상이 없겠지만, 혹시나</p>
 
 <p>아래와 같이 conflict가 발생하게 될 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Auto-merging server/src/main/java/codestates/frogroup/indiego/domain/member/entity/dto/MemberDto.java
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre>Auto-merging server/src/main/java/codestates/frogroup/indiego/domain/member/entity/dto/MemberDto.java
 CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict <span class="k">in </span>server/src/main/java/codestates/frogroup/indiego/domain/member/entity/dto/MemberDto.java
 error: could not apply cd49c93... <span class="c">#3 - LoginResponseDto 추가</span>
 hint: After resolving the conflicts, mark them with
@@ -770,7 +812,8 @@ hint: <span class="s2">"git cherry-pick --continue"</span><span class="nb">.</sp
 hint: You can instead skip this commit with <span class="s2">"git cherry-pick --skip"</span><span class="nb">.</span>
 hint: To abort and get back to the state before <span class="s2">"git cherry-pick"</span>,
 hint: run <span class="s2">"git cherry-pick --abort"</span><span class="nb">.</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>hint 안내에 따라 진행할수가 있다. <br>
 우선 CONFLICT가 발생한 부분을 로그로 알려준다.<br>
 나와 같은 경우는 <code class="language-plaintext highlighter-rouge">MemberDto</code> 충돌이 나왔다고 위에 나와있다.</p>
@@ -789,13 +832,22 @@ ctrl + s, ctrl + x 를 눌러줘 저장을해준다.</p>
 <code class="language-plaintext highlighter-rouge">develop</code>브랜치에 있던 커밋이 <code class="language-plaintext highlighter-rouge">feat/BE/ljh</code>로 복사된 것을 <br>
 볼 수 있을 것이다 !!!!!</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit a5d3ef8d6110d838c896ba3125c351eb5b611623 <span class="o">(</span>HEAD -&gt; feat/BE/ljh<span class="o">)</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre>commit a5d3ef8d6110d838c896ba3125c351eb5b611623 <span class="o">(</span>HEAD -&gt; feat/BE/ljh<span class="o">)</span>
 Author: Lee JaeHyeok &lt;dhfif718@gmail.com&gt;
 Date:   Thu Jan 12 17:58:46 2023 +0900
 
     1. 로그인 시 응답 가능하도록 ResponseDto 추가
 
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>해쉬값을 보아하니 복사보다는 새로 만들어진 느낌이다. <br>
 이렇게 옮기려고하는 커밋을 모두 옮기면 된다.</p>
@@ -809,8 +861,12 @@ Cherry-Pick을 했다고 자동으로 삭제가되진 않는다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">develop</code> 브랜치로 체크아웃을하여</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git reset HEAD^
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git reset HEAD^
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>를 입력하면 가장 최근인 HEAD의 커밋이 삭제되어진다.</p>
 
@@ -836,10 +892,10 @@ Drop Commit을 눌러주면 된다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/db/2022/11/15/db-mysql.html" title="Git 이전 Commit Message 수정하기">MySQL Local 연동 하기</a></li>
-<li><a class="post-link" href="/til/2022/09/26/til.html" title="Git 이전 Commit Message 수정하기">[TIL] Java Algorithm BFS, DFS</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="Git 이전 Commit Message 수정하기">[macOs] 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
-<li><a class="post-link" href="/db/2023/01/08/db-redissetting.html" title="Git 이전 Commit Message 수정하기">Redis CLI 설치 및 사용방법</a></li>
+        <li><a class="post-link" href="/server/2023/01/01/server-oraclesetting.html" title="Git 이전 Commit Message 수정하기">Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선</a></li>
+<li><a class="post-link" href="/til/2022/11/01/til.html" title="Git 이전 Commit Message 수정하기">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
+<li><a class="post-link" href="/til/2022/10/26/til.html" title="Git 이전 Commit Message 수정하기">[TIL] Spring Exception 2</a></li>
+<li><a class="post-link" href="/til/2022/12/01/til.html" title="Git 이전 Commit Message 수정하기">[TIL] Spring WebFlux 구현하기</a></li>
 </ul>
     </div>
 <div class="post-comments">

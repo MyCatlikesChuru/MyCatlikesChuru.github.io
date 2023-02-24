@@ -700,8 +700,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>현재 설정되어 있는 언어를 확인해보자</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$LANG</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">echo</span> <span class="nv">$LANG</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>입력할 경우 아래와 같이 표시된다.</p>
 
@@ -716,8 +720,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>자세한 내용은 맨위에 참조한 하이퍼링크를 참고하자!<br>
 이제 한글로된 것을 영어로 바꾸기위해 zsh 편집을 실행한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.zshrc
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>vi ~/.zshrc
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 터미널에 입력할 경우</p>
 
@@ -738,8 +746,12 @@ i 를 눌르면<br>
 
 <p><br></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">git</span><span class="o">=</span><span class="s2">"LANG=en_US.UTF-8 git"</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">alias </span><span class="nv">git</span><span class="o">=</span><span class="s2">"LANG=en_US.UTF-8 git"</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>해당 코드를 맨아래에 입력하면된다.</p>
 
@@ -753,8 +765,12 @@ i 를 눌르면<br>
 참고로 #은 주석이기 때문에 앞에 alias 앞에 #을 붙인다면 동작되지 않을 것이다.<br>
 터미널을 재실행하거나 아래의 명령어를 입력하면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">source</span> ~/.zshrc
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">source</span> ~/.zshrc
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -772,8 +788,12 @@ i 를 눌르면<br>
 
 <p>예를 한가지 들어서 내가 현재 사용중인 포트를 전부 확인하는 명령어는 아래와같다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lsof <span class="nt">-PiTCP</span> <span class="nt">-sTCP</span>:LISTEN
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>lsof <span class="nt">-PiTCP</span> <span class="nt">-sTCP</span>:LISTEN
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmTdt60EHwPrl_Pc6RN1Xw0tgkeB9-IbmQecZOclKUAczvYl7Mb2yXH08EmeAwUADipmZnM4BWg=w3024-h1620" align="left" width="600px">
 <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -811,10 +831,10 @@ i 를 눌르면<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/15/til.html" title="[TIL] HTML,CSS 기초">[TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
-<li><a class="post-link" href="/til/2022/09/19/til.html" title="[TIL] HTML,CSS 기초">[TIL] 한달차 회고</a></li>
-<li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="[TIL] HTML,CSS 기초">[Programmers - Java] 프린터</a></li>
-<li><a class="post-link" href="/til/2022/11/25/til.html" title="[TIL] HTML,CSS 기초">[TIL] OAuth 2 인증 기초</a></li>
+        <li><a class="post-link" href="/linux/unix/2022/07/27/server-ubunto.html" title="[TIL] HTML,CSS 기초">Permission denied (publickey) 우분투 에러 조치</a></li>
+<li><a class="post-link" href="/db/2022/12/19/db-mysqlEER.html" title="[TIL] HTML,CSS 기초">MySQL EER 다이어그램 만드는법</a></li>
+<li><a class="post-link" href="/til/2022/09/01/til.html" title="[TIL] HTML,CSS 기초">[TIL] Java 문법기초 - 배열</a></li>
+<li><a class="post-link" href="/git/2023/01/12/git-cherrypick.html" title="[TIL] HTML,CSS 기초">Git Cherry-Pick으로 Commit 옮기기</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
@@ -698,13 +698,22 @@ MySQL 설치과정은 생략하겠다.</p>
 
 <p>스키마 이름은 stackover라는 이름으로지 지정했다.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
   <span class="na">datasource</span><span class="pi">:</span>
     <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
     <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
     <span class="na">username</span><span class="pi">:</span> <span class="s">${MYSQL_ID}</span> <span class="c1"># 유저네임</span>
     <span class="na">password</span><span class="pi">:</span> <span class="s">${MYSQL_PASSWORD}</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>환경변수를 사용해 유저이름과 비밀번호를 지정해줬다.</p>
 
@@ -722,12 +731,20 @@ MySQL 설치과정은 생략하겠다.</p>
 
 <p><strong>두번째</strong>로는 EC2의 <code class="language-plaintext highlighter-rouge">mysqld.cnf</code> 파일의 내용을 수정해줘야한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/mysql/mysql.conf.d
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">cd</span> /etc/mysql/mysql.conf.d
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>해당 경로에 진입하면 <code class="language-plaintext highlighter-rouge">mysqld.conf</code> 파일을 열 수 있고</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vi mysqld.cnf
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>vi mysqld.cnf
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>sudo를 이용해야 저장이 가능하다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/217404926-1ee85e87-0d10-45c2-93c0-19082093d5e9.png" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -742,16 +759,28 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 
 <p>✅ <strong>mysql 접속</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>처음에는 root 계정으로 진입하면 mysql에 접속이 가능하다.<br>
 만약 root 계정에 비밀번호를 설정하지 않았을 경우에는</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>mysql <span class="nt">-u</span> root
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어로 접근한 다음에</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER USER <span class="s1">'root'</span>@<span class="s1">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'yourPassword'</span><span class="p">;</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ALTER USER <span class="s1">'root'</span>@<span class="s1">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'yourPassword'</span><span class="p">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>yourPassword에 원하는 비밀번호를 입력해 root 계정에<br>
 비밀번호를 설정해 줄 수 있다.</p>
 
@@ -760,8 +789,12 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 <p>✅ <strong>유저 생성</strong><br>
 이제 mysql에 접속이 완료되었다면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT user,authentication_string,plugin,host FROM mysql.user<span class="p">;</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>SELECT user,authentication_string,plugin,host FROM mysql.user<span class="p">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어로 등록된 user 정보를 확인할 수 있다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/217404921-fd7b50ad-3296-494f-b58a-35555a97a3bd.png" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -770,23 +803,35 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 그리고 host를 %로 변경해주면 외부에서도 진입이 가능해진다.</p>
 
 <p>이제 계정을 하나 만들어보자</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create user <span class="sb">`</span>유저이름<span class="sb">`</span>@<span class="sb">`</span>%<span class="sb">`</span> identified by <span class="sb">`</span>비밀번호<span class="sb">`</span><span class="p">;</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>create user <span class="sb">`</span>유저이름<span class="sb">`</span>@<span class="sb">`</span>%<span class="sb">`</span> identified by <span class="sb">`</span>비밀번호<span class="sb">`</span><span class="p">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>유저이름과 비밀번호를 입력해 계정을 생성할 수 있다.<br>
 만약 비밀번호를 변경하고 싶은경우 위에서 root계정 비밀번호를 변경할 때<br>
 사용했던 명령어를 입력해주면 비밀번호를 변경할 수 있다.</p>
 
 <p>이제 만들어진 유저 정보를 가지고</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> 유저이름 <span class="nt">-p</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>mysql <span class="nt">-u</span> 유저이름 <span class="nt">-p</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>mysql을 root 계정이아닌 만들어진 계정으로 접속할 수가 있다.</p>
 
 <p><br></p>
 
 <p>✅ <strong>유저 삭제</strong><br>
 혹시나 유저를 삭제하고 싶은 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drop user 유저이름@localhost<span class="p">;</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>drop user 유저이름@localhost<span class="p">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>과 같이 입력해주면 삭제가 가능핟.</p>
 
 <p><br></p>
@@ -800,16 +845,28 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 <code class="language-plaintext highlighter-rouge">ERROR 1045 (28000): Access denied for user '유저이름'@'%' (using password: YES)</code><br>
 과 같은 에러를 만날 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grant all privileges on <span class="k">*</span>.<span class="k">*</span> to <span class="sb">`</span>유저이름<span class="sb">`</span>@<span class="sb">`</span>%<span class="sb">`</span><span class="p">;</span>
-</code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flush privileges<span class="p">;</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>grant all privileges on <span class="k">*</span>.<span class="k">*</span> to <span class="sb">`</span>유저이름<span class="sb">`</span>@<span class="sb">`</span>%<span class="sb">`</span><span class="p">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>flush privileges<span class="p">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>정상적으로 처리가 완료되었다면 쿼리가 날라갔다고 메세지가 나온다.</p>
 
 <p>전부 완료를 하고나면 <code class="language-plaintext highlighter-rouge">quit</code>로 mysql을 나온다음에<br>
 우분투 터미널에서</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl restart mysql
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>systemctl restart mysql
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>해당 명령어를 입력해 mysql을 재실행 시켜주자</p>
 
 <p>위 과정이 전부 완료되었다면<br>
@@ -845,10 +902,10 @@ mysqlx-bind-address는 주석처리를 해주었다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="AWS EC2 NginX 클라이언트 배포">[macOs] Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="AWS EC2 NginX 클라이언트 배포">[macOs] 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
-<li><a class="post-link" href="/til/2022/10/07/til.html" title="AWS EC2 NginX 클라이언트 배포">[TIL] DB RDMBS 3</a></li>
-<li><a class="post-link" href="/til/2022/11/02/til.html" title="AWS EC2 NginX 클라이언트 배포">[TIL] Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
+        <li><a class="post-link" href="/til/2022/09/16/til.html" title="AWS EC2 NginX 클라이언트 배포">[TIL] Java Thread, JVM</a></li>
+<li><a class="post-link" href="/spring/2022/08/03/spring-port.html" title="AWS EC2 NginX 클라이언트 배포">[Spring] Web server failed to start. Port 8080 was already in use...</a></li>
+<li><a class="post-link" href="/til/2022/10/20/til.html" title="AWS EC2 NginX 클라이언트 배포">[TIL] Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/spring/2022/11/25/spring-environment.html" title="AWS EC2 NginX 클라이언트 배포">[Spring] Could not resolve placeholder '환경변수명' in value ${환경변수명} 오류</a></li>
 </ul>
     </div>
 <div class="post-comments">

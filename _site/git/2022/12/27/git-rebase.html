@@ -704,13 +704,21 @@ pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
 
 <p>❓ 하지만 다른 사람이 작업한 부분과, 내가 작업한 부분이 겹쳤다면 ❓</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git pull origin dev/back
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위와 같이 명령을 해보아도 충돌이 나면서 작업이 진행 되지 않을 것이다.</p>
 
 <p>그럴 경우에는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin dev/back <span class="nt">--rebase</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git pull origin dev/back <span class="nt">--rebase</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><img src="https://user-images.githubusercontent.com/95069395/217531072-d4b655ed-f047-411b-af49-a08eb274b0b3.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>위와 같이 입력을 해주면, 파일이 합쳐진 것이고<br>
@@ -719,8 +727,12 @@ pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
 
 <p>수정을 다완료 하고 나면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git rebase <span class="nt">--continue</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git rebase <span class="nt">--continue</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/217531087-2ad4738a-4cc0-408a-a48b-6c3dbdda892b.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -732,8 +744,12 @@ pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
 <p>아래와 같이 원래 브랜치 <code class="language-plaintext highlighter-rouge">feat/BE/security</code>로 바뀐 모습을 볼 수 있다. <br>
 이제 rebase완료된 파일을 <code class="language-plaintext highlighter-rouge">feat/BE/security</code> 브랜치로 올려주면 된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git push origin feat/BE/security
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력해주면 push를 할 수 있는데</p>
 
 <p>아래와 같은 에러에 마주하였을 경우에는</p>
@@ -741,8 +757,12 @@ pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
 <p><img src="https://user-images.githubusercontent.com/95069395/217531097-98d18b4c-42a4-430e-9832-00bd654669c9.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>합쳐진게 전부 잘 수정했다고 가정하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin feat/BE/security <span class="nt">-ff</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>git push origin feat/BE/security <span class="nt">-ff</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력해 레파지토리에 강제로 push할 수 있다.</p>
 
 <p><br>
@@ -760,10 +780,10 @@ pull을 하거나 remote를 가져오기위해 fetch를 진행한다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/19/til.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">[TIL] 한달차 회고</a></li>
-<li><a class="post-link" href="/til/2022/11/14/til.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">[TIL] API Documentation 2</a></li>
-<li><a class="post-link" href="/til/2022/08/25/til.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">[TIL] HTML,CSS 목업화면 만들어보기</a></li>
-<li><a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">Nginx 에러 조치 , Failed to start A high performance web server...</a></li>
+        <li><a class="post-link" href="/til/2022/11/01/til.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">[TIL] Spring AOP 1</a></li>
+<li><a class="post-link" href="/til/2022/09/27/til.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">[TIL] Java Algorithm 1</a></li>
+<li><a class="post-link" href="/til/2022/12/05/til.html" title="[Spring] Security Test 코드 작성시 UserDetails 설정">[TIL] Cloud 운영 환경 구성 2</a></li>
 </ul>
     </div>
 <div class="post-comments">

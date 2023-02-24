@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -736,7 +736,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <a href="https://mycatlikeschuru.github.io/til/2022/11/21/til.html">(Spring Security 인증처리)</a> 과정에서 인증이 완료된 객체 <code class="language-plaintext highlighter-rouge">Authentication</code>를 <br>
 <code class="language-plaintext highlighter-rouge">SecurityContextHolder</code>에 넣어줬던 흐름이 인증처리의 마지막이어었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationFilter</span> <span class="kd">extends</span> <span class="nc">OncePerRequestFilter</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationFilter</span> <span class="kd">extends</span> <span class="nc">OncePerRequestFilter</span> <span class="o">{</span>
     
     <span class="o">...</span> <span class="n">이상</span> <span class="n">생략</span>
     
@@ -752,7 +770,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
             
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>실제로 <code class="language-plaintext highlighter-rouge">AuthorizationFilter</code> 클래스 코드 중 <code class="language-plaintext highlighter-rouge">getAuthentication();</code> 메서드를 이용해  <br>
 <code class="language-plaintext highlighter-rouge">Authentication</code> 객체를 꺼내는 모습을 코드로 볼 수 있다.</p>
 
@@ -761,7 +780,36 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>(2). <code class="language-plaintext highlighter-rouge">Authentication</code> 객체와 <code class="language-plaintext highlighter-rouge">HttpServletRequest</code> 객체를<br>
 <code class="language-plaintext highlighter-rouge">AuthorizationManager</code>에게 전달한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationFilter</span> <span class="kd">extends</span> <span class="nc">OncePerRequestFilter</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AuthorizationFilter</span> <span class="kd">extends</span> <span class="nc">OncePerRequestFilter</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">HttpServletRequest</span><span class="o">&gt;</span> <span class="n">authorizationManager</span><span class="o">;</span>
      
@@ -788,7 +836,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <span class="o">}</span>
 
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>실제로 코드를 확인해보면<br>
 생성자로 <code class="language-plaintext highlighter-rouge">AuthorizationManager</code>의 객체를 DI받고 있다.<br>
 그리고 <code class="language-plaintext highlighter-rouge">.check(this::getAuthentication, request);</code> 메서드를 호출해<br>
@@ -799,7 +848,17 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>(3). <code class="language-plaintext highlighter-rouge">AuthorizationManager</code>는 <br>
 권한 부여 처리를 총괄하는 매니저 역할의 인터페이스이다.<br>
 구현체는  <code class="language-plaintext highlighter-rouge">RequestMatcherDelegatingAuthorizationManager</code> 클래스이다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FunctionalInterface</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@FunctionalInterface</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
     
     <span class="o">...</span> <span class="n">이상</span> <span class="n">생략</span>
@@ -807,10 +866,43 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	<span class="nd">@Nullable</span>
 	<span class="nc">AuthorizationDecision</span> <span class="nf">check</span><span class="o">(</span><span class="nc">Supplier</span><span class="o">&lt;</span><span class="nc">Authentication</span><span class="o">&gt;</span> <span class="n">authentication</span><span class="o">,</span> <span class="no">T</span> <span class="n">object</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>코드로도 볼 수 있듯이 인터페이스에 메서드가 정의되어있고</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">RequestMatcherDelegatingAuthorizationManager</span> <span class="kd">implements</span> <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">HttpServletRequest</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">RequestMatcherDelegatingAuthorizationManager</span> <span class="kd">implements</span> <span class="nc">AuthorizationManager</span><span class="o">&lt;</span><span class="nc">HttpServletRequest</span><span class="o">&gt;</span> <span class="o">{</span>
 
     <span class="o">...</span>
     <span class="n">이상</span> <span class="n">생략</span>
@@ -840,7 +932,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">...</span> <span class="n">이하</span> <span class="n">생략</span>
             
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>구현체인 <code class="language-plaintext highlighter-rouge">RequestMatcherDelegatingAuthorizationManager</code> 클래스에<br>
 <code class="language-plaintext highlighter-rouge">check();</code>메서드가 Override되어 있는 모습을 확인할 수 있다.</p>
 
@@ -865,7 +958,20 @@ Map을 담고있는 객체가 반환되며 권한 부여과정이 진행되고</
 <p>만약에 권한이 존재하지 않아 <code class="language-plaintext highlighter-rouge">if (matchResult.isMatch())</code> 메서드를 통과하지 못한다면<br>
 <code class="language-plaintext highlighter-rouge">return null;</code>로 인해 null값이 반환되게 되어진다.<br>
 즉, 맨처음에 우리가 <code class="language-plaintext highlighter-rouge">check();</code>메서드를 호출했던 <code class="language-plaintext highlighter-rouge">AuthorizationFilter</code>에서</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Override</span>
 <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doFilterInternal</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">FilterChain</span> <span class="n">filterChain</span><span class="o">)</span>
         <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
 
@@ -876,7 +982,8 @@ Map을 담고있는 객체가 반환되며 권한 부여과정이 진행되고</
     <span class="o">}</span>
     <span class="n">filterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">throw new AccessDeniedException("Access Denied");</code> 예외를 던지게되어<br>
 권한을 부여하지 않도록 처리를 해주는 것이다.</p>
 
@@ -980,10 +1087,10 @@ Spring Security 로직이 변경되는지 내일부터 다시 공부해보자</p
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/25/til.html" title="[TIL] JWT 기초">[TIL] OAuth 2 인증 기초</a></li>
-<li><a class="post-link" href="/til/2022/10/28/til.html" title="[TIL] JWT 기초">[TIL] Spring JDBC 기반 액세스 계층 2</a></li>
-<li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="[TIL] JWT 기초">[Spring] @JsonIgnore 사용하기</a></li>
-<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="[TIL] JWT 기초">[macOs] neofetch를 활용하여 terminal 커스터마이징</a></li>
+        <li><a class="post-link" href="/til/2022/12/08/til.html" title="[TIL] JWT 기초">[TIL] 배포 자동화 GitHub Actions</a></li>
+<li><a class="post-link" href="/til/2022/10/18/til.html" title="[TIL] JWT 기초">[TIL] Spring AOP 2</a></li>
+<li><a class="post-link" href="/til/2022/11/03/til.html" title="[TIL] JWT 기초">[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="[TIL] JWT 기초">H2 Database 다운로드 및 실행</a></li>
 </ul>
     </div>
 <div class="post-comments">

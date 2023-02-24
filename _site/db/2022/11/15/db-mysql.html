@@ -700,8 +700,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>1). bulid.gradle 설정</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'mysql:mysql-connector-java'
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>runtimeOnly 'mysql:mysql-connector-java'
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>첫번째로 의존라이브러리를 추가해줘야한다.</p>
 
@@ -714,7 +718,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>2). .yml 파일 설정</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
   <span class="na">jpa</span><span class="pi">:</span>
     <span class="na">hibernate</span><span class="pi">:</span>
       <span class="na">ddl-auto</span><span class="pi">:</span> <span class="s">create-drop</span>  <span class="c1"># 스키마 자동 생성</span>
@@ -727,7 +746,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:포트넘버/스키마이름?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트넘버, 스키마이름</span>
     <span class="na">username</span><span class="pi">:</span>  <span class="c1"># 유저네임</span>
     <span class="na">password</span><span class="pi">:</span>  <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>두번째로 연결을위한 .yml파일 설정이다.<br>
 프로젝트 이름 &gt; main &gt; resources 에서 확인이 가능하고<br>
@@ -788,12 +808,20 @@ datasource :<br>
 이렇게 최종적으로 4가지 정보를 알아볼 수 있었다.</p>
 
 <p>이렇게 정리해서 정보를 적어보자면</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">datasource</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="na">datasource</span><span class="pi">:</span>
   <span class="na">driver-class-name</span><span class="pi">:</span> <span class="s">com.mysql.cj.jdbc.Driver</span>
   <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul</span> <span class="c1"># 포트:3306 , 스키마:example</span>
   <span class="na">username</span><span class="pi">:</span> <span class="s">root</span>  <span class="c1"># 유저네임</span>
   <span class="na">password</span><span class="pi">:</span> <span class="s">내 비밀번호</span> <span class="c1"># 비밀번호</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>이렇게 설정할 수 있을 것이다.</p>
 
@@ -811,10 +839,10 @@ datasource :<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/08/25/til.html" title="[TIL] Application 빌드, 실행">[TIL] HTML,CSS 목업화면 만들어보기</a></li>
-<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="[TIL] Application 빌드, 실행">[macOs] neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/til/2022/11/04/til.html" title="[TIL] Application 빌드, 실행">[TIL] Spring Transaction 1</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="[TIL] Application 빌드, 실행">[TIL] Java Algorithm 3</a></li>
+        <li><a class="post-link" href="/til/2022/08/23/til.html" title="[TIL] Application 빌드, 실행">[TIL] HTML,CSS 기초</a></li>
+<li><a class="post-link" href="/til/2022/11/10/til.html" title="[TIL] Application 빌드, 실행">[TIL] JUnit 3</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="[TIL] Application 빌드, 실행">[TIL] Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/til/2022/12/14/til.html" title="[TIL] Application 빌드, 실행">[TIL] 네달차 회고</a></li>
 </ul>
     </div>
 <div class="post-comments">

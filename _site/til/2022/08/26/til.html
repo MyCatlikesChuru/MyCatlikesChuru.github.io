@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -748,12 +748,20 @@ WSL2 (Window Subsystem for Linux 2)를 설치해줘야한다.<br>
 Windows에서 리눅스 터미널을 실행할 수 있게 해주는 프로그램이다. <br>
 Windows도 터미널을 이용하여</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#1 Windows subsystem for linux 기능켜기
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>#1 Windows subsystem for linux 기능켜기
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
 #2 가상머신 플랫폼 기능 켜기
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위를 차례대로 입력한 후에<br>
 리눅스 커널 업데이트 패키지를 다운받으면 된다. (4단계에있음)<br>
@@ -761,8 +769,12 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 <p>그리고 설치가 완료되었으면 wsl의 버젼을 설정하면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl <span class="nt">--set-default-version</span> 2
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>wsl <span class="nt">--set-default-version</span> 2
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>Linux 사용준비는 마무리된다. 그리고 Microsoft Stroe에서 Ubuntu를 설치해주면 끝!</p>
 
@@ -875,8 +887,12 @@ Linux의 가장큰 특징은 일반사용자에게 관리자 권한을 완전히
 비밀번호를 입력하라고 키모양으로 생성되는 모습을 볼 수 있다.<br>
 비밀번호를 입력후 <code class="language-plaintext highlighter-rouge">ls -l</code>로 관리자 권한 조회를 해보자</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">ls</span> <span class="nt">-l</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNbI_BwlH5dAHLFz0sbd2TCL6rJpI2rshogEVBy2RMOo7yGiqIjoL3Dx_K7RurGLaphxItY7WQcE-8IjOpmhEwzdH7ZFA=w3024-h1620" alt="image" class="align-left" style="max-width: 70%"></p>
 
@@ -891,8 +907,12 @@ Linux의 가장큰 특징은 일반사용자에게 관리자 권한을 완전히
 nano라는 쉬운 에디터도 있다<br>
 아래와 같이 터미널에 nano라고 입력해보자</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>nano
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gN_ncIMo6eqgmCNM8Bk0UTLP3YksxB-Byoa-BHX59lpHbkwrUqJ8lbhUmUYB6KTtBxK1J2ZF5B2ZUVPO9scUi_WyRblUg=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -902,8 +922,12 @@ Cancle, Yes, No이렇게 노출되는데 선택해서 진행하면된다.<br>
 해당 파일을 편집하고싶을 경우<br>
 예를들어 hi.txt라는 파일을 수정하려고한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano hi.txt
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>nano hi.txt
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>를 통해 접속을하면 아래와 같이 표시된다.</p>
 
@@ -1111,8 +1135,12 @@ chmod 644 filename 으로 표기하면 된다.</p>
 
 <p><strong>지역 환경변수</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hello</span><span class="o">=</span>AnNyeong!
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">hello</span><span class="o">=</span>AnNyeong!
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPzHq719sfaaTYbm9cBjNAv81ocfnf6vVVN1kJFxKQ59Rz52qR0FZdzznDE9vnfi_BClBEtWw-C7OPMRk2GgoqK2XE_=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -1123,8 +1151,12 @@ chmod 644 filename 으로 표기하면 된다.</p>
 
 <p><strong>전역 환경변수</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">hellojapan</span><span class="o">=</span><span class="s2">"Gonnichiwa"</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">export </span><span class="nv">hellojapan</span><span class="o">=</span><span class="s2">"Gonnichiwa"</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO2KN2ODzqlzcHR-j13cbW1arSziver6445LrP7QeEHtocTFzYtJiN0-YkAdWBTRjli5ZDvuS9ZgXhE71_-6RX5ueRiKQ=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -1136,8 +1168,12 @@ chmod 644 filename 으로 표기하면 된다.</p>
 
 <p><strong>지역 환경변수</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi ~/.zshrc
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>vi ~/.zshrc
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>vi편집기를 이용해 .zshrc파일을 연다.<br>
 편집기 아래에 위와 같이 변수를 지정할 경우<br>
@@ -1147,13 +1183,21 @@ echo $변수이름으로 똑같이 출력이 확인이 가능하다.</p>
 
 <p><strong>전역 환경변수</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>777 /etc/profile
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo chmod </span>777 /etc/profile
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>profile r–r–r–권한을 777로 변경</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /etc/profile
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>vi /etc/profile
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNeTlXglViJK00IKInKys79tvDTFUFrJuJuJLfH8P59KxJLlIsvNa6r_xDhOBskOqprfdDwcNAe4iaww5B6IwoSQy4t=w3024-h1620" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -1194,10 +1238,10 @@ echo $변수이름으로 똑같이 출력이 확인이 가능하다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/21/til.html" title="[TIL] Git 기초">[TIL] Spring Security 2 (인증처리)</a></li>
-<li><a class="post-link" href="/til/2022/09/02/til.html" title="[TIL] Git 기초">[TIL] Java 객체지향 - 클래스, 필드, 메서드</a></li>
-<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="[TIL] Git 기초">[macOs] neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/til/2022/11/17/til.html" title="[TIL] Git 기초">[TIL] 인증, 보안 기초</a></li>
+        <li><a class="post-link" href="/til/2022/10/28/til.html" title="[TIL] Git 기초">[TIL] Spring JDBC 기반 액세스 계층 2</a></li>
+<li><a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html" title="[TIL] Git 기초">[Spring] Security Test 코드 작성시 UserDetails 설정</a></li>
+<li><a class="post-link" href="/til/2022/11/01/til.html" title="[TIL] Git 기초">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
+<li><a class="post-link" href="/til/2022/11/09/til.html" title="[TIL] Git 기초">[TIL] JUnit 2</a></li>
 </ul>
     </div>
 <div class="post-comments">

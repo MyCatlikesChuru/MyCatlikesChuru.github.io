@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -719,7 +719,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>스택 자료구조에 대해 아주 적합한 사진이다.<br>
 이를 프로그램으로 적용해서 알아보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="nc">Stack</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stack</span><span class="o">&lt;&gt;();</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">1</span><span class="o">));;</span> <span class="c1">// 1</span>
     <span class="n">example</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
@@ -731,7 +745,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span> <span class="c1">// 5</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">);</span> <span class="c1">// [1,2,3,4]</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>우선 Stack 클래스의 메서드를 사용해야한다.<br>
 Stack 클래스로 객체를 만들어</p>
@@ -748,7 +763,25 @@ Stack 클래스로 객체를 만들어</p>
 <p>여기서 한단계 더 나아가 ArrayList 자료를 이용해<br>
 Stack 클래스에 있는 메서드를 구현해보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ArrayListStack</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">ArrayListStack</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
     <span class="kd">public</span> <span class="no">E</span> <span class="nf">push</span><span class="o">(</span><span class="no">E</span> <span class="n">item</span><span class="o">){</span>
         <span class="n">buffer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
@@ -764,13 +797,33 @@ Stack 클래스에 있는 메서드를 구현해보자.</p>
         <span class="k">return</span> <span class="n">test</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위에는 내가 임의로 만든 ArrayListStack 이라는 클래스다.<br>
 스택에서 사용하는 메서드인 push와 pop을<br>
 ArrayList 클래스를 이용해 구현해보았다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StackArrayListTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StackArrayListTest</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 
@@ -787,7 +840,8 @@ ArrayList 클래스를 이용해 구현해보았다.</p>
 
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>메인 메서드에서 해당 클래스의<br>
 메서드를 사용하게되면 Stack 클래스와 동일하게<br>
@@ -808,7 +862,22 @@ ArrayList 클래스를 이용해 구현해보았다.</p>
 <p>즉, 첫번쨰로 저장된 객체를 가장 첫번쨰로 배출한다는 의미다.<br>
 스태과 동일하게 프로그램을 통해 알아보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
     <span class="n">example</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
     <span class="n">example</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
@@ -821,7 +890,8 @@ ArrayList 클래스를 이용해 구현해보았다.</p>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">);</span> <span class="c1">// [3]</span>
 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>Queue는 인터페이스로 Collection에 상속받고있다.<br>
 인터페이스 안에는 .add, .poll 등의 메서드가 추상화되어있다.<br>
@@ -860,10 +930,10 @@ Stack과 Queue관련 알고리즘 문제를 푸는 시간이 주를 이뤘고<br
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/06/til.html" title="[TIL] Java 자료구조 Graph, Tree, BST">[TIL] Java 객체지향 - 상속, 캡슐화</a></li>
-<li><a class="post-link" href="/til/2022/10/31/til.html" title="[TIL] Java 자료구조 Graph, Tree, BST">[TIL] Spring Data JDBC Pagination</a></li>
-<li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="[TIL] Java 자료구조 Graph, Tree, BST">[macOs] Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
-<li><a class="post-link" href="/git/2023/01/12/git-commitmessage.html" title="[TIL] Java 자료구조 Graph, Tree, BST">Git 이전 Commit Message 수정하기</a></li>
+        <li><a class="post-link" href="/til/2022/09/08/til.html" title="[TIL] Java 자료구조 Graph, Tree, BST">[TIL] Java 객체지향 - 추상화</a></li>
+<li><a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html" title="[TIL] Java 자료구조 Graph, Tree, BST">MySQL EC2에 설치후 WorkBench 접속하기</a></li>
+<li><a class="post-link" href="/til/2022/10/12/til.html" title="[TIL] Java 자료구조 Graph, Tree, BST">[TIL] Spring Basic 2</a></li>
+<li><a class="post-link" href="/til/2022/11/02/til.html" title="[TIL] Java 자료구조 Graph, Tree, BST">[TIL] Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
 </ul>
     </div>
 <div class="post-comments">

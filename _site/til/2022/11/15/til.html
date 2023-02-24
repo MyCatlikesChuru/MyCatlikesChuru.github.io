@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -736,14 +736,45 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><strong>2). 터미널로 build</strong></p>
 
 <p>첫번째로 Gradle이 설치되어 있는지 확인해보자</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gradle <span class="nt">-v</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>gradle <span class="nt">-v</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>만약에 버젼이 안뜨고 zsh: command not found: gradle<br>
 찾을 수 없다고 한다면, homebrew를 통해 gradle을 다운 받는다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>gradle
-</code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">==&gt;</span> Downloading https://ghcr.io/v2/homebrew/core/openjdk/17/manifests/17.0.5
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>brew <span class="nb">install </span>gradle
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td>
+<td class="rouge-code"><pre><span class="o">==&gt;</span> Downloading https://ghcr.io/v2/homebrew/core/openjdk/17/manifests/17.0.5
 <span class="c">######################################################################## 100.0%</span>
 <span class="o">==&gt;</span> Downloading https://ghcr.io/v2/homebrew/core/openjdk/17/blobs/sha256:0e2244e35a350256474b6eb6e03d11af5c0270ab7ca4e6bc71
 <span class="o">==&gt;</span> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:0e2244e35a350256474b6eb6e03d11af5c0270
@@ -764,7 +795,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
 Hide these hints with HOMEBREW_NO_ENV_HINTS <span class="o">(</span>see <span class="sb">`</span>man brew<span class="sb">`</span><span class="o">)</span><span class="nb">.</span>
 <span class="o">==&gt;</span> <span class="sb">`</span>brew cleanup<span class="sb">`</span> has not been run <span class="k">in </span>the last 30 days, running now...
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>이렇게 다운 받고 난뒤에 다시<br>
 버젼을 체크해보면 설치된 모습을 확인해 볼 수 있다.</p>
@@ -774,18 +806,30 @@ Hide these hints with HOMEBREW_NO_ENV_HINTS <span class="o">(</span>see <span cl
 <p>이제 Gradle이 설치되었으니<br>
 우리가 만든 애플리케이션 폴더에 들어가서<br>
 아래와 같이 빌드 명령어를 입력해 주면 빌드가 되어진다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew build
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>./gradlew build
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><strong>zsh: permission denied: ./gradlew</strong><br>
 만약 명령어 입력시 위에처럼 권한 문제가 발생한다면</p>
 
 <p>gradlew의 권한을 644 -&gt; 755로 변경해주어야한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ll
-</code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-rwxr-xr-x</span>   1 ljh  staff   7.9K 11 15 10:44 gradlew
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ll
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">-rwxr-xr-x</span>   1 ljh  staff   7.9K 11 15 10:44 gradlew
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>현재 경로에서를 ll을 입력하여 권한 상태를 확인할 수 있다.<br>
 ls -l 을 입력하여도 확인이 가능하다</p>
 
@@ -794,12 +838,20 @@ r-x : 5<br>
 r-x : 5<br>
 와 같이 권한을 변경해주어야 하며</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>755 gradlew
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">chmod </span>755 gradlew
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>권한 변경 명령어인 chmod로 권한을 변경해주면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./gradlew build
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>./gradlew build
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어가 정상적으로 빌드되어지는 모습을 확인할 수 있다.</p>
 
 <p>빌드가 되어지면 위에 IDE를 통해 빌드했던 것 처럼<br>
@@ -811,8 +863,12 @@ build &gt; libs 폴더에 .jar 파일이 생기는 것을 확인할 수 있다.<
 
 <p><strong>터미널로 Jar 파일 실행시키기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> section3-week3-template-build-0.0.1-SNAPSHOT.jar
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>java <span class="nt">-jar</span> section3-week3-template-build-0.0.1-SNAPSHOT.jar
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>기본적으로 .jar파일을 실행시키려면<br>
 java -jar을 입력후 파일이름을 넣어주면<br>
 애플리케이션이 IDE에서 실행되는 것 처럼 실행되는 모습을<br>
@@ -850,10 +906,16 @@ server.yml -&gt; mysql 정보<br>
 <p>mysql을 사용한다고 가정하고 설정을 진행해보자</p>
 
 <p><strong>1). yml 설정 변경</strong></p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
   <span class="na">profiles</span><span class="pi">:</span>
     <span class="na">active</span><span class="pi">:</span> <span class="s">server</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>application.yml 파일에 위와 같이 설정해주면 된다.</p>
 
 <p><br></p>
@@ -865,8 +927,12 @@ server.yml -&gt; mysql 정보<br>
 <p>IDE의 구성 편집에서도 수정할 수 있다.<br>
 애플리케이션을 선택 후</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--spring.profiles.active=server
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>--spring.profiles.active=server
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 입력해주면 된다.</p>
 
@@ -876,15 +942,23 @@ server.yml -&gt; mysql 정보<br>
 기존과 동일하게 실행 시키는데 뒤에<br>
 –spring.profiles.active=server 를 추가해주고 실행시키면된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> section3-week3-homework-build-0.0.1-SNAPSHOT.jar <span class="nt">--spring</span>.profiles.active<span class="o">=</span>server
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>java <span class="nt">-jar</span> section3-week3-homework-build-0.0.1-SNAPSHOT.jar <span class="nt">--spring</span>.profiles.active<span class="o">=</span>server
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOw2G15X-zOCP3BDQOKHUUDe0Ke0JSeo4adpdLmWFxycz5DKUQU7l29DPD9IiDiPDuoB4L2ezVLh0UiGlvfOnts_JHt=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>실행 시킬 경우</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The following 1 profile is active: "server"
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>The following 1 profile is active: "server"
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같은 profile 문구가 발생한다면<br>
 정상적으로 연결이 되어졌다는걸 확인할 수 있다.</p>
@@ -894,20 +968,32 @@ server.yml -&gt; mysql 정보<br>
 <h3 id="오늘-만난-error">오늘 만난 ERROR</h3>
 
 <p>오늘 만난 에러중 dataSource 관련 에러가 발생했었다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre>Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource 
 [org/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Hikari.class]: Bean instantiation via factory method failed; nested exception 
 is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.zaxxer.hikari.HikariDataSource]: Factory method 'dataSource' 
 threw exception; nested exception is java.lang.IllegalStateException: Cannot load driver class: com.mysql.cj.jdbc.Driver
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>해당 내용은 의존라이브러리가 제대로 추가되어있지 않아<br>
 읽어오지 못하는 현상 같았고</p>
 
 <p>mysql 과 연동하기 때문에 msql 의존라이브러리를 추가하였고</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// mysql 의존라이브러리 추가</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="c1">// mysql 의존라이브러리 추가</span>
 <span class="n">runtimeOnly</span> <span class="err">'</span><span class="nl">mysql:</span><span class="n">mysql</span><span class="o">-</span><span class="n">connector</span><span class="o">-</span><span class="n">java</span><span class="err">'</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>의존 라이브러리 추가후</p>
 
@@ -939,10 +1025,10 @@ threw exception; nested exception is java.lang.IllegalStateException: Cannot loa
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html" title="[TIL] 세달차 회고">[Spring] Security Test 코드 작성시 UserDetails 설정</a></li>
-<li><a class="post-link" href="/til/2022/09/06/til.html" title="[TIL] 세달차 회고">[TIL] Java 객체지향 - 상속, 캡슐화</a></li>
-<li><a class="post-link" href="/til/2022/09/02/til.html" title="[TIL] 세달차 회고">[TIL] Java 객체지향 - 클래스, 필드, 메서드</a></li>
-<li><a class="post-link" href="/til/2022/10/28/til.html" title="[TIL] 세달차 회고">[TIL] Spring JDBC 기반 액세스 계층 2</a></li>
+        <li><a class="post-link" href="/til/2022/09/16/til.html" title="[TIL] 세달차 회고">[TIL] Java Thread, JVM</a></li>
+<li><a class="post-link" href="/til/2022/09/26/til.html" title="[TIL] 세달차 회고">[TIL] Java Algorithm BFS, DFS</a></li>
+<li><a class="post-link" href="/til/2022/10/27/til.html" title="[TIL] 세달차 회고">[TIL] Spring JDBC 기반 액세스 계층 1</a></li>
+<li><a class="post-link" href="/til/2022/09/30/til.html" title="[TIL] 세달차 회고">[TIL] Network Basic</a></li>
 </ul>
     </div>
 <div class="post-comments">

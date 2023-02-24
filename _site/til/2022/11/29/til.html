@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -744,10 +744,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 리액티브 스트림즈에서 사양으로 정의된 구성요소를 알아보자</p>
 
 <p><strong>1). Publisher 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Publisher</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Publisher</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">subscribe</span><span class="o">(</span><span class="nc">Subscriber</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>-. 데이터 소스로 부터 데이터를 내보내는(emit) 역할을 한다. <br>
 -. <code class="language-plaintext highlighter-rouge">subscribe();</code>추상 메서드를 포함하고 있고, 매개변수로 전달되는 Subscriberrk<br>
 Publisher로부터 내보내진 데이터를 소비하는 역할을 한다.</p>
@@ -755,13 +761,22 @@ Publisher로부터 내보내진 데이터를 소비하는 역할을 한다.</p>
 <p><br></p>
 
 <p><strong>2). Subscriber 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscriber</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscriber</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSubscribe</span><span class="o">(</span><span class="nc">Subscription</span> <span class="n">s</span><span class="o">);</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onNext</span><span class="o">(</span><span class="no">T</span> <span class="n">t</span><span class="o">);</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onError</span><span class="o">(</span><span class="nc">Throwable</span> <span class="n">t</span><span class="o">);</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onComplete</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>-. Publisher로 부터 내보내진 데이터를 소비하는 역할을 한다.</p>
 
 <p>-. <code class="language-plaintext highlighter-rouge">onSubscribe(Subscription s);</code></p>
@@ -791,11 +806,18 @@ Publisher로부터 내보내진 데이터를 소비하는 역할을 한다.</p>
 <p><br></p>
 
 <p><strong>3). Subscription 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscription</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Subscription</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">request</span><span class="o">(</span><span class="kt">long</span> <span class="n">n</span><span class="o">);</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cancel</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>-. Subscriber의 구독 자체를 표현한 인터페이스이다.
 -. <code class="language-plaintext highlighter-rouge">request(long n)</code></p>
 <ul>
@@ -810,9 +832,14 @@ Publisher로부터 내보내진 데이터를 소비하는 역할을 한다.</p>
 <p><br></p>
 
 <p><strong>4). Processor 인터페이스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Processor</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">R</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">Subscriber</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;,</span> <span class="nc">Publisher</span><span class="o">&lt;</span><span class="no">R</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Processor</span><span class="o">&lt;</span><span class="no">T</span><span class="o">,</span> <span class="no">R</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">Subscriber</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;,</span> <span class="nc">Publisher</span><span class="o">&lt;</span><span class="no">R</span><span class="o">&gt;</span> <span class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>-. 별도로 구현해야 되는 추상메서드는 없다.<br>
 -. Publisher와 Subscriber의 역할을 동시에 할 수 있는 특징을 가지고 있다.</p>
 
@@ -826,7 +853,21 @@ Publisher로부터 내보내진 데이터를 소비하는 역할을 한다.</p>
 </ul>
 
 <p>코드로 알아보기</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// Publisher의 역할</span>
         <span class="nc">Mono</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">mono</span> <span class="o">=</span> <span class="nc">Mono</span><span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">);</span>
@@ -838,7 +879,8 @@ Publisher로부터 내보내진 데이터를 소비하는 역할을 한다.</p>
 
 <span class="c1">// 출력</span>
 <span class="nc">Hello</span><span class="o">,</span> <span class="nc">Reactive</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>리액티브 스트림즈 구현체인 Project Reactor을 통해 출력하고 있는 모습이다.<br>
 <code class="language-plaintext highlighter-rouge">Mono</code>의 역할이 Publisher의 역할이고<br>
 Subscriber는 Publisher가 emit한 데이터를 전달 받아서<br>
@@ -849,7 +891,18 @@ Subscriber는 Publisher가 emit한 데이터를 전달 받아서<br>
 
 <p>기존에 우리가 사용했던 Stream과 동일하게 메서드 체인형식으로 구성도 가능하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveExample</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">Mono</span>
             <span class="o">.</span><span class="na">just</span><span class="o">(</span><span class="s">"Hello, Reactive"</span><span class="o">)</span>
@@ -858,11 +911,26 @@ Subscriber는 Publisher가 emit한 데이터를 전달 받아서<br>
 <span class="o">}</span>
 <span class="c1">// 출력</span>
 <span class="nc">Hello</span><span class="o">,</span> <span class="nc">Reactive</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>다른 형식의 예제를 알아보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveGlossaryExample</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReactiveGlossaryExample</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">Flux</span>
             <span class="o">.</span><span class="na">fromIterable</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">11</span><span class="o">))</span>
@@ -874,7 +942,8 @@ Subscriber는 Publisher가 emit한 데이터를 전달 받아서<br>
 <span class="o">}</span>
 <span class="c1">// 출력</span>
 <span class="mi">14</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><strong>Publisher -&gt;</strong> <code class="language-plaintext highlighter-rouge">Flux</code>가 Pusblisher 이다.</p>
 
 <p><strong>Emit -&gt;</strong> <code class="language-plaintext highlighter-rouge">Flux</code>가 데이터를 내보내는 것을 가르킴</p>
@@ -914,10 +983,10 @@ Subscriber는 Publisher가 emit한 데이터를 전달 받아서<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/01/til.html" title="[TIL] Spring WebFlux Project Reactor">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
-<li><a class="post-link" href="/til/2022/10/12/til.html" title="[TIL] Spring WebFlux Project Reactor">[TIL] Spring Basic 2</a></li>
-<li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[TIL] Spring WebFlux Project Reactor">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
-<li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="[TIL] Spring WebFlux Project Reactor">Git pull rebase 사용해 병합하기</a></li>
+        <li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[TIL] Spring WebFlux Project Reactor">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
+<li><a class="post-link" href="/til/2022/11/28/til.html" title="[TIL] Spring WebFlux Project Reactor">[TIL] Spring Security, JWT , OAuth 2 인증</a></li>
+<li><a class="post-link" href="/til/2022/09/21/til.html" title="[TIL] Spring WebFlux Project Reactor">[TIL] Json</a></li>
+<li><a class="post-link" href="/til/2022/12/06/til.html" title="[TIL] Spring WebFlux Project Reactor">[TIL] 배포 컨테이너 Docker</a></li>
 </ul>
     </div>
 <div class="post-comments">

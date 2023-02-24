@@ -707,14 +707,22 @@ ZIP파일을 다운받아 사용도 가능하다.</p>
 
 <p>ZIP파일을 다운 받으면 다운받은 경로에서 <br>
 관리자 권한으로 unzip을 해주면 된다.</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo unzip ~/Downloads/ngrok-v3-stable-darwin-amd64.zip -d /usr/local/bin
-</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>sudo unzip ~/Downloads/ngrok-v3-stable-darwin-amd64.zip -d /usr/local/bin
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>나와 같은 경우는 <code class="language-plaintext highlighter-rouge">~/Desktop/Download</code>의 경로에 파일이 있었기에<br>
 앞에 경로만 변경해서 <code class="language-plaintext highlighter-rouge">sudo unzip</code>을 실행해주면 된다.</p>
 
 <p>설치가 완료되고</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ngrok <span class="nt">-h</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ngrok <span class="nt">-h</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력하면 옵션에 대한 설명이 나올 것이다.</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gObsmscGnFyEnA0dNsZKusGOpCI7AOhWbFj1xP9TzarKyjkfZMV-kWxLwuaaRfu64X9e7Q1sSuOtTyx8BVyQ9p_5EUkrQ=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -722,8 +730,12 @@ ZIP파일을 다운받아 사용도 가능하다.</p>
 <p>그렇다면 정상적으로 설치가 완료된 것이다.</p>
 
 <p>터미널에서</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ngrok http 8080
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ngrok http 8080
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>을 입력해주게 되면 <code class="language-plaintext highlighter-rouge">http://localhost:8080</code>로 연결해주는</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOjwMrGdUi75T-RxvGdlsyritWRjFkORgi8EGTcO4k5XEjRyV_7wWkDoXIAkOjbTp5yImsdeNeBI5fcDNuEaklMf9u4iQ=w1920-h888" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -752,29 +764,45 @@ ZIP파일을 다운받아 사용도 가능하다.</p>
 <p><br></p>
 
 <p><code class="language-plaintext highlighter-rouge">bin</code>폴더에 스크립트 파일을 이용해 톰캣서버를 실행시킬 수 있다.</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./startup.sh
-</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>./startup.sh
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
 <p>종료시에는 아래 스크립트를 실행시키면 된다.</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./shutdown.sh
-</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>./shutdown.sh
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>톰캣서버가 실행되면 기본 포트는 <code class="language-plaintext highlighter-rouge">localhost:8080</code>으로 접속이 가능하다.</p>
 
 <p>톰캣서버의 설정을 변경하는 경로는 아래와 같다.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conf &gt; server.xml
-</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>conf &gt; server.xml
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>해당 xml파일을 열어 포트번호를 변경한다든가… 혹은<br>
 내가 빌드한 <code class="language-plaintext highlighter-rouge">.war</code>파일의 경로를 설정한다든가 할 수 있다.</p>
 
 <p>우선 포트번호를 변경하는 방법이다.<br>
 아래와 같이 <code class="language-plaintext highlighter-rouge">Connector</code> 태그로 기존에 코드가 작성되어있다.</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">"8090"</span> <span class="na">protocol=</span><span class="s">"HTTP/1.1"</span> <span class="na">connectionTimeout=</span><span class="s">"20000"</span> <span class="na">redirectPort=</span><span class="s">"8443"</span> <span class="nt">/&gt;</span>
-</code></pre></div></div>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">"8090"</span> <span class="na">protocol=</span><span class="s">"HTTP/1.1"</span> <span class="na">connectionTimeout=</span><span class="s">"20000"</span> <span class="na">redirectPort=</span><span class="s">"8443"</span> <span class="nt">/&gt;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>변경하고자하는 포트로 변경. (8080-&gt;8090)<br>
 이제 <code class="language-plaintext highlighter-rouge">localhost:8090</code>으로 서버를 띄울 수 있다.</p>
 
@@ -782,7 +810,28 @@ ZIP파일을 다운받아 사용도 가능하다.</p>
 애플리케이션을 놓고 해당 애플리케이션을 실행 시키고 싶을 경우<br>
 기존에 작성되어있는 <code class="language-plaintext highlighter-rouge">Host</code>태그를 찾아서 코드를 추가해야한다.</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nt">&lt;Host</span> <span class="na">name=</span><span class="s">"localhost"</span>  <span class="na">appBase=</span><span class="s">"webapps"</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td>
+<td class="rouge-code"><pre>      <span class="nt">&lt;Host</span> <span class="na">name=</span><span class="s">"localhost"</span>  <span class="na">appBase=</span><span class="s">"webapps"</span>
             <span class="na">unpackWARs=</span><span class="s">"true"</span> <span class="na">autoDeploy=</span><span class="s">"true"</span><span class="nt">&gt;</span>
             <span class="c">&lt;!-- webapps 내 War파일 실행 --&gt;</span>
             <span class="nt">&lt;Context</span> <span class="na">path=</span><span class="s">"/"</span> <span class="na">docBase=</span><span class="s">"todolist-0.0.1-SNAPSHOT"</span>  <span class="na">reloadable=</span><span class="s">"false"</span> <span class="nt">&gt;</span> <span class="nt">&lt;/Context&gt;</span>
@@ -801,7 +850,8 @@ ZIP파일을 다운받아 사용도 가능하다.</p>
                <span class="na">pattern=</span><span class="s">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> <span class="nt">/&gt;</span>
 
       <span class="nt">&lt;/Host&gt;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">&lt;!-- webapps 내 War파일 실행 --&gt;</code>이라고 적힌 아래의<br>
 <code class="language-plaintext highlighter-rouge">Context</code>태그의 내용을 추가해주면 된다.<br>
 여기서 <code class="language-plaintext highlighter-rouge">docBase</code>의 이름은 내가 빌드한 <code class="language-plaintext highlighter-rouge">.war</code>파일의 이름이다.</p>
@@ -841,9 +891,9 @@ docker를 이용해 사용을 해줄 수도있을 것 같다는 생각이든다.
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/31/til.html" title="[TIL] 네달차 회고">[TIL] Spring Data JDBC Pagination</a></li>
-<li><a class="post-link" href="/db/2022/11/15/db-mysql.html" title="[TIL] 네달차 회고">MySQL Local 연동 하기</a></li>
-<li><a class="post-link" href="/til/2022/11/22/til.html" title="[TIL] 네달차 회고">[TIL] Spring Security 3 (권한부여)</a></li>
+        <li><a class="post-link" href="/til/2022/09/29/til.html" title="[TIL] 네달차 회고">[TIL] Java Algorithm 3</a></li>
+<li><a class="post-link" href="/til/2022/09/19/til.html" title="[TIL] 네달차 회고">[TIL] 한달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/11/24/til.html" title="[TIL] 네달차 회고">[TIL] Spring Security, JWT 사용하여 인증하기</a></li>
 <li><a class="post-link" href="/til/2022/10/26/til.html" title="[TIL] 네달차 회고">[TIL] Spring Exception 2</a></li>
 </ul>
     </div>

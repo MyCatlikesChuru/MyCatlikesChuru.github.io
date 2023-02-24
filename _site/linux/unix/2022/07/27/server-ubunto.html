@@ -695,9 +695,14 @@ EC2 인스턴스를 생성하면<br>
 
 <p><strong>내 EC2 우분투 접속 명령</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>400 키파일.pem
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo chmod </span>400 키파일.pem
 ssh <span class="nt">-i</span> 키파일.pem ubuntu@내주소
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>키파일.pem : 인스턴스 생성시 등록한 키페어를 올려다 놓으면 <br>
 <code class="language-plaintext highlighter-rouge">/Users/ljh/Desktop/~~</code> 이런식으로 경로가 불러와집니다.<br>
@@ -728,8 +733,12 @@ PasswordAuthentication를 Yes로 변경해주는 <br>
 
 <p><strong>현재 키 조회하기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> ~/.ssh
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">ls</span> ~/.ssh
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>.ssh 폴더에 접근 명령어</p>
 
@@ -764,8 +773,12 @@ Github Key는 위에 MycatlikesChuru-GitHub와 .pub으로된 파일이다.<br>
 
 <p><strong>id_rsa 삭제</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> ~/.ssh/id<span class="k">*</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">rm</span> ~/.ssh/id<span class="k">*</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPsZTlkzPfQnnc289BRxHCoiR6CUEy8TZjKKjJFSCVgGSL74Urg2S-woTbE0rmS4HzLgKcd7lJ4vO9e7unTemny314cQg=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -776,8 +789,12 @@ Github Key는 위에 MycatlikesChuru-GitHub와 .pub으로된 파일이다.<br>
 
 <p><strong>키 발급</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ssh-keygen
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gO1OngBZCQL3owrEIqE7NFff7U1n8G94CpQ72rNK8O5rG0_CDcy-K1fcmO6sz_vcpo32yFAap40uBwJRYGMhWSknuEVhw=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -790,8 +807,12 @@ Github Key는 위에 MycatlikesChuru-GitHub와 .pub으로된 파일이다.<br>
 
 <p><strong>발급받은키 확인</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> ~/.ssh/id_rsa.pub
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">cat</span> ~/.ssh/id_rsa.pub
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOBGGEQANI1GXxRtOnOhymi5qVrX2TFXbVIk3dKnHI5iIKnyvh2XpIBm4TX4gwobkvVClBbCsfTv_HV1FYmmoNuX32ydg=w1920-h864" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -804,8 +825,12 @@ authorized_keys 파일에 붙여넣어주면된다.<br>
 
 <p><strong>키값 authorized_keys에 넣기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="o">&gt;&gt;</span> ~/.ssh/authorized_keys
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">cat</span> <span class="o">&gt;&gt;</span> ~/.ssh/authorized_keys
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위의 터미널을 입력후 -&gt; 복사한 키값을 붙여넣고 , 줄바꿈후에 -&gt; Ctrl + D(저장)을 눌러주면 값이 들어간다.<br>
 authorized_keys파일은 위에 설명한거와같이 .ssh폴더안에 같이 들어있다.<br>
@@ -828,9 +853,14 @@ authorized_keys파일은 위에 설명한거와같이 .ssh폴더안에 같이 �
 
 <p>이렇게 3개의 과정만 진행한 다음에 다시 우분투에 접속을 시도했다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>400 키파일.pem
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo chmod </span>400 키파일.pem
 ssh <span class="nt">-i</span> 키파일.pem ubuntu@내주소
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>그랬더니…</p>
 
@@ -854,17 +884,29 @@ Github ssh키로 인증을 받게 되있엇고 권한이 금지되어있었는�
 
 <p><strong>하나씩 추가하기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>700 ~/.ssh
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">chmod </span>700 ~/.ssh
 <span class="nb">chmod </span>600 ~/.ssh/id_rsa
 <span class="nb">chmod </span>644 ~/.ssh/id_rsa.pub  
 <span class="nb">chmod </span>644 ~/.ssh/authorized_keys
 <span class="nb">chmod </span>644 ~/.ssh/known_hosts
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><strong>한방에 추가하기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>700 ~/.ssh &amp; <span class="nb">chmod </span>600 ~/.ssh/id_rsa &amp; <span class="nb">chmod </span>644 ~/.ssh/id_rsa.pub  &amp; <span class="nb">chmod </span>644 ~/.ssh/authorized_keys &amp; <span class="nb">chmod </span>644 ~/.ssh/known_hosts
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">chmod </span>700 ~/.ssh &amp; <span class="nb">chmod </span>600 ~/.ssh/id_rsa &amp; <span class="nb">chmod </span>644 ~/.ssh/id_rsa.pub  &amp; <span class="nb">chmod </span>644 ~/.ssh/authorized_keys &amp; <span class="nb">chmod </span>644 ~/.ssh/known_hosts
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>아래 사이트를 참고하였다!<br>
 <a href="https://github.com/rangyu/TIL/blob/master/ubuntu/SSH-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%A0%91%EC%86%8D-%EC%8B%9C-%ED%8D%BC%EB%AF%B8%EC%85%98-%EB%AC%B8%EC%A0%9C-UNPROTECTED-PRIVATE-KEY-FILE.md">참고 - rangyu님의 blog</a></p>
@@ -880,10 +922,10 @@ Github ssh키로 인증을 받게 되있엇고 권한이 금지되어있었는�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/29/til.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">[TIL] Spring WebFlux Reactive 프로그래밍</a></li>
-<li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">H2 Database 다운로드 및 실행</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">[TIL] Java Algorithm 3</a></li>
-<li><a class="post-link" href="/til/2022/11/10/til.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">[TIL] JUnit 3</a></li>
+        <li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">[Spring] @JsonIgnore 사용하기</a></li>
+<li><a class="post-link" href="/til/2022/11/30/til.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">[TIL] Spring WebFlux Project Reactor</a></li>
+<li><a class="post-link" href="/til/2022/11/09/til.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">[TIL] JUnit 2</a></li>
+<li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at 문제 조치">[macOs] brew update Error Another active Homebrew update process is already in...</a></li>
 </ul>
     </div>
 <div class="post-comments">

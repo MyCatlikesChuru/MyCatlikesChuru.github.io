@@ -896,7 +896,27 @@ ex) <code class="language-plaintext highlighter-rouge">char babo = 'y';</code></
   <li>덜 정밀한 타입에서 더 정밀한 타입으로 (정수-&gt; 실수)</li>
 </ol>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>byte(1) -&gt; short(2)/char(2) -&gt; int(4) -&gt; long(8) -&gt; float(4) -&gt; double(8)
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td>
+<td class="rouge-code"><pre>byte(1) -&gt; short(2)/char(2) -&gt; int(4) -&gt; long(8) -&gt; float(4) -&gt; double(8)
 
 예를 들어
 
@@ -914,7 +934,8 @@ int a = 128;
 byte b = (byte)a;
 
 출력 : -128
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -922,12 +943,20 @@ byte b = (byte)a;
 
 <p><em><strong>선언방법</strong></em></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 문자열 리터럴 Taxi를 String 타입의 변수 transfer1에 할당</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="c1">// 문자열 리터럴 Taxi를 String 타입의 변수 transfer1에 할당</span>
 <span class="nc">String</span> <span class="n">transfer1</span> <span class="o">=</span> <span class="s">"Taxi"</span><span class="o">;</span>
 
 <span class="c1">// String 클래스의 인스턴스를 생성하는 방법</span>
 <span class="nc">String</span> <span class="n">transfer2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"Taxi"</span><span class="o">);</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>첫번째 선언 방법은 “문자열 리터럴을 직접 할당하는 방식”이고<br>
 두번째 선언 방법은 “String 클래스의 인서튼스를 생성하여 할당하는 방식”이다.<br>
@@ -938,9 +967,14 @@ byte b = (byte)a;
 
 <p><em><strong>참조변수인데 출력은 문자열이?</strong></em></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">transfer1</span><span class="o">);</span> <span class="c1">// "taxi"</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">transfer1</span><span class="o">);</span> <span class="c1">// "taxi"</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">transfer2</span><span class="o">);</span> <span class="c1">// "taxi"</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>두 개의 문자를 출력했을 때, taxi로 출력되어진다.<br>
 이유는 String 타입의 변수를 참조하면 String 클래스의 매서드인 toString()이<br>
@@ -951,7 +985,21 @@ byte b = (byte)a;
 
 <p><em><strong>참조변수 비교 방법은?</strong></em></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">transfer1</span> <span class="o">=</span> <span class="s">"taxi"</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">String</span> <span class="n">transfer1</span> <span class="o">=</span> <span class="s">"taxi"</span><span class="o">;</span>
 <span class="nc">String</span> <span class="n">transfer2</span> <span class="o">=</span> <span class="s">"taxi"</span><span class="o">;</span>
 <span class="nc">String</span> <span class="n">transfer3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"taxi"</span><span class="o">);</span>
 <span class="nc">String</span> <span class="n">transfer4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="s">"taxi"</span><span class="o">);</span>
@@ -963,7 +1011,8 @@ byte b = (byte)a;
 <span class="kt">boolean</span> <span class="n">comparison5</span> <span class="o">=</span> <span class="n">transfer1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"taxi"</span><span class="o">);</span>    <span class="c1">// true</span>
 <span class="kt">boolean</span> <span class="n">comparison6</span> <span class="o">=</span> <span class="n">transfer1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">transfer3</span><span class="o">);</span> <span class="c1">// true</span>
 <span class="kt">boolean</span> <span class="n">comparison7</span> <span class="o">=</span> <span class="n">transfer3</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">transfer4</span><span class="o">);</span> <span class="c1">// true</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위의 예시를 통해 알아보자.<br>
 우선 기본타입을 제외한 선언방식이므로 ‘참조 타입’이다.<br>
@@ -997,7 +1046,24 @@ transfer1, transfer2는 동일한 참조변수를 할당하였기에 주소값�
 <p>StringTokenizer 클래스는 문자열을 쪼개주는 클래스이다.<br>
 그렇게 쪼개어진 문자열을 토큰(token)이라고 한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.StringTokenizer</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.StringTokenizer</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
 	<span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"This is a string example using StringTokenizer"</span><span class="o">;</span>
@@ -1012,7 +1078,8 @@ transfer1, transfer2는 동일한 참조변수를 할당하였기에 주소값�
 	<span class="o">}</span>
 	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"total tokens:"</span><span class="o">+</span><span class="n">tokenizer</span><span class="o">.</span><span class="na">countTokens</span><span class="o">());</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">int countToken();</code><br>
 -. 남아 있는 토큰개수를 반환함</p>
@@ -1031,7 +1098,18 @@ transfer1, transfer2는 동일한 참조변수를 할당하였기에 주소값�
 <p>매번 인스턴스를 만들어서 문자열을 더하기에는 매우 비효울적이다.<br>
 StringBulider로 다양한 매서드를 이용해 String을 빌딩?이 가능하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">StringBuilder</span> <span class="n">stringBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
         <span class="n">stringBuilder</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"문자열 "</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="s">"연결"</span><span class="o">);</span>
@@ -1040,7 +1118,8 @@ StringBulider로 다양한 매서드를 이용해 String을 빌딩?이 가능하
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>예제로 stringBulider라는 인스턴스를 만들어 이용해보자</p>
 
@@ -1058,8 +1137,12 @@ String 인스턴스를 생성한다. 따라서 문자열을 많이 결합할수�
 하지만 StringBuffer 인스턴스를 사용하면 문자열을 바로 추가할 수 있고, 공간의 낭비도 없으며  <br>
 속도도 매우 빨라진다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">StringBuffer</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">(</span><span class="s">"Java"</span><span class="o">);</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">StringBuffer</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">(</span><span class="s">"Java"</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 str이라는 인스턴스를 만들어 아래의 매서드를 사용해보자<br>
 <code class="language-plaintext highlighter-rouge">.append();</code> : 해당 문자열의 마지막에 문자를 연결해준다.<br>
@@ -1170,10 +1253,10 @@ AND연산자, OR연산자라고 한다.<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/08/29/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] Git 기초</a></li>
-<li><a class="post-link" href="/til/2022/12/05/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] Cloud 운영 환경 구성 2</a></li>
-<li><a class="post-link" href="/til/2022/10/04/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] Network HTTP</a></li>
-<li><a class="post-link" href="/til/2022/10/13/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] Spring DI 1</a></li>
+        <li><a class="post-link" href="/til/2022/09/23/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] Java 자료구조 Graph, Tree, BST</a></li>
+<li><a class="post-link" href="/til/2022/12/01/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] Spring WebFlux 구현하기</a></li>
+<li><a class="post-link" href="/til/2022/09/01/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] Java 문법기초 - 배열</a></li>
+<li><a class="post-link" href="/til/2022/11/16/til.html" title="[TIL] Java 문법기초 - 제어문">[TIL] 세달차 회고</a></li>
 </ul>
     </div>
 <div class="post-comments">

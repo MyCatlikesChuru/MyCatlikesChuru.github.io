@@ -712,19 +712,31 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>어제 공부했던 문법들을 실제로 써보는 시간이 왔다.<br>
 먼저 brew를 이용해 mysql을 사용할 수 있게 만들어줘야한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>mysql
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>brew <span class="nb">install </span>mysql
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위의 코드를 입력해 설치해주자</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services start mysql
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>brew services start mysql
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>그리고 다음으로는 mysql를 실행해줘야 접속이 가능하다.<br>
 처음에는 비밀번호가 설정되어 있지 않기때문에</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>mysql <span class="nt">-u</span> root
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위에 명령어를 입력하여 mysql 화면에 진입이 가능하다.</p>
 
@@ -736,8 +748,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 만약 ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)<br>
 이렇한 에러가 발생했다면, 이미 패스워드를 만들었기때문에</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>-p를 추가하여 진입이 가능하다.</p>
 
@@ -751,8 +767,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>여기서 만약 비밀번호가 없어 설정을하고 싶으면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER USER <span class="s1">'root'</span>@<span class="s1">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'yourPassword'</span><span class="p">;</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ALTER USER <span class="s1">'root'</span>@<span class="s1">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="s1">'yourPassword'</span><span class="p">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>mysql 진입화면에서 위에 명령어를 입력해주면 비밀번호가 설정된다<br>
 yourPassword 안에는 당연히 본인이 원하는 비밀번호를 입력하자</p>
@@ -1125,10 +1145,10 @@ ex) SupportRepId 가 EmployeeId를 사용중</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/27/til.html" title="[TIL] DB RDMBS 3">[TIL] Spring JDBC 기반 액세스 계층 1</a></li>
-<li><a class="post-link" href="/til/2022/10/18/til.html" title="[TIL] DB RDMBS 3">[TIL] Spring AOP 2</a></li>
-<li><a class="post-link" href="/til/2022/10/04/til.html" title="[TIL] DB RDMBS 3">[TIL] Network HTTP</a></li>
-<li><a class="post-link" href="/til/2022/09/19/til.html" title="[TIL] DB RDMBS 3">[TIL] 한달차 회고</a></li>
+        <li><a class="post-link" href="/til/2022/12/15/til.html" title="[TIL] DB RDMBS 3">[TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
+<li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="[TIL] DB RDMBS 3">[Programmers - Java] 주식가격</a></li>
+<li><a class="post-link" href="/til/2022/08/18/til.html" title="[TIL] DB RDMBS 3">[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작</a></li>
+<li><a class="post-link" href="/til/2022/12/02/til.html" title="[TIL] DB RDMBS 3">[TIL] Cloud 운영 환경 구성 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

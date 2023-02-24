@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
@@ -698,22 +698,35 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h4 id="-현재-인스턴스-사양">📌 현재 인스턴스 사양</h4>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>이미지 : Ubuntu 22.04
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre>이미지 : Ubuntu 22.04
 구성 : (AMD) VM.Standard.E2.1.Micro / 1 core OCPU, 1GB Memory
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
 <h4 id="-기초-셋팅">📌 기초 셋팅</h4>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>apt update
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>가장 먼저 시스템 업데이트를 해준다.</p>
 
 <p><br></p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install -y nano
-</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>sudo apt install -y nano
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>nano 편집기를 다운받아 편하게 사용해보자</p>
 
 <p><br></p>
@@ -726,42 +739,70 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p><strong>1). 스왑공간</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>fallocate <span class="nt">-l</span> 2G /swapfile
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>fallocate <span class="nt">-l</span> 2G /swapfile
 <span class="nb">sudo chmod </span>600 /swapfile
 <span class="nb">sudo </span>mkswap /swapfile
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 순서대로 입력을 해주게 된다면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Setting up swapspace version 1, size <span class="o">=</span> 2 GiB <span class="o">(</span>2147479552 bytes<span class="o">)</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre>Setting up swapspace version 1, size <span class="o">=</span> 2 GiB <span class="o">(</span>2147479552 bytes<span class="o">)</span>
 no label, <span class="nv">UUID</span><span class="o">=</span>8f85218d-329c-4eec-bf11-5d87964c5f0d
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위와 같이 스왑공간이 정상적으로 생성되었다고 메세지가 뜬다.</p>
 
 <p><br></p>
 
 <p><strong>2). 스왑시작</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>swapon /swapfile
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>swapon /swapfile
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위 명령어로 스왑을 시작한다.</p>
 
 <p><br></p>
 
 <p><strong>3). 스왑생성 확인</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>swapon <span class="nt">--show</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>swapon <span class="nt">--show</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어로 정상적으로 작동하는지 확인이 가능하다</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME      TYPE SIZE USED PRIO
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre>NAME      TYPE SIZE USED PRIO
 /swapfile file   2G   0B   <span class="nt">-2</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>와 같은식으로 확인이되며, 2GB의 스왑공간이 확보되었다고 표시된다.</p>
 
 <p><br></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>free <span class="nt">-h</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>free <span class="nt">-h</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어를 통해 시스템에서 사용할 수 있는<br>
 메모리 공간을 확인할 수 있다.</p>
 
@@ -772,15 +813,25 @@ no label, <span class="nv">UUID</span><span class="o">=</span>8f85218d-329c-4eec
 <p>스왑공간은 시스템이 재시작되면 초기화가 진행되므로<br>
 스왑공간을 그대로 남아있게하기 위해서 간단한 셋팅값을 지정해주어야 한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nano /etc/fstab
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>nano /etc/fstab
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>를 입력해 nano 편집기로 fstab 파일을 수정해줄 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">LABEL</span><span class="o">=</span>cloudimg-rootfs   /        ext4   discard,errors<span class="o">=</span>remount-ro       0 1
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">LABEL</span><span class="o">=</span>cloudimg-rootfs   /        ext4   discard,errors<span class="o">=</span>remount-ro       0 1
 <span class="nv">LABEL</span><span class="o">=</span>UEFI      /boot/efi       vfat    <span class="nb">umask</span><span class="o">=</span>0077      0 1
 /swapfile swap swap defaults 0 0
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>최종적으로는 맨 아래의 <code class="language-plaintext highlighter-rouge">/swapfile swap swap defaults 0 0</code>를<br>
 입력한후 저장해주면 된다. nano 편집기 저장방법은 <code class="language-plaintext highlighter-rouge">ctrl+s</code>한 다음에 <code class="language-plaintext highlighter-rouge">ctrl+x</code>를<br>
 입력해주면 정상적으로 저장될 것 이다.</p>
@@ -794,8 +845,12 @@ no label, <span class="nv">UUID</span><span class="o">=</span>8f85218d-329c-4eec
 
 <p>마지막으로 서버의 시간을 설정해줄 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>timedatectl set-timezone Asia/Seoul
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>timedatectl set-timezone Asia/Seoul
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -813,10 +868,10 @@ no label, <span class="nv">UUID</span><span class="o">=</span>8f85218d-329c-4eec
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="Jekyll Github IO 블로그 코드 하이라이트">[Programmers - Java] 주식가격</a></li>
-<li><a class="post-link" href="/til/2022/08/18/til.html" title="Jekyll Github IO 블로그 코드 하이라이트">[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작</a></li>
-<li><a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html" title="Jekyll Github IO 블로그 코드 하이라이트">MySQL EC2에 설치후 WorkBench 접속하기</a></li>
-<li><a class="post-link" href="/db/2023/01/08/db-redissetting.html" title="Jekyll Github IO 블로그 코드 하이라이트">Redis CLI 설치 및 사용방법</a></li>
+        <li><a class="post-link" href="/til/2022/10/28/til.html" title="Jekyll Github IO 블로그 코드 하이라이트">[TIL] Spring JDBC 기반 액세스 계층 2</a></li>
+<li><a class="post-link" href="/til/2022/11/11/til.html" title="Jekyll Github IO 블로그 코드 하이라이트">[TIL] API Documentation 1</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="Jekyll Github IO 블로그 코드 하이라이트">[TIL] Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/til/2022/09/05/til.html" title="Jekyll Github IO 블로그 코드 하이라이트">[TIL] Java 객체지향 - 생성자, 내부 클래스</a></li>
 </ul>
     </div>
 <div class="post-comments">

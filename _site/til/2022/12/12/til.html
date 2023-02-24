@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -725,8 +725,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 서버와 H2 데이터베이스를 이용해 작성해볼 생각이다.</p>
 
 <p>로컬 환경에서 테스트를 하고자한다면</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://todobackend.com/client/index.html?http://localhost:8080
-</code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>https://todobackend.com/client/index.html?http://localhost:8080
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>해당 URL로 접속 시 TODO LIST에 대한 GET 요청이 이루어질 것이다.<br>
 GET,POST,PATCH,DELETE 까지 적용해보자</p>
 
@@ -735,7 +739,23 @@ GET,POST,PATCH,DELETE 까지 적용해보자</p>
 내장 톰켓 서버를 사용할 것이고, H2를 사용할 거다.<br>
 그리고 Mapper를 이용할 것이고, DB에 접근하는 기술은 JPA를 사용할 것이다.<br>
 그리고 편의를 위한 롬복과, 테스트 코드 작성을 위한 의존라이브러리</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="n">dependencies</span> <span class="o">{</span>
 	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">jpa</span><span class="err">'</span>
 	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span>
 	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">validation</span><span class="err">'</span>
@@ -749,7 +769,8 @@ GET,POST,PATCH,DELETE 까지 적용해보자</p>
 
 	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>이 정도를 추가해볼 수 있을 것 같다.</p>
 
 <p><br></p>
@@ -760,7 +781,64 @@ GET,POST,PATCH,DELETE 까지 적용해보자</p>
 
 <p>우선 Controller 부터 작성 했다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span><span class="err">\</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Slf4j</span><span class="err">\</span>
 <span class="nd">@RestController</span>
 <span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListController</span> <span class="o">{</span>
@@ -815,13 +893,36 @@ GET,POST,PATCH,DELETE 까지 적용해보자</p>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NO_CONTENT</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>크게 어려운 기술들은 없다.<br>
 총 6개의 API로 가장 간단한 동작들만하는 메서드이다.</p>
 
 <p>Entity 클래스 작성이다.<br>
 JPA기술을 사용하기 때문에 해당 관련 설정을 해주어야한다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Entity</span>
 <span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="nd">@NoArgsConstructor</span>
@@ -841,20 +942,44 @@ JPA기술을 사용하기 때문에 해당 관련 설정을 해주어야한다.<
     <span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>4개의 필드변수가 존재하고 <br>
 테이블을 4개만 사용할 예정이다.</p>
 
 <p>Repository 계층이다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TodoListRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">,</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TodoListRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">TodoList</span><span class="o">,</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>JpaRepository를 상속받고, 우리가 Entity클래스로 지정한 <br>
 <code class="language-plaintext highlighter-rouge">TodoList</code>와 Id 타입인 <code class="language-plaintext highlighter-rouge">Long</code>을 타입매개변수로 넣어주자</p>
 
 <p>이제 Controller에서 주고받는 데이터를<br>
 맵핑해주는 Dto 클래스를 만들어보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListDto</span> <span class="o">{</span>
 
@@ -870,8 +995,19 @@ JPA기술을 사용하기 때문에 해당 관련 설정을 해주어야한다.<
         <span class="k">return</span> <span class="n">completed</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListResponseDto</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
@@ -879,7 +1015,8 @@ JPA기술을 사용하기 때문에 해당 관련 설정을 해주어야한다.<
     <span class="kd">private</span> <span class="nc">Long</span> <span class="n">todoOrder</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">completed</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>첫번째 Dto는 Json객체로 요청이 왔을때<br>
 맵핑을하도록 작성해주었다.<br>
 아직 Valid 대한 예외처리는 적용하지 못한 상태이다.</p>
@@ -888,7 +1025,26 @@ JPA기술을 사용하기 때문에 해당 관련 설정을 해주어야한다.<
 Json객체를 만들기위해 맵핑해주는 Dto객체이다.</p>
 
 <p>그리고 Mapper 클래스를 만들어보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">TodoListMapper</span> <span class="o">{</span>
     <span class="k">default</span> <span class="nc">TodoList</span> <span class="nf">todoListDtoToTodoList</span><span class="o">(</span><span class="nc">TodoListDto</span> <span class="n">todoListDto</span><span class="o">){</span>
         <span class="k">if</span> <span class="o">(</span> <span class="n">todoListDto</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">)</span> <span class="o">{</span>
@@ -905,13 +1061,30 @@ Json객체를 만들기위해 맵핑해주는 Dto객체이다.</p>
     <span class="o">}</span>
     <span class="nc">TodoListResponseDto</span> <span class="nf">todoListToTodoListResponseDto</span><span class="o">(</span><span class="nc">TodoList</span> <span class="n">todoList</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>Mapper를 통해서 <code class="language-plaintext highlighter-rouge">TodoListDto</code>객체를 <code class="language-plaintext highlighter-rouge">TodoList</code> 클래스로<br>
 <code class="language-plaintext highlighter-rouge">TodoList</code>객체를 <code class="language-plaintext highlighter-rouge">TodoListResponseDto</code>클래스로 변경해준다.</p>
 
 <p>이제 간단한 서비스로직에 대한 예외처리를 위한<br>
 클래스를 만들어 보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
     <span class="no">LIST_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span><span class="s">"TodoList Not Found"</span><span class="o">);</span>
 
     <span class="nd">@Getter</span>
@@ -925,8 +1098,20 @@ Json객체를 만들기위해 맵핑해주는 Dto객체이다.</p>
         <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServiceLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span><span class="o">{</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ServiceLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span><span class="o">{</span>
     <span class="nd">@Getter</span>
     <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
 
@@ -935,13 +1120,67 @@ Json객체를 만들기위해 맵핑해주는 Dto객체이다.</p>
         <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>이제 해당 커스텀 코드로 예외를 발생시킬 것이다.<br>
 리스트의 존재여부와 같은 예외가 발생하면<br>
 해당 예외를 발생시켜 추후에 Advice로 잡아서 처리해줄 수 있다.</p>
 
 <p>이제 마지막으로 Service 로직을 작성해보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Service</span>
 <span class="nd">@Transactional</span>
 <span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TodoListService</span> <span class="o">{</span>
@@ -992,7 +1231,8 @@ Json객체를 만들기위해 맵핑해주는 Dto객체이다.</p>
     <span class="o">}</span>
 
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>아주 기본적인 서비스로직을 구현했다.<br>
 트랜잭션 전파관련해 건드릴 만한 서비스도 존재하지 않아<br>
 클래스단에 @Transactional을 붙여주었다.</p>
@@ -1049,10 +1289,10 @@ Spring MVC관련 계층 프로그램은 이제<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/07/til.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[TIL] DB RDMBS 3</a></li>
-<li><a class="post-link" href="/til/2022/11/23/til.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[TIL] JWT 기초</a></li>
-<li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[macOs] Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
-<li><a class="post-link" href="/spring/2023/02/17/spring-test.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[Spring] 단위 테스트 JPA metamodel must not be empty!</a></li>
+        <li><a class="post-link" href="/til/2022/10/11/til.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[TIL] Spring Basic 1</a></li>
+<li><a class="post-link" href="/til/2022/10/13/til.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[TIL] Spring DI 1</a></li>
+<li><a class="post-link" href="/til/2022/10/25/til.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[TIL] Spring Exception 1</a></li>
+<li><a class="post-link" href="/til/2022/08/24/til.html" title="[TIL] Ngrok 사용하여 로컬에서 서버 실행">[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -725,19 +725,41 @@ public ResponseEntity postMember(@RequestParam("age") int age,
 나중에 학교,전화번호 등등 여러가지 데이터가 많이 추가된다고 가정하면<br>
 Controller 클래스의 너무나 많은 RequsetParam을 사용해야한다.<br>
 그래서 나오게 된 것이 DTO 기술이다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@PostMapping</span>
 <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">MemberDto</span> <span class="n">memberDto</span><span class="o">)</span> <span class="o">{</span>
      <span class="o">.</span>
      <span class="o">.</span>
      <span class="o">.</span>
     <span class="k">return</span> <span class="o">..</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>우선 위에서 사용한 @RequsetParam -&gt; @RequestBody로 변경한다.<br>
 그리고 MemberDto라는 클래스를 만들어 매개변수로 받아준다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Getter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberDto</span> <span class="o">{</span>
  
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
@@ -747,7 +769,8 @@ Controller 클래스의 너무나 많은 RequsetParam을 사용해야한다.<br>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">;</span>
     
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>이렇게 될 경우에. 클라이언트 측에서 Json 형식으로 URI와 함께 요청을 한다면<br>
 Json의 있는 키값들이 MemberDto의 필드변수에 할당되어진다.</p>
@@ -814,18 +837,44 @@ Spring 애플리케이션에서는 NullPointerException이 발생한다<br>
 
 <p>1). 우선 위에 예제 코드에서 @Vaild를 Dto 매개변수 앞에 달아주고</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@PostMapping</span>
 <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@Vaild</span> <span class="nd">@RequestBody</span> <span class="nc">MemberDto</span> <span class="n">memberDto</span><span class="o">)</span> <span class="o">{</span>
      <span class="o">.</span>
      <span class="o">.</span>
      <span class="o">.</span>
     <span class="k">return</span> <span class="o">..</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><br>
 2). Dto 클래스의 원하는 유효성 검증 애노테이션으로 조건을 설정한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Getter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberDto</span> <span class="o">{</span>
     <span class="nd">@Min</span><span class="o">(</span><span class="mi">100</span><span class="o">)</span>
     <span class="nd">@Max</span><span class="o">(</span><span class="mi">50000</span><span class="o">)</span> <span class="c1">// 100~50000사이에만 price 유혀성 검사 통과</span>
@@ -839,7 +888,8 @@ Spring 애플리케이션에서는 NullPointerException이 발생한다<br>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">;</span>
     
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>@Vaild<br>
 -&gt; 유효성 검증을 적용해주는 애노테이션<br>
 DTO 앞에 @Vaild를 붙여 클래스를 유효성 검증해줌 만약 유효성검증에 실패하면 요청은 거부(reject)된다.</p>
@@ -900,10 +950,10 @@ ex) @PatchMapping(“/{coffee-id}”) public ResponseEntity patchCoffee(@PathVar
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/08/til.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">[TIL] Java 객체지향 - 추상화</a></li>
-<li><a class="post-link" href="/til/2022/12/15/til.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">[TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
-<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">[macOs] neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/git/2023/01/12/git-commitmessage.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">Git 이전 Commit Message 수정하기</a></li>
+        <li><a class="post-link" href="/til/2022/12/13/til.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">[TIL] Ngrok 사용하여 로컬에서 서버 실행</a></li>
+<li><a class="post-link" href="/db/2023/01/14/db-redis.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">Redis JWT Refresh Token 관리 및 재발행</a></li>
+<li><a class="post-link" href="/til/2022/10/07/til.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">[TIL] DB RDMBS 3</a></li>
+<li><a class="post-link" href="/til/2022/12/06/til.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">[TIL] 배포 컨테이너 Docker</a></li>
 </ul>
     </div>
 <div class="post-comments">

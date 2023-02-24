@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#H2">#H2</a>
@@ -698,17 +698,35 @@ H2 Database를 다운받아 설정해보려한다.</p>
 여기서 버젼확인을 꼭해주자. 의존라이브러리를 추가할때 해당버젼과 일치해야한다.</p>
 
 <p><strong>Gradle의 경우</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="nl">h2:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">214</span><span class="err">'</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="nl">h2:</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">214</span><span class="err">'</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>와 같이 설정해 줄 수있다. 일반적으로 버전을 제외하고</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>로 설정하면 자동으로 가장 최신의 버전이 추가되는 것 같다.</p>
 
 <p><br></p>
 
 <p><strong>Maven의 경우</strong></p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;dependencies&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre>    <span class="nt">&lt;dependencies&gt;</span>
         <span class="c">&lt;!-- H2 데이터베이스 --&gt;</span>
         <span class="nt">&lt;dependency&gt;</span>
             <span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
@@ -716,7 +734,8 @@ H2 Database를 다운받아 설정해보려한다.</p>
             <span class="nt">&lt;version&gt;</span>2.1.214<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/dependency&gt;</span>
     <span class="nt">&lt;/dependencies&gt;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>와 같은식으로 설정해줄 수 있다.</p>
 
 <p>해당 zip파일을 풀면 폴더하나가 나오게되는데<br>
@@ -725,8 +744,12 @@ H2 Database를 다운받아 설정해보려한다.</p>
 <p><img src="https://user-images.githubusercontent.com/95069395/217752303-1d0737ec-84df-4fcc-8c05-5e5d12c3a90e.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p>해당 파일 위치에서</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./h2.sh
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>./h2.sh
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 실행 시켜주면 h2 data base 팝업이 발생하고  <br>
 <img src="https://user-images.githubusercontent.com/95069395/217752305-2b795af1-57d9-426d-965a-50e9fbdc42c6.png" alt="image" class="align-left" style="max-width: 100%"> 아이콘이 상단에 떠있을 것이다.</p>
 
@@ -734,12 +757,20 @@ H2 Database를 다운받아 설정해보려한다.</p>
 
 <p>만약 스크립트가 권한에 의해 실행되지 않는다면 chmod 명령어로 권한을 <br>
 부여해주면 쉽게 해결할 수 있다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ll
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>ll
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>권한 확인 진행을 먼저해주고</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>755 h2.sh
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">chmod </span>755 h2.sh
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 해주게되면 정상적으로 진입할 수 있을 것이다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/217752309-02ac4522-d3df-45d1-8137-7398a77a51bb.png" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -751,17 +782,40 @@ gradle과 maven에 따라다르지만 resources에 정보를 설정해주면된�
 포트번호 <code class="language-plaintext highlighter-rouge">:8082</code>앞에 localhost를 붙여보면 접속이 가능할 것이다.</p>
 
 <p>gradle 같은 경우에는</p>
-<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring.datasource.url</span><span class="p">=</span><span class="s">jdbc:h2:tcp://localhost/~/test</span>
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="py">spring.datasource.url</span><span class="p">=</span><span class="s">jdbc:h2:tcp://localhost/~/test</span>
 <span class="py">spring.datasource.username</span><span class="p">=</span><span class="s">sa</span>
 <span class="py">spring.datasource.password</span><span class="p">=</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>application.properties 설정을 통해<br>
 접속 관련 정보를 설정해주면 된다.</p>
 
 <p><br></p>
 
 <p>Maven 같은 경우에도 마찬가지다</p>
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;persistence</span> <span class="na">version=</span><span class="s">"2.2"</span>
              <span class="na">xmlns=</span><span class="s">"http://xmlns.jcp.org/xml/ns/persistence"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
              <span class="na">xsi:schemaLocation=</span><span class="s">"http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"</span><span class="nt">&gt;</span>
@@ -776,7 +830,8 @@ gradle과 maven에 따라다르지만 resources에 정보를 설정해주면된�
         <span class="nt">&lt;/properties&gt;</span>
     <span class="nt">&lt;/persistence-unit&gt;</span>
 <span class="nt">&lt;/persistence&gt;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>과 같은 방식으로 <code class="language-plaintext highlighter-rouge">persistence.xml</code> 설정을 통해<br>
 정보를 입력해줄 수 있다.</p>
 
@@ -791,10 +846,10 @@ gradle과 maven에 따라다르지만 resources에 정보를 설정해주면된�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="MySQL EER 다이어그램 만드는법">[Programmers - Java] 주식가격</a></li>
-<li><a class="post-link" href="/spring/2023/02/17/spring-test.html" title="MySQL EER 다이어그램 만드는법">[Spring] 단위 테스트 JPA metamodel must not be empty!</a></li>
-<li><a class="post-link" href="/til/2022/11/01/til.html" title="MySQL EER 다이어그램 만드는법">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
-<li><a class="post-link" href="/til/2022/11/03/til.html" title="MySQL EER 다이어그램 만드는법">[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</a></li>
+        <li><a class="post-link" href="/til/2022/11/18/til.html" title="MySQL EER 다이어그램 만드는법">[TIL] Spring Security 1 (기초)</a></li>
+<li><a class="post-link" href="/til/2022/08/22/til.html" title="MySQL EER 다이어그램 만드는법">[TIL] 개발환경 셋팅하기</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="MySQL EER 다이어그램 만드는법">[TIL] Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/algorithm/2023/02/11/algo-ponketmon.html" title="MySQL EER 다이어그램 만드는법">[Programmers - Java] 폰켓몬</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -732,52 +732,89 @@ GitHub 레포지포티와 연결하여, 후에 변경사항을 반영했을 경�
 <p>이와 같이 구성을 하기 위해서<br>
 EC2 인스턴스에 java,aws-cli,ruby를 설치하여 개발환경을 구축해야한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>apt update
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>apt를 업데이트를 먼저 진행한다.</p>
 
 <p><br></p>
 
 <p><strong>1). Java 설치</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-11-jre-headless
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>openjdk-11-jre-headless
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
 <p><strong>2). AWS CLI 설치</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="nt">-o</span> <span class="s2">"awscliv2.zip"</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre>curl <span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="nt">-o</span> <span class="s2">"awscliv2.zip"</span>
 <span class="nb">sudo </span>apt <span class="nb">install </span>unzip
 unzip awscliv2.zip
 <span class="nb">sudo</span> ./aws/install
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><a href="https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-install.html">AWS CLI 공식 문서</a>를 참고하면 동일하게 나온다.<br>
 unzip이 설치되어있다면 생략해도 가능하다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws <span class="nt">--version</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>aws <span class="nt">--version</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>설치가 완려되면 버젼확인이 가능하다.</p>
 
 <p><br></p>
 
 <p><strong>3). CodeDeploy Agent 설치</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>ruby-full             
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>apt <span class="nb">install </span>ruby-full             
 <span class="nb">sudo </span>apt <span class="nb">install </span>wget
 <span class="nb">cd</span> /home/ubuntu
 <span class="nb">sudo </span>wget https://aws-codedeploy-ap-northeast-2.s3.ap-northeast-2.amazonaws.com/latest/install
 <span class="nb">sudo chmod</span> +x ./install
 <span class="nb">sudo</span> ./install auto <span class="o">&gt;</span> /tmp/logfile
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p><a href="https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/codedeploy-agent-operations-install-ubuntu.html">AWS CodeDeploy 공식 문서</a>를 참조하면 확인이 가능하다.
 wget이 없을 경우 wget 설치.</p>
 
 <p>설치가 완료되면 서비스가 실행중인다 확인할 수 있다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service codedeploy-agent status
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>service codedeploy-agent status
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력하였을 경우 <code class="language-plaintext highlighter-rouge">active(running)</code>문구를 확인할 수 있다. 
 만약 확인이 되지 않을 경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service codedeploy-agent start
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="nb">sudo </span>service codedeploy-agent start
 <span class="nb">sudo </span>service codedeploy-agent stop
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>start와 stop을 반복하여 확인할 수 있다..</p>
 
 <p><br></p>
@@ -854,27 +891,52 @@ GiuHub에 연결해서 사용하면 된다.</p>
 
 <p>우선 EC2에 배포하려는 프로그램에 설정해주자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="n">dependencies</span><span class="o">{</span>
     <span class="o">...</span>
     <span class="n">implementation</span><span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">cloud</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">aws</span><span class="o">-</span><span class="n">parameter</span><span class="o">-</span><span class="n">store</span><span class="o">-</span><span class="n">config</span><span class="err">'</span>
     <span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencyManagement</span> <span class="o">{</span> 
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="n">dependencyManagement</span> <span class="o">{</span> 
 	<span class="n">imports</span> <span class="o">{</span>
 		<span class="n">mavenBom</span> <span class="s">"org.springframework.cloud:spring-cloud-starter-parent:Hoxton.SR12"</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>build.gradle의 의존관계를 설정해주어야한다.</p>
 
-<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">aws</span><span class="pi">:</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="na">aws</span><span class="pi">:</span>
   <span class="na">paramstore</span><span class="pi">:</span>
     <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">prefix</span><span class="pi">:</span> <span class="s">/spring-boot-aws</span>
     <span class="na">name</span><span class="pi">:</span> <span class="s">be-88-MyCatlikesChuru</span> <span class="c1"># 리소스 이름을 작성합니다.</span>
     <span class="na">profileSeparator</span><span class="pi">:</span> <span class="s">_</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>파라미터 스토어에서는 <code class="language-plaintext highlighter-rouge">/prefix/name/key</code>의 순서로 네이밍 규칙에 <br>
 맞게 작성해야한다. name은 EC2 인스턴스이름과 동일하게 설정해주자.</p>
@@ -929,10 +991,10 @@ AWS 공부를 열심히 해볼 생각이다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="[TIL] 배포 자동화 GitHub Actions">[Programmers - Java] 프린터</a></li>
-<li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[TIL] 배포 자동화 GitHub Actions">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
-<li><a class="post-link" href="/til/2022/10/28/til.html" title="[TIL] 배포 자동화 GitHub Actions">[TIL] Spring JDBC 기반 액세스 계층 2</a></li>
-<li><a class="post-link" href="/til/2022/10/11/til.html" title="[TIL] 배포 자동화 GitHub Actions">[TIL] Spring Basic 1</a></li>
+        <li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="[TIL] 배포 자동화 GitHub Actions">[macOs] brew update Error Another active Homebrew update process is already in...</a></li>
+<li><a class="post-link" href="/til/2022/10/04/til.html" title="[TIL] 배포 자동화 GitHub Actions">[TIL] Network HTTP</a></li>
+<li><a class="post-link" href="/til/2022/08/22/til.html" title="[TIL] 배포 자동화 GitHub Actions">[TIL] 개발환경 셋팅하기</a></li>
+<li><a class="post-link" href="/til/2022/11/21/til.html" title="[TIL] 배포 자동화 GitHub Actions">[TIL] Spring Security 2 (인증처리)</a></li>
 </ul>
     </div>
 <div class="post-comments">

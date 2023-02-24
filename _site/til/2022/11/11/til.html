@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -733,7 +733,63 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>Spring Rest Docs를 사용하기 위해 사전 작업을 하여야한다.<br>
 build.gradle의 설정해주자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plugins</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+</pre></td>
+<td class="rouge-code"><pre><span class="n">plugins</span> <span class="o">{</span>
 	<span class="n">id</span> <span class="s">"org.asciidoctor.jvm.convert"</span> <span class="n">version</span> <span class="s">"3.3.2"</span>
         <span class="o">...</span>
 <span class="o">}</span>
@@ -787,11 +843,90 @@ build.gradle의 설정해주자</p>
 		<span class="n">into</span> <span class="err">'</span><span class="kd">static</span><span class="o">/</span><span class="n">docs</span><span class="err">'</span>    
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>build.gradle 설정이 끝났다면 이제 코드를 작성해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@WebMvcTest</span><span class="o">(</span><span class="nc">MemberController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@WebMvcTest</span><span class="o">(</span><span class="nc">MemberController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="c1">//@Transactional</span>
 <span class="c1">//@SpringBootTest</span>
@@ -867,7 +1002,8 @@ build.gradle의 설정해주자</p>
                 <span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>기존 코드와 달라진점은 
 @WebMvcTest(MemberController.class)          <br>
@@ -880,16 +1016,25 @@ Bean만 등록하기때문에 상대적으로 속도가 빠르다고 한다.</p>
 <p>또한, @AutoConfigureRestDocs 어노테이션을 붙여주었고<br>
 .andDo(docment())를 이용해 Rest Docs에 필요한 정보를 보내주었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">payload</span><span class="o">.</span><span class="na">PayloadDocumentation</span><span class="o">.*;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">payload</span><span class="o">.</span><span class="na">PayloadDocumentation</span><span class="o">.*;</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">MockMvcRestDocumentation</span><span class="o">.</span><span class="na">document</span><span class="o">;</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>document(), fieldWithPath(), requestFields() <br>
 필요한 정보를 만드는 과정에서 위 api를 사용하기위해선<br>
 PayloadDocumentation, MockMvcRestDocumentation을 import 해주어야한다.</p>
 
 <p>그리고 patch 핸들러 메서드에 대해 path parameter를 이용할 경우</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">pathParameters</span><span class="o">;</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">pathParameters</span><span class="o">;</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 스태틱으로 import 해주면 사용이 가능하다.</p>
 
 <p><br></p>
@@ -899,7 +1044,18 @@ OperationRequestPreprocessor<br>
 OperationResponsePreprocessor<br>
 클래스를 이용해 인터페이스안에 정적 메서드를 만들어 구현하였다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApiDocumentUtils</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ApiDocumentUtils</span> <span class="o">{</span>
     <span class="kd">static</span> <span class="nc">OperationRequestPreprocessor</span> <span class="nf">getRequestPreProcessor</span><span class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="nf">preprocessRequest</span><span class="o">(</span><span class="n">prettyPrint</span><span class="o">());</span>
     <span class="o">}</span>
@@ -908,7 +1064,8 @@ OperationResponsePreprocessor<br>
         <span class="k">return</span> <span class="nf">preprocessResponse</span><span class="o">(</span><span class="n">prettyPrint</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>getRequestPreProcessor() <br>
 getResponsePreProcessor()<br>
 아리는 메서드를 만들었고 해당 내용엔 OperationPreprocessor 클래스의<br>
@@ -985,10 +1142,10 @@ SpringRestDocs를 사용하는 법을 알아보았고</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/08/26/til.html" title="[TIL] API Documentation 2">[TIL] Linux 기초</a></li>
-<li><a class="post-link" href="/til/2022/11/15/til.html" title="[TIL] API Documentation 2">[TIL] Application 빌드, 실행</a></li>
-<li><a class="post-link" href="/til/2022/09/20/til.html" title="[TIL] API Documentation 2">[TIL] Java 재귀</a></li>
-<li><a class="post-link" href="/til/2022/10/05/til.html" title="[TIL] API Documentation 2">[TIL] DB RDMBS 1</a></li>
+        <li><a class="post-link" href="/til/2022/10/14/til.html" title="[TIL] API Documentation 2">[TIL] Spring DI 2</a></li>
+<li><a class="post-link" href="/til/2022/10/07/til.html" title="[TIL] API Documentation 2">[TIL] DB RDMBS 3</a></li>
+<li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="[TIL] API Documentation 2">[macOs] brew update Error Another active Homebrew update process is already in...</a></li>
+<li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="[TIL] API Documentation 2">[Programmers - Java] 프린터</a></li>
 </ul>
     </div>
 <div class="post-comments">

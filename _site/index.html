@@ -120,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -928,7 +927,8 @@ return
 Controller 단위 테스트를 진행하려고 @WebMvcTest
 어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.
 
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreation... <span class="read_more">Read More</span>
+1
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreati... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1192,6 +1192,9 @@ OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서
         <p>
         https 관련 설정을 만지다가
 nginx를 실행하는데 아래와 같은 에러가 발생했다.
+1
+2
+3
 $ sudo service nginx start
 Job for nginx.service failed because the control process exited with error code.
 See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
@@ -1199,8 +1202,22 @@ See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for det
 터미널에 나온대로 systemctl status nginx.service를 
 입력하여 로그를 확인해봤다.
 
-$ systemctl status nginx.service
-× nginx.ser... <span class="read_more">Read More</span>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1277,7 +1294,7 @@ $ systemctl status nginx.service
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 27, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
       </div>
       <a class="post-excerpt" href="/server/2023/01/27/server-oraclesetting.html">
         <p>
@@ -1293,6 +1310,7 @@ WorkBench를 이용해 mysql을 접속하려한다.
 
 iptables를 이용해 방화벽 설정을 할 수 있다.
 
+1
 sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
 
 와 같이 입력해주면 설정이 가능하다. 
@@ -1305,11 +1323,8 @@ UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고
 
 1). UFW 활성화
 
+1
 sudo ufw enable
-
-
-
-
 ... <span class="read_more">Read More</span>
         </p>
       </a>
@@ -1387,7 +1402,7 @@ sudo ufw enable
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 21, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
       </div>
       <a class="post-excerpt" href="/spring/2023/01/21/spring-email.html">
         <p>
@@ -1399,6 +1414,10 @@ org.springframework.mail.MailAuthenticationException와 같은
 
 ✅ 작업환경
 
+1
+2
+3
+4
 Spring Boot 2.7.7  
 Java 11 
 macOs Monterey 12.6 버전 
@@ -1412,7 +1431,8 @@ macOs Monterey 12.6 버전
 첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. 
 메일을 보내는 주체는 Google의 gmail을 이용하려한다.
 
-implementation 'org.springframework.boot:spring-boot-starter-mail... <span class="read_more">Read More</span>
+1
+implementation 'org.springframework.boot:spring-boot-st... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1489,7 +1509,7 @@ implementation 'org.springframework.boot:spring-boot-starter-mail... <span class
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 15, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
       </div>
       <a class="post-excerpt" href="/spring/2023/01/15/spring-fileupload.html">
         <p>
@@ -1504,6 +1524,11 @@ implementation 'org.springframework.boot:spring-boot-starter-mail... <span class
 
 ✅ 작업 환경
 
+1
+2
+3
+4
+5
 AWS S3 버킷
 Spring Boot 2.7.7  
 Java 11 
@@ -1522,7 +1547,7 @@ macOs Monterey 12.6 버전
 
 1). 클라이언트에서 이미지파일을 업로드 요청
 -&gt; multipart/form-data 타입으로 요청
--&gt; Key=file / va... <span class="read_more">Read More</span>
+-&gt; Key... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1599,7 +1624,7 @@ macOs Monterey 12.6 버전
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 14, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
       </div>
       <a class="post-excerpt" href="/db/2023/01/14/db-redis.html">
         <p>
@@ -1617,12 +1642,14 @@ JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해
 
 ✅ 작업환경
 
+1
+2
+3
+4
 Spring Boot 2.7.7
 java 11 
 macOS Ventura 13.1
-로컬 환경에서 테스트 진행
-
-... <span class="read_more">Read More</span>
+로컬 환경에서 ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1707,6 +1734,7 @@ macOS Ventura 13.1
 
 만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우
 
+1
 git rebase -i HEAD~3        
 
 를 입력해서 커밋메세지가 수정이 가능하다. 
@@ -1731,7 +1759,7 @@ Interactively Rebase from Here를 눌러주자
 
 
 
-그러면 Rebasing ... <span class="read_more">Read More</span>
+그러면 Rebasin... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1808,7 +1836,7 @@ Interactively Rebase from Here를 눌러주자
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
       </div>
       <a class="post-excerpt" href="/git/2023/01/12/git-cherrypick.html">
         <p>
@@ -2031,9 +2059,10 @@ Jekyll 코드 하이라이트 적용
 나와 같은 경우에는 highlight.js demo 사이트에서 
 마음에 드는 코드하이라이트의 이름만 설정해주면 된다.
 
+1
 _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
 
-해당 경로의 code-highlight.html... <span class="read_more">Read More</span>
+해당 경로의 code-highlight.ht... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2110,7 +2139,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Jan 01, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
       </div>
       <a class="post-excerpt" href="/server/2023/01/01/server-oraclesetting.html">
         <p>
@@ -2127,6 +2156,8 @@ AMD 기반으로 만들었기 때문에 사양이 낮은 무료 인스턴스를 
 
 📌 현재 인스턴스 사양
 
+1
+2
 이미지 : Ubuntu 22.04
 구성 : (AMD) VM.Standard.E2.1.Micro / 1 core OCPU, 1GB Memory
 
@@ -2134,8 +2165,7 @@ AMD 기반으로 만들었기 때문에 사양이 낮은 무료 인스턴스를 
 
 
 📌 기초 셋팅
-
-sud... <span class="read_more">Read More</span>
+... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2334,7 +2364,7 @@ VCN 이름을 설정하고 다음 클릭
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 29, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
       </div>
       <a class="post-excerpt" href="/linux/unix/2022/12/29/server-NginX.html">
         <p>
@@ -2435,7 +2465,7 @@ AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 28, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
       </div>
       <a class="post-excerpt" href="/db/2022/12/28/db-mysqlEC2.html">
         <p>
@@ -2452,11 +2482,16 @@ MySQL 설치과정은 생략하겠다.
 
 스키마 이름은 stackover라는 이름으로지 지정했다.
 
+1
+2
+3
+4
+5
+6
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul # 포트넘버, 스키마이름
-   ... <span class="read_more">Read More</span>
+    url: jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul # 포트넘... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2533,7 +2568,7 @@ spring:
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
       </div>
       <a class="post-excerpt" href="/spring/2022/12/27/spring-JunitSecure.html">
         <p>
@@ -2549,11 +2584,27 @@ Test 코드를 작성중 Spring Security 문제와 부딪히게 된 것 !!
 📌 문제 발생 (403 Forbidden)
 
 기존과 동일하게 POST 요청을 보내 보았다.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
     @Test
     @DisplayName("질문 작성 API : createQuestion")
-    void createQuestion() throws Exception {
-
-        QuestionPostDto q... <span class="read_more">Read More</span>
+    void createQuestion() ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2846,7 +2897,7 @@ Continue 버튼을 눌러줍니다.
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 19, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
       </div>
       <a class="post-excerpt" href="/db/2022/12/19/db-h2setting.html">
         <p>
@@ -2863,14 +2914,14 @@ h2 database 홈페이지에 접속하면
 여기서 버젼확인을 꼭해주자. 의존라이브러리를 추가할때 해당버젼과 일치해야한다.
 
 Gradle의 경우
+1
 runtimeOnly 'com.h2database:h2:2.1.214'
 
 와 같이 설정해 줄 수있다. 일반적으로 버전을 제외하고
+1
 runtimeOnly 'com.h2database:h2
 
-로 설정하면 자동으로 가장 최신의 버전이 추가되는 것 같다.
-
-... <span class="read_more">Read More</span>
+로 설정하면 자동으로 가장 최신의 버전이 추가되는 것 같... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -2947,7 +2998,7 @@ runtimeOnly 'com.h2database:h2
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 15, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 49 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 52 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/15/til.html">
         <p>
@@ -3235,7 +3286,7 @@ Ngrok은 네트워크 설정을 하지 않아도
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 12, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/12/til.html">
         <p>
@@ -3347,6 +3398,11 @@ TODO List 연습 클라이언트를 이용해 로컬톰켓서버와
 연결 시 CORS문제가 발생해 해결했던 코드를 올려 본다.
 
 1). 어노테이션으로 설정하는 방법
+1
+2
+3
+4
+5
 @CrossOrigin(origins = "https://todobackend.com")
 @RestController
 public class TodoListController {
@@ -3358,10 +3414,24 @@ public class TodoListController {
 
 2). 빈 객체를 만들어 설정하는 방법
 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
 @SpringBootApplication
-public class TodolistApplication {
-
-	public static void main(String[... <span class="read_more">Read More</span>
+public class Todoli... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -3438,7 +3508,7 @@ public class TodolistApplication {
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 09, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/09/til.html">
         <p>
@@ -3648,7 +3718,7 @@ Github Actions를 통한 자동화 배포 Flow
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/07/til.html">
         <p>
@@ -3745,7 +3815,7 @@ Github Actions를 통한 자동화 배포 Flow
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 06, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/06/til.html">
         <p>
@@ -3958,6 +4028,8 @@ brew update 중 아래와 같은 에러가 발생했다.
 
 
 
+1
+2
 Error: Another active Homebrew update process is already in progress.
 Please wait for it to finish or terminate it to continue.
 
@@ -3968,7 +4040,7 @@ Please wait for it to finish or terminate it to continue.
 
 
 
-/opt/homebrew/var/homeb... <span class="read_more">Read More</span>
+/opt/homebrew/var/h... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags"><a class="post-tag" href="/tags.html#macOs">#macOs</a></div>
@@ -4147,7 +4219,7 @@ Cloud Computing
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Dec 01, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 21 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 23 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/12/01/til.html">
         <p>
@@ -4247,7 +4319,7 @@ Spring 5에 Reactive 스택이라는 기술이 새롭게 추가되었고
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 30, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/30/til.html">
         <p>
@@ -4346,7 +4418,7 @@ Reactive 기반 Spring Web Application을 만들때 사용하는 핵심기술이
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 29, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/29/til.html">
         <p>
@@ -4444,7 +4516,7 @@ Reactive 기반 Spring Web Application을 만들때 사용하는 핵심기술이
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 28, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 23 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 26 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/28/til.html">
         <p>
@@ -4765,6 +4837,15 @@ OAu... <span class="read_more">Read More</span>
 코드에서 @Value 어노테이션으로 application.yml 파일의 
 설정된 값들을 사용하려고하였다.
 
+1
+2
+3
+4
+5
+6
+7
+8
+9
 @Component
 public class JwtTokenizer {
 
@@ -4776,8 +4857,7 @@ public class JwtTokenizer {
 }
 
 
-사용하려고 하는 대상은 SecretKey이고
-중요한 정보이기 때문에 시... <span class="read_more">Read More</span>
+사용하려고 하는 대상은 SecretKe... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -4854,7 +4934,7 @@ public class JwtTokenizer {
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 24, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 19 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 20 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/24/til.html">
         <p>
@@ -4954,7 +5034,7 @@ Spring Security를 이용해 인증과정을 거치게 되... <span class="read_
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 23, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/23/til.html">
         <p>
@@ -5056,7 +5136,7 @@ Json 포맷으로 사용자에 대한... <span class="read_more">Read More</span
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 22, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/22/til.html">
         <p>
@@ -5159,7 +5239,7 @@ Spring Security 권한부여
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 21, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/21/til.html">
         <p>
@@ -5262,7 +5342,7 @@ Filter 흐름 복습
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 18, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 21 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 23 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/18/til.html">
         <p>
@@ -5573,7 +5653,7 @@ HTTPS의 Hyper T... <span class="read_more">Read More</span>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 15, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/15/til.html">
         <p>
@@ -5697,6 +5777,7 @@ MySQL WorkBench GUI로 작업하였고
 
 1). bulid.gradle 설정
 
+1
 runtimeOnly 'mysql:mysql-connector-java'
 
 
@@ -5705,7 +5786,7 @@ runtimeOnly 'mysql:mysql-connector-java'
 
 
 추가하고 Gradle Reload를 할 경우 위와 같이
-라이브러리 패키지가 생기는 것을 확인할... <span class="read_more">Read More</span>
+라이브러리 패키지가 생기는 것을 확... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -5782,7 +5863,7 @@ runtimeOnly 'mysql:mysql-connector-java'
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 14, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/14/til.html">
         <p>
@@ -5886,7 +5967,7 @@ API 자동 문서화 연습
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 11, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/11/til.html">
         <p>
@@ -5985,7 +6066,7 @@ API 자동 문서화 연습
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 10, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/10/til.html">
         <p>
@@ -6087,7 +6168,7 @@ API 자동 문서화 연습
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 09, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/09/til.html">
         <p>
@@ -6291,7 +6372,7 @@ TEST
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 07, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/07/til.html">
         <p>
@@ -6494,7 +6575,7 @@ Transaction 이란?
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Nov 03, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/11/03/til.html">
         <p>
@@ -6803,7 +6884,7 @@ JPA의 구현... <span class="read_more">Read More</span>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 31, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/31/til.html">
         <p>
@@ -7007,7 +7088,7 @@ Database, Service, Dto, Mapper, Controller의 연동과... <span class="read_mor
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/27/til.html">
         <p>
@@ -7140,8 +7221,14 @@ JDBC의 API를 우리가 직접 사용할 일은 없다고한다.
 
 1). 예외처리를 매개변수로 받기
 
+1
+2
+3
+4
+5
+6
 @ExceptionHandler
-@ResponseStatus(HttpStatus... <span class="read_more">Read More</span>
+@ResponseStatu... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -7218,7 +7305,7 @@ JDBC의 API를 우리가 직접 사용할 일은 없다고한다.
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 25, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/25/til.html">
         <p>
@@ -7321,7 +7408,7 @@ ex) Postman API 요청시, 400 Bad Requset
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 25, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
       </div>
       <a class="post-excerpt" href="/it/2022/10/25/it-etc-imageurl.html">
         <p>
@@ -7420,7 +7507,7 @@ ex) Postman API 요청시, 400 Bad Requset
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 24, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/24/til.html">
         <p>
@@ -7931,7 +8018,7 @@ View... <span class="read_more">Read More</span>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 18, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/18/til.html">
         <p>
@@ -8039,7 +8126,7 @@ Pointcut은 어제 알아보았듯이
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 17, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/17/til.html">
         <p>
@@ -8145,7 +8232,7 @@ Aspect Oriented Programming의 약자이다.
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 14, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/14/til.html">
         <p>
@@ -8168,11 +8255,22 @@ Aspect Oriented Programming의 약자이다.
 @Bean 어노테이션을 메소드에 선언해주면
 그 매소드의 반환된 객체를 통해 빈을 정의하고 생명주기를 설정하게된다.
 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
 @Configuration
 public class AppConfig {
     @Bean
     public MemberService memberService (){
-        return new MemberServic... <span class="read_more">Read More</span>
+       ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -8249,7 +8347,7 @@ public class AppConfig {
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 13, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/13/til.html">
         <p>
@@ -8564,7 +8662,7 @@ Framework vs Library
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Oct 07, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/10/07/til.html">
         <p>
@@ -8704,7 +8802,8 @@ MySQL 터미널로 작업하기
 어제 공부했던 문법들을 실제로 써보는 시간이 왔다.
 먼저 brew를 이용해 mysql을 사용할 수 있게 만들어줘야한다.
 
-brew in... <span class="read_more">Read More</span>
+1
+brew ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -9297,7 +9396,7 @@ Transmission Control Protocol / Internet Protocol의 약자이다.
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/27/til.html">
         <p>
@@ -9606,7 +9705,7 @@ Graph, Tree, BST (Binary Serach Tree에 대해 공부해볼 예정이다.
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 22, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/22/til.html">
         <p>
@@ -10018,7 +10117,7 @@ JavaScript문법을 사용하니 우리는 프로그램 데이터를 주고 받�
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 16, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 20 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/16/til.html">
         <p>
@@ -10121,7 +10220,7 @@ JavaScript문법을 사용하니 우리는 프로그램 데이터를 주고 받�
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 15, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/15/til.html">
         <p>
@@ -10227,7 +10326,7 @@ Annotation
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 14, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/14/til.html">
         <p>
@@ -10330,7 +10429,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 13, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 26 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 28 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/13/til.html">
         <p>
@@ -10433,7 +10532,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 08, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/08/til.html">
         <p>
@@ -10533,7 +10632,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 07, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/07/til.html">
         <p>
@@ -10636,7 +10735,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 06, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 22 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 24 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/06/til.html">
         <p>
@@ -10740,7 +10839,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 05, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/05/til.html">
         <p>
@@ -10837,7 +10936,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 02, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/02/til.html">
         <p>
@@ -10937,7 +11036,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Sep 01, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/09/01/til.html">
         <p>
@@ -11041,7 +11140,7 @@ ArrayList arrayList = new ArrayList&lt;... <span class="read_more">Read More</sp
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Aug 31, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/08/31/til.html">
         <p>
@@ -11344,7 +11443,7 @@ Git이라는 버전관리 시스템도 개발하셨다고 들었다.
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Aug 26, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/08/26/til.html">
         <p>
@@ -11471,6 +11570,7 @@ neofetch란 아래의 이미지와 같이 CLI에서 사용자의 정보를 알 �
 
 
 
+1
 brew install neofetch
 
 
@@ -11478,6 +11578,7 @@ brew를 통해 neofetch를 설치하고
 
 
 
+1
 brew list
 
 
@@ -11490,7 +11591,7 @@ brew list를 통해 neofetch가 잘 설치되었는지 확인하자.
 
 
 
-neofet... <span class="read_more">Read More</span>
+ne... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags"><a class="post-tag" href="/tags.html#macOs">#macOs</a></div>
@@ -11565,7 +11666,7 @@ neofet... <span class="read_more">Read More</span>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Aug 25, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/08/25/til.html">
         <p>
@@ -11664,7 +11765,7 @@ neofet... <span class="read_more">Read More</span>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Aug 24, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/08/24/til.html">
         <p>
@@ -11773,7 +11874,7 @@ displ... <span class="read_more">Read More</span>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Aug 23, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
       </div>
       <a class="post-excerpt" href="/til/2022/08/23/til.html">
         <p>
@@ -11891,6 +11992,7 @@ zsh에서 git 언어가 갑자기 한글로 바뀌었다면?(다시 영어로 �
 
 현재 설정되어 있는 언어를 확인해보자
 
+1
 echo $LANG
 
 
@@ -11902,7 +12004,7 @@ echo $LANG
 언어는 ko KR.UTF-8
 
 그래서 이렇게 변하는 이유를 찾아보니 git설정에서 gettext로 OS에서
-사용하는 언어를 가져온 뒤 직접 해당 언어를 사용하도록 설정을 업... <span class="read_more">Read More</span>
+사용하는 언어를 가져온 뒤 직접 해당 언어를 사용하도록 설정을... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags"><a class="post-tag" href="/tags.html#macOs">#macOs</a></div>
@@ -12305,13 +12407,14 @@ Spotlight (⌘Command + SpaceBar)를 열어 터미널을 검색.
 
 현재 열려있는 포트를 조회하는 명령어입니다.
 
+1
 lsof -PiTCP -sTCP:LISTEN
 
 
 
 
 이렇게 사용중인 포트가 쭉 나온다.
-여기서 PI... <span class="read_more">Read More</span>
+여기서 ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -12587,6 +12690,8 @@ EC2 인스턴스를 생성하면
 
 내 EC2 우분투 접속 명령
 
+1
+2
 sudo chmod 400 키파일.pem
 ssh -i 키파일.pem ubuntu@내주소
 
@@ -12595,10 +12700,7 @@ ssh -i 키파일.pem ubuntu@내주소
 /Users/ljh/Desktop/~~ 이런식으로 경로가 불러와집니다.
 내주소 : 54.180.104.68과 같은 방식으로 인스턴스의 IPv4 주소를 써주시면 됩니다.
 
-본론
-
-
-... <span class="read_more">Read More</span>
+본... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">

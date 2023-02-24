@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -729,7 +729,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>아래의 css만 적용해둔 상태이다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre>main {
   border: 1px dotted red;
 }
 
@@ -741,18 +755,27 @@ div {
   margin: 10px;
   padding: 10px;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>이제 flex를 적용해보면서 차이를 알아가보려고한다.</p>
 
 <h4 id="flex-direction--정렬-축-정하기"><strong>flex-direction : 정렬 축 정하기</strong></h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-direction : row;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>현재 display : flex; 적용해둔 상태.<br>
 flex-direction을 row로 설정. (가로정렬)<br>
@@ -766,12 +789,20 @@ flex-direction을 row로 설정. (가로정렬)<br>
 <p>가로정렬하는법을 위에서 알아보았으니<br>
 세로정렬하는 방법이다. row -&gt; column으로 변경하면 적용된다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-direction : column;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/216815144-79ee2a81-a6c0-4dc9-b246-0559908526db.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -781,12 +812,20 @@ flex-direction을 row로 설정. (가로정렬)<br>
 가로정렬을 반대로 row-reverse로 지정하면<br>
 box1이 맨오른쪽에 위치한걸 볼 수 있다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-direction : row-reverse;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/216814975-d7aa689a-dc53-4f45-b398-65096a78c9be.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -796,12 +835,20 @@ box1이 맨오른쪽에 위치한걸 볼 수 있다.</p>
 column-reverse로 설정을 할 경우에  <br>
 맨아래에서부터 box1이 채워지는 것을 볼 수 있다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-direction : column-reverse;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/216814976-8061177e-d42e-408f-9cdd-36cdde9fa00c.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -813,12 +860,20 @@ column-reverse로 설정을 할 경우에  <br>
 처음 flex-wrap을 설정하지 않았어도 nowrap이 Default상태로<br>
 줄바꿈을 진행하지 않는 값이 기본값이다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-wrap : nowrap;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>적용해보면 아래와 같이 부모박스 크기보다<br>
 많은 자식박스가 들어갈 경우 벗어나는 모습이다.</p>
@@ -830,12 +885,20 @@ column-reverse로 설정을 할 경우에  <br>
 <p>이제 반대로 부모박스안에서 줄바꿈을 가능하게하려면<br>
 nowrap -&gt; wrap으로 변경하면 줄바꿈이 가능해진다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-wrap : wrap;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>부모박스안에 자식박스가 채워진 모습.<br>
 여기서 이제 반응형으로 화면을 줄엿다 늘렷다하면 자식박스도 같이<br>
@@ -848,12 +911,20 @@ nowrap -&gt; wrap으로 변경하면 줄바꿈이 가능해진다.</p>
 <p>줄바꿈이 되었다면 이걸 뒤집어서<br>
 wrap-reverse로하면 순서가 뒤집혀서 표시가 된다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-wrap : wrap-reverse;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>뒤집히는 순서는 세로 축만 변경되는 모습을 볼 수 있다.</p>
 
@@ -877,13 +948,22 @@ justify-content는 flex-start, flex-end, center, space-between, space-around가 
 
 <p>우선 flex-direction의 정렬이 가로정렬일때 부터 알아보자.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre>main {
   display: flex;
   flex-direction : row;
   justify-content : flex-start;
   border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>flex-start일 경우에는 설정을 안했을때와 동일하게 정렬되어진다.<br>
 가로정렬로 설정되어있고 수평방향에 맞게 정렬되어졌다.</p>
@@ -908,7 +988,22 @@ justify-content는 flex-start, flex-end, center, space-between, space-around가 
 <p>세로정렬의 경우 테스트를 위해 width와 height를 강제로 부여한후에<br>
 테스트를 진행해야 알아보기가 편해서 값을 넣고 진행했다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre>main {
   width : 500px;
   height : 500px;
   display: flex;
@@ -921,7 +1016,8 @@ div {
   height : 20px;
   border: 1px solid green;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>flex-start일 경우 위에서부터 세로정렬.</p>
 
@@ -958,7 +1054,17 @@ flex-direction이 row 혹은 column이냐에 따라 수직방향을 정렬하기
 
 <p>우선 align-items를 설정하지 않은 상태에서 보았다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre>main {
     width : 400px;
     height : 400px;
     display: flex;
@@ -966,7 +1072,8 @@ flex-direction이 row 혹은 column이냐에 따라 수직방향을 정렬하기
     flex-direction : row;
     border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>박스의 크기들이 이렇게 보여진다.</p>
 
@@ -1010,7 +1117,17 @@ align-items : flex-start를 설정할 경우<br>
 <p>우선 위와 동일한 align-items를 설정하지 않은 상태에서 보았다.<br>
 flex-direction을 세로방향으로 설정해놓았다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>main {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre>main {
     width : 400px;
     height : 400px;
     display: flex;
@@ -1018,7 +1135,8 @@ flex-direction을 세로방향으로 설정해놓았다.</p>
     flex-direction : column;
     border: 1px dotted red;
 }
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>세로 정렬인만큼 박스가 위에서 아래로 정렬된 모습을 볼 수있고<br>
 wrap으로 인해 다음 박스는 다음줄로 넘어간 모습이다.</p>
@@ -1078,8 +1196,12 @@ justify-content(축 수평정렬) / align-itmes(축 수직정렬)</strong>에</p
 <strong>shrink</strong> : 요소의 크기가 얼마나 줄어들 것인지?<br>
 <strong>basis</strong> : 늘어나고 줄어드는 것과 상관없이 기본 크기</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flex:   &lt;grow(팽창 지수)&gt;    &lt;shrink(수축 지수)&gt;    &lt;basis(기본 크기)&gt;
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>flex:   &lt;grow(팽창 지수)&gt;    &lt;shrink(수축 지수)&gt;    &lt;basis(기본 크기)&gt;
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>한줄로 표현방법<br>
 flex : 0 1 auto;</p>
@@ -1164,10 +1286,10 @@ Flexbox라는 것으로 화면을 꾸밀 수 있다는 점과<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/02/til.html" title="[TIL] HTML,CSS 목업화면 만들어보기">[TIL] Java 객체지향 - 클래스, 필드, 메서드</a></li>
-<li><a class="post-link" href="/git/2023/01/12/git-commitmessage.html" title="[TIL] HTML,CSS 목업화면 만들어보기">Git 이전 Commit Message 수정하기</a></li>
-<li><a class="post-link" href="/til/2022/08/18/til.html" title="[TIL] HTML,CSS 목업화면 만들어보기">[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작</a></li>
-<li><a class="post-link" href="/til/2022/10/17/til.html" title="[TIL] HTML,CSS 목업화면 만들어보기">[TIL] Spring AOP 1</a></li>
+        <li><a class="post-link" href="/til/2022/09/08/til.html" title="[TIL] HTML,CSS 목업화면 만들어보기">[TIL] Java 객체지향 - 추상화</a></li>
+<li><a class="post-link" href="/spring/2022/12/12/spring-cors.html" title="[TIL] HTML,CSS 목업화면 만들어보기">[Spring] CORS 설정하기</a></li>
+<li><a class="post-link" href="/til/2022/11/07/til.html" title="[TIL] HTML,CSS 목업화면 만들어보기">[TIL] Spring Transaction 2 , Event 비동기 적용</a></li>
+<li><a class="post-link" href="/til/2022/10/12/til.html" title="[TIL] HTML,CSS 목업화면 만들어보기">[TIL] Spring Basic 2</a></li>
 </ul>
     </div>
 <div class="post-comments">

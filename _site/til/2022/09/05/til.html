@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -726,17 +726,38 @@ Git부터 시작해서 Java에 대한 문법 그리고 객체지향에 대한 �
 
 <h4 id="선언방법">선언방법</h4>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">접근제어자</span> <span class="n">클래스명</span><span class="o">(</span><span class="n">매개변수</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 생성자 기본 구조</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="n">접근제어자</span> <span class="n">클래스명</span><span class="o">(</span><span class="n">매개변수</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 생성자 기본 구조</span>
 	<span class="o">...</span><span class="na">생략</span><span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 클래스명과 반드시 같아야하고 리턴해주는 리턴타입이 없다.<br>
 접근제어자는 생략해도 된다.</p>
 
 <p>사용 예제를 한번 들어보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
     <span class="nc">Car</span><span class="o">()</span> <span class="o">{</span> 
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1번 생성자"</span><span class="o">);</span>
     <span class="o">}</span>
@@ -749,7 +770,8 @@ Git부터 시작해서 Java에 대한 문법 그리고 객체지향에 대한 �
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"3번 생성자"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 Car라는 클래스가 있으면<br>
 생성자를 만들어주려면 클래스명과 동일한 메서드를 만들면 된다.<br>
@@ -776,7 +798,19 @@ Git부터 시작해서 Java에 대한 문법 그리고 객체지향에 대한 �
 생성자를 상호 호출해주는 메서드로<br>
 <strong>자신이 속한 클래스에서 다른 생성자를 호출한는 경우에 사용한다.</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">test</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="n">prac</span><span class="o">()</span> <span class="o">{</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"연습"</span><span class="o">);</span>
@@ -786,9 +820,22 @@ Git부터 시작해서 Java에 대한 문법 그리고 객체지향에 대한 �
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span><span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
         <span class="n">prac</span> <span class="n">ins1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">prac</span><span class="o">();</span>
         <span class="n">prac</span> <span class="n">ins2</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">prac</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">);</span>
@@ -798,7 +845,8 @@ Git부터 시작해서 Java에 대한 문법 그리고 객체지향에 대한 �
 <span class="n">연습</span>
 <span class="n">연습</span>
 <span class="mi">3</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같은 클래스가 있다고 가정할때.<br>
 Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만들었다.</p>
@@ -817,7 +865,20 @@ Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만�
 
 <p><code class="language-plaintext highlighter-rouge">this.</code> 키워드는 매개변수와 인스턴스 변수를 구분하기 위한 용도로 사용되는 방법이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">modelName</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">color</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">maxSpeed</span><span class="o">;</span>
@@ -828,7 +889,8 @@ Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만�
         <span class="k">this</span><span class="o">.</span><span class="na">maxSpeed</span> <span class="o">=</span> <span class="n">maxSpeed</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>예제를 살펴보자</p>
 
@@ -850,7 +912,25 @@ Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만�
 
 <h4 id="선언방법-1">선언방법</h4>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Outer</span> <span class="o">{</span> <span class="c1">// 외부 클래스</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Outer</span> <span class="o">{</span> <span class="c1">// 외부 클래스</span>
 	
 	<span class="kd">class</span> <span class="nc">Inner</span> <span class="o">{</span>
 		<span class="c1">// 인스턴스 내부 클래스	</span>
@@ -866,7 +946,8 @@ Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만�
 		<span class="o">}</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>내부 클래스는 3가지 나뉠 수 있다.</p>
 
@@ -884,7 +965,26 @@ Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만�
 
 <h4 id="인스턴스-내부-클래스">인스턴스 내부 클래스</h4>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span> <span class="c1">// 외부 클래스</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span> <span class="c1">// 외부 클래스</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">InPrac</span> <span class="nc">InPrac</span><span class="o">;</span>
@@ -901,9 +1001,24 @@ Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만�
         <span class="nc">InPrac</span><span class="o">.</span><span class="na">Test</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">prac</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">prac</span><span class="o">();</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"외부 클래스 사용하여 내부 클래스 기능 호출"</span><span class="o">);</span>
@@ -915,7 +1030,8 @@ Main 클래스에서는 생성자를 2개를 이용해 인스턴스 2개를 만�
 <span class="n">외부</span> <span class="n">클래스</span> <span class="n">사용하여</span> <span class="n">내부</span> <span class="n">클래스</span> <span class="n">기능</span> <span class="n">호출</span>
 <span class="mi">3</span>
 <span class="mi">5</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 예제를 보면 InPrac라는 인스턴스 내부클래스를 생성했다.<br>
 이제 이안에 있는 <code class="language-plaintext highlighter-rouge">Test();</code> 매소드를 호출하는 방법은 위와같이<br>
@@ -931,7 +1047,19 @@ prac클래스의 생성자를 통해 인스턴스를 만들어준 다음 포인�
 
 <p>내부 클래스가 외부 클래스의 존재와 무관하게 정적변수를 사용할 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
     <span class="kd">static</span> <span class="kd">class</span> <span class="nc">InPrac</span><span class="o">{</span>
@@ -941,9 +1069,21 @@ prac클래스의 생성자를 통해 인스턴스를 만들어준 다음 포인�
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">prac</span><span class="o">.</span><span class="na">InPrac</span> <span class="n">sample</span> <span class="o">=</span> <span class="k">new</span> <span class="n">prac</span><span class="o">.</span><span class="na">InPrac</span><span class="o">();</span> <span class="c1">//정적 이너 클래스의 객체 생성</span>
         <span class="n">sample</span><span class="o">.</span><span class="na">test</span><span class="o">();</span>
@@ -952,7 +1092,8 @@ prac클래스의 생성자를 통해 인스턴스를 만들어준 다음 포인�
 
 <span class="c1">// 출력 (에러부분 삭제후)</span>
 <span class="mi">5</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위의 예제로 보면 인스턴스 내부 클래스와 동일한 예제지만<br>
 호출하는 방법이 조금 달라졌다.<br>
@@ -963,7 +1104,23 @@ prac클래스의 생성자를 통해 인스턴스를 만들어준 다음 포인�
 
 <h4 id="지역-내부-클래스">지역 내부 클래스</h4>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">prac</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
     <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
@@ -977,9 +1134,22 @@ prac클래스의 생성자를 통해 인스턴스를 만들어준 다음 포인�
         <span class="n">test</span><span class="o">.</span><span class="na">getPrint</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">prac</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">prac</span><span class="o">();</span>
         <span class="n">test</span><span class="o">.</span><span class="na">test</span><span class="o">();</span>
@@ -989,7 +1159,8 @@ prac클래스의 생성자를 통해 인스턴스를 만들어준 다음 포인�
 <span class="c1">// 출력</span>
 <span class="mi">3</span>
 <span class="mi">5</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>지역 내부클래스도 위와 동일한 예저로 들자면<br>
 <code class="language-plaintext highlighter-rouge">void test();</code>라는 메서드 내부에 내부 클래스가 존재하는 점이 달라진 점이다.<br>
@@ -1035,10 +1206,10 @@ prac클래스의 생성자를 통해 인스턴스를 만들어준 다음 포인�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/08/24/til.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계</a></li>
-<li><a class="post-link" href="/til/2022/11/21/til.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">[TIL] Spring Security 2 (인증처리)</a></li>
-<li><a class="post-link" href="/til/2022/12/06/til.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">[TIL] 배포 컨테이너 Docker</a></li>
-<li><a class="post-link" href="/til/2022/11/30/til.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">[TIL] Spring WebFlux Project Reactor</a></li>
+        <li><a class="post-link" href="/til/2022/11/09/til.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">[TIL] JUnit 2</a></li>
+<li><a class="post-link" href="/til/2022/12/13/til.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">[TIL] Ngrok 사용하여 로컬에서 서버 실행</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+<li><a class="post-link" href="/til/2022/09/26/til.html" title="[TIL] Java 객체지향 - 상속, 캡슐화">[TIL] Java Algorithm BFS, DFS</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -710,13 +710,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p><strong>1). 예외처리를 매개변수로 받기</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@ExceptionHandler</span>
 <span class="nd">@ResponseStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">)</span>
 <span class="kd">public</span> <span class="nc">ErrorResponse</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">RuntimeException</span> <span class="n">error</span><span class="o">){</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
     <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>@ExceptionHandler로 에러를 감지하게 해주고<br>
 에러가 감지되었는데 RuntimeException에러가 발생하면<br>
@@ -726,8 +735,12 @@ RuntimeException 클래스로 객체를 받아서<br>
 <p>여기서 getMessage(); 메서드는<br>
 <strong>Throwalbe</strong>의 메서드를 <strong>상속</strong>받아 사용하고 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"Not found"</span><span class="o">);</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="k">throw</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"Not found"</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>만약 다른 메서드에서 위와 같이 강제로 RuntimeException을 발생시키고<br>
 Message로 “Not found”라고 적어두었을 경우.<br>
@@ -745,7 +758,22 @@ RuntimeException 객체가 매개변수를 통해 전달된다.</p>
 
 <p><strong>2). 개선된 예외 상황 처리</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">ExceptionCode</span> <span class="o">{</span>
     <span class="no">MEMBER_NOT_FOUND</span><span class="o">(</span><span class="mi">404</span><span class="o">,</span> <span class="s">"Member Not Found"</span><span class="o">);</span>
     <span class="nd">@Getter</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">status</span><span class="o">;</span>
@@ -758,9 +786,20 @@ RuntimeException 객체가 매개변수를 통해 전달된다.</p>
         <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BusinessLogicException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
     <span class="nd">@Getter</span>
     <span class="kd">private</span> <span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">;</span>
     <span class="kd">public</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span> <span class="n">exceptionCode</span><span class="o">){</span>
@@ -768,15 +807,25 @@ RuntimeException 객체가 매개변수를 통해 전달된다.</p>
         <span class="k">this</span><span class="o">.</span><span class="na">exceptionCode</span> <span class="o">=</span> <span class="n">exceptionCode</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ExceptionHandler</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@ExceptionHandler</span>
 <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">handleResourceNotFoundException</span><span class="o">(</span><span class="nc">BusinessLogicException</span> <span class="n">e</span><span class="o">){</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">());</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getExceptionCode</span><span class="o">().</span><span class="na">getStatus</span><span class="o">()));</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위에 클래스를 3가지로 나누어서<br>
 BusinessLogicException 클래스를 통해<br>
@@ -793,8 +842,12 @@ Throawble까지 메세지를 올려주고, 객체를 저장하게 작성했다.<
 
 <p><br></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">);</span>
-</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="k">throw</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">);</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>최종적으로 예외를 강제로 위와 같이<br>
 MEMBER_NOT_FOUND로 던졌을 경우</p>
@@ -850,10 +903,10 @@ MEMBER_NOT_FOUND로 던졌을 경우</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">Jekyll Github IO 블로그 코드 하이라이트</a></li>
-<li><a class="post-link" href="/til/2022/08/18/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작</a></li>
-<li><a class="post-link" href="/til/2022/09/05/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">[TIL] Java 객체지향 - 생성자, 내부 클래스</a></li>
-<li><a class="post-link" href="/til/2022/08/26/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">[TIL] Linux 기초</a></li>
+        <li><a class="post-link" href="/til/2022/11/11/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">[TIL] API Documentation 1</a></li>
+<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">[macOs] 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
+<li><a class="post-link" href="/til/2022/11/07/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">[TIL] Spring Transaction 2 , Event 비동기 적용</a></li>
+<li><a class="post-link" href="/til/2022/08/30/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 1">[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자</a></li>
 </ul>
     </div>
 <div class="post-comments">

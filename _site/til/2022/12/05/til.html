@@ -714,13 +714,21 @@ Cloud 운영 환경에 대한 구성들을 배워 보았다.<br>
 
 <p>먼저 <a href="https://github.com/nvm-sh/nvm#install--update-script">nvm 설치</a>를 진행해주자.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>wget <span class="nt">-qO-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>공식 사이트에 있는 최신 버젼을 설치해주면 될 것 같다.<br>
 만약, wget을 찾을 수 없다는 알람이 뜬다면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>wget
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>brew <span class="nb">install </span>wget
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>wget을 패키지 관리자인 homebrew로 설치하면 된다.</p>
 
 <p>짤막한 지식과 검색을 통한 지식으로 정리를 해보자면<br>
@@ -729,8 +737,12 @@ Node.js는 브라우저 내에서 말고도 다른 환경에서도 JavaScript를
 도와주는 실행창, 실행 환경이라고한다. (크롬의 js해석 엔진인 V8 엔진을 이용)</p>
 
 <p>그럼 이제 nvm 설치가 완료되었다면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nt">--version</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>nvm <span class="nt">--version</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어로 설치가 되었는지 확인해주자.</p>
 
 <p>이제 nvm이 설치되었으니 <a href="https://nodejs.org/en/">node.js 설치</a>를 할 수 있다.  <br>
@@ -738,24 +750,40 @@ Node.js는 브라우저 내에서 말고도 다른 환경에서도 JavaScript를
 
 <p>원하는 버전을 설치해줘도 되지만.. 16버전을 이용했을 때<br>
 오류가 없었기에</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install </span>16
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>nvm <span class="nb">install </span>16
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>이라고 입력해주면 16버전이 설치된다.</p>
 
 <p>최신 버전을 설치하고 싶을 경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm <span class="nb">install</span> <span class="nt">--lts</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>nvm <span class="nb">install</span> <span class="nt">--lts</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력해주면 최신버전이 설치가 된다.</p>
 
 <p>만약 설치를 여러개 하였을 때, 버젼을 변경해서 사용하고 싶을 경우<br>
 먼저 버전을 확인하고 싶으면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm list
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>nvm list
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어로 현재 설치된 버전이 확인된다.</p>
 
 <p>그리고 버전을 변경하고 싶을 경우</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nvm use 16
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>nvm use 16
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>과 같은 식으로 현재 설치된 버전 중 선택해서 nvm use를 사용하면 변경된다.</p>
 
 <p><br></p>
@@ -764,14 +792,22 @@ Node.js는 브라우저 내에서 말고도 다른 환경에서도 JavaScript를
 우선 터미널로 우리가 만든 클라이언트 폴더에 접속한다.</p>
 
 <p>이동완료후 클라이언트 의존성 모듈을 설치해야한다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>npm <span class="nb">install</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>npm은 Node Package Manager로 Node.js로 만들어진<br>
 프로그램을 쉽게 설치 혹은 여러기능들을 해주는 것이라 이해하면 쉬울 것 같다.</p>
 
 <p>설치가 완료되었으면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nt">-v</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>npm <span class="nt">-v</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>명령어로 설치된 버전을 확인할 수 있다.</p>
 
 <p><br></p>
@@ -796,8 +832,12 @@ build하기 전에 EC2의 주소를 이용해 환경변수로 설정해<br>
 
 <p>내 EC2 인스턴스의 <code class="language-plaintext highlighter-rouge">퍼블릭 IPv4 DNS</code>를 입력해주면 된다.<br>
 환경 변수 설정이 끝났으면 이제 <code class="language-plaintext highlighter-rouge">npm</code>을 이용해 build를 진행해주면된다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>npm run build
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>를 입력해주면 build가 되어질 것이고</p>
 
 <p><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMm2-cXyHyX_Dka-3eOFxiBi9Shvt6NpdXGyr4eeNvSiqYakRmHEw2IsC8VT2TjTHetmajHF85bfA8RoFaMV30SGUGA_Q=w1920-h921" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -957,13 +997,21 @@ MySQL의 db.t2.micro 인스턴스는 750시간이 무료사용 가능한 것 같
 터미널로 확인이 가능하다.</p>
 
 <p>이전에 homebrew를 통해 MySQL을 설치했었다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>mysql
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>brew <span class="nb">install </span>mysql
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>MYSQL이 정상적으로 설치가 완료되었다면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-u</span> <span class="o">[</span>마스터 이름] <span class="nt">--host</span> <span class="o">[</span>엔드 포인트 주소] <span class="nt">-P</span> <span class="o">[</span>포트 번호] <span class="nt">-p</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>mysql <span class="nt">-u</span> <span class="o">[</span>마스터 이름] <span class="nt">--host</span> <span class="o">[</span>엔드 포인트 주소] <span class="nt">-P</span> <span class="o">[</span>포트 번호] <span class="nt">-p</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>이렇게 입력해주면 터미널로 mysql 접속이 된다.</p>
 
 <p>예를 들어 데이터베이스 만들때 생성했던 정보가 아래와 같다고 가정해보자</p>
@@ -973,8 +1021,12 @@ MySQL의 db.t2.micro 인스턴스는 750시간이 무료사용 가능한 것 같
 데이터 베이스 엔드포인트 : be-88-mycatlikeschuru.c0nwl8c1futc.ap-northeast-2.rds.amazonaws.com</p>
 
 <p>위와 같다고 가정할 때 아래와 같이 터미널에 명령을 실행시켜주면 된다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql <span class="nt">-u</span> admin <span class="nt">--host</span> be-88-mycatlikeschuru.c0nwl8c1futc.ap-northeast-2.rds.amazonaws.com <span class="nt">-P</span> 13306 <span class="nt">-p</span>
-</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre> mysql <span class="nt">-u</span> admin <span class="nt">--host</span> be-88-mycatlikeschuru.c0nwl8c1futc.ap-northeast-2.rds.amazonaws.com <span class="nt">-P</span> 13306 <span class="nt">-p</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위와 같이 입력하면 비밀번호를 입력라고 나올텐데<br>
 우리가 설정했던 마스터 비밀번호 1234를 입력해주면</p>
 
@@ -1000,14 +1052,24 @@ MySQL의 db.t2.micro 인스턴스는 750시간이 무료사용 가능한 것 같
 <p><code class="language-plaintext highlighter-rouge">.yml</code>파일이거나 혹은 <code class="language-plaintext highlighter-rouge">.properties</code>파일에 설정해주면된다.<br>
 <code class="language-plaintext highlighter-rouge">.properties</code>파일로 만들었으니 해당 기준으로 적어본다.</p>
 
-<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring.jpa.database</span><span class="p">=</span><span class="s">mysql</span>
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="py">spring.jpa.database</span><span class="p">=</span><span class="s">mysql</span>
 <span class="py">spring.jpa.database-platform</span><span class="p">=</span><span class="s">org.hibernate.dialect.MySQL5InnoDBDialect</span>
 <span class="py">spring.datasource.url</span><span class="p">=</span><span class="s">jdbc:mysql://[AWS RDS 엔드포인트]/test?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</span>
 <span class="py">spring.datasource.username</span><span class="p">=</span><span class="s">[RDS 마스터 이름]</span>
 <span class="py">spring.datasource.password</span><span class="p">=</span><span class="s">[RDS 마스터 비밀번호]</span>
 <span class="py">spring.datasource.driver-class-name</span><span class="p">=</span><span class="s">com.mysql.cj.jdbc.Driver</span>
 <span class="py">config.domain</span><span class="p">=</span><span class="s">[AWS S3 엔드포인트]</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위에 처럼 이제 우리가 모두 알 수 있는 정보다</p>
 
 <p>RDS를 만들었기에 엔드포인트를 알 수 있고<br>
@@ -1051,10 +1113,10 @@ API 요청이 오면 이제 정상적으로 EC2 서버에서 작성한 프로그
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/23/til.html" title="[TIL] 배포 컨테이너 Docker">[TIL] Java 자료구조 Graph, Tree, BST</a></li>
-<li><a class="post-link" href="/til/2022/12/02/til.html" title="[TIL] 배포 컨테이너 Docker">[TIL] Cloud 운영 환경 구성 1</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="[TIL] 배포 컨테이너 Docker">[TIL] Java Algorithm 3</a></li>
-<li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="[TIL] 배포 컨테이너 Docker">[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
+        <li><a class="post-link" href="/til/2022/10/20/til.html" title="[TIL] 배포 컨테이너 Docker">[TIL] Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/git/2023/01/12/git-commitmessage.html" title="[TIL] 배포 컨테이너 Docker">Git 이전 Commit Message 수정하기</a></li>
+<li><a class="post-link" href="/til/2022/09/15/til.html" title="[TIL] 배포 컨테이너 Docker">[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+<li><a class="post-link" href="/til/2022/12/06/til.html" title="[TIL] 배포 컨테이너 Docker">[TIL] 배포 컨테이너 Docker</a></li>
 </ul>
     </div>
 <div class="post-comments">

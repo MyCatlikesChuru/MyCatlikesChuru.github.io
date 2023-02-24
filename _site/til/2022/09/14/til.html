@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -731,7 +731,23 @@ IndexOutOfBoundsException 예외가 발생하니 주의해야한다.</p>
 
 <p>간단한 예를 들어보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"A"</span><span class="o">);</span>
@@ -745,7 +761,8 @@ IndexOutOfBoundsException 예외가 발생하니 주의해야한다.</p>
 <span class="c1">//출력</span>
 <span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
 <span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>동일한 List 객체 arrayList1과 2를 만들었다.<br>
 arrayList1에는 값을 add시켜주고<br>
@@ -761,7 +778,19 @@ arrayList2에는 arrayList1의 값을 addAll 시켜주어<br>
 -&gt; 지정된 위치의 요소를 제거한다. int형으로 값을 입력.<br>
 반환 타입은 요소가 반환된다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"A"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="s">"B"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="s">"C"</span><span class="o">);</span>
@@ -771,7 +800,8 @@ arrayList2에는 arrayList1의 값을 addAll 시켜주어<br>
 <span class="c1">//출력</span>
 <span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
 <span class="no">A</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위와 같이 0번 인덱스를 지웠고, 해당하는 요소인 “A”가 반환되어진 모습니다.<br>
 String 타입의 A이기때문에 String으로 반환되어진 값이다.</p>
@@ -784,7 +814,19 @@ String 타입의 A이기때문에 String으로 반환되어진 값이다.</p>
 
 <p>아래의 예제를 보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"A"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="s">"B"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="s">"C"</span><span class="o">);</span>
@@ -794,7 +836,8 @@ String 타입의 A이기때문에 String으로 반환되어진 값이다.</p>
 <span class="c1">//출력</span>
 <span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
 <span class="mi">3</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>A,B,C 요소가 들어있으므로 int형 3이 출력되어진다.</p>
 
@@ -808,7 +851,19 @@ String 타입의 A이기때문에 String으로 반환되어진 값이다.</p>
 즉, 요소가 반환되어진다. 요소는 위에서 얘기했듯이<br>
 선언되었을때의 타입매개변수로 지정한 것을 얘기한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"A"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="s">"B"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="s">"C"</span><span class="o">);</span>
@@ -818,7 +873,8 @@ String 타입의 A이기때문에 String으로 반환되어진 값이다.</p>
 <span class="c1">//출력</span>
 <span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
 <span class="no">A</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>0번 인덱스의 요소를 뽑아내는 프로그램이다.<br>
 String형태의 A가 출력되어지는 모습.</p>
@@ -829,7 +885,20 @@ String형태의 A가 출력되어지는 모습.</p>
 해당 List안의 요소를 지워주는 메서드이다.<br>
 반환타입은 void이며, 따로 반환되어지는 것이 없다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"A"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="s">"B"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="s">"C"</span><span class="o">);</span>
@@ -840,7 +909,8 @@ String형태의 A가 출력되어지는 모습.</p>
 <span class="c1">//출력</span>
 <span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
 <span class="o">[]</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>clear(); 메서드 진행후 출력시<br>
 List가 비어있는 모습</p>
@@ -853,7 +923,22 @@ List가 비어있는 모습</p>
 반환 타입은 boolean으로 반환하게 되어진다.<br>
 List안의 요소가 있으면 false / 요소가 없으면 true</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arrayList1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="s">"A"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="s">"B"</span><span class="o">);</span>
 <span class="n">arrayList1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="s">"C"</span><span class="o">);</span>
@@ -866,7 +951,8 @@ List안의 요소가 있으면 false / 요소가 없으면 true</p>
 <span class="o">[</span><span class="no">A</span><span class="o">,</span> <span class="no">B</span><span class="o">,</span> <span class="no">C</span><span class="o">]</span>
 <span class="kc">false</span>
 <span class="kc">true</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>위의 코드로 isEmpty(); 메서드를 호출해<br>
 비어있는지 유무확인을 할 수 있다.</p>
@@ -901,7 +987,17 @@ hashMap.put(“이재혁”,177); 이런식으로 지정된 값을 맵의 키와
 
 <p>반환 타입은 V, 즉 값이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">176</span><span class="o">);</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
@@ -909,7 +1005,8 @@ hashMap.put(“이재혁”,177); 이런식으로 지정된 값을 맵의 키와
 <span class="c1">//출력</span>
 <span class="o">{}</span>
 <span class="o">{</span><span class="n">이재혁</span><span class="o">=</span><span class="mi">176</span><span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>hashMap.put을 키와값을 한뒤에<br>
 출력했을때 위와 같이 담겨져있는 객체가 표시된다.<br>
@@ -926,7 +1023,20 @@ Map을 entry타입의 Set으로 바꾸어주는 메서드이다.<br>
 
 <p><code class="language-plaintext highlighter-rouge">Map.Entrt&lt;K,V&gt;</code>로 담아서 Set으로 변환시킨 모습이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
@@ -937,7 +1047,8 @@ Map을 entry타입의 Set으로 바꾸어주는 메서드이다.<br>
 <span class="c1">//출력</span>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="o">[</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">]</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>첫번째 출력은 hashMap상태로 출력된 모습이며<br>
 두번째 출력은 entrySet으로 변경된 형태의 모습이다.<br>
@@ -954,7 +1065,20 @@ iterator가 사용가능한 Set으로 변경해주는 것이다.</p>
 keySet은 Key 객체들만 Set 타입으로 변경하는 것이다.<br>
 똑같이 넘겨주는 인자는 없고, 반환 타입은 <code class="language-plaintext highlighter-rouge">Set&lt;K&gt;</code>를 반환한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
@@ -965,7 +1089,8 @@ keySet은 Key 객체들만 Set 타입으로 변경하는 것이다.<br>
 <span class="c1">//출력</span>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="o">[</span><span class="n">아무개</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">]</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>출력되어진 값들은 Key값만 가지고 있는 Set객체이다.<br>
 위에서 Key값을 String으로 선언했기에<br>
@@ -979,7 +1104,21 @@ keySet은 Key 객체들만 Set 타입으로 변경하는 것이다.<br>
 마찬가지로 넘겨주는 인자는 없고<br>
 반환 타입은 <code class="language-plaintext highlighter-rouge">Collection&lt;V&gt;</code>가 되어진다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 
@@ -991,7 +1130,8 @@ keySet은 Key 객체들만 Set 타입으로 변경하는 것이다.<br>
 <span class="c1">//출력값</span>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="o">[</span><span class="mi">184</span><span class="o">,</span> <span class="mi">177</span><span class="o">]</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>마찬가지로 값을 반환한 객체가 표시되어진다.</p>
 
@@ -1003,7 +1143,19 @@ Key에 맵핑되어있는 값을 찾아주는 메서드이다.</p>
 <p><strong>get(Object Key);</strong><br>
 -&gt; get 메서드안에 Key에 해당하는 객체를 넣어주면 V, 즉 값이 반환되어지는 메서드이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span> <span class="o">,</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 
@@ -1013,7 +1165,8 @@ Key에 맵핑되어있는 값을 찾아주는 메서드이다.</p>
 <span class="c1">//출력</span>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="mi">184</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>get메서드에 “아무개”라는 스트링 값을 키로 호출시키면<br>
 해당 키의 값인 Integer형 184라는 값이 반환되게 되어진다.</p>
@@ -1026,7 +1179,20 @@ Key에 맵핑되어있는 값을 찾아주는 메서드이다.</p>
 <p><strong>remove(Object Key);</strong><br>
 -&gt; get과 동일하게 Key에 해당하는 객체를 넣어주면 V, 즉 값이 반환되어지는 메서드이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
@@ -1037,7 +1203,8 @@ Key에 맵핑되어있는 값을 찾아주는 메서드이다.</p>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="mi">184</span>
 <span class="o">{</span><span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>2개로 맵핑되어있는 Map에 remove(“아무개”);를 호출함으로써<br>
 아무개에한 반환값 Integer 184를 반환하게되고<br>
@@ -1049,7 +1216,18 @@ Map에서는 아무개가 사라진 모습을 볼 수 있다.</p>
 ArrayList와 동일하게 맵핑되어있는 Entry 개수를<br>
 int형으로 반환해준다. 호출할때 인자는 따로 없다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td>
+<td class="rouge-code"><pre><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
@@ -1058,7 +1236,8 @@ int형으로 반환해준다. 호출할때 인자는 따로 없다.</p>
 <span class="c1">//출력</span>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="mi">2</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -1069,7 +1248,20 @@ int형으로 반환해준다. 호출할때 인자는 따로 없다.</p>
 -&gt; Key값을 인자에 넘겨주고 호출하면, 해당 Key와 동일한<br>
 Key가 있으면 true로 반환 / 없으면 false로 반환한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
@@ -1080,7 +1272,8 @@ Key가 있으면 true로 반환 / 없으면 false로 반환한다.</p>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="kc">true</span>
 <span class="kc">false</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -1092,7 +1285,20 @@ Key가 있으면 true로 반환 / 없으면 false로 반환한다.</p>
 -&gt; Value 값을 인자에 넘겨주고 호출하면, 해당 Value와 동일한<br>
 Value 가 있으면 true로 반환 / 없으면 false로 반환한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="mi">177</span><span class="o">);</span>
 <span class="n">hashMap</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"아무개"</span><span class="o">,</span><span class="mi">184</span><span class="o">);</span>
 
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
@@ -1103,7 +1309,8 @@ Value 가 있으면 true로 반환 / 없으면 false로 반환한다.</p>
 <span class="o">{</span><span class="n">아무개</span><span class="o">=</span><span class="mi">184</span><span class="o">,</span> <span class="n">이재혁</span><span class="o">=</span><span class="mi">177</span><span class="o">}</span>
 <span class="kc">true</span>
 <span class="kc">false</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <hr>
 
@@ -1141,10 +1348,10 @@ IDE를 통해서 연습해보고 매우 유익했던 하루였다!!</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/db/2023/01/08/db-redissetting.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">Redis CLI 설치 및 사용방법</a></li>
-<li><a class="post-link" href="/til/2022/11/09/til.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">[TIL] JUnit 2</a></li>
-<li><a class="post-link" href="/til/2022/08/26/til.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">[TIL] Linux 기초</a></li>
-<li><a class="post-link" href="/til/2022/10/18/til.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">[TIL] Spring AOP 2</a></li>
+        <li><a class="post-link" href="/til/2022/09/27/til.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">[TIL] Java Algorithm 1</a></li>
+<li><a class="post-link" href="/til/2022/10/31/til.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">[TIL] Spring Data JDBC Pagination</a></li>
+<li><a class="post-link" href="/til/2022/10/06/til.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">[TIL] DB RDMBS 2</a></li>
+<li><a class="post-link" href="/til/2022/11/25/til.html" title="[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력">[TIL] OAuth 2 인증 기초</a></li>
 </ul>
     </div>
 <div class="post-comments">

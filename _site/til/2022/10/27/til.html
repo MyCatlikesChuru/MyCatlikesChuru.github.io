@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -747,8 +747,12 @@ SQL 쿼리문을 직접 다루기보단, 객체를 SQL 쿼리문으로 변환해
 
 <p>JPA의 기술적인 난이도에 비해 심플하다.<br>
 우선 Spring data JDBC를 이용하기 위해서는</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>이전에 우리가 의존 라이브러리 추가했던 것 처럼<br>
 build.gradle 의존 라이브러리 코드를 추가해줘야 된다.</p>
@@ -757,15 +761,23 @@ build.gradle 의존 라이브러리 코드를 추가해줘야 된다.</p>
 
 <p>데이터 베이스는 인메모리를 이용하는 DB H2를 사용하여 실습해보자</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>runtimeOnly 'com.h2database:h2'
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>runtimeOnly 'com.h2database:h2'
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>동일하게 build.gradle에 h2를 사용가능하게<br>
 의존성 라이브러리를 추가해주자</p>
 
 <p>스프링 부트를 실행시키면 콘솔에 아래와 같이 노출되는 것을 볼 수 있는데</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:48abebe3-424c-4a03-a74b-8d1ff2ebc750'
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:48abebe3-424c-4a03-a74b-8d1ff2ebc750'
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>이말은, /h2-consle 주소로 접속후 연결하기 위한<br>
 JDBC URL: jdbc:h2:mem:48abebe3-424c-4a03-a74b-8d1ff2ebc750 를<br>
 입력하라는 의미이다.</p>
@@ -778,14 +790,24 @@ JDBC URL: jdbc:h2:mem:48abebe3-424c-4a03-a74b-8d1ff2ebc750 를<br>
 <p>위와 같이 입력하면 H2 DB에 접속이 가능하다.<br>
 여기서 JDBC URL은 부트실행시킬시 랜덤으로 변경되므로 간편하게 이용하기위해선</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
   <span class="na">h2</span><span class="pi">:</span>
     <span class="na">console</span><span class="pi">:</span>
       <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
       <span class="na">path</span><span class="pi">:</span> <span class="s">/h2 (1)</span> <span class="c1">#Context path 변경</span>
   <span class="na">datasource</span><span class="pi">:</span>
     <span class="na">url</span><span class="pi">:</span> <span class="s">jdbc:h2:mem:test</span> <span class="c1">#(2) #JDBC URL 변경</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>resources -&gt; application.yml에서 위와 같이 설정을하면<br>
 주소를 h2, JDBC URL을 간단하게 입력해<br>
 접속이 가능하므로 참고하자!<br>
@@ -806,12 +828,20 @@ application.yml 파일에 사용할 DB를 연동했다.<br>
 <p><br></p>
 
 <p>1). .sql 파일에 필요한 Table Script를 작성한다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE IF NOT EXISTS BABO (
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre>CREATE TABLE IF NOT EXISTS BABO (
     BABO_ID bigint NOT NULL AUTO_INCREMENT,
     MESSAGE varchar(100) NOT NULL,
     PRIMARY KEY (BABO_ID)
 );
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>resources 경로에서 -&gt; 새로 만들기 -&gt; 파일 -&gt; 이름.sql <br>
 로 입력하면 .sql 파일이 생길 것이다.</p>
 
@@ -821,7 +851,19 @@ Primary key를 만들고  MESSAGE라는 column도 생성하는 쿼리문을<br>
 
 <p>2). 작성한 sql파일을 읽어서 테이블을 생성할 수 있도록 application.yml파일에 초기화 설정을 추가한다.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+<td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
   <span class="na">h2</span><span class="pi">:</span>
     <span class="na">console</span><span class="pi">:</span>
       <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
@@ -831,7 +873,8 @@ Primary key를 만들고  MESSAGE라는 column도 생성하는 쿼리문을<br>
   <span class="na">sql</span><span class="pi">:</span>
     <span class="na">init</span><span class="pi">:</span>
       <span class="na">schema-locations</span><span class="pi">:</span> <span class="s">classpath*:schema.sql</span> <span class="c1"># 경로 추가</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>이제 우리가 만든 sql파일의 경로를 설정해주는 방법인데.<br>
 파일이름을 schema.sql이라고 지정했고 해당 파일을<br>
 위의 코드 처럼 경로를 지정했다.<br>
@@ -855,15 +898,25 @@ DB에 저장을 해줄 수 있다.</p>
 <p><strong>맨처음에 JDBC는 자바레벨에서 데이터베이스에 데이터를 업데이트하거나<br>
 반대로 받을 수 있다고 맨처음에 얘기를 했습니다.</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>맨처음에 의존라이브러리를 우리가 추가했었는데<br>
 이 라이브러리 안에 기능중 CrudRepository라는 클래스로<br>
 데이터베이스에 접근이 가능하다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.springframework.data.repository.CrudRepository</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MessageRepository</span> <span class="kd">extends</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="nc">Babo</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>인터페이스로 Repository를 만들고 CrudRepository를 상속해준 다음에<br>
 &lt;클래스, PrimaryKey 타입&gt;을 입력해주면 우리는 다형성에 의해<br>
 CrudRepository에 있는 기능들을 사용할 수 있게 되어진다.</p>
@@ -874,7 +927,20 @@ import가 되려면 의존라이브러리를 추가해야한다 !!)</em></p>
 <p>위에 코드로 이제 우리는 infterface MessageRepository를 사용해<br>
 Service 클래스에서 Overriding하여 사용하면<br>
 데이터가 H2 DB에 저장이되는 아주 신비로운 일을 겪을 수 있다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@Service</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MessageService</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MessageRepository</span> <span class="n">messageRepository</span><span class="o">;</span>
 
@@ -885,7 +951,8 @@ Service 클래스에서 Overriding하여 사용하면<br>
         <span class="k">return</span> <span class="n">messageRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>스프링 컨테이너를 통한 의존성 주입 후<br>
 해당 객체의 .save(); 메서드를 구현하면<br>
 Entity의 맞는 데이터가 들어왔을 때, 데이터가 맵핑되어 자동으로<br>
@@ -917,10 +984,10 @@ DB에 저장되게 되어진다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/28/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">[TIL] Java Algorithm 2</a></li>
-<li><a class="post-link" href="/til/2022/11/03/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</a></li>
-<li><a class="post-link" href="/til/2022/11/15/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">[TIL] Application 빌드, 실행</a></li>
-<li><a class="post-link" href="/til/2022/11/18/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">[TIL] Spring Security 1 (기초)</a></li>
+        <li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">H2 Database 다운로드 및 실행</a></li>
+<li><a class="post-link" href="/til/2022/11/24/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">[TIL] Spring Security, JWT 사용하여 인증하기</a></li>
+<li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">Jekyll Github IO 블로그 코드 하이라이트</a></li>
+<li><a class="post-link" href="/til/2022/08/31/til.html" title="[TIL] Spring JDBC 기반 액세스 계층 2">[TIL] Java 문법기초 - 제어문</a></li>
 </ul>
     </div>
 <div class="post-comments">

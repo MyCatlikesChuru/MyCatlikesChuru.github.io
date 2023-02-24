@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 17 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -764,11 +764,18 @@ Refresh Token을 사용해 Access Token을 새로 발급을 받는다.</p>
    -&gt; 어떤 종류의 토큰인지  <br>
    -&gt; 어떤 알고리즘으로 암호화 하는지<br>
    -&gt; Header의 JSON 객체를 base64 방식으로 인코딩한다.</p>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="p">{</span><span class="w">
   </span><span class="nl">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HS256"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"typ"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JWT"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
+</span></pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -777,12 +784,20 @@ Refresh Token을 사용해 Access Token을 새로 발급을 받는다.</p>
    -&gt; 민감한 정보는 담지 않는 것이 좋다.<br>
    -&gt; 기타 필요한 정보<br>
    -&gt; Payload의 JSON 객체를 base64 방식으로 인코딩한다.</p>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre><span class="p">{</span><span class="w">
   </span><span class="nl">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LeeJaehyeok"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">151623391</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
+</span></pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -790,8 +805,12 @@ Refresh Token을 사용해 Access Token을 새로 발급을 받는다.</p>
    -&gt; Header, Payload를 base64 인코딩한 값과 salt값의 조합으로 암호화된 값<br>
    -&gt; 단방향 암호화를 수행한다.<br>
    -&gt; 이렇게 암호화된 메세지는 토큰의 위변조 유무를 검증하는데 사용한다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HMACSHA256(base64UrlEncode(header) + '.' + base64UrlEncode(payload), secret);
-</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre>HMACSHA256(base64UrlEncode(header) + '.' + base64UrlEncode(payload), secret);
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p><br></p>
 
@@ -849,11 +868,18 @@ JWT 토큰을 만드는 방법을 코드로 작성해보자</p>
 
 <p><strong>1). 의존 라이브러리 추가</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//jwt 의존 라이브러리</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+<td class="rouge-code"><pre><span class="c1">//jwt 의존 라이브러리</span>
 <span class="n">implementation</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">jsonwebtoken</span><span class="o">:</span><span class="n">jjwt</span><span class="o">-</span><span class="nl">api:</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">5</span><span class="err">'</span>
 <span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">jsonwebtoken</span><span class="o">:</span><span class="n">jjwt</span><span class="o">-</span><span class="nl">impl:</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">5</span><span class="err">'</span>
 <span class="n">runtimeOnly</span>	<span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">jsonwebtoken</span><span class="o">:</span><span class="n">jjwt</span><span class="o">-</span><span class="nl">jackson:</span><span class="mf">0.11</span><span class="o">.</span><span class="mi">5</span><span class="err">'</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>우선 build.gradle에 jjwt 의존라이브러리를 추가해준다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/210178457-15eabdfd-e96e-4b63-9fb3-60c82fbbed2a.png" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -865,7 +891,37 @@ JWT 토큰을 만드는 방법을 코드로 작성해보자</p>
 <p><strong>2). AccessToken 만들기</strong><br>
 JWT 토큰을 생서해주는 클래스를 만들어보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
     
    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64SecretKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">secretKey</span><span class="o">)</span> <span class="o">{</span>
       <span class="nc">String</span> <span class="n">encode</span> <span class="o">=</span> <span class="nc">Encoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">secretKey</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
@@ -893,7 +949,8 @@ JWT 토큰을 생서해주는 클래스를 만들어보자.</p>
       <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>1). <code class="language-plaintext highlighter-rouge">encodeBase64SecretKey();</code> 메서드<br>
 해당 메서드 부터 살펴보면, String 타입의 객체 secretKey라는 것을<br>
@@ -923,7 +980,46 @@ HMAC_SHA 알고리즘을 적용해 Key객체로 만들어 리턴해준다.<br>
 
 <p>이렇게 우선 AccessToken을 만들어주는 메서드를 구현했다.<br>
 해당 메서드를 테스트코드를 만들어 검증해보자.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@TestInstance</span><span class="o">(</span><span class="nc">TestInstance</span><span class="o">.</span><span class="na">Lifecycle</span><span class="o">.</span><span class="na">PER_CLASS</span><span class="o">)</span> <span class="c1">// 테스트 인스턴스 생성단위가 클래스임</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td>
+<td class="rouge-code"><pre><span class="nd">@TestInstance</span><span class="o">(</span><span class="nc">TestInstance</span><span class="o">.</span><span class="na">Lifecycle</span><span class="o">.</span><span class="na">PER_CLASS</span><span class="o">)</span> <span class="c1">// 테스트 인스턴스 생성단위가 클래스임</span>
 <span class="kd">class</span> <span class="nc">JwtTokenizerTest</span> <span class="o">{</span>
    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">JwtTokenizer</span> <span class="n">jwtTokenizer</span><span class="o">;</span>
    <span class="kd">private</span> <span class="nc">String</span> <span class="n">secretKey</span><span class="o">;</span>
@@ -960,7 +1056,8 @@ HMAC_SHA 알고리즘을 적용해 Key객체로 만들어 리턴해준다.<br>
       <span class="n">assertThat</span><span class="o">(</span><span class="n">accessToken</span><span class="o">,</span> <span class="n">notNullValue</span><span class="o">());</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>위와 같이 테스트 코드를 작성할 수 있다.</p>
 
 <p>테스트를 실행전 secretKey값을 넣어놓고 인코딩한 값을<br>
@@ -999,7 +1096,27 @@ RefreshToken을 만드는 방법은 사실 AccessToken과<br>
 
 <p>아까와 동일한 클래스 JwtTokenizer에다 메서드를 추가해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td>
+<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtTokenizer</span> <span class="o">{</span>
     
    <span class="o">...</span> <span class="n">생략</span>
 
@@ -1017,16 +1134,22 @@ RefreshToken을 만드는 방법은 사실 AccessToken과<br>
    <span class="o">...</span> <span class="n">생략</span>
    
 <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>AcessToken과 다른점은 얘기했듯이<br>
 clamis에 대한 내용만 빠진 상태로 Token을 만들어주면된다.</p>
 
 <p><br></p>
 
 <h3 id="오늘-만난-error">오늘 만난 ERROR</h3>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The specified key byte array is 248 bits which is not secure enough for any JWT HMAC-SHA algorithm.  The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size &gt;= 256 bits (the key size must be greater than or equal to the hash output size).  Consider using the io.jsonwebtoken.security.Keys#secretKeyFor(SignatureAlgorithm) method to create a key guaranteed to be secure enough for your preferred HMAC-SHA algorithm.  See https://tools.ietf.org/html/rfc7518#section-3.2 for more information.
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+<td class="rouge-code"><pre>The specified key byte array is 248 bits which is not secure enough for any JWT HMAC-SHA algorithm.  The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size &gt;= 256 bits (the key size must be greater than or equal to the hash output size).  Consider using the io.jsonwebtoken.security.Keys#secretKeyFor(SignatureAlgorithm) method to create a key guaranteed to be secure enough for your preferred HMAC-SHA algorithm.  See https://tools.ietf.org/html/rfc7518#section-3.2 for more information.
 io.jsonwebtoken.security.WeakKeyException: The specified key byte array is 136 bits which is not secure enough for any JWT HMAC-SHA algorithm.  The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size &gt;= 256 bits (the key size must be greater than or equal to the hash output size).  Consider using the io.jsonwebtoken.security.Keys#secretKeyFor(SignatureAlgorithm) method to create a key guaranteed to be secure enough for your preferred HMAC-SHA algorithm.  See https://tools.ietf.org/html/rfc7518#section-3.2 for more information.
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 
 <p>HMAC_SHA 알고리즘을 사용 중 발생했던 에러를 적어본다.<br>
 알람 발생 경위는 위에 에러 콘솔에서<br>
@@ -1035,24 +1158,40 @@ SecretKey값이 256 bits가 넘지 않아서 발생한 문제로 추청되어</p
 
 <p>테스트를 진행해봤다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64SecretKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">secretKey</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">encodeBase64SecretKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">secretKey</span><span class="o">){</span>
      <span class="nc">String</span> <span class="n">encode</span> <span class="o">=</span> <span class="nc">Encoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">secretKey</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="nc">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">));</span>
      <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"encodeBase64SecretKey Method 실행 { "</span> <span class="o">+</span><span class="s">"secretKEY = "</span><span class="o">+</span> <span class="n">secretKey</span> <span class="o">+</span> <span class="s">" secretKEY.Byte = "</span><span class="o">+</span> <span class="n">secretKey</span><span class="o">.</span><span class="na">getBytes</span><span class="o">().</span><span class="na">length</span> <span class="o">+</span> <span class="s">" Base64 Encode = "</span> <span class="o">+</span> <span class="n">encode</span><span class="o">+</span><span class="s">" }"</span><span class="o">);</span>
      <span class="k">return</span> <span class="n">encode</span><span class="o">;</span>
  <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>현재 매개변수로 String secretKey를 BASE64로 인코딩 해주는 작업이다.<br>
 secretKey = “LeeJaehyeok63763712323123123112”;<br>
 실제로 이러한 데이터를 secretKey로 입력했다.</p>
 
 <p>해당 encode 객체로 아래의 메서드의 매개변수로 보내주었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="nc">Key</span> <span class="nf">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td>
+<td class="rouge-code"><pre> <span class="kd">private</span> <span class="nc">Key</span> <span class="nf">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
      <span class="kt">byte</span><span class="o">[]</span> <span class="n">keyBytes</span> <span class="o">=</span> <span class="nc">Decoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span> <span class="c1">// 디코딩 진행</span>
      <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Key</span><span class="o">)</span> <span class="nc">Keys</span><span class="o">.</span><span class="na">hmacShaKeyFor</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">);</span> <span class="c1">// HMAC 알고리즘을 적용한 Key 객체 생성</span>
      <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
  <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>첫번째로 인코딩했던 문자열을 디코딩해주고<br>
 HMAC_SHA 알고리즘을 통해 Key값으로 바꾸는 작업을 했다.<br>
 이떄 여기서 에러가 발생했던 지점이었다.</p>
@@ -1060,7 +1199,24 @@ HMAC_SHA 알고리즘을 통해 Key값으로 바꾸는 작업을 했다.<br>
 <p><code class="language-plaintext highlighter-rouge">.hmacShaKeyFor();</code> 안에서 스펙과 맞지않는 디코드값을 <br>
 넣어준게 문제인 것 같다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="nc">Key</span> <span class="nf">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td>
+<td class="rouge-code"><pre> <span class="kd">private</span> <span class="nc">Key</span> <span class="nf">getKeyFormBase64EncodedKey</span><span class="o">(</span><span class="nc">String</span> <span class="n">base64EncodedSecretKey</span><span class="o">){</span>
      <span class="kt">byte</span><span class="o">[]</span> <span class="n">keyBytes</span> <span class="o">=</span> <span class="nc">Decoders</span><span class="o">.</span><span class="na">BASE64</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">base64EncodedSecretKey</span><span class="o">);</span> <span class="c1">// 디코딩 진행</span>
         
      <span class="c1">// ===========Test 임시 코드===========</span>
@@ -1075,7 +1231,8 @@ HMAC_SHA 알고리즘을 통해 Key값으로 바꾸는 작업을 했다.<br>
      <span class="nc">Key</span> <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Key</span><span class="o">)</span> <span class="nc">Keys</span><span class="o">.</span><span class="na">hmacShaKeyFor</span><span class="o">(</span><span class="n">keyBytes</span><span class="o">);</span> <span class="c1">// HMAC 알고리즘을 적용한 Key 객체 생성</span>
      <span class="k">return</span> <span class="n">key</span><span class="o">;</span>
  <span class="o">}</span>
-</code></pre></div></div>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
 <p>실제로 디코딩했을때 우리가 넣어줬던</p>
 
 <p><code class="language-plaintext highlighter-rouge">System.out.println(test);</code><br>
@@ -1128,10 +1285,10 @@ Bit로 환산해보면 1Byte = 8 Bit로 계산되어지니<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/07/til.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">[TIL] Spring Transaction 2 , Event 비동기 적용</a></li>
-<li><a class="post-link" href="/til/2022/12/12/til.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">[TIL] 프로젝트 연습, 준비</a></li>
-<li><a class="post-link" href="/til/2022/12/01/til.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">[TIL] Spring WebFlux 구현하기</a></li>
-<li><a class="post-link" href="/til/2022/09/13/til.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">[TIL] Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
+        <li><a class="post-link" href="/it/2022/10/25/it-etc-imageurl.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">구글 드라이브로 이미지 url 적용하기</a></li>
+<li><a class="post-link" href="/til/2022/11/16/til.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">[TIL] 세달차 회고</a></li>
+<li><a class="post-link" href="/linux/unix/2022/12/29/server-NginX.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">AWS EC2 NginX 클라이언트 배포</a></li>
+<li><a class="post-link" href="/til/2022/11/14/til.html" title="[TIL] Spring Security, JWT 사용하여 인증하기">[TIL] API Documentation 2</a></li>
 </ul>
     </div>
 <div class="post-comments">
