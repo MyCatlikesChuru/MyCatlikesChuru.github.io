@@ -183,11 +183,7 @@ _
 f
 6_posts/program/Spring/2022-11-25-spring-environment.md,3/9/397b2fbd358e640530049a511ec53a0800c7da8b
 ]
--_posts/til/BootCamp/2022-12/2022-12-13-til.md,e/d/edfc7a88621ac676e87ba5742edaab2acb55b3ae
-]
 -_posts/til/BootCamp/2022-12/2022-12-12-til.md,b/e/be802dcd9edc20e665365761e1e2bfe226cd61b8
-]
--_posts/til/BootCamp/2022-12/2022-12-08-til.md,e/4/e4cee5c82f43f10d43081937313cfdd92248371c
 ]
 -_posts/til/BootCamp/2022-12/2022-12-07-til.md,9/7/9731043c6ce0628aa3f9b928c4f9fc848d8e8adc
 ]
