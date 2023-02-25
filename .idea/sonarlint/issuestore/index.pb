@@ -213,8 +213,6 @@ f
 ]
 -_posts/til/BootCamp/2022-11/2022-11-17-til.md,b/b/bbd8a5590e23ac94d726add8e5295ce974836282
 ]
--_posts/til/BootCamp/2022-11/2022-11-16-til.md,8/2/829698f3fb76376f2deb4e0e92e29f95830d6127
-]
 -_posts/til/BootCamp/2022-11/2022-11-15-til.md,3/4/34b752e5b986da806d413a7c470ff295dd3e09a7
 ]
 -_posts/til/BootCamp/2022-11/2022-11-14-til.md,9/9/99d6ab18996ef0785010ddd6c29902d50475931c
@@ -344,3 +342,11 @@ X
 (_posts/os/macOs/2022-08-26-OS-macOs-3.md,2/8/28742905e11d4f0f90a160b31f57c4c538bd7fcb
 Z
 *_includes/extensions/comments/gitment.html,b/0/b088ef4777d2fae2f23fd7d9edc72172d0509e19
+X
+(_posts/os/macOs/2022-11-27-OS-macOs-4.md,e/f/ef2c0246a1dd6d4746889485e0c4749bcf0fa444
+X
+(_posts/os/macOs/2022-12-04-OS-macOs-5.md,2/8/28e671eb1d131f69102cd4a39f0cf3ba4afeb737
+g
+7_posts/algorithm/programmers/2023-02-19-algo-printer.md,d/6/d68145b1dc0e1ec8fa4a6ac70f552b0a88779b95
+i
+9_posts/algorithm/programmers/2023-02-11-algo-ponketmon.md,e/a/eac034878388f8fd5c3c390364baad1f1930dc24
