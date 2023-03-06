@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Oracle Cloud 외부 접속 설정
+title: "Oracle Cloud 외부 접속 설정"
 subtitle: 
 categories: Server
 tags: [Server, Oracle]

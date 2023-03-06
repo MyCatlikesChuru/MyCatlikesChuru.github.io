@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선
+title: "Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선"
 subtitle: 
 categories: Server
 tags: [Server, Oracle]
