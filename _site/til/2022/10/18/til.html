@@ -677,7 +677,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -716,27 +716,12 @@ Advice의 타입별 사용방법을 알아보았었다.<br>
 우리가 JoinPoint에서 어느 부분을 쓸지 정해주는 부분이다<br>
 AspectJ 이용해 우리는 표현식을 사용할 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.*</span><span class="o">;</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.*</span><span class="o">;</span>
+</code></pre></div></div>
 
 <p>어제 보았던 예제를 보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Around</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Around</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">AroundLog</span><span class="o">(</span><span class="nc">ProceedingJoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Throwable</span><span class="o">{</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 실행 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
     <span class="k">try</span> <span class="o">{</span>
@@ -745,8 +730,7 @@ AspectJ 이용해 우리는 표현식을 사용할 수 있다.</p>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Aspect 종료 : "</span> <span class="o">+</span> <span class="n">joinPoint</span><span class="o">.</span><span class="na">getSignature</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>Adivce 타입은 @Around이고</p>
 
@@ -804,21 +788,13 @@ com.aop.section2aopcalculate.calculate 패키지 안에 경로가 지정되어�
 <p>예를 들어 하나의 클래스의 메서드만 동작시키고 싶을 경우 (우린 add메서드를 가정하자)<br>
 아래와 가은 방식으로 표현할 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate.calculate.NewCalculate.add(..))"</span><span class="o">)</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate.calculate.NewCalculate.add(..))"</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>여기서 결합식을 사용해 우리가 add메서드와 sub메서드를 둘다 실행시킬 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate.calculate.NewCalculate.add(..)) || execution(* com.aop.section2aopcalculate.calculate.NewCalculate.sub(..))"</span><span class="o">)</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate.calculate.NewCalculate.add(..)) || execution(* com.aop.section2aopcalculate.calculate.NewCalculate.sub(..))"</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p>|| 표현식으로 결합식을 사용하면 add,sub 메서드가 둘다 지정되어<br>
 실행되는 모습을 볼 수 있다.</p>
@@ -871,18 +847,11 @@ com.aop.section2aopcalculate.calculate 패키지 안에 경로가 지정되어�
 
 <p><strong>&lt;Exam.interface / 메서드 인터페이스 추상화&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Exam</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Exam</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="nf">total</span><span class="o">();</span>
     <span class="kt">float</span> <span class="nf">avg</span><span class="o">();</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>Score.class에서 구현하게 추상화를 해둔 Interface<br>
 가장 큰 이유는 아래에 Aop.class에서<br>
@@ -890,51 +859,7 @@ Proxy.newProxyInstance의 매개변수로 인터페이스를 사용해야하기 
 
 <p><strong>&lt;Score.class / 핵심 로직(합산,평균)&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">lombok.Setter</span><span class="o">;</span>
 
 <span class="nd">@Getter</span>
@@ -976,8 +901,7 @@ Proxy.newProxyInstance의 매개변수로 인터페이스를 사용해야하기 
         <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>Lombok @Getter,@Setter를 사용하여<br>
 Getter,Setter의 긴 코드를 생략했습니다.</p>
@@ -990,34 +914,7 @@ Getter,Setter의 긴 코드를 생략했습니다.</p>
 
 <p><strong>&lt;Aop.class / 공통관심사 코드&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.lang.reflect.InvocationHandler</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.lang.reflect.InvocationHandler</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.lang.reflect.Proxy</span><span class="o">;</span>
 
@@ -1042,8 +939,7 @@ Getter,Setter의 긴 코드를 생략했습니다.</p>
             <span class="k">return</span> <span class="n">proxy</span><span class="o">;</span>
         <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><strong>동적 프록시(Dynamic Proxy)</strong>를 사용하여 코드를 작성했다.<br>
 동적프록시는 런타임 시점에 프록시 클래스를 만들어주는 방식이다.<br>
@@ -1069,35 +965,7 @@ Proxy.newProxyInstance() 메서드로 Proxy를 생성하는데 3개의 파라미
 
 <p><strong>&lt;Application.class / 클라이언트 요청부분&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">Aop</span> <span class="n">aop</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Aop</span><span class="o">();</span>
         <span class="nc">Exam</span> <span class="n">exam</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Score</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">80</span><span class="o">,</span><span class="mi">80</span><span class="o">,</span><span class="mi">90</span><span class="o">);</span>
@@ -1123,8 +991,7 @@ START: 0ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
 END: 2004ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
 =======================
 */</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>전부 구현을 완료했으니 동작을 해보자!<br>
 Application을 main메서드를 만들어 동작시킬 수 있게 해주었다.<br>
@@ -1161,27 +1028,7 @@ Score의 내용을 분리한다음에 Spring의 @Aspect를 이용하여<br>
 
 <p><strong>&lt;Score.class / 점수 관리 객체&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">lombok.Getter</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">lombok.Setter</span><span class="o">;</span>
 
 <span class="nd">@Getter</span>
@@ -1199,8 +1046,7 @@ Score의 내용을 분리한다음에 Spring의 @Aspect를 이용하여<br>
         <span class="k">this</span><span class="o">.</span><span class="na">com</span> <span class="o">=</span> <span class="n">com</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 동일하게 Lombok을 이용해<br>
 Getter,Setter를 만들고 후에 클라이언트에서 객체를 만들어<br>
@@ -1208,44 +1054,7 @@ Getter,Setter를 만들고 후에 클라이언트에서 객체를 만들어<br>
 
 <p><strong>&lt;NewlecService / 핵심 로직(합산,평균)&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
 
 <span class="nd">@Service</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewlecService</span> <span class="o">{</span>
@@ -1280,8 +1089,7 @@ Getter,Setter를 만들고 후에 클라이언트에서 객체를 만들어<br>
         <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>Java 코드로 작성한 Score.class와 동일한 부분이다.<br>
 메서드 실행시 코멘트로 알려주고 쓰레드 딜레이를 넣어<br>
@@ -1290,31 +1098,7 @@ Getter,Setter를 만들고 후에 클라이언트에서 객체를 만들어<br>
 
 <p><strong>&lt;TimeTraceAop.class / 공통 관심 코드&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">org.aspectj.lang.ProceedingJoinPoint</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.aspectj.lang.ProceedingJoinPoint</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Around</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Aspect</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
@@ -1336,8 +1120,7 @@ Getter,Setter를 만들고 후에 클라이언트에서 객체를 만들어<br>
         <span class="o">}</span>
      <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>동일하게 시간을 측정하는 공통관심 클래스이다.<br>
 @Aspect 어노테이션으로 AOP 사용을 알려주고<br>
@@ -1350,45 +1133,7 @@ joinPoint.proceed();를 이용해 메서드를 호출하고 있고<br>
 
 <p><strong>&lt;AopExampleApplication.class / 스프링 부트실행, 클라이언트코드&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">com.AopExample.Aop_Example.aopSpring.NewlecService</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.AopExample.Aop_Example.aopSpring.NewlecService</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.AopExample.Aop_Example.aopSpring.Score</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
@@ -1424,8 +1169,7 @@ START: 0ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
 END: 2006ms / class com.AopExample.Aop_Example.aopSpring.TimeTraceAop
 =======================
 */</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>스프링 부트 실행 클래스 아래에 클라이언트 요청 코드도 같이두었다.<br>
 Java코드로 작성한 것과 다른점은 Java코드에선 proxy 객체를 이용했고<br>
@@ -1472,10 +1216,10 @@ Spring으로 작성한 AOP기술을 이용한 예제<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html" title="[TIL] 두달차 회고">Nginx 에러 조치 , Failed to start A high performance web server...</a></li>
-<li><a class="post-link" href="/til/2022/11/14/til.html" title="[TIL] 두달차 회고">[TIL] API Documentation 2</a></li>
-<li><a class="post-link" href="/til/2022/08/26/til.html" title="[TIL] 두달차 회고">[TIL] Linux 기초</a></li>
-<li><a class="post-link" href="/til/2022/09/29/til.html" title="[TIL] 두달차 회고">[TIL] Java Algorithm 3</a></li>
+        <li><a class="post-link" href="/til/2022/12/07/til.html" title="[TIL] 두달차 회고">[TIL] 배포 자동화 AWS Pipeline</a></li>
+<li><a class="post-link" href="/til/2022/10/07/til.html" title="[TIL] 두달차 회고">[TIL] DB RDMBS 3</a></li>
+<li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="[TIL] 두달차 회고">[Programmers - Java] 주식가격</a></li>
+<li><a class="post-link" href="/til/2022/11/04/til.html" title="[TIL] 두달차 회고">[TIL] Spring Transaction 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

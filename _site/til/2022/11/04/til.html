@@ -830,16 +830,10 @@ commit();을 하기전까지 다른 세션의 접근을 막고있는 것이다.<
 <p>하지만 첫번쨰 쿼리로 타임아웃을 설정했기 때문에<br>
 해당 트랜잭션은 60초 후에 아래와 같은<br>
 알람이 발생하면서 세션이 자동적으로 종료하게된다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre> Timeout trying to lock table {0}; SQL statement:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Timeout trying to lock table {0}; SQL statement:
     update member set money=10000 - 2000 where member_id = 'memberA' [50200-200]
     HYT00/50200
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><br></p>
 
@@ -889,10 +883,10 @@ Java코드로 어떻게 적용하는게 알맞는 것인지?라는<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/27/til.html" title="[TIL] Spring Transaction 2 , Event 비동기 적용">[TIL] Java Algorithm 1</a></li>
-<li><a class="post-link" href="/til/2022/09/15/til.html" title="[TIL] Spring Transaction 2 , Event 비동기 적용">[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+        <li><a class="post-link" href="/til/2022/10/11/til.html" title="[TIL] Spring Transaction 2 , Event 비동기 적용">[TIL] Spring Basic 1</a></li>
+<li><a class="post-link" href="/spring/2022/08/03/spring-port.html" title="[TIL] Spring Transaction 2 , Event 비동기 적용">[Spring] Web server failed to start. Port 8080 was already in use...</a></li>
+<li><a class="post-link" href="/til/2022/11/09/til.html" title="[TIL] Spring Transaction 2 , Event 비동기 적용">[TIL] JUnit 2</a></li>
 <li><a class="post-link" href="/til/2022/10/26/til.html" title="[TIL] Spring Transaction 2 , Event 비동기 적용">[TIL] Spring Exception 2</a></li>
-<li><a class="post-link" href="/til/2022/12/01/til.html" title="[TIL] Spring Transaction 2 , Event 비동기 적용">[TIL] Spring WebFlux 구현하기</a></li>
 </ul>
     </div>
 <div class="post-comments">

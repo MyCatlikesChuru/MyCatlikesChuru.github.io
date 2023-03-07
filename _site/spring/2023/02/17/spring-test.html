@@ -690,28 +690,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>Controller 단위 테스트를 진행하려고 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code><br>
 어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: JPA metamodel must not be empty!
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: JPA metamodel must not be empty!
+</code></pre></div></div>
 
 <p>원인을 파악중 Entity들의 생성,수정 LocalDateTime을 자동으로<br>
 관리해주는 <code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>어노테이션을 <code class="language-plaintext highlighter-rouge">@SpringBootApplication</code>클래스에<br>
 등록해 놓은 거이 위의 에러의 요인이였다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@EnableJpaAuditing</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableJpaAuditing</span>
 <span class="nd">@SpringBootApplication</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JaritalkApplication</span> <span class="o">{</span>
 
@@ -719,8 +705,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">JaritalkApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>은 JPA관련 Bean들을 필요로하는데 <br>
 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code>같은 단위테스트는 JPA관련 Bean들을 로드하지 않기 때문이다.</p>
@@ -731,18 +716,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p><strong>1. Configuration 분리</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="nd">@EnableJpaAuditing</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JpaAuditingConfiguration</span> <span class="o">{</span>  
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code> 어노테이션을 새로운 클래스를 만들어<br>
 빈으로 등록해주면 된다.</p>
@@ -751,20 +729,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p><strong>2. MockBean 추가</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="nd">@WebMvcTest</span><span class="o">(</span><span class="n">controllers</span> <span class="o">=</span> <span class="nc">CommunityController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">class</span> <span class="nc">CommunityControllerTest</span> <span class="o">{</span>
     <span class="o">...</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>테스트하려고 하는 클래스에 <code class="language-plaintext highlighter-rouge">JpaMetamodelMappingContext</code> <br>
 <code class="language-plaintext highlighter-rouge">@MockBean</code>을 추가해주면된다.</p>
 
@@ -779,10 +749,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="[Programmers - Java] 프린터">[Programmers - Java] 프린터</a></li>
-<li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="[Programmers - Java] 프린터">Git pull rebase 사용해 병합하기</a></li>
-<li><a class="post-link" href="/til/2022/10/20/til.html" title="[Programmers - Java] 프린터">[TIL] Spring MVC Controller 계층</a></li>
-<li><a class="post-link" href="/til/2022/08/19/til.html" title="[Programmers - Java] 프린터">[TIL] 부트캠프 시작과 마음가짐</a></li>
+        <li><a class="post-link" href="/til/2022/09/22/til.html" title="[Programmers - Java] 프린터">[TIL] Java 자료구조 Stack, Queue</a></li>
+<li><a class="post-link" href="/til/2022/12/05/til.html" title="[Programmers - Java] 프린터">[TIL] Cloud 운영 환경 구성 2</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="[Programmers - Java] 프린터">[TIL] Spring AOP 1</a></li>
+<li><a class="post-link" href="/til/2022/10/05/til.html" title="[Programmers - Java] 프린터">[TIL] DB RDMBS 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

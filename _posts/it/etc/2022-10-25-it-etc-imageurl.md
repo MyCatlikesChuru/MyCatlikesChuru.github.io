@@ -2,8 +2,8 @@
 layout: post
 title: 구글 드라이브로 이미지 url 적용하기
 subtitle: 
-categories: IT
-tags: [IT, 이미지 url, 구글 드라이브]
+categories: Etc
+tags: [Etc, 이미지 url, 구글 드라이브]
 comments: true
 published: true 
 ---

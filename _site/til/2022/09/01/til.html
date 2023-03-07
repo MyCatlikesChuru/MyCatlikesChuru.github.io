@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -719,21 +719,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p><strong>선언방법</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">double</span><span class="o">[]</span> <span class="n">weight</span><span class="o">;</span> <span class="c1">// 선언</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span><span class="o">[]</span> <span class="n">weight</span><span class="o">;</span> <span class="c1">// 선언</span>
 <span class="n">weight</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">40</span><span class="o">];</span> <span class="c1">// 할당</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">double</span><span class="o">[]</span> <span class="n">weight</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">40</span><span class="o">];</span> <span class="c1">// 선언과 할당을 한번에</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span><span class="o">[]</span> <span class="n">weight</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="mi">40</span><span class="o">];</span> <span class="c1">// 선언과 할당을 한번에</span>
+</code></pre></div></div>
 
 <p>double[] weight; 라는 의미에 집중해보자<br>
 🔹 배열을 가리킬 참조변수 weight를 선언했다.</p>
@@ -746,39 +737,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
 🔹 대입 연산자에 의해 <strong>생성된 배열 첫 번재 요소</strong>의 주소값이 참조 변수 weight에 할당된다.<br>
 🔹 참조변수 weight은 배열의 맨 첫번째 요소(weight[0])를 가르키게 된다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">double</span><span class="o">[]</span> <span class="n">weight</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[]</span> <span class="o">{</span><span class="mi">60</span><span class="o">,</span> <span class="mi">62</span><span class="o">,</span> <span class="mi">45</span><span class="o">,</span> <span class="mi">77</span><span class="o">,</span> <span class="o">....</span> <span class="o">,</span> <span class="mi">55</span><span class="o">};</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span><span class="o">[]</span> <span class="n">weight</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[]</span> <span class="o">{</span><span class="mi">60</span><span class="o">,</span> <span class="mi">62</span><span class="o">,</span> <span class="mi">45</span><span class="o">,</span> <span class="mi">77</span><span class="o">,</span> <span class="o">....</span> <span class="o">,</span> <span class="mi">55</span><span class="o">};</span>
+</code></pre></div></div>
 
 <p>위에있는 코드와는 다르게<br>
 0.0값으로 초기화하지않고 직접 방에 값을 넣어서 초기화해주는 방법이다.<br>
 여기서 중요한점은 double[]안에 숫자를 넣지 않아야한다는 점이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{};</span>
 <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">a</span><span class="o">));</span> <span class="c1">// []</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>빈배열을 선언하고 싶을 경우 위와 같이 선언할 수 있고<br>
 Arrays.toString으로 출력할 경우 [] 이렇게 빈배열이 출력됨을 알 수 있다.<br>
 return 해야할경우 a를 return하거나, 뒤에 할당한 값을 그대로 return하면된다.<br>
 배열에 있는 값을 탐색할 수 있는 방법이 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">int</span><span class="o">[]</span> <span class="n">num</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">};</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[]</span> <span class="n">num</span> <span class="o">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">};</span>
+</code></pre></div></div>
 
 <p>위와 같은 코드를 작성했을때 num[0]을 출력하게 되면<br>
 0번 인덱스에 있는 int형 값인 1이 출력되게 되어진다.<br>
@@ -800,14 +777,9 @@ return 해야할경우 a를 return하거나, 뒤에 할당한 값을 그대로 r
 
 <p><strong>선언방법</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">int</span><span class="o">[][]</span> <span class="n">kcal</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[][]</span> <span class="n">kcal</span><span class="o">;</span>
 <span class="n">kcal</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">31</span><span class="o">][</span><span class="mi">3</span><span class="o">];</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위에 1차원 배열과 다를게 없다<br>
 []하나가 더추가된 모습이고<br>
@@ -839,47 +811,17 @@ return 해야할경우 a를 return하거나, 뒤에 할당한 값을 그대로 r
 이러한 배열을 가변 배열이라고 한다.<br>
 가별 배열은 아래와 같이 선언 및 초기화가 가능</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">int</span><span class="o">[][]</span> <span class="n">ages</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">][];</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[][]</span> <span class="n">ages</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">][];</span>
+</code></pre></div></div>
 
 <p>위처럼 초기화를 시키고 age를<br>
 <code class="language-plaintext highlighter-rouge">Arrays.toString();</code>으로 출력을 해보면<br>
 아래와 같이 나온다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="o">[</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">]</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">]</span>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">int</span><span class="o">[][]</span> <span class="n">ages</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">][];</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">[][]</span> <span class="n">ages</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">][];</span>
 
 <span class="n">ages</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">5</span><span class="o">];</span>
 <span class="n">ages</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">6</span><span class="o">];</span>
@@ -899,8 +841,7 @@ return 해야할경우 a를 return하거나, 뒤에 할당한 값을 그대로 r
 <span class="c1">// Arrays.toString(ages[2]) = [0, 0, 0, 0, 0, 0, 0]</span>
 <span class="c1">// Arrays.toString(ages[3]) = [0, 0, 0, 0, 0, 0, 0, 0]</span>
 <span class="c1">// Arrays.toString(ages[4]) = [0, 0, 0, 0, 0, 0, 0, 0, 0]</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>여기서 알 수 있는점은<br>
 처음에 외부배열 5개를 초기화 시켜 ages에 할당했고<br>
@@ -970,10 +911,10 @@ stream을 이용해 여러가지 메서드들을 더 불러올 수 있는 모양
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/04/til.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">[TIL] Spring Transaction 1</a></li>
-<li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
-<li><a class="post-link" href="/til/2022/11/30/til.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">[TIL] Spring WebFlux Project Reactor</a></li>
-<li><a class="post-link" href="/git/2023/01/12/git-commitmessage.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">Git 이전 Commit Message 수정하기</a></li>
+        <li><a class="post-link" href="/til/2022/12/08/til.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">[TIL] 배포 자동화 GitHub Actions</a></li>
+<li><a class="post-link" href="/til/2022/09/19/til.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">[TIL] 한달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/12/06/til.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">[TIL] 배포 컨테이너 Docker</a></li>
+<li><a class="post-link" href="/til/2022/12/12/til.html" title="[TIL] Java 객체지향 - 클래스, 필드, 메서드">[TIL] 프로젝트 연습, 준비</a></li>
 </ul>
     </div>
 <div class="post-comments">

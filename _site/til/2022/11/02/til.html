@@ -728,24 +728,14 @@ Order : orderId, orderStatus, createdAt, modifiedAt<br>
 이름부터 직관적이라 기억하기 쉬울 것 같다.</p>
 
 <p>사용방법을 코드로 알아보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@ManyToOne</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ManyToOne</span>
 <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"MEMBER_ID"</span><span class="o">)</span>
 <span class="kd">private</span> <span class="nc">Member</span> <span class="n">member</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addOrder</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">){</span>
     <span class="k">this</span><span class="o">.</span><span class="na">orders</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>해당 클래스는 Order Entity 클래스에서 추가한 모습이다.</p>
 
 <p>기존에 Order : orderId, orderStatus, createdAt, modifiedAt <br>
@@ -758,42 +748,7 @@ Member 타입의 객체를 만들고, @JoinColumn으로 해당 Column을 참조�
 
 <p>테스트를 위해 DB에 Member 2명과, Order 1건을 만들어 테스트해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JpaTest</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">EntityTransaction</span> <span class="n">tx</span><span class="o">;</span>
@@ -826,8 +781,7 @@ Member 타입의 객체를 만들고, @JoinColumn으로 해당 Column을 참조�
 
 <span class="c1">// 출력</span>
 <span class="nl">findOrder:</span> <span class="mi">2</span><span class="o">,</span> <span class="n">tmdghwlq</span><span class="nd">@naver</span><span class="o">.</span><span class="na">com</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>member 객체 2개(member1,member2)와<br>
 Order 객체 1개를 만들었다. Order 객체에는 Setter를 이용하여<br>
 member2 객체를 member 참조변수에 참조하도록 코드를 추가했다.</p>
@@ -870,22 +824,13 @@ commit();을 진행하여 DB에 등록했다.</p>
 어떤 고객이 무슨 주문들을 했는지를 알고 싶을때<br>
 일대다 매핑을 추가해주면 <strong>양방향 관계</strong>를 만들어 줄 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"member"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"member"</span><span class="o">)</span>
 <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Order</span><span class="o">&gt;</span> <span class="n">orders</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
 
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addOrder</span><span class="o">(</span><span class="nc">Order</span> <span class="n">order</span><span class="o">){</span>
     <span class="k">this</span><span class="o">.</span><span class="na">orders</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>Member Entity 클래스에 추가된 코드다</p>
 
 <p>OneToMany같은 경우에는 @JoinColumn을 사용하지 않았고<br>
@@ -898,37 +843,7 @@ commit();을 진행하여 DB에 등록했다.</p>
 
 <p>위에서 보았던 예제에서 test 메서드 내용만 바꾸어 보고<br>
 테스트를 진행해보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">private</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
     <span class="n">tx</span><span class="o">.</span><span class="na">begin</span><span class="o">();</span>
     <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">,</span> <span class="s">"이재혁"</span><span class="o">,</span> <span class="s">"010-1234-5678"</span><span class="o">);</span>
     <span class="nc">Order</span> <span class="n">order1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span>
@@ -956,8 +871,7 @@ commit();을 진행하여 DB에 등록했다.</p>
 <span class="c1">//출력</span>
 <span class="nl">findOrder:</span> <span class="mi">1</span><span class="o">,</span> <span class="no">ORDER_REQUEST</span>
 <span class="nl">findOrder:</span> <span class="mi">2</span><span class="o">,</span> <span class="no">ORDER_REQUEST</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>test 메서드의 내용만 변경되었고 확인해보면<br>
 Member는 1개, Order는 2개를 생성하였고</p>
 
@@ -1006,10 +920,10 @@ DB의 List&lt;/Order/&gt; orders 객체는 Column으로 표시되지 않는다�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/spring/2023/01/21/spring-email.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">[Spring] MailAuthenticationException 문제 해결</a></li>
-<li><a class="post-link" href="/til/2022/12/12/til.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">[TIL] 프로젝트 연습, 준비</a></li>
-<li><a class="post-link" href="/til/2022/09/20/til.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">[TIL] Java 재귀</a></li>
-<li><a class="post-link" href="/db/2023/01/08/db-redissetting.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">Redis CLI 설치 및 사용방법</a></li>
+        <li><a class="post-link" href="/til/2022/10/21/til.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">[TIL] Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/11/10/til.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">[TIL] JUnit 3</a></li>
+<li><a class="post-link" href="/spring/2023/02/17/spring-test.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">[Spring] 단위 테스트 JPA metamodel must not be empty!</a></li>
+<li><a class="post-link" href="/til/2022/08/31/til.html" title="[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)">[TIL] Java 문법기초 - 제어문</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -785,28 +785,7 @@ Pointcut : 모든 메소드에서 내가 적용하고 싶은 것만 선택<br>
 
 <p><strong>&lt;계산기 메인 프로그램, 빈등록해서 관리&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Service</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewCalculate</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">add</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">){</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Methode 실행 : add"</span><span class="o">);</span>
@@ -825,57 +804,20 @@ Pointcut : 모든 메소드에서 내가 적용하고 싶은 것만 선택<br>
         <span class="k">return</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><strong>&lt;AOP 적용 프로그램, 빈등록해서 관리&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Aspect</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
 <span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
     <span class="c1">// 변경될 내용들 @Before, @After ~~</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><strong>&lt;Test 실행 프로그램, Junit5&gt;</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@SpringBootTest</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestCalcualte</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">NewCalculate</span> <span class="n">newCalculate</span><span class="o">;</span>
 
@@ -901,8 +843,7 @@ Pointcut : 모든 메소드에서 내가 적용하고 싶은 것만 선택<br>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newCalculate</span><span class="o">.</span><span class="na">mul</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">50</span><span class="o">));</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>2개의 클래스는 java 폴더에<br>
 1개의 클래스는 test 폴더에 넣어 테스트용 프로그램을 만들었다.<br>
@@ -914,31 +855,7 @@ Pointcut : 모든 메소드에서 내가 적용하고 싶은 것만 선택<br>
 2). Advice를 구현한 메서드는 일반적으로 리턴타입이 void이다.<br>
 3). 메서드에서 예외를 발생시킬 경우 대상 객체의 메서드가 호출되지 않는다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Aspect</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
 <span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
     <span class="nd">@Before</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
@@ -960,8 +877,7 @@ Pointcut : 모든 메소드에서 내가 적용하고 싶은 것만 선택<br>
 <span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
 <span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
 <span class="mf">2.0</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>보는 것과 같이 메서드가 실행되기전에<br>
 Aspect 실행 문구가 출력되는 것을 볼 수있다.</p>
@@ -970,31 +886,7 @@ Aspect 실행 문구가 출력되는 것을 볼 수있다.</p>
 1). 조인 포인트의 메서드 예외나 정상과는 상관없이 실행한다.<br>
 2). 메서드 실행 완료 후 공통 기능 실행을 한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Aspect</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
 <span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
     <span class="nd">@After</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
@@ -1016,8 +908,7 @@ Aspect 실행 문구가 출력되는 것을 볼 수있다.</p>
 <span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
 <span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
 <span class="mf">2.0</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>각 메서드들이 실행 완료된 후에<br>
 Aspect 실행 문구 출력되는 것을 볼 수 있다.</p>
@@ -1026,36 +917,7 @@ Aspect 실행 문구 출력되는 것을 볼 수 있다.</p>
 1). 조인 포인트 실행 완료 후 실행한다.<br>
 2). 메서드가 예외 없이 실행된 이후 공통 기능을 실행</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Aspect</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
 <span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
     <span class="nd">@AfterReturning</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">,</span> <span class="n">returning</span> <span class="o">=</span> <span class="s">"value"</span><span class="o">)</span>
@@ -1082,8 +944,7 @@ Aspect 실행 문구 출력되는 것을 볼 수 있다.</p>
 <span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
 <span class="o">--&gt;</span> <span class="n">returning</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="mf">2.0</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>After와 다른점은 returning로 값을 활용할 수가 있다.<br>
 위에 예제에서 프린트문을 하나더 추가했고<br>
@@ -1097,65 +958,28 @@ value라는 변수에 담아 출력하였다.<br>
 
 <p>간단하게 add함수에다 만들어서 진행해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">int</span> <span class="nf">add</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">int</span> <span class="nf">add</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"--&gt; Methode 실행 : add"</span><span class="o">);</span>
     <span class="k">if</span><span class="o">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">&gt;</span><span class="mi">101</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">Exception</span><span class="o">(</span><span class="s">"예외"</span><span class="o">);</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>기존 코드에서 예외처리만 추가했다 x+y값이 101보다 크면<br>
 “예외”를 던져주게 프로그램을 작성했다.<br>
 예외가 추가됨에따라 기존 Test 코드에도 임시로 throws Exception를<br>
 달아주면 정상적으로 테스트코드가 동작할 것이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newCalculate</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">50</span><span class="o">));</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>이제 준비는 되었으니 예외 발생시 받을 변수 ex를 설정하고 출력구문을 넣어<br>
 AfterThrowing를 적용하여 작동시켜보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Aspect</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
 <span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
     <span class="nd">@AfterThrowing</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">,</span> <span class="n">throwing</span> <span class="o">=</span> <span class="s">"ex"</span><span class="o">)</span>
@@ -1175,8 +999,7 @@ AfterThrowing를 적용하여 작동시켜보자.</p>
 <span class="mi">5000</span>
 <span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
 <span class="mf">2.0</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위의 출력을 보면 알 수 있듯이<br>
 sub,mul,div 메서드들은 공통코드인 Aspect코드들이<br>
@@ -1196,40 +1019,7 @@ sub,mul,div 메서드들은 공통코드인 Aspect코드들이<br>
 try ~ catch ~ finally 구문처리 가능<br>
 다른 얘들과는 다르게 ProceedingJoinPoint 타입을 사용해야한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Aspect</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Aspect</span>
 <span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AspectCalculate</span> <span class="o">{</span>
     <span class="nd">@Around</span><span class="o">(</span><span class="s">"execution(* com.aop.section2aopcalculate..*(..))"</span><span class="o">)</span>
@@ -1260,8 +1050,7 @@ try ~ catch ~ finally 구문처리 가능<br>
 <span class="o">--&gt;</span> <span class="nc">Methode</span> <span class="n">실행</span> <span class="o">:</span> <span class="n">div</span>
 <span class="o">--&gt;</span> <span class="nc">Aspect</span> <span class="n">종료</span> <span class="o">:</span> <span class="n">div</span>
 <span class="mf">2.0</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위에 예제에서 볼 수 있듯이<br>
 joinPoint.procced(); 위,아래로 출력문을 넣어<br>
@@ -1297,10 +1086,10 @@ joinPoint.procced(); 위,아래로 출력문을 넣어<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/08/til.html" title="[TIL] Spring AOP 2">[TIL] Java 객체지향 - 추상화</a></li>
+        <li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="[TIL] Spring AOP 2">[Programmers - Java] 주식가격</a></li>
 <li><a class="post-link" href="/db/2022/11/15/db-mysql.html" title="[TIL] Spring AOP 2">MySQL Local 연동 하기</a></li>
-<li><a class="post-link" href="/til/2022/09/07/til.html" title="[TIL] Spring AOP 2">[TIL] Java 객체지향 - 다형성</a></li>
-<li><a class="post-link" href="/til/2022/12/08/til.html" title="[TIL] Spring AOP 2">[TIL] 배포 자동화 GitHub Actions</a></li>
+<li><a class="post-link" href="/til/2022/10/13/til.html" title="[TIL] Spring AOP 2">[TIL] Spring DI 1</a></li>
+<li><a class="post-link" href="/server/2023/01/01/server-oraclesetting.html" title="[TIL] Spring AOP 2">Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선</a></li>
 </ul>
     </div>
 <div class="post-comments">

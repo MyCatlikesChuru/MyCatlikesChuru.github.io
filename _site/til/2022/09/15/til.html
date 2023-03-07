@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -726,19 +726,7 @@ List, Set 그리고 Map에 대해 복습하는 시간을 가졌었다.<br>
 오늘은 표준과 메타에대해서만 공부해보려한다.<br>
 간단한 예시를 들어보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">man</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">man</span><span class="o">{</span>
     <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
     <span class="kt">void</span> <span class="nf">name</span><span class="o">(){}</span>
 <span class="o">}</span>
@@ -748,8 +736,7 @@ List, Set 그리고 Map에 대해 복습하는 시간을 가졌었다.<br>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"2"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>@Override라는 애너테이션이 있다.<br>
 name이라는 매서드를 오버라이드한다고 애너테이션이 붙어있다.<br>
@@ -870,31 +857,18 @@ Collection 인터페이스를 구현한 객체들 (List,Set 등)은 모두 이 �
 
 <p>*List로부터 스트림을 생성하는 방법</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">);</span>
 <span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">listStream</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">();</span>
 <span class="n">listStream</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">prinln</span><span class="o">);</span> <span class="c1">//스트림의 모든 요소를 출력.</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>*배열로부터 스트림을 생성하는 방법</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="nc">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">);</span> <span class="c1">//가변인자</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="nc">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">);</span> <span class="c1">//가변인자</span>
 <span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="nc">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">});</span>
 <span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">});</span>
 <span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="k">new</span> <span class="nc">String</span><span class="o">[]</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">},</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span> <span class="c1">//end 범위 미포함</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>여기서 스트림을 사용할 때 주의점은<br>
 <em><strong>1. 데이터 소스로 부터 데이터를 읽기만 하고 변경하지 않는다.</strong></em><br>
@@ -921,27 +895,7 @@ Collection 인터페이스를 구현한 객체들 (List,Set 등)은 모두 이 �
 여러가지 응용이 가능해진다.<br>
 몇 가지 예제를 보면서 익숙해져보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">name</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">,</span><span class="s">"염승호"</span><span class="o">,</span><span class="s">"정용원"</span><span class="o">,</span><span class="s">"이종건"</span><span class="o">,</span><span class="s">"이재혁"</span><span class="o">);</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"List: "</span><span class="o">+</span><span class="n">name</span><span class="o">);</span>
 
@@ -959,8 +913,7 @@ Collection 인터페이스를 구현한 객체들 (List,Set 등)은 모두 이 �
             <span class="o">.</span><span class="na">distinct</span><span class="o">()</span> <span class="c1">// 중복제거</span>
             <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>중간 연산자로 .distinct()를 사용하고 있다.<br>
 이 연산자는 중복된 요소를 제거해 리턴해준다.<br>
@@ -981,24 +934,14 @@ Collection 인터페이스를 구현한 객체들 (List,Set 등)은 모두 이 �
 Wrapper 클래스다. (모든 타입의 객체를 담을수있다)<br>
 간단한 예제를 보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">optString</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">optString</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">);</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optString</span><span class="o">);</span> <span class="c1">//출력: Optional[고양이]</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">optString</span><span class="o">.</span><span class="na">get</span><span class="o">());</span><span class="c1">//출력: 이재혁</span>
 
 <span class="nc">String</span> <span class="n">nullName</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 <span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">ofNullable</span><span class="o">(</span><span class="n">nullName</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="s">"이재혁"</span><span class="o">);</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span><span class="o">);</span> <span class="c1">//출력: 이재혁</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>Optional의 String타입으로 “이재혁”이라는 요소를 추가한 객체를 만들었다.<br>
 객체를 바로 프린트할 경우 = Optional[이재혁] 이렇게 출력된다.<br>
@@ -1068,10 +1011,10 @@ FileReader, FileWriter는 문자 데이터를 다룰떄 사용하고<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/29/til.html" title="[TIL] Java Thread, JVM">[TIL] Spring WebFlux Reactive 프로그래밍</a></li>
-<li><a class="post-link" href="/til/2022/10/13/til.html" title="[TIL] Java Thread, JVM">[TIL] Spring DI 1</a></li>
-<li><a class="post-link" href="/til/2022/10/31/til.html" title="[TIL] Java Thread, JVM">[TIL] Spring Data JDBC Pagination</a></li>
-<li><a class="post-link" href="/spring/2023/01/15/spring-fileupload.html" title="[TIL] Java Thread, JVM">[Spring] AWS S3 FileUpload 하여 URL로 관리하기</a></li>
+        <li><a class="post-link" href="/spring/2022/08/03/spring-port.html" title="[TIL] Java Thread, JVM">[Spring] Web server failed to start. Port 8080 was already in use...</a></li>
+<li><a class="post-link" href="/til/2022/09/26/til.html" title="[TIL] Java Thread, JVM">[TIL] Java Algorithm BFS, DFS</a></li>
+<li><a class="post-link" href="/til/2022/10/04/til.html" title="[TIL] Java Thread, JVM">[TIL] Network HTTP</a></li>
+<li><a class="post-link" href="/til/2022/12/09/til.html" title="[TIL] Java Thread, JVM">[TIL] Cloud 운영 전략</a></li>
 </ul>
     </div>
 <div class="post-comments">

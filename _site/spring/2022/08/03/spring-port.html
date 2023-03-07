@@ -700,12 +700,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>현재 열려있는 포트를 조회하는 명령어입니다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>lsof <span class="nt">-PiTCP</span> <span class="nt">-sTCP</span>:LISTEN
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lsof <span class="nt">-PiTCP</span> <span class="nt">-sTCP</span>:LISTEN
+</code></pre></div></div>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/217753268-1c6cdc9b-0116-4061-a5d6-cf10ffa034d8.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -718,12 +714,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>아래의 명령어를 입력하면 해당 포트가죽는다</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">kill</span> <span class="nt">-9</span> pid값
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">kill</span> <span class="nt">-9</span> pid값
+</code></pre></div></div>
 
 <p>나의 8080포트의 pid값은 3186이다<br>
 고로 kill -9 3186 으로 입력하면 해당 포트가 죽을 것이다.</p>
@@ -733,12 +725,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><strong>참고</strong><br>
 포트 전체조회하는 법도 있지만 포트번호를 알경우 선택해서 찾는법</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>lsof <span class="nt">-n</span> <span class="nt">-i4TCP</span>:8080 | <span class="nb">grep </span>LISTEN
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lsof <span class="nt">-n</span> <span class="nt">-i4TCP</span>:8080 | <span class="nb">grep </span>LISTEN
+</code></pre></div></div>
 <p>8080포트만 찾는 터미널 명령어.</p>
 
 
@@ -752,10 +740,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">Git pull rebase 사용해 병합하기</a></li>
-<li><a class="post-link" href="/til/2022/11/03/til.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</a></li>
-<li><a class="post-link" href="/til/2022/11/17/til.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">[TIL] 인증, 보안 기초</a></li>
-<li><a class="post-link" href="/til/2022/12/15/til.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">[TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
+        <li><a class="post-link" href="/db/2022/11/15/db-mysql.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">MySQL Local 연동 하기</a></li>
+<li><a class="post-link" href="/linux/unix/2022/12/29/server-NginX.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">AWS EC2 NginX 클라이언트 배포</a></li>
+<li><a class="post-link" href="/til/2022/11/07/til.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">[TIL] Spring Transaction 2 , Event 비동기 적용</a></li>
+<li><a class="post-link" href="/til/2022/09/05/til.html" title="[TIL] 백엔드 부트캠프 코드스테이츠 준비와 시작">[TIL] Java 객체지향 - 생성자, 내부 클래스</a></li>
 </ul>
     </div>
 <div class="post-comments">

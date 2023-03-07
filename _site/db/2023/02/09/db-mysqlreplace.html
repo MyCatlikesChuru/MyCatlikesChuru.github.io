@@ -713,36 +713,16 @@ MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸�
 
 <p><br></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span> FROM member<span class="p">;</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span> FROM member<span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span><span class="p">;</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>Table : member<br>
 Column : image</p>
 
 <p>변경하고자 하는 데이터는 image의 Text값을 변경하는 것이다.<br>
 <code class="language-plaintext highlighter-rouge">REPLACE('문자열','기존문자열','변경문자열')</code> 형식으로 쿼리를 날려주면 된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td>
-<td class="rouge-code"><pre>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span> FROM member<span class="p">;</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span> FROM member<span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOg7R_zu1d5ondnz2mF9Mfs5POsyaYwY0bpBfzQmTCA5iNpVhU3rycNjteK9RZKX0_dsQLXn1AGkA_MtfZJKeSJ03vOJg=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765442-ddf39075-30c9-45a1-9d55-806b35c9c991.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPE5xpI0-lxEqtHYRm-avwUL1X2y8HUz_CtZoT2afckhm77Y_hZfo5N7xB6VP2bDxsiIT4DcFRwe8wSc5-y9BFHYfhe=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765447-d8b3c96e-42d2-4b4d-9660-df536e82a48e.png'</span><span class="o">)</span><span class="p">;</span>
@@ -755,8 +735,7 @@ UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOeqDCgTYyD4_NlylK0EE-y1Fn0lj364mopuRJbuN4JvWP2eQGBJt6Ygv48nrlnHiuiq2Dkgz3ep7XILzUgT_lVAN1VpA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765473-c7044900-f16b-407c-a27e-939c7c8a2e17.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPKgEG4sHNVV90PQrE5jn37skBOV5Qp7M3czg2sShhPYx46ybBb0KhQ37mcxGl6H6E_1xVdAhna7aAJGi8qp1oYGCWMMw=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765476-31afe366-b1d2-4ee8-92f4-7d254a7616d2.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNXn3Qy3cjHid6lgXk6cT9J78rm98pYCgumlTWAHENmA_Q3ujH3MxEbMBYp_lHBLM8rpIU51BtZnzaIKi3CiEsrqcDKQA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765478-e9cbd679-d241-4a42-b285-f334b0b22241.png'</span><span class="o">)</span><span class="p">;</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>쿼리를 만들고 테이블에 정상적으로 변경되는지 확인까지 완료!</p>
 
@@ -792,10 +771,10 @@ REPLACE를 사용하는 것보단 Table Data export를 사용해 csv파일에서
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/08/24/til.html" title="[Programmers - Java] 폰켓몬">[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계</a></li>
-<li><a class="post-link" href="/til/2022/12/13/til.html" title="[Programmers - Java] 폰켓몬">[TIL] Ngrok 사용하여 로컬에서 서버 실행</a></li>
-<li><a class="post-link" href="/til/2022/09/30/til.html" title="[Programmers - Java] 폰켓몬">[TIL] Network Basic</a></li>
-<li><a class="post-link" href="/til/2022/11/11/til.html" title="[Programmers - Java] 폰켓몬">[TIL] API Documentation 1</a></li>
+        <li><a class="post-link" href="/til/2022/10/18/til.html" title="[Programmers - Java] 폰켓몬">[TIL] Spring AOP 2</a></li>
+<li><a class="post-link" href="/til/2022/11/14/til.html" title="[Programmers - Java] 폰켓몬">[TIL] API Documentation 2</a></li>
+<li><a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html" title="[Programmers - Java] 폰켓몬">Nginx 에러 조치 , Failed to start A high performance web server...</a></li>
+<li><a class="post-link" href="/til/2022/09/15/til.html" title="[Programmers - Java] 폰켓몬">[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
 </ul>
     </div>
 <div class="post-comments">

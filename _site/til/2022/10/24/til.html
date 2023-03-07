@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -730,18 +730,7 @@ Controller의 핸들러 메서드를 통해서<br>
 <p>5).@Setter : 멤버 변수의 Setter 메서드를 만들어줌</p>
 
 <p>말로 들으면 어려우니 코드로 확인해보자</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="nd">@NoArgsConstructor</span>
 <span class="nd">@AllArgsConstructor</span>
@@ -750,53 +739,11 @@ Controller의 핸들러 메서드를 통해서<br>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위의 코드가 lombok 어노테이션을 적용한 코드이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kt">long</span> <span class="n">memberId</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
@@ -835,8 +782,7 @@ Controller의 핸들러 메서드를 통해서<br>
         <span class="k">this</span><span class="o">.</span><span class="na">phone</span> <span class="o">=</span> <span class="n">phone</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>해당 lombok 어노테이션을 build하면 위와 같이 코드가<br>
 자동으로 생성되서 빌드되게 되어진다.</p>
 
@@ -853,19 +799,7 @@ lomobk의 기능을 이용하면 어노테이션 하나로<br>
 
 <p>우선 기본로직을 작성해보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="nd">@NoArgsConstructor</span>
 <span class="nd">@AllArgsConstructor</span>
@@ -875,32 +809,21 @@ lomobk의 기능을 이용하면 어노테이션 하나로<br>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>Entity 클래스인 Coffee 클래스이다.<br>
 lombok을 이용해 Getter,Setter 메서드를 사용할 수 있게 해주고<br>
 생성자는 매개변수가 없는 생성자 1개 (NoArgsConstructor)<br>
 매개변수가 4개인 생성자 1개 (AllArgsConstructor)<br>
 해서 총 2개의 생성자가 만들어졌다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeePostDto</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">korName</span><span class="o">;</span>
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>그리고 API 계층에서 보내줄 데이터<br>
 3개를 멤버변수로 만들었다.</p>
@@ -912,19 +835,7 @@ Controller에는 API 데이터를 가져오고 반환해주는 역할만 두고<
 Service 클래스를 만들어 비지니스로직을 만들고<br>
 Mapper를 이용해 Dto와 Entity클래스를 매핑하여 연동해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Service</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeService</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">createCoffee</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">){</span>
         
@@ -934,36 +845,12 @@ Mapper를 이용해 Dto와 Entity클래스를 매핑하여 연동해보자</p>
         <span class="k">return</span> <span class="n">toss</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>우선 Service 클래스를 Bean으로 등록해놓고<br>
 의존성 주입을 통행 createCoffee(); 메서드를<br>
 다른 클래스에서 사용할 수 있게 된다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@RestController</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/api/coffees"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeController</span> <span class="o">{</span>
    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CoffeeService</span> <span class="n">coffeeService</span><span class="o">;</span>
@@ -984,8 +871,7 @@ Mapper를 이용해 Dto와 Entity클래스를 매핑하여 연동해보자</p>
       <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;&gt;(</span><span class="n">coffeeMapper</span><span class="o">.</span><span class="na">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="n">response</span><span class="o">),</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>Controller 클래스에서는 CoffeeService,CoffeeMapper 를 의존성 주입해놓고<br>
 Mapper 클래스인 coffeeMapper를 만들어 coffeePostDto를 &lt;-&gt; entity의 맵핑을 시켜주는<br>
 방법으로 프로그램을 작성했다. 최종적으로 맵핑시켜 받은 객체를<br>
@@ -996,30 +882,17 @@ coffeeToCoffeeResponseDto라는 맵퍼를 이용해 Json 객체를 통해 반환
 
 <p>이제 @Mapper라는 어노테이션을 이용해<br>
 추상화 시켜 Mapper 클래스를 작성해보자.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="nl">mapstruct:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="nl">mapstruct:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
 <span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">mapstruct</span><span class="o">:</span><span class="n">mapstruct</span><span class="o">-</span><span class="nl">processor:</span><span class="mf">1.4</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="na">Final</span><span class="err">'</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>우선 gradle dependencies에 위의 코드를 추가해줘야 Mapper를 사용가능하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Mapper</span><span class="o">(</span><span class="n">componentModel</span> <span class="o">=</span> <span class="s">"spring"</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CoffeeMapper</span> <span class="o">{</span>
     <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDto</span><span class="o">);</span>
     <span class="nc">CoffeeResponseDto</span> <span class="nf">coffeeToCoffeeResponseDto</span><span class="o">(</span><span class="nc">Coffee</span> <span class="n">coffee</span><span class="o">);</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>이렇게 인터페이스를 통해 메서드를 추상화 시켜놓으면<br>
 Mapper 클래스가 자동으로 빌드과정에서 구현체를 만들어준다.<br>
 해당 구현체의 내용은 첫줄부터 보자면</p>
@@ -1031,19 +904,7 @@ coffeePostDto로 전달된 객체를 Coffee 타입의 변수로 값을 넣어준
 실제로 빌드해놓은 코드를 보면 아래와 같이 나온다.</p>
 
 <p><strong>&lt;@Mapper를 통해 자동으로 Build된 코드&gt;</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">if</span> <span class="o">(</span><span class="n">coffeePostDtoo</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -1053,8 +914,7 @@ coffeePostDto로 전달된 객체를 Coffee 타입의 변수로 값을 넣어준
       <span class="n">coffee</span><span class="o">.</span><span class="na">setPrice</span><span class="o">(</span><span class="n">coffeePostDtoo</span><span class="o">.</span><span class="na">getPrice</span><span class="o">());</span>
       <span class="k">return</span> <span class="n">coffee</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>다른 부분들은 생략하고 coffeePostDto 부분만 보면<br>
 위처럼 coffeePostDto를 매개변수로 전달해<br>
 참조변수에 값이 있으면, Coffee 객체를 생성자를 통해 새로만들어<br>
@@ -1066,17 +926,7 @@ setter로 필드변수에 값을 넣어주는 모습이다.</p>
 실제로 @Setter를 지우게되면 다른 방법으로 값을 넣을 방법을 찾는다.</p>
 
 <p><strong>&lt;Coffee 클래스의 @Setter를 지운고 @Mapper를 통해 자동으로 Build한 코드 &gt;</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Coffee</span> <span class="nf">coffeePostDtoToCoffee</span><span class="o">(</span><span class="nc">CoffeePostDto</span> <span class="n">coffeePostDtoo</span><span class="o">)</span> <span class="o">{</span>
   <span class="k">if</span> <span class="o">(</span><span class="n">coffeePostDtoo</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
       <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
   <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
@@ -1084,8 +934,7 @@ setter로 필드변수에 값을 넣어주는 모습이다.</p>
       <span class="k">return</span> <span class="n">coffee</span><span class="o">;</span>
   <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>@Setter를 지웠을 경우에 위처럼 빌드과정에서 Mapper를 통해<br>
 값을 전달해주는 코드가 달라지게된다. 이렇게 되면<br>
 Setter가 없기때문에 객체만 만들어져서 전달될 뿐 Dto로 전달된 값이<br>
@@ -1095,18 +944,7 @@ Setter가 없기때문에 객체만 만들어져서 전달될 뿐 Dto로 전달�
 
 <p>마지막으로 응답을할 때 전달해준 Dto를 만들었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CoffeeResponseDto</span> <span class="o">{</span>
@@ -1115,8 +953,7 @@ Setter가 없기때문에 객체만 만들어져서 전달될 뿐 Dto로 전달�
     <span class="kd">private</span> <span class="nc">String</span> <span class="n">engName</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>해당 클래스도 생성자와, Getter,Setter를 만들어주고<br>
 Controller에서 return하여 값을 응답할 때<br>
 Coffee객체를 CoffeeMapper로 맵핑하여 다시 리턴하게될 수 있게<br>
@@ -1158,15 +995,15 @@ ex) coffeePostDto -&gt; Coffee 필드변수의 값을 저장.</li>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">Jekyll GitHub Page 댓글, 파비콘 꾸미기...</a><a class="next" href="/it/2022/10/25/it-etc-imageurl.html" title="구글 드라이브로 이미지 url 적용하기">구글 드라이브로 이미지 url 적용하기</a>
+<a class="previous" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="Jekyll GitHub Page 댓글, 파비콘 꾸미기">Jekyll GitHub Page 댓글, 파비콘 꾸미기...</a><a class="next" href="/etc/2022/10/25/it-etc-imageurl.html" title="구글 드라이브로 이미지 url 적용하기">구글 드라이브로 이미지 url 적용하기</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/14/til.html" title="구글 드라이브로 이미지 url 적용하기">[TIL] API Documentation 2</a></li>
-<li><a class="post-link" href="/til/2022/11/29/til.html" title="구글 드라이브로 이미지 url 적용하기">[TIL] Spring WebFlux Reactive 프로그래밍</a></li>
-<li><a class="post-link" href="/til/2022/09/01/til.html" title="구글 드라이브로 이미지 url 적용하기">[TIL] Java 문법기초 - 배열</a></li>
-<li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="구글 드라이브로 이미지 url 적용하기">Git pull rebase 사용해 병합하기</a></li>
+        <li><a class="post-link" href="/til/2022/09/13/til.html" title="구글 드라이브로 이미지 url 적용하기">[TIL] Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
+<li><a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html" title="구글 드라이브로 이미지 url 적용하기">[macOs] Apache 웹 서버 AH00558 Could not reliable determine the server’s fully...</a></li>
+<li><a class="post-link" href="/til/2022/10/21/til.html" title="구글 드라이브로 이미지 url 적용하기">[TIL] Spring DTO</a></li>
+<li><a class="post-link" href="/til/2022/11/01/til.html" title="구글 드라이브로 이미지 url 적용하기">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
 </ul>
     </div>
 <div class="post-comments">

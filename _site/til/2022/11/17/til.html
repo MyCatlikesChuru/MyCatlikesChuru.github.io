@@ -774,28 +774,16 @@ Https 서버를 구현하는 간단한 예제를 살펴보자</p>
 
 <p>로컬환경에서 인증서를 만들기위해 터미널로 mkcert를 설치해야한다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>brew <span class="nb">install </span>mkcert
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>mkcert
+</code></pre></div></div>
 <p>homebrew를 이용해 mkcert 설치</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>mkcert <span class="nt">-install</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkcert <span class="nt">-install</span>
+</code></pre></div></div>
 <p>PKCS12 형식 인증서를 생성할 수 있도록 설치</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>mkcert <span class="nt">-pkcs12</span> localhost
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkcert <span class="nt">-pkcs12</span> localhost
+</code></pre></div></div>
 <p>내가 만든 프로젝트 resources 경로에서<br>
 위의 명령어를 실행시켜 PKCS12 인증서를 생성해주면</p>
 
@@ -807,16 +795,10 @@ Https 서버를 구현하는 간단한 예제를 살펴보자</p>
 localhost.p12 인증서가 생긴다.</p>
 
 <p>인증서가 생겼다면 application.properties 안에</p>
-<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="py">server.ssl.key-store</span><span class="p">=</span><span class="s">classpath:localhost.p12</span>
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">server.ssl.key-store</span><span class="p">=</span><span class="s">classpath:localhost.p12</span>
 <span class="py">server.ssl.key-store-type</span><span class="p">=</span><span class="s">PKCS12</span>
 <span class="py">server.ssl.key-store-password</span><span class="p">=</span><span class="s">changeit</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>와 같이 입력해주면 https로 서버를 사용가능하다.<br>
 여기서 비밀번호는 초기해 셋팅을 하지않으면 changeit으로 입력하면된다.</p>
 
@@ -954,10 +936,10 @@ sameSite - 같은 사이트에서만 쿠키를 사용할 수 있게 하는 설�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/13/til.html" title="[TIL] Spring Security 1 (기초)">[TIL] Ngrok 사용하여 로컬에서 서버 실행</a></li>
-<li><a class="post-link" href="/til/2022/08/31/til.html" title="[TIL] Spring Security 1 (기초)">[TIL] Java 문법기초 - 제어문</a></li>
-<li><a class="post-link" href="/til/2022/09/01/til.html" title="[TIL] Spring Security 1 (기초)">[TIL] Java 문법기초 - 배열</a></li>
-<li><a class="post-link" href="/til/2022/10/11/til.html" title="[TIL] Spring Security 1 (기초)">[TIL] Spring Basic 1</a></li>
+        <li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="[TIL] Spring Security 1 (기초)">[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
+<li><a class="post-link" href="/til/2022/10/20/til.html" title="[TIL] Spring Security 1 (기초)">[TIL] Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/til/2022/09/27/til.html" title="[TIL] Spring Security 1 (기초)">[TIL] Java Algorithm 1</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="[TIL] Spring Security 1 (기초)">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
 </ul>
     </div>
 <div class="post-comments">

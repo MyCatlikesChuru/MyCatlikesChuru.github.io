@@ -736,67 +736,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 코드로 예제를 확인해보자</p>
 
 <p><strong>수열 문제</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">N06_Permutation</span> <span class="n">exmple</span> <span class="o">=</span> <span class="k">new</span> <span class="n">N06_Permutation</span><span class="o">();</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">exmple</span><span class="o">.</span><span class="na">newChickenRecipe</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">10010</span><span class="o">,</span><span class="mi">10</span><span class="o">,</span><span class="mi">110</span><span class="o">,</span><span class="mi">111100</span><span class="o">,</span><span class="mi">101010</span><span class="o">},</span><span class="mi">3</span><span class="o">));</span>
 <span class="o">}</span>
@@ -854,8 +794,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">arrayList</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위 문제는 1,0이 포함된 숫자형태의 요소들의 수열을 나열하는 문제다.<br>
 문제의 제약사항중 0이 3개이상 포함된 요소들은 제거해서<br>
@@ -945,47 +884,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 사용하여 알고리즘을 풀이하면 좋다는 것이다<br>
 오늘 풀어본 코드로 간단한 예제를 봐보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">N07_Combination</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="n">N07_Combination</span><span class="o">();</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">boringBlackjack</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">13</span><span class="o">}));</span>
 <span class="o">}</span>
@@ -1023,8 +922,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">}</span>
     <span class="k">return</span> <span class="n">primeCount</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위의 문제는 배열에 나열된 카드 중에<br>
 순서를 생각하지 않고 3장을 골라 합을 구한뒤<br>
@@ -1096,10 +994,10 @@ IDE를 사용하지 않으면 오류가 엄청 발생한다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/01/til.html" title="[TIL] Network Basic">[TIL] Spring WebFlux 구현하기</a></li>
-<li><a class="post-link" href="/til/2022/10/12/til.html" title="[TIL] Network Basic">[TIL] Spring Basic 2</a></li>
-<li><a class="post-link" href="/db/2023/02/09/db-mysqlreplace.html" title="[TIL] Network Basic">MySQL replace 함수사용하여 일괄 변경하기</a></li>
-<li><a class="post-link" href="/til/2022/09/08/til.html" title="[TIL] Network Basic">[TIL] Java 객체지향 - 추상화</a></li>
+        <li><a class="post-link" href="/spring/2022/11/25/spring-environment.html" title="[TIL] Network Basic">[Spring] Could not resolve placeholder '환경변수명' in value ${환경변수명} 오류</a></li>
+<li><a class="post-link" href="/server/2023/01/27/server-oraclesetting.html" title="[TIL] Network Basic">Oracle Cloud 외부 접속 설정</a></li>
+<li><a class="post-link" href="/cs/2023/03/07/it-etc-paradigm.html" title="[TIL] Network Basic">프로그래밍 패러다임</a></li>
+<li><a class="post-link" href="/til/2022/11/09/til.html" title="[TIL] Network Basic">[TIL] JUnit 2</a></li>
 </ul>
     </div>
 <div class="post-comments">

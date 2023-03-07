@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 18 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
@@ -699,18 +699,11 @@ JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해<br>
 
 <h3 id="-작업환경">✅ 작업환경</h3>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre>Spring Boot 2.7.7
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Spring Boot 2.7.7
 java 11 
 macOS Ventura 13.1
 로컬 환경에서 테스트 진행
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><br></p>
 
@@ -721,12 +714,8 @@ Lettuce, Jedis라는 두가지 오픈소스 Java 라이브러리를 사용할 �
 Lettuce는 별도의 설정이 필요없고, Jedis는 의존성을 추가해줘야한다.</p>
 
 <p>Gradle 의존성</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">redis</span><span class="err">'</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">redis</span><span class="err">'</span>
+</code></pre></div></div>
 
 <p>Spring data Redis는 두가지 접근 방식을 제공하는데<br>
 하나는 Redis Template, 하나는 RedisRepository를 이용한 방식이다.   <br>
@@ -737,32 +726,7 @@ Lettuce는 별도의 설정이 필요없고, Jedis는 의존성을 추가해줘�
 
 <p><strong>1). RedisConfig 클래스</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisConfig</span> <span class="o">{</span>
 
 	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${spring.redis.host}"</span><span class="o">)</span>
@@ -785,27 +749,17 @@ Lettuce는 별도의 설정이 필요없고, Jedis는 의존성을 추가해줘�
 		<span class="k">return</span> <span class="n">redisTemplate</span><span class="o">;</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">LettuceConnectionFactory</code>를 생성자를 만들어 반환할때<br>
 host, port 정보가 필요하다.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
   <span class="na">cache</span><span class="pi">:</span>
     <span class="na">type</span><span class="pi">:</span> <span class="s">redis</span>
   <span class="na">redis</span><span class="pi">:</span>
     <span class="na">host</span><span class="pi">:</span> <span class="s">localhost</span>
     <span class="na">port</span><span class="pi">:</span> <span class="m">6379</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>로컬환경에서 테스트를 할 것이기 때문에<br>
 yml파일에 설정해주고 @Value 어노테이션으로 파싱하도록 했다.</p>
@@ -822,63 +776,7 @@ yml파일에 설정해주고 @Value 어노테이션으로 파싱하도록 했다
 
 <p><strong>2). RedisDao 클래스</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Component</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisDao</span> <span class="o">{</span>
 
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span><span class="o">;</span>
@@ -932,8 +830,7 @@ yml파일에 설정해주고 @Value 어노테이션으로 파싱하도록 했다
         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>두번째로는 <code class="language-plaintext highlighter-rouge">RedisDao</code>라는 클래스를 만들어 <br>
 스프링 컨테이너에 빈으로 등록해<br>
@@ -1011,52 +908,7 @@ Access Token 재발급 시퀀스를 진행한다.<br>
 
 <p><strong>JwtAuthenticationFilter 클래스</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtAuthenticationFilter</span> <span class="kd">extends</span> <span class="nc">UsernamePasswordAuthenticationFilter</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtAuthenticationFilter</span> <span class="kd">extends</span> <span class="nc">UsernamePasswordAuthenticationFilter</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">AuthenticationManager</span> <span class="n">authenticationManager</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TokenProvider</span> <span class="n">tokenProvider</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RedisDao</span> <span class="n">redisDao</span><span class="o">;</span>
@@ -1099,8 +951,7 @@ Access Token 재발급 시퀀스를 진행한다.<br>
         <span class="k">this</span><span class="o">.</span><span class="na">getSuccessHandler</span><span class="o">().</span><span class="na">onAuthenticationSuccess</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">,</span><span class="n">authResult</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code>를 상속받아<br>
 구현한 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code> 필터 클래스이다. Spring Security에<br>
 FilterChain에 설정해두어 로그인 요청시 해당 필터를 거치게된다.</p>
@@ -1115,16 +966,10 @@ FilterChain에 설정해두어 로그인 요청시 해당 필터를 거치게된
 인증필터를 만들어 처리해주었고, 현재 위에 올려둔 필터클래스에서는<br>
 JWT 발행과 <code class="language-plaintext highlighter-rouge">redisDao.setValues()</code>메서드를 통해 Redis에</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre>Key : refreshToken  
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Key : refreshToken  
 Value : accessToken  
 소멸시간 : 2일
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>로 저장을 해주게 되었다. 위 플로우에서 얘기했던 1),2)번에 해당하는 내용이다.<br>
 이렇게 필터 구현 부분에서 JWT를 발행해 Redis에 저장해주게 되었다.</p>
 
@@ -1147,29 +992,7 @@ JWT 해독을하고, 정상적으로 해독하면 API가 실행될 것이고, �
 
 <p><strong>MemberController 클래스</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Slf4j</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
 <span class="nd">@RestController</span>
 <span class="nd">@Validated</span>
 <span class="nd">@RequiredArgsConstructor</span>
@@ -1189,8 +1012,7 @@ JWT 해독을하고, 정상적으로 해독하면 API가 실행될 것이고, �
         <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="s">"Refresh Token 재발급 완료!"</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>재발행을 실행해주는 API이다. 해당 API는<br>
 위에서 얘기했던 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code>에서 실행되지 않게<br>
 <code class="language-plaintext highlighter-rouge">shouldNotFilter</code>를 구현해 처리해줄 수 있다. <br>
@@ -1200,51 +1022,7 @@ JWT 해독을하고, 정상적으로 해독하면 API가 실행될 것이고, �
 <p><br></p>
 
 <p><strong>MemberSerivce 클래스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Service</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
 <span class="nd">@Slf4j</span>
 <span class="nd">@RequiredArgsConstructor</span>
 <span class="nd">@Transactional</span>
@@ -1286,8 +1064,7 @@ JWT 해독을하고, 정상적으로 해독하면 API가 실행될 것이고, �
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>다른 서비스 로직들은 지우고 표현해두었다. <br>
 <code class="language-plaintext highlighter-rouge">reissueAccessToken</code>메서드라는 부분을 만들어 검증 로직을 작성했다.</p>
@@ -1347,10 +1124,10 @@ Spring Security에 대한 내용을 어느정도 선수지식으로 가지고 �
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">[macOs] brew update Error Another active Homebrew update process is already in...</a></li>
-<li><a class="post-link" href="/til/2022/12/07/til.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">[TIL] 배포 자동화 AWS Pipeline</a></li>
-<li><a class="post-link" href="/til/2022/11/04/til.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">[TIL] Spring Transaction 1</a></li>
-<li><a class="post-link" href="/spring/2023/01/15/spring-fileupload.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">[Spring] AWS S3 FileUpload 하여 URL로 관리하기</a></li>
+        <li><a class="post-link" href="/til/2022/09/21/til.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">[TIL] Json</a></li>
+<li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">Git pull rebase 사용해 병합하기</a></li>
+<li><a class="post-link" href="/til/2022/10/24/til.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">[TIL] Spring MVC Serivce 계층</a></li>
+<li><a class="post-link" href="/til/2022/08/30/til.html" title="[Spring] AWS S3 FileUpload 하여 URL로 관리하기">[TIL] Java 문법기초 - 자바란?, 변수와 타입, 문자열, 연산자</a></li>
 </ul>
     </div>
 <div class="post-comments">

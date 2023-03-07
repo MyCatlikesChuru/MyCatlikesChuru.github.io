@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -765,12 +765,8 @@ Docker를 사용하면 OS에 상관없이 즉시 애플리케이션 실행 환�
 
 <p>도커 설치를 완료하면 위와 같은 애플리케이션 GUI 확인이 가능하다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker <span class="nt">--version</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nt">--version</span>
+</code></pre></div></div>
 <p>실제로 CLI로 버젼을 입력할 경우 정상적으로 설치되었으면<br>
 현재 설치된 버전이 나올 것이다.</p>
 
@@ -786,33 +782,21 @@ Docker를 사용하면 OS에 상관없이 즉시 애플리케이션 실행 환�
 <h4 id="1-이미지-관련-명령어">1). 이미지 관련 명령어</h4>
 
 <p>✅ 설치된 이미지 조회하는 명령어이다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker image <span class="nb">ls</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image <span class="nb">ls</span>
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>✅ 이미지를 설치하는 방법이다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker image pull 이미지이름:tag
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image pull 이미지이름:tag
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>✅ 설치되어 있는 이미지를 삭제하는 방법이다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker image <span class="nb">rm </span>이미지이름
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker image <span class="nb">rm </span>이미지이름
+</code></pre></div></div>
 <p>만약 이미지를 컨테이너에 사용할 경우 삭제가 불가능하다.<br>
 컨테이너를 종료시키고 삭제 후 에 이미지를 삭제해야한다.</p>
 
@@ -822,12 +806,8 @@ Docker를 사용하면 OS에 상관없이 즉시 애플리케이션 실행 환�
 
 <p>✅ 설치되어 있는 이미지를 삭제하는 방법이다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container run <span class="nt">--name</span> 컨테이너이름 <span class="nt">-p</span> 8080:80 이미지이름
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--name</span> 컨테이너이름 <span class="nt">-p</span> 8080:80 이미지이름
+</code></pre></div></div>
 <p><strong>컨테이너 이름</strong>은 우리가 정하면 된다.</p>
 
 <p><strong>이미지 이름</strong>은 설치한 이미지의 이름을 적어주면되는데<br>
@@ -845,59 +825,39 @@ Docker를 사용하면 OS에 상관없이 즉시 애플리케이션 실행 환�
 
 <p>✅ 컨테이너 리스트 출력</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container ps <span class="nt">-a</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container ps <span class="nt">-a</span>
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>✅ 실행중인 컨테이너 리스트 출력</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container <span class="nb">ls</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">ls</span>
+</code></pre></div></div>
 <p>컨테이너 리스트 출려과는 다르다. 현재 start되어있는 컨테이너만 출력되어진다.</p>
 
 <p><br></p>
 
 <p>✅ 컨테이너 실행</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container start 컨테이너이름
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container start 컨테이너이름
+</code></pre></div></div>
 <p>컨테이너를 백그라운드 상태로 실행시킬 수 있는 명령어이다.</p>
 
 <p><br></p>
 
 <p>✅ 컨테이너 중지</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container stop 컨테이너이름
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container stop 컨테이너이름
+</code></pre></div></div>
 <p>살행 중인 컨테이너를 종료하는 명령어이다.</p>
 
 <p><br></p>
 
 <p>✅ 컨테이너 삭제</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container <span class="nb">rm </span>컨테이너이름
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">rm </span>컨테이너이름
+</code></pre></div></div>
 <p>컨테이너를 중지시킨다음, 해당 컨테이너가 필요없을 경우<br>
 해당 명령얼 컨테이너를 삭제할 수 있다.</p>
 
@@ -905,56 +865,35 @@ Docker를 사용하면 OS에 상관없이 즉시 애플리케이션 실행 환�
 
 <p>✅ 컨테이너 내부 접근</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker <span class="nb">exec</span> <span class="nt">-it</span> 컨테이너이름 bash
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> 컨테이너이름 bash
+</code></pre></div></div>
 <p>선택한 컨테이너를 bash CLI로 접근할 수 있다.</p>
 
 <p><br></p>
 
 <p>✅ 현재 폴더의 파일을 컨테이너의 경로에 복사하기</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container <span class="nb">cp</span> ./ 컨테이너이름:/경로
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">cp</span> ./ 컨테이너이름:/경로
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>✅ 구동중인 컨테이너를 지정해 이미지로 만들기</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container commit 컨테이너이름 이미지이름:tag
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container commit 컨테이너이름 이미지이름:tag
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>✅ 이미지 빌드하는 방법</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker build <span class="nt">--tag</span> 이미지이름:tag <span class="nb">.</span> 
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> 이미지이름:tag <span class="nb">.</span> 
+</code></pre></div></div>
 <p>Dockerfile을 만들고, Dockerfile 대로 이미지를 build하는 방법이다.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre>FROM httpd:2.4 
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM httpd:2.4 
 COPY ./ /usr/local/apache2/htdocs/
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>와 같은 형식으로 Dockerfile을 만든다.<br>
 위에 내용을 해석하자면 베이스 이미지르 httpd로 사용<br>
 현재경로에(./) 있는 파일들을 특정경로(/usr/local/apache2/htdocs/)로 이동한다.</p>
@@ -981,40 +920,16 @@ COPY ./ /usr/local/apache2/htdocs/
 검색해보면 오른쪽에 커맨드로 도커를 가져올 수 있는 명령어가 있고<br>
 사용 방법에 대한 내용이 쭉 나와 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker pull docker/whalesay
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull docker/whalesay
+</code></pre></div></div>
 <p>를 입력해주면 해당 이미지를 다운 받는다</p>
 
 <p>그리고 컨테이너를 시작시켜주는 명령어를 사용하면 된다.<br>
 해당 이미지에선 사용하는 방법을 설명해준다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker run docker/whalesay cowsay boo
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run docker/whalesay cowsay boo
+</code></pre></div></div>
 <p>를 입력하게 되면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td>
-<td class="rouge-code"><pre> _____
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> _____
 &lt; boo <span class="o">&gt;</span>
  <span class="nt">-----</span>
     <span class="se">\</span>
@@ -1028,8 +943,7 @@ COPY ./ /usr/local/apache2/htdocs/
        <span class="se">\_</span>_____ o          __/
         <span class="se">\ </span>   <span class="se">\ </span>       __/
           <span class="se">\_</span>___<span class="se">\_</span>_____/
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>이러한 귀여운 고래 모습을 볼 수 있다.</p>
 
 <p>이제 간단한 이미지를 다운받아 사용까지 해보았다.<br>
@@ -1044,12 +958,8 @@ COPY ./ /usr/local/apache2/htdocs/
 Apache HTTP Server인 <code class="language-plaintext highlighter-rouge">httpd</code> 이미지를 이용해<br>
 웹서버를 띄워 볼 수 도 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container run <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">-p</span> 818:80 httpd
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container run <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">-p</span> 818:80 httpd
+</code></pre></div></div>
 <p>test라는 이름의 컨테이너로 818포트를 80포트로 포워딩하게 해두었다.<br>
 httpd의 기본포트는 80번으로 설정되어있다.</p>
 
@@ -1078,23 +988,15 @@ httpd의 기본포트는 80번으로 설정되어있다.</p>
 <code class="language-plaintext highlighter-rouge">index.html</code>파일이 있는 것을 볼 수 있다. 해당 파일은 It works! 파일이다.<br>
 해당 경로에 내가 올리려는 <code class="language-plaintext highlighter-rouge">팩맨 게임</code>의 <code class="language-plaintext highlighter-rouge">index.html</code>과 여러 파일들을 넣어주면 된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container <span class="nb">cp</span> ./ <span class="nb">test</span>:/usr/local/apache2/htdocs/
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container <span class="nb">cp</span> ./ <span class="nb">test</span>:/usr/local/apache2/htdocs/
+</code></pre></div></div>
 <p>이제 내가가지고 있는 프로그램 파일 경로로 접속해<br>
 해당 명령어를 입력해주면 해당 경로에 있는 파일들이<br>
 전부 test 컨테이너의 해당 경로로 복사되어진다.</p>
 
 <p>그리고 다시 컨테이너를 시작해준다면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker container start <span class="nb">test</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker container start <span class="nb">test</span>
+</code></pre></div></div>
 <p>백그라운드로 실행 될 것이다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/216759698-39ed3329-cd66-441e-836f-3e6b1e294e15.png" alt="image" class="align-left" style="max-width: 100%"></p>
@@ -1106,33 +1008,20 @@ httpd의 기본포트는 80번으로 설정되어있다.</p>
 <p>두번째 방법으로는
 <code class="language-plaintext highlighter-rouge">팩맨 게임</code>폴더에 <code class="language-plaintext highlighter-rouge">Dockerfile</code>이라는 <br>
 이름의 파일을 만든다. 그리고 해당 파일 안에는</p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre>FROM httpd:2.4
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM httpd:2.4
 COPY ./ /usr/local/apache2/htdocs/
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>와 같은 내용을 넣어준다. (설명은 명령어에서 설명했으므로 생략)</p>
 
 <p>그리고 build 명령어를 이용해서 이미지를 빌드할 수 있다.<br>
 명령어를 실행할때는 <code class="language-plaintext highlighter-rouge">Dockerfile</code> 경로에서 입력해야한다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker build <span class="nt">--tag</span> pacman:2.0 <span class="nb">.</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> pacman:2.0 <span class="nb">.</span>
+</code></pre></div></div>
 <p>build 명령어를 실행하면, 이미지 파일이 생성되고<br>
 해당 이미지 파일로 이제 컨테이너를 실행시키면 된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>docker run <span class="nt">--name</span> pacmangametest <span class="nt">-p</span> 818:80 pacman:2.0
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--name</span> pacmangametest <span class="nt">-p</span> 818:80 pacman:2.0
+</code></pre></div></div>
 
 <p><br></p>
 
@@ -1170,10 +1059,10 @@ COPY ./ /usr/local/apache2/htdocs/
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="[TIL] 배포 자동화 AWS Pipeline">[Programmers - Java] 프린터</a></li>
-<li><a class="post-link" href="/til/2022/10/17/til.html" title="[TIL] 배포 자동화 AWS Pipeline">[TIL] Spring AOP 1</a></li>
-<li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="[TIL] 배포 자동화 AWS Pipeline">H2 Database 다운로드 및 실행</a></li>
-<li><a class="post-link" href="/til/2022/12/06/til.html" title="[TIL] 배포 자동화 AWS Pipeline">[TIL] 배포 컨테이너 Docker</a></li>
+        <li><a class="post-link" href="/til/2022/12/09/til.html" title="[TIL] 배포 자동화 AWS Pipeline">[TIL] Cloud 운영 전략</a></li>
+<li><a class="post-link" href="/til/2022/12/07/til.html" title="[TIL] 배포 자동화 AWS Pipeline">[TIL] 배포 자동화 AWS Pipeline</a></li>
+<li><a class="post-link" href="/til/2022/11/17/til.html" title="[TIL] 배포 자동화 AWS Pipeline">[TIL] 인증, 보안 기초</a></li>
+<li><a class="post-link" href="/spring/2022/08/03/spring-port.html" title="[TIL] 배포 자동화 AWS Pipeline">[Spring] Web server failed to start. Port 8080 was already in use...</a></li>
 </ul>
     </div>
 <div class="post-comments">

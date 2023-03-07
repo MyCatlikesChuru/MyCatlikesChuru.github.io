@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 23 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 21 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -824,49 +824,14 @@ FilterChainProxy로 부터 해당 Filter들을 시작할 수 있게되어진다.
 
 <p>우선 Spring Security를 사용하기 위한 의존라이브러리를 추가해야한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">security</span><span class="err">'</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">security</span><span class="err">'</span>
+</code></pre></div></div>
 <p>build.gradle에 의존라이브러를 추가시켜 놓으면 준비 끝이다.</p>
 
 <p>처음으로 우선 위에서 보았던<br>
 SecurityFilterChain을 구성해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfiguration</span> <span class="o">{</span>
     
     <span class="nd">@Bean</span>
@@ -895,8 +860,7 @@ SecurityFilterChain을 구성해보자</p>
         <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>기본적인 구성방법은 SecurityFilterChain 클래스 타입을 반환하는<br>
 메서드를 하나 만들어 filter의 정보를 넣어주는 것이다.<br>
@@ -930,24 +894,7 @@ UserDetailsManager 반환하는 Bean 객체를 만들어주었다.</p>
 구현한 객체를 Bean으로 등록해주면 해당 정보로 등록된<br>
 사용자들은 정보에 해당하는 인증과 권한을 가지게 된다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td>
-<td class="rouge-code"><pre> <span class="nd">@Bean</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@Bean</span>
  <span class="kd">public</span> <span class="nc">UserDetailsManager</span> <span class="nf">userDetailsService</span><span class="o">(){</span>
      <span class="nc">UserDetails</span> <span class="n">user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">.</span><span class="na">withDefaultPasswordEncoder</span><span class="o">()</span> <span class="c1">// password 암호화</span>
              <span class="o">.</span><span class="na">username</span><span class="o">(</span><span class="s">"dhfif718@naver.com"</span><span class="o">)</span> <span class="c1">// 식별하는 사용자 아이디 값</span>
@@ -962,8 +909,7 @@ UserDetailsManager 반환하는 Bean 객체를 만들어주었다.</p>
 
      <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryUserDetailsManager</span><span class="o">(</span><span class="n">user</span><span class="o">,</span><span class="n">admin</span><span class="o">);</span>
  <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>InMemoryUserDetailsManager 구현체로 구성 정보를 넘겨주면 된다.<br>
 구성 정보를 만드는 방법은 UserDetails 인터페이스를 상속받는<br>
 User 클래스를 이용해 만들 수있다.</p>
@@ -993,17 +939,7 @@ bcrypt 방식으로 password를 암호화해준다. 즉, 1111,2222로 들어온 
 암호화를 하기위해 위에서 이용했던 bcrpty 방식으로 암호화를 <br>
 도와주는 API가 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td>
-<td class="rouge-code"><pre> <span class="cm">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cm">/*
  * PasswordEncoder Bean 등록
  * 암호화를 해야한다. Spring Security에서 지원하는 Default = bcrypt
  * */</span>
@@ -1011,8 +947,7 @@ bcrypt 방식으로 password를 암호화해준다. 즉, 1111,2222로 들어온 
  <span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">(){</span>
      <span class="k">return</span> <span class="nc">PasswordEncoderFactories</span><span class="o">.</span><span class="na">createDelegatingPasswordEncoder</span><span class="o">();</span>
  <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>SecurityConfiguration 클래스에<br>
 PasswordEncoder 인터페이스 타입 객체를 Bean으로 등록해주고<br>
 회원가입시 사용할 수있다.</p>
@@ -1020,20 +955,7 @@ PasswordEncoder 인터페이스 타입 객체를 Bean으로 등록해주고<br>
 <p>회원가입할 경우 Controller는 구성되어 있다고 가정하고<br>
 Service 코드를 확인해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre><span class="cm">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
 *  InMemory 사용을 위한 빈주입
 * */</span>
 <span class="c1">//@Configuration</span>
@@ -1044,8 +966,7 @@ Service 코드를 확인해보자</p>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="n">userDetailsManager</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>MemberService라는 인터페이스 타입으로 객체를 Bean으로 등록해준다.</p>
 
 <p>InMemoryMemberSerivce에 우리가 이용해야할<br>
@@ -1057,39 +978,7 @@ UserDetailsManager와 PasswordEncoder를 매개변수로 넣어<br>
 
 <p><br></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InMemoryMemberService</span> <span class="kd">implements</span> <span class="nc">MemberService</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InMemoryMemberService</span> <span class="kd">implements</span> <span class="nc">MemberService</span> <span class="o">{</span>
 
    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">UserDetailsManager</span> <span class="n">userDetailsManager</span><span class="o">;</span>
    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">;</span>
@@ -1119,8 +1008,7 @@ UserDetailsManager와 PasswordEncoder를 매개변수로 넣어<br>
               <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>여기서 회원가입을 위한 서비스 로직 createMember <br>
 안의 내용을 들여다보면된다.</p>
 
@@ -1165,40 +1053,7 @@ UserDetailsManager가 UserDetailsService를 상속받은 관계이다.</p>
 <p>우선 H2 DB 설정과 관련된 부분은 되어있다고 가정하겠다. <br>
 문제없이 H2 DataBase를 사용하기 위해서는<br>
 기존에 설정했던 SecurityFilterChain에서 한가지 Filter를 추가해줘야한다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfiguration</span> <span class="o">{</span>
     
     <span class="nd">@Bean</span>
@@ -1229,8 +1084,7 @@ UserDetailsManager가 UserDetailsService를 상속받은 관계이다.</p>
         <span class="k">return</span> <span class="n">http</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>.headers().frameOptions().sameOrigin()<br>
 메서드들이 추가되었고, 추가하지 않으면</p>
 
@@ -1240,20 +1094,7 @@ UserDetailsManager가 UserDetailsService를 상속받은 관계이다.</p>
 
 <p><br></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre><span class="cm">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
 *  DB 사용을 위한 빈주입
 * */</span>
 <span class="nd">@Configuration</span>
@@ -1264,42 +1105,11 @@ UserDetailsManager가 UserDetailsService를 상속받은 관계이다.</p>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberServiceV1</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>기존에 InMemory를 사용하기 위해 설정했던 구성정보를 지우고<br>
 새로운 구성정보를 설정. DBMemberService가 적용되도록 스프링 빈으로 등록했다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Transactional</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DBMemberServiceV1</span> <span class="kd">implements</span> <span class="nc">MemberService</span> <span class="o">{</span>
 
    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
@@ -1327,8 +1137,7 @@ UserDetailsManager가 UserDetailsService를 상속받은 관계이다.</p>
          <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_EXISTS</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>DBMemberService에서는<br>
 비밀번호 암호화를 한 것을 member 객체에 담아<br>
 Repository에 저장하게만 구성해주면 끝난다.</p>
@@ -1340,39 +1149,7 @@ Repository에 저장하게만 구성해주면 끝난다.</p>
 <p>이제 회원가입을하였고<br>
 로그인을 하였을때 UserDetailsManager와 같은 역할을 구현해줘야한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-</pre></td>
-<td class="rouge-code"><pre><span class="cm">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
 * DB사용했을때 인증 처리 적용하기 (인메모리 사용시 기존 UserDetailManager를 사용했었음)
 * UserDetailsService는 User정보를 로드하는 핵심적인 인터페이스다.
 * UserDetailManager는 UserDetailsService를 상속하고있음
@@ -1402,8 +1179,7 @@ Repository에 저장하게만 구성해주면 끝난다.</p>
         <span class="k">return</span> <span class="n">user1</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>우리는 UserDetailsService를 구현할 클래스를 만들어<br>
 상속을 받게 만들어준다음. loadUserByUsername 오버라이딩해<br>
 재정의를 해서 반환을 UserDetails 객체로 만들어 반환을 해주면된다.</p>
@@ -1481,18 +1257,7 @@ username정보를 이용해 DB에 조회를 한다.<br>
 
 <h3 id="오늘-만난-error">오늘 만난 ERROR</h3>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre>***************************
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>***************************
 APPLICATION FAILED TO START
 ***************************
 
@@ -1501,39 +1266,20 @@ Description:
 Parameter 0 of constructor in com.codestates.member.MemberController required a single bean, but 2 were found:
 	- inMemoryMemberService: defined by method 'inMemoryMemberService' in class path resource [com/codestates/config/JavaConfigurationV1.class]
 	- dbMemberService: defined by method 'dbMemberService' in class path resource [com/codestates/config/JavaConfigurationV2.class]
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>오늘 테스트 중 만났던 에러다. <br>
 내용은 MemberController에서 싱글빈을 요구한는데 2개가 있다는 것 같은 내용이다.<br>
 즉, 같은 타입의 빈이 두개가 등록된 문제라고 생각했다.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre>Action:
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Action:
 
 Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>밑에 아주친절하게 @Primary나  @Qualifier를 사용하라한다.</p>
 
 <p><br></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="cm">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
 *  InMemory 사용을 위한 빈주입
 * */</span>
 <span class="nd">@Configuration</span>
@@ -1543,22 +1289,9 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
         <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryMemberService</span><span class="o">(</span><span class="n">userDetailsManager</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="cm">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
 *  DB 사용을 위한 빈주입
 * */</span>
 <span class="nd">@Configuration</span>
@@ -1568,8 +1301,7 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
         <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span><span class="n">passwordEncoder</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>MemberControler에서는 MemberService를 DI받게 설계해놓았고</p>
 
 <p>MemberService라는 인터페이스를 구현한<br>
@@ -1581,17 +1313,7 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
 
 <p>하지만 코드는 그대로 유지싶었기에</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaConfigurationV2</span> <span class="o">{</span>
     <span class="nd">@Bean</span>
     <span class="nd">@Primary</span>
@@ -1599,8 +1321,7 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
         <span class="k">return</span> <span class="k">new</span> <span class="nf">DBMemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">,</span> <span class="n">passwordEncoder</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>JavaConfigurationV2에 빈등록 메서드에 @Primary를 이용해<br>
 빈을 선택해 주입해주도록 정했다.</p>
@@ -1633,10 +1354,10 @@ Consider marking one of the beans as @Primary, updating the consumer to accept m
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="[TIL] Spring Security 2 (인증처리)">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
-<li><a class="post-link" href="/til/2022/11/22/til.html" title="[TIL] Spring Security 2 (인증처리)">[TIL] Spring Security 3 (권한부여)</a></li>
-<li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="[TIL] Spring Security 2 (인증처리)">[Spring] @JsonIgnore 사용하기</a></li>
-<li><a class="post-link" href="/til/2022/09/19/til.html" title="[TIL] Spring Security 2 (인증처리)">[TIL] 한달차 회고</a></li>
+        <li><a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html" title="[TIL] Spring Security 2 (인증처리)">Nginx 에러 조치 , Failed to start A high performance web server...</a></li>
+<li><a class="post-link" href="/til/2022/12/02/til.html" title="[TIL] Spring Security 2 (인증처리)">[TIL] Cloud 운영 환경 구성 1</a></li>
+<li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="[TIL] Spring Security 2 (인증처리)">Jekyll Github IO 블로그 코드 하이라이트</a></li>
+<li><a class="post-link" href="/spring/2023/02/17/spring-test.html" title="[TIL] Spring Security 2 (인증처리)">[Spring] 단위 테스트 JPA metamodel must not be empty!</a></li>
 </ul>
     </div>
 <div class="post-comments">

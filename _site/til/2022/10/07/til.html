@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -717,39 +717,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 Table과 동시에 컬럼을 만들 었다.<br>
 그냥 아무런 의미없는 테이블이다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre>CREATE TABLE user (
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE user (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name varchar(255) not null,
   email varchar(255) not null
 );
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td>
-<td class="rouge-code"><pre>CREATE TABLE content (
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE content (
   id INT PRIMARY KEY AUTO_INCREMENT,
   title varchar(255) not null,
   body varchar(255) not null,
   userId int not null,
   created_at timestamp not null DEFAULT (current_timestamp),
 );
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>그러면 두 개의 테이블이 만들어졌을 것이고<br>
 conten의 userId를 FK(외래키)로 지정하여<br>
@@ -759,12 +741,8 @@ user의 id를 참조하도록 만들었다.</p>
 FOREIGN KEY라는 키워드와 REFERENCES를 이용하면<br>
 외래키를 사용할 수 있게된다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>ALTER TABLE `content` ADD FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER TABLE `content` ADD FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+</code></pre></div></div>
 
 <p>위에 구문은 content 테이블의 userId 외래키에게<br>
 user의 id를 참조하도록 추가해주는 구문이다.<br>
@@ -783,19 +761,11 @@ user의 id를 참조하도록 추가해주는 구문이다.<br>
 <p>그리고 그냥 아무런 데이터 들을 INSERT하여<br>
 레코드의 값을 채워 주었다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>INSERT INTO content (title,body,userId) VALUES ('쿠크','세이튼?',5);
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO content (title,body,userId) VALUES ('쿠크','세이튼?',5);
+</code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>INSERT INTO user (name,email) VALUES ('KIM BOM JIN','bomgin892@gmail.com');
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO user (name,email) VALUES ('KIM BOM JIN','bomgin892@gmail.com');
+</code></pre></div></div>
 
 <p>값을 넣고 제대로 만들어졌는지 <br>
 user랑 content Table 조회.</p>
@@ -822,14 +792,9 @@ user랑 content Table 조회.</p>
 
 <p>가장 헷갈리는 JOIN 관련된 문법을 주로 연습했다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre>SELECT * FROM content
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM content
 LEFT JOIN user ON content.id = user.id;
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>우선 테이블 두개를 JOIN 해보았다.</p>
 
@@ -906,14 +871,9 @@ user 테이블을 참조해 데이터를 들여다보게 될 수 있는 것이�
 <p>이번엔 처음으로 돌아가서<br>
 INNER JOIN을 해보자</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre>SELECT * FROM content
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM content
 INNER JOIN user ON content.id = user.id;
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>LEFT 에서 INNER만 바꾼 코드다<br>
 전체를 조회하며<br>
@@ -979,47 +939,7 @@ Foreign Key를 사용할 수 있도록 해주는 문제다.</p>
 3,4번은 N:N<br>
 의 형태로 참조가 진행되어진다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-</pre></td>
-<td class="rouge-code"><pre>CREATE TABLE `user` (
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE `user` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -1057,8 +977,7 @@ ALTER TABLE `user` ADD FOREIGN KEY (`roledId`) REFERENCES `role` (`id`);
 ALTER TABLE `content_category` ADD FOREIGN KEY (`contentId`) REFERENCES `content` (`id`);
 
 ALTER TABLE `content_category` ADD FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`);
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같이 작성하게된다면<br>
 아래와 같이 표현되게 되어진다!!<br>
@@ -1097,10 +1016,10 @@ ALTER TABLE `content_category` ADD FOREIGN KEY (`categoryId`) REFERENCES `catego
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/server/2023/01/01/server-oraclesetting.html" title="[TIL] Spring Basic 1">Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선</a></li>
-<li><a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html" title="[TIL] Spring Basic 1">Nginx 에러 조치 , Failed to start A high performance web server...</a></li>
-<li><a class="post-link" href="/til/2022/12/07/til.html" title="[TIL] Spring Basic 1">[TIL] 배포 자동화 AWS Pipeline</a></li>
-<li><a class="post-link" href="/db/2023/02/09/db-mysqlreplace.html" title="[TIL] Spring Basic 1">MySQL replace 함수사용하여 일괄 변경하기</a></li>
+        <li><a class="post-link" href="/til/2022/08/23/til.html" title="[TIL] Spring Basic 1">[TIL] HTML,CSS 기초</a></li>
+<li><a class="post-link" href="/til/2022/09/07/til.html" title="[TIL] Spring Basic 1">[TIL] Java 객체지향 - 다형성</a></li>
+<li><a class="post-link" href="/til/2022/11/02/til.html" title="[TIL] Spring Basic 1">[TIL] Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[TIL] Spring Basic 1">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
 </ul>
     </div>
 <div class="post-comments">

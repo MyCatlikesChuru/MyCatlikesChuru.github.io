@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
@@ -697,12 +697,8 @@ WorkBench를 이용해 mysql을 접속하려한다.</p>
 
 <p>iptables를 이용해 방화벽 설정을 할 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>iptables <span class="nt">-I</span> INPUT 1 <span class="nt">-p</span> tcp <span class="nt">--dport</span> 80 <span class="nt">-j</span> ACCEPT
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>iptables <span class="nt">-I</span> INPUT 1 <span class="nt">-p</span> tcp <span class="nt">--dport</span> 80 <span class="nt">-j</span> ACCEPT
+</code></pre></div></div>
 <p>와 같이 입력해주면 설정이 가능하다. <br>
 UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고<br>
 수준높은 방화벽 구성에는 iptables를 사용해야한다.</p>
@@ -713,51 +709,26 @@ UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고<b
 
 <p><strong>1). UFW 활성화</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw <span class="nb">enable</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw <span class="nb">enable</span>
+</code></pre></div></div>
 
 <p><br></p>
 
 <p><strong>2). UFW 비활성화</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw disable
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw disable
+</code></pre></div></div>
 
 <p><br></p>
 
 <p><strong>3). UFW 상태확인</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw status verbose
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw status verbose
+</code></pre></div></div>
 
 <p>상태확인 명령어를 입력하면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre>Status: active
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
 Logging: on <span class="o">(</span>low<span class="o">)</span>
 Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
 New profiles: skip
@@ -768,8 +739,7 @@ To                         Action      From
 80/tcp                     ALLOW IN    Anywhere
 3306/tcp <span class="o">(</span>v6<span class="o">)</span>              ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
 80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>와 같이 허용한 포트에 대해 표시가된다. ex) 80, 3306<br>
 위에서 확인이 가능하듯, 기본룰은</p>
 
@@ -783,34 +753,22 @@ outgoing은 전부 허가(allow)<br>
 
 <p><strong>1). http 80번 포 TCP,UDP 포트를 모두허용</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw allow 80
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80
+</code></pre></div></div>
 
 <p><br></p>
 
 <p><strong>2). http 80번 포 TCP 포트만 허용</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw allow 80/tcp
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/tcp
+</code></pre></div></div>
 
 <p><br></p>
 
 <p><strong>3). http 80번 포 UDP 포트만 허용</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw allow 80/udp
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/udp
+</code></pre></div></div>
 
 <p><br></p>
 
@@ -826,20 +784,7 @@ outgoing은 전부 허가(allow)<br>
 <code class="language-plaintext highlighter-rouge">sudo ufw status verbose</code>로 조회하였을 경우에<br>
 아래와 같이 조회되었다고 가정했을때</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre>Status: active
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
 Logging: on <span class="o">(</span>low<span class="o">)</span>
 Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
 New profiles: skip
@@ -850,22 +795,13 @@ To                         Action      From
 80                         DENY IN     Anywhere
 80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
 80 <span class="o">(</span>v6<span class="o">)</span>                    DENY IN     Anywhere <span class="o">(</span>v6<span class="o">)</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>해당 정책들을 삭제하고 싶은 경우에는</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw delete deny 80
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>ufw delete allow 80/tcp
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete deny 80
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete allow 80/tcp
+</code></pre></div></div>
 <p>와 같은 방식으로 <code class="language-plaintext highlighter-rouge">delete</code> 명령어를 이용해 룰을 삭제할 수 있다.</p>
 
 <p><br></p>
@@ -884,10 +820,10 @@ To                         Action      From
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/db/2023/01/08/db-redissetting.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">Redis CLI 설치 및 사용방법</a></li>
-<li><a class="post-link" href="/server/2023/01/01/server-oraclesetting.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선</a></li>
-<li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">Jekyll Github IO 블로그 코드 하이라이트</a></li>
-<li><a class="post-link" href="/til/2022/11/18/til.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">[TIL] Spring Security 1 (기초)</a></li>
+        <li><a class="post-link" href="/til/2022/12/01/til.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">[TIL] Spring WebFlux 구현하기</a></li>
+<li><a class="post-link" href="/til/2022/12/14/til.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">[TIL] 네달차 회고</a></li>
+<li><a class="post-link" href="/til/2022/08/26/til.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">[TIL] Linux 기초</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
 </ul>
     </div>
 <div class="post-comments">

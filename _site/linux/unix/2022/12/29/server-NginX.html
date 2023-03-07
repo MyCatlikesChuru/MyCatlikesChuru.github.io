@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
@@ -706,32 +706,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><br></p>
 
 <h4 id="-작업-환경">📌 작업 환경</h4>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre>NGINX version : nginx/1.22.1
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NGINX version : nginx/1.22.1
 EC2 인스턴스 유형 : Ubuntu, 22.04 LTS (HVM), SSD Volume Type , 64비트(x86)  
 JDK : openjdk version 11.0.17
 작업 컴퓨터 OS : macOS Monterey 12.6
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><br></p>
 
 <h4 id="-nginx-설치">📌 NGINX 설치</h4>
 
 <p>EC2 인스턴스에 Nginx를 설치해줘야한다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>apt-get update
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>nginx
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>업데이트를 해주고 nginx를 설치해주면 된다.</p>
 
 <p>설치가 완료되었다면 <code class="language-plaintext highlighter-rouge">nginx -version</code>을 입력하면<br>
@@ -743,62 +731,38 @@ JDK : openjdk version 11.0.17
 <h4 id="-nginx-시작-종료-삭제">📌 NGINX 시작, 종료, 삭제</h4>
 
 <p>1). 시작 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>service nginx start
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx start
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>2). 중지 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>service nginx stop
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx stop
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>3). 상태 확인 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>service nginx status
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx status
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>4). 설정파일 테스트 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>nginx <span class="nt">-t</span> 
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nginx <span class="nt">-t</span> 
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>5). 재시작 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nb">sudo </span>service nginx restart
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx restart
+</code></pre></div></div>
 
 <p><br></p>
 
 <p>6). nginx 설치 삭제 명령어</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>apt-get remove <span class="nt">--purge</span> nginx nginx-full nginx-common 
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get remove <span class="nt">--purge</span> nginx nginx-full nginx-common 
+</code></pre></div></div>
 <p>폴더부터 전부 삭제하는 방법이니 뭔가 꼬였다 싶을때<br>
 경건한마음으로 삭제했다가 다시시도해봐도될 것 같다.</p>
 
@@ -840,18 +804,7 @@ JDK : openjdk version 11.0.17
 <code class="language-plaintext highlighter-rouge">conf.d</code>폴더에 1).<code class="language-plaintext highlighter-rouge">client.conf</code> , 2).<code class="language-plaintext highlighter-rouge">server.conf</code> 두개를 만들었다.</p>
 
 <p><strong>1). client.conf</strong></p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre>server {
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
   server_name stackoverflowpre.p-e.kr;
   root /home/ubuntu/preproject/seb41_pre_037/client/build;
   index index.html index.htm;
@@ -860,8 +813,7 @@ JDK : openjdk version 11.0.17
     try_files $uri $uri/ /index.html;
   }
 }
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>server_name에는 <a href="https://xn--220b31d95hq8o.xn--3e0b707e/">내 도메인 한국</a>에서 받은 <br>
 도메인(stackoverflowpre.p-e.kr)으로 적어주었고  <br>
 EC2 IPv4 주소와 연결되어있다.</p>
@@ -871,34 +823,7 @@ EC2 IPv4 주소와 연결되어있다.</p>
 <p><br></p>
 
 <p><strong>2). server.conf</strong></p>
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-</pre></td>
-<td class="rouge-code"><pre>upstream preServer {
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream preServer {
         ip_hash;
         server 127.0.0.1:8080;
 }
@@ -923,8 +848,7 @@ server {
         }
 
 }
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>preServer에 <code class="language-plaintext highlighter-rouge">localhost:8080</code>인 <code class="language-plaintext highlighter-rouge">127.0.0.1:8080</code>을 설정해주었고 (스프링 톰켓서버)<br>
 server_name에는 동일하게 도메인을 넣어주었다.</p>
 
@@ -948,10 +872,10 @@ server_name에는 동일하게 도메인을 넣어주었다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[Programmers - Java] 주식가격</a></li>
-<li><a class="post-link" href="/til/2022/08/23/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[TIL] HTML,CSS 기초</a></li>
-<li><a class="post-link" href="/til/2022/09/21/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[TIL] Json</a></li>
-<li><a class="post-link" href="/til/2022/11/08/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[TIL] JUnit 1</a></li>
+        <li><a class="post-link" href="/algorithm/2023/02/19/algo-printer.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[Programmers - Java] 프린터</a></li>
+<li><a class="post-link" href="/til/2022/10/04/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[TIL] Network HTTP</a></li>
+<li><a class="post-link" href="/til/2022/10/11/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[TIL] Spring Basic 1</a></li>
+<li><a class="post-link" href="/til/2022/12/01/til.html" title="Oracle Cloud Free Tier 무료 인스턴스 생성과 접속">[TIL] Spring WebFlux 구현하기</a></li>
 </ul>
     </div>
 <div class="post-comments">

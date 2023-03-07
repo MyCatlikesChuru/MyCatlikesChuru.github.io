@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -711,19 +711,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>지금 만들고 있는 애플리케이션에서는 GET, DELETE<br>
 API만 자동화 시켜주면 마무리가 된다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">BDDMockito</span><span class="o">.</span><span class="na">given</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">BDDMockito</span><span class="o">.</span><span class="na">given</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">.</span><span class="na">Mockito</span><span class="o">.</span><span class="na">doNothing</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">RestDocumentationRequestBuilders</span><span class="o">.*;</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">parameterWithName</span><span class="o">;</span>
@@ -733,36 +721,13 @@ API만 자동화 시켜주면 마무리가 된다.</p>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">payload</span><span class="o">.</span><span class="na">PayloadDocumentation</span><span class="o">.*;</span> <span class="c1">//responseFields(); , fieldWithPath() 사용</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">mockmvc</span><span class="o">.</span><span class="na">MockMvcRestDocumentation</span><span class="o">.</span><span class="na">document</span><span class="o">;</span> <span class="c1">// document();</span>
 <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">restdocs</span><span class="o">.</span><span class="na">request</span><span class="o">.</span><span class="na">RequestDocumentation</span><span class="o">.</span><span class="na">pathParameters</span><span class="o">;</span> <span class="c1">// pathParameters();</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>시작 전 우리가 사용하기 위한 기술에 대한<br>
 import를 진행해준다.</p>
 
 <p>유의 깊게 볼 것은 RestDocs 구성을 위한 API들이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td>
-<td class="rouge-code"><pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="nd">@AutoConfigureRestDocs</span>
 <span class="nd">@WebMvcTest</span><span class="o">(</span><span class="nc">MemberController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
@@ -782,8 +747,7 @@ import를 진행해준다.</p>
     <span class="o">...</span>
     
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>기본적인 위존성 주입과 Class 애노테이션을 셋팅 한 다음<br>
 Test 코드를 작성해 API 자동화하여 만들어 줄 수 있다.</p>
 
@@ -798,50 +762,7 @@ Service영역과의 연결된 부분을 Mock 객체를 반환시켜<br>
 멤버 조회, 멤버 전체조회, 멤버 삭제 이렇게 된다.</p>
 
 <p><strong>1). GET</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">getMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="nc">MemberDto</span><span class="o">.</span><span class="na">response</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">StubData</span><span class="o">.</span><span class="na">MockMember</span><span class="o">.</span><span class="na">getSingleResponseBody</span><span class="o">();</span>
     <span class="kt">long</span> <span class="n">memberid</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getMemberId</span><span class="o">();</span>
@@ -882,8 +803,7 @@ Service영역과의 연결된 부분을 Mock 객체를 반환시켜<br>
                     <span class="o">)</span>
             <span class="o">));</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>크게 달라진점은 없다.<br>
 andDo를 통해 검증과 동시에 API 자동화를 위한<br>
 여러가지 파라미터들을 넘겨주고 있다.</p>
@@ -891,19 +811,7 @@ andDo를 통해 검증과 동시에 API 자동화를 위한<br>
 <p>GET 요청이기때문에 requestFields();에 대한<br>
 작성은 따로하지 않았다.</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dhfif718@gmail.com"</span><span class="p">,</span><span class="w">
@@ -913,8 +821,7 @@ andDo를 통해 검증과 동시에 API 자동화를 위한<br>
     </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></pre></td>
-</tr></tbody></table></code></pre></div></div>
+</span></code></pre></div></div>
 <p>최종 적으로 responseFields의 Json 형태는 위와 같이 이루어진다.<br>
 현재는 data라는 Object안에 한종류의 데이터가 들어가 있다.</p>
 
@@ -923,19 +830,7 @@ andDo를 통해 검증과 동시에 API 자동화를 위한<br>
 <p>만약 전체조회를 위해<br>
 data안에 배열로 데이터가 존재한다면 어떻게<br>
 표시를 해주어야할까?</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="n">responseFields</span><span class="o">(</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">responseFields</span><span class="o">(</span>
         <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
                 <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
                 <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].email"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">STRING</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"이메일"</span><span class="o">),</span>
@@ -945,26 +840,12 @@ data안에 배열로 데이터가 존재한다면 어떻게<br>
                 <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data.[].stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">),</span>
         <span class="o">)</span>
 <span class="o">)</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>responseFields의 위와 같이 data.[].을 이용해  <br>
 배열에 해당하는 내용을 표시해줄 수 있다.</p>
 
 <p>또한</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre><span class="n">responseFields</span><span class="o">(</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">responseFields</span><span class="o">(</span>
         <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
                 <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">ARRAY</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"결과 데이터"</span><span class="o">).</span><span class="na">optional</span><span class="o">(),</span>
                 <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].memberId"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"회원 식별자"</span><span class="o">),</span>
@@ -975,8 +856,7 @@ data안에 배열로 데이터가 존재한다면 어떻게<br>
                 <span class="n">fieldWithPath</span><span class="o">(</span><span class="s">"data[].stamp"</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="nc">JsonFieldType</span><span class="o">.</span><span class="na">NUMBER</span><span class="o">).</span><span class="na">description</span><span class="o">(</span><span class="s">"스탬프 갯수"</span><span class="o">),</span>
         <span class="o">)</span>
 <span class="o">)</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>위와 같이도 표기할 수 있다.</p>
 
 <p>여기서 한가지 참고해야할 점은
@@ -987,33 +867,7 @@ JsonFieldType.ARRAY = data : []  <br>
 <p>하나의 멤버만 조회했을때 OBJECT를 사용한 이유와<br>
 여러 멤버를 조회했을때 ARRAY를 사용한 이유이다.</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-</pre></td>
-<td class="rouge-code"><pre><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"data"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"memberId"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"dhfif718@gmail.com"</span><span class="p">,</span><span class="w">
@@ -1037,8 +891,7 @@ JsonFieldType.ARRAY = data : []  <br>
     </span><span class="nl">"stamp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></pre></td>
-</tr></tbody></table></code></pre></div></div>
+</span></code></pre></div></div>
 
 <p>실제로 build하여 생성된 response-body를 확인해보면<br>
 우리가 최종적으로 반환한 데이터에 따른 배열이<br>
@@ -1051,32 +904,7 @@ JsonFieldType.ARRAY = data : []  <br>
 <p><br></p>
 
 <p><strong>2). DELETE</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteMemberTest</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
     <span class="kt">long</span> <span class="n">memberId</span> <span class="o">=</span> <span class="mi">1L</span><span class="o">;</span>
 
@@ -1099,8 +927,7 @@ JsonFieldType.ARRAY = data : []  <br>
                     <span class="o">)</span>
             <span class="o">));</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>Delete는 사실 더욱더 간단하다.<br>
 requestFields와 responseFields의 따로 만들어줄<br>
 필요가 없기 때문에 parameter에 대한 API 내용만 적어주면된다..</p>
@@ -1118,12 +945,8 @@ gradle build하는 과정 중 문제가 발생했다.</p>
 
 <p>첫번째는 아래와 같은 오류 코드가 발생</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">There</span> <span class="n">were</span> <span class="n">failing</span> <span class="n">tests</span><span class="o">.</span> <span class="nc">See</span> <span class="n">the</span> <span class="n">report</span> <span class="nl">at:</span> <span class="nl">file:</span><span class="c1">///Users/ljh/Desktop/myprogram/CodeStates/be-homework-api-documentation/build/reports/tests/test/index.html</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">There</span> <span class="n">were</span> <span class="n">failing</span> <span class="n">tests</span><span class="o">.</span> <span class="nc">See</span> <span class="n">the</span> <span class="n">report</span> <span class="nl">at:</span> <span class="nl">file:</span><span class="c1">///Users/ljh/Desktop/myprogram/CodeStates/be-homework-api-documentation/build/reports/tests/test/index.html</span>
+</code></pre></div></div>
 
 <p>두번째는 resources의 index.html 파일이 생기지 않았다.</p>
 
@@ -1185,10 +1008,10 @@ API 문서를 만들 수 있다는게 너무 좋은 기술인 것 같다는 생�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="MySQL Local 연동 하기">Jekyll Github IO 블로그 코드 하이라이트</a></li>
-<li><a class="post-link" href="/til/2022/09/22/til.html" title="MySQL Local 연동 하기">[TIL] Java 자료구조 Stack, Queue</a></li>
-<li><a class="post-link" href="/til/2022/11/25/til.html" title="MySQL Local 연동 하기">[TIL] OAuth 2 인증 기초</a></li>
-<li><a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html" title="MySQL Local 연동 하기">[Spring] Security Test 코드 작성시 UserDetails 설정</a></li>
+        <li><a class="post-link" href="/til/2022/09/21/til.html" title="MySQL Local 연동 하기">[TIL] Json</a></li>
+<li><a class="post-link" href="/til/2022/10/20/til.html" title="MySQL Local 연동 하기">[TIL] Spring MVC Controller 계층</a></li>
+<li><a class="post-link" href="/til/2022/10/05/til.html" title="MySQL Local 연동 하기">[TIL] DB RDMBS 1</a></li>
+<li><a class="post-link" href="/til/2022/09/14/til.html" title="MySQL Local 연동 하기">[TIL] Java 컬렉션 문제풀이</a></li>
 </ul>
     </div>
 <div class="post-comments">

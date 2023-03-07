@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -729,21 +729,7 @@ AOP 기능까지 추가된 트랜잭션이라고 보면 될 것 같다.</p>
 트랜잭션을 커밋하고 롤백하며 관리했었다고 한다.</p>
 
 <p><strong>예제)</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">accountTransfer</span><span class="o">(</span><span class="nc">String</span> <span class="n">fromId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">toId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">money</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">accountTransfer</span><span class="o">(</span><span class="nc">String</span> <span class="n">fromId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">toId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">money</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
     <span class="c1">// 트랜잭션 시작</span>
     <span class="nc">TransactionStatus</span> <span class="n">status</span> <span class="o">=</span> <span class="n">transactionManager</span><span class="o">.</span><span class="na">getTransaction</span><span class="o">(</span><span class="k">new</span> <span class="nc">DefaultTransactionDefinition</span><span class="o">());</span>
     <span class="k">try</span> <span class="o">{</span>
@@ -755,8 +741,7 @@ AOP 기능까지 추가된 트랜잭션이라고 보면 될 것 같다.</p>
         <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>하지만 이렇게될 경우 try, catch문이나<br>
 트랜잭션 매니저부분의 commit,rollback 등 반복적인 코드와<br>
@@ -768,18 +753,11 @@ AOP 기능까지 추가된 트랜잭션이라고 보면 될 것 같다.</p>
 적용되어 깔금한 코드로 변경할 수 있다.</p>
 
 <p><strong>예제)</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Transactional</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">accountTransfer</span><span class="o">(</span><span class="nc">String</span> <span class="n">fromId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">toId</span><span class="o">,</span> <span class="kt">int</span> <span class="n">money</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">SQLException</span> <span class="o">{</span>
     <span class="n">bizLogic</span><span class="o">(</span><span class="n">fromId</span><span class="o">,</span> <span class="n">toId</span><span class="o">,</span> <span class="n">money</span><span class="o">);</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같이 애노테이션을 붙여 트랜잭션을 적용하는 방법을<br>
 <strong>선언형 방식의 트랜잭션 적용</strong>이라고한다.</p>
@@ -892,24 +870,7 @@ ApplicationEventPublisher 클래스의 .publishEvent();<br>
 <p>간단한 예제로 Member 클래스에는 여러가지 정보가 있다고 가정하고<br>
 회원가입을 눌러 POST매서드를 통해 Service로직이 호출된다 가정해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Slf4j</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
 <span class="nd">@RequiredArgsConstructor</span>
 <span class="nd">@Transactional</span>
 <span class="nd">@Service</span>
@@ -924,24 +885,13 @@ ApplicationEventPublisher 클래스의 .publishEvent();<br>
     <span class="o">}</span>
 <span class="o">}</span>
 
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>간단한 코드로 ApplicationEventPublisher 객체를 스프링컨테이너를 통해<br>
 주입받은 객체 publisher로 이벤트를 발생시키는 메서드를 실행시킨다.<br>
 해당 객체에는 Event 정보를 담은 객체가 들어있어야한다.</p>
 
 <p>정보를 담은 객체를 따로 만들기위해 클래스를 만들었다.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Getter</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberCreatedEvent</span> <span class="kd">extends</span> <span class="nc">ApplicationEvent</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="nc">Member</span> <span class="n">member</span><span class="o">;</span>
     <span class="kd">public</span> <span class="nf">MemberCreatedEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">,</span> <span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
@@ -949,35 +899,14 @@ ApplicationEventPublisher 클래스의 .publishEvent();<br>
         <span class="k">this</span><span class="o">.</span><span class="na">member</span> <span class="o">=</span> <span class="n">member</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>MemberCreatedEvent라는 객체를 Event하여<br>
 우리는 이제 Listenr를 통해 객체를 받을 수 있다.</p>
 
 <p>Listener 클래스를 만들어보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Component</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
 <span class="nd">@RequiredArgsConstructor</span>
 <span class="nd">@Slf4j</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberCreatedEventListener</span> <span class="o">{</span>
@@ -995,8 +924,7 @@ ApplicationEventPublisher 클래스의 .publishEvent();<br>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>@EventListener 어노테이션을 사용한<br>
 메서드는 Event로 발행한 객체를 가져올 수 있다.</p>
 
@@ -1041,30 +969,7 @@ rollback(); 되어지는 모습을 확인할 수 있다.</p>
 <p>만약 위에 코드에서 @Async를 적용하여<br>
 해당 메서드를 비동기로 가져갈 수가 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Component</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
 <span class="nd">@RequiredArgsConstructor</span>
 <span class="nd">@Slf4j</span>
 <span class="nd">@EnableAsync</span> <span class="c1">// 비동기 사용가능하도록 설정</span>
@@ -1085,8 +990,7 @@ rollback(); 되어지는 모습을 확인할 수 있다.</p>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>@EnableAsync , @Async 어노테이션을 이용해<br>
 listenr라는 메서드는 비동기상태가 되었다.<br>
 즉, MemberSerivce 로직에서 호출하여도 제어의 흐름은<br>
@@ -1124,10 +1028,10 @@ MemberSerivce는 본인 쓰레드대로 진행하고</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/18/til.html" title="[TIL] JUnit 1">[TIL] Spring Security 1 (기초)</a></li>
-<li><a class="post-link" href="/db/2022/12/19/db-mysqlEER.html" title="[TIL] JUnit 1">MySQL EER 다이어그램 만드는법</a></li>
-<li><a class="post-link" href="/til/2022/11/25/til.html" title="[TIL] JUnit 1">[TIL] OAuth 2 인증 기초</a></li>
-<li><a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html" title="[TIL] JUnit 1">[Programmers - Java] 주식가격</a></li>
+        <li><a class="post-link" href="/til/2022/09/23/til.html" title="[TIL] JUnit 1">[TIL] Java 자료구조 Graph, Tree, BST</a></li>
+<li><a class="post-link" href="/til/2022/11/10/til.html" title="[TIL] JUnit 1">[TIL] JUnit 3</a></li>
+<li><a class="post-link" href="/til/2022/09/21/til.html" title="[TIL] JUnit 1">[TIL] Json</a></li>
+<li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="[TIL] JUnit 1">H2 Database 다운로드 및 실행</a></li>
 </ul>
     </div>
 <div class="post-comments">

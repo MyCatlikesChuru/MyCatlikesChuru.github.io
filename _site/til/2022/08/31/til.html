@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -715,32 +715,19 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h3 id="if-문">If 문</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="k">if</span> <span class="o">(</span><span class="n">조건식</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">조건식</span><span class="o">)</span> <span class="o">{</span>
 	<span class="c1">// 조건식 실행 내용</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>소괄호() 조건식에는 boolean 값으로 평가될 수 있는 조건식을 넣어주어야한다.<br>
 중괄호{}를 이용해 여러 문장을 하나의 단위로 묶을 수 있고 이걸 블록(block)이라고 한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 <span class="k">if</span><span class="o">(</span><span class="n">a</span><span class="o">==</span><span class="mi">1</span><span class="o">){</span>
    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"if문 실행완료"</span><span class="o">);</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>정말 간단하게 생각할때 a를 1이라는 값으로 할당하였을 때<br>
 조건식에 ==을 으용해 비교하였을 때 참이면 true, 거짓이면 false다.<br>
@@ -750,19 +737,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h3 id="ifelse문">if…else문</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="k">if</span><span class="o">(</span><span class="n">조건식1</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="o">(</span><span class="n">조건식1</span><span class="o">)</span> <span class="o">{</span>
 	<span class="c1">//조건식1이 참이라면, 실행되는 블록입니다.		</span>
 <span class="o">}</span> 
 <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">조건식2</span><span class="o">)</span> <span class="o">{</span>
@@ -772,8 +747,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	<span class="c1">//조건식1과 2가 모두 참이 아닐 때, 실행되는 블록입니다.</span>
 	<span class="c1">//else문은 생략 가능합니다.</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>간단하게말해 연쇄작용을하는 느낌이다.</p>
 
@@ -781,20 +755,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h3 id="switch문">Switch문</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre><span class="k">switch</span> <span class="o">(</span><span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">switch</span> <span class="o">(</span><span class="n">num</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">case</span> <span class="s">"1"</span> <span class="o">:</span>
             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1번"</span><span class="o">);</span>
             <span class="k">break</span><span class="o">;</span> <span class="c1">//다음 case를 실행하지 않고, switch문 탈출!</span>
@@ -805,8 +766,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"없는 숫자! "</span> <span class="o">+</span> <span class="n">num</span><span class="o">);</span>
             <span class="k">break</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>switch문은 기본적을<br>
 소괄호 안에있는 값을 case와 같은지 비교해주는 if문과 같은 개념이다.<br>
@@ -818,22 +778,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h3 id="for문">for문</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 <span class="c1">// for (초기화; 조건식; 증감식)</span>
 <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">num</span><span class="o">++)</span> <span class="o">{</span>	
   <span class="n">sum</span> <span class="o">+=</span> <span class="n">num</span><span class="o">;</span>
 <span class="o">}</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sum</span><span class="o">);</span> <span class="c1">// 1~9의 합인 45가 출력됩니다.</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>for문의 기본적인 형태이다.<br>
 초기화, 조건식, 증감식. 위의 내용을 이용해 여러번을 반복하는 반복문을 만들어줄 수 있다.<br>
@@ -844,18 +795,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h3 id="for문-enhanced-for문">for문 (Enhanced for문)</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">String</span><span class="o">[]</span> <span class="n">names</span> <span class="o">=</span> <span class="o">{</span><span class="s">"lee"</span><span class="o">,</span> <span class="s">"kim"</span><span class="o">,</span> <span class="s">"park"</span><span class="o">};</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">names</span> <span class="o">=</span> <span class="o">{</span><span class="s">"lee"</span><span class="o">,</span> <span class="s">"kim"</span><span class="o">,</span> <span class="s">"park"</span><span class="o">};</span>
 <span class="k">for</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span> <span class="o">:</span> <span class="n">names</span><span class="o">)</span> <span class="o">{</span>
   <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">"님은 자바를 공부중 입니다."</span><span class="o">);</span>
 <span class="o">}</span>
@@ -864,8 +804,7 @@ lee님은 자바를 공부중 입니다.
 kim님은 자바를 공부중 입니다.
 park님은 자바를 공부중 입니다.
 */</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>for문은 for문이지만 조금더 향상된 for문의 표현방식이다.<br>
 names라는 배열안에 lee, kim, park이라는 인덱스가 있다고 하였을 경우.<br>
@@ -874,20 +813,12 @@ names라는 배열안에 lee, kim, park이라는 인덱스가 있다고 하였�
 
 <h3 id="while문">while문</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre><span class="o">(</span><span class="n">초기화</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span><span class="n">초기화</span><span class="o">);</span>
 <span class="k">while</span><span class="o">(</span><span class="n">조건식</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">실행문</span><span class="o">;</span> <span class="c1">//조건식이 참인 동안 실행</span>
   <span class="n">증감식</span><span class="o">;</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>전체적으로는 for문과 동일하다<br>
 초기화 선언만 밖에 해주거나 증감식을 이어가다가<br>
@@ -895,16 +826,10 @@ names라는 배열안에 lee, kim, park이라는 인덱스가 있다고 하였�
 
 <h3 id="do-while-문">do-while 문</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="k">do</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">do</span> <span class="o">{</span>
   <span class="o">(</span><span class="mi">1</span><span class="o">)</span><span class="n">실행문</span> <span class="c1">//처음 한 번은 무조건 실행</span>
 <span class="o">}</span> <span class="k">while</span><span class="o">((</span><span class="mi">2</span><span class="o">)</span><span class="n">조건식</span><span class="o">);</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>while문을 실행하기준에 do에 있는 실행문을 먼저 진행하게 된다.</p>
 
@@ -935,10 +860,10 @@ names라는 배열안에 lee, kim, park이라는 인덱스가 있다고 하였�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/25/til.html" title="[TIL] Java 문법기초 - 배열">[TIL] Spring Exception 1</a></li>
-<li><a class="post-link" href="/db/2023/02/09/db-mysqlreplace.html" title="[TIL] Java 문법기초 - 배열">MySQL replace 함수사용하여 일괄 변경하기</a></li>
-<li><a class="post-link" href="/til/2022/11/10/til.html" title="[TIL] Java 문법기초 - 배열">[TIL] JUnit 3</a></li>
-<li><a class="post-link" href="/til/2022/11/18/til.html" title="[TIL] Java 문법기초 - 배열">[TIL] Spring Security 1 (기초)</a></li>
+        <li><a class="post-link" href="/til/2022/12/12/til.html" title="[TIL] Java 문법기초 - 배열">[TIL] 프로젝트 연습, 준비</a></li>
+<li><a class="post-link" href="/til/2022/08/24/til.html" title="[TIL] Java 문법기초 - 배열">[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계</a></li>
+<li><a class="post-link" href="/til/2022/12/15/til.html" title="[TIL] Java 문법기초 - 배열">[TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
+<li><a class="post-link" href="/til/2022/11/01/til.html" title="[TIL] Java 문법기초 - 배열">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
 </ul>
     </div>
 <div class="post-comments">

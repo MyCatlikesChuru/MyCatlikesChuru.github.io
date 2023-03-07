@@ -711,16 +711,10 @@ Workflow는 하나 이상의 작업이 실행되는 자동화 프로세스로, �
 <p>GitHub Actions는 설정파일(<code class="language-plaintext highlighter-rouge">.yml</code>)에 따라 Github Repository에<br>
 특정 변동사항을 트리거로 작동된다. 트리커는 Pull Request나 push 같은 이벤트를<br>
 사용할 수 있다고 위에서 얘기 했었었다.</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="na">on</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
   <span class="na">push</span><span class="pi">:</span>
     <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">main"</span> <span class="pi">]</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>간단한 예시로 <code class="language-plaintext highlighter-rouge">main</code>브랜치에 push가 되어질때를 트리거로 사용하는 <code class="language-plaintext highlighter-rouge">.yml</code>설정이다.</p>
 
 <p>Github Actions에서 빌드를 마치고 빌드 결과물을(.jar)  AWS S3 버킷에 객체를 저장한다.<br>
@@ -789,20 +783,7 @@ Access Key가 필요하다. 공개되면 보안 이슈가 발생할 수 있어<b
 Github Secret 기능을 이용해 Access Key 값을 저장한 후 사용할 수 있다.<br>
 <a href="https://github.com/aws-actions/configure-aws-credentials">configure-aws-credentials 레퍼런스</a>를 참고해보면 좋을 것 같다.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre><span class="na">jobs</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jobs</span><span class="pi">:</span>
   <span class="na">build</span><span class="pi">:</span>
     <span class="na">steps</span><span class="pi">:</span>      
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Configure AWS credentials</span>
@@ -813,8 +794,7 @@ Github Secret 기능을 이용해 Access Key 값을 저장한 후 사용할 수 
           <span class="na">aws-region</span><span class="pi">:</span> <span class="s">ap-northeast-2</span>
      
       <span class="s">// ..생략</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/211198212-b1fff5ec-39c8-480d-ad7f-05b67fcb9b31.png" alt="image" class="align-left" style="max-width: 100%"></p>
 
@@ -854,10 +834,10 @@ AWS CodeDeploy의 <code class="language-plaintext highlighter-rouge">.yml</code>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/31/til.html" title="[TIL] Cloud 운영 전략">[TIL] Spring Data JDBC Pagination</a></li>
-<li><a class="post-link" href="/macos/2022/12/04/OS-macOs-5.html" title="[TIL] Cloud 운영 전략">[macOs] brew update Error Another active Homebrew update process is already in...</a></li>
-<li><a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html" title="[TIL] Cloud 운영 전략">Jekyll Github IO 블로그 코드 하이라이트</a></li>
-<li><a class="post-link" href="/til/2022/10/06/til.html" title="[TIL] Cloud 운영 전략">[TIL] DB RDMBS 2</a></li>
+        <li><a class="post-link" href="/til/2022/10/07/til.html" title="[TIL] Cloud 운영 전략">[TIL] DB RDMBS 3</a></li>
+<li><a class="post-link" href="/til/2022/08/23/til.html" title="[TIL] Cloud 운영 전략">[TIL] HTML,CSS 기초</a></li>
+<li><a class="post-link" href="/til/2022/11/22/til.html" title="[TIL] Cloud 운영 전략">[TIL] Spring Security 3 (권한부여)</a></li>
+<li><a class="post-link" href="/til/2022/11/08/til.html" title="[TIL] Cloud 운영 전략">[TIL] JUnit 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

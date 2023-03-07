@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -717,16 +717,10 @@ DI 의존성 주입에 대한 내용을 좀 더 파고들어보자</p>
 <p><strong>1). 의존성 주입이 아닌경우</strong><br>
 -. 의존 관계이긴하나 DI적용이 안되어 강한 관계를 가짐</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MemberRepository</span><span class="o">();</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같은 코드의 경우 MemberReposity의 메서드나 필드변수를 사용하기 위해서<br>
 MemberRepository 클래스를 참조해 객체를 만들었다.</p>
@@ -734,22 +728,13 @@ MemberRepository 클래스를 참조해 객체를 만들었다.</p>
 <p><strong>2). 의존성 주입의 경우</strong><br>
 -. 의존 관계이면서 DI가 적용되어 관계가 느슨해짐</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
     <span class="kd">public</span> <span class="nf">MemberService</span> <span class="o">(</span><span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">){</span>
         <span class="k">this</span><span class="o">.</span><span class="na">memberRepository</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위의 코드 같은 경우는 동일하게 MemberRepository의 메서드나 필드변수를 사용하기 위해서<br>
 객체를 참조하게 만들었는데, 방법이 다르다.</p>
@@ -768,17 +753,7 @@ memberRepository 객체를 참조해서<br>
 위에까지는 의존성 주입의 방법이며<br>
 아래의 코드는 순수 자바코드로 외부에서 객체를 정해주는 코드라 볼 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
     <span class="o">}</span>
@@ -786,23 +761,14 @@ memberRepository 객체를 참조해서<br>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberTest</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">DependencyConfig</span> <span class="n">dependencyConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DependencyConfig</span><span class="o">();</span>
         <span class="nc">MemberService</span> <span class="n">memberService</span> <span class="o">=</span> <span class="n">dependencyConfig</span><span class="o">.</span><span class="na">memberService</span><span class="o">();</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>MemberService 쪽의 코드를 건들지 않아도<br>
 새로 추가되거나 변경되어도<br>
@@ -822,12 +788,8 @@ memberRepository 객체를 참조해서<br>
 <p>위의 예제에서 DependencyConfig클래스의 역할을 한다 보면 될 것 같다.<br>
 스프링 컨테이너 의 빈을 넣는 방법이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">ApplicationContext</span> <span class="n">ac</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">DependencyConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ApplicationContext</span> <span class="n">ac</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">DependencyConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
 
 <p>ApplicationContext는 인터페이스이다. 일반적으로 스프링 컨테이너라고 부른다<br>
 AnnotationConfigApplicationContext는 ApplicationContext의 구현체 이다.<br>
@@ -842,21 +804,7 @@ AnnotationConfigApplicationContext는 ApplicationContext의 구현체 이다.<br
 <p>컨테이너 안에있는 Bean 객체에 대한 구성정보를 활용할 수 있다.<br>
 위의 예제로든 클래스를 이렇게 어노테이션을 붙여주면</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
 	
     <span class="nd">@Bean</span>
@@ -868,8 +816,7 @@ AnnotationConfigApplicationContext는 ApplicationContext의 구현체 이다.<br
         <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>스프링 컨테이너 안에 2개의 빈이 등록되는 것이다.</p>
 <ol>
@@ -902,12 +849,8 @@ ApplicationContext를 일반적으로 스프링 컨테이너라 부르는데<br>
 AnnotationConfigApplicationContext 이외에도<br>
 XML파일로 스프링 컨테이너를 만들 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GenericXmlApplicationContext</span><span class="o">(</span><span class="s">"DependencyConfig.xml"</span><span class="o">);</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GenericXmlApplicationContext</span><span class="o">(</span><span class="s">"DependencyConfig.xml"</span><span class="o">);</span>
+</code></pre></div></div>
 
 <p>똑같이 AppicationContext의 구현체이며 이전에는<br>
 어노테이션 기반이였으면, 위의 클래스는 XML파일을 기반으로한다.<br>
@@ -929,14 +872,9 @@ XML파일로 스프링 컨테이너를 만들 수 있다.</p>
 <p>반대로 호출도 가능하다.<br>
 빈을 호출하는 방법이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">ApplicationContext</span> <span class="n">applicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">AppConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ApplicationContext</span> <span class="n">applicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">AppConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="nc">MemberService</span> <span class="n">memberService</span> <span class="o">=</span> <span class="n">applicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"memberService"</span><span class="o">,</span><span class="nc">MemberService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위에서 MemberService라는 메서드를 @Bean으로 지정 해주었기에<br>
 해당 이름으로 해당객체를 getBean(메서드이름, 클래스이름);<br>
@@ -1091,18 +1029,7 @@ BeanDefinition만 알면된다.<br>
 
 <p><strong>기존 객체 만드는 패턴</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
 	
     <span class="kd">public</span> <span class="nc">MemberService</span> <span class="nf">memberService</span> <span class="o">(){</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberService</span><span class="o">(</span><span class="n">memberRepository</span><span class="o">());</span>
@@ -1111,22 +1038,9 @@ BeanDefinition만 알면된다.<br>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberTest</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">DependencyConfig</span> <span class="n">dependencyConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DependencyConfig</span><span class="o">();</span>
         <span class="nc">MemberService</span> <span class="n">memberService1</span> <span class="o">=</span> <span class="n">dependencyConfig</span><span class="o">.</span><span class="na">memberService</span><span class="o">();</span>
@@ -1136,8 +1050,7 @@ BeanDefinition만 알면된다.<br>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">memberService2</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>우리가 이렇게 코드가 있다고 가정할때<br>
 memberService1과 memberService2는 각각 새로운 객체가 생긴다.<br>
@@ -1152,18 +1065,7 @@ MemberService@58644d46</p>
 
 <p><strong>싱글톤 패턴 적용</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonService</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonService</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">SingletonService</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SingletonService</span><span class="o">();</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="nc">SingletonService</span> <span class="nf">getInstance</span><span class="o">(){</span>
@@ -1172,23 +1074,9 @@ MemberService@58644d46</p>
 
     <span class="kd">private</span> <span class="nf">SingletonService</span><span class="o">(){}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonTest</span> <span class="o">{</span>
 
     <span class="nc">SingletonService</span> <span class="n">singletonService1</span> <span class="o">=</span> <span class="nc">SingletonService</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
     <span class="nc">SingletonService</span> <span class="n">singletonService2</span> <span class="o">=</span> <span class="nc">SingletonService</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
@@ -1199,8 +1087,7 @@ MemberService@58644d46</p>
 
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>만약에 위와 같이 static공유 변수를 이용한다면<br>
 서로 다른 객체를 만들어도 동일한 객체를 사용하게 되어진다.<br>
@@ -1227,21 +1114,7 @@ Default로 싱글톤을 지원하고 있다.</p>
 
 <p><strong>스프링 컨테이너를 이용한 싱글톤</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DependencyConfig</span> <span class="o">{</span>
 	
     <span class="nd">@Bean</span>
@@ -1253,22 +1126,9 @@ Default로 싱글톤을 지원하고 있다.</p>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">MemberRepository</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberApp</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberApp</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">ApplicationContext</span> <span class="n">applicationContext</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AnnotationConfigApplicationContext</span><span class="o">(</span><span class="nc">DependencyConfig</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
         <span class="nc">MemberService</span> <span class="n">memberService1</span> <span class="o">=</span> <span class="n">applicationContext</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"memberService"</span><span class="o">,</span><span class="nc">MemberService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
@@ -1278,8 +1138,7 @@ Default로 싱글톤을 지원하고 있다.</p>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">memberService2</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위에서 얘기했듯이 기본적으로 스프링컨테이너는<br>
 싱글톤을 지원하기 때문에  getBean으로 얻은 객체인<br>
@@ -1331,10 +1190,10 @@ MemberService@8bcc55f</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/11/28/til.html" title="[TIL] Spring DI 2">[TIL] Spring Security, JWT , OAuth 2 인증</a></li>
-<li><a class="post-link" href="/til/2022/12/01/til.html" title="[TIL] Spring DI 2">[TIL] Spring WebFlux 구현하기</a></li>
-<li><a class="post-link" href="/macos/2022/08/23/OS-macOs-2.html" title="[TIL] Spring DI 2">[macOs] 터미널 git언어를 한글에서 영어로 바꾸는 방법</a></li>
-<li><a class="post-link" href="/linux/unix/2022/07/27/server-ubunto.html" title="[TIL] Spring DI 2">Permission denied (publickey) 우분투 에러 조치</a></li>
+        <li><a class="post-link" href="/til/2022/11/14/til.html" title="[TIL] Spring DI 2">[TIL] API Documentation 2</a></li>
+<li><a class="post-link" href="/etc/2022/10/25/it-etc-imageurl.html" title="[TIL] Spring DI 2">구글 드라이브로 이미지 url 적용하기</a></li>
+<li><a class="post-link" href="/server/2023/01/01/server-oraclecloud.html" title="[TIL] Spring DI 2">Oracle Cloud Free Tier 무료 인스턴스 생성과 접속</a></li>
+<li><a class="post-link" href="/til/2022/11/21/til.html" title="[TIL] Spring DI 2">[TIL] Spring Security 2 (인증처리)</a></li>
 </ul>
     </div>
 <div class="post-comments">

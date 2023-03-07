@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 28 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 26 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
@@ -715,74 +715,33 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>열거형 사용법</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>enum 열거형이름 { 상수명1, 상수명2, ... }
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum 열거형이름 { 상수명1, 상수명2, ... }
+</code></pre></div></div>
 
 <p>열거형을 사용할땐 위와 같이 작성한다.<br>
 관례적으로 대문자로 작성한다.<br>
 예를들어 사계절을 열겨형으로 나눈다는 예제를 가정하면</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">enum</span> <span class="nc">Seasons</span> <span class="o">{</span> 
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">Seasons</span> <span class="o">{</span> 
     <span class="no">SPRING</span><span class="o">,</span> <span class="c1">//정수값 0 할당</span>
     <span class="no">SUMMER</span><span class="o">,</span>  <span class="c1">//정수값 1 할당</span>
     <span class="no">FALL</span><span class="o">,</span> <span class="c1">//정수값 2 할당</span>
     <span class="no">WINTER</span> <span class="c1">//정수값 3 할당</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>자동적으로 시작부터 0인 정수값으로 할당되어 상수를 가르킨다.<br>
 열거형을 접근하는 방법은 static 변수를 참조하는 것과 동일하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">Seasons</span><span class="o">.</span><span class="na">SPRING</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Seasons</span><span class="o">.</span><span class="na">SPRING</span>
+</code></pre></div></div>
 
 <p>static 변수 접근 방법은 클래스이름.변수 였는데<br>
 열거형 접근 방법은 열거형이름.상수명이다.</p>
 
 <p>열거형 사용예제</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">enum</span> <span class="nc">Seasons</span> <span class="o">{</span><span class="no">SPRING</span><span class="o">,</span> <span class="no">SUMMER</span><span class="o">,</span> <span class="no">FALL</span><span class="o">,</span> <span class="no">WINTER</span><span class="o">}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">Seasons</span> <span class="o">{</span><span class="no">SPRING</span><span class="o">,</span> <span class="no">SUMMER</span><span class="o">,</span> <span class="no">FALL</span><span class="o">,</span> <span class="no">WINTER</span><span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -804,8 +763,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="c1">// 출력 : 봄</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>Seasons이라는 열거형이름으로 상수값 4개를 할당했다.<br>
 Seasons타입으로 seasons라는 참조변수에 Seasons.SPRING을 할당했다.<br>
@@ -865,36 +823,7 @@ switch case문은 <strong>char, byte, short, int, Character, Byte, Short, Intege
 
 <p>코드로 예제를 들어보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">people1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GenericEx</span><span class="o">&lt;&gt;(</span><span class="s">"철수"</span><span class="o">);</span>
         <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">people2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">GenericEx</span><span class="o">&lt;&gt;(</span><span class="mi">1</span><span class="o">);</span>
@@ -921,8 +850,7 @@ switch case문은 <strong>char, byte, short, int, Character, Byte, Short, Intege
 <span class="c1">//출력</span>
 <span class="n">철수</span>
 <span class="mi">1</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>GenericEx라는 클래스의 name라는 인스턴스변수는<br>
 어떤 타입을 받을지 모르자고 가정해보자<br>
@@ -938,12 +866,8 @@ String name , int name 따로 선언을 해주어야한다.</p>
 
 <h3 id="타입-매개변수-여러개-사용"><strong>타입 매개변수 여러개 사용</strong></h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>class GenericEx&lt;K, V&gt; { ... }
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class GenericEx&lt;K, V&gt; { ... }
+</code></pre></div></div>
 
 <p>타입 매개변수는 임의의 문자로 지정이 가능하다.</p>
 
@@ -960,18 +884,11 @@ R : Result</p>
 
 <h3 id="제너릭-클래스-정의시-주의할-점">제너릭 클래스 정의시 주의할 점</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">GenericEx</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
 	<span class="kd">private</span> <span class="no">T</span> <span class="n">name1</span><span class="o">;</span> <span class="c1">// O </span>
 	<span class="kd">static</span> <span class="no">T</span> <span class="n">name2</span><span class="o">;</span> <span class="c1">// X </span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위의 예제와 같이 클래스 변수, 즉 static으로 선언된 변수는 사용할 수 없다.<br>
 그 이유는 클래스 변수에 타입 매개변수를 사용할 수 있다면<br>
@@ -992,33 +909,18 @@ R : Result</p>
 클래스 내부의 특정 메서드만 제네릭으로 선언할 수도 있다.<br>
 이를 제네릭 메서드라고한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Basket</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>                        <span class="c1">// 1 : 여기에서 선언한 타입 매개변수 T와 </span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Basket</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>                        <span class="c1">// 1 : 여기에서 선언한 타입 매개변수 T와 </span>
 		<span class="o">...</span>
 		<span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="no">T</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 2 : 여기에서 선언한 타입 매개변수 T는 서로 다른 것입니다.</span>
 				<span class="o">...</span>
 		<span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">Basket</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">basket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bakset</span><span class="o">&lt;&gt;();</span> <span class="c1">// 위 예제의 1의 T가 String으로 지정됩니다. </span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Basket</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">basket</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bakset</span><span class="o">&lt;&gt;();</span> <span class="c1">// 위 예제의 1의 T가 String으로 지정됩니다. </span>
 <span class="n">basket</span><span class="o">.&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span><span class="n">add</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>                <span class="c1">// 위 예제의 2의 T가 Integer로 지정됩니다. </span>
 <span class="n">basket</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>                         <span class="c1">// 타입 지정을 생략할 수도 있습니다. </span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같이 선언하고 호출할 수 있다.<br>
 제네릭 메서드는 클래스 타입 매개변수와 달리 static메서드에서도 선언하여 사용할 수 있다.</p>
@@ -1033,14 +935,9 @@ R : Result</p>
 
 <p>사용방법</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td>
-<td class="rouge-code"><pre><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">T</span><span class="o">&gt;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">T</span><span class="o">&gt;</span>
 <span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>T는 앞서 얘기한 타입매개 변수이고 저라리에는<br>
 다른 타입의 값들도 들어갈 수 있다.</p>
@@ -1089,22 +986,13 @@ R : Result</p>
 
 <p>코드로 오류를 보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>System.out.println 뒤에 세미콜린이 안붙어있다.<br>
 실행하게되면 <code class="language-plaintext highlighter-rouge">error: ';' expected</code><br>
@@ -1118,22 +1006,13 @@ R : Result</p>
 <p>런타임 에러는 실행도중 발생하는 에러를 가르킨다.<br>
 코드로 예제를 보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span><span class="s">"b"</span><span class="o">,</span><span class="s">"c"</span><span class="o">};</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">strs</span><span class="o">[</span><span class="mi">3</span><span class="o">]);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>간단하게 배열을 만들어 출력하는 프로그램이다<br>
 총 3개의 방에 각각 값들을 초기화 시켜주었고<br>
@@ -1178,22 +1057,7 @@ Runtime Exception 클래스와 그 하위클래스를<br>
 <p>자바에서의 예외 처리하기위한 문법이다.<br>
 사용 방법은 아래와 같다</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td>
-<td class="rouge-code"><pre><span class="k">try</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
     <span class="c1">// 예외가 발생할 가능성이 있는 코드를 삽입</span>
 <span class="o">}</span> 
 <span class="k">catch</span> <span class="o">(</span><span class="nc">ExceptionType1</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
@@ -1206,8 +1070,7 @@ Runtime Exception 클래스와 그 하위클래스를<br>
     <span class="c1">// finally 블럭은 옵셔널</span>
     <span class="c1">// 예외 발생 여부와 상관없이 항상 실행</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>간단하다. 예외가 발생할 것 같은 코드를<br>
 try 구문에 넣어 실행 시킨 후.<br>
@@ -1218,27 +1081,7 @@ catch 구문의 실행내용이 실행되면 finally 구문으로 넘어가며<b
 
 <p>코드 예제를 통해 사용해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">String</span><span class="o">[]</span> <span class="n">strs</span> <span class="o">=</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span><span class="s">"b"</span><span class="o">,</span><span class="s">"c"</span><span class="o">};</span>
         <span class="k">try</span> <span class="o">{</span>
@@ -1256,8 +1099,7 @@ catch 구문의 실행내용이 실행되면 finally 구문으로 넘어가며<b
 <span class="c1">//출력</span>
 <span class="nc">ArrayIndexOutOfBoundsException</span> <span class="n">발생</span> <span class="o">!!</span>
 <span class="n">종료</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>배열 범위를 넘어가는 간단한 예외처리를 해볼 것이다.<br>
 우선 e1, e2 매개변수에 각각 예외클래스를 지정해 주었다.<br>
@@ -1278,30 +1120,18 @@ e2 두번째는 <code class="language-plaintext highlighter-rouge">ArrayIndexOut
 
 <p>사용 방법</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="n">반환타입</span> <span class="n">메서드명</span><span class="o">(</span><span class="n">매개변수</span><span class="o">,</span> <span class="o">...)</span> <span class="kd">throws</span> <span class="n">예외클래스1</span><span class="o">,</span> <span class="n">예외클래스2</span><span class="o">,</span> <span class="o">...</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">반환타입</span> <span class="n">메서드명</span><span class="o">(</span><span class="n">매개변수</span><span class="o">,</span> <span class="o">...)</span> <span class="kd">throws</span> <span class="n">예외클래스1</span><span class="o">,</span> <span class="n">예외클래스2</span><span class="o">,</span> <span class="o">...</span> <span class="o">{</span>
 	<span class="o">...</span><span class="na">생략</span><span class="o">...</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>예외클래스를 지정해서 늘려가며 사용이가능하다.<br>
 특정 메서드에서 모든 종류의 메서드가 발생할 가능성이 있는 경우도 가능하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span><span class="o">{</span>
 	<span class="c1">//실행 구문</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>Exception은 모든 예외의 상위 클래스이기 때문에<br>
 그 하위 클래스 타입의 예외 클래스들이 모두 포함되게 된다.<br>
@@ -1311,33 +1141,7 @@ e2 두번째는 <code class="language-plaintext highlighter-rouge">ArrayIndexOut
 
 <p><strong>예외가 발생하지 않는 코드</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThrowExceptionTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThrowExceptionTest</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">try</span><span class="o">{</span>
             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
@@ -1361,8 +1165,7 @@ e2 두번째는 <code class="language-plaintext highlighter-rouge">ArrayIndexOut
 <span class="mi">2</span>
 <span class="mi">5</span>
 <span class="mi">6</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>흐름을 이해하기위해 프린트로 출력을 두었다.<br>
 메인 메소드에서 try구문을 실행하게되었다.<br>
@@ -1376,35 +1179,7 @@ Class.forName으로 존재하는 클래스를 불러왔다.<br>
 
 <p><strong>예외가 발생하는 코드</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThrowExceptionTest</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThrowExceptionTest</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">try</span><span class="o">{</span>
             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
@@ -1430,8 +1205,7 @@ Class.forName으로 존재하는 클래스를 불러왔다.<br>
 <span class="n">java</span><span class="o">.</span><span class="na">babo</span>
 <span class="mi">4</span>
 <span class="mi">6</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>이제 예외가 발생하는 위의 코드를 보자<br>
 존재하지않는 java.babo라는 임의의 클래스이름을 적었다.<br>
@@ -1495,12 +1269,8 @@ ArraysList는 저장 용량을 초과하면 객체가 자동으로 저장용량�
 
 <p>사용방법</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">List</span><span class="o">&lt;</span><span class="n">타입</span> <span class="n">매개변수</span><span class="o">&gt;</span> <span class="n">객체명</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">타입</span> <span class="n">매개변수</span><span class="o">&gt;(</span><span class="n">초기</span> <span class="n">저장</span> <span class="n">용량</span><span class="o">);</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="n">타입</span> <span class="n">매개변수</span><span class="o">&gt;</span> <span class="n">객체명</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">타입</span> <span class="n">매개변수</span><span class="o">&gt;(</span><span class="n">초기</span> <span class="n">저장</span> <span class="n">용량</span><span class="o">);</span>
+</code></pre></div></div>
 
 <p>여기서 타입 매개변수는 제너릭을 표기함을 의미한다.<br>
 초기 저장 용량은 지정하지 않으면 10으로 저장되어진다.</p>
@@ -1553,51 +1323,7 @@ LinkedList에는 불연속적으로 존재하며, 이 데이터는 서로 연결
 
 <p>코드로 확인해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.LinkedList</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
 
@@ -1639,8 +1365,7 @@ LinkedList에는 불연속적으로 존재하며, 이 데이터는 서로 연결
 <span class="no">C</span>
 <span class="o">[]</span>
 <span class="o">------------------</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>LinkedList로 객체로 만들어진 list라는 인스턴스로<br>
 순차적으로 값을 뽑아내고 하나찍 제거하는 프로그램이다.</p>
@@ -1657,42 +1382,7 @@ Set 인터페이스를 구현한 가장 대표적인 컬렉션 클래스이다.<
 Set 인터페이스 특성을 그대로 물려받으므로 중복된 값을 허용하지 않고,<br>
 저장 순서를 유지하지 않는다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="c1">// HashSet 생성</span>
     <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">languages</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
@@ -1725,8 +1415,7 @@ Set 인터페이스 특성을 그대로 물려받으므로 중복된 값을 허�
 <span class="nc">Ruby</span>
 <span class="nc">Python</span>
 <span class="nc">Kotlin</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>선언 및 사용 방법은 List와 유사하다.<br>
 HashSet 객체로 languages 라는 인스턴스 생성<br>
@@ -1752,28 +1441,7 @@ TreeSet은 이진트리형태로 데이터를 저장한다.<br>
 
 <p>코드 예제로 확인해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeSetTeacher</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeSetTeacher</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="nc">TreeSet</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">treeSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TreeSet</span><span class="o">&lt;&gt;();</span>
 
@@ -1792,8 +1460,7 @@ TreeSet은 이진트리형태로 데이터를 저장한다.<br>
 <span class="o">}</span>
 <span class="c1">// 출력 - 할때마다 달라짐 (난수에의해)</span>
 <span class="n">당첨</span> <span class="n">번호는</span> <span class="o">:</span> <span class="o">[</span><span class="mi">12</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">27</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">39</span><span class="o">]</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위의 코드는 1~45값의 난수를 발생시켜 하나씩<br>
 TreeSet객체로 만들어진 인스턴에서 .add();하는 프로그램이다.<br>
@@ -1831,38 +1498,14 @@ iterator()를 직접 호출할 수 없다.</p>
 
 <p>선언 방법</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="nc">HashMap</span><span class="o">&lt;</span><span class="n">키</span> <span class="n">타입매개변수</span><span class="o">,</span> <span class="n">값</span> <span class="n">타입매개변수</span><span class="o">&gt;</span> <span class="n">hashmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">HashMap</span><span class="o">&lt;</span><span class="n">키</span> <span class="n">타입매개변수</span><span class="o">,</span> <span class="n">값</span> <span class="n">타입매개변수</span><span class="o">&gt;</span> <span class="n">hashmap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+</code></pre></div></div>
 
 <p>다른 것들과 다른점은 키와 값의 타입매개변수<br>
 이렇게 두개를 설정해주어야한다.<br>
 아래의 코드로 간단하게 확인이 가능하다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 
     <span class="c1">// HashMap 생성</span>
     <span class="nc">HashMap</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
@@ -1880,8 +1523,7 @@ iterator()를 직접 호출할 수 없다.</p>
 <span class="o">}</span>
 <span class="c1">//출력</span>
 <span class="n">총</span> <span class="n">entry</span> <span class="nl">수:</span> <span class="mi">5</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>map.put()을 이용해 키와 값을 입력한다. <br>
 그리고 총 들어간 Entry의 개수를 int값을 반환해주는<br>
@@ -1916,10 +1558,10 @@ size(); 확인시 5개가 저장된걸 볼 수 있다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/12/til.html" title="[TIL] Java 컬렉션 문제풀이">[TIL] 프로젝트 연습, 준비</a></li>
-<li><a class="post-link" href="/til/2022/08/24/til.html" title="[TIL] Java 컬렉션 문제풀이">[TIL] HTML,CSS 페이지 레이아웃, 웹화면 셀계</a></li>
-<li><a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html" title="[TIL] Java 컬렉션 문제풀이">Nginx 에러 조치 , Failed to start A high performance web server...</a></li>
-<li><a class="post-link" href="/til/2022/08/29/til.html" title="[TIL] Java 컬렉션 문제풀이">[TIL] Git 기초</a></li>
+        <li><a class="post-link" href="/til/2022/09/29/til.html" title="[TIL] Java 컬렉션 문제풀이">[TIL] Java Algorithm 3</a></li>
+<li><a class="post-link" href="/til/2022/09/14/til.html" title="[TIL] Java 컬렉션 문제풀이">[TIL] Java 컬렉션 문제풀이</a></li>
+<li><a class="post-link" href="/til/2022/10/11/til.html" title="[TIL] Java 컬렉션 문제풀이">[TIL] Spring Basic 1</a></li>
+<li><a class="post-link" href="/til/2022/10/19/til.html" title="[TIL] Java 컬렉션 문제풀이">[TIL] 두달차 회고</a></li>
 </ul>
     </div>
 <div class="post-comments">

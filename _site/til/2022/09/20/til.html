@@ -715,23 +715,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>간단한 예제를 보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">example</span><span class="o">(){</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">example</span><span class="o">(){</span>
     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"재귀함수입니다."</span><span class="o">);</span>
     <span class="n">example</span><span class="o">();</span>
 <span class="o">}</span>
@@ -745,8 +729,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <span class="o">.</span>
 <span class="o">.</span>
 <span class="o">.</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같은 메서드를 보자<br>
 메서드 안에서 자기자신의 메서드를 계속해서 호출하고 있다.<br>
@@ -779,19 +762,7 @@ for문과 재귀함수를 비교해보자</p>
 
 <p><strong>for 문으로 작성</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
     <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">num</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
@@ -801,33 +772,14 @@ for문과 재귀함수를 비교해보자</p>
 <span class="o">}</span>
 <span class="c1">//출력</span>
 <span class="mi">120</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와같이 반복문을 이용해 간단하게 작성할 수 있다. <br>
 증가되는 i값을 result의 계속해서 곱해주는 방식이다.</p>
 
 <p><strong>재귀함수를 이용해 작성</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">test</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">test</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">test</span> <span class="n">example</span> <span class="o">=</span> <span class="k">new</span> <span class="n">test</span><span class="o">();</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">example</span><span class="o">.</span><span class="na">factorial</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
@@ -843,8 +795,7 @@ for문과 재귀함수를 비교해보자</p>
 <span class="o">}</span>
 <span class="c1">//출력</span>
 <span class="mi">120</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>이렇게 작성할 수 있다.<br>
 위의 for문과 확연한 차이가 있다.<br>
@@ -926,10 +877,10 @@ factorial(1) = 1 // 재귀함수 종료</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/12/07/til.html" title="[TIL] Json">[TIL] 배포 자동화 AWS Pipeline</a></li>
-<li><a class="post-link" href="/til/2022/09/23/til.html" title="[TIL] Json">[TIL] Java 자료구조 Graph, Tree, BST</a></li>
-<li><a class="post-link" href="/til/2022/11/03/til.html" title="[TIL] Json">[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</a></li>
-<li><a class="post-link" href="/til/2022/11/18/til.html" title="[TIL] Json">[TIL] Spring Security 1 (기초)</a></li>
+        <li><a class="post-link" href="/til/2022/11/01/til.html" title="[TIL] Json">[TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)</a></li>
+<li><a class="post-link" href="/til/2022/12/05/til.html" title="[TIL] Json">[TIL] Cloud 운영 환경 구성 2</a></li>
+<li><a class="post-link" href="/til/2022/10/07/til.html" title="[TIL] Json">[TIL] DB RDMBS 3</a></li>
+<li><a class="post-link" href="/db/2022/11/15/db-mysql.html" title="[TIL] Json">MySQL Local 연동 하기</a></li>
 </ul>
     </div>
 <div class="post-comments">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-02-24T17:57:42+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] 주식가격</title><link href="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html" rel="alternate" type="text/html" title="[Programmers - Java] 주식가격" /><published>2023-02-22T00:00:00+09:00</published><updated>2023-02-22T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/22/algo-stockprice</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html"><![CDATA[<h2 id="-문제--주식가격">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42584">주식가격</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-07T09:29:19+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">프로그래밍 패러다임</title><link href="http://localhost:4000/cs/2023/03/07/it-etc-paradigm.html" rel="alternate" type="text/html" title="프로그래밍 패러다임" /><published>2023-03-07T00:00:00+09:00</published><updated>2023-03-07T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/03/07/it-etc-paradigm</id><content type="html" xml:base="http://localhost:4000/cs/2023/03/07/it-etc-paradigm.html"><![CDATA[]]></content><author><name>LEE JAEHYEOK</name></author><category term="CS" /><category term="ComputerScience" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">[Programmers - Java] 주식가격</title><link href="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html" rel="alternate" type="text/html" title="[Programmers - Java] 주식가격" /><published>2023-02-22T00:00:00+09:00</published><updated>2023-02-22T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/22/algo-stockprice</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/22/algo-stockprice.html"><![CDATA[<h2 id="-문제--주식가격">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42584">주식가격</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -167,31 +167,7 @@ prices 배열의 길이가 늘어날수록 시간 복잡도가 배로 증가하�
 
 <h3 id="-코드">👨🏻‍💻 코드</h3>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
 <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
@@ -215,7 +191,7 @@ prices 배열의 길이가 늘어날수록 시간 복잡도가 배로 증가하�
         <span class="k">return</span> <span class="n">answer</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>여기서 유의 깊게 봐야할 부분은 <code class="language-plaintext highlighter-rouge">stack.push(i);</code><br />
 순회가 끝나면 Stack에 인덱스값을 저장해주는 부분이다.</p>
@@ -340,42 +316,7 @@ A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 �
 
 <p>여기까지 문제 이해와 설명부분이였고 코드로 살펴보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
 <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
@@ -410,7 +351,7 @@ A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 �
         <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>더 깔끔한 풀이가 분명 가능할 것 같다. <br />
 우선 내가 풀이한 방법을 설명해보자면</p>
 
@@ -432,23 +373,14 @@ index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><nam
 <p>Controller 단위 테스트를 진행하려고 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code><br />
 어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: JPA metamodel must not be empty!
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: JPA metamodel must not be empty!
+</code></pre></div></div>
 
 <p>원인을 파악중 Entity들의 생성,수정 LocalDateTime을 자동으로<br />
 관리해주는 <code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>어노테이션을 <code class="language-plaintext highlighter-rouge">@SpringBootApplication</code>클래스에<br />
 등록해 놓은 거이 위의 에러의 요인이였다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="rouge-code"><pre><span class="nd">@EnableJpaAuditing</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableJpaAuditing</span>
 <span class="nd">@SpringBootApplication</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JaritalkApplication</span> <span class="o">{</span>
 
@@ -456,7 +388,7 @@ index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><nam
 		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">JaritalkApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>은 JPA관련 Bean들을 필요로하는데 <br />
 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code>같은 단위테스트는 JPA관련 Bean들을 로드하지 않기 때문이다.</p>
@@ -467,15 +399,11 @@ index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><nam
 
 <p><strong>1. Configuration 분리</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="nd">@EnableJpaAuditing</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">JpaAuditingConfiguration</span> <span class="o">{</span>  
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code> 어노테이션을 새로운 클래스를 만들어<br />
 빈으로 등록해주면 된다.</p>
@@ -484,17 +412,12 @@ index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><nam
 
 <p><strong>2. MockBean 추가</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="nd">@WebMvcTest</span><span class="o">(</span><span class="n">controllers</span> <span class="o">=</span> <span class="nc">CommunityController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
 <span class="kd">class</span> <span class="nc">CommunityControllerTest</span> <span class="o">{</span>
     <span class="o">...</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>테스트하려고 하는 클래스에 <code class="language-plaintext highlighter-rouge">JpaMetamodelMappingContext</code> <br />
 <code class="language-plaintext highlighter-rouge">@MockBean</code>을 추가해주면된다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[✅ 문제발생 및 원인]]></summary></entry><entry><title type="html">[Programmers - Java] 폰켓몬</title><link href="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html" rel="alternate" type="text/html" title="[Programmers - Java] 폰켓몬" /><published>2023-02-11T00:00:00+09:00</published><updated>2023-02-11T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/11/algo-ponketmon</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"><![CDATA[<h2 id="-문제--폰켓몬">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/1845">폰켓몬</a></h2>
 
@@ -612,23 +535,7 @@ N은 주어지는 폰켓몬의 총 수량이고 만약</p>
 
 <p>코드로 살펴보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 
 <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
@@ -644,7 +551,7 @@ N은 주어지는 폰켓몬의 총 수량이고 만약</p>
         <span class="k">return</span> <span class="o">(</span><span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="o">?</span> <span class="n">max</span> <span class="o">:</span> <span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">max</code>값은 종류의 최대값을 표현했다. <br />
 위에서 설명했듯이 내가 가져갈 수 잇는 폰켓몬의 최대는 <br />
 <code class="language-plaintext highlighter-rouge">nums</code>로 주어지는 폰켓몬 수량의 절반이다.</p>
@@ -683,31 +590,16 @@ MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸�
 
 <p><br /></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span> FROM member<span class="p">;</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span> FROM member<span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span><span class="p">;</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>Table : member<br />
 Column : image</p>
 
 <p>변경하고자 하는 데이터는 image의 Text값을 변경하는 것이다.<br />
 <code class="language-plaintext highlighter-rouge">REPLACE('문자열','기존문자열','변경문자열')</code> 형식으로 쿼리를 날려주면 된다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="rouge-code"><pre>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span> FROM member<span class="p">;</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span> FROM member<span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOg7R_zu1d5ondnz2mF9Mfs5POsyaYwY0bpBfzQmTCA5iNpVhU3rycNjteK9RZKX0_dsQLXn1AGkA_MtfZJKeSJ03vOJg=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765442-ddf39075-30c9-45a1-9d55-806b35c9c991.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPE5xpI0-lxEqtHYRm-avwUL1X2y8HUz_CtZoT2afckhm77Y_hZfo5N7xB6VP2bDxsiIT4DcFRwe8wSc5-y9BFHYfhe=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765447-d8b3c96e-42d2-4b4d-9660-df536e82a48e.png'</span><span class="o">)</span><span class="p">;</span>
@@ -720,7 +612,7 @@ UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOeqDCgTYyD4_NlylK0EE-y1Fn0lj364mopuRJbuN4JvWP2eQGBJt6Ygv48nrlnHiuiq2Dkgz3ep7XILzUgT_lVAN1VpA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765473-c7044900-f16b-407c-a27e-939c7c8a2e17.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPKgEG4sHNVV90PQrE5jn37skBOV5Qp7M3czg2sShhPYx46ybBb0KhQ37mcxGl6H6E_1xVdAhna7aAJGi8qp1oYGCWMMw=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765476-31afe366-b1d2-4ee8-92f4-7d254a7616d2.png'</span><span class="o">)</span><span class="p">;</span>
 UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNXn3Qy3cjHid6lgXk6cT9J78rm98pYCgumlTWAHENmA_Q3ujH3MxEbMBYp_lHBLM8rpIU51BtZnzaIKi3CiEsrqcDKQA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765478-e9cbd679-d241-4a42-b285-f334b0b22241.png'</span><span class="o">)</span><span class="p">;</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>쿼리를 만들고 테이블에 정상적으로 변경되는지 확인까지 완료!</p>
 
@@ -745,36 +637,14 @@ REPLACE를 사용하는 것보단 Table Data export를 사용해 csv파일에서
 <p><br />
 <br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서 MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…]]></summary></entry><entry><title type="html">Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.</title><link href="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html" rel="alternate" type="text/html" title="Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server." /><published>2023-01-28T00:00:00+09:00</published><updated>2023-01-28T00:00:00+09:00</updated><id>http://localhost:4000/linux/unix/2023/01/28/server-nginxerror</id><content type="html" xml:base="http://localhost:4000/linux/unix/2023/01/28/server-nginxerror.html"><![CDATA[<p>https 관련 설정을 만지다가<br />
 nginx를 실행하는데 아래와 같은 에러가 발생했다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>service nginx start
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>service nginx start
 Job <span class="k">for </span>nginx.service failed because the control process exited with error code.
 See <span class="s2">"systemctl status nginx.service"</span> and <span class="s2">"journalctl -xeu nginx.service"</span> <span class="k">for </span>details.
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>터미널에 나온대로 <code class="language-plaintext highlighter-rouge">systemctl status nginx.service</code>를 <br />
 입력하여 로그를 확인해봤다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>systemctl status nginx.service
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl status nginx.service
 × nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded <span class="o">(</span>/lib/systemd/system/nginx.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
      Active: failed <span class="o">(</span>Result: exit-code<span class="o">)</span> since Sat 2023-01-28 02:54:33 KST<span class="p">;</span> 14s ago
@@ -793,24 +663,22 @@ Jan 28 02:54:33 instance-20230101-2217 nginx[11723]: nginx: <span class="o">[</s
 Jan 28 02:54:33 instance-20230101-2217 systemd[1]: nginx.service: Control process exited, <span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE
 Jan 28 02:54:33 instance-20230101-2217 systemd[1]: nginx.service: Failed with result <span class="s1">'exit-code'</span><span class="nb">.</span>
 Jan 28 02:54:33 instance-20230101-2217 systemd[1]: Failed to start A high performance web server and a reverse proxy server.
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같은 에러 코드들이 나왔다. <br />
 <code class="language-plaintext highlighter-rouge">Failed to start A high performance web server and a reverse proxy server.</code>를<br />
 키워드로 검색하니 <a href="https://stackoverflow.com/questions/51525710/nginx-failed-to-start-a-high-performance-web-server-and-a-reverse-proxy-server">Stackoverflow 해결 레퍼런스</a>로 문제 해결이 가능했다.</p>
 
 <p>나와 같은 경우는</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>fuser <span class="nt">-k</span> 80/tcp
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>fuser <span class="nt">-k</span> 80/tcp
 <span class="nb">sudo </span>systemctl restart nginx
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>를 입력하여주니 오류가 해결되었다.</p>
 
 <p>내용을 보자하니.. 이미 실행 80으로 실행중인 포트가 있었던 것..<br />
 <code class="language-plaintext highlighter-rouge">sudo lsof -i:80</code>를 입력해서 한번 확인후</p>
 
-<p>위에 명령어처럼 해당하는 포트를 중지시켜주자!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Linux/Unix" /><category term="Linux" /><category term="Unix" /><summary type="html"><![CDATA[https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. 1 2 3 $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.]]></summary></entry><entry><title type="html">Oracle Cloud 외부 접속 설정</title><link href="http://localhost:4000/server/2023/01/27/server-oraclesetting.html" rel="alternate" type="text/html" title="Oracle Cloud 외부 접속 설정" /><published>2023-01-27T00:00:00+09:00</published><updated>2023-01-27T00:00:00+09:00</updated><id>http://localhost:4000/server/2023/01/27/server-oraclesetting</id><content type="html" xml:base="http://localhost:4000/server/2023/01/27/server-oraclesetting.html"><![CDATA[<p>오늘은 Oracle Cloud 서버에<br />
+<p>위에 명령어처럼 해당하는 포트를 중지시켜주자!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Linux/Unix" /><category term="Linux" /><category term="Unix" /><summary type="html"><![CDATA[https 관련 설정을 만지다가 nginx를 실행하는데 아래와 같은 에러가 발생했다. $ sudo service nginx start Job for nginx.service failed because the control process exited with error code. See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details. 터미널에 나온대로 systemctl status nginx.service를 입력하여 로그를 확인해봤다.]]></summary></entry><entry><title type="html">Oracle Cloud 외부 접속 설정</title><link href="http://localhost:4000/server/2023/01/27/server-oraclesetting.html" rel="alternate" type="text/html" title="Oracle Cloud 외부 접속 설정" /><published>2023-01-27T00:00:00+09:00</published><updated>2023-01-27T00:00:00+09:00</updated><id>http://localhost:4000/server/2023/01/27/server-oraclesetting</id><content type="html" xml:base="http://localhost:4000/server/2023/01/27/server-oraclesetting.html"><![CDATA[<p>오늘은 Oracle Cloud 서버에<br />
 nginx에 클라이언트를 배포해 외부에서 접속하고<br />
 WorkBench를 이용해 mysql을 접속하려한다.</p>
 
@@ -822,9 +690,8 @@ WorkBench를 이용해 mysql을 접속하려한다.</p>
 
 <p>iptables를 이용해 방화벽 설정을 할 수 있다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>iptables <span class="nt">-I</span> INPUT 1 <span class="nt">-p</span> tcp <span class="nt">--dport</span> 80 <span class="nt">-j</span> ACCEPT
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>iptables <span class="nt">-I</span> INPUT 1 <span class="nt">-p</span> tcp <span class="nt">--dport</span> 80 <span class="nt">-j</span> ACCEPT
+</code></pre></div></div>
 <p>와 같이 입력해주면 설정이 가능하다. <br />
 UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고<br />
 수준높은 방화벽 구성에는 iptables를 사용해야한다.</p>
@@ -835,40 +702,26 @@ UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고<b
 
 <p><strong>1). UFW 활성화</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw <span class="nb">enable</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw <span class="nb">enable</span>
+</code></pre></div></div>
 
 <p><br /></p>
 
 <p><strong>2). UFW 비활성화</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw disable
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw disable
+</code></pre></div></div>
 
 <p><br /></p>
 
 <p><strong>3). UFW 상태확인</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw status verbose
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw status verbose
+</code></pre></div></div>
 
 <p>상태확인 명령어를 입력하면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="rouge-code"><pre>Status: active
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
 Logging: on <span class="o">(</span>low<span class="o">)</span>
 Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
 New profiles: skip
@@ -879,7 +732,7 @@ To                         Action      From
 80/tcp                     ALLOW IN    Anywhere
 3306/tcp <span class="o">(</span>v6<span class="o">)</span>              ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
 80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>와 같이 허용한 포트에 대해 표시가된다. ex) 80, 3306<br />
 위에서 확인이 가능하듯, 기본룰은</p>
 
@@ -893,25 +746,22 @@ outgoing은 전부 허가(allow)<br />
 
 <p><strong>1). http 80번 포 TCP,UDP 포트를 모두허용</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw allow 80
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80
+</code></pre></div></div>
 
 <p><br /></p>
 
 <p><strong>2). http 80번 포 TCP 포트만 허용</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw allow 80/tcp
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/tcp
+</code></pre></div></div>
 
 <p><br /></p>
 
 <p><strong>3). http 80번 포 UDP 포트만 허용</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw allow 80/udp
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw allow 80/udp
+</code></pre></div></div>
 
 <p><br /></p>
 
@@ -927,18 +777,7 @@ outgoing은 전부 허가(allow)<br />
 <code class="language-plaintext highlighter-rouge">sudo ufw status verbose</code>로 조회하였을 경우에<br />
 아래와 같이 조회되었다고 가정했을때</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="rouge-code"><pre>Status: active
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Status: active
 Logging: on <span class="o">(</span>low<span class="o">)</span>
 Default: deny <span class="o">(</span>incoming<span class="o">)</span>, allow <span class="o">(</span>outgoing<span class="o">)</span>, disabled <span class="o">(</span>routed<span class="o">)</span>
 New profiles: skip
@@ -949,15 +788,13 @@ To                         Action      From
 80                         DENY IN     Anywhere
 80/tcp <span class="o">(</span>v6<span class="o">)</span>                ALLOW IN    Anywhere <span class="o">(</span>v6<span class="o">)</span>
 80 <span class="o">(</span>v6<span class="o">)</span>                    DENY IN     Anywhere <span class="o">(</span>v6<span class="o">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>해당 정책들을 삭제하고 싶은 경우에는</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw delete deny 80
-</pre></td></tr></tbody></table></code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>ufw delete allow 80/tcp
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete deny 80
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>ufw delete allow 80/tcp
+</code></pre></div></div>
 <p>와 같은 방식으로 <code class="language-plaintext highlighter-rouge">delete</code> 명령어를 이용해 룰을 삭제할 수 있다.</p>
 
 <p><br /></p>
@@ -971,15 +808,11 @@ To                         Action      From
 
 <h3 id="-작업환경">✅ 작업환경</h3>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre>Spring Boot 2.7.7  
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Spring Boot 2.7.7  
 Java 11 
 macOs Monterey 12.6 버전 
 로컬환경에서 테스트 진행
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><br /></p>
 
@@ -988,23 +821,18 @@ macOs Monterey 12.6 버전
 <p>첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. <br />
 메일을 보내는 주체는 Google의 gmail을 이용하려한다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">mail</span><span class="err">'</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">mail</span><span class="err">'</span>
+</code></pre></div></div>
 <p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/package-summary.html">org.springframewokr.mail</a>, <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/javamail/package-summary.html">org.springframewokr.javamail</a> 패키지를 사용한다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">JavaMailSender</code> 인터페이스의 <code class="language-plaintext highlighter-rouge">send();</code>메서드를<br />
 Override 하여 구현하였고 테스트 진행도중 아래와 같은 예외를 만나게 되었다.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre>2023-01-21 15:40:59.934 ERROR 281 --- [         task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void codestates.frogroup.indiego.global.email.event.MemberRegistrationEventListener.listen(codestates.frogroup.indiego.global.email.event.MemberRegistrationApplicationEvent) throws java.lang.Exception
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2023-01-21 15:40:59.934 ERROR 281 --- [         task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void codestates.frogroup.indiego.global.email.event.MemberRegistrationEventListener.listen(codestates.frogroup.indiego.global.email.event.MemberRegistrationApplicationEvent) throws java.lang.Exception
 
 org.springframework.mail.MailAuthenticationException: Authentication failed; nested exception is javax.mail.AuthenticationFailedException: 534-5.7.9 Application-specific password required. Learn more at
 534 5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor t1-20020a63d241000000b004c974bb9a4esm11189895pgi.83 - gsmtp
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>내용을 잘 읽어보니, 인증에 실패하였고<br />
 <code class="language-plaintext highlighter-rouge">Application-specific password required</code> 애플리케이션의 스펙에 맞는<br />
@@ -1014,44 +842,7 @@ org.springframework.mail.MailAuthenticationException: Authentication failed; nes
 <p>예외가 발생한 코드를 쭉 따라가다 보면<br />
 <code class="language-plaintext highlighter-rouge">JavaMailSender</code>인터페이스의</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-</pre></td><td class="rouge-code"><pre>	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doSend</span><span class="o">(</span><span class="nc">MimeMessage</span><span class="o">[]</span> <span class="n">mimeMessages</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">originalMessages</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">MailException</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doSend</span><span class="o">(</span><span class="nc">MimeMessage</span><span class="o">[]</span> <span class="n">mimeMessages</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">originalMessages</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">MailException</span> <span class="o">{</span>
 		<span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">,</span> <span class="nc">Exception</span><span class="o">&gt;</span> <span class="n">failedMessages</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
 		<span class="nc">Transport</span> <span class="n">transport</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
@@ -1088,25 +879,11 @@ org.springframework.mail.MailAuthenticationException: Authentication failed; nes
                 
                 <span class="o">...</span> <span class="n">생략</span>
 	<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>구현체인 <code class="language-plaintext highlighter-rouge">JavaMailSenderImpl</code>의 아래의 메서드에서 <br />
 <code class="language-plaintext highlighter-rouge">connectTransport();</code> 메서드를 호출할 때 예외가 발생한 것을 볼 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="rouge-code"><pre>	<span class="kd">protected</span> <span class="nc">Transport</span> <span class="nf">connectTransport</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">MessagingException</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">protected</span> <span class="nc">Transport</span> <span class="nf">connectTransport</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">MessagingException</span> <span class="o">{</span>
 		<span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">getUsername</span><span class="o">();</span>
 		<span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">getPassword</span><span class="o">();</span>
 		<span class="k">if</span> <span class="o">(</span><span class="s">""</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">username</span><span class="o">))</span> <span class="o">{</span>  <span class="c1">// probably from a placeholder</span>
@@ -1120,7 +897,7 @@ org.springframework.mail.MailAuthenticationException: Authentication failed; nes
 		<span class="n">transport</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">getHost</span><span class="o">(),</span> <span class="n">getPort</span><span class="o">(),</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
 		<span class="k">return</span> <span class="n">transport</span><span class="o">;</span>
 	<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>해당 코드에서도 <code class="language-plaintext highlighter-rouge">transport.connect();</code> 메서드 안에서<br />
 host, port, user, password의 정보로 연결 시도를 하는데 정보가 맞지않아 <br />
 연결이 정상적으로 실행되지 않을 경우에 <code class="language-plaintext highlighter-rouge">AuthenticationFailedException</code> 예외가 <br />
@@ -1132,23 +909,7 @@ host, port, user, password의 정보로 연결 시도를 하는데 정보가 맞
 
 <p>현재 yml 설정 파일이다.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre><span class="na">mail</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mail</span><span class="pi">:</span>
   <span class="na">smtp</span><span class="pi">:</span>
     <span class="na">host</span><span class="pi">:</span> <span class="s">smtp.gmail.com</span>
     <span class="na">port</span><span class="pi">:</span> <span class="m">587</span>
@@ -1164,7 +925,7 @@ host, port, user, password의 정보로 연결 시도를 하는데 정보가 맞
     <span class="na">name</span><span class="pi">:</span>
       <span class="na">member</span><span class="pi">:</span>
         <span class="na">join</span><span class="pi">:</span> <span class="s">email-registration-member</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>환경변수를 이용해 설정해두었고<br />
 username에는 구글 이메일 주소를 넣었고<br />
 password에는 구글 비밀번호를 넣었었다.</p>
@@ -1207,17 +968,12 @@ ex) abcdefghijklmnop</p>
 
 <h3 id="-작업-환경">✅ 작업 환경</h3>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre>AWS S3 버킷
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AWS S3 버킷
 Spring Boot 2.7.7  
 Java 11 
 macOs Monterey 12.6 버전 
 로컬환경에서 테스트 진행
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><br /></p>
 
@@ -1349,23 +1105,7 @@ AWS S3에 저장되고 URL을 추출하는 과정만 담으려합니다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">application.yml</code> 을 설정해주자</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
   <span class="na">servlet</span><span class="pi">:</span>
     <span class="na">multipart</span><span class="pi">:</span>
       <span class="na">max-file-size</span><span class="pi">:</span> <span class="s">10MB</span>
@@ -1381,7 +1121,7 @@ AWS S3에 저장되고 URL을 추출하는 과정만 담으려합니다.</p>
       <span class="na">static</span><span class="pi">:</span> <span class="s">ap-northeast-2</span>
     <span class="na">stack</span><span class="pi">:</span>
       <span class="na">auto</span><span class="pi">:</span> <span class="no">false</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>처음으로는 servlet의 multipart 용량 사이즈를 지정해주었다. <br />
 10MB 이상을 넘지못하도록 지정했고, 넘은 파일이 올 경우에<br />
@@ -1400,45 +1140,19 @@ bucket은 나의 버킷이름인 indiego-fileupload에 <br />
 
 <p>그리고 build.gradle을 설정해주자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="n">dependencies</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
         <span class="o">...</span>
 	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">cloud</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="nl">aws:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="na">RELEASE</span><span class="err">'</span>
         <span class="o">...</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>기본적인 Spring web, Lombok 같은 <br />
 의존 라이브러리도 설정해주어야한다.</p>
 
 <p>다음으로는<br />
 AmazonS3Config 클래스를 작성해보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AmazonS3Config</span> <span class="o">{</span>
     
 	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${cloud.aws.credentials.access-key}"</span><span class="o">)</span>
@@ -1459,7 +1173,7 @@ AmazonS3Config 클래스를 작성해보자.</p>
 			<span class="o">.</span><span class="na">build</span><span class="o">();</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">AmazonS3Client</code>타입으로 빈을 만들어 주었다. <br />
 이용된 정보는 환경변수에 설정했던 값들이 이용되었다.<br />
@@ -1474,9 +1188,8 @@ AmazonS3Config 클래스를 작성해보자.</p>
 
 <p><strong>1). AmazonClientException 문제</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">com</span><span class="o">.</span><span class="na">amazonaws</span><span class="o">.</span><span class="na">AmazonClientException</span><span class="o">:</span> <span class="no">EC2</span> <span class="nc">Instance</span> <span class="nc">Metadata</span> <span class="nc">Service</span> <span class="n">is</span> <span class="n">disabled</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">com</span><span class="o">.</span><span class="na">amazonaws</span><span class="o">.</span><span class="na">AmazonClientException</span><span class="o">:</span> <span class="no">EC2</span> <span class="nc">Instance</span> <span class="nc">Metadata</span> <span class="nc">Service</span> <span class="n">is</span> <span class="n">disabled</span>
+</code></pre></div></div>
 
 <p>위와 같은 예외가 콘솔에 찍혀있었다.<br />
 <a href="https://h-kkaemi.tistory.com/24">AmazonClientException 참고 레퍼런스</a>를 참고해서 해결해보았다.</p>
@@ -1488,19 +1201,13 @@ AmazonS3Config 클래스를 작성해보자.</p>
 
 <p>그리고 yml 파일 로깅 설정을</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="rouge-code"><pre><span class="na">logging</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logging</span><span class="pi">:</span>
   <span class="na">level</span><span class="pi">:</span>
     <span class="na">com</span><span class="pi">:</span>
       <span class="na">amazonaws</span><span class="pi">:</span>
         <span class="na">util</span><span class="pi">:</span>
           <span class="na">EC2MetadataUtils</span><span class="pi">:</span> <span class="s">error</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같이 설정해준다면, 더이상 오류 메세지는 보이지 않을 것이다.</p>
 
@@ -1511,9 +1218,8 @@ AmazonS3Config 클래스를 작성해보자.</p>
 <p>이번에 발생한 문제는 버킷에서 ACLs를 허용하지<br />
 않았다는 문구가 출력외었다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>com.amazonaws.services.s3.model.AmazonS3Exception: The bucket does not allow ACLs
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.amazonaws.services.s3.model.AmazonS3Exception: The bucket does not allow ACLs
+</code></pre></div></div>
 
 <p>해당 문제도 AWS S3 버킷의</p>
 
@@ -1527,38 +1233,7 @@ AmazonS3Config 클래스를 작성해보자.</p>
 
 <p>첫번째로 Controller를 작성해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td><td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">com.image.fileupload.controller</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.image.fileupload.controller</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.image.fileupload.service.AwsS3Service</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.image.fileupload.service.ImageUploadService</span><span class="o">;</span>
@@ -1589,7 +1264,7 @@ AmazonS3Config 클래스를 작성해보자.</p>
         <span class="k">return</span> <span class="n">url</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>사이사이에 로그로 값을 확인할 수 있도록 찍어두었다. <br />
 key = file / value = 이미지 로 받아오는 방법이다.<br />
 Spring에서는 MultipartFile 형식으로 받아올 수 있다. <br />
@@ -1604,60 +1279,15 @@ Spring에서는 MultipartFile 형식으로 받아올 수 있다. <br />
 AWS S3 외에 다른 저장소를 사용할 수 있게에 <br />
 인터페이스를 하나 만들었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
 	<span class="nc">String</span> <span class="nf">StoreImage</span><span class="o">(</span><span class="nc">MultipartFile</span> <span class="n">img</span><span class="o">);</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>해당 인터페이스를 구현체로 <br />
 AwsS3Service 클래스를 만들었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td><td class="rouge-code"><pre><span class="nd">@Slf4j</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
 <span class="nd">@RequiredArgsConstructor</span>
 <span class="nd">@Service</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AwsS3Service</span> <span class="kd">implements</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
@@ -1699,7 +1329,7 @@ AwsS3Service 클래스를 만들었다.</p>
 		<span class="k">return</span> <span class="n">originalFilename</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>여기서 AmazonS3 를 DI 받아 <code class="language-plaintext highlighter-rouge">.putObject();</code> 메서드를 이용해 <br />
 AWS S3 저장소에 저장을할 수 있게되어진다.</p>
@@ -1767,9 +1397,8 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 
 <p>만약 정말로 사이즈가 넘게 된다면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded<span class="p">;</span> nested exception is java.lang.IllegalStateException:
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded<span class="p">;</span> nested exception is java.lang.IllegalStateException:
+</code></pre></div></div>
 
 <p>와 같은 예외가 발생하게 될 것이고 <br />
 해당 예외를 처리하기위해서 간단한 예외처리 로직을 구현해보았다.</p>
@@ -1777,20 +1406,7 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 <p>@ControllerAdvice를 이용해서<br />
 <code class="language-plaintext highlighter-rouge">MaxUploadSizeExceededException</code>예외를 잡을 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="rouge-code"><pre><span class="nd">@ControllerAdvice</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ControllerAdvice</span>
 <span class="nd">@Slf4j</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalExceptionHandler</span> <span class="o">{</span>
 
@@ -1803,26 +1419,8 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
         <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">internalServerError</span><span class="o">().</span><span class="na">body</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td><td class="rouge-code"><pre><span class="nd">@Getter</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="nd">@NoArgsConstructor</span>
 <span class="nd">@JsonInclude</span><span class="o">(</span><span class="nc">JsonInclude</span><span class="o">.</span><span class="na">Include</span><span class="o">.</span><span class="na">NON_NULL</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ErrorResponse</span> <span class="o">{</span>
@@ -1840,7 +1438,7 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 	<span class="o">}</span>
 
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>ErrorResponse에 대한 내용은 우선 대강 정의해보았다. <br />
 어떻게 반환할지에대해서는 커스터마이징을 통해서 <br />
@@ -1850,626 +1448,4 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 <br /></p>
 
 <p>✨ 참고 블로그 <br />
-<a href="https://antdev.tistory.com/93#recentEntries">AWS S3, FileUpload 참고 레퍼런스</a>, <a href="https://victorydntmd.tistory.com/334">FileUpload 관련 참고 블로그 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="S3" /><summary type="html"><![CDATA[오늘은 AWS S3에 파일 업로드를 하는 예제를 다뤄보려한다.]]></summary></entry><entry><title type="html">Redis JWT Refresh Token 관리 및 재발행</title><link href="http://localhost:4000/db/2023/01/14/db-redis.html" rel="alternate" type="text/html" title="Redis JWT Refresh Token 관리 및 재발행" /><published>2023-01-14T00:00:00+09:00</published><updated>2023-01-14T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/01/14/db-redis</id><content type="html" xml:base="http://localhost:4000/db/2023/01/14/db-redis.html"><![CDATA[<p>Redis에 대한 간단한 CS지식과 <br />
-<a href="https://mycatlikeschuru.github.io/db/2023/01/08/db-redissetting.html">Redis 설치 및 CLI 사용법</a>을 알아보았었다.</p>
-
-<p>오늘은 이제 나의 사용 목적인 프로젝트에 도입을 해보려한다. <br />
-JWT Refresh Token관리와 좋아요,조회수 등 <br />
-빈번히 update가 일어나는 항목에 대해서 관리하는 차원에서 <br />
-캐시서버인 Redis를 사용해보려한다.</p>
-
-<p>그 중에서도 Redis 사용에 대한 코드와<br />
-JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해<br />
-초점을 두고 작성했기에 많은 코드들이 생략되어 있다는점 참고 부탁드린다.</p>
-
-<h3 id="-작업환경">✅ 작업환경</h3>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre>Spring Boot 2.7.7
-java 11 
-macOS Ventura 13.1
-로컬 환경에서 테스트 진행
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p><br /></p>
-
-<h3 id="-redis-프로그램-작성">📌 Redis 프로그램 작성</h3>
-
-<p>Spring Boot에서는 <code class="language-plaintext highlighter-rouge">Spring Data Redis</code>를 이용해<br />
-Lettuce, Jedis라는 두가지 오픈소스 Java 라이브러리를 사용할 수 있다고 한다.<br />
-Lettuce는 별도의 설정이 필요없고, Jedis는 의존성을 추가해줘야한다.</p>
-
-<p>Gradle 의존성</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">redis</span><span class="err">'</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Spring data Redis는 두가지 접근 방식을 제공하는데<br />
-하나는 Redis Template, 하나는 RedisRepository를 이용한 방식이다.   <br />
-이번에 사용해본 방법은 Redis Template 방식이고</p>
-
-<p><code class="language-plaintext highlighter-rouge">RedisConnectionFactory</code> 인터페이스를 통해<br />
-<code class="language-plaintext highlighter-rouge">LettuceConnectionFactory</code> 생성하여 반환하는 Bean을 등록해야한다.</p>
-
-<p><strong>1). RedisConfig 클래스</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-</pre></td><td class="rouge-code"><pre><span class="nd">@Configuration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisConfig</span> <span class="o">{</span>
-
-	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${spring.redis.host}"</span><span class="o">)</span>
-	<span class="kd">private</span> <span class="nc">String</span> <span class="n">host</span><span class="o">;</span>
-
-	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${spring.redis.port}"</span><span class="o">)</span>
-	<span class="kd">private</span> <span class="kt">int</span> <span class="n">port</span><span class="o">;</span>
-
-	<span class="nd">@Bean</span>
-	<span class="kd">public</span> <span class="nc">RedisConnectionFactory</span> <span class="nf">redisConnectionFactory</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="k">new</span> <span class="nf">LettuceConnectionFactory</span><span class="o">(</span><span class="n">host</span><span class="o">,</span> <span class="n">port</span><span class="o">);</span>
-	<span class="o">}</span>
-
-	<span class="nd">@Bean</span>
-	<span class="kd">public</span> <span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">redisTemplate</span><span class="o">()</span> <span class="o">{</span>
-		<span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RedisTemplate</span><span class="o">&lt;&gt;();</span>
-		<span class="n">redisTemplate</span><span class="o">.</span><span class="na">setKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
-		<span class="n">redisTemplate</span><span class="o">.</span><span class="na">setValueSerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
-		<span class="n">redisTemplate</span><span class="o">.</span><span class="na">setConnectionFactory</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">());</span>
-		<span class="k">return</span> <span class="n">redisTemplate</span><span class="o">;</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">LettuceConnectionFactory</code>를 생성자를 만들어 반환할때<br />
-host, port 정보가 필요하다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">cache</span><span class="pi">:</span>
-    <span class="na">type</span><span class="pi">:</span> <span class="s">redis</span>
-  <span class="na">redis</span><span class="pi">:</span>
-    <span class="na">host</span><span class="pi">:</span> <span class="s">localhost</span>
-    <span class="na">port</span><span class="pi">:</span> <span class="m">6379</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>로컬환경에서 테스트를 할 것이기 때문에<br />
-yml파일에 설정해주고 @Value 어노테이션으로 파싱하도록 했다.</p>
-
-<p>그리고 <code class="language-plaintext highlighter-rouge">setKeySerializer</code>,<code class="language-plaintext highlighter-rouge">setValueSerializer</code>와 같은<br />
-<code class="language-plaintext highlighter-rouge">RedisTemplete</code>객체에 설정을 해주는 이유는</p>
-
-<p>RedisTemplate를 사용할 때 Spring - Redis 간 데이터<br />
-직렬화,역직렬화 시 사용하는 방식이 JDK 직렬화 방식이기 때문에 <br />
-문제는 없지만 redis-cli를 통해 접근할때 알아볼 수 없는 형태로 출력되기 때문에 <br />
-설정을 진행 해준 것이다!</p>
-
-<p><br /></p>
-
-<p><strong>2). RedisDao 클래스</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-</pre></td><td class="rouge-code"><pre><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisDao</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">RedisDao</span><span class="o">(</span><span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">redisTemplate</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValues</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">ValueOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">();</span>
-        <span class="n">values</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValues</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="nc">String</span> <span class="n">data</span><span class="o">,</span> <span class="nc">Duration</span> <span class="n">duration</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">ValueOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">();</span>
-        <span class="n">values</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">data</span><span class="o">,</span> <span class="n">duration</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getValues</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">ValueOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">();</span>
-        <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">values</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteValues</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">expireValues</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">timeout</span><span class="o">){</span>
-        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">expire</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">timeout</span> <span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHashOps</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">HashOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>
-        <span class="n">values</span><span class="o">.</span><span class="na">putAll</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">data</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getHashOps</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="nc">String</span> <span class="n">hashKey</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">HashOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>
-        <span class="k">return</span> <span class="n">values</span><span class="o">.</span><span class="na">hasKey</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">hashKey</span><span class="o">)</span> <span class="o">?</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span><span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">hashKey</span><span class="o">)</span> <span class="o">:</span> <span class="k">new</span> <span class="nc">String</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteHashOps</span><span class="o">(</span><span class="nc">String</span> <span class="n">key</span><span class="o">,</span> <span class="nc">String</span> <span class="n">hashKey</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">HashOperations</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>
-        <span class="n">values</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">hashKey</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">validateValue</span><span class="o">(</span><span class="nc">String</span> <span class="n">value</span><span class="o">){</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>두번째로는 <code class="language-plaintext highlighter-rouge">RedisDao</code>라는 클래스를 만들어 <br />
-스프링 컨테이너에 빈으로 등록해<br />
-DI 받아 사용하도록 클래스를 하나 만들어 주었다.</p>
-
-<p>안에 메서드 내용들을 보면 <br />
-기본적인 Key,Value를 설정하는 방법, 그리고 Get하여 가져오기 <br />
-또한 소멸 시간설정(TTL)을 하여 Key를 만들기</p>
-
-<p>Hash 자료구조로 Key,Value 만들기 정도 코드를 추가해두었다. <br />
-JWT사용할땐 기본적 Key,Value로 진행할 예정이고<br />
-다른 프로젝트에서 Hash 구조를 사용하기때문에 우선 추가해줬다.</p>
-
-<p><br /></p>
-
-<h3 id="-redis를-통한-refresh-token-관리">📌 Redis를 통한 Refresh Token 관리</h3>
-
-<h4 id="redis를-이용한-jwt-활용">Redis를 이용한 JWT 활용</h4>
-
-<p>이러한 방법이 정말 최선일지? <br />
-확실하진 않다… 여러가지 레퍼런스 블로그들을 보면서<br />
-이번에 프로젝트를 하면서 적용해본 아키텍처를 그려보았다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/212480772-df9dcb0d-241e-4301-97e7-688b64424717.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>순서를 살펴 보자면</p>
-
-<p><strong>1). 로그인시 JWT 토큰을 발급 받는다.</strong><br />
--&gt; AccessToken, RefreshToken을 발급 받음.</p>
-
-<p><br /></p>
-
-<p><strong>2). 발급받은 토큰을 Client에 전달 한다.</strong><br />
--&gt; Access Token은 Header에 <code class="language-plaintext highlighter-rouge">Authorization</code>에 담는다.<br />
--&gt; Refresh Token은 쿠키에 담아 보내준다.
-전달하기 전에 서버에서는 Refresh Token을 Redis 캐시서버에 Key/Value <br />
-형태로 소멸시간을 지정해 저장한다. (나는 2일 정도로 해두었다)</p>
-
-<p>❗️<strong>생각해볼 만한 내용들</strong><br />
-여기서 생각해보면 좋은 점이. Refresh Token을 클라이언트에 보내는 것이<br />
-정말 최신인가? 라는 생각이 든다. 이부분에 대해 고민을 많이해봤고 많이 찾아보았지만<br />
-결론적으로 내가 내린 생각은 해당 Refresh Token을 클라이언트에서 서버로<br />
-보내주지 않으면 Access Token으로만 재발급이 이루어지게되는데<br />
-Access Token을 탈취당할 경우 Redis에 있는 Refresh Token으로 재발급이 가능해지니<br />
-위험해 질 것 같다는 생각에 이르럿고, 취약점이 존재하지만 최소한 쿠키로 담아 보내 <br />
-HttpOnly 옵션으로 XSS(Cross-Site Scripting) 공격을 막을 수기에 보내주기로 결정했다.</p>
-
-<p><br /></p>
-
-<p><strong>3). API 요청할때 인증을 위한 Access Token을 담아 요청한다.</strong><br />
--&gt; 정상적으로 인증이 완료되면 해당 API를 수행한다.<br />
--&gt; 만약 Access Token이 만료되었다면? 서버에서는 만료되었다고 <br />
-클라이언트측에 알려준다. (나와 같은경우는 토큰이 만료되었다고 JSON을 응답해줌)</p>
-
-<p><br /></p>
-
-<p><strong>4). 만료응답을 받은 클라이언트는 Access Token 재발행 API를 요청한다.</strong><br />
--&gt; Access Token과 Refresh Token을 헤더에 담아서 Access Token 재발급을 요청한다.<br />
--&gt; 재발급 요청을 받은 서버는 Refresh Token을 Redis에서 찾는다. <br />
--&gt; 만약 Redis 캐시서버안에 Refresh Token이 소멸되지 않았다면<br />
-Access Token 재발급 시퀀스를 진행한다.<br />
--&gt; 만약 Refresh Token이 소멸되었다면, 예외처리하여 클라이언트에 알려준다.<br />
-(이후 로그아웃을 하든 다음 액션은 클라이언트쪽에 맡긴다.)</p>
-
-<p><br /></p>
-
-<h4 id="jwt-redis-저장-재발행-코드">JWT Redis 저장, 재발행 코드</h4>
-
-<p>위와 같은 플로우로 일단 정리를 하였다. <br />
-해당 로직 구현은 아래에서 살펴보자.<br />
-모든 로직을 적어두진 않을 것이고, 중요하다고 생각하는<br />
-부분의 클래스 내용들만 적어볼 예정이다.</p>
-
-<p><strong>1). 로그인시 JWT 토큰 발급, Redis에 저장</strong></p>
-
-<p><strong>JwtAuthenticationFilter 클래스</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JwtAuthenticationFilter</span> <span class="kd">extends</span> <span class="nc">UsernamePasswordAuthenticationFilter</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">AuthenticationManager</span> <span class="n">authenticationManager</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TokenProvider</span> <span class="n">tokenProvider</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RedisDao</span> <span class="n">redisDao</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">JwtAuthenticationFilter</span><span class="o">(</span><span class="nc">AuthenticationManager</span> <span class="n">authenticationManager</span><span class="o">,</span> <span class="nc">TokenProvider</span> <span class="n">tokenProvider</span><span class="o">,</span> <span class="nc">RedisDao</span> <span class="n">redisDao</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">authenticationManager</span> <span class="o">=</span> <span class="n">authenticationManager</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">tokenProvider</span> <span class="o">=</span> <span class="n">tokenProvider</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">redisDao</span> <span class="o">=</span> <span class="n">redisDao</span><span class="o">;</span>
-    <span class="o">}</span>
-    
-    <span class="nd">@SneakyThrows</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">Authentication</span> <span class="nf">attemptAuthentication</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
-
-        <span class="nc">LoginDto</span> <span class="n">loginDto</span> <span class="o">=</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">request</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">(),</span> <span class="nc">LoginDto</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// ServletInputSteam을 LoginDto 클래스 객체로 역직렬화 (즉, JSON 객체꺼냄)</span>
-        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# attemptAuthentication : loginDto.getEmail={}, login.getPassword={}"</span><span class="o">,</span><span class="n">loginDto</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span><span class="n">loginDto</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span>
-
-        <span class="nc">UsernamePasswordAuthenticationToken</span> <span class="n">authenticationToken</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UsernamePasswordAuthenticationToken</span><span class="o">(</span><span class="n">loginDto</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span> <span class="n">loginDto</span><span class="o">.</span><span class="na">getPassword</span><span class="o">());</span>
-        <span class="k">return</span> <span class="n">authenticationManager</span><span class="o">.</span><span class="na">authenticate</span><span class="o">(</span><span class="n">authenticationToken</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">successfulAuthentication</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="nc">FilterChain</span> <span class="n">chain</span><span class="o">,</span> <span class="nc">Authentication</span> <span class="n">authResult</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
-
-        <span class="nc">AuthMember</span> <span class="n">authMember</span> <span class="o">=</span> <span class="o">(</span><span class="nc">AuthMember</span><span class="o">)</span> <span class="n">authResult</span><span class="o">.</span><span class="na">getPrincipal</span><span class="o">();</span>
-        <span class="nc">TokenDto</span> <span class="n">tokenDto</span> <span class="o">=</span> <span class="n">tokenProvider</span><span class="o">.</span><span class="na">generateTokenDto</span><span class="o">(</span><span class="n">authMember</span><span class="o">);</span>
-        <span class="nc">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">tokenDto</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">();</span> <span class="c1">// accessToken 만들기</span>
-        <span class="nc">String</span> <span class="n">refreshToken</span> <span class="o">=</span> <span class="n">tokenDto</span><span class="o">.</span><span class="na">getRefreshToken</span><span class="o">();</span> <span class="c1">// refreshToken 만들기</span>
-
-        <span class="n">tokenProvider</span><span class="o">.</span><span class="na">accessTokenSetHeader</span><span class="o">(</span><span class="n">accessToken</span><span class="o">,</span><span class="n">response</span><span class="o">);</span> <span class="c1">// AccessToken Header response 생성</span>
-        <span class="c1">//tokenProvider.refreshTokenSetHeader(refreshToken,response); // RefreshToken Header response 생성</span>
-        <span class="n">tokenProvider</span><span class="o">.</span><span class="na">refreshTokenSetCookie</span><span class="o">(</span><span class="n">refreshToken</span><span class="o">,</span><span class="n">response</span><span class="o">);</span> <span class="c1">// RefreshToken Cookie로 설정</span>
-        <span class="nc">Responder</span><span class="o">.</span><span class="na">loginSuccessResponse</span><span class="o">(</span><span class="n">response</span><span class="o">,</span><span class="n">authMember</span><span class="o">);</span> <span class="c1">// login 완료시 Response 응답 만들기</span>
-
-        <span class="c1">// 로그인 성공시 Refresh Token Redis 저장 ( key = Refresh Token / value = Access Token )</span>
-        <span class="kt">int</span> <span class="n">refreshTokenExpirationMinutes</span> <span class="o">=</span> <span class="n">tokenProvider</span><span class="o">.</span><span class="na">getRefreshTokenExpirationMinutes</span><span class="o">();</span>
-        <span class="n">redisDao</span><span class="o">.</span><span class="na">setValues</span><span class="o">(</span><span class="n">refreshToken</span><span class="o">,</span><span class="n">accessToken</span><span class="o">,</span> <span class="nc">Duration</span><span class="o">.</span><span class="na">ofMinutes</span><span class="o">(</span><span class="n">refreshTokenExpirationMinutes</span><span class="o">));</span>
-
-        <span class="k">this</span><span class="o">.</span><span class="na">getSuccessHandler</span><span class="o">().</span><span class="na">onAuthenticationSuccess</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">,</span><span class="n">authResult</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code>를 상속받아<br />
-구현한 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code> 필터 클래스이다. Spring Security에<br />
-FilterChain에 설정해두어 로그인 요청시 해당 필터를 거치게된다.</p>
-
-<p>여기서 중점적으로 봐야할 코드는<br />
-<code class="language-plaintext highlighter-rouge">successfulAuthentication</code>메서드 부분이다.<br />
-<code class="language-plaintext highlighter-rouge">UsernamePasswordAuthenticationFilter</code> 필터에서는 <br />
-인증된 객체를 <code class="language-plaintext highlighter-rouge">Security Context Holder</code>에 저장해주는 역할을한다.</p>
-
-<p>나와 같은 경우는 해당 필터를 Override하였기 때문에<br />
-<code class="language-plaintext highlighter-rouge">Security Context Holder</code>에 객체저장하는건 <code class="language-plaintext highlighter-rouge">JwtVerificationFilter</code>라는<br />
-인증필터를 만들어 처리해주었고, 현재 위에 올려둔 필터클래스에서는<br />
-JWT 발행과 <code class="language-plaintext highlighter-rouge">redisDao.setValues()</code>메서드를 통해 Redis에</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>Key : refreshToken  
-Value : accessToken  
-소멸시간 : 2일
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>로 저장을 해주게 되었다. 위 플로우에서 얘기했던 1),2)번에 해당하는 내용이다.<br />
-이렇게 필터 구현 부분에서 JWT를 발행해 Redis에 저장해주게 되었다.</p>
-
-<p><br /></p>
-
-<p><strong>2). Token 만료시 JWT 재발행</strong></p>
-
-<p>위에서 로그인시 토큰 발급까지 해주었고  <br />
-클라이언트에서 Access Token을 헤더에 담아 어떤<br />
-API를 요청하였을때, 토큰이 만료되었다고 서버에서 확인해서 알려주면<br />
-재발행 API를 클라이언트에서 보내기로 했었다.</p>
-
-<p>❗️ Access Token 만료확인 코드는 너무 많기때문에 생략합니다.<br />
-필자는 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code> 필터클래스를 만들어 <code class="language-plaintext highlighter-rouge">OncePerRequestFilter</code>를<br />
-상속받아 API요청시 <code class="language-plaintext highlighter-rouge">doFilterInternal</code>를 Override받아 구현해 해당 필터에서 <br />
-JWT 해독을하고, 정상적으로 해독하면 API가 실행될 것이고, 토큰에 문제가 있거나 만료가되었으면<br />
-예외처리하여 클라이언트 측에 JSON을 만들어 Body에 던져주었습니다.</p>
-
-<p><br /></p>
-
-<p><strong>MemberController 클래스</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td><td class="rouge-code"><pre><span class="nd">@Slf4j</span>
-<span class="nd">@RestController</span>
-<span class="nd">@Validated</span>
-<span class="nd">@RequiredArgsConstructor</span>
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/members"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberController</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
-
-    <span class="o">...</span>
-
-    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/reissue"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">ResponseEntity</span> <span class="nf">reissue</span><span class="o">(</span><span class="nd">@CookieValue</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"refreshToken"</span><span class="o">,</span> <span class="n">required</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span> <span class="nc">String</span> <span class="n">refreshToken</span><span class="o">,</span>
-                                  <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span>
-                                  <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">){</span>
-
-        <span class="n">memberService</span><span class="o">.</span><span class="na">reissueAccessToken</span><span class="o">(</span><span class="n">refreshToken</span><span class="o">,</span><span class="n">request</span><span class="o">,</span><span class="n">response</span><span class="o">);</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">ResponseEntity</span><span class="o">(</span><span class="s">"Refresh Token 재발급 완료!"</span><span class="o">,</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>재발행을 실행해주는 API이다. 해당 API는<br />
-위에서 얘기했던 <code class="language-plaintext highlighter-rouge">JwtAuthenticationFilter</code>에서 실행되지 않게<br />
-<code class="language-plaintext highlighter-rouge">shouldNotFilter</code>를 구현해 처리해줄 수 있다. <br />
-그렇게되면 AccessToken이 만료되었더라도, 해당 API는 실행이 된다.<br />
-해당 로직은 API 요청부분이고, 이제 중요한 Service로직을 확인해보자</p>
-
-<p><br /></p>
-
-<p><strong>MemberSerivce 클래스</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td><td class="rouge-code"><pre><span class="nd">@Service</span>
-<span class="nd">@Slf4j</span>
-<span class="nd">@RequiredArgsConstructor</span>
-<span class="nd">@Transactional</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomBeanUtils</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">beanUtils</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">PasswordEncoder</span> <span class="n">passwordEncoder</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">CustomAuthorityUtils</span> <span class="n">authorityUtils</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">TokenProvider</span> <span class="n">tokenProvider</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RedisDao</span> <span class="n">redisDao</span><span class="o">;</span>
-
-    <span class="o">...</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">reissueAccessToken</span><span class="o">(</span><span class="nc">String</span> <span class="n">refreshToken</span><span class="o">,</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">){</span>
-
-        <span class="k">if</span><span class="o">(</span><span class="n">refreshToken</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">COOKIE_REFRESH_TOKEN_NOT_FOUND</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="nc">String</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">tokenProvider</span><span class="o">.</span><span class="na">resolveToken</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
-        <span class="nc">String</span> <span class="n">redisAccessToken</span> <span class="o">=</span> <span class="n">redisDao</span><span class="o">.</span><span class="na">getValues</span><span class="o">(</span><span class="n">refreshToken</span><span class="o">);</span>
-
-        <span class="c1">// Refresh Token이 Redis에 존재할 경우 Access Token 생성</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">redisDao</span><span class="o">.</span><span class="na">validateValue</span><span class="o">(</span><span class="n">redisAccessToken</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">accessToken</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">redisAccessToken</span><span class="o">)){</span>
-            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"# RefreshToken을 통한 AccessToken 재발급 시작"</span><span class="o">);</span>
-            <span class="nc">Claims</span> <span class="n">claims</span> <span class="o">=</span> <span class="n">tokenProvider</span><span class="o">.</span><span class="na">parseClaims</span><span class="o">(</span><span class="n">refreshToken</span><span class="o">);</span> <span class="c1">// Refresh Token 복호화</span>
-            <span class="nc">String</span> <span class="n">email</span> <span class="o">=</span> <span class="n">claims</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"sub"</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// Refresh Token에서 email정보 가져오기</span>
-            <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">findVerifiedMember</span><span class="o">(</span><span class="n">email</span><span class="o">);</span> <span class="c1">// DB에서 사용자 정보 찾기</span>
-            <span class="nc">AuthMember</span> <span class="n">authMember</span> <span class="o">=</span> <span class="nc">AuthMember</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span> <span class="n">member</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span> <span class="n">member</span><span class="o">.</span><span class="na">getRoles</span><span class="o">());</span>
-            <span class="nc">TokenDto</span> <span class="n">tokenDto</span> <span class="o">=</span> <span class="n">tokenProvider</span><span class="o">.</span><span class="na">generateTokenDto</span><span class="o">(</span><span class="n">authMember</span><span class="o">);</span> <span class="c1">// Token 만들기</span>
-            <span class="kt">int</span> <span class="n">refreshTokenExpirationMinutes</span> <span class="o">=</span> <span class="n">tokenProvider</span><span class="o">.</span><span class="na">getRefreshTokenExpirationMinutes</span><span class="o">();</span>
-            <span class="n">redisDao</span><span class="o">.</span><span class="na">setValues</span><span class="o">(</span><span class="n">refreshToken</span><span class="o">,</span> <span class="n">tokenDto</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">(),</span> <span class="nc">Duration</span><span class="o">.</span><span class="na">ofMinutes</span><span class="o">(</span><span class="n">refreshTokenExpirationMinutes</span><span class="o">));</span>
-            <span class="n">tokenProvider</span><span class="o">.</span><span class="na">accessTokenSetHeader</span><span class="o">(</span><span class="n">tokenDto</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">(),</span><span class="n">response</span><span class="o">);</span>
-
-        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(!</span><span class="n">redisDao</span><span class="o">.</span><span class="na">validateValue</span><span class="o">(</span><span class="n">redisAccessToken</span><span class="o">)){</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">REFRESH_TOKEN_NOT_FOUND</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">TOKEN_IS_NOT_SAME</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>다른 서비스 로직들은 지우고 표현해두었다. <br />
-<code class="language-plaintext highlighter-rouge">reissueAccessToken</code>메서드라는 부분을 만들어 검증 로직을 작성했다.</p>
-
-<p>첫번째로는 쿠키에 RefreshToken이 제대로 담겨왔는지를 확인한다.</p>
-
-<p>그리고는 이제 헤더에 담긴 AccessToken을 꺼내고<br />
-쿠키로 전달받은 RefreshToken으로 <code class="language-plaintext highlighter-rouge">redisDao.getValues</code>메서드를 이용해<br />
-Redis에서 AccessToken을 꺼낸다. <em><strong>(key=refreshToken, value=accessToken으로 저장했으니까!)</strong></em></p>
-
-<p>이제 <code class="language-plaintext highlighter-rouge">if(redisDao.validateValue(redisAccessToken) &amp;&amp; accessToken.equals(redisAccessToken))</code><br />
-비교문을 통해 이 두개의 AccessToken을 비교해 일치하는지 확인하고<br />
-만약 꺼내왔을때 소멸이 된 상태라면 <code class="language-plaintext highlighter-rouge">redisDao.validateValue(redisAccessToken)</code>에<br />
-null값이 찍혀있게되어 둘 중하나라도 조건이 만족하지 못하면 예외처리가 될 것이다.</p>
-
-<p>즉! Refresh Token이 존재하고(소멸되지 않고)<br />
-해당 Refresh Token에 매칭되는 Access Token을 들고왔을때만<br />
-Access Token을 재발행 한다음에 다시 클라이언트에 전송해준다는 서비스 로직이다.</p>
-
-<p><br /></p>
-
-<h3 id="-정리">📌 정리</h3>
-
-<p>이렇게 여러가지 레퍼런스를 찾아보면서 <br />
-우선 내가 생각하는대로 정리하여 올려보았다. <br />
-이 방법이 틀릴수도 있고, 어느정도 타협이 될 수도 있다고 생각한다.</p>
-
-<p>앞으로도 토큰을 사용한다면 보안에 대해 좀더 깊게 공부를 해봐야할 것 같다.<br />
-또한, 이 글의 본목적은 코드를 전부 리뷰한다기 보다는</p>
-
-<p>어떠한 흐름으로 작업을 했는지와 Redis를 이용하여<br />
-토큰을 비교하는 부분에 초점을 두고 작성했기에 <br />
-Spring Security에 대한 내용을 어느정도 선수지식으로 가지고 있어야하기에<br />
-조금 불친절한 설명이 될 수도 있을 것 같다는 생각이든다.</p>
-
-<p>그래도 참고차 올려보고<br />
-내공부를 위한 기록이기도하여 정리해보았다 📚</p>
-
-<p><br />
-<br />
-<br /></p>
-
-<p>✨ 참고 블로그
-<a href="https://hudi.blog/refresh-token-in-spring-boot-with-redis/">Redis Jpa 사용 레퍼런스</a>, <a href="https://wildeveloperetrain.tistory.com/32">Redis 사용방법 2가지 레퍼런스</a></p>
-
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="redis" /><summary type="html"><![CDATA[Redis에 대한 간단한 CS지식과 Redis 설치 및 CLI 사용법을 알아보았었다.]]></summary></entry></feed>
+<a href="https://antdev.tistory.com/93#recentEntries">AWS S3, FileUpload 참고 레퍼런스</a>, <a href="https://victorydntmd.tistory.com/334">FileUpload 관련 참고 블로그 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="S3" /><summary type="html"><![CDATA[오늘은 AWS S3에 파일 업로드를 하는 예제를 다뤄보려한다.]]></summary></entry></feed>

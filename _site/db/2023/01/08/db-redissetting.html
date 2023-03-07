@@ -710,12 +710,8 @@ RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.</p>
 
 <p>맥을 사용하는 유저라면 brew를 사용할 텐데</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>brew <span class="nb">install </span>redis
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>redis
+</code></pre></div></div>
 <p>를 입력하면 redis 설치가 가능하다.</p>
 
 <p><br></p>
@@ -723,42 +719,26 @@ RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.</p>
 <h3 id="-redis-시작-종료">📌 Redis 시작, 종료</h3>
 
 <p>기본 적인 redis 시작 명렁어이다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>brew services start redis
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services start redis
+</code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">==&gt; Successfully started redis (label: homebrew.mxcl.redis)</code><br>
 와 같이 표현되면 정상적으로 실행 된 것이다.</p>
 
 <p><br></p>
 
 <p>시작이완료되고 아래 명령어를 입력하면</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>redis-cli
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redis-cli
+</code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">127.0.0.1:6379&gt;</code>과 같이 <code class="language-plaintext highlighter-rouge">localhost:6379</code>로<br>
 접속되었다는 표시가 나올 거다.</p>
 
 <p><br></p>
 
 <p>redis 종료, 재시작 명렁어이다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>brew services stop redis
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>brew services restart redis
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services stop redis
+</code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew services restart redis
+</code></pre></div></div>
 
 <p>nginx, httpd 등 시작명령어가 비슷하고 익숙할 것이다.</p>
 
@@ -767,22 +747,14 @@ RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.</p>
 <h3 id="-redis-crud">📌 Redis CRUD</h3>
 
 <p><strong>1). 현재의 키값을 확인</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; keys <span class="k">*</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; keys <span class="k">*</span>
+</code></pre></div></div>
 
 <p><br></p>
 
 <p><strong>2). key / value 형태로 저장 (한개만)</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; <span class="nb">set test </span>a
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; <span class="nb">set test </span>a
+</code></pre></div></div>
 <p>test : key 값이된다.<br>
 a : value 값이된다.<br>
 즉 test라는 키의 a라는 value로 저장!</p>
@@ -791,24 +763,16 @@ a : value 값이된다.<br>
 
 <p><strong>3). key / value 형태로 저장 (여러개 한번에)</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; mset test1 a test2 b
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; mset test1 a test2 b
+</code></pre></div></div>
 <p>와 같이 입력하게 될 경우, test1,test2 라는 키가 생기고<br>
 a,b라는 value가 생긴다.</p>
 
 <p><br></p>
 
 <p><strong>4). key의 value를 조회</strong></p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; get <span class="nb">test</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; get <span class="nb">test</span>
+</code></pre></div></div>
 <p>test라는 키의 value를 조회한다. <br>
 위에서 a로 지정했으니 a로 출력된다.</p>
 
@@ -816,12 +780,8 @@ a,b라는 value가 생긴다.</p>
 
 <p><strong>5). 소멸시간 지정해서 저장하기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; setex <span class="nb">test </span>10 a
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; setex <span class="nb">test </span>10 a
+</code></pre></div></div>
 <p>와 같이 지정하게 될 경우, test라는 키값은<br>
 10초동안만 존재하게 된다.<br>
 10초후에 자동으로 소멸되며 조회를해도 찾을 수 없다.</p>
@@ -830,12 +790,8 @@ a,b라는 value가 생긴다.</p>
 
 <p><strong>6). 키와 값 삭제하기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; del <span class="nb">test</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; del <span class="nb">test</span>
+</code></pre></div></div>
 <p>키값을 입력해 만들어둔 키를 삭제할 수 있다. <br>
 삭제가 완료되면 <code class="language-plaintext highlighter-rouge">(integer) 1</code>와 같이 표시된다.</p>
 
@@ -843,24 +799,16 @@ a,b라는 value가 생긴다.</p>
 
 <p><strong>7). 모든 키와 값 삭제하기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; flushall
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; flushall
+</code></pre></div></div>
 <p>모든 키와 값을 삭제해주는 명령어다</p>
 
 <p><br></p>
 
 <p><strong>8). 키의 소멸 시간 확인하기</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; ttl <span class="nb">test</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; ttl <span class="nb">test</span>
+</code></pre></div></div>
 <p>ttl 다음에 키값을 입력하면 현재 남은 시간을 확인할 수 있다. <br>
 초단위로 표시되며, 계속 입력하면 초가 줄어드는걸 볼 수 있다.</p>
 
@@ -871,16 +819,10 @@ a,b라는 value가 생긴다.</p>
 <p>redis의 hashes 자료구조에는<br>
 Key와 Field 용어가 나온다.</p>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre>Hash Key1
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hash Key1
      ᄂ Hash Sub Key1 (=Field1)
      ᄂ Hash Sub Key2 (=Field2)
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>와 같은 구조로 하나의 Key값에 여러가지<br>
 Field를 저장을 할수 있다.</p>
 
@@ -888,12 +830,8 @@ Field를 저장을 할수 있다.</p>
 
 <p><strong>1). 하나의 키로 여러개 필드 저장</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; hset dhfif718@naver.com token <span class="s2">"value1"</span> like <span class="s2">"10"</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hset dhfif718@naver.com token <span class="s2">"value1"</span> like <span class="s2">"10"</span>
+</code></pre></div></div>
 <p>HSET 명령어를 이용할 수 있다.</p>
 
 <p>dhfif718@naver.com 라는 Key값에</p>
@@ -908,37 +846,22 @@ key : like / value : 10<br>
 
 <p><strong>2). 조회하는 방법</strong></p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; hget dhfif718@naver.com like
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hget dhfif718@naver.com like
+</code></pre></div></div>
 
 <p>조회를할때 위와 같은 방법으로 조회하게되면<br>
 10이라는 값이 출력되게 되어진다.</p>
 
 <p>만약 전체 필드를 조회하고 싶다면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; hgetall dhfif718@naver.com
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hgetall dhfif718@naver.com
+</code></pre></div></div>
 <p>hgetall을 key값과 입력하면 전체 조회가 된다.</p>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td>
-<td class="rouge-code"><pre>1<span class="o">)</span> <span class="s2">"token"</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1<span class="o">)</span> <span class="s2">"token"</span>
 2<span class="o">)</span> <span class="s2">"value1"</span>
 3<span class="o">)</span> <span class="s2">"like"</span>
 4<span class="o">)</span> <span class="s2">"10"</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>와 같은 방식으로 출력되어진다.</p>
 
 <p><br></p>
@@ -947,12 +870,8 @@ key : like / value : 10<br>
 
 <p>마지막으로 삭제하는 방법이다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>127.0.0.1:6379&gt; hdel dhfif718@naver.com token like
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>127.0.0.1:6379&gt; hdel dhfif718@naver.com token like
+</code></pre></div></div>
 
 <p>여러개의 필드를 한번에 삭제할 수도 있고<br>
 하나씩 지정해서 삭제할 수도 있다.</p>
@@ -977,10 +896,10 @@ key : like / value : 10<br>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/17/til.html" title="Git Cherry-Pick으로 Commit 옮기기">[TIL] Spring AOP 1</a></li>
-<li><a class="post-link" href="/til/2022/11/02/til.html" title="Git Cherry-Pick으로 Commit 옮기기">[TIL] Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)</a></li>
-<li><a class="post-link" href="/til/2022/11/10/til.html" title="Git Cherry-Pick으로 Commit 옮기기">[TIL] JUnit 3</a></li>
-<li><a class="post-link" href="/db/2022/11/15/db-mysql.html" title="Git Cherry-Pick으로 Commit 옮기기">MySQL Local 연동 하기</a></li>
+        <li><a class="post-link" href="/til/2022/09/02/til.html" title="Git Cherry-Pick으로 Commit 옮기기">[TIL] Java 객체지향 - 클래스, 필드, 메서드</a></li>
+<li><a class="post-link" href="/til/2022/11/23/til.html" title="Git Cherry-Pick으로 Commit 옮기기">[TIL] JWT 기초</a></li>
+<li><a class="post-link" href="/til/2022/08/19/til.html" title="Git Cherry-Pick으로 Commit 옮기기">[TIL] 부트캠프 시작과 마음가짐</a></li>
+<li><a class="post-link" href="/til/2022/09/28/til.html" title="Git Cherry-Pick으로 Commit 옮기기">[TIL] Java Algorithm 2</a></li>
 </ul>
     </div>
 <div class="post-comments">

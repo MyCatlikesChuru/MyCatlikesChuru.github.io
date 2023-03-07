@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#S3">#S3</a>
@@ -696,20 +696,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <h3 id="-작업-환경">✅ 작업 환경</h3>
 
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre>AWS S3 버킷
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AWS S3 버킷
 Spring Boot 2.7.7  
 Java 11 
 macOs Monterey 12.6 버전 
 로컬환경에서 테스트 진행
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><br></p>
 
@@ -841,25 +833,7 @@ AWS S3에 저장되고 URL을 추출하는 과정만 담으려합니다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">application.yml</code> 을 설정해주자</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td>
-<td class="rouge-code"><pre><span class="na">spring</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
   <span class="na">servlet</span><span class="pi">:</span>
     <span class="na">multipart</span><span class="pi">:</span>
       <span class="na">max-file-size</span><span class="pi">:</span> <span class="s">10MB</span>
@@ -875,8 +849,7 @@ AWS S3에 저장되고 URL을 추출하는 과정만 담으려합니다.</p>
       <span class="na">static</span><span class="pi">:</span> <span class="s">ap-northeast-2</span>
     <span class="na">stack</span><span class="pi">:</span>
       <span class="na">auto</span><span class="pi">:</span> <span class="no">false</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>처음으로는 servlet의 multipart 용량 사이즈를 지정해주었다. <br>
 10MB 이상을 넘지못하도록 지정했고, 넘은 파일이 올 경우에<br>
@@ -895,50 +868,19 @@ bucket은 나의 버킷이름인 indiego-fileupload에 <br>
 
 <p>그리고 build.gradle을 설정해주자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td>
-<td class="rouge-code"><pre><span class="n">dependencies</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
         <span class="o">...</span>
 	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">cloud</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="nl">aws:</span><span class="mf">2.2</span><span class="o">.</span><span class="mi">6</span><span class="o">.</span><span class="na">RELEASE</span><span class="err">'</span>
         <span class="o">...</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>기본적인 Spring web, Lombok 같은 <br>
 의존 라이브러리도 설정해주어야한다.</p>
 
 <p>다음으로는<br>
 AmazonS3Config 클래스를 작성해보자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AmazonS3Config</span> <span class="o">{</span>
     
 	<span class="nd">@Value</span><span class="o">(</span><span class="s">"${cloud.aws.credentials.access-key}"</span><span class="o">)</span>
@@ -959,8 +901,7 @@ AmazonS3Config 클래스를 작성해보자.</p>
 			<span class="o">.</span><span class="na">build</span><span class="o">();</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">AmazonS3Client</code>타입으로 빈을 만들어 주었다. <br>
 이용된 정보는 환경변수에 설정했던 값들이 이용되었다.<br>
@@ -975,12 +916,8 @@ AmazonS3Config 클래스를 작성해보자.</p>
 
 <p><strong>1). AmazonClientException 문제</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre><span class="n">com</span><span class="o">.</span><span class="na">amazonaws</span><span class="o">.</span><span class="na">AmazonClientException</span><span class="o">:</span> <span class="no">EC2</span> <span class="nc">Instance</span> <span class="nc">Metadata</span> <span class="nc">Service</span> <span class="n">is</span> <span class="n">disabled</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">com</span><span class="o">.</span><span class="na">amazonaws</span><span class="o">.</span><span class="na">AmazonClientException</span><span class="o">:</span> <span class="no">EC2</span> <span class="nc">Instance</span> <span class="nc">Metadata</span> <span class="nc">Service</span> <span class="n">is</span> <span class="n">disabled</span>
+</code></pre></div></div>
 
 <p>위와 같은 예외가 콘솔에 찍혀있었다.<br>
 <a href="https://h-kkaemi.tistory.com/24">AmazonClientException 참고 레퍼런스</a>를 참고해서 해결해보았다.</p>
@@ -992,22 +929,13 @@ AmazonS3Config 클래스를 작성해보자.</p>
 
 <p>그리고 yml 파일 로깅 설정을</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td>
-<td class="rouge-code"><pre><span class="na">logging</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logging</span><span class="pi">:</span>
   <span class="na">level</span><span class="pi">:</span>
     <span class="na">com</span><span class="pi">:</span>
       <span class="na">amazonaws</span><span class="pi">:</span>
         <span class="na">util</span><span class="pi">:</span>
           <span class="na">EC2MetadataUtils</span><span class="pi">:</span> <span class="s">error</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>위와 같이 설정해준다면, 더이상 오류 메세지는 보이지 않을 것이다.</p>
 
@@ -1018,12 +946,8 @@ AmazonS3Config 클래스를 작성해보자.</p>
 <p>이번에 발생한 문제는 버킷에서 ACLs를 허용하지<br>
 않았다는 문구가 출력외었다.</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>com.amazonaws.services.s3.model.AmazonS3Exception: The bucket does not allow ACLs
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>com.amazonaws.services.s3.model.AmazonS3Exception: The bucket does not allow ACLs
+</code></pre></div></div>
 
 <p>해당 문제도 AWS S3 버킷의</p>
 
@@ -1037,40 +961,7 @@ AmazonS3Config 클래스를 작성해보자.</p>
 
 <p>첫번째로 Controller를 작성해보자</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td>
-<td class="rouge-code"><pre><span class="kn">package</span> <span class="nn">com.image.fileupload.controller</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.image.fileupload.controller</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">com.image.fileupload.service.AwsS3Service</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">com.image.fileupload.service.ImageUploadService</span><span class="o">;</span>
@@ -1101,8 +992,7 @@ AmazonS3Config 클래스를 작성해보자.</p>
         <span class="k">return</span> <span class="n">url</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 <p>사이사이에 로그로 값을 확인할 수 있도록 찍어두었다. <br>
 key = file / value = 이미지 로 받아오는 방법이다.<br>
 Spring에서는 MultipartFile 형식으로 받아올 수 있다. <br>
@@ -1117,65 +1007,15 @@ Spring에서는 MultipartFile 형식으로 받아올 수 있다. <br>
 AWS S3 외에 다른 저장소를 사용할 수 있게에 <br>
 인터페이스를 하나 만들었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td>
-<td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
 	<span class="nc">String</span> <span class="nf">StoreImage</span><span class="o">(</span><span class="nc">MultipartFile</span> <span class="n">img</span><span class="o">);</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>해당 인터페이스를 구현체로 <br>
 AwsS3Service 클래스를 만들었다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Slf4j</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
 <span class="nd">@RequiredArgsConstructor</span>
 <span class="nd">@Service</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AwsS3Service</span> <span class="kd">implements</span> <span class="nc">ImageUploadService</span> <span class="o">{</span>
@@ -1217,8 +1057,7 @@ AwsS3Service 클래스를 만들었다.</p>
 		<span class="k">return</span> <span class="n">originalFilename</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
 	<span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>여기서 AmazonS3 를 DI 받아 <code class="language-plaintext highlighter-rouge">.putObject();</code> 메서드를 이용해 <br>
 AWS S3 저장소에 저장을할 수 있게되어진다.</p>
@@ -1286,12 +1125,8 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 
 <p>만약 정말로 사이즈가 넘게 된다면</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td>
-<td class="rouge-code"><pre>org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded<span class="p">;</span> nested exception is java.lang.IllegalStateException:
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.web.multipart.MaxUploadSizeExceededException: Maximum upload size exceeded<span class="p">;</span> nested exception is java.lang.IllegalStateException:
+</code></pre></div></div>
 
 <p>와 같은 예외가 발생하게 될 것이고 <br>
 해당 예외를 처리하기위해서 간단한 예외처리 로직을 구현해보았다.</p>
@@ -1299,22 +1134,7 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 <p>@ControllerAdvice를 이용해서<br>
 <code class="language-plaintext highlighter-rouge">MaxUploadSizeExceededException</code>예외를 잡을 수 있다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@ControllerAdvice</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@ControllerAdvice</span>
 <span class="nd">@Slf4j</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">GlobalExceptionHandler</span> <span class="o">{</span>
 
@@ -1327,29 +1147,8 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
         <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">internalServerError</span><span class="o">().</span><span class="na">body</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
-<td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td>
-<td class="rouge-code"><pre><span class="nd">@Getter</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
 <span class="nd">@NoArgsConstructor</span>
 <span class="nd">@JsonInclude</span><span class="o">(</span><span class="nc">JsonInclude</span><span class="o">.</span><span class="na">Include</span><span class="o">.</span><span class="na">NON_NULL</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ErrorResponse</span> <span class="o">{</span>
@@ -1367,8 +1166,7 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 	<span class="o">}</span>
 
 <span class="o">}</span>
-</pre></td>
-</tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>ErrorResponse에 대한 내용은 우선 대강 정의해보았다. <br>
 어떻게 반환할지에대해서는 커스터마이징을 통해서 <br>
@@ -1391,10 +1189,10 @@ profileimage라는 폴더에 내가 지정한 형식의 폴더이름과 확장�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/06/til.html" title="[Spring] MailAuthenticationException 문제 해결">[TIL] DB RDMBS 2</a></li>
-<li><a class="post-link" href="/til/2022/10/31/til.html" title="[Spring] MailAuthenticationException 문제 해결">[TIL] Spring Data JDBC Pagination</a></li>
-<li><a class="post-link" href="/til/2022/12/15/til.html" title="[Spring] MailAuthenticationException 문제 해결">[TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
-<li><a class="post-link" href="/til/2022/09/16/til.html" title="[Spring] MailAuthenticationException 문제 해결">[TIL] Java Thread, JVM</a></li>
+        <li><a class="post-link" href="/til/2022/09/30/til.html" title="[Spring] MailAuthenticationException 문제 해결">[TIL] Network Basic</a></li>
+<li><a class="post-link" href="/til/2022/10/12/til.html" title="[Spring] MailAuthenticationException 문제 해결">[TIL] Spring Basic 2</a></li>
+<li><a class="post-link" href="/spring/2022/12/12/spring-cors.html" title="[Spring] MailAuthenticationException 문제 해결">[Spring] CORS 설정하기</a></li>
+<li><a class="post-link" href="/til/2022/09/01/til.html" title="[Spring] MailAuthenticationException 문제 해결">[TIL] Java 문법기초 - 배열</a></li>
 </ul>
     </div>
 <div class="post-comments">
