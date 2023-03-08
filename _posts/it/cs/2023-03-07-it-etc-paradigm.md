@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Java 함수형 프로그래밍"
+title: "함수형 프로그래밍이란? - Java"
 subtitle: 
 categories: CS
 tags: [ComputerScience]
 comments: true
-published: false 
+published: true 
 ---
 
 ### 프로그래밍 패러다임  
@@ -23,7 +23,9 @@ published: false
 
 <br/>  
 
-### 선언형과 함수형 프로그래밍  
+### 함수형 프로그래밍  
+
+#### 함수형 프로그래밍의 특징
 
 무엇을 풀어내는가에 집중하는 패러다임이다.  
 프로그램은 함수로 이루어진 것이다라는 명제가 담겨있는 패러다임이기도 하다.  
@@ -36,6 +38,8 @@ published: false
 ![image](https://user-images.githubusercontent.com/95069395/223608704-9f5ca7e8-bbbb-4774-b25c-5e8dc858f488.png){: .align-left style="max-width: 70%"}  
 [그림출처 - https://warpgate3.tistory.com]
 
+<br/>
+
 **1). Immutable Data (불변하는 데이터)**  
 데이터가 함수 밖에서 변형하지 않는 원칙이다. 다만, 함수의 반환 값은 함수 내에서 수행된 작업을 반영해야한다.  
 
@@ -46,7 +50,7 @@ published: false
 
 순수함수의 예제를 살펴보자 
 ```java
-public class NonPure {
+public class Pure {
     public String greeting(String name) {
         return "Hello " + name;
     }
@@ -75,7 +79,7 @@ public class NonPure {
 
 <br/>
 
-**3). No Iterate (반복문 사용 X)**  
+**3). No foreach (반복문 사용 X)**  
 for, while문과 같은 반복문을 사용하지 않는다. 반복문 안에는 가변적인 값들과 처리에 대한 코드가 섞여 있다. 함수형 프로그래밍에서는 반복문 대신에 map,filter 같은 함수를 매개변수로 받는 메서드를 이용한다.   
 
 예제로 살펴보자, 우선 일반적인 for문의 사용 경우다.
@@ -134,14 +138,17 @@ public class HigherOrderFunctionExample {
 ```
 위에코드는 고차함수의 함수를 반환값으로 이용할 수 있는 예제이다.  
 `add.applay(2);`를 호출하게 될 경우 `Function<Integer, Integer>`타입의 메서드로 반환하게된다.  
-반환된 메서드를 다시 `.add(3);`하였을 경우 `y -> x + y`를 계산한 Integer타입으로 반환하게되어   
-이전에 호출했을때 매개변수로 전달된 2값과 더해져 5라는 값이 출력되게 되어진다.
+반환된 함수를 다시 `.add(3);`하였을 경우 `y -> x + y`를 계산한 Integer타입으로 반환하게되어   
+이전에 호출했을때 매개변수로 전달된 2값과 더해져 5라는 값이 출력되게 되어진다.  
+
+즉, `Function<Integer, Integer>`는 정수값을 받아 반환하는 함수이고,  
+해당함수를 반환값으로 이용하고 있어, 고차함수라고 할 수 있다.
 
 
 <br/>
 
 ❗️**일급객체란?**    
-고차 함수를 쓰기 위해서는 해당 언어가 일 급객체라는 특징을 가져야한다.
+고차 함수를 쓰기 위해서는 해당 언어가 일급객체라는 특징을 가져야한다.
 
 일급객체의 충족 조건 3가지
 1. 모든 일급 객체는 변수나 데이터에 담을 수 있어야 한다.
