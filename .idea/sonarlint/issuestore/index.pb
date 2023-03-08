@@ -354,7 +354,11 @@ j
 -_posts/til/BootCamp/2022-12/2022-12-14-til.md,2/9/293585e47a2e8bd34ee1a957cee79f78edbb8b3a
 ]
 -_posts/til/BootCamp/2022-12/2022-12-05-til.md,a/e/ae03b360860e9d2165df7edbcea9075862f7b7a4
-]
--_posts/til/BootCamp/2022-12/2022-12-02-til.md,d/f/df7de244fa0ef3e1eb308febf3f54ba7a53615cf
 ;
 _config.yml,c/d/cd089ae45ce870c45e434019e8f1ed4f066cd425
+]
+-_posts/til/BootCamp/2022-11/2022-11-10-til.md,7/d/7d45de74b30965654e8fb8b280ad78cff0aade74
+^
+._posts/server/2023-01-01-server-oraclecloud.md,a/8/a8fab605c101f72fb0fd31084204ec08a80bc002
+[
++_posts/it/etc/2022-10-25-it-etc-imageurl.md,a/a/aa564a9916c50b55ae91b55746e5efded0366efb
