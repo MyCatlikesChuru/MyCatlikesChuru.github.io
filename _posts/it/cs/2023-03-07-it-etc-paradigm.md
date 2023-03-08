@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "함수형 프로그래밍이란? - Java"
-subtitle: 
+subtitle: 면접을 위한 CS 전공지식 노트
 categories: CS
 tags: [ComputerScience]
 comments: true
