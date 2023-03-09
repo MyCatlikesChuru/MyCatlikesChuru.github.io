@@ -1,4 +1,239 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-08T23:46:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers - Java] K 번째수</title><link href="http://localhost:4000/algorithm/2023/03/08/algo-knumber.html" rel="alternate" type="text/html" title="[Programmers - Java] K 번째수" /><published>2023-03-08T00:00:00+09:00</published><updated>2023-03-08T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/03/08/algo-knumber</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/03/08/algo-knumber.html"><![CDATA[<h2 id="-문제--k-번째수">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42748">K 번째수</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-09T15:32:21+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">네트워크 기초와 TCP/IP 4계층 모델</title><link href="http://localhost:4000/cs/2023/03/08/it-etc-network.html" rel="alternate" type="text/html" title="네트워크 기초와 TCP/IP 4계층 모델" /><published>2023-03-08T00:00:00+09:00</published><updated>2023-03-08T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/03/08/it-etc-network</id><content type="html" xml:base="http://localhost:4000/cs/2023/03/08/it-etc-network.html"><![CDATA[<p><img src="" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<h3 id="네트워크-기초">네트워크 기초</h3>
+
+<h4 id="네트워크란">네트워크란?</h4>
+
+<p>노드(node)와 링크(link)가 서로 연결되어 있거나 연결되어 있으며<br />
+리소스를 공유하는 집합을 의미한다. 여기서 노드란 서버,라우터,스위치 등 네트워크 <br />
+장치를 의미하고 링크는 유선 또는 무선을 의미한다.</p>
+
+<p><br /></p>
+
+<h4 id="처리량">처리량</h4>
+
+<p>네트워크를 구축할 때는 ‘좋은’ 네트워크로 만드는 것이 중요하다. <br />
+조은 네트워크란 많은 처리량을 처리할 수 있으며 지연 시간이 짧고 장애 빈도가 <br />
+적으며 좋은 보안을 갖춘 네트워크를 말한다.</p>
+
+<p>처리량(throughput)은 링크 내에서 성공적으로 전달된 데이터의 양을 말하고<br />
+보통 얼만큼의 트래픽을 처리했는지를 나타낸다.</p>
+
+<p><em><strong>많은 트래픽을 처리한다 = 많은 처리량을 가진다.</strong></em></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223918518-917aeb8f-f620-401e-94c3-a582ab9869bc.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>단위로는 bps(bits per second)를 쓴다. 초당 전송 또는 수신되는 비트수라는 의미이다. <br />
+처리량은 사용자들이 많이 접속할 때마다 커지는 트래픽, 네트워크 장치 간의 대역폭, 네트워크 중간에<br />
+발생하는 에러, 장치의 하드웨어 스펙에 영향을 받는다.</p>
+
+<ul>
+  <li>트래픽이 많아졌다 = 흐르는 데이터가 많아졌다.</li>
+  <li>처리량이 많아졌다 = 처리되는 트래픽이 많아졌다.</li>
+</ul>
+
+<p><br /></p>
+
+<h4 id="지연-시간">지연 시간</h4>
+
+<p>지연시간이란 요청이 처리되는 시간을 말하며 어떤 메세지가 두 장치 사이를 왕복하는 데 걸리는 시간을 말한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223918992-2c50b9a0-204f-4bea-9aee-d96fa4720cee.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>해당 그림의 지연시간은 1.7초이다. <br />
+지연 시간은 매체 타입(무선,유선), 패킷 크기, 라우터의 패킷 처리 시간에 영향을 받는다.</p>
+
+<p><br /></p>
+
+<h4 id="네트워크-토폴로지">네트워크 토폴로지</h4>
+
+<p>네트워크 토폴로지는 노드와 링크가 어떻게 배치되어 있는지에 대한 방식이자 연결 형태를 의미한다.   <br />
+네트워크 토폴로지 방식에는 트리,버스,스타,링형,메시 등이 있다.</p>
+
+<p><strong>1). 트리 토폴로지</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223926751-9841a69b-abdb-41be-9509-d9bf89e54a60.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>장점 : 노드의 추가, 삭제가 쉽다.<br />
+단점 : 트래픽이 몰릴 때, 하위 노드에 영향을 끼칠 수 있다.</p>
+
+<p><strong>2). 버스 토폴리지</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223926756-9bcefb65-3304-4f6c-b2ac-7de1db6063bf.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>장점 : 신뢰성이 우수하며, 설치 비용이 적다. 중앙 통신 회선에 노드를 추가하거나 삭제하기 쉽다. <br />
+단점 : 스푸핑이 가능하다. <br />
+❗️스푸핑? LAN 상에서 송신부의 패킷을 관련 없는 수신부의 호스트로 가지 않도록 하는 기능을 못하게 하는 현상. 올바르게 수신부로 가야할 패킷이 의도치 않은 노드로 가게 된다.</p>
+
+<p><strong>3). 스타 토폴로지</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223926759-9e6ad865-4199-4fee-8f96-69daa6387735.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>장점 : 노드를 추가하거나, 에러를 탐지하기가 쉽다. 패킷의 충돌 발생 가능성이 적다. <br />
+어떠한 노드에 장애가 발생했을 때, 이를 발견하기가 쉽다. <br />
+단점 : 중앙 노드에 장애가 발생시, 전체 네트워크에 영향을 준다.</p>
+
+<p><strong>4). 링형 토폴로지</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223926760-b057979e-22fe-4900-9dd4-3ceeca729aa8.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>장점 : 노드의 수가 늘어나도 네트워크 상의 손실이 거의 없다. 충돌이 발생할 가능성이 적다.
+단점 : 한 노드 및 회선에 문제가 발생 시 네트워크 전체에 영향을 미친다.</p>
+
+<p><strong>5). 메시 토폴로지</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223926761-40a387bc-5dbf-46c0-ab45-66a773e2ac35.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>장점 : 한 노드에서 장애가 발생해도 경로가 여러개이기 때문에 네트워크 유지가 된다.<br />
+트래픽의 분산처리가 용이하다. <br />
+단점 : 노드의 추가 및 제거가 어렵고, 구축 및 운용 비용이 비싸다.</p>
+
+<p><br /></p>
+
+<h4 id="네트워크-분류">네트워크 분류</h4>
+
+<p>네트워크는 규모를 기반으로 분류할 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223925633-73f52c7a-9029-4d10-bac5-2eba3951a1c3.png" alt="image" class="align-left" style="max-width: 70%" />
+<a href="http://www.differencebetween.net/technology/difference-between-lan-wan-and-man/">그림 출처</a></p>
+
+<p>사무실과 개인적으로 소유 가능한 규모인 LAN (Local Area Network) <br />
+서울시 등 시 정도의 규모인 MAN (Metropolitan Area Network) <br />
+세계 규모의 WAN (Wide Area Network)</p>
+
+<p>규모에 따라 전송속도의 혼잡도가 증가한다. (LAN &lt; MAN &lt; WAN)</p>
+
+<p><br /></p>
+
+<h4 id="네트워크-성능-분석-명령어">네트워크 성능 분석 명령어</h4>
+
+<p>애플리케이션 코드상에는 전혀 문제가 없는데, 사용자가 서비스로부터 데이터를 가져오지 못하는 <br />
+상황이 발생하기도 한다. 이는 네트워크 병목 현상일 가능성이 있고, 네트워크로부터 발생한 문제점 <br />
+인지를 확인 후 네트워크 성능 분석을 해봐야 한다. 이때 사용하는 명령어들을 적어보자.</p>
+
+<p><strong>1). ping</strong></p>
+
+<p>ping(Packet INternet Groper)은 네트워크 상태를 확인하려는 대상 노드를 향해 <br />
+일정 크기의 패킷을 전송하는 명령어이다.</p>
+
+<p>Shell을 기준으로 구글 IP(66.249.64.97)로 5번의 핑 테스트를 하고 싶다면</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping 66.249.64.97 <span class="nt">-c</span> 5
+PING 66.249.64.97 <span class="o">(</span>66.249.64.97<span class="o">)</span>: 56 data bytes
+64 bytes from 66.249.64.97: <span class="nv">icmp_seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>114 <span class="nb">time</span><span class="o">=</span>238.246 ms
+64 bytes from 66.249.64.97: <span class="nv">icmp_seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>114 <span class="nb">time</span><span class="o">=</span>246.734 ms
+64 bytes from 66.249.64.97: <span class="nv">icmp_seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>114 <span class="nb">time</span><span class="o">=</span>237.321 ms
+64 bytes from 66.249.64.97: <span class="nv">icmp_seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>114 <span class="nb">time</span><span class="o">=</span>236.923 ms
+64 bytes from 66.249.64.97: <span class="nv">icmp_seq</span><span class="o">=</span>4 <span class="nv">ttl</span><span class="o">=</span>114 <span class="nb">time</span><span class="o">=</span>238.359 ms
+</code></pre></div></div>
+<p>위와 같이 테스트 결과가 표시된다.<br />
+해당 노드의 패킷 수신 상태와 도달하기까지 시간등을 알 수 있으며<br />
+네트워크가 잘 연결되어 있는지 확인할 수 있습니다.</p>
+
+<p><br /></p>
+
+<p><strong>2). netstat</strong></p>
+
+<p>접속되어 있는 서비스들의 네트워크 상태를 표시하는 명령어이다. <br />
+네트워크 접속, 라우팅 테이블, 네트워크 프로토콜 등 리스트를 보여줍니다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat
+Active Internet connections
+Proto Recv-Q Send-Q  Local Address          Foreign Address        <span class="o">(</span>state<span class="o">)</span>
+tcp4       0      0  192.168.219.106.51923  tp-in-f109.1e100.imaps ESTABLISHED
+tcp4      50      0  192.168.219.106.51916  125.209.238.153.imaps  CLOSE_WAIT
+tcp4       0      0  192.168.219.106.51915  162.247.243.29.https   ESTABLISHED
+tcp4       0      0  192.168.219.106.51914  server-54-230-61.https ESTABLISHED
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>3). nslookup</strong></p>
+
+<p>DNS에 관련된 내용을 확인하기 위해 쓰는 명령어이다. <br />
+특정 도메인에 맵핑된 IP를 확인하기 위해 사용한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup
+<span class="o">&gt;</span> google.com
+Server:		61.41.153.2
+Address:	61.41.153.2#53
+
+Non-authoritative answer:
+Name:	google.com
+Address: 172.217.24.78
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>4). tracert</strong></p>
+
+<p>윈도우에서는 tracert이고 리눅스에서는 traceroute라는 명령어이다.<br />
+노드까지 네트워크 경로를 확인할 때 사용하는 명령어이다. 목적지 노드까지 구간들 중 <br />
+어느 구간에서 응답 시간이 느려지는지 등을 확인할 수 있다.</p>
+
+<p>구글 노드까지의 경로를 확인하는 예제를 보자.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>traceroute 172.217.24.78
+traceroute to 172.217.24.78 <span class="o">(</span>172.217.24.78<span class="o">)</span>, 64 hops max, 52 byte packets
+ 1  192.168.219.1 <span class="o">(</span>192.168.219.1<span class="o">)</span>  2.039 ms  2.223 ms  2.153 ms
+ 2  180.230.197.1 <span class="o">(</span>180.230.197.1<span class="o">)</span>  4.158 ms  5.895 ms  5.859 ms
+ 3  10.240.241.189 <span class="o">(</span>10.240.241.189<span class="o">)</span>  5.620 ms  11.481 ms  5.485 ms
+ 4  10.204.44.93 <span class="o">(</span>10.204.44.93<span class="o">)</span>  3.383 ms  3.860 ms  3.336 ms
+ 5  1.213.16.169 <span class="o">(</span>1.213.16.169<span class="o">)</span>  3.285 ms
+    61.43.176.9 <span class="o">(</span>61.43.176.9<span class="o">)</span>  2.534 ms
+    61.43.207.13 <span class="o">(</span>61.43.207.13<span class="o">)</span>  2.882 ms
+ 6  <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>
+ 7  <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>
+ 8  1.208.167.5 <span class="o">(</span>1.208.167.5<span class="o">)</span>  8.190 ms
+    1.213.115.13 <span class="o">(</span>1.213.115.13<span class="o">)</span>  14.300 ms  4.141 ms
+ 9  61.42.0.26 <span class="o">(</span>61.42.0.26<span class="o">)</span>  41.057 ms
+    1.208.167.38 <span class="o">(</span>1.208.167.38<span class="o">)</span>  43.814 ms
+    1.208.106.174 <span class="o">(</span>1.208.106.174<span class="o">)</span>  47.441 ms
+10  210.107.126.38 <span class="o">(</span>210.107.126.38<span class="o">)</span>  80.176 ms
+    1.208.178.26 <span class="o">(</span>1.208.178.26<span class="o">)</span>  63.977 ms
+    61.43.220.22 <span class="o">(</span>61.43.220.22<span class="o">)</span>  43.209 ms
+11  142.250.168.244 <span class="o">(</span>142.250.168.244<span class="o">)</span>  51.090 ms  58.378 ms  43.391 ms
+12  <span class="k">*</span> <span class="k">*</span> <span class="k">*</span>
+13  108.170.233.30 <span class="o">(</span>108.170.233.30<span class="o">)</span>  38.043 ms
+    142.250.230.198 <span class="o">(</span>142.250.230.198<span class="o">)</span>  42.186 ms
+    108.170.241.97 <span class="o">(</span>108.170.241.97<span class="o">)</span>  47.815 ms
+14  108.170.241.79 <span class="o">(</span>108.170.241.79<span class="o">)</span>  47.372 ms
+    142.251.245.23 <span class="o">(</span>142.251.245.23<span class="o">)</span>  47.688 ms
+    108.170.241.80 <span class="o">(</span>108.170.241.80<span class="o">)</span>  47.576 ms
+15  sin10s06-in-f14.1e100.net <span class="o">(</span>172.217.24.78<span class="o">)</span>  40.511 ms
+    209.85.142.26 <span class="o">(</span>209.85.142.26<span class="o">)</span>  46.256 ms
+    sin10s06-in-f14.1e100.net <span class="o">(</span>172.217.24.78<span class="o">)</span>  39.145 ms
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="네트워크-프로토콜-표준화">네트워크 프로토콜 표준화</h4>
+
+<p>네트워크 프로토콜이란 다른 장치들끼리 데이터를 주고받기 위해 설정된 공통된 인터페이스를 <br />
+말한다. 이러한 프로토콜은 기업이나 개인 발표에서 정하는 것이 아니라 IEEE 또는 IETF라는 <br />
+표준화 단체가 이를 정한다.</p>
+
+<p>IEEE802.3은 유선 LAN 프로토콜로 유선으로 LAN을 구축할 때 쓰이는 프로토콜이다. <br />
+이를 통해 만든 기업이 다른 장치라도 서로 데이터를 수신할 수 있는 것이다.</p>
+
+<p><br /></p>
+
+<h3 id="tcpip-4계층-모델">TCP/IP 4계층 모델</h3>
+
+<p>인터넷 프로토콜 스위트는 인터넷에서 컴퓨터들이 서로 정보를 주고받는 데 쓰이는 <br />
+포로토콜의 집합이며, 이를 TCP/IP 4계층 모델로 설명하거나 OSI 7계층 모델로 설명하기도 한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/223934632-1b6ab954-869f-411d-a2a9-878088db0223.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>TCP/IP 4계층에서 애플리케이션 계층을 <br />
+OSI 7계층에서는 3계층으로 나누었다. (애플리케이션 계층, 프레젠테이션 계층, 세션 계층)</p>
+
+<p>마찬가지로 TCP/IP 링크 계층을 <br />
+OSI 7계층에서는 2계층으로 나누었다. (데이터 링크 계층, 물리 계층)</p>
+
+<p>이 계층들은 특정 계층이 변경되었을 때, 다른 계층이 영향을 받지 않도록 설계되어있다. <br />
+예를들어서 전송 계층에서 TCP를 UDP로 변경했다고 해서 인터넷 웹 브라우저를 다시 설치해야 하는<br />
+것이 아니듯 유연하게 설계되어진 계층들이다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="CS" /><category term="ComputerScience" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">[Programmers - Java] K 번째수</title><link href="http://localhost:4000/algorithm/2023/03/08/algo-knumber.html" rel="alternate" type="text/html" title="[Programmers - Java] K 번째수" /><published>2023-03-08T00:00:00+09:00</published><updated>2023-03-08T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/03/08/algo-knumber</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/03/08/algo-knumber.html"><![CDATA[<h2 id="-문제--k-번째수">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42748">K 번째수</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -1168,161 +1403,4 @@ To                         Action      From
 <p><br /></p>
 
 <p>✨ 참고 블로그 <br />
-<a href="https://kibua20.tistory.com/124">클라우드 방화벽 설정 참고 레퍼런스</a>, <a href="https://webdir.tistory.com/206">우분투 UFW 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Server" /><category term="Server" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.]]></summary></entry><entry><title type="html">[Spring] MailAuthenticationException 문제 해결</title><link href="http://localhost:4000/spring/2023/01/21/spring-email.html" rel="alternate" type="text/html" title="[Spring] MailAuthenticationException 문제 해결" /><published>2023-01-21T00:00:00+09:00</published><updated>2023-01-21T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/01/21/spring-email</id><content type="html" xml:base="http://localhost:4000/spring/2023/01/21/spring-email.html"><![CDATA[<p>오늘은 회원가입시 이메일 전송 로직을 확인중<br />
-<code class="language-plaintext highlighter-rouge">org.springframework.mail.MailAuthenticationException</code>와 같은<br />
-예외를 만났고 해당관련 해결방법을 적어가보려한다.</p>
-
-<p><br /></p>
-
-<h3 id="-작업환경">✅ 작업환경</h3>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Spring Boot 2.7.7  
-Java 11 
-macOs Monterey 12.6 버전 
-로컬환경에서 테스트 진행
-</code></pre></div></div>
-
-<p><br /></p>
-
-<h3 id="-에러-확인-및-해결">📌 에러 확인 및 해결</h3>
-
-<p>첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. <br />
-메일을 보내는 주체는 Google의 gmail을 이용하려한다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">mail</span><span class="err">'</span>
-</code></pre></div></div>
-<p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/package-summary.html">org.springframewokr.mail</a>, <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/mail/javamail/package-summary.html">org.springframewokr.javamail</a> 패키지를 사용한다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">JavaMailSender</code> 인터페이스의 <code class="language-plaintext highlighter-rouge">send();</code>메서드를<br />
-Override 하여 구현하였고 테스트 진행도중 아래와 같은 예외를 만나게 되었다.</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2023-01-21 15:40:59.934 ERROR 281 --- [         task-1] .a.i.SimpleAsyncUncaughtExceptionHandler : Unexpected exception occurred invoking async method: public void codestates.frogroup.indiego.global.email.event.MemberRegistrationEventListener.listen(codestates.frogroup.indiego.global.email.event.MemberRegistrationApplicationEvent) throws java.lang.Exception
-
-org.springframework.mail.MailAuthenticationException: Authentication failed; nested exception is javax.mail.AuthenticationFailedException: 534-5.7.9 Application-specific password required. Learn more at
-534 5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor t1-20020a63d241000000b004c974bb9a4esm11189895pgi.83 - gsmtp
-</code></pre></div></div>
-
-<p>내용을 잘 읽어보니, 인증에 실패하였고<br />
-<code class="language-plaintext highlighter-rouge">Application-specific password required</code> 애플리케이션의 스펙에 맞는<br />
-비밀번호를 요구한다고한다. 그리고 참고용 주소를 하나가 콘솔에 찍혀있다.<br />
-<a href="https://support.google.com/accounts/answer/185833?visit_id=638098789197662028-710657186&amp;p=InvalidSecondFactor&amp;rd=1">앱 비밀번호로 로그인</a>관련 주소이며, 정말 친절한 Spring… 감동..</p>
-
-<p>예외가 발생한 코드를 쭉 따라가다 보면<br />
-<code class="language-plaintext highlighter-rouge">JavaMailSender</code>인터페이스의</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doSend</span><span class="o">(</span><span class="nc">MimeMessage</span><span class="o">[]</span> <span class="n">mimeMessages</span><span class="o">,</span> <span class="nd">@Nullable</span> <span class="nc">Object</span><span class="o">[]</span> <span class="n">originalMessages</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">MailException</span> <span class="o">{</span>
-		<span class="nc">Map</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">,</span> <span class="nc">Exception</span><span class="o">&gt;</span> <span class="n">failedMessages</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;&gt;();</span>
-		<span class="nc">Transport</span> <span class="n">transport</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-		<span class="k">try</span> <span class="o">{</span>
-			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mimeMessages</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-
-				<span class="c1">// Check transport connection first...</span>
-				<span class="k">if</span> <span class="o">(</span><span class="n">transport</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="o">!</span><span class="n">transport</span><span class="o">.</span><span class="na">isConnected</span><span class="o">())</span> <span class="o">{</span>
-					<span class="k">if</span> <span class="o">(</span><span class="n">transport</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-						<span class="k">try</span> <span class="o">{</span>
-							<span class="n">transport</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-						<span class="o">}</span>
-						<span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-							<span class="c1">// Ignore - we're reconnecting anyway</span>
-						<span class="o">}</span>
-						<span class="n">transport</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-					<span class="o">}</span>
-					<span class="k">try</span> <span class="o">{</span>
-						<span class="n">transport</span> <span class="o">=</span> <span class="n">connectTransport</span><span class="o">();</span>
-					<span class="o">}</span>
-					<span class="k">catch</span> <span class="o">(</span><span class="nc">AuthenticationFailedException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-						<span class="k">throw</span> <span class="k">new</span> <span class="nf">MailAuthenticationException</span><span class="o">(</span><span class="n">ex</span><span class="o">);</span>
-					<span class="o">}</span>
-					<span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-						<span class="c1">// Effectively, all remaining messages failed...</span>
-						<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">mimeMessages</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
-							<span class="nc">Object</span> <span class="n">original</span> <span class="o">=</span> <span class="o">(</span><span class="n">originalMessages</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">originalMessages</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">:</span> <span class="n">mimeMessages</span><span class="o">[</span><span class="n">j</span><span class="o">]);</span>
-							<span class="n">failedMessages</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">original</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
-						<span class="o">}</span>
-						<span class="k">throw</span> <span class="k">new</span> <span class="nf">MailSendException</span><span class="o">(</span><span class="s">"Mail server connection failed"</span><span class="o">,</span> <span class="n">ex</span><span class="o">,</span> <span class="n">failedMessages</span><span class="o">);</span>
-					<span class="o">}</span>
-				<span class="o">}</span>
-        <span class="o">}</span>        
-                
-                <span class="o">...</span> <span class="n">생략</span>
-	<span class="o">}</span>
-</code></pre></div></div>
-<p>구현체인 <code class="language-plaintext highlighter-rouge">JavaMailSenderImpl</code>의 아래의 메서드에서 <br />
-<code class="language-plaintext highlighter-rouge">connectTransport();</code> 메서드를 호출할 때 예외가 발생한 것을 볼 수 있다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">protected</span> <span class="nc">Transport</span> <span class="nf">connectTransport</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">MessagingException</span> <span class="o">{</span>
-		<span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="n">getUsername</span><span class="o">();</span>
-		<span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="n">getPassword</span><span class="o">();</span>
-		<span class="k">if</span> <span class="o">(</span><span class="s">""</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">username</span><span class="o">))</span> <span class="o">{</span>  <span class="c1">// probably from a placeholder</span>
-			<span class="n">username</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-			<span class="k">if</span> <span class="o">(</span><span class="s">""</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">password</span><span class="o">))</span> <span class="o">{</span>  <span class="c1">// in conjunction with "" username, this means no password to use</span>
-				<span class="n">password</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-			<span class="o">}</span>
-		<span class="o">}</span>
-
-		<span class="nc">Transport</span> <span class="n">transport</span> <span class="o">=</span> <span class="n">getTransport</span><span class="o">(</span><span class="n">getSession</span><span class="o">());</span>
-		<span class="n">transport</span><span class="o">.</span><span class="na">connect</span><span class="o">(</span><span class="n">getHost</span><span class="o">(),</span> <span class="n">getPort</span><span class="o">(),</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
-		<span class="k">return</span> <span class="n">transport</span><span class="o">;</span>
-	<span class="o">}</span>
-</code></pre></div></div>
-<p>해당 코드에서도 <code class="language-plaintext highlighter-rouge">transport.connect();</code> 메서드 안에서<br />
-host, port, user, password의 정보로 연결 시도를 하는데 정보가 맞지않아 <br />
-연결이 정상적으로 실행되지 않을 경우에 <code class="language-plaintext highlighter-rouge">AuthenticationFailedException</code> 예외가 <br />
-발생하는 거이라고 추측이된다… 좀더 어드벤스한 공부는 추후해 해봐야할 것 같다.</p>
-
-<p><br /></p>
-
-<p>그래서 스프링에서 친절하게 알려준 콘솔내용대로 해결을 해보자.</p>
-
-<p>현재 yml 설정 파일이다.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mail</span><span class="pi">:</span>
-  <span class="na">smtp</span><span class="pi">:</span>
-    <span class="na">host</span><span class="pi">:</span> <span class="s">smtp.gmail.com</span>
-    <span class="na">port</span><span class="pi">:</span> <span class="m">587</span>
-    <span class="na">username</span><span class="pi">:</span> <span class="s">${GOOGLE_ID}</span>
-    <span class="na">password</span><span class="pi">:</span> <span class="s">${GOOGLE_PASSWORD}</span>
-    <span class="na">auth</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">starttls</span><span class="pi">:</span>
-      <span class="na">enable</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">subject</span><span class="pi">:</span>
-    <span class="na">member</span><span class="pi">:</span>
-      <span class="na">registration</span><span class="pi">:</span> <span class="s">개굴단의 인디고 서비스에 성공적으로 가입하셨습니다.</span>
-  <span class="na">template</span><span class="pi">:</span>
-    <span class="na">name</span><span class="pi">:</span>
-      <span class="na">member</span><span class="pi">:</span>
-        <span class="na">join</span><span class="pi">:</span> <span class="s">email-registration-member</span>
-</code></pre></div></div>
-<p>환경변수를 이용해 설정해두었고<br />
-username에는 구글 이메일 주소를 넣었고<br />
-password에는 구글 비밀번호를 넣었었다.</p>
-
-<p>여기서 비밀번호 스펙이 맞지않다고 예외가 발생한 것이였고<br />
-<a href="https://support.google.com/accounts/answer/185833?visit_id=638098789197662028-710657186&amp;p=InvalidSecondFactor&amp;rd=1">앱 비밀번호로 로그인</a>으로 접속해 앱 비밀번호를 설정해주었다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/213848506-5245e665-d3ef-4c2d-901d-94c49ef6f696.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>최종적으로 비밀번호를 받게된다면<br />
-16자의 비밀번호를 발급받게 될 것이고</p>
-
-<p>password 환경변수에 공백없이 16자를 입력해주면 된다.<br />
-ex) abcdefghijklmnop</p>
-
-<p><br /></p>
-
-<p>수정을 하고 다시 회원가입 서비스를 진행해보았다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/213848511-98c77ad0-50b7-4470-8665-538d73155427.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>간단한 템플릿으로 우선 테스트를 진행했고 <br />
-회원가입을한 유저의 메일로 정상적으로 회원가입 안내 메일이 보내진 것을 확인해볼 수 있다!!</p>
-
-<p><br />
-<br /></p>
-
-<p>✨ 참고 블로그<br />
-<a href="https://kijuk.tistory.com/162?category=1056346">문제 해결 참고 블로그</a></p>
-
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="email" /><summary type="html"><![CDATA[오늘은 회원가입시 이메일 전송 로직을 확인중 org.springframework.mail.MailAuthenticationException와 같은 예외를 만났고 해당관련 해결방법을 적어가보려한다.]]></summary></entry></feed>
+<a href="https://kibua20.tistory.com/124">클라우드 방화벽 설정 참고 레퍼런스</a>, <a href="https://webdir.tistory.com/206">우분투 UFW 설정 참고 레퍼런스</a></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Server" /><category term="Server" /><category term="Oracle" /><summary type="html"><![CDATA[오늘은 Oracle Cloud 서버에 nginx에 클라이언트를 배포해 외부에서 접속하고 WorkBench를 이용해 mysql을 접속하려한다.]]></summary></entry></feed>
