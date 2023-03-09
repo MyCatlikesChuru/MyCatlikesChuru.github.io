@@ -12,8 +12,8 @@
 <meta property="og:title" content="네트워크 기초와 TCP/IP 4계층 모델">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
-<meta property="og:description" content="안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !">
+<meta name="description" content="네트워크 기초">
+<meta property="og:description" content="네트워크 기초">
 <link rel="canonical" href="http://localhost:4000/cs/2023/03/08/it-etc-network.html">
 <meta property="og:url" content="http://localhost:4000/cs/2023/03/08/it-etc-network.html">
 <meta property="og:site_name" content="LeeJellan">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary">
 <meta property="twitter:title" content="네트워크 기초와 TCP/IP 4계층 모델">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-03-08T00:00:00+09:00","datePublished":"2023-03-08T00:00:00+09:00","description":"안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !","headline":"네트워크 기초와 TCP/IP 4계층 모델","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cs/2023/03/08/it-etc-network.html"},"url":"http://localhost:4000/cs/2023/03/08/it-etc-network.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-03-08T00:00:00+09:00","datePublished":"2023-03-08T00:00:00+09:00","description":"네트워크 기초","headline":"네트워크 기초와 TCP/IP 4계층 모델","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cs/2023/03/08/it-etc-network.html"},"url":"http://localhost:4000/cs/2023/03/08/it-etc-network.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -676,16 +676,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
   </p>
 <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p><img src="" alt="image" class="align-left" style="max-width: 70%"></p>
-
-<h3 id="네트워크-기초">네트워크 기초</h3>
+      <h3 id="네트워크-기초">네트워크 기초</h3>
 
 <h4 id="네트워크란">네트워크란?</h4>
 
@@ -735,6 +733,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>네트워크 토폴로지는 노드와 링크가 어떻게 배치되어 있는지에 대한 방식이자 연결 형태를 의미한다.   <br>
 네트워크 토폴로지 방식에는 트리,버스,스타,링형,메시 등이 있다.</p>
 
+<p><strong><em>❗️링크와 노드란 ?</em></strong><br>
+링크는 네트워크의 연결매체를 얘기하고, 노드는 네트워크 연결 대상이다.(컴퓨터 등)</p>
+
 <p><strong>1). 트리 토폴로지</strong></p>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/223926751-9841a69b-abdb-41be-9509-d9bf89e54a60.png" alt="image" class="align-left" style="max-width: 70%"></p>
@@ -747,8 +748,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p><img src="https://user-images.githubusercontent.com/95069395/223926756-9bcefb65-3304-4f6c-b2ac-7de1db6063bf.png" alt="image" class="align-left" style="max-width: 70%"></p>
 
 <p>장점 : 신뢰성이 우수하며, 설치 비용이 적다. 중앙 통신 회선에 노드를 추가하거나 삭제하기 쉽다. <br>
-단점 : 스푸핑이 가능하다. <br>
-❗️스푸핑? LAN 상에서 송신부의 패킷을 관련 없는 수신부의 호스트로 가지 않도록 하는 기능을 못하게 하는 현상. 올바르게 수신부로 가야할 패킷이 의도치 않은 노드로 가게 된다.</p>
+단점 : 스푸핑이 가능하다.   핑</p>
+
+<p><em><strong>❗️스푸핑 ?</strong></em> <br>
+LAN 상에서 송신부의 패킷을 관련 없는 수신부의 호스트로 가지 않도록 하는 기능을 못하게 하는 현상. <br>
+올바르게 수신부로 가야할 패킷이 의도치 않은 노드로 가게 된다.</p>
 
 <p><strong>3). 스타 토폴로지</strong></p>
 
@@ -779,8 +783,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 <p>네트워크는 규모를 기반으로 분류할 수 있다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/95069395/223925633-73f52c7a-9029-4d10-bac5-2eba3951a1c3.png" alt="image" class="align-left" style="max-width: 70%">
-<a href="http://www.differencebetween.net/technology/difference-between-lan-wan-and-man/">그림 출처</a></p>
+<p><img src="https://user-images.githubusercontent.com/95069395/223925633-73f52c7a-9029-4d10-bac5-2eba3951a1c3.png" alt="image" class="align-left" style="max-width: 70%"><br>
+<a href="http://www.differencebetween.net/technology/difference-between-lan-wan-and-man/">그림 출처 - differencebetween.net</a></p>
 
 <p>사무실과 개인적으로 소유 가능한 규모인 LAN (Local Area Network) <br>
 서울시 등 시 정도의 규모인 MAN (Metropolitan Area Network) <br>
@@ -801,7 +805,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 <p>ping(Packet INternet Groper)은 네트워크 상태를 확인하려는 대상 노드를 향해 <br>
 일정 크기의 패킷을 전송하는 명령어이다.</p>
 
-<p>Shell을 기준으로 구글 IP(66.249.64.97)로 5번의 핑 테스트를 하고 싶다면</p>
+<p>리눅스를 기준으로 구글 IP(66.249.64.97)로 5번의 핑 테스트를 하고 싶다면</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping 66.249.64.97 <span class="nt">-c</span> 5
 PING 66.249.64.97 <span class="o">(</span>66.249.64.97<span class="o">)</span>: 56 data bytes
@@ -903,22 +907,281 @@ traceroute to 172.217.24.78 <span class="o">(</span>172.217.24.78<span class="o"
 
 <p><br></p>
 
-<h3 id="tcpip-4계층-모델">TCP/IP 4계층 모델</h3>
+<h3 id="tcpip">TCP/IP</h3>
 
-<p>인터넷 프로토콜 스위트는 인터넷에서 컴퓨터들이 서로 정보를 주고받는 데 쓰이는 <br>
-포로토콜의 집합이며, 이를 TCP/IP 4계층 모델로 설명하거나 OSI 7계층 모델로 설명하기도 한다.</p>
+<h4 id="계층-구조">계층 구조</h4>
+
+<p><strong>TCP/IP는 데이터가 의도된 목적지에 닿을 수 있도록 보장해주는 프로토콜(통신규약)이다.</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224016057-b541b0fc-87b3-49a7-b18a-83941944e0fd.png" alt="image" class="align-left" style="max-width: 70%"><br>
+<a href="https://velog.io/@pixelstudio/TCPIP%EC%99%80-OSI-7-%EB%A0%88%EC%9D%B4%EC%96%B4%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90">그림 출처 - pixelstudio</a></p>
+
+<p><br></p>
+
+<p>OSI 7계층은 네트워크에서 통신이 일어나는 과정을 7단계로 나눈 것을 말한다. <br>
+두 가지 네트워크 모델 중 가장 큰 차이점은 OSI는 개념적 모델로 통신에는 실질적으로 <br>
+사용되지 않지만 TCP/IP는 통신에 실질적으로 사용하고있다.</p>
+
+<p>OSI 7계층은 단계별로 통신을 일어나는 과정을 파악하기 용이하고<br>
+특정 계층에 이상이 생긴다면 해당 계층만 수정해 문제를 해결할 수 있다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/95069395/223934632-1b6ab954-869f-411d-a2a9-878088db0223.png" alt="image" class="align-left" style="max-width: 70%"></p>
 
-<p>TCP/IP 4계층에서 애플리케이션 계층을 <br>
-OSI 7계층에서는 3계층으로 나누었다. (애플리케이션 계층, 프레젠테이션 계층, 세션 계층)</p>
+<p>TCP/IP 모델은 OSI 모델에 맵핑이 가능하다.<br>
+TCP/IP 4계층에서 애플리케이션 계층은 <br>
+OSI 7계층에서는 3계층을(애플리케이션 계층, 프레젠테이션 계층, 세션 계층)</p>
 
-<p>마찬가지로 TCP/IP 링크 계층을 <br>
-OSI 7계층에서는 2계층으로 나누었다. (데이터 링크 계층, 물리 계층)</p>
+<p>마찬가지로 TCP/IP 링크(네트워크) 계층은 <br>
+OSI 7계층에서는 2계층을(데이터 링크 계층, 물리 계층) 맵핑할 수 있다.</p>
 
 <p>이 계층들은 특정 계층이 변경되었을 때, 다른 계층이 영향을 받지 않도록 설계되어있다. <br>
 예를들어서 전송 계층에서 TCP를 UDP로 변경했다고 해서 인터넷 웹 브라우저를 다시 설치해야 하는<br>
 것이 아니듯 유연하게 설계되어진 계층들이다.</p>
+
+<p><br></p>
+
+<h4 id="osi-7계층">OSI 7계층</h4>
+
+<p><strong>1). 물리 계층</strong></p>
+
+<p>이름 그대로 물리적인 계층이다. 주로 전기적, 기계적, 기능적인 특성을 이용해 <br>
+통신 케이블로 데이터를 전송한다. 이 계층에서는 데이터를 전송하려는 데이터가 무엇인지<br>
+에러가 있는지 등에는 전혀 신경 쓰지 않는 계층이다.</p>
+
+<p>해당 계층에 속하는 대표적인 장비는 통신 케이블(랜선), 허브, 리피터가 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224021103-0fd98a2e-f607-4e36-a510-efd75d44a0fc.png" alt="image" class="align-left" style="max-width: 40%"></p>
+
+<p><span style="color:#F04965"><strong>한줄 정리 : 통신 케이블, 리피터, 허브 등을 통해 데이터를 데이터 링크 계층으로 전송한다.</strong></span></p>
+
+<p><br></p>
+
+<p><strong>2). 데이터 링크 계층</strong></p>
+
+<p>송수신되는 정보의 오류와 흐름을 관리하여 안전한 정보를 전달할 수 있도록 해주는 계층이다.<br>
+이 계층에서는 맥 주소를 가지고 통신하게 된다. 이 계층에 전송되는 단위를 프레임이라하고 <br>
+대표적인 장비에는 브리지, 스위치 등이 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224020739-82a629f2-4132-486f-ae08-331cbd311ea2.png" alt="image" class="align-left" style="max-width: 40%"></p>
+
+<p>즉, 브리지나 스위치를 통해 맥주소를 가지고 물리계층에서 받은 정보를 네트워크 계층으로 전달한다.<br>
+<span style="color:#F04965"><strong>한줄정리 : 에러검층, 재전송, 흐름제어를 하는 계층</strong></span></p>
+
+<p><strong><em>❗️스위치와 허브의 차이</em></strong> <br>
+허브가 스위치와 다른점은 연결된 기기 중 하나에서 전송된 패킷이 허브에<br>
+연결된 모든 기기로 브로드캐스팅된다는 점이다. 반면 스위치는 패킷의 목적지 주소로<br>
+지정된 기기로 이어지는 포트로만 패킷이 전달된다.</p>
+
+<p><strong><em>❗️브로드캐스팅이란?</em></strong><br>
+송신 호스트가 전송한 데이터가 네트워크에 연결된 호스트에 전송되는 방식<br>
+(방송처럼 불특정 다수에게 보내는 형식)</p>
+
+<p><strong><em>❗패킷이란?️</em></strong><br>
+컴퓨터 네트워크가 전달하는 데이터의 형식화된 블록</p>
+
+<p><strong><em>❗MAC 주소?️</em></strong><br>
+컴퓨터나 노트북 등 각 장치에는 네트워크에 연결하기 위한 장치(LAN카드)가 있는데<br>
+이를 구별하기위한 식별번호를 말한다. 6바이트로 구성된다.
+️</p>
+
+<p><br></p>
+
+<p><strong>3). 네트워크 계층</strong><br>
+이 계층에서는 데이터를 목적지까지 가장 안전하고 빠르게 전달하는 기능(라우팅)이다.<br>
+경로를 선택하고 주소(IP)를 정하고 경로에 따라 패킷을 전달해주는 것이 이계층의 역할이다.<br>
+여기에 사용되는 프로토콜의 종류도 다양하고, 라우팅하는 기술도 다양하다.</p>
+
+<p><span style="color:#F04965"><strong>한줄정리 : 주소부여(IP), 경로설정(Route)의 역할을 맡는다</strong></span></p>
+
+<p><br></p>
+
+<p><strong>4). 전송 계층</strong><br>
+통신을 활성화하기 위한 계층이다. 보통 TCP 프로토콜을 이용하고, 포트를 열어서 응용프로그램들이<br>
+전송을 할 수 있게 한다. 만약 데이터가 왔다면 해당 데이터를 하나로 합쳐서 5계층에 던져준다. <br>
+즉, 전송 계층은 패킷들의 전송이 유효한지 확인하고 전송 실패한 패킷들을 다시 전송한다는 것을 뜻한다.</p>
+
+<p>TCP 프로토콜?</p>
+<ul>
+  <li>순서를 보장한다.</li>
+  <li>연결지향 프로토콜을 사용하여 연결한다.</li>
+  <li>가상 패킷 교환 방식을 사용한다.
+    <ul>
+      <li>가상회선 패킷 교환 방식은 각 패킷에는 가상회선 식별자가 포함되며 모든 패킷을 전송하면 가상회선이 해제되고 패킷들은 전송된 <code class="language-plaintext highlighter-rouge">순서대로</code> 도착하는 방식을 말한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>UDP 프로토콜?</p>
+<ul>
+  <li>순서를 보장하지 않는다.</li>
+  <li>수신 여부를 확인하지 않으며 비연결성을 가진다.</li>
+  <li>데이터그래매 패킷 교환 방식을 사용한다.
+    <ul>
+      <li>패킷이 독립적으로 이동하며 최적의 경로를 선택하여 가는데 하나의 메세지에서 분할된 여러 패킷은 서로 다른 경로로 전송될 수 있으며 도착한 <code class="language-plaintext highlighter-rouge">순서가 다를</code> 수 있는 방식을 뜻한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong><em>❓순서도 보장되지 않고 비연결을 지향하는데 어디에 쓰는가?</em></strong> <br>
+UDP 통신 프로토콜은 신뢰성을 보장하지는 않지만 TCP에 비해 빠른 속도를 제공한다.<br>
+비연결성을 지향하기 때문에 데이터를 재전송할 필요도 없고, 흐름 제어나 에러체크도 항상 필요하진 않다. <br>
+이러한 이유로 신뢰성보다 연속성,성능이 더욱 중요시되는 서비스에서 UDP를 사용한다. <br>
+ex) 멀티미디어 스트리밍, 인터넷 전화 등</p>
+
+<p><span style="color:#F04965"><strong>한줄정리 : 패킷생성 및 세션계층에 전송</strong></span></p>
+
+<p><br></p>
+
+<p><strong>5). 세션 계층</strong><br>
+데이터가 통신하기 위한 논리적연결을 말한다. 통신을 하기위한 대문이라 보면된다. <br>
+이 계층에서는 TCP/IP 세션을 만들고 없애는 책임을 가진다.<br>
+즉, 세션 계층은 응용 프로그램 간의 대화를 유지하기 위한 구조를 제공하고, 이를 처리하기 위해<br>
+프로세스들의 논리적인 연결을 담당하는 계층이다.</p>
+
+<p><span style="color:#F04965"><strong>한줄정리 : 통신을 하기 위한 세션 확립, 유지, 중단을 수행한다.</strong></span></p>
+
+<p><br></p>
+
+<p><strong>6). 표현 계층</strong><br>
+이 계층은 코드 간의 번역을 담당하여 사용자 시스템에서 데이터의 형식상 차이를 다르는 부담을<br>
+응용 계층으로부터 덜어준다. MIME 인코딩이나 암호화 등의 동작이 이 계층에서 이루어진다.</p>
+
+<p>예를 들면 해당 데이터가 TEXT인지, GIF인지, JPG인지의 구분 등이 표현 계층의 몫이다.</p>
+
+<p><span style="color:#F04965"><strong>한줄정리 : 사용자의 명령어를 완성 및 결과 표현</strong></span></p>
+
+<p><br></p>
+
+<p><strong>7). 애플리케이션(응용) 계층</strong><br>
+최종 목적지로서 HTTP, FTP, SMTP, POP3, IMAP, Telnet등과 같은 프로토콜이 있다. <br>
+사용자가 네트워크에 엑세스 할 수 있도록 하는 응용 프로그램 그룹이다.</p>
+
+<p><span style="color:#F04965"><strong>한줄정리 : 응용 프로세스 간의 정보교환, 파일 전송 등의 서비스를 제공한다.</strong></span></p>
+
+<p><br></p>
+
+<h4 id="tcpip-4계층">TCP/IP 4계층</h4>
+
+<p><strong>1). 링크 계층(네트워크 엑세스)</strong><br>
+OSI 7계층의 물리계층, 데이터 링크 계층에 해당한다. <br>
+데이터를 전기신호로 변환한 , 물리적인 주소인 MAC 주소를 사용해, 알맞는 기기로<br>
+데이터를 전달하는 계층이다.</p>
+
+<p><br></p>
+
+<p><strong>2). 인터넷 계층</strong> <br>
+OSI 7계층의 네트워크 계층에 해당한다.<br>
+패킷을 최종 목적지까지 라우팅하는 계층이다.</p>
+
+<p><br></p>
+
+<p><strong>3). 전송 계층</strong>  <br>
+OSI 7계층의 전송 계층에 해당한다.<br>
+통신 노드 간 신뢰성 있는 데이터 전송을 보장하는 계층이다.</p>
+
+<p><br></p>
+
+<p><strong>4). 애플리케이션 계층</strong><br>
+OSI 7계층의 세션 계층, 표현 계층, 응용 계층에 해당한다.<br>
+사용자와 가장 가까운 계층으로, 사용자-소프트웨어 간 소통을 담당하는 계층이다.<br>
+애플리케이션을 실행하기 위한 데이터 형식이 작성된다.</p>
+
+<p><br></p>
+
+<h4 id="tcpip-vs-osi">TCP/IP vs OSI</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>항목</th>
+      <th>OSI 7계층</th>
+      <th>TCP/IP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>계층</td>
+      <td>7계층 모델</td>
+      <td>4계층 모델</td>
+    </tr>
+    <tr>
+      <td>구성</td>
+      <td>역할 기반 계층 구성</td>
+      <td>프로토콜의 집합 기반</td>
+    </tr>
+    <tr>
+      <td>기술</td>
+      <td>통신전반 기술 표준화</td>
+      <td>데이터 전송기술 특화</td>
+    </tr>
+    <tr>
+      <td>활용</td>
+      <td>통신 모델 표준 제시</td>
+      <td>실무적 통신기술 구현</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br></p>
+
+<h4 id="tcp-연결-성립-과정">TCP 연결 성립 과정</h4>
+
+<p>TCP는 신뢰성을 확보할 때 3-way handshake라는 작업을 진행한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224047350-494f0558-eee5-453f-a1bf-0f99fc6e6745.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>SYN 단계 : 클라이언트는 서버에 클라이언트의 ISN을 담아 SYN을 보낸다.<br>
+SYN + ACK 단계 : 서버는 클라이언트의 SYN을 수신하고 서버의 ISN을 보내며 승인번호로<br>
+클라이언트의 ISN + 1을 보냅니다.<br>
+ACK 단계 : 클라이언트는 서버의 ISN + 1 한 값인 승인번호를 담아 ACK를 서버에 보낸다.</p>
+
+<p>위의 과정 이후 신뢰성이 구축되고 데이터 전송을 시작한다.</p>
+
+<p><strong><em>❗️ISN ?</em></strong>  <br>
+Initial Sequence Numbers의 약어이며<br>
+새로운 TCP연결의 첫 번째 패킷에 할당된 임의의 시퀀스 번호를 말하며 이는 장치마다 다를 수 있다.</p>
+
+<p><br></p>
+
+<h4 id="tcp-연결-해제-과정">TCP 연결 해제 과정</h4>
+
+<p>TCP가 연결을 해제할 때는 4-way handshake 과정이 발생한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224054280-9cc960ab-27b1-40a2-b348-2e22f3f6693d.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>1번 : 먼저 클라이언트가 연결을 닫으려고 할 때 FIN으로 설정된 세그먼트를 보낸다. <br>
+그리고 클라이언트는 FIN_WAIT_1 상태로 들어가고 서버의 응답을 기다립니다.</p>
+
+<p>2번 : 서버는 클라이언트로 ACK라는 승인 세그먼트를 보낸다. 그리고 CLOSE_WAIT<br>
+상태에 들어간다. 클라이언트가 세그먼트를 받으면 FIN_WAIT_2 상태에 들어간다.</p>
+
+<p>3번 : 서버는 ACK를 보내고 일정 시간 이후에 클라이언트에 FIN이라는 세그먼트를 보내다.</p>
+
+<p>4번 : 클라이언트는 TIME_WAIT 상태가 되고 다시 서버로 ACK를 보내서 서버는 CLOSED  <br>
+상태가 된다. 이후 클라이언트는 어느 정도의 시간을 대기한 후 연결이 닫히고 클라이언트와<br>
+서버의 모든 자원의 연결이 해제된다.</p>
+
+<p>TIME_WAIT을 눈여겨 봐야한다. 4번에서 연결을 바로 닫지 않고 일정 시간 뒤에 닫는 이유는<br>
+지연 패킷이 발생할 경우를 대비하기 위함이고, 패킷이 뒤늦게 도달하고 이를 처리하지 못한다면<br>
+데이터 무결성 문제가 발생하기때문이다. 마지막으로 두 장치가 연결이 닫혔는지 확인하기 위해서이다. <br>
+LAST_ACK 상태에서 닫히게되면 다시 새로운 연결을 하려고 할때 장치는 줄곧 LAST_ACK로 되어있기 떄문에 <br>
+접속 오류가 나타날 수 있기 때문에 TIME_WAIT라는 일정 시간이 필요하다고한다.</p>
+
+<p><br></p>
+
+<h4 id="계층-간-데이터-송수신-과정">계층 간 데이터 송수신 과정</h4>
+
+<p><br><br>
+<br></p>
+
+<p>✨ 참고 사이트</p>
+<ul>
+  <li><a href="https://www.javatpoint.com/osi-vs-tcp-ip">javatpoint.com</a></li>
+  <li><a href="https://devowen.com/344">devowen님</a></li>
+  <li><a href="https://wooono.tistory.com/507">wooono님</a></li>
+</ul>
+
+<p><br></p>
 
 
 
@@ -931,10 +1194,10 @@ OSI 7계층에서는 2계층으로 나누었다. (데이터 링크 계층, 물�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/algorithm/2023/03/08/algo-knumber.html" title="">[Programmers - Java] K 번째수</a></li>
-<li><a class="post-link" href="/macos/2022/08/26/OS-macOs-3.html" title="">[macOs] neofetch를 활용하여 terminal 커스터마이징</a></li>
-<li><a class="post-link" href="/db/2022/12/19/db-h2setting.html" title="">H2 Database 다운로드 및 실행</a></li>
-<li><a class="post-link" href="/macos/2022/08/03/OS-macOs-1.html" title="">[macOs] 업데이트 후 xcrun error invalid active developer path, missing xcrun at...</a></li>
+        <li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="">Git pull rebase 사용해 병합하기</a></li>
+<li><a class="post-link" href="/til/2022/09/23/til.html" title="">[TIL] Java 자료구조 Graph, Tree, BST</a></li>
+<li><a class="post-link" href="/til/2022/10/24/til.html" title="">[TIL] Spring MVC Serivce 계층</a></li>
+<li><a class="post-link" href="/til/2022/08/22/til.html" title="">[TIL] 개발환경 셋팅하기</a></li>
 </ul>
     </div>
 <div class="post-comments">
