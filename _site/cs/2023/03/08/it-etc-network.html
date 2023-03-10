@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
   </p>
 <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
@@ -1171,6 +1171,40 @@ LAST_ACK 상태에서 닫히게되면 다시 새로운 연결을 하려고 할�
 
 <h4 id="계층-간-데이터-송수신-과정">계층 간 데이터 송수신 과정</h4>
 
+<p>HTTP를 통해 웹서버에 있는 데이터를 요청할 경우 아래와 같은 과정이 발생한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224226896-ae323226-5c8d-4366-8039-ad940fc94f70.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>보내는 요청들은 캡슐화 과정을 거쳐 전달되고, 다시 링크 계층을 통해 해당 서버와 통신을하고<br>
+해당 서버의 링크 계층으로부터 애플리케이션까지 비캡슐화 과정을 거쳐 데이터가 전송된다.<br>
+최종적으로 사용자에게는 PDU인 메세지로 전달됩니다.</p>
+
+<p>1). 캡슐화 과정<br>
+상위 계층의 헤더와 데이터를 하위 계층의 데이터 부분에 포함시키고 해당 계층의<br>
+헤더를 삽입하는 과정을 말한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224228665-0c3da47a-0928-4479-84ac-308166a69be7.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>2). 비캡슐화 과정<br>
+하위 계층에서 상위 계층으로 가며 각 계층의 헤더 부분을 제거하는 과정을 말한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/224228697-89a69997-c7c5-4c0d-857b-027ae6b42b8d.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p><br></p>
+
+<h4 id="pdu">PDU</h4>
+
+<p>네트워크의 어떠한 계층에서 계층으로 데이터가 전달될 때 한 덩어리의 단위를 <br>
+PDU(Protocol Data Unit)라고 한다. 제어 관련 정보들이 포함된 <code class="language-plaintext highlighter-rouge">헤더</code><br>
+데이터를 의미하는 <code class="language-plaintext highlighter-rouge">페이로드</code>로 구성되어 있으며, 계층마다 부르는 명칭이 다르다.</p>
+
+<ul>
+  <li>애플리케이션 계층 : 메세지</li>
+  <li>전송 계층 : 세그먼트(TCP), 데이터그램(UDP)</li>
+  <li>인터넷 계층 : 패킷</li>
+  <li>링크 계층 : 프레임(데이터 링크 계층), 비트(물리 계층)</li>
+</ul>
+
 <p><br><br>
 <br></p>
 
@@ -1194,10 +1228,10 @@ LAST_ACK 상태에서 닫히게되면 다시 새로운 연결을 하려고 할�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/git/2022/12/27/git-rebase.html" title="">Git pull rebase 사용해 병합하기</a></li>
-<li><a class="post-link" href="/til/2022/09/23/til.html" title="">[TIL] Java 자료구조 Graph, Tree, BST</a></li>
-<li><a class="post-link" href="/til/2022/10/24/til.html" title="">[TIL] Spring MVC Serivce 계층</a></li>
-<li><a class="post-link" href="/til/2022/08/22/til.html" title="">[TIL] 개발환경 셋팅하기</a></li>
+        <li><a class="post-link" href="/til/2022/11/17/til.html" title="">[TIL] 인증, 보안 기초</a></li>
+<li><a class="post-link" href="/til/2022/09/15/til.html" title="">[TIL] Java 애노테이션, 람다, 스트림, 파일 입출력</a></li>
+<li><a class="post-link" href="/til/2022/11/11/til.html" title="">[TIL] API Documentation 1</a></li>
+<li><a class="post-link" href="/spring/2022/08/03/spring-port.html" title="">[Spring] Web server failed to start. Port 8080 was already in use...</a></li>
 </ul>
     </div>
 <div class="post-comments">
