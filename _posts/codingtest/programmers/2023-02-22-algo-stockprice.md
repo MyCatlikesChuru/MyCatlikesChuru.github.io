@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Programmers - Java] 주식가격"
+title: "[Programmers] 주식가격 (Java)"
 subtitle: 고득점 Kit (스택,큐 - Level 2)
 categories: Algorithm
 tags: [Algorithm, Programmers]

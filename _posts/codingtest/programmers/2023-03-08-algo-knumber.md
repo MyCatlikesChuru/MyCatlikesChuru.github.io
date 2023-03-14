@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Programmers - Java] K 번째수"
+title: "[Programmers] K 번째수 (Java)"
 subtitle: 고득점 Kit (정렬 - Level 1)
 categories: Algorithm
 tags: [Algorithm, Programmers]

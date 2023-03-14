@@ -336,8 +336,6 @@ g
 7_posts/algorithm/programmers/2023-02-19-algo-printer.md,d/6/d68145b1dc0e1ec8fa4a6ac70f552b0a88779b95
 i
 9_posts/algorithm/programmers/2023-02-11-algo-ponketmon.md,e/a/eac034878388f8fd5c3c390364baad1f1930dc24
-h
-8_posts/algorithm/programmers/2023-02-11-algo-nocomple.md,2/b/2b1569e9935a56ae13be94535170d8f269e58a5c
 ]
 -_posts/til/BootCamp/2022-11/2022-11-16-til.md,8/2/829698f3fb76376f2deb4e0e92e29f95830d6127
 ]
@@ -346,8 +344,6 @@ h
 -_posts/til/BootCamp/2022-12/2022-12-14-til.md,2/9/293585e47a2e8bd34ee1a957cee79f78edbb8b3a
 ]
 -_posts/til/BootCamp/2022-12/2022-12-05-til.md,a/e/ae03b360860e9d2165df7edbcea9075862f7b7a4
-;
-_config.yml,c/d/cd089ae45ce870c45e434019e8f1ed4f066cd425
 ]
 -_posts/til/BootCamp/2022-11/2022-11-10-til.md,7/d/7d45de74b30965654e8fb8b280ad78cff0aade74
 ^
@@ -372,3 +368,5 @@ W
 '_posts/algorithm/programmers/_Mockup.md,7/8/7864aa5fd68f9ac80daec46280cca372c21d338d
 j
 :_posts/algorithm/programmers/2023-02-22-algo-stockprice.md,d/3/d3c1ad6679edc2970893ddbb854df591e5c9c0b1
+]
+-_posts/til/BootCamp/2022-08/2022-08-18-til.md,9/2/926c58e67192fa8a017f5940a0bf4ccc590ba2cc

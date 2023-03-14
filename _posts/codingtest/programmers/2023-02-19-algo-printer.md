@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Programmers - Java] 프린터"
+title: "[Programmers] 프린터 (Java)"
 subtitle: 고득점 Kit (스택,큐 - Level 2)
 categories: Algorithm
 tags: [Algorithm, Programmers]

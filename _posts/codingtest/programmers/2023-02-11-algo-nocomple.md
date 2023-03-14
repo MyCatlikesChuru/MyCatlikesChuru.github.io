@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Programmers - Java] 완주하지 못한 선수"
+title: "[Programmers] 완주하지 못한 선수 (Java)"
 subtitle: 고득점 Kit (해시 - Level 1)
 categories: Algorithm
 tags: [Algorithm, Programmers]

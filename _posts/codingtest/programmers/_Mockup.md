@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "[Programmers - Java] "
+title: "[Programmers] (Java)"
 subtitle: 고득점 Kit (정렬 - Level 1)
 categories: Algorithm
 tags: [Algorithm, Programmers]
 comments: true
-published: true
+published: false
 ---
 
 ## 📌 문제 : [K번째수]  
