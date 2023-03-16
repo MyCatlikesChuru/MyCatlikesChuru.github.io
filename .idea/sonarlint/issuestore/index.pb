@@ -158,8 +158,6 @@ K
 404.html,1/2/12bf52c5b60772bbf201ffb05d6bb178c1bf9a28
 Z
 *_posts/example/2015-02-28-test-markdown.md,4/5/45810d4aff86311a5c010666cdd728a218e9585e
-;
-sitemap.xml,9/9/991b411cc600215e9528c61790563f0521666950
 A
 sitemapsmaple.xml,a/b/ab1c7477bc2b94bc81fd85314839f46e7671193d
 V
