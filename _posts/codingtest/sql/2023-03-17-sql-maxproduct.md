@@ -12,7 +12,7 @@ published: true
 
 ### 📖 문제 설명  
 
-<p>다음은 종합병원에 속한 의사 정보를 담은<code>DOCTOR</code> 테이블입니다. <code>DOCTOR</code> 테이블은 다음과 같으며 <code>DR_NAME</code>, <code>DR_ID</code>, <code>LCNS_NO</code>, <code>HIRE_YMD</code>, <code>MCDP_CD</code>, <code>TLNO</code>는 각각 의사이름, 의사ID, 면허번호, 고용일자, 진료과코드, 전화번호를 나타냅니다.</p>
+<p>다음은 어느 의류 쇼핑몰에서 판매 중인 상품들의 정보를 담은 <code>PRODUCT</code> 테이블입니다. <code>PRODUCT</code> 테이블은 아래와 같은 구조로 되어있으며, <code>PRODUCT_ID</code>, <code>PRODUCT_CODE</code>, <code>PRICE</code>는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.</p>
 <table class="table">
         <thead><tr>
 <th>Column name</th>
@@ -21,195 +21,72 @@ published: true
 </tr>
 </thead>
         <tbody><tr>
-<td>DR_NAME</td>
-<td>VARCHAR(20)</td>
+<td>PRODUCT_ID</td>
+<td>INTEGER</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>DR_ID</td>
-<td>VARCHAR(10)</td>
+<td>PRODUCT_CODE</td>
+<td>VARCHAR(8)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>LCNS_NO</td>
-<td>VARCHAR(30)</td>
+<td>PRICE</td>
+<td>INTEGER</td>
 <td>FALSE</td>
-</tr>
-<tr>
-<td>HIRE_YMD</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>MCDP_CD</td>
-<td>VARCHAR(6)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>TLNO</td>
-<td>VARCHAR(50)</td>
-<td>TRUE</td>
 </tr>
 </tbody>
       </table>
+<p>상품 별로 중복되지 않는 8자리 상품코드 값을 가지며, 앞 2자리는 카테고리 코드를 의미합니다.</p>
+
 <hr>
 
 <h5>문제</h5>
 
-<p><code>DOCTOR</code> 테이블에서 진료과가 흉부외과(CS)이거나 일반외과(GS)인 의사의 이름, 의사ID, 진료과, 고용일자를 조회하는 SQL문을 작성해주세요. 이때 결과는 고용일자를 기준으로 내림차순 정렬하고, 고용일자가 같다면 이름을 기준으로 오름차순 정렬해주세요.</p>
+<p><code>PRODUCT</code> 테이블에서 판매 중인 상품 중 가장 높은 판매가를 출력하는 SQL문을 작성해주세요. 이때 컬럼명은 MAX_PRICE로 지정해주세요.</p>
 
 <hr>
 
 <h5>예시</h5>
 
-<p><code>DOCTOR</code> 테이블이 다음과 같을 때</p>
+<p>예를 들어 <code>PRODUCT</code> 테이블이 다음과 같다면</p>
 <table class="table">
         <thead><tr>
-<th>DR_NAME</th>
-<th>DR_ID</th>
-<th>LCNS_NO</th>
-<th>HIRE_YMD</th>
-<th>MCDP_CD</th>
-<th>TLNO</th>
+<th>PRODUCT_ID</th>
+<th>PRODUCT_CODE</th>
+<th>PRICE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>루피</td>
-<td>DR20090029</td>
-<td>LC00010001</td>
-<td>2009-03-01</td>
-<td>CS</td>
-<td>01085482011</td>
+<td>1</td>
+<td>A1000001</td>
+<td>10000</td>
 </tr>
 <tr>
-<td>패티</td>
-<td>DR20090001</td>
-<td>LC00010901</td>
-<td>2009-07-01</td>
-<td>CS</td>
-<td>01085220122</td>
+<td>2</td>
+<td>A2000005</td>
+<td>9000</td>
 </tr>
 <tr>
-<td>뽀로로</td>
-<td>DR20170123</td>
-<td>LC00091201</td>
-<td>2017-03-01</td>
-<td>GS</td>
-<td>01034969210</td>
-</tr>
-<tr>
-<td>티거</td>
-<td>DR20100011</td>
-<td>LC00011201</td>
-<td>2010-03-01</td>
-<td>NP</td>
-<td>01034229818</td>
-</tr>
-<tr>
-<td>품바</td>
-<td>DR20090231</td>
-<td>LC00011302</td>
-<td>2015-11-01</td>
-<td>OS</td>
-<td>01049840278</td>
-</tr>
-<tr>
-<td>티몬</td>
-<td>DR20090112</td>
-<td>LC00011162</td>
-<td>2010-03-01</td>
-<td>FM</td>
-<td>01094622190</td>
-</tr>
-<tr>
-<td>니모</td>
-<td>DR20200012</td>
-<td>LC00911162</td>
-<td>2020-03-01</td>
-<td>CS</td>
-<td>01089483921</td>
-</tr>
-<tr>
-<td>오로라</td>
-<td>DR20100031</td>
-<td>LC00010327</td>
-<td>2010-11-01</td>
-<td>OS</td>
-<td>01098428957</td>
-</tr>
-<tr>
-<td>자스민</td>
-<td>DR20100032</td>
-<td>LC00010192</td>
-<td>2010-03-01</td>
-<td>GS</td>
-<td>01023981922</td>
-</tr>
-<tr>
-<td>벨</td>
-<td>DR20100039</td>
-<td>LC00010562</td>
-<td>2010-07-01</td>
-<td>GS</td>
-<td>01058390758</td>
+<td>3</td>
+<td>C1000006</td>
+<td>22000</td>
 </tr>
 </tbody>
       </table>
-<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
+<p>가장 높은 판매가는 22,000 원 이므로, 다음과 같은 결과가 나와야 합니다.</p>
 <table class="table">
         <thead><tr>
-<th>DR_NAME</th>
-<th>DR_ID</th>
-<th>MCDP_CD</th>
-<th>HIRE_YMD</th>
+<th>MAX_PRICE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>니모</td>
-<td>DR20200012</td>
-<td>CS</td>
-<td>2020-03-01</td>
-</tr>
-<tr>
-<td>뽀로로</td>
-<td>DR20170123</td>
-<td>GS</td>
-<td>2017-03-01</td>
-</tr>
-<tr>
-<td>벨</td>
-<td>DR20100039</td>
-<td>GS</td>
-<td>2010-07-01</td>
-</tr>
-<tr>
-<td>자스민</td>
-<td>DR20100032</td>
-<td>GS</td>
-<td>2010-03-01</td>
-</tr>
-<tr>
-<td>패티</td>
-<td>DR20090001</td>
-<td>CS</td>
-<td>2009-07-01</td>
-</tr>
-<tr>
-<td>루피</td>
-<td>DR20090029</td>
-<td>CS</td>
-<td>2009-03-01</td>
+<td>22000</td>
 </tr>
 </tbody>
       </table>
-<hr>
 
-<h5>주의사항</h5>
-
-<p>날짜 포맷은 예시와 동일하게 나와야합니다.</p>
-
-
-> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
+> 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges  
 
 ---
 

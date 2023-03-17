@@ -384,3 +384,9 @@ _
 /_posts/codingtest/sql/2023-03-14-sql-carlist.md,3/8/3829c2931b2082544a644205ec604945d4a033e2
 _
 /_posts/codingtest/sql/2023-03-15-sql-carrent.md,1/2/12d62185958a0879a117ece1e84077172e4a41f0
+i
+9_posts/codingtest/programmers/2023-02-11-algo-nocomple.md,3/a/3ad38c454e9cd47fd6065b7e18c50d177e992162
+j
+:_posts/codingtest/programmers/2023-02-11-algo-ponketmon.md,9/8/98d05609114daf08fef4dde8f1eace043090cf56
+h
+8_posts/codingtest/programmers/2023-02-19-algo-printer.md,e/2/e2d7c3297beebeb5e7157b4cde80117348843ee1
