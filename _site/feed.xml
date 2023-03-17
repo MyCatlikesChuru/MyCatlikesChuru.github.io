@@ -1,4 +1,841 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-14T19:36:04+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers] 조건에 맞는 도서 리스트 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/14/sql-book.html" rel="alternate" type="text/html" title="[Programmers] 조건에 맞는 도서 리스트 출력하기 (MySQL)" /><published>2023-03-14T00:00:00+09:00</published><updated>2023-03-14T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/14/sql-book</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/14/sql-book.html"><![CDATA[<h2 id="-문제--조건에-맞는-도서-리스트-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/144853">조건에 맞는 도서 리스트 출력하기</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-16T18:00:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers] 조건에 부합하는 중고거래 댓글 조회하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/16/sql-trade.html" rel="alternate" type="text/html" title="[Programmers] 조건에 부합하는 중고거래 댓글 조회하기 (MySQL)" /><published>2023-03-16T00:00:00+09:00</published><updated>2023-03-16T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/16/sql-trade</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/16/sql-trade.html"><![CDATA[<h2 id="-문제--조건에-부합하는-중고거래-댓글-조회하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/164673">조건에 부합하는 중고거래 댓글 조회하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 중고거래 게시판 정보를 담은 <code>USED_GOODS_BOARD</code> 테이블과 중고거래 게시판 첨부파일 정보를 담은 <code>USED_GOODS_REPLY</code> 테이블입니다. <code>USED_GOODS_BOARD</code> 테이블은 다음과 같으며 <code>BOARD_ID</code>, <code>WRITER_ID</code>, <code>TITLE</code>, <code>CONTENTS</code>, <code>PRICE</code>, <code>CREATED_DATE</code>, <code>STATUS</code>, <code>VIEWS</code>은 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>BOARD_ID</td>
+<td>VARCHAR(5)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>WRITER_ID</td>
+<td>VARCHAR(50)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>TITLE</td>
+<td>VARCHAR(100)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CONTENTS</td>
+<td>VARCHAR(1000)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRICE</td>
+<td>NUMBER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CREATED_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VARCHAR(10)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>VIEWS</td>
+<td>NUMBER</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p><code>USED_GOODS_REPLY</code> 테이블은 다음과 같으며 <code>REPLY_ID</code>, <code>BOARD_ID</code>, <code>WRITER_ID</code>, <code>CONTENTS</code>, <code>CREATED_DATE</code>는 각각 댓글 ID, 게시글 ID, 작성자 ID, 댓글 내용, 작성일을 의미합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>REPLY_ID</td>
+<td>VARCHAR(10)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>BOARD_ID</td>
+<td>VARCHAR(5)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>WRITER_ID</td>
+<td>VARCHAR(50)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CONTENTS</td>
+<td>VARCHAR(1000)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>CREATED_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>USED_GOODS_BOARD</code>와 <code>USED_GOODS_REPLY</code> 테이블에서 2022년 10월에 작성된 게시글 제목, 게시글  ID, 댓글 ID, 댓글 작성자 ID, 댓글 내용, 댓글 작성일을 조회하는 SQL문을 작성해주세요. 결과는 댓글 작성일을 기준으로 오름차순 정렬해주시고, 댓글 작성일이 같다면 게시글  제목을 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p><code>USED_GOODS_BOARD</code> 테이블이 다음과 같고</p>
+<table class="table">
+        <thead><tr>
+<th>BOARD_ID</th>
+<th>WRITER_ID</th>
+<th>TITLE</th>
+<th>CONTENTS</th>
+<th>PRICE</th>
+<th>CREATED_DATE</th>
+<th>STATUS</th>
+<th>VIEWS</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>B0001</td>
+<td>kwag98</td>
+<td>반려견 배변패드 팝니다</td>
+<td>정말 저렴히 판매합니다. 전부 미개봉 새상품입니다.</td>
+<td>12000</td>
+<td>2022-10-01</td>
+<td>DONE</td>
+<td>250</td>
+</tr>
+<tr>
+<td>B0002</td>
+<td>lee871201</td>
+<td>국내산 볶음참깨</td>
+<td>직접 농사지은 참깨입니다.</td>
+<td>3000</td>
+<td>2022-10-02</td>
+<td>DONE</td>
+<td>121</td>
+</tr>
+<tr>
+<td>B0003</td>
+<td>goung12</td>
+<td>배드민턴 라켓</td>
+<td>사놓고 방치만 해서 팝니다.</td>
+<td>9000</td>
+<td>2022-10-02</td>
+<td>SALE</td>
+<td>212</td>
+</tr>
+<tr>
+<td>B0004</td>
+<td>keel1990</td>
+<td>디올 귀걸이</td>
+<td>신세계강남점에서 구입. 정품 아닐시 백퍼센트 환불</td>
+<td>130000</td>
+<td>2022-10-02</td>
+<td>SALE</td>
+<td>199</td>
+</tr>
+<tr>
+<td>B0005</td>
+<td>haphli01</td>
+<td>스팸클래식 팔아요</td>
+<td>유통기한 2025년까지에요</td>
+<td>10000</td>
+<td>2022-10-02</td>
+<td>SALE</td>
+<td>121</td>
+</tr>
+</tbody>
+      </table>
+<p><code>USED_GOODS_REPLY</code> 테이블이 다음과 같을 때</p>
+<table class="table">
+        <thead><tr>
+<th>REPLY_ID</th>
+<th>BOARD_ID</th>
+<th>WRITER_ID</th>
+<th>CONTENTS</th>
+<th>CREATED_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>R000000001</td>
+<td>B0001</td>
+<td>s2s2123</td>
+<td>구매하겠습니다. 쪽지 드립니다.</td>
+<td>2022-10-02</td>
+</tr>
+<tr>
+<td>R000000002</td>
+<td>B0002</td>
+<td>hoho1112</td>
+<td>쪽지 주세요.</td>
+<td>2022-10-03</td>
+</tr>
+<tr>
+<td>R000000003</td>
+<td>B0006</td>
+<td>hwahwa2</td>
+<td>삽니다. 연락주세요.</td>
+<td>2022-10-03</td>
+</tr>
+<tr>
+<td>R000000004</td>
+<td>B0007</td>
+<td>hong02</td>
+<td>예약중</td>
+<td>2022-10-06</td>
+</tr>
+<tr>
+<td>R000000005</td>
+<td>B0009</td>
+<td>hanju23</td>
+<td>구매완료</td>
+<td>2022-10-07</td>
+</tr>
+</tbody>
+      </table>
+<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>TITLE</th>
+<th>BOARD_ID</th>
+<th>REPLY_ID</th>
+<th>WRITER_ID</th>
+<th>CONTENTS</th>
+<th>CREATED_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>반려견 배변패드 팝니다</td>
+<td>B0001</td>
+<td>R000000001</td>
+<td>s2s2123</td>
+<td>구매하겠습니다. 쪽지 드립니다.</td>
+<td>2022-10-02</td>
+</tr>
+<tr>
+<td>국내산 볶음참깨</td>
+<td>B0002</td>
+<td>R000000002</td>
+<td>hoho1112</td>
+<td>쪽지 주세요.</td>
+<td>2022-10-03</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>주의사항</h5>
+
+<p><code>CREATED_DATE</code>의 포맷이 예시의 포맷과 일치해야 정답처리 됩니다.</p>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<pre><code class="language-RoomSql">SELECT b.TITLE, 
+    b.BOARD_ID, 
+    r.REPLY_ID, 
+    r.WRITER_ID, 
+    r.CONTENTS, 
+    DATE_FORMAT(r.CREATED_DATE,'%Y-%m-%d') AS CREATED_DATE
+    FROM USED_GOODS_BOARD b
+INNER JOIN USED_GOODS_REPLY r 
+ON b.BOARD_ID = r.BOARD_ID
+WHERE DATE_FORMAT(b.CREATED_DATE, '%Y-%m') = '2022-10'
+ORDER BY r.CREATED_DATE ASC, b.TITLE ASC;
+</code></pre>
+
+<p>문제에서 출력되어야하는 항목은 BOARD의 <code class="language-plaintext highlighter-rouge">TITLE</code>, <code class="language-plaintext highlighter-rouge">BOARD_ID</code><br />
+REPLY의 <code class="language-plaintext highlighter-rouge">WRITER_ID</code>, <code class="language-plaintext highlighter-rouge">CONTENTS</code>, <code class="language-plaintext highlighter-rouge">CREATED_DATE</code> 이다.</p>
+
+<p>BOARD_ID로 INNER JOIN을 하여 BOARD와 REPLY의 모두 있는 데이터를 뽑는다. <br />
+즉, 댓글이 달린 게시판의 데이터만 추출해오게 된다. 날짜같은 경우는 주어진 것 처럼 <br />
+DATE_FORMAT을 이용해 변경해주고</p>
+
+<p>2022년 10월에 해당하는 데이터를 WHERE절로 걸러준다.<br />
+그리고 ORDER BY를 통해 오름차순 정렬을 해주면 되는데 <br />
+여기서 정렬조건은 2개이다. 댓글의 날짜(<code class="language-plaintext highlighter-rouge">CREATED_DATE</code>)를 기준으로 오름차순을 하고 <br />
+만약 같은 날짜일 경우에는 게시판의 제목(<code class="language-plaintext highlighter-rouge">TITLE</code>)을 기준으로 오름차순 정렬을 해야한다.</p>
+
+<p>ORDER BY 문법에 첫번째 정렬값이 같다면 콤마(,)로 다음 조건을 적어주면 <br />
+해당 기준으로 정렬을 진행해준다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 조건에 부합하는 중고거래 댓글 조회하기]]></summary></entry><entry><title type="html">[Programmers] 소수 찾기 (Java)</title><link href="http://localhost:4000/algorithm/2023/03/16/algo-prime.html" rel="alternate" type="text/html" title="[Programmers] 소수 찾기 (Java)" /><published>2023-03-16T00:00:00+09:00</published><updated>2023-03-16T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/03/16/algo-prime</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/03/16/algo-prime.html"><![CDATA[<h2 id="-문제--소수-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42839">소수 찾기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.</p>
+
+<p>각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.</p>
+
+<h4 id="제한사항">제한사항</h4>
+
+<ul>
+<li>numbers는 길이 1 이상 7 이하인 문자열입니다.</li>
+<li>numbers는 0~9까지 숫자만으로 이루어져 있습니다.</li>
+<li>"013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.</li>
+</ul>
+
+<h4 id="입출력-예">입출력 예</h4>
+
+<table class="table">
+        <thead><tr>
+<th>numbers</th>
+<th>return</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>"17"</td>
+<td>3</td>
+</tr>
+<tr>
+<td>"011"</td>
+<td>2</td>
+</tr>
+</tbody>
+      </table>
+
+<h4 id="입출력-예-설명">입출력 예 설명</h4>
+
+<p>예제 #1<br />
+[1, 7]으로는 소수 [7, 17, 71]를 만들 수 있습니다.</p>
+
+<p>예제 #2<br />
+[0, 1, 1]으로는 소수 [11, 101]를 만들 수 있습니다.</p>
+
+<ul>
+<li>11과 011은 같은 숫자로 취급합니다.</li>
+</ul>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
+
+<p>이번문제는 String으로 주어지는 문자열을 주어지는데 <br />
+문자열 하나씩 만들 수 있는 모든 조합을 소수를 찾아 소수의 <br />
+개수를 반환하는 문제이다.</p>
+
+<p>예제로 <code class="language-plaintext highlighter-rouge">17</code>이라는 값이 주어졌을때<br />
+<code class="language-plaintext highlighter-rouge">1</code>,<code class="language-plaintext highlighter-rouge">17</code>,<code class="language-plaintext highlighter-rouge">7</code>,<code class="language-plaintext highlighter-rouge">71</code>과 같이 총 4개의 조합을 구할 수 있고 <br />
+이 중에 <code class="language-plaintext highlighter-rouge">17</code>,<code class="language-plaintext highlighter-rouge">7</code>,<code class="language-plaintext highlighter-rouge">71</code>이 소수기 때문에 정답은 소수의 개수인 <code class="language-plaintext highlighter-rouge">3</code>을 리턴하면 된다.</p>
+
+<p>여기서 만약 조합을 구하는 길이가 정해져 있다면 <br />
+다중 for문을 이용해 풀 수 있지만 지금과 같은 경우에는 <br />
+numbers라는 문자열이 1~7개의 길이를 가진 예제가 주어지기 때문에 <br />
+재귀를 통한 완전탐색으로 풀어야겠다라는 결론에 도달했다.</p>
+
+<p><br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">012</code>라는 문자열이 주어졌다고 가정하고 아래의 순서를 살펴보자  <br />
+해당 예제의 조합에서는 <code class="language-plaintext highlighter-rouge">2</code>라는 값만 소수이기 때문에 리턴값은 <code class="language-plaintext highlighter-rouge">1</code>이어야한다.<br />
+<em>(편의상 true=⭕️ / false=❌ 로 표현하겠습니다.)</em></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/225528468-38bd539f-096f-411f-bc3f-c7e3edb77f9a.gif" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>우선 주어진 문자열을 <code class="language-plaintext highlighter-rouge">int[] arr</code>라는 배열로 쪼개었고 <br />
+재귀를 통해 탐색한 곳을 관리하는 <code class="language-plaintext highlighter-rouge">boolean[] visit</code>라는 배열을 만들어 <br />
+탐색할 때 해당 배열의 조건을 이용해 조합을 구하였다.  <br />
+재귀를 호출하면서 <code class="language-plaintext highlighter-rouge">Set&lt;Integer&gt; answer</code>에 소수인 값들은 담도록하였고 <br />
+중복된 값이 들어갈 수 있기 때문에 Collection의 Set을 이용하였다.</p>
+
+<p>위의 그림에서 알 수 있듯이 <br />
+arr 배열을 순회할때 재귀함수를 호출하고 호출된 재귀함수에서 <br />
+또다시 순회하면서 재귀함수를 호출하는 반복적인 모습을 볼 수 있다.</p>
+
+<p>문제 풀이를 위한 5가지를 살펴보자</p>
+<ol>
+  <li>arr에서 순회할때 재귀함수가 호출되면 true로 체크한다.</li>
+  <li>방문하지 않은 인덱스만 재귀한다.</li>
+  <li>재귀할때 현재 본인 인덱스 값을 String 타입 number 변수에 더해 매개변수로 넘겨준다.</li>
+  <li>순회한 인덱스는 false로 변경한다.</li>
+  <li>재귀 탈출조건은 number 길이와 arr 배열길이가 같을때 입니다.</li>
+</ol>
+
+<p>해당 조건을 토대로 코드를 살펴보면서 이해해보자.</p>
+
+<p><br /></p>
+
+<h3 id="-코드">👨🏻‍💻 코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="nc">String</span> <span class="n">numbers</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// 만들수 있는 조합 중 소수의 갯수를 구하는 문제</span>
+        <span class="c1">// String 길이가 달라지기 때문에 재귀로 풀어야하는 문제</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
+        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">visit</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span> <span class="c1">// 소수인 값만 담게되는 HashSet</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">recursion</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">answer</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">visit</span><span class="o">);</span>
+            <span class="n">visit</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">recursion</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="nc">String</span> <span class="n">number</span><span class="o">,</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">visit</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">visit</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// 해당 index 재귀 호출시 방문 체크\</span>
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">number</span><span class="o">);</span>  <span class="c1">// String -&gt; int</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isPrime</span><span class="o">(</span><span class="n">num</span><span class="o">))</span> <span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span> <span class="c1">// 소수인 숫자는 Set에 추가 (중복인 것은 제거)</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">number</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// 탈출조건 , number의 문자열길이와 배열길이가 같아질때</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">visit</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">recursion</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">number</span> <span class="o">+</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">answer</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">visit</span><span class="o">);</span> <span class="c1">// number값을 이어붙여서 호출</span>
+                <span class="n">visit</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 소수일경우 true, 아닐경우 false</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">num</span><span class="o">);</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>우선 재귀함수인 <code class="language-plaintext highlighter-rouge">recursion</code> 메서드를 하나 만들었고 <br />
+소수를 판단해 소수면 true를 반환하는 메서드인 <code class="language-plaintext highlighter-rouge">isPrime</code>을 만들었다.</p>
+
+<p>처음부터 보면 arr배열을 순회하는 for문이 존재하고 <br />
+재귀함수를 호출한다. 0번 인덱스부터 조합을 구하기위해서 재귀함수가 호출되고 <br />
+재귀함수를 호출한 후에 방문여부를 표시하는 <code class="language-plaintext highlighter-rouge">visit[index]</code>의 값을 true 설정한다. <br />
+그리고 소수인지판단해 Set에 값을 저장하고 아니면 if문을 통과하게 되어진다.</p>
+
+<p>재귀함수 탈출조건을 설정해주고, 본격적으로 조합을 구하기 위한 재귀함수안에 <br />
+for문을 한번 더 실행 시킨다. 방문하지않은 곳만 다시 재귀함수를 호출하기 위해서 <br />
+if문으로 <code class="language-plaintext highlighter-rouge">!visit[i]</code>라는 조건을 걸어 재귀함수를 호출하게된다.</p>
+
+<p>이렇게 0번 인덱스에 false로 되어있는 곳을 방문하게되고 <br />
+재귀함수가 호출될때 <code class="language-plaintext highlighter-rouge">number + arr[i]</code>를 하여 현재 탐색중인 문자열을 <br />
+계속 이어붙이면서 현재 어떤 값을 찾고 있는지 알 수 있고 해당조건을 통해서 <br />
+재귀함수를 탈출하는 조건으로도 사용할 수 있다.</p>
+
+<p>이렇게 쭉 재귀함수가 탐색을 마치고 탈출조건에 걸리게되면 <br />
+<code class="language-plaintext highlighter-rouge">visit[i] = false;</code>를 통해 방문했던 곳을 다시 방문하지 않았다고 변경하고 <br />
+탐색중이던 for문을 순회할떄는 다시 원래상태의 visit배열이 되어진다. <br />
+이러한 원리로 완전탐색을 통해 조합을 구한뒤 풀이에 맞는 값을 반환해주면 문제해결!</p>
+
+<p>재귀라는 개념이 아직 어색하고 잘 보이지 않기에 연습이 많이 필요해보인다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 소수 찾기]]></summary></entry><entry><title type="html">[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/16/sql-icecream.html" rel="alternate" type="text/html" title="[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)" /><published>2023-03-16T00:00:00+09:00</published><updated>2023-03-16T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/16/sql-icecream</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/16/sql-icecream.html"><![CDATA[<h2 id="-문제--과일로-만든-아이스크림-고르기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/133025">과일로 만든 아이스크림 고르기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 아이스크림 가게의 상반기 주문 정보를 담은 <code>FIRST_HALF</code> 테이블과 아이스크림 성분에 대한 정보를 담은 <code>ICECREAM_INFO</code> 테이블입니다. <code>FIRST_HALF</code> 테이블 구조는 다음과 같으며, <code>SHIPMENT_ID</code>, <code>FLAVOR</code>, <code>TOTAL_ORDER</code> 는 각각 아이스크림 공장에서 아이스크림 가게까지의 출하 번호, 아이스크림 맛, 상반기 아이스크림 총주문량을 나타냅니다. <code>FIRST_HALF</code> 테이블의 기본 키는 <code>FLAVOR</code>입니다.</p>
+<table class="table">
+        <thead><tr>
+<th style="text-align: left">NAME</th>
+<th style="text-align: left">TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td style="text-align: left">SHIPMENT_ID</td>
+<td style="text-align: left">INT(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td style="text-align: left">FLAVOR</td>
+<td style="text-align: left">VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td style="text-align: left">TOTAL_ORDER</td>
+<td style="text-align: left">INT(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ICECREAM_INFO</code> 테이블 구조는 다음과 같으며, <code>FLAVOR</code>, <code>INGREDITENT_TYPE</code> 은 각각 아이스크림 맛, 아이스크림의 성분 타입을 나타냅니다. <code>INGREDIENT_TYPE</code>에는 아이스크림의 주 성분이 설탕이면 <code>sugar_based</code>라고 입력되고, 아이스크림의 주 성분이 과일이면 <code>fruit_based</code>라고 입력됩니다. <code>ICECREAM_INFO</code>의 기본 키는 <code>FLAVOR</code>입니다. <code>ICECREAM_INFO</code>테이블의 <code>FLAVOR</code>는 <code>FIRST_HALF</code> 테이블의  <code>FLAVOR</code>의 외래 키입니다.</p>
+<table class="table">
+        <thead><tr>
+<th style="text-align: left">NAME</th>
+<th style="text-align: left">TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td style="text-align: left">FLAVOR</td>
+<td style="text-align: left">VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td style="text-align: left">INGREDIENT_TYPE</td>
+<td style="text-align: left">VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p>상반기 아이스크림 총주문량이 3,000보다 높으면서 아이스크림의 주 성분이 과일인 아이스크림의 맛을 총주문량이 큰 순서대로 조회하는 SQL 문을 작성해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>FIRST_HALF</code> 테이블이 다음과 같고</p>
+<table class="table">
+        <thead><tr>
+<th style="text-align: left">SHIPMENT_ID</th>
+<th style="text-align: left">FLAVOR</th>
+<th>TOTAL_ORDER</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td style="text-align: left">101</td>
+<td style="text-align: left">chocolate</td>
+<td>3200</td>
+</tr>
+<tr>
+<td style="text-align: left">102</td>
+<td style="text-align: left">vanilla</td>
+<td>2800</td>
+</tr>
+<tr>
+<td style="text-align: left">103</td>
+<td style="text-align: left">mint_chocolate</td>
+<td>1700</td>
+</tr>
+<tr>
+<td style="text-align: left">104</td>
+<td style="text-align: left">caramel</td>
+<td>2600</td>
+</tr>
+<tr>
+<td style="text-align: left">105</td>
+<td style="text-align: left">white_chocolate</td>
+<td>3100</td>
+</tr>
+<tr>
+<td style="text-align: left">106</td>
+<td style="text-align: left">peach</td>
+<td>2450</td>
+</tr>
+<tr>
+<td style="text-align: left">107</td>
+<td style="text-align: left">watermelon</td>
+<td>2150</td>
+</tr>
+<tr>
+<td style="text-align: left">108</td>
+<td style="text-align: left">mango</td>
+<td>2900</td>
+</tr>
+<tr>
+<td style="text-align: left">109</td>
+<td style="text-align: left">strawberry</td>
+<td>3100</td>
+</tr>
+<tr>
+<td style="text-align: left">110</td>
+<td style="text-align: left">melon</td>
+<td>3150</td>
+</tr>
+<tr>
+<td style="text-align: left">111</td>
+<td style="text-align: left">orange</td>
+<td>2900</td>
+</tr>
+<tr>
+<td style="text-align: left">112</td>
+<td style="text-align: left">pineapple</td>
+<td>2900</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ICECREAM_INFO</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th style="text-align: left">FLAVOR</th>
+<th>INGREDIENT_TYPE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td style="text-align: left">chocolate</td>
+<td>sugar_based</td>
+</tr>
+<tr>
+<td style="text-align: left">vanilla</td>
+<td>sugar_based</td>
+</tr>
+<tr>
+<td style="text-align: left">mint_chocolate</td>
+<td>sugar_based</td>
+</tr>
+<tr>
+<td style="text-align: left">caramel</td>
+<td>sugar_based</td>
+</tr>
+<tr>
+<td style="text-align: left">white_chocolate</td>
+<td>sugar_based</td>
+</tr>
+<tr>
+<td style="text-align: left">peach</td>
+<td>fruit_based</td>
+</tr>
+<tr>
+<td style="text-align: left">watermelon</td>
+<td>fruit_based</td>
+</tr>
+<tr>
+<td style="text-align: left">mango</td>
+<td>fruit_based</td>
+</tr>
+<tr>
+<td style="text-align: left">strawberry</td>
+<td>fruit_based</td>
+</tr>
+<tr>
+<td style="text-align: left">melon</td>
+<td>fruit_based</td>
+</tr>
+<tr>
+<td style="text-align: left">orange</td>
+<td>fruit_based</td>
+</tr>
+<tr>
+<td style="text-align: left">pineapple</td>
+<td>fruit_based</td>
+</tr>
+</tbody>
+      </table>
+<p>상반기 아이스크림 총주문량이 3,000보다 높은 아이스크림 맛은 chocolate, strawberry, melon, white_chocolate입니다. 이 중에 아이스크림의 주 성분이 과일인 아이스크림 맛은 strawberry와 melon이고 총주문량이 큰 순서대로 아이스크림 맛을 조회하면 melon, strawberry 순으로 조회되어야 합니다. 따라서 SQL 문을 실행하면 다음과 같이 나와야 합니다. </p>
+<table class="table">
+        <thead><tr>
+<th style="text-align: left">FLAVOR</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td style="text-align: left">melon</td>
+</tr>
+<tr>
+<td style="text-align: left">strawberry</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<p><code class="language-plaintext highlighter-rouge">FIRST_HALF</code>, <code class="language-plaintext highlighter-rouge">INGREDIENT_TYPE</code>라는 두개의 테이블이 있다.<br />
+두개의 테이블을 JOIN한 다음에 <code class="language-plaintext highlighter-rouge">FIRST_HALF</code> 테이블에서 주문수량이 3000보다 큰값을 찾고  <br />
+<code class="language-plaintext highlighter-rouge">INGREDIENT_TYPE</code> 테이블에서는 과일을 나타내는 fruit_based를 찾아 내림차순으로 정렬하면된다.</p>
+
+<pre><code class="language-RoomSql">SELECT F.FLAVOR FROM FIRST_HALF F
+LEFT JOIN ICECREAM_INFO I ON I.FLAVOR = F.FLAVOR
+WHERE F.TOTAL_ORDER &gt; 3000 AND I.INGREDIENT_TYPE = 'fruit_based'
+ORDER BY F.TOTAL_ORDER DESC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 과일로 만든 아이스크림 고르기]]></summary></entry><entry><title type="html">[Programmers] 자동차 대여 기록에서 장기/단기 대여 구분하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/15/sql-carrent.html" rel="alternate" type="text/html" title="[Programmers] 자동차 대여 기록에서 장기/단기 대여 구분하기 (MySQL)" /><published>2023-03-15T00:00:00+09:00</published><updated>2023-03-15T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/15/sql-carrent</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/15/sql-carrent.html"><![CDATA[<h2 id="-문제--자동차-대여-기록에서-장기단기-대여-구분하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/151138">자동차 대여 기록에서 장기/단기 대여 구분하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블입니다. <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블은 아래와 같은 구조로 되어있으며, <code>HISTORY_ID</code>, <code>CAR_ID</code>, <code>START_DATE</code>, <code>END_DATE</code> 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>HISTORY_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CAR_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>START_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>END_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블에서 대여 시작일이 2022년 9월에 속하는 대여 기록에 대해서 대여 기간이 30일 이상이면 '장기 대여' 그렇지 않으면 '단기 대여' 로 표시하는 컬럼(컬럼명: <code>RENT_TYPE</code>)을 추가하여 대여기록을 출력하는 SQL문을 작성해주세요. 결과는 대여 기록 ID를 기준으로 내림차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>HISTORY_ID</th>
+<th>CAR_ID</th>
+<th>START_DATE</th>
+<th>END_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>4</td>
+<td>2022-09-27</td>
+<td>2022-11-27</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>2022-10-03</td>
+<td>2022-11-04</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>2022-09-05</td>
+<td>2022-09-05</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>2022-09-01</td>
+<td>2022-09-30</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>2022-09-16</td>
+<td>2022-10-15</td>
+</tr>
+</tbody>
+      </table>
+<p>2022년 9월의 대여 기록 중 '장기 대여' 에 해당하는 기록은 대여 기록 ID가 1, 4인 기록이고, '단기 대여' 에 해당하는 기록은 대여 기록 ID가 3, 5 인 기록이므로 대여 기록 ID를 기준으로 내림차순 정렬하면 다음과 같이 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>HISTORY_ID</th>
+<th>CAR_ID</th>
+<th>START_DATE</th>
+<th>END_DATE</th>
+<th>RENT_TYPE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>5</td>
+<td>3</td>
+<td>2022-09-16</td>
+<td>2022-10-13</td>
+<td>단기 대여</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>2022-09-01</td>
+<td>2022-09-30</td>
+<td>장기 대여</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>2022-09-05</td>
+<td>2022-09-05</td>
+<td>단기 대여</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>2022-09-27</td>
+<td>2022-10-26</td>
+<td>장기 대여</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>주의사항</h5>
+
+<p><code>START_DATE</code>와 <code>END_DATE</code>의 경우 예시의 데이트 포맷과 동일해야 정답처리 됩니다.</p>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<pre><code class="language-RoomSql">SELECT 
+    c.HISTORY_ID, 
+    c.CAR_ID, 
+    DATE_FORMAT(c.START_DATE, '%Y-%m-%d') AS START_DATE, 
+    DATE_FORMAT(c.END_DATE, '%Y-%m-%d') AS END_DATE,
+    CASE 
+        WHEN DATEDIFF(END_DATE,START_DATE) + 1 &gt;= 30 THEN '장기 대여' 
+        ELSE '단기 대여' END AS RENT_TYPE
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY c
+WHERE START_DATE BETWEEN '2022-09-01' AND '2022-09-30'
+ORDER BY HISTORY_ID DESC;
+</code></pre>
+
+<p>여기서 생각해봐야할 것들을 정리해본다.</p>
+
+<ol>
+  <li>DATE 형식을 YYYY-MM-DD로 변경하여 출력할 것</li>
+  <li>대여시작일 30일을 기준으로 장기대여, 단기대여를 구분하여 RENT_TYPE 칼럼추가</li>
+  <li>9월에 속하는 대여기간만 조회해야한다.</li>
+  <li>최종 출력된 목록에서 HISTORY_ID 기준으로 내림차순 정렬하기</li>
+</ol>
+
+<p>1번은 <code class="language-plaintext highlighter-rouge">DATA_FORMAT</code>을 사용해 변경해주었고</p>
+
+<p>2번은 CASE 문법을 이용해서 일수의 차이를 구한다음 구분이 가능하다.  <br />
+시간의 차이를 구할때는 <code class="language-plaintext highlighter-rouge">DATEDIFF(종료날짜,시작날짜)</code>를 사용해 차이를 구해주었고 <br />
+차이의 +1을 해야 한달이 된다는 사실을 까먹지말자!</p>
+
+<p>3번은 <code class="language-plaintext highlighter-rouge">BETWEEN</code> 문법으로 9월에 해당하는 것들만 찾고</p>
+
+<p>마지막으로 <code class="language-plaintext highlighter-rouge">ORDER BY</code>를 통해서 정렬해주면 문제는 통과!</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 자동차 대여 기록에서 장기/단기 대여 구분하기]]></summary></entry><entry><title type="html">[Programmers] 조건에 맞는 도서 리스트 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/14/sql-book.html" rel="alternate" type="text/html" title="[Programmers] 조건에 맞는 도서 리스트 출력하기 (MySQL)" /><published>2023-03-14T00:00:00+09:00</published><updated>2023-03-14T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/14/sql-book</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/14/sql-book.html"><![CDATA[<h2 id="-문제--조건에-맞는-도서-리스트-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/144853">조건에 맞는 도서 리스트 출력하기</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -306,6 +1143,8 @@ ORDER BY CAR_ID DESC;
   <li>%m% (문자열 중간에 m이 들어간 모든 문자) <br />
 -&gt; ex) aaamaaa, aamaaa, m</li>
 </ul>
+
+<p><br /></p>
 
 <p><strong>_ 와일드카드의 예제</strong></p>
 <ul>
@@ -1416,438 +2255,4 @@ prices 배열의 길이가 늘어날수록 시간 복잡도가 배로 증가하�
 <code class="language-plaintext highlighter-rouge">answer[stack.peek()] = i - stack.peek();</code>를 하여 초값을 계산하고 <br />
 <code class="language-plaintext highlighter-rouge">stack.pop();</code>하여 Stack에서 제거시켜주게된다. 위에 그림에서 설명했던 부분과 동일하다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 주식가격]]></summary></entry><entry><title type="html">[Programmers] 프린터 (Java)</title><link href="http://localhost:4000/algorithm/2023/02/19/algo-printer.html" rel="alternate" type="text/html" title="[Programmers] 프린터 (Java)" /><published>2023-02-19T00:00:00+09:00</published><updated>2023-02-19T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/19/algo-printer</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/19/algo-printer.html"><![CDATA[<h2 id="-문제--프린터">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42587">프린터</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.</p>
-<div class="highlight"><pre class="codehilite"><code>1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.
-2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.
-3. 그렇지 않으면 J를 인쇄합니다.
-</code></pre></div>
-<p>예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있고 중요도가 2 1 3 2 라면 C D A B 순으로 인쇄하게 됩니다.</p>
-
-<p>내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 알고 싶습니다. 위의 예에서 C는 1번째로, A는 3번째로 인쇄됩니다.</p>
-
-<p>현재 대기목록에 있는 문서의 중요도가 순서대로 담긴 배열 priorities와 내가 인쇄를 요청한 문서가 현재 대기목록의 어떤 위치에 있는지를 알려주는 location이 매개변수로 주어질 때, 내가 인쇄를 요청한 문서가 몇 번째로 인쇄되는지 return 하도록 solution 함수를 작성해주세요.</p>
-
-<h4 id="제한사항">제한사항</h4>
-
-<ul>
-<li>현재 대기목록에는 1개 이상 100개 이하의 문서가 있습니다.</li>
-<li>인쇄 작업의 중요도는 1~9로 표현하며 숫자가 클수록 중요하다는 뜻입니다.</li>
-<li>location은 0 이상 (현재 대기목록에 있는 작업 수 - 1) 이하의 값을 가지며 대기목록의 가장 앞에 있으면 0, 두 번째에 있으면 1로 표현합니다.</li>
-</ul>
-
-<h4 id="입출력-예">입출력 예</h4>
-
-<table class="table">
-        <thead><tr>
-<th>priorities</th>
-<th>location</th>
-<th>return</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>[2, 1, 3, 2]</td>
-<td>2</td>
-<td>1</td>
-</tr>
-<tr>
-<td>[1, 1, 9, 1, 1, 1]</td>
-<td>0</td>
-<td>5</td>
-</tr>
-</tbody>
-      </table>
-
-<h4 id="입출력-예-설명">입출력 예 설명</h4>
-
-<p>예제 #1</p>
-<p>문제에 나온 예와 같습니다.</p>
-
-<p>예제 #2</p>
-<p>6개의 문서(A, B, C, D, E, F)가 인쇄 대기목록에 있고 중요도가 1 1 9 1 1 1 이므로 C D E F A B 순으로 인쇄합니다. </p>
-
-<p><a href="http://www.csc.kth.se/contest/nwerc/2006/problems/nwerc06.pdf" target="_blank" rel="noopener">출처</a></p>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
-
-<p>문제내용이 얼핏 어려울지 몰라도, 천천히 읽어보면 답이보인다. <br />
-문제 부터 파악을 해보자</p>
-
-<p>이 문제의 핵심은 중요도가 높은 문서는 프린트를 하고<br />
-인쇄 진행을하는 순서의 문서가 중요도가 대기목록보다 낮으면 <br />
-대기목록의 마지막으로 보내지는게 핵심이다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/219957856-f278355c-33bd-49b1-b466-0888d9d3265e.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위의 그림대로 우선 프로그래밍을 진행하였다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">대기목록 -&gt; 인쇄진행 -&gt; 확인후 대기목록 or 프린트완료 List로 이동</code><br />
-이렇게를 큰틀로 잡고 진행하였고 첫번째 예제인 <code class="language-plaintext highlighter-rouge">[2, 1, 3, 2]</code>를 한번 봐보자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/219957560-50050212-afe0-4621-95c9-cc4cdda5d21c.gif" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위의 GIF처럼 중요도가 높으면 인쇄 List로 이동하고<br />
-중요도가 낮으면 대기목록 맨뒤로 이동을 한다.</p>
-
-<p>최종적으로 반환해야하는 값은 Location에 따라 결정된다. <br />
-Locaiton과 같은 경우는 처음에 목록이 만들어졌을때의 목록위치다. <br />
-제한사항에서 보면 0부터 시작한다는 것을 알 수 있고</p>
-
-<p>예를들어 Location = 2 라고 가정할 경우 <br />
-문서이름 A,B,C,D라고 정해졌으면 0,1,2,3의 위치로<br />
-C문서를 가르키게된다. 즉, C문서가 몇번째로 인쇄가 되어지냐?  <br />
-라는게 이번 문제풀이의 답이 되어지겠다.  <br />
-위에 그림에서 보듯이 C는 첫번째로 반환되어지기 때문에 return = 1이 된다.</p>
-
-<p><br /></p>
-
-<p>좀 더 쉽게 두번째 예제를 보자
-<code class="language-plaintext highlighter-rouge">[1, 1, 9, 1, 1, 1]</code></p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/219958614-ac20ff5a-b105-431b-85fb-0f03a16cc3f4.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>처음에 문서가 이렇게 있을 것이다. Location이 0이라는 뜻은 <br />
-A라는 문서를 가르키는 것이고, 최종적으로 인쇄가 완료된 후면</p>
-
-<p><br /></p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/219958616-d79f0380-bd2d-4fb2-9dbd-49692dfe7729.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위에 처럼 인쇄가 되어질 것이다. <br />
-그러면 최종적으로 A라는 문서가 어느 위치에 있는지?<br />
-1부터 시작되어 5번째로 인쇄가 되어지기 때문에<br />
-5라는 값을 반환해주면 된다.</p>
-
-<p><br /></p>
-
-<h3 id="-코드">👨🏻‍💻 코드</h3>
-
-<p>여기까지 문제 이해와 설명부분이였고 코드로 살펴보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
-
-<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">priorities</span><span class="o">,</span> <span class="kt">int</span> <span class="n">location</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 문제의 핵심.</span>
-        <span class="c1">// 높은 숫자가 중요도가 높은 것이다.</span>
-        <span class="c1">// 대기문서에서 꺼낸 문서가 대기열에 있는 문서보다 중요도가 낮으면 맨뒤로간다.</span>
-        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">important</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 우선순위를 담는 Queue</span>
-        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 문서를 위치를 담는 Queue</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span> <span class="c1">// 프린트를 완료한 List</span>
-        <span class="kt">int</span> <span class="n">maxDoc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="c1">// 우선순위, 문서를 Queue에 담는다.</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">priorities</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">priorities</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-            <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Queue의 담긴게 없으면 반복문을 탈출</span>
-            <span class="nc">Integer</span> <span class="n">print</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 중요도를 하나씩 빼온다</span>
-            <span class="nc">Integer</span> <span class="n">target</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span> <span class="c1">// 대기열의 문서위치를 하나씩 빼온다</span>
-            <span class="k">if</span><span class="o">(</span><span class="n">important</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">maxDoc</span> <span class="o">=</span> <span class="n">important</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">i</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span> <span class="c1">// 현재 우선순위가 가장 높은 숫자</span>
-            <span class="o">}</span>
-            <span class="k">if</span><span class="o">(</span><span class="n">print</span> <span class="o">&gt;=</span> <span class="n">maxDoc</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 높을경우 프린트 완료 List에 문서위치를 담는다.</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">important</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">print</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 우선순위를 마지막에 넣는다.</span>
-                <span class="n">document</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">target</span><span class="o">);</span> <span class="c1">// 우선순위가 아닐경우 문서위치를 마지막에 넣는다.</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="na">indexOf</span><span class="o">(</span><span class="n">location</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>더 깔끔한 풀이가 분명 가능할 것 같다. <br />
-우선 내가 풀이한 방법을 설명해보자면</p>
-
-<p>Queue를 2개를 만들었다.</p>
-<ol>
-  <li>우선순위를 담는 Queue</li>
-  <li>문서의 위치를 담는 Queue</li>
-</ol>
-
-<p>그리고 최종적을 인쇄가 완료되면 담는 List를 만들어주었다.<br />
-문서의 위치 Queue는 0부터 채워넣어주었다. <br />
-Queue를 이용에 앞에서부터 poll();하여 해당 값이<br />
-현재 가지고 있는 Queue에서 가장크거나 큰값이랑 같은지 비교를하여<br />
-통과를하면 인쇄완료 List에 문서의 위치를 저장하는 방식이다.</p>
-
-<p>최종적으로 문서의 위치가 저장되면 location 값과 같은<br />
-index를 가져와 +1을 하여 반환해주었다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 프린터]]></summary></entry><entry><title type="html">[Spring] 단위 테스트 JPA metamodel must not be empty!</title><link href="http://localhost:4000/spring/2023/02/17/spring-test.html" rel="alternate" type="text/html" title="[Spring] 단위 테스트 JPA metamodel must not be empty!" /><published>2023-02-17T00:00:00+09:00</published><updated>2023-02-17T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/02/17/spring-test</id><content type="html" xml:base="http://localhost:4000/spring/2023/02/17/spring-test.html"><![CDATA[<h3 id="-문제발생-및-원인">✅ 문제발생 및 원인</h3>
-
-<p>Controller 단위 테스트를 진행하려고 <code class="language-plaintext highlighter-rouge">@WebMvcTest</code><br />
-어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: JPA metamodel must not be empty!
-</code></pre></div></div>
-
-<p>원인을 파악중 Entity들의 생성,수정 LocalDateTime을 자동으로<br />
-관리해주는 <code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>어노테이션을 <code class="language-plaintext highlighter-rouge">@SpringBootApplication</code>클래스에<br />
-등록해 놓은 거이 위의 에러의 요인이였다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableJpaAuditing</span>
-<span class="nd">@SpringBootApplication</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JaritalkApplication</span> <span class="o">{</span>
-
-	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">JaritalkApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code>은 JPA관련 Bean들을 필요로하는데 <br />
-<code class="language-plaintext highlighter-rouge">@WebMvcTest</code>같은 단위테스트는 JPA관련 Bean들을 로드하지 않기 때문이다.</p>
-
-<p><br /></p>
-
-<h3 id="-해결-방법">📌 해결 방법</h3>
-
-<p><strong>1. Configuration 분리</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
-<span class="nd">@EnableJpaAuditing</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JpaAuditingConfiguration</span> <span class="o">{</span>  
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">@EnableJpaAuditing</code> 어노테이션을 새로운 클래스를 만들어<br />
-빈으로 등록해주면 된다.</p>
-
-<p><br /></p>
-
-<p><strong>2. MockBean 추가</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@MockBean</span><span class="o">(</span><span class="nc">JpaMetamodelMappingContext</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-<span class="nd">@WebMvcTest</span><span class="o">(</span><span class="n">controllers</span> <span class="o">=</span> <span class="nc">CommunityController</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-<span class="kd">class</span> <span class="nc">CommunityControllerTest</span> <span class="o">{</span>
-    <span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>테스트하려고 하는 클래스에 <code class="language-plaintext highlighter-rouge">JpaMetamodelMappingContext</code> <br />
-<code class="language-plaintext highlighter-rouge">@MockBean</code>을 추가해주면된다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="JUnit" /><summary type="html"><![CDATA[✅ 문제발생 및 원인]]></summary></entry><entry><title type="html">[Programmers] 폰켓몬 (Java)</title><link href="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html" rel="alternate" type="text/html" title="[Programmers] 폰켓몬 (Java)" /><published>2023-02-11T00:00:00+09:00</published><updated>2023-02-11T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2023/02/11/algo-ponketmon</id><content type="html" xml:base="http://localhost:4000/algorithm/2023/02/11/algo-ponketmon.html"><![CDATA[<h2 id="-문제--폰켓몬">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/1845">폰켓몬</a></h2>
-
-<p>2023-02-11 기준 풀이</p>
-
-<h2 id="-문제-설명">📖 문제 설명</h2>
-
-<p>당신은 폰켓몬을 잡기 위한 오랜 여행 끝에, 홍 박사님의 연구실에 도착했습니다. 홍 박사님은 당신에게 자신의 연구실에 있는 총 N 마리의 폰켓몬 중에서 N/2마리를 가져가도 좋다고 했습니다.<br />
-홍 박사님 연구실의 폰켓몬은 종류에 따라 번호를 붙여 구분합니다. 따라서 같은 종류의 폰켓몬은 같은 번호를 가지고 있습니다. 예를 들어 연구실에 총 4마리의 폰켓몬이 있고, 각 폰켓몬의 종류 번호가 [3번, 1번, 2번, 3번]이라면 이는 3번 폰켓몬 두 마리, 1번 폰켓몬 한 마리, 2번 폰켓몬 한 마리가 있음을 나타냅니다. 이때, 4마리의 폰켓몬 중 2마리를 고르는 방법은 다음과 같이 6가지가 있습니다.</p>
-
-<ol>
-<li>첫 번째(3번), 두 번째(1번) 폰켓몬을 선택</li>
-<li>첫 번째(3번), 세 번째(2번) 폰켓몬을 선택</li>
-<li>첫 번째(3번), 네 번째(3번) 폰켓몬을 선택</li>
-<li>두 번째(1번), 세 번째(2번) 폰켓몬을 선택</li>
-<li>두 번째(1번), 네 번째(3번) 폰켓몬을 선택</li>
-<li>세 번째(2번), 네 번째(3번) 폰켓몬을 선택</li>
-</ol>
-
-<p>이때, 첫 번째(3번) 폰켓몬과 네 번째(3번) 폰켓몬을 선택하는 방법은 한 종류(3번 폰켓몬 두 마리)의 폰켓몬만 가질 수 있지만, 다른 방법들은 모두 두 종류의 폰켓몬을 가질 수 있습니다. 따라서 위 예시에서 가질 수 있는 폰켓몬 종류 수의 최댓값은 2가 됩니다.<br />
-당신은 최대한 다양한 종류의 폰켓몬을 가지길 원하기 때문에, 최대한 많은 종류의 폰켓몬을 포함해서 N/2마리를 선택하려 합니다. N마리 폰켓몬의 종류 번호가 담긴 배열 nums가 매개변수로 주어질 때, N/2마리의 폰켓몬을 선택하는 방법 중, 가장 많은 종류의 폰켓몬을 선택하는 방법을 찾아, 그때의 폰켓몬 종류 번호의 개수를 return 하도록 solution 함수를 완성해주세요.</p>
-
-<h4 id="제한사항">제한사항</h4>
-
-<ul>
-<li>nums는 폰켓몬의 종류 번호가 담긴 1차원 배열입니다.</li>
-<li>nums의 길이(N)는 1 이상 10,000 이하의 자연수이며, 항상 짝수로 주어집니다.</li>
-<li>폰켓몬의 종류 번호는 1 이상 200,000 이하의 자연수로 나타냅니다.</li>
-<li>가장 많은 종류의 폰켓몬을 선택하는 방법이 여러 가지인 경우에도, 선택할 수 있는 폰켓몬 종류 개수의 최댓값 하나만 return 하면 됩니다.</li>
-</ul>
-
-<hr />
-
-<h4 id="입출력-예">입출력 예</h4>
-
-<table class="table">
-        <thead><tr>
-<th>nums</th>
-<th>result</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>[3,1,2,3]</td>
-<td>2</td>
-</tr>
-<tr>
-<td>[3,3,3,2,2,4]</td>
-<td>3</td>
-</tr>
-<tr>
-<td>[3,3,3,2,2,2]</td>
-<td>2</td>
-</tr>
-</tbody>
-      </table>
-
-<h4 id="입출력-예-설명">입출력 예 설명</h4>
-
-<p>입출력 예 #1<br />
-문제의 예시와 같습니다.</p>
-
-<p>입출력 예 #2<br />
-6마리의 폰켓몬이 있으므로, 3마리의 폰켓몬을 골라야 합니다.<br />
-가장 많은 종류의 폰켓몬을 고르기 위해서는 3번 폰켓몬 한 마리, 2번 폰켓몬 한 마리, 4번 폰켓몬 한 마리를 고르면 되며, 따라서 3을 return 합니다.</p>
-
-<p>입출력 예 #3<br />
-6마리의 폰켓몬이 있으므로, 3마리의 폰켓몬을 골라야 합니다.<br />
-가장 많은 종류의 폰켓몬을 고르기 위해서는 3번 폰켓몬 한 마리와 2번 폰켓몬 두 마리를 고르거나, 혹은 3번 폰켓몬 두 마리와 2번 폰켓몬 한 마리를 고르면 됩니다. 따라서 최대 고를 수 있는 폰켓몬 종류의 수는 2입니다.</p>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
-
-<p>문제에서 요구하는 사항을 살펴보자</p>
-
-<ul>
-  <li>연구실에서 N/2마리의 폰켓몬을 가져갈 수 있다.</li>
-  <li>가져갈 수 있는 폰켓몬 종류 수의 최댓값을 구해야한다.</li>
-</ul>
-
-<p>이 두가지가 이번 문제에 가장 핵심 키워드라고 볼 수 있다.  <br />
-폰켓몬이 주어지는 배열 nums은 항상 짝수로 주어지며  <br />
-N은 주어지는 폰켓몬의 총 수량이고 만약</p>
-
-<p><strong>연구소에 4마리가 있을 경우 : 2마리를 가져갈 수 있음</strong><br />
-<strong>연구소에 6마리가 있을 경우 : 3마리를 가져갈 수 있음</strong>  <br />
-<strong>연구소에 8마리가 있을 경우 : 4마리를 가져갈 수 있음</strong><br />
-.<br />
-.<br />
-.</p>
-
-<p>이렇게 가정을해볼 수 있다.</p>
-
-<p>4마리의 포켓몬, 3가지 종류의 포켓몬이 존재한다고 (피카츄,파이리,꼬북이)<br />
-숫자가아닌 포켓몬이 있다고 생각하고 가정해보자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/218260250-f2879d9d-4a6a-4b55-971a-33ff2dafd295.png" alt="image" class="align-left" style="max-width: 75%" /></p>
-
-<p>연구소에는 4마리가 존재한다. 그럼 나는 2마리를 가져갈 수 있고  <br />
-총 가져갈 수 있는 경우의 수는 6가지가 나오게 된다.<br />
-무조건 2마리밖에 가져가지 못하기 때문에<br />
-<span style="color:#0066CC"> <strong>포켓몬의 종류가 아무리 많든 최대로 2종류의 포켓몬만을 가져갈 수 있다.</strong> </span></p>
-
-<p><br /></p>
-
-<p>6마리일 경우에도 마찬가지다. 기본적으로 N/3이기 때문에 3마리만 가져갈 수 있다.<br />
-종류가 다양하다고 가정하면 3마리만 가져갈 수 있기 때문에 3종류가 최댓값일 것이고, <br />
-종류가 다양하지 않다면 중복된 포켓몬을 제거해주면 최대로 가져갈 수 있는 종류의 값이 나올 것이다.</p>
-
-<p><br /></p>
-
-<h3 id="-코드">👨🏻‍💻 코드</h3>
-
-<p>코드로 살펴보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
-
-<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 골라야하는 폰켓몬 수, 즉 종류가 서로다를 경우 최대 종류의 개수</span>
-        <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">;</span>
-
-        <span class="c1">// 같은 종류의 폰켓몬은 제거한 후 hash로 저장</span>
-        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">hashSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span>
-        <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">nums</span><span class="o">).</span><span class="na">forEach</span><span class="o">(</span><span class="n">num</span> <span class="o">-&gt;</span> <span class="n">hashSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">));</span>
-
-        <span class="c1">// 중복이 제거된 폰켓몬 종류가 최대 종류의 개수보다 많을 경우 -&gt; 최대종류의 개수 리턴</span>
-        <span class="c1">// 중복이 제거된 폰켓몬 종류가 최대 종류의 개수보다 적을 경우 -&gt; 적은종류의 개수 리턴</span>
-        <span class="k">return</span> <span class="o">(</span><span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="o">?</span> <span class="n">max</span> <span class="o">:</span> <span class="n">hashSet</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">max</code>값은 종류의 최대값을 표현했다. <br />
-위에서 설명했듯이 내가 가져갈 수 잇는 폰켓몬의 최대는 <br />
-<code class="language-plaintext highlighter-rouge">nums</code>로 주어지는 폰켓몬 수량의 절반이다.</p>
-
-<p>중복을 제거하기위해 <code class="language-plaintext highlighter-rouge">HashSet</code>을 이용하였다. <br />
-사실 <code class="language-plaintext highlighter-rouge">stream</code>의 <code class="language-plaintext highlighter-rouge">distinct</code>를 이용해 중복을 제거해줄 수도 있지만<br />
-문제풀이 방향이 해시이기 때문에 위와 같은 방법으로 풀이를 했다.</p>
-
-<p>마지막으로 <code class="language-plaintext highlighter-rouge">hashSet</code>의 중복이 제거된 폰켓몬의 수량이 <br />
-최대 수량보다 크다면 최대수량을 리턴하고 <br />
-작다면 중복이 제거된 <code class="language-plaintext highlighter-rouge">hashSet</code>의 수량을 리턴하여 반환하도록 하였다.</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 폰켓몬]]></summary></entry><entry><title type="html">MySQL replace 함수사용하여 일괄 변경하기</title><link href="http://localhost:4000/db/2023/02/09/db-mysqlreplace.html" rel="alternate" type="text/html" title="MySQL replace 함수사용하여 일괄 변경하기" /><published>2023-02-09T00:00:00+09:00</published><updated>2023-02-09T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/02/09/db-mysqlreplace</id><content type="html" xml:base="http://localhost:4000/db/2023/02/09/db-mysqlreplace.html"><![CDATA[<p>예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서  <br />
-MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/217779406-6b06d791-ae7a-4f77-b89d-e68c3c63e8af.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서<br />
-사진주소를 가져와서 DB에 저장하기때문에 남아있고<br />
-일반으로 회원가입한 유저는 위에 12가지 기본이미지를 랜덤으로 배정받게되는데<br />
-보는거처럼 사진 원본파일이 구글드라이브에서 날라가서 표시가안되는 모습이다.</p>
-
-<p>처음했던 프로젝트이기도하고 사진관리하는 방법이 너무 miss인 것 같다. <br />
-우선 데이터베이스에 회원으로 가입되어있는 멤버가 100명정도 가입되어있는데 <br />
-해당 데이터를 조작하기위해서 Replace라는 함수를 이용해 일괄 변경하기로 정했다.</p>
-
-<p><br /></p>
-
-<h3 id="-replace-함수-사용">📌 Replace 함수 사용</h3>
-
-<p>WorkBench 열어서 강제로 SQL을 만들어 변경할려고한다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/217779419-2cc32d98-7a95-4ebd-ad58-da1cadcf0395.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>member라는 테이블에 image 컬럼의 데이터를 바꾸는 것이다. <br />
-(❗️ 현재 이미지 주소 종류를 12가지로 한정지어놔서 가능한 작업이다.<br />
-만약 종류가 각기달랐다면 다른방법을 알아봐야했을 것이다.)</p>
-
-<p><br /></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span> FROM member<span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://기존이미지주소'</span>,<span class="s1">'https://변경이미지주소'</span><span class="o">)</span><span class="p">;</span>
-</code></pre></div></div>
-<p>Table : member<br />
-Column : image</p>
-
-<p>변경하고자 하는 데이터는 image의 Text값을 변경하는 것이다.<br />
-<code class="language-plaintext highlighter-rouge">REPLACE('문자열','기존문자열','변경문자열')</code> 형식으로 쿼리를 날려주면 된다.</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span> FROM member<span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOtBngM6igLV_5Gi86DYVCKWPOuuBgzUxZiiu2DZVYZdi1T_CpI2-xBeHbODJMwMymHxzTtCtLwlbTsvuCZj1dbg5fWkw=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765437-5eb0766a-139b-4d74-8ea7-f13fb511fb6b.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOg7R_zu1d5ondnz2mF9Mfs5POsyaYwY0bpBfzQmTCA5iNpVhU3rycNjteK9RZKX0_dsQLXn1AGkA_MtfZJKeSJ03vOJg=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765442-ddf39075-30c9-45a1-9d55-806b35c9c991.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPE5xpI0-lxEqtHYRm-avwUL1X2y8HUz_CtZoT2afckhm77Y_hZfo5N7xB6VP2bDxsiIT4DcFRwe8wSc5-y9BFHYfhe=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765447-d8b3c96e-42d2-4b4d-9660-df536e82a48e.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPEZNW9ORtC6bMAw54VDZFQ3IaDPrGVWFKi18kERIrAxuE8N8MmbZhtol2Ujxvyrz21Ows7-0_4P8cz_sJlXYPvVu4z=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765450-c1e29534-8974-45c3-ba3d-0d98dc3ac4c7.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOUcWn-HIk4JoOiMBxVqMc458drW7579JOqVcfR3Nq7eHs2WZV1URKdSy7iAEnrteP-19yw4B7xAAphkiPKu4fAez8j3g=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765456-26f2ac03-91a6-4b4d-a14c-ab6275d49022.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMY6Ju7pO_FZp5hyfYdjKljdMAFlS5nCtbnvfJfXXqG52kH_WvYSqNsi7ClGgYVgmK8Gav_XdM_tCc5liRtQD8bZq4Ryg=w1920-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765459-d95c0338-5ced-4689-9afb-61d917e0c4ad.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gP3vIemuwNCa2gLq8QFxJ0mvEUyH90NCzzCdEh6zkRFmQvF6_MHHo8N46VTTP58ovW3ikNSXN281NhTcbDaBfESUl6eUw=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765462-8b65713a-f436-405e-812d-c7b906bcb8e8.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gMzNhh9XTiXBHg_K4sHjKxhNVZTpihvtXFyGa_pR2L3j2ymHy6w9uDu5Pqmjo_-PPl40kIJENWVqGGfVE7-o1vMxMS0Zg=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765465-83f95069-d4be-4418-a7ee-f569b235f665.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOnvAfzDjdq54wfaQ3aQnYMNbfCsFwZVvyBIxEzKYw7LUtT7SnlxkIyZnkXyxrN2y8N5CuXVCLdNdloEMYYl7PPTBotWA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765469-2a34827e-f18c-4bca-aa49-ab3c698c46ce.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gOeqDCgTYyD4_NlylK0EE-y1Fn0lj364mopuRJbuN4JvWP2eQGBJt6Ygv48nrlnHiuiq2Dkgz3ep7XILzUgT_lVAN1VpA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765473-c7044900-f16b-407c-a27e-939c7c8a2e17.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gPKgEG4sHNVV90PQrE5jn37skBOV5Qp7M3czg2sShhPYx46ybBb0KhQ37mcxGl6H6E_1xVdAhna7aAJGi8qp1oYGCWMMw=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765476-31afe366-b1d2-4ee8-92f4-7d254a7616d2.png'</span><span class="o">)</span><span class="p">;</span>
-UPDATE member SET member.image <span class="o">=</span> REPLACE<span class="o">(</span>image, <span class="s1">'https://lh3.googleusercontent.com/u/0/drive-viewer/AFDK6gNXn3Qy3cjHid6lgXk6cT9J78rm98pYCgumlTWAHENmA_Q3ujH3MxEbMBYp_lHBLM8rpIU51BtZnzaIKi3CiEsrqcDKQA=w1000-h921'</span>,<span class="s1">'https://user-images.githubusercontent.com/95069395/217765478-e9cbd679-d241-4a42-b285-f334b0b22241.png'</span><span class="o">)</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>쿼리를 만들고 테이블에 정상적으로 변경되는지 확인까지 완료!</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/217785372-71da8902-27fb-42ed-97ee-d171e916a983.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>다시 사이트가 제대로된 이미지로 표현되는 것을 볼 수 있다. <br />
-쿼리 실행시 1175 에러가 발생한다면 -&gt; <a href="https://jwgye.tistory.com/31">Update시 에러코드 1175 처리</a>블로그를 참고해보자</p>
-
-<p><br /></p>
-
-<p>이렇게 테이블의 컬럼자체 내용을 바꿔끼워야할 경우에<br />
-REPLACE를 사용하는 것보단 Table Data export를 사용해 csv파일에서 <br />
-일괄변경하여 수정한다음 import해서 데이터를 갈아끼워주는것이 훨씬더 효율적인 것 같다.</p>
-
-<p><br />
-<br />
-<br /></p>
-
-<p>✨ 참고 블로그
-<a href="https://leenow.tistory.com/13">Mysql Replace 함수 사용법 레퍼런스</a></p>
-
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><category term="MySQL" /><summary type="html"><![CDATA[예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서 MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…]]></summary></entry></feed>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Algorithm" /><category term="Algorithm" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 주식가격]]></summary></entry></feed>

@@ -378,3 +378,9 @@ X
 _config.yml,c/d/cd089ae45ce870c45e434019e8f1ed4f066cd425
 Y
 )_posts/it/cs/2023-03-08-it-etc-network.md,8/5/85a942e0693b5181f69734675c99a5f3709d3c70
+\
+,_posts/codingtest/sql/2023-03-14-sql-book.md,a/c/ac9f9f2e5b2d982f8e628970b0e8c63a74033de8
+_
+/_posts/codingtest/sql/2023-03-14-sql-carlist.md,3/8/3829c2931b2082544a644205ec604945d4a033e2
+_
+/_posts/codingtest/sql/2023-03-15-sql-carrent.md,1/2/12d62185958a0879a117ece1e84077172e4a41f0

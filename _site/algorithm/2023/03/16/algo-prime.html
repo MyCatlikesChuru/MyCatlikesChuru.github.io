@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[Programmers] 소수 찾기 (Java) | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="[Programmers] 소수 찾기 (Java)">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="📌 문제 : 소수 찾기">
+<meta property="og:description" content="📌 문제 : 소수 찾기">
+<link rel="canonical" href="http://localhost:4000/algorithm/2023/03/16/algo-prime.html">
+<meta property="og:url" content="http://localhost:4000/algorithm/2023/03/16/algo-prime.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-03-16T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="[Programmers] 소수 찾기 (Java)">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-03-16T00:00:00+09:00","datePublished":"2023-03-16T00:00:00+09:00","description":"📌 문제 : 소수 찾기","headline":"[Programmers] 소수 찾기 (Java)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/algorithm/2023/03/16/algo-prime.html"},"url":"http://localhost:4000/algorithm/2023/03/16/algo-prime.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">[Programmers] 소수 찾기 (Java)</h1>
+  <h2 class="post-subtitle">고득점 Kit (완전탐색 - Level 2)</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-03-16T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Mar 16, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h2 id="-문제--소수-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42839">소수 찾기</a>
+</h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.</p>
+
+<p>각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.</p>
+
+<h4 id="제한사항">제한사항</h4>
+
+<ul>
+<li>numbers는 길이 1 이상 7 이하인 문자열입니다.</li>
+<li>numbers는 0~9까지 숫자만으로 이루어져 있습니다.</li>
+<li>"013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.</li>
+</ul>
+
+<h4 id="입출력-예">입출력 예</h4>
+
+<table class="table">
+        <thead>
+<tr>
+<th>numbers</th>
+<th>return</th>
+</tr>
+</thead>
+        <tbody>
+<tr>
+<td>“17”</td>
+<td>3</td>
+</tr>
+<tr>
+<td>“011”</td>
+<td>2</td>
+</tr>
+</tbody>
+      </table>
+
+<h4 id="입출력-예-설명">입출력 예 설명</h4>
+
+<p>예제 #1<br>
+[1, 7]으로는 소수 [7, 17, 71]를 만들 수 있습니다.</p>
+
+<p>예제 #2<br>
+[0, 1, 1]으로는 소수 [11, 101]를 만들 수 있습니다.</p>
+
+<ul>
+<li>11과 011은 같은 숫자로 취급합니다.</li>
+</ul>
+
+<hr>
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<h3 id="️-풀이-방법">☀️ 풀이 방법</h3>
+
+<p>이번문제는 String으로 주어지는 문자열을 주어지는데 <br>
+문자열 하나씩 만들 수 있는 모든 조합을 소수를 찾아 소수의 <br>
+개수를 반환하는 문제이다.</p>
+
+<p>예제로 <code class="language-plaintext highlighter-rouge">17</code>이라는 값이 주어졌을때<br>
+<code class="language-plaintext highlighter-rouge">1</code>,<code class="language-plaintext highlighter-rouge">17</code>,<code class="language-plaintext highlighter-rouge">7</code>,<code class="language-plaintext highlighter-rouge">71</code>과 같이 총 4개의 조합을 구할 수 있고 <br>
+이 중에 <code class="language-plaintext highlighter-rouge">17</code>,<code class="language-plaintext highlighter-rouge">7</code>,<code class="language-plaintext highlighter-rouge">71</code>이 소수기 때문에 정답은 소수의 개수인 <code class="language-plaintext highlighter-rouge">3</code>을 리턴하면 된다.</p>
+
+<p>여기서 만약 조합을 구하는 길이가 정해져 있다면 <br>
+다중 for문을 이용해 풀 수 있지만 지금과 같은 경우에는 <br>
+numbers라는 문자열이 1~7개의 길이를 가진 예제가 주어지기 때문에 <br>
+재귀를 통한 완전탐색으로 풀어야겠다라는 결론에 도달했다.</p>
+
+<p><br></p>
+
+<p><code class="language-plaintext highlighter-rouge">012</code>라는 문자열이 주어졌다고 가정하고 아래의 순서를 살펴보자  <br>
+해당 예제의 조합에서는 <code class="language-plaintext highlighter-rouge">2</code>라는 값만 소수이기 때문에 리턴값은 <code class="language-plaintext highlighter-rouge">1</code>이어야한다.<br>
+<em>(편의상 true=⭕️ / false=❌ 로 표현하겠습니다.)</em></p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/225528468-38bd539f-096f-411f-bc3f-c7e3edb77f9a.gif" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p>우선 주어진 문자열을 <code class="language-plaintext highlighter-rouge">int[] arr</code>라는 배열로 쪼개었고 <br>
+재귀를 통해 탐색한 곳을 관리하는 <code class="language-plaintext highlighter-rouge">boolean[] visit</code>라는 배열을 만들어 <br>
+탐색할 때 해당 배열의 조건을 이용해 조합을 구하였다.  <br>
+재귀를 호출하면서 <code class="language-plaintext highlighter-rouge">Set&lt;Integer&gt; answer</code>에 소수인 값들은 담도록하였고 <br>
+중복된 값이 들어갈 수 있기 때문에 Collection의 Set을 이용하였다.</p>
+
+<p>위의 그림에서 알 수 있듯이 <br>
+arr 배열을 순회할때 재귀함수를 호출하고 호출된 재귀함수에서 <br>
+또다시 순회하면서 재귀함수를 호출하는 반복적인 모습을 볼 수 있다.</p>
+
+<p>문제 풀이를 위한 5가지를 살펴보자</p>
+<ol>
+  <li>arr에서 순회할때 재귀함수가 호출되면 true로 체크한다.</li>
+  <li>방문하지 않은 인덱스만 재귀한다.</li>
+  <li>재귀할때 현재 본인 인덱스 값을 String 타입 number 변수에 더해 매개변수로 넘겨준다.</li>
+  <li>순회한 인덱스는 false로 변경한다.</li>
+  <li>재귀 탈출조건은 number 길이와 arr 배열길이가 같을때 입니다.</li>
+</ol>
+
+<p>해당 조건을 토대로 코드를 살펴보면서 이해해보자.</p>
+
+<p><br></p>
+
+<h3 id="-코드">👨🏻‍💻 코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">solution</span><span class="o">(</span><span class="nc">String</span> <span class="n">numbers</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// 만들수 있는 조합 중 소수의 갯수를 구하는 문제</span>
+        <span class="c1">// String 길이가 달라지기 때문에 재귀로 풀어야하는 문제</span>
+        <span class="nc">String</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">""</span><span class="o">);</span>
+        <span class="kt">boolean</span><span class="o">[]</span> <span class="n">visit</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">&lt;&gt;();</span> <span class="c1">// 소수인 값만 담게되는 HashSet</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">recursion</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">answer</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">visit</span><span class="o">);</span>
+            <span class="n">visit</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">answer</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">recursion</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="nc">String</span> <span class="n">number</span><span class="o">,</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">answer</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">boolean</span><span class="o">[]</span> <span class="n">visit</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">visit</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// 해당 index 재귀 호출시 방문 체크\</span>
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">number</span><span class="o">);</span>  <span class="c1">// String -&gt; int</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">isPrime</span><span class="o">(</span><span class="n">num</span><span class="o">))</span> <span class="n">answer</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">num</span><span class="o">);</span> <span class="c1">// 소수인 숫자는 Set에 추가 (중복인 것은 제거)</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">number</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">==</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// 탈출조건 , number의 문자열길이와 배열길이가 같아질때</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">visit</span><span class="o">[</span><span class="n">i</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">recursion</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">number</span> <span class="o">+</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">answer</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">visit</span><span class="o">);</span> <span class="c1">// number값을 이어붙여서 호출</span>
+                <span class="n">visit</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 소수일경우 true, 아닐경우 false</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPrime</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">num</span><span class="o">);</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>우선 재귀함수인 <code class="language-plaintext highlighter-rouge">recursion</code> 메서드를 하나 만들었고 <br>
+소수를 판단해 소수면 true를 반환하는 메서드인 <code class="language-plaintext highlighter-rouge">isPrime</code>을 만들었다.</p>
+
+<p>처음부터 보면 arr배열을 순회하는 for문이 존재하고 <br>
+재귀함수를 호출한다. 0번 인덱스부터 조합을 구하기위해서 재귀함수가 호출되고 <br>
+재귀함수를 호출한 후에 방문여부를 표시하는 <code class="language-plaintext highlighter-rouge">visit[index]</code>의 값을 true 설정한다. <br>
+그리고 소수인지판단해 Set에 값을 저장하고 아니면 if문을 통과하게 되어진다.</p>
+
+<p>재귀함수 탈출조건을 설정해주고, 본격적으로 조합을 구하기 위한 재귀함수안에 <br>
+for문을 한번 더 실행 시킨다. 방문하지않은 곳만 다시 재귀함수를 호출하기 위해서 <br>
+if문으로 <code class="language-plaintext highlighter-rouge">!visit[i]</code>라는 조건을 걸어 재귀함수를 호출하게된다.</p>
+
+<p>이렇게 0번 인덱스에 false로 되어있는 곳을 방문하게되고 <br>
+재귀함수가 호출될때 <code class="language-plaintext highlighter-rouge">number + arr[i]</code>를 하여 현재 탐색중인 문자열을 <br>
+계속 이어붙이면서 현재 어떤 값을 찾고 있는지 알 수 있고 해당조건을 통해서 <br>
+재귀함수를 탈출하는 조건으로도 사용할 수 있다.</p>
+
+<p>이렇게 쭉 재귀함수가 탐색을 마치고 탈출조건에 걸리게되면 <br>
+<code class="language-plaintext highlighter-rouge">visit[i] = false;</code>를 통해 방문했던 곳을 다시 방문하지 않았다고 변경하고 <br>
+탐색중이던 for문을 순회할떄는 다시 원래상태의 visit배열이 되어진다. <br>
+이러한 원리로 완전탐색을 통해 조합을 구한뒤 풀이에 맞는 값을 반환해주면 문제해결!</p>
+
+<p>재귀라는 개념이 아직 어색하고 잘 보이지 않기에 연습이 많이 필요해보인다.</p>
+
+<p><br></p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/sql/2023/03/15/sql-carrent.html" title="[Programmers] 자동차 대여 기록에서 장기/단기 대여 구분하기 (MySQL)">[Programmers] 자동차 대여 기록에서 장기/단기 대여...</a><a class="next" href="/sql/2023/03/16/sql-icecream.html" title="[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)">[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/spring/2022/08/03/spring-json.html" title="[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)">[Spring] @JsonIgnore 사용하기</a></li>
+<li><a class="post-link" href="/til/2022/09/27/til.html" title="[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)">[TIL] Java Algorithm 1</a></li>
+<li><a class="post-link" href="/til/2022/11/03/til.html" title="[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)">[TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)</a></li>
+<li><a class="post-link" href="/til/2022/10/18/til.html" title="[Programmers] 과일로 만든 아이스크림 고르기 (MySQL)">[TIL] Spring AOP 2</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
