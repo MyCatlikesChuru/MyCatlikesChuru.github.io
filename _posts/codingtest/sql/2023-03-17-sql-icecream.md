@@ -164,12 +164,12 @@ published: true
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
 
----  
+---
+
+## 🗝 문제 풀이
 
 문제는 현재 `FIRST_HALF` 테이블에서 총주문량이 큰값을 내림차순으로 정렬하고   
 총주문량이 같다면 출하번호 기준으로 오름차순으로 정렬하는 문제이다.
-
-## 🗝 문제 풀이
 
 ```RoomSql
 SELECT F.FLAVOR FROM FIRST_HALF F

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Programmers] 흉부외과 또는 일반외과 의사 목록 출력하기 (MySQL)"
+title: "[Programmers] 가장 비싼 상품 구하기 (MySQL)"
 subtitle: Level 1
 categories: SQL
 tags: [SQL, Programmers]
@@ -8,7 +8,7 @@ comments: true
 published: true
 ---
 
-## 📌 문제 : [흉부외과 또는 일반외과 의사 목록 출력하기] 
+## 📌 문제 : [가장 비싼 상품 구하기] 
 
 ### 📖 문제 설명  
 
@@ -215,34 +215,18 @@ published: true
 
 ## 🗝 문제 풀이
 
-문제는 현재 `FIRST_HALF` 테이블에서 총주문량이 큰값을 내림차순으로 정렬하고   
-총주문량이 같다면 출하번호 기준으로 오름차순으로 정렬하는 문제이다.
+`PRODUCT` 테이블의 `PRICE` 칼럼에서 가장 큰 값을   
+출력하는 SQL을 작성하면 해결되는 문제이다.
 
 ```RoomSql
-SELECT 
-    D.DR_NAME, 
-    D.DR_ID, 
-    D.MCDP_CD, 
-    DATE_FORMAT(D.HIRE_YMD, '%Y-%m-%d') AS HIRE_YMD
-FROM DOCTOR D
-WHERE D.MCDP_CD = 'CS' OR D.MCDP_CD = 'GS'
-ORDER BY HIRE_YMD DESC, DR_NAME ASC;
+SELECT MAX(P.PRICE) AS MAX_PRICE 
+FROM PRODUCT P;
 ```
 
-DATE_FORMAT을 이용해 날짜형식을 변경해준다.   
-그리고 흉부외과(CS), 일반외과(GS)인 경우만 걸러내야하기 때문에   
-WHERE절을 이용해 조건을걸어 값을 필터링해주자
-
-ORDER BY를 통해 내림,오름차순 정렬을 해주면 되는데   
-여기서 정렬조건은 2개이다. 고용날짜(`HIRE_YMD`)를 기준으로 내림차순을 하고   
-만약 고용날짜가 같을 경우 의사이름(`DR_NAME`)을 기준으로 오름차순 정렬을 해야한다.   
-
-ORDER BY 문법에 첫번째 정렬값이 같다면 콤마(,)로 다음 조건을 적어주면   
-해당 기준으로 정렬을 진행해준다.
-
- 
+`MAX(칼럼명)`을 입력하게되면 칼럼에서 가장큰 값을 찾아주고  
+`AS`를 이용해 `MAX_PRICE`로 변경해 출력해주게 되면된다.
 
 
 <br/>
 
-[흉부외과 또는 일반외과 의사 목록 출력하기]:https://school.programmers.co.kr/learn/courses/30/lessons/132203
+[가장 비싼 상품 구하기]:https://school.programmers.co.kr/learn/courses/30/lessons/131697
