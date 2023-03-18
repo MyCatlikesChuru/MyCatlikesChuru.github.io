@@ -392,3 +392,5 @@ k
 ;_posts/codingtest/programmers/2023-02-22-algo-stockprice.md,e/8/e8fa1e08dbedf11e933e1c4a7a3d9788100dbbca
 h
 8_posts/codingtest/programmers/2023-03-08-algo-knumber.md,c/0/c024838776321a833c1ac60df2c0fcc87228d9bd
+`
+0_posts/codingtest/sql/2023-03-16-sql-icecream.md,f/0/f02f2def9d5b07f0914e2fb758e26183922e1572
