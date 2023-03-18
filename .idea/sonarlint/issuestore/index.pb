@@ -378,8 +378,6 @@ X
 _config.yml,c/d/cd089ae45ce870c45e434019e8f1ed4f066cd425
 Y
 )_posts/it/cs/2023-03-08-it-etc-network.md,8/5/85a942e0693b5181f69734675c99a5f3709d3c70
-\
-,_posts/codingtest/sql/2023-03-14-sql-book.md,a/c/ac9f9f2e5b2d982f8e628970b0e8c63a74033de8
 _
 /_posts/codingtest/sql/2023-03-14-sql-carlist.md,3/8/3829c2931b2082544a644205ec604945d4a033e2
 _
@@ -390,3 +388,7 @@ j
 :_posts/codingtest/programmers/2023-02-11-algo-ponketmon.md,9/8/98d05609114daf08fef4dde8f1eace043090cf56
 h
 8_posts/codingtest/programmers/2023-02-19-algo-printer.md,e/2/e2d7c3297beebeb5e7157b4cde80117348843ee1
+k
+;_posts/codingtest/programmers/2023-02-22-algo-stockprice.md,e/8/e8fa1e08dbedf11e933e1c4a7a3d9788100dbbca
+h
+8_posts/codingtest/programmers/2023-03-08-algo-knumber.md,c/0/c024838776321a833c1ac60df2c0fcc87228d9bd
