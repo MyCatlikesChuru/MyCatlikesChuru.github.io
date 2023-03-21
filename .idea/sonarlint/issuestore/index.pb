@@ -394,3 +394,7 @@ h
 8_posts/codingtest/programmers/2023-03-08-algo-knumber.md,c/0/c024838776321a833c1ac60df2c0fcc87228d9bd
 `
 0_posts/codingtest/sql/2023-03-16-sql-icecream.md,f/0/f02f2def9d5b07f0914e2fb758e26183922e1572
+f
+6_posts/codingtest/programmers/2023-03-16-algo-prime.md,7/4/74acb5a734f8bb904a8b91dbfac9ba6c156db32e
+`
+0_posts/codingtest/sql/2023-03-17-sql-icecream.md,5/d/5d8a0df8f1268795a2504fbad2d4b229020cfe19
