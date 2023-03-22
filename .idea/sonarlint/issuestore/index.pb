@@ -398,3 +398,5 @@ f
 6_posts/codingtest/programmers/2023-03-16-algo-prime.md,7/4/74acb5a734f8bb904a8b91dbfac9ba6c156db32e
 `
 0_posts/codingtest/sql/2023-03-17-sql-icecream.md,5/d/5d8a0df8f1268795a2504fbad2d4b229020cfe19
+\
+,_posts/codingtest/sql/2023-03-14-sql-book.md,a/c/ac9f9f2e5b2d982f8e628970b0e8c63a74033de8
