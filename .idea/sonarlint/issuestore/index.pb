@@ -400,3 +400,5 @@ f
 0_posts/codingtest/sql/2023-03-17-sql-icecream.md,5/d/5d8a0df8f1268795a2504fbad2d4b229020cfe19
 \
 ,_posts/codingtest/sql/2023-03-14-sql-book.md,a/c/ac9f9f2e5b2d982f8e628970b0e8c63a74033de8
+^
+._posts/codingtest/sql/2023-03-17-sql-doctor.md,7/4/7408ea298229e1c22049468bc0b06b71afeb4c57
