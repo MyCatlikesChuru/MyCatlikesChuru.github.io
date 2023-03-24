@@ -402,3 +402,7 @@ f
 ,_posts/codingtest/sql/2023-03-14-sql-book.md,a/c/ac9f9f2e5b2d982f8e628970b0e8c63a74033de8
 ^
 ._posts/codingtest/sql/2023-03-17-sql-doctor.md,7/4/7408ea298229e1c22049468bc0b06b71afeb4c57
+b
+2_posts/codingtest/sql/2023-03-17-sql-maxproduct.md,5/8/58dfa4974f9acae09dda5bdec5977e67a4e16c18
+b
+2_posts/codingtest/sql/2023-03-23-sql-animalname.md,3/c/3cc132e04b23263760744ad96c166a6c4609f27d
