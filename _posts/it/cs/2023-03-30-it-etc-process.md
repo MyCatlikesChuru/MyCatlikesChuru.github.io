@@ -373,20 +373,11 @@ CPU 스케줄러는 CPU 스케줄링 알고리즘에 따라 프로세스에서 �
 강제로 다른 프로세스에 CPU 소유권을 할당하는 방식을 말한다. (라운드 로빈, SRF, 다단계 큐 등)
 
 
-![image](){: .align-left style="max-width: 70%"}
-
-
-
 
 
 <br/>  
-<br/>  
-
-✨ 참고 사이트  
-- 
-
-
 <br/>
+
 
 [그림 출처 - jokerkwu]:https://jokerkwu.tistory.com/89
 [그림 출처 - many258]:https://many258.github.io/study/os-process/
