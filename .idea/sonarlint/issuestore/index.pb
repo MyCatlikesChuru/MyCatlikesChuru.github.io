@@ -376,20 +376,12 @@ X
 (_includes/extensions/code-highlight.html,6/5/65756496fbf7270fd4a4225857fa71c13677a0ca
 ;
 _config.yml,c/d/cd089ae45ce870c45e434019e8f1ed4f066cd425
-Y
-)_posts/it/cs/2023-03-08-it-etc-network.md,8/5/85a942e0693b5181f69734675c99a5f3709d3c70
 _
 /_posts/codingtest/sql/2023-03-14-sql-carlist.md,3/8/3829c2931b2082544a644205ec604945d4a033e2
 _
 /_posts/codingtest/sql/2023-03-15-sql-carrent.md,1/2/12d62185958a0879a117ece1e84077172e4a41f0
 i
 9_posts/codingtest/programmers/2023-02-11-algo-nocomple.md,3/a/3ad38c454e9cd47fd6065b7e18c50d177e992162
-j
-:_posts/codingtest/programmers/2023-02-11-algo-ponketmon.md,9/8/98d05609114daf08fef4dde8f1eace043090cf56
-h
-8_posts/codingtest/programmers/2023-02-19-algo-printer.md,e/2/e2d7c3297beebeb5e7157b4cde80117348843ee1
-k
-;_posts/codingtest/programmers/2023-02-22-algo-stockprice.md,e/8/e8fa1e08dbedf11e933e1c4a7a3d9788100dbbca
 h
 8_posts/codingtest/programmers/2023-03-08-algo-knumber.md,c/0/c024838776321a833c1ac60df2c0fcc87228d9bd
 `
@@ -406,3 +398,11 @@ b
 2_posts/codingtest/sql/2023-03-17-sql-maxproduct.md,5/8/58dfa4974f9acae09dda5bdec5977e67a4e16c18
 b
 2_posts/codingtest/sql/2023-03-23-sql-animalname.md,3/c/3cc132e04b23263760744ad96c166a6c4609f27d
+]
+-_posts/codingtest/sql/2023-03-17-sql-trade.md,9/3/93df84424a85d046746e0323924feacdc57fb208
+^
+._posts/codingtest/sql/2023-03-18-sql-doctor.md,9/5/95e37634e2a736ebb25abd898522fbf65ab1ba05
+^
+._posts/codingtest/sql/2023-03-19-sql-member.md,7/d/7dceb2c1f19730b921e0f6097a13a8d0c27f300e
+[
++_posts/codingtest/sql/2023-03-20-sql-age.md,8/a/8a25b5a484b3e08bd082566908d97dd7561055b7
