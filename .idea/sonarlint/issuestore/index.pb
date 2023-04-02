@@ -406,3 +406,5 @@ b
 ._posts/codingtest/sql/2023-03-19-sql-member.md,7/d/7dceb2c1f19730b921e0f6097a13a8d0c27f300e
 [
 +_posts/codingtest/sql/2023-03-20-sql-age.md,8/a/8a25b5a484b3e08bd082566908d97dd7561055b7
+^
+._posts/codingtest/sql/2023-03-21-sql-geungi.md,e/b/ebacbd35cf06e54ad76818cd3a8f5f2a5b5a4ef2

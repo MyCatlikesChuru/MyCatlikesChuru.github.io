@@ -130,6 +130,11 @@ published: true
 
 ## 🗝 문제 풀이
 
+1. ROUND를 이용해 소수점 두번쨰 자리에서 반올림
+2. DATEDIFF를 이용한 날짜의 차이를 계산
+3. AVG를 이용한 평균 계산
+4. GROUP BY를 이용한 집계
+
 ```RoomSql
 SELECT c.CAR_ID,
     ROUND(AVG(DATEDIFF(c.END_DATE, c.START_DATE)+1),1)
