@@ -170,12 +170,6 @@ _
 /_posts/program/Spring/2022-12-12-spring-cors.md,a/9/a9af466bfa3c40083e2d543c6d90bd98546a8f41
 f
 6_posts/program/Spring/2022-12-27-spring-JunitSecure.md,a/0/a045e10a39e06cb60ce797c092721b7bb940c9fc
-e
-5_posts/program/Spring/2023-01-15-spring-fileupload.md,e/9/e9185513b657dd3743e813b4aa9bd94ec4e2ae77
-`
-0_posts/program/Spring/2023-01-21-spring-email.md,b/a/ba860215d26f3c63ab04b9cfd9af2de7308cf80c
-_
-/_posts/program/Spring/2023-02-17-spring-test.md,5/c/5cc852746974b312e4db3ce5d8dd2e29ad38b077
 f
 6_posts/program/Spring/2022-11-25-spring-environment.md,3/9/397b2fbd358e640530049a511ec53a0800c7da8b
 ]
@@ -412,3 +406,5 @@ _
 /_posts/codingtest/sql/2023-03-22-sql-gangwon.md,0/b/0bf9e01c475207d637bae3304559ce85087d4a5e
 k
 ;_posts/codingtest/programmers/2023-02-22-algo-stockprice.md,e/8/e8fa1e08dbedf11e933e1c4a7a3d9788100dbbca
+h
+8_posts/codingtest/programmers/2023-02-19-algo-printer.md,e/2/e2d7c3297beebeb5e7157b4cde80117348843ee1
