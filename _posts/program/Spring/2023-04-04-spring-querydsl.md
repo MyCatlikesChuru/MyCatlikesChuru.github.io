@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Spring] QueryDSL 공부 및 사용하기"
+title: "[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기"
 subtitle: 
 categories: Spring
 tags: [Spring, QueryDSL]
