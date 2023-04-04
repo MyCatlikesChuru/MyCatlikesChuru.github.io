@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>프로세스(Process)와 스레드(Thread) | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="프로세스(Process)와 스레드(Thread)">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="프로세스와 스레드">
+<meta property="og:description" content="프로세스와 스레드">
+<link rel="canonical" href="http://localhost:4000/cs/2023/03/30/it-etc-process.html">
+<meta property="og:url" content="http://localhost:4000/cs/2023/03/30/it-etc-process.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-03-30T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="프로세스(Process)와 스레드(Thread)">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-03-30T00:00:00+09:00","datePublished":"2023-03-30T00:00:00+09:00","description":"프로세스와 스레드","headline":"프로세스(Process)와 스레드(Thread)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cs/2023/03/30/it-etc-process.html"},"url":"http://localhost:4000/cs/2023/03/30/it-etc-process.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">프로세스(Process)와 스레드(Thread)</h1>
+  <h2 class="post-subtitle">면접을 위한 CS 전공지식 노트</h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-03-30T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Mar 30, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
+  </p>
+<div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <h3 id="프로세스와-스레드">프로세스와 스레드</h3>
+
+<p>프로세스는 컴퓨터에서 실행되고 있는 프로그램을 말한다. <br>
+CPU 스케줄링의 대상이되는 작업(task)라는 용어와 거의 같은 의미로 쓰인다.   <br>
+프로세스 간에는 메모리 등의 자원을 공유하지 않는다.</p>
+
+<p>스레드는 프로세스 내 작업의 흐름을 지칭한다. <br>
+하나의 프로세스 내에 여러개의 스레드를 가질 수 있다. <br>
+한 프로세스에서 여러 스레가 자원을 공유하고 있기때문에 잘 못 구현하면 <br>
+다른 스레드에도 치명적인 영향을 미칠 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228850085-162630a9-c2cb-42e1-9c54-71fcff2c5769.png" alt="image" class="align-left" style="max-width: 70%"><br>
+<a href="https://jokerkwu.tistory.com/89">그림 출처 - jokerkwu</a></p>
+
+<p><br></p>
+
+<h4 id="프로세스의-컴파일-과정">프로세스의 컴파일 과정</h4>
+
+<p>프로세스는 프로그램이 메모리에 올라가 인스턴스화된 것을 의미한다. <br>
+예를들어 구글 크롬 프로그램 파일(chrome.exe)과 같은 실행 파일을 말하고 <br>
+이를 실행하면 구글 크롬 프로세스로 변환되는 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228852597-168cabe1-c95f-4c61-bb2c-29b47ea83e22.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p><br></p>
+
+<p>프로그램을 만드는 과정은 만드는 언어마다 다르다. <br>
+컴파일 언어인 C언어 기반의 프로그램을 기준으로 설명하면 컴파일러가 <br>
+컴파일 과정을 통해 컴퓨터가 이해할 수 있는 기계어로 번역하여<br>
+실행할 수 있는 파일을 만들게 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228852890-28c985d2-5f1a-4cc5-aa67-d70e158edc37.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p><br></p>
+
+<p><strong>컴파일러</strong><br>
+오류처리, 코드 최적화 작업을 하며 어셈블리어로 변환한다.</p>
+
+<p><strong>어셈블러</strong><br>
+어셈블리어는 목적코드로 변환하게 된다. 이때 확장자는 운영체제마다 다른데 <br>
+리눅스에스는 .o 이다.</p>
+
+<p><strong>라이브러리</strong><br>
+라이브러리는 정적,동적으로 나뉜다. <br>
+정적 라이브러리는 프로그램 빌드 시 라이브러리가 제공하는 모든 코드를 <br>
+실행파일에 넣는 방식으로 라이브러리를 쓰는 방법이다.</p>
+
+<p>동적 라이브러리는 프로그램 실행 시 필요할 때만 DLL이라는 함수 정보를 통해 <br>
+참조하여 라이브러리를 쓰는 방법이다.</p>
+
+<p><strong>링커</strong><br>
+프로그램 내에 있는 라이브러리 함수 또는 다른 파일들과 목적코드를 결합하여  <br>
+실행 파일을 만든다. 실행파일의 확장자는 .exe또는 .out라는 확장자를 가진다.</p>
+
+<p><br></p>
+
+<h4 id="프로세스의-상태">프로세스의 상태</h4>
+
+<p>프로세스의 상태는 여러 가지 상태 값을 가진다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228858836-5aab51f2-fa03-40f7-9746-58b83ed7765c.png" alt="image" class="align-left" style="max-width: 70%"> <br>
+<a href="https://many258.github.io/study/os-process/">그림 출처 - many258</a></p>
+
+<p><strong>New (생성상태)</strong> <br>
+프로세스가 생성된 상태를 의미하며, fork() 또는 exec() <br>
+함수를 통해 생성한다. 이때 PCB가 할당된다.</p>
+
+<p><strong><em>fork()</em></strong> <br>
+부모 프로세스의 주소 공간을 그대로 복사하며, 새로운 자식 프로세스를 생성하는 <br>
+한수이다. 주소 공간만 복사할 뿐이지 부모 프로세스의 비동기 작업 등을 상속하지 않는다.</p>
+
+<p><strong><em>exec()</em></strong> <br>
+새롭게 프로세스를 생성하는 하수이다.</p>
+
+<p><strong>Ready (대기 상태)</strong><br>
+메모리 공간이 충분하면 메모리를 할당받고 아니면 아닌 상태로 <br>
+대기하고 있으며 CPU 스케줄러부터 CPU 소유권이 넘어오기 기다리는 상태이다.</p>
+
+<p><strong>Suspended Ready (대기중단 상태)</strong><br>
+메모리 부족으로 일시 중단된 상태이다.</p>
+
+<p><strong>Running (실행 상태)</strong><br>
+CPU 소유권과 메모리를 할당받고 인스트럭션을 수행 중인 상태를 의미한다. <br>
+CPU burst가 일어났다고도 표현합니다.</p>
+
+<p><strong>Blocked Suspended (중단 상태)</strong> <br>
+어떤 이벤트가 발생한 이후 기다리며 프로세스가 차단된 상태이다. <br>
+I/O 디바이스에 의한 인터럽트로 이런 현상이 많이 발생하기도 한다. <br>
+예를 들어 프린트 인쇄버튼을 눌렀을때 프로세스가 잠깐 멈춘들할때의 상태와 비슷하다.</p>
+
+<p><strong>Wait or Block (일시 중단 상태)</strong> <br>
+대기 중단과 유사하다. 중단된 상태에서 프로세스가 실행되려고 <br>
+했지만 메모리 부족으로 일시 중단된 상태이다.</p>
+
+<p><strong>Exit (종료 상태)</strong><br>
+메모리와 CPU 소유권을 모두 놓고 가는 상태를 말한다. <br>
+종료는 자연스럽게 종료되는 것도 있지만 부모 프로세스가 자식 프로세스를 <br>
+강제시키는 비자발적 종료로 종료되는 것도 있다. 자식 프로세스에 할당된 자원의 <br>
+한계치를 넘어서거나 부모 프로세스가 종료되거나 사용자 process.kill 등 여러 명령어로 <br>
+프로세스를 종료할 때 발생합니다.</p>
+
+<p><br></p>
+
+<h4 id="프로세스의-메모리-구조">프로세스의 메모리 구조</h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228995206-be46f534-0057-476a-87f6-045fc07c69ef.png" alt="image" class="align-left" style="max-width: 70%"> <br>
+<a href="https://minhamina.tistory.com/235">그림 출처 - minhamina</a></p>
+
+<p>스택, 힙, 데이터 영역, 코드영역으로 나뉘어 진다.  <br>
+스택은 위 주소부터 할당되고 힙은 아래 주소부터 할당된다.</p>
+
+<p><br></p>
+
+<p><strong>스택과 힙</strong> <br>
+스택과 힙은 동적 할당이 되며, 동적 할당은 런타임 단계에서 메모리 할당받는 것을 말한다.</p>
+
+<p><strong>스택</strong>은 지역변수, 매개변수, 실행되는 항숨에 의해 늘어들거나 줄어드는 메모리 영역이다. <br>
+함수가 호출될 때마다 호출될 때의 환경 등 특정 정보가 스택에 계속해서 저장된다.</p>
+
+<p><strong>힙</strong>은 동적으로 할당되는 변수를 담는다.</p>
+
+<p><br></p>
+
+<p><strong>데이터 영역과 코드영역</strong><br>
+이 영역은 정적 할당되는 영역이다. 정적 할당은 컴파일 단계에서 메모리를 할당하는 것을 말한다. <br>
+데이터 영역은 BSS segment, Data segmenet, code/text segment로 나뉘어서 저장된다.</p>
+
+<p>BSS segment : 전역변수 또는 static, const로 선언되고 있고 0으로 초기화 또는 초기화 되지 않은 변수들 <br>
+Data segment : 전역변수 또는 static, const로 선언되어 있고 0이 아닌 값으로 초기화된 변수들 <br>
+code segment : 프로그램의 코드가 들어간다.</p>
+
+<p><br></p>
+
+<h4 id="pcb">PCB</h4>
+
+<p>Process Controler Block의 약자로 운영체제에서 프로세스에 대한 메타데이터를 <br>
+저장한 데이터를 말한다. 프로세스 제어 블록이라고도한다. 프로세스가 생성되면  <br>
+운영체제는 해당 PCB를 생성한다.</p>
+
+<p>프로그램이 실행되면 프로세스가 생성되고<br>
+프로세스 주소 값들에 스택,힙 등의 구조를 기반으로 메로리가 할당된다. <br>
+그리고 프로세스의 메타데이터들이 PCB에 저장되어 관리된다.</p>
+
+<p><strong><em>메타데이터?</em></strong><br>
+데이터에 관한 구조화된 데이터이자 데이터를 설명하는 작은 데이터, 대량의 정보 가운데에서<br>
+ 찾고 있는 정보를 효율적으로 찾아내서 이용하기 위해 일정한 규칙에 따라 콘텐츠에 대해 부여되는 데이터이다.</p>
+
+<p><br></p>
+
+<p><strong>프로세스의 구조</strong></p>
+<ul>
+  <li>프로세스 스케쥴링 상태 : ‘준비’, ‘일시중단’ 프로세스가 CPU에 대한 소유권을 얻은 이후 상태</li>
+  <li>프로세스 ID : 프로세스 ID, 해당 프로세스의 자식 프로세스 ID</li>
+  <li>프로세스 권한 : 컴퓨터 자원 또는 I/O 디바이스에 대한 권한 정보</li>
+  <li>프로그램 카운터 : 프로세스에서 실행해야 할 다음 명령어의 주소에 대한 포인터</li>
+  <li>CPU 레지스터 : 프로세스를 실행하기 위해 저장해야 할 레지스터에 대한 정보</li>
+  <li>CPU 스케줄링 정보 : CPU 스케줄러에 의해 중단된 시간 등에 대한 정보</li>
+  <li>계정 정보 : 프로세스 실행에 사용된 CPU 사용량, 실행한 유저의 정보</li>
+  <li>I/O 상태 정보 : 프로세스에 할당된 I/O 디바이스 목록</li>
+</ul>
+
+<p><br></p>
+
+<p><strong>컨텍스트 스위칭</strong><br>
+PCB를 교환하는 과정이다. 프로세스에 할당된 시간이 끝나거나 인터럽트에 의해 발생한다. <br>
+컴퓨터는 많은 프로그램을 동시에 실행하는 것처럼 보이지만 어떠한 시점에서 실행되고 있는 <br>
+프로세스는 단 한 개이며, 많은 프로세스가 동시에 구동되는 것처럼 보이는 것은 다른 프로세스와의 <br>
+컨텍스트 스위칭이 아주 빠른 속도로 실해오디기 때문이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229003391-f5f43410-e6c3-4536-aa2c-ced269d579e9.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>프로세스 A를 실행 <br>
+-&gt; 프로세스 A의 PCB를 저장<br>
+-&gt; 프로세스 B의 PCB를 로드 <br>
+-&gt; 프로세스 B를 실행    <br>
+-&gt; 프로세스 B의 PCB를 저장 <br>
+-&gt; 프로세스 A의 PCB를 저장 <br>
+-&gt; 프로세스 A를 싱행</p>
+
+<p>2개의 프로세스에서 컨텍스트 스위칭이 발생하는 과정이다.  <br>
+컨텍스트 스위칭이 일어날 때 유휴시간이 발생하고, 이뿐만이 아니라  <br>
+캐시미스라는 비용도 발생하게 된다.</p>
+
+<p><br></p>
+
+<p><strong>캐시미스</strong> <br>
+컨텍스트 스위칭이 일어날 때 프로세스가 가지고 있는 메모리 주소가 그대로 있으면 <br>
+잘못된 주소 변환이 생기므로 캐시클리어 과정을 겪게 되고 이 때문에 캐시미스가 발생한다.</p>
+
+<p><strong>스레드에서의 컨텍스트 스위칭</strong><br>
+컨텍스트 스위칭은 프로세스만이 아닌 스레드에서도 일어난다. 스레드는 스택 영역을 제외한 <br>
+모든 메모리를 공유하기 때문에 스레드 컨텍스트 스위칭의 경우 비용이 더 적고 시간도 <br>
+더 적게 걸린다고 한다.</p>
+
+<p><br></p>
+
+<h4 id="멀티-프로세싱">멀티 프로세싱</h4>
+
+<p>여러개의 ‘프로세스’, 즉 멀티프로세스를 통해 2가지 이상의 일을 수행할 수 있는 것을 말한다.  <br>
+이를 통해 하나 이상의 일을 병렬로 처리할 수 있으며 특정 프로세스의 메모리, 프로세스 중  <br>
+일부에 문제가 발생되더라도 다른 프로세스를 이용해 처리할 수 있으므로 신뢰성을 높일 수 있다고한다.</p>
+
+<p><br></p>
+
+<p><strong>웹 브라우저</strong> <br>
+웹 브라우저는 멀티프로세스 구조를 가지고 있다.</p>
+
+<ol>
+  <li>브라우저 프로세스 : 주소표시줄, 북마크 막대, 뒤로가기버튼 등 네트워크 요청이나 파일접근 같은 권한을 담당</li>
+  <li>렌더러 프로세스 : 웹 사이트가 보이는 부분의 모든것을 제어</li>
+  <li>플러그인 프로세스 : 웹 사이트에서 사용하는 플러그인을 제어</li>
+  <li>GPU 프로세스 : GPU를 이용해서 화면을 그리는 부분을 제어</li>
+</ol>
+
+<p><br></p>
+
+<p><strong>IPC</strong> <br>
+Inter Process Communication의 약자로 프로세스끼리 데이터를 <br>
+주고받고 공유 데이터를 관리하는 매커니즘을 뜻한다.</p>
+
+<p>IPC의 종류로는 공유메모리, 파일, 소켓, 익명 파이프, 명명 파이프, 메시지 큐가 있다. <br>
+이들은 모두 메모리가 완전히 공유되는 스레드보다는 속도가 떨어진다.</p>
+
+<p><br></p>
+
+<p><em><strong>공유 메모리</strong></em><br>
+여러 프로세스에 동일한 메모리 블록에 대한 접근 권한이 부여되어 프로세스가 서로 통신할 수 있도록 <br>
+공유 메모리를 생성해서 통신하는 것을 말한다.</p>
+
+<p><em><strong>파일</strong></em> <br>
+파일은 디스크에 저장된 데이터 또는 파일 서버에서 제공한 데이터를 의미하고, 이를 기반으로 <br>
+프로세스 간 통신을 한다.</p>
+
+<p><em><strong>익명 파이프</strong></em><br>
+프로세스 간에 FIFO 방식을로 읽히는 임시 공간인 파이프를 기반으로 데이터를 주고 받는다. <br>
+단방향 방식의 읽기 전용, 쓰기 전용 파이프를 만들어서 작동하는 방식</p>
+
+<p><em><strong>명명 파이프</strong></em> <br>
+파이프 서버와 하나 이상의 파이프 클라이언트 간의 통신을 위한 명명된 단방향 또는 양방향 파이프를 말한다.</p>
+
+<p><em><strong>메시지 큐</strong></em> <br>
+메시지를 큐 데이터 구조형태로 관리하는 것을 의미한다. 이는 커널의 전역변수 형탱 등 커널에서 <br>
+전역적으로 관리되며 다른 IPC 방식에 비해서 사용방법이 매우 직관적이고 간단하며 다른 코드의 <br>
+수정 없이 단지 몇 줄의 코드를 추가시켜 간단하게 메시지 큐에 접근할 수 있는 장점이 있다.</p>
+
+<p><br></p>
+
+<h4 id="스레드와-멀티스레딩">스레드와 멀티스레딩</h4>
+
+<p><strong>스레드</strong><br>
+스레드는 프로세스의 실행 가능한 가장 작은 단위이다. <br>
+프로세스는 여러 스레드를 가질 수 있다.</p>
+
+<p><strong>멀티스레딩</strong> <br>
+멀티스레딩은 프로세스 내 작업을 여러개의 스레드, 멀티스레드로 처리하는 기법을 말한다. <br>
+스레드끼리 서로 자원을 공유하기 때문에 효율성이 높다. 예를 들어 웹 요청을 처리할 때 <br>
+새 프로세스를 생성하는 대신 스레드를 사용하는 웹 서버의 경우 훨씬 적은 리소스를 소비한다. <br>
+동시성에 큰장점이 있지만, 한 스레드에 문제가 생기면 다른 스레드에 영향을 끼칠 수 있는 단점이 있다.</p>
+
+<p><br></p>
+
+<h4 id="공유-자원과-임계-영역">공유 자원과 임계 영역</h4>
+
+<p><strong>공유 자원</strong> <br>
+공유 자원은 시스템 안에서 각 프로세스, 스레드가 함께 접근할 수 있는  <br>
+모니터,프린터,메모리,파일,데이터 등의 자원이나 변수 등을 의미한다.</p>
+
+<p>이 공유 자원을 두개 이상의 프로세스가 동시에 읽거나 쓰는 상황을 경재상태라고 한다. <br>
+동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있다.</p>
+
+<p><strong>임계 영역</strong> <br>
+둘 이상의 프로세스, 스레드가 공유 자원에 접근할 때 순서 등의 이유로 결과가 달라지는 코드 영역을 말한다.  <br>
+임계 영역을 해결하기 위한 방법은 크게 뮤텍스, 세마포어, 모니터 세가지를 가지고 있다.</p>
+
+<p><em>뮤텍스</em><br>
+프로세스나 스레드가 공유자원을 lock()을 통해 잠금 설정하고 사용한 후에는 <br>
+unlock()을 통해 잠금 해제를 하는 객체가 뮤텍스이다. 잠금이 설정되면 다른 프로세스나 스레드는 <br>
+잠긴 코드 영역에 접근할 수 없고 해제는 그와 반대이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229030044-7ab70e96-2347-4035-8dc8-69108411abb3.png" alt="image" class="align-left" style="max-width: 70%"><br>
+<a href="https://dis.dankook.ac.kr/lectures/ds19/author/kpark/page/2/">그림 출처 - dankook</a></p>
+
+<p><br></p>
+
+<p><em>세마포어</em> <br>
+일반화된 뮤텍스이다. 간단한 정수 값과 두 가지 함수 wait(), signal()로  <br>
+공유자원에 접근을 처리해준다.</p>
+
+<p>wait() : 자신의 차례가 올때까지 기다리는 함수 <br>
+signal() : 다음 프로세스로 순서를 넘겨주는 함수</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229030071-83893073-7749-4d38-ba9d-edb608d9f154.png" alt="image" class="align-left" style="max-width: 70%"><br>
+<a href="https://dis.dankook.ac.kr/lectures/ds19/author/kpark/page/2/">그림 출처 - dankook</a></p>
+
+<p><br></p>
+
+<p><em>모니터</em> <br>
+둘 이상의 스레드나 프로세스가 공유 자원에 안전하게 접근할 수 있도록 <br>
+공유 자원을 숨기고 해당 접근에 대해 인터페이스만 제공한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229030765-45342170-053f-4989-8fec-d8373fbeecf5.png" alt="image" class="align-left" style="max-width: 70%"></p>
+
+<p>그림과 같이 모니터큐를 통해 공유 자원에 대한 작업들을 순차적으로 처리한다.</p>
+
+<p><br></p>
+
+<h4 id="교착-상태">교착 상태</h4>
+
+<p>교착 상태는 두 개 이상의 프로세스들이 서로가 가진 자원을 기다리며 중단된 상태를 말한다.</p>
+
+<p>예를 들어 A프로세스가 B프로세스의 어떤 자원을 요청할 때 <br>
+B프로세스에서도 A프로세스의 자원을 요청하는 상황일때이다.</p>
+
+<p><br></p>
+
+<p><strong>교착 상태의 원인</strong></p>
+
+<ol>
+  <li>상호 배제 : 한 프로세스가 자원을 독점하고 있으며, 다른 프로세스들은 접근이 불가능한 상태</li>
+  <li>점유 대기 : 특정 프로세스가 점유한 자원을 다른 프로세스가 요청하는 상태</li>
+  <li>비선점 : 다른 프로세스의 자원을 강제적으로 가져올 수 없는 상태</li>
+  <li>환형 대기 : 서로가 자원을 요구하는 상태</li>
+</ol>
+
+<p><br></p>
+
+<p><strong>교착 상태의 해결 방법</strong></p>
+
+<ol>
+  <li>자원을 할당할 때 애초에 조건이 성립되지 않도록 설계</li>
+  <li>교착 상태 가능성이 없을 때만 자원이 할당되며, 프로세스당 요청할 자원들의 최대치를 통해 자원 할당 가능 여부를 파악하는 은행원 알고리즘을 사용</li>
+  <li>교착 상태가 발생하면 사이클이 있는지 찾아보고 이에 관련된 프로세스를 한 개씩 지운다.</li>
+  <li>교착 상태는 매우 드믈게 일어나기 때문에 이를 처리하는 비용이 더 커서 교착 상태가 발생하면 사용자가 작업을 종료한다. 현대 운영체제는 이 방법을 채택했다. (ex: 응답없음이라고 발생하는 경우)</li>
+</ol>
+
+<p><em>은행원 알고리즘?</em> <br>
+안정상태를 유지할 수 있는 요구만 수락하고 불안전 상태를 초래할 수 있는 사용자의 요구는 <br>
+나중에 만족할 수 있을 때까지 계속 거절한다.</p>
+
+<p>ex) A: $60, B: $40, C $50 달러가 필요한 상태 <br>
+은행은 $100의 자본을 가지고 있고
+은행에서 A: $20, B: $30, C: $30 을 빌려주었을 경우 $20달러를 보유.</p>
+
+<p>이상태에서 B에게 먼저 빌려준 후 상황을 해결한 다음 빌린돈을 받고 <br>
+다음 고객들의 문제들을 해결할 수 있음. <br>
+A에게 빌려줄 경우 셋다 아무도 해결해줄 수 없는 상황이기 때문.</p>
+
+<p><br></p>
+
+<h3 id="cpu-스케줄링-알고리즘">CPU 스케줄링 알고리즘</h3>
+
+<p>CPU 스케줄러는 CPU 스케줄링 알고리즘에 따라 프로세스에서 해야 하는 일을 <br>
+스레드 단위로 CPU에 할당한다.</p>
+
+<p>프로그램이 실행될 때는 CPU 스케줄링 알고리즘이 어떤 프로그램에 CPU 소유권을 줄 것인지 결정한다.</p>
+
+<p><br></p>
+
+<p><strong>비선점형 방식</strong><br>
+프로세스가 스스로 CPU 소유권을 포기하는 방식으로 강제로 프로세스를 중지하지 않는다. <br>
+따라서 컨텍스트 스위칭으로 인한 부하가 적다. (FCFS, SJF, 우선순위 등)</p>
+
+<p><strong>선점형 방식</strong><br>
+현대 운영체제가 쓰는 방식으로 지금 사용하고 있는 프로세스를 알고리즘에 의해 중단시켜 버리고 <br>
+강제로 다른 프로세스에 CPU 소유권을 할당하는 방식을 말한다. (라운드 로빈, SRF, 다단계 큐 등)</p>
+
+<p><br><br>
+<br></p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/sql/2023/03/23/sql-animalname.html" title="[Programmers] 이름이 있는 동물의 아이디 (MySQL)">[Programmers] 이름이 있는 동물의 아이디 (MySQL)...</a><a class="next" href="/sql/2023/04/01/sql-carrent.html" title="[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)">[Programmers] 자동차 평균 대여 기간 구하기...</a>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/10/25/til.html" title="[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)">[TIL] Spring Exception 1</a></li>
+<li><a class="post-link" href="/sql/2023/03/19/sql-member.html" title="[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)">[Programmers] 조건에 맞는 회원수 구하기 (MySQL)</a></li>
+<li><a class="post-link" href="/til/2022/11/14/til.html" title="[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)">[TIL] API Documentation 2</a></li>
+<li><a class="post-link" href="/til/2022/08/25/til.html" title="[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)">[TIL] HTML,CSS 목업화면 만들어보기</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

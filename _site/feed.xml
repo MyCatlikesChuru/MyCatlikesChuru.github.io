@@ -1,4 +1,1540 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-03-30T16:52:05+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers] 이름이 있는 동물의 아이디 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/23/sql-animalname.html" rel="alternate" type="text/html" title="[Programmers] 이름이 있는 동물의 아이디 (MySQL)" /><published>2023-03-23T00:00:00+09:00</published><updated>2023-03-23T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/23/sql-animalname</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/23/sql-animalname.html"><![CDATA[<h2 id="-문제--이름이-있는-동물의-아이디">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59407">이름이 있는 동물의 아이디</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-04T18:23:04+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Spring] QueryDSL 사용하기</title><link href="http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html" rel="alternate" type="text/html" title="[Spring] QueryDSL 사용하기" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/04/spring-querydsladvance</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html"><![CDATA[<h2 id="querydsl">QueryDSL</h2>
+
+<h3 id="q타입-활용">Q타입 활용</h3>
+
+<p>Q타입 객체를 만들어 사용이 가능하다.<br />
+m이라는 이름으로 객체를 생성하여 queryFactorty를 이용한 사용법.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">queryDsl</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
+        <span class="nc">QMember</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QMember</span><span class="o">(</span><span class="s">"m"</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>위와 같이 사용도 가능하지만 QMember.member를 이용해 QMember 클래스에 <br />
+선언되어 있는 것을 이용하는 방법을 주로 사용한다. 여기서 QMember를 static import하여 사용한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">queryDsl</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">QMember</span><span class="o">.</span><span class="na">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="nc">QMember</span><span class="o">.</span><span class="na">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="nc">QMember</span><span class="o">.</span><span class="na">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>같은 테이블을 JOIN하는 경우에 첫번째와 같이 alias를 변경하여 사용하여 해결이 가능하다. <br />
+하지만 그럴 경우가 아니면 일반적으로 static import하여 2번과 같이 사용한다.</p>
+
+<p><br /></p>
+
+<h3 id="검색-조건-쿼리">검색 조건 쿼리</h3>
+
+<p><code class="language-plaintext highlighter-rouge">select</code>, <code class="language-plaintext highlighter-rouge">from</code>을 <br />
+<code class="language-plaintext highlighter-rouge">selectFrom</code>으로 합칠 수 있다.</p>
+
+<p>여러가지 검색 조건의 쿼리</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">)</span> <span class="c1">// username = 'member1'</span>
+<span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">ne</span><span class="o">(</span><span class="s">"member1"</span><span class="o">)</span> <span class="c1">// username != 'member1'</span>
+<span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">).</span><span class="na">not</span> <span class="c1">// username != 'member1'</span>
+
+<span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">isNotNull</span><span class="o">()</span> <span class="c1">// 이름이 is not null</span>
+
+<span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">in</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span><span class="mi">20</span><span class="o">)</span> <span class="c1">// age가 10이거나 20살인 사람</span>
+<span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">notIn</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span><span class="mi">20</span><span class="o">)</span> <span class="c1">// age가 10이거나 20살이 아닌사람</span>
+<span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span><span class="mi">30</span><span class="o">)</span> <span class="c1">// age가 10~30사이인 사람</span>
+
+<span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">goe</span><span class="o">(</span><span class="mi">30</span><span class="o">)</span> <span class="c1">// age &gt;= 30</span>
+<span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">gt</span><span class="o">(</span><span class="mi">30</span><span class="o">)</span> <span class="c1">// age &gt; 30</span>
+<span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">loe</span><span class="o">(</span><span class="mi">30</span><span class="o">)</span> <span class="c1">// age &lt;= 30</span>
+<span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">lt</span><span class="o">(</span><span class="mi">30</span><span class="o">)</span> <span class="c1">// age &lt; 30</span>
+
+<span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">like</span><span class="o">(</span><span class="s">"member%"</span><span class="o">)</span> <span class="c1">// like 검색</span>
+<span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"member"</span><span class="o">)</span> <span class="c1">// like `%member%` 검색</span>
+<span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"member"</span><span class="o">)</span> <span class="c1">// like `member%` 검색</span>
+</code></pre></div></div>
+
+<p>기본적으로 JPQL에서 지원하는 모든 검색 조건을 제공한다. <br />
+이를 이용해서 한번 작성해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">search</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="mi">10</span><span class="o">)))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+        
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getAge</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>member의 테이블을 조회하여 <br />
+username = ‘member1’ AND age = ‘10’인 행을 조회하는 쿼리이다.</p>
+
+<p>현재 usename,age가 조건에 부합하는 행은 하나가 존재하므로 해당 행의 대한 데이터가 <br />
+findMember를 통해 접근이 가능하다.</p>
+
+<p>여기서 <code class="language-plaintext highlighter-rouge">.and()</code>를 이용해 쿼리를 작성했지만 아래와 같이</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">search</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">),</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getAge</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">,</code>를 입력하여 체인을 걸어주면 기본적으로 <code class="language-plaintext highlighter-rouge">.and()</code>로 인식하게 되어 사용할 수 있다.</p>
+
+<p><br /></p>
+
+<h3 id="결과-조회-fetch">결과 조회 (fetch)</h3>
+
+<ol>
+  <li>fetch() : 리스트 조회, 데이터 없으면 빈 리스트 반환</li>
+  <li>fetchOne() : 단 건 조회
+    <ul>
+      <li>결과가 없으면 : null</li>
+      <li>결과가 둘 이상이면 : NonUniqueResultException 발생</li>
+    </ul>
+  </li>
+  <li>fetchFirst() : limit(1)을 걸면서 fetchOne()하는 것과 동일 (=limit(1).fetchOne)</li>
+  <li>fetchResults() : 페이징 정보 포함, total count 쿼리 추가 실행</li>
+  <li>fetchCount() : count 쿼리로 변경해서 count 수 조회</li>
+</ol>
+
+<p>결과를 조회하는 문법은 위와 같다. <br />
+코드를 통해서 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resultFetch</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// 1. fetch : 리스트 조회</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">fetch</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="c1">// 2. fetchOne : 단 건 조회</span>
+        <span class="nc">Member</span> <span class="n">fetchOne</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="c1">// 3. fetchFirst : limit(1).fetchOne()</span>
+        <span class="nc">Member</span> <span class="n">fetchFirst</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetchFirst</span><span class="o">();</span>
+
+        <span class="c1">// 4. fetchResults : 페이징 정보 포함</span>
+        <span class="nc">QueryResults</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">fetchResults</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetchResults</span><span class="o">();</span>
+
+        <span class="n">fetchResults</span><span class="o">.</span><span class="na">getTotal</span><span class="o">();</span>
+        <span class="n">fetchResults</span><span class="o">.</span><span class="na">getLimit</span><span class="o">();</span>
+        <span class="n">fetchResults</span><span class="o">.</span><span class="na">getOffset</span><span class="o">();</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">content</span> <span class="o">=</span> <span class="n">fetchResults</span><span class="o">.</span><span class="na">getResults</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>1~3번까지는 많이 사용해보던 방식들이라 이해하기 쉬울 것이다. <br />
+여기서 페이징 정보를 받는 <code class="language-plaintext highlighter-rouge">fetchResults</code>를 확인해보자</p>
+
+<p>해당 객체로 <code class="language-plaintext highlighter-rouge">.getTotal()</code>, <code class="language-plaintext highlighter-rouge">.getLimit()</code>, <code class="language-plaintext highlighter-rouge">.getOffset()</code>과 같은 페이징 <br />
+정보가 확인이 가능하고 <code class="language-plaintext highlighter-rouge">.getResults()</code>를 통해서 List로 정보만 확인이 가능하다</p>
+
+<p>페이징 정보 깨알상식으로 아래 적어본다.</p>
+<ul>
+  <li>total : 현재 조회된 모든값의 총 갯수</li>
+  <li>limit : 조회할 결과의 개수를 의미</li>
+  <li>offset : 조회를 시작할 기준점을 의미</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">fetchResults</code>를 실행하게 될 경우 쿼리가 2번 발생한다.</p>
+
+<pre><code class="language-roomsql">select
+      count(member0_.member_id) as col_0_0_ 
+  from
+      member member0_
+</code></pre>
+<pre><code class="language-roomsql">select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">total</code>을 가져오기위한 쿼리 한개와 <br />
+<code class="language-plaintext highlighter-rouge">content</code>를 가져오는 쿼리 한개해서 총2개의 쿼리가 발생한다.</p>
+
+<p><br /></p>
+
+<p>마지막으로 <code class="language-plaintext highlighter-rouge">fetchCount</code>를 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">resultFetch</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// 5. fetchCount : count 수 조회</span>
+        <span class="kt">long</span> <span class="n">total</span> <span class="o">=</span> <span class="n">queryFactory</span>
+        <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">fetchCount</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">fetchResults</code>에서 쿼리가 2번 발생했었는데<br />
+<code class="language-plaintext highlighter-rouge">fetchCount</code>를 하게되면 <code class="language-plaintext highlighter-rouge">total</code>값만 한번의 쿼리로 가져오게 된다.</p>
+
+<pre><code class="language-roomsql">select
+      count(member0_.member_id) as col_0_0_ 
+  from
+      member member0_
+</code></pre>
+
+<p><br /></p>
+
+<h3 id="정렬">정렬</h3>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[QueryDSL]]></summary></entry><entry><title type="html">[Programmers] 상품 별 오프라인 매출 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/04/sql-productsum.html" rel="alternate" type="text/html" title="[Programmers] 상품 별 오프라인 매출 구하기 (MySQL)" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/04/sql-productsum</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/04/sql-productsum.html"><![CDATA[<h2 id="-문제--상품-별-오프라인-매출-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131533">상품 별 오프라인 매출 구하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 의류 쇼핑몰에서 판매중인 상품들의 상품 정보를 담은 <code>PRODUCT</code> 테이블과 오프라인 상품 판매 정보를 담은 <code>OFFLINE_SALE</code> 테이블 입니다. <code>PRODUCT</code> 테이블은 아래와 같은 구조로 <code>PRODUCT_ID</code>, <code>PRODUCT_CODE</code>, <code>PRICE</code>는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>PRODUCT_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRODUCT_CODE</td>
+<td>VARCHAR(8)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRICE</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>상품 별로 중복되지 않는 8자리 상품코드 값을 가지며, 앞 2자리는 카테고리 코드를 의미합니다.</p>
+
+<p><code>OFFLINE_SALE</code> 테이블은 아래와 같은 구조로 되어있으며 <code>OFFLINE_SALE_ID</code>, <code>PRODUCT_ID</code>, <code>SALES_AMOUNT</code>, <code>SALES_DATE</code>는 각각 오프라인 상품 판매 ID, 상품 ID, 판매량, 판매일을 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>OFFLINE_SALE_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRODUCT_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>SALES_AMOUNT</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>SALES_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>동일한 날짜, 상품 ID 조합에 대해서는 하나의 판매 데이터만 존재합니다.</p>
+
+<hr />
+
+<h5>문제</h5>
+
+<p><code>PRODUCT</code> 테이블과 <code>OFFLINE_SALE</code> 테이블에서 상품코드 별 매출액(판매가 * 판매량) 합계를 출력하는 SQL문을 작성해주세요. 결과는 매출액을 기준으로 내림차순 정렬해주시고 매출액이 같다면 상품코드를 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>PRODUCT</code> 테이블이 다음과 같고 </p>
+<table class="table">
+        <thead><tr>
+<th>PRODUCT_ID</th>
+<th>PRODUCT_CODE</th>
+<th>PRICE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>A1000011</td>
+<td>15000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A1000045</td>
+<td>8000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C3000002</td>
+<td>42000</td>
+</tr>
+</tbody>
+      </table>
+<p><code>OFFLINE_SALE</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>OFFLINE_SALE_ID</th>
+<th>PRODUCT_ID</th>
+<th>SALES_AMOUNT</th>
+<th>SALES_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2022-02-21</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2022-03-02</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2022-05-01</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>2022-05-24</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1</td>
+<td>2</td>
+<td>2022-07-14</td>
+</tr>
+<tr>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>2022-09-22</td>
+</tr>
+</tbody>
+      </table>
+<p>각 상품 별 총 판매량과 판매가는 다음과 같습니다.</p>
+
+<ul>
+<li><code>PRODUCT_CODE</code> 가 <code>A1000011</code>인 상품은 총 판매량이 6개, 판매가가 15,000원</li>
+<li><code>PRODUCT_CODE</code> 가 <code>A1000045</code>인 상품은 총 판매량이 2개, 판매가가 8,000원</li>
+<li><code>PRODUCT_CODE</code> 가 <code>C3000002</code>인 상품은 총 판매량이 3개, 판매가가 42,000원</li>
+</ul>
+
+<p>그러므로 각 상품 별 매출액을 계산하고 정렬하면 결과가 다음과 같이 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>PRODUCT_CODE</th>
+<th>SALES</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>C3000002</td>
+<td>126000</td>
+</tr>
+<tr>
+<td>A1000011</td>
+<td>90000</td>
+</tr>
+<tr>
+<td>A1000045</td>
+<td>16000</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>SUM을 이용해 (가격 * 수량)을 곱한 값 행의 합계를 SALES 컬럼으로 지정한다.</li>
+  <li>LEFT JOIN하여 PRODUCT_ID가 같은 것을 찾기</li>
+  <li>PRODUCT_CODE를 그룹핑</li>
+  <li>최종적으로 SALES 컬럼, SUM되어진 가격*수량 값을 기준으로 내림차순 정렬</li>
+  <li>만약 컬럼의 값이 같다면 PRODUCT_CODE를 오름차순하여 정렬</li>
+</ol>
+
+<pre><code class="language-RoomSql">SELECT p.PRODUCT_CODE,
+    SUM(p.PRICE * o.SALES_AMOUNT) AS SALES
+FROM OFFLINE_SALE o
+LEFT JOIN PRODUCT p 
+ON p.PRODUCT_ID = o.PRODUCT_ID
+GROUP BY p.PRODUCT_CODE
+ORDER BY SALES DESC, p.PRODUCT_CODE ASC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 상품 별 오프라인 매출 구하기]]></summary></entry><entry><title type="html">[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기</title><link href="http://localhost:4000/spring/2023/04/04/spring-querydsl.html" rel="alternate" type="text/html" title="[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/04/spring-querydsl</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/04/spring-querydsl.html"><![CDATA[<h2 id="querydsl">QueryDSL</h2>
+
+<h3 id="querydsl-너는-뭐니">QueryDSL 너는 뭐니?🤔</h3>
+
+<p>Query Domain Specific Language의 약자이다.  <br />
+JPQL을 Java 코드로 작성할 수 있도록 하는 라이브러리이다.</p>
+
+<p>JPQL과 다르게 사용함으로써 얻을 수 있는 이점은</p>
+<ol>
+  <li>문자가 아닌 코드로 쿼리를 작성함으로써, 컴파일 시점에 문법 오류를 확인할 수 있다.</li>
+  <li>자동 완성 등 IDE의 도움을 받을 수 있다.</li>
+  <li>동적인 쿼리 작성이 편하다.</li>
+</ol>
+
+<p>*동적쿼리? <br />
+파라미터가 어떻게 오는지에 따라 조건이 변경되어지는 쿼리를 말한다.</p>
+
+<p><br /></p>
+
+<h3 id="설정하기">설정하기</h3>
+
+<p><strong>gradle 설정</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">buildscript</span> <span class="o">{</span> <span class="c1">// Spring Boot 2.6 이상일 경우</span>
+	<span class="n">ext</span> <span class="o">{</span>
+		<span class="n">queryDslVersion</span> <span class="o">=</span> <span class="s">"5.0.0"</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">plugins</span> <span class="o">{</span>
+	<span class="n">id</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="err">'</span> <span class="n">version</span> <span class="err">'</span><span class="mf">2.7</span><span class="o">.</span><span class="mi">7</span><span class="err">'</span>
+	<span class="n">id</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">dependency</span><span class="o">-</span><span class="n">management</span><span class="err">'</span> <span class="n">version</span> <span class="err">'</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">15</span><span class="o">.</span><span class="na">RELEASE</span><span class="err">'</span>
+	<span class="c1">//querydsl 추가</span>
+	<span class="n">id</span> <span class="s">"com.ewerk.gradle.plugins.querydsl"</span> <span class="n">version</span> <span class="s">"1.0.10"</span>
+	<span class="n">id</span> <span class="err">'</span><span class="n">java</span><span class="err">'</span>
+<span class="o">}</span>
+
+<span class="n">group</span> <span class="o">=</span> <span class="err">'</span><span class="n">study</span><span class="err">'</span>
+<span class="n">version</span> <span class="o">=</span> <span class="err">'</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="err">'</span>
+<span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="err">'</span><span class="mi">11</span><span class="err">'</span>
+
+<span class="n">configurations</span> <span class="o">{</span>
+	<span class="n">compileOnly</span> <span class="o">{</span>
+		<span class="n">extendsFrom</span> <span class="n">annotationProcessor</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">repositories</span> <span class="o">{</span>
+	<span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">jpa</span><span class="err">'</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span>
+
+	<span class="c1">//querydsl 추가</span>
+	<span class="n">implementation</span> <span class="s">"com.querydsl:querydsl-jpa:${queryDslVersion}"</span>
+	<span class="n">implementation</span> <span class="s">"com.querydsl:querydsl-apt:${queryDslVersion}"</span>
+
+	<span class="c1">// 쿼리를 이쁘게 출력해주는 라이브러리</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">gavlyukovskiy</span><span class="o">:</span><span class="n">p6spy</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="nl">starter:</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">8</span><span class="err">'</span>
+
+	<span class="n">compileOnly</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
+	<span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span><span class="err">'</span>
+	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
+	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
+<span class="o">}</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="err">'</span><span class="n">test</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">useJUnitPlatform</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="c1">//querydsl 추가 시작</span>
+<span class="n">def</span> <span class="n">querydslDir</span> <span class="o">=</span> <span class="s">"$buildDir/generated/querydsl"</span>
+
+<span class="n">querydsl</span> <span class="o">{</span>
+	<span class="n">jpa</span> <span class="o">=</span> <span class="kc">true</span>
+	<span class="n">querydslSourcesDir</span> <span class="o">=</span> <span class="n">querydslDir</span>
+<span class="o">}</span>
+<span class="n">sourceSets</span> <span class="o">{</span>
+	<span class="n">main</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">srcDir</span> <span class="n">querydslDir</span>
+<span class="o">}</span>
+<span class="n">compileQuerydsl</span><span class="o">{</span>
+	<span class="n">options</span><span class="o">.</span><span class="na">annotationProcessorPath</span> <span class="o">=</span> <span class="n">configurations</span><span class="o">.</span><span class="na">querydsl</span>
+<span class="o">}</span>
+<span class="n">configurations</span> <span class="o">{</span>
+	<span class="n">compileOnly</span> <span class="o">{</span>
+		<span class="n">extendsFrom</span> <span class="n">annotationProcessor</span>
+	<span class="o">}</span>
+	<span class="n">querydsl</span><span class="o">.</span><span class="na">extendsFrom</span> <span class="n">compileClasspath</span>
+<span class="o">}</span>
+<span class="c1">//querydsl 추가 끝</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Gradle &gt; Tasks &gt; other &gt; compileQuerydsl</code>을 눌러 빌드하면</p>
+
+<p><code class="language-plaintext highlighter-rouge">def querydslDir = "$buildDir/generated/querydsl"</code>에 의해서     <br />
+build &gt; generated 패지키에 Q타입 클래스가 생긴다.</p>
+
+<p><br /></p>
+
+<p><strong>❗️ 주의점 ❗️</strong><br />
+generated된 파일들은 git에 올리면 안된다. <br />
+즉, gitignore처리를 해줘야한다. 보통 build파일을 gitignore하기 때문에 <br />
+build 패키지안에 generated 폴더를 넣어주면된다. (gradle에서 설정)</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229707216-aece56b0-bc8c-4619-a4ec-24454e83486d.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<h3 id="사용하기">사용하기</h3>
+
+<p>Member, Team을 이용한 예제를 작성해보려한다.</p>
+
+<p><strong>Member.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span> 
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+<span class="nd">@ToString</span><span class="o">(</span><span class="n">of</span> <span class="o">=</span> <span class="o">{</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"username"</span><span class="o">,</span> <span class="s">"age"</span><span class="o">})</span> <span class="c1">// team은 넣을경우 무한루프돔</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"member_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">username</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"team_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Team</span> <span class="n">team</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">age</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="nc">Team</span> <span class="n">team</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">team</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="n">changeTeam</span><span class="o">(</span><span class="n">team</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeTeam</span><span class="o">(</span><span class="nc">Team</span> <span class="n">team</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">team</span> <span class="o">=</span> <span class="n">team</span><span class="o">;</span>
+        <span class="n">team</span><span class="o">.</span><span class="na">getMembers</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>Team.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span> 
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+<span class="nd">@ToString</span><span class="o">(</span><span class="n">of</span> <span class="o">=</span> <span class="o">{</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"name"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Team</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"team"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">public</span> <span class="nf">Team</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>빌드하여 QTeam, QMember 클래스가 생성되었다면 <br />
+테스트코드를 통해 JPQL과 Querydsl을 비교해보자</p>
+
+<p><strong>1). JPQL로 작성한 테스트 코드</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+    <span class="nd">@BeforeEach</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
+        <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startJPQL</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">"select m from Member m where m.username = :username"</span><span class="o">,</span> <span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span> <span class="s">"member1"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">getSingleResult</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>팀 객체를 2개 만들었다. (teamA, teamB) <br />
+그리고 멤버를 4개 만들어 teamA, teamB에 속하도록 하였다.</p>
+
+<p>이중에서 Member의 username이 <code class="language-plaintext highlighter-rouge">member1</code>로 되어있는 테이블을 조회하는 JPQL 문법이다. <br />
+파라미터 바인딩을 통해 <code class="language-plaintext highlighter-rouge">:username</code>의 <code class="language-plaintext highlighter-rouge">member1</code>을 넣어 주었다.</p>
+
+<pre><code class="language-roomsql">select
+    member0_.member_id as member_i1_1_,
+    member0_.age as age2_1_,
+    member0_.team_id as team_id4_1_,
+    member0_.username as username3_1_ 
+from
+    member member0_ 
+where
+    member0_.username=?
+</code></pre>
+<p>실제로 콘솔창에 출력되어진 쿼리를 보아도 where 절에 ?가 들어간 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>2). Querydsl로 작성한 테스트 코드</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+    <span class="nd">@BeforeEach</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
+        <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">queryDsl</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
+        <span class="nc">QMember</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QMember</span><span class="o">(</span><span class="s">"m"</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위와 동일한 요구사항으로 querydsl을 이용하여 작성한 코드이다. <br />
+JPAQueryFactory 객체와 Q타입 Member객체를 만들어 작성하였다.</p>
+
+<p>그리고 where절에서 username.eq를 통해 <code class="language-plaintext highlighter-rouge">member1</code>과 같은 항목을 찾고 있다. <br />
+여기서 JPQL과 다른점은 파라미터 바인딩을 하지않았지만, 자동으로 파라미터 바인딩을 해준다.</p>
+
+<pre><code class="language-roomsql">select
+        member0_.member_id as member_i1_1_,
+        member0_.age as age2_1_,
+        member0_.team_id as team_id4_1_,
+        member0_.username as username3_1_ 
+    from
+        member member0_ 
+    where
+        member0_.username=?
+</code></pre>
+<p>위의 쿼리는 querydsl을 사용하였을 떄 출력되어진 쿼리문인데  <br />
+역시 JPQL과 동일하게 파라미터 바인딩이 되어진 모습이다.</p>
+
+<p><br /> <br />
+<br /></p>
+
+<p>여기까지가 기본적인 설정과 사용법에 대한 내용이고  <br />
+사용해본결과 정말 컴파일시 오류 확인이 정말 용이하고  <br />
+<code class="language-plaintext highlighter-rouge">.</code>을 입력해 사용가능한 문법들이 쭉 나오니깐 코드 작성할때 어시스턴스가 <br />
+정말 편하게 느껴졌다. 좀 더 사용해보면서 동적쿼리에 얼마나 편하게 작업이가능한지? <br />
+여러가지 문법이 무엇이 있는지도 배워보도록 하자 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[QueryDSL]]></summary></entry><entry><title type="html">[Programmers] 조건에 맞는 도서와 저자 리스트 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/03/sql-bookauthor.html" rel="alternate" type="text/html" title="[Programmers] 조건에 맞는 도서와 저자 리스트 출력하기 (MySQL)" /><published>2023-04-03T00:00:00+09:00</published><updated>2023-04-03T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/03/sql-bookauthor</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/03/sql-bookauthor.html"><![CDATA[<h2 id="-문제--조건에-맞는-도서와-저자-리스트-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/144854">조건에 맞는 도서와 저자 리스트 출력하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 한 서점에서 판매중인 도서들의 도서 정보(<code>BOOK</code>) 테이블입니다.</p>
+
+<p><code>BOOK</code> 테이블은 각 도서의 정보를 담은 테이블로 아래와 같은 구조로 되어있습니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+<th>Description</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>BOOK_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>도서 ID</td>
+</tr>
+<tr>
+<td>CATEGORY</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+<td>카테고리 (경제, 인문, 소설, 생활, 기술)</td>
+</tr>
+<tr>
+<td>AUTHOR_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>저자 ID</td>
+</tr>
+<tr>
+<td>PRICE</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>판매가 (원)</td>
+</tr>
+<tr>
+<td>PUBLISHED_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+<td>출판일</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>BOOK</code> 테이블에서 <code>2021년</code>에 출판된 <code>'인문'</code> 카테고리에 속하는 도서 리스트를 찾아서 도서 ID(<code>BOOK_ID</code>), 출판일 (<code>PUBLISHED_DATE</code>)을 출력하는 SQL문을 작성해주세요. <br />
+결과는 출판일을 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>BOOK</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>BOOK_ID</th>
+<th>CATEGORY</th>
+<th>AUTHOR_ID</th>
+<th>PRICE</th>
+<th>PUBLISHED_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>인문</td>
+<td>1</td>
+<td>10000</td>
+<td>2020-01-01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>경제</td>
+<td>2</td>
+<td>9000</td>
+<td>2021-02-05</td>
+</tr>
+<tr>
+<td>3</td>
+<td>인문</td>
+<td>2</td>
+<td>11000</td>
+<td>2021-04-11</td>
+</tr>
+<tr>
+<td>4</td>
+<td>인문</td>
+<td>3</td>
+<td>10000</td>
+<td>2021-03-15</td>
+</tr>
+<tr>
+<td>5</td>
+<td>생활</td>
+<td>1</td>
+<td>12000</td>
+<td>2021-01-10</td>
+</tr>
+</tbody>
+      </table>
+<p>조건에 속하는 도서는 도서 ID 가 3, 4인 도서이므로 다음과 같습니다.</p>
+<table class="table">
+        <thead><tr>
+<th>BOOK_ID</th>
+<th>PUBLISHED_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>3</td>
+<td>2021-04-11</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2021-03-15</td>
+</tr>
+</tbody>
+      </table>
+<p>그리고 출판일 오름차순으로 정렬하여야 하므로 다음과 같은 결과가 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>BOOK_ID</th>
+<th>PUBLISHED_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>4</td>
+<td>2021-03-15</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2021-04-11</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>주의사항</h5>
+
+<p><code>PUBLISHED_DATE</code>의 데이트 포맷이 예시와 동일해야 정답처리 됩니다.</p>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>DATE_FORMAT을 이용한 발행시간 형식 변경</li>
+  <li>LEFT JOIN으로 AUTHOR_ID가 같을때 JOIN</li>
+  <li>카테고리 = ‘경제’인 것들만 찾기</li>
+  <li>발행일 기준으로 오름차순</li>
+</ol>
+
+<pre><code class="language-RoomSql">SELECT b.BOOK_ID,
+    a.AUTHOR_NAME,
+    DATE_FORMAT(b.PUBLISHED_DATE,'%Y-%m-%d')
+FROM BOOK b 
+LEFT JOIN AUTHOR a
+ON b.AUTHOR_ID = a.AUTHOR_ID
+WHERE b.category = '경제'
+ORDER BY b.PUBLISHED_DATE ASC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 조건에 맞는 도서와 저자 리스트 출력하기]]></summary></entry><entry><title type="html">[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/01/sql-carrent.html" rel="alternate" type="text/html" title="[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)" /><published>2023-04-01T00:00:00+09:00</published><updated>2023-04-01T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/01/sql-carrent</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/01/sql-carrent.html"><![CDATA[<h2 id="-문제--자동차-평균-대여-기간-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/157342">자동차 평균 대여 기간 구하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블입니다. <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블은 아래와 같은 구조로 되어있으며, <code>HISTORY_ID</code>, <code>CAR_ID</code>, <code>START_DATE</code>, <code>END_DATE</code> 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>HISTORY_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CAR_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>START_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>END_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블에서 평균 대여 기간이 7일 이상인 자동차들의 자동차 ID와 평균 대여 기간(컬럼명: <code>AVERAGE_DURATION</code>) 리스트를 출력하는 SQL문을 작성해주세요. 평균 대여 기간은 소수점 두번째 자리에서 반올림하고, 결과는 평균 대여 기간을 기준으로 내림차순 정렬해주시고, 평균 대여 기간이 같으면 자동차 ID를 기준으로 내림차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>HISTORY_ID</th>
+<th>CAR_ID</th>
+<th>START_DATE</th>
+<th>END_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>2022-09-27</td>
+<td>2022-10-01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2022-10-03</td>
+<td>2022-11-04</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>2022-09-05</td>
+<td>2022-09-05</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>2022-09-08</td>
+<td>2022-09-10</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>2022-09-16</td>
+<td>2022-10-15</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>2022-11-07</td>
+<td>2022-12-06</td>
+</tr>
+</tbody>
+      </table>
+<p>자동차 별 평균 대여 기간은</p>
+
+<ul>
+<li>자동차 ID가 1인 자동차의 경우, 대여 기간이 각각 5일, 33일, 30일인 기록이 존재하므로 평균 22.7일</li>
+<li>자동차 ID가 2인 자동차의 경우, 대여 기간이 각각 1일, 3일인 기록이 존재하므로 평균 2일</li>
+<li>자동차 ID가 3인 자동차의 경우, 대여 기간이 30일인 기록만 존재하므로 평균 30일
+입니다. 평균 대여 기간이 7일 이상인 자동차는 자동차 ID가 1, 3인 자동차이고, 평균 대여 기간 내림차순 및 자동차 ID를 기준으로 내림차순 정렬하면 다음과 같이 나와야 합니다.</li>
+</ul>
+<table class="table">
+        <thead><tr>
+<th>CAR_ID</th>
+<th>AVERAGE_DURATION</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>3</td>
+<td>30.0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>22.7</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>ROUND를 이용해 소수점 두번쨰 자리에서 반올림</li>
+  <li>DATEDIFF를 이용한 날짜의 차이를 계산</li>
+  <li>AVG를 이용한 평균 계산</li>
+  <li>GROUP BY를 이용한 집계</li>
+</ol>
+
+<pre><code class="language-RoomSql">SELECT c.CAR_ID,
+    ROUND(AVG(DATEDIFF(c.END_DATE, c.START_DATE)+1),1)
+    AS AVERAGE_DURATION
+    FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY c
+GROUP BY CAR_ID
+HAVING AVERAGE_DURATION &gt;= '7'
+ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 자동차 평균 대여 기간 구하기]]></summary></entry><entry><title type="html">[Programmers] 자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/01/sql-cartype.html" rel="alternate" type="text/html" title="[Programmers] 자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기 (MySQL)" /><published>2023-04-01T00:00:00+09:00</published><updated>2023-04-01T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/01/sql-cartype</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/01/sql-cartype.html"><![CDATA[<h2 id="-문제--자동차-종류-별-특정-옵션이-포함된-자동차-수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/151137">자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 자동차 대여 회사에서 대여중인 자동차들의 정보를 담은 <code>CAR_RENTAL_COMPANY_CAR</code> 테이블입니다. <code>CAR_RENTAL_COMPANY_CAR</code> 테이블은 아래와 같은 구조로 되어있으며, <code>CAR_ID</code>, <code>CAR_TYPE</code>, <code>DAILY_FEE</code>, <code>OPTIONS</code> 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>CAR_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CAR_TYPE</td>
+<td>VARCHAR(255)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DAILY_FEE</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>VARCHAR(255)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>자동차 종류는 '세단', 'SUV', '승합차', '트럭', '리무진' 이 있습니다. 자동차 옵션 리스트는 콤마(',')로 구분된 키워드 리스트(옵션 리스트 값 예시: '열선시트', '스마트키', '주차감지센서')로 되어있으며, 키워드 종류는 '주차감지센서', '스마트키', '네비게이션', '통풍시트', '열선시트', '후방카메라', '가죽시트' 가 있습니다.</p>
+
+<hr />
+
+<h5>문제</h5>
+
+<p><code>CAR_RENTAL_COMPANY_CAR</code> 테이블에서 '통풍시트', '열선시트', '가죽시트' 중 하나 이상의 옵션이 포함된 자동차가 자동차 종류 별로 몇 대인지 출력하는 SQL문을 작성해주세요. 이때 자동차 수에 대한 컬럼명은 <code>CARS</code>로 지정하고, 결과는 자동차 종류를 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>CAR_RENTAL_COMPANY_CAR</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>CAR_ID</th>
+<th>CAR_TYPE</th>
+<th>DAILY_FEE</th>
+<th>OPTIONS</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>세단</td>
+<td>16000</td>
+<td>가죽시트,열선시트,후방카메라</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SUV</td>
+<td>14000</td>
+<td>스마트키,네비게이션,열선시트</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SUV</td>
+<td>22000</td>
+<td>주차감지센서,후방카메라</td>
+</tr>
+<tr>
+<td>4</td>
+<td>트럭</td>
+<td>35000</td>
+<td>주차감지센서,네비게이션,열선시트</td>
+</tr>
+<tr>
+<td>5</td>
+<td>SUV</td>
+<td>16000</td>
+<td>가죽시트,네비게이션,열선시트,후방카메라,주차감지센서</td>
+</tr>
+</tbody>
+      </table>
+<p>'통풍시트', '열선시트', '가죽시트' 중 하나 이상의 옵션이 포함된 자동차는 자동차 ID가 1, 2, 4, 5인 자동차이고, 자동차 종류 별로 몇 대인지 구하고 자동차 종류를 기준으로 오름차순 정렬하면 다음과 같은 결과가 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>CAR_TYPE</th>
+<th>CARS</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>SUV</td>
+<td>2</td>
+</tr>
+<tr>
+<td>세단</td>
+<td>1</td>
+</tr>
+<tr>
+<td>트럭</td>
+<td>1</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>COUNT를 이용한 CAR_TYPE 수량 집계</li>
+  <li>WHERE절을 이용한 특정 조건 찾기</li>
+  <li>GROUP BY를 이용한 집계</li>
+</ol>
+
+<pre><code class="language-RoomSql">SELECT CAR_TYPE,
+    COUNT(CAR_TYPE) AS CARS
+FROM CAR_RENTAL_COMPANY_CAR
+WHERE OPTIONS LIKE '%통풍시트%' OR
+    OPTIONS LIKE '%열선시트%' OR
+    OPTIONS LIKE '%가죽시트%'
+GROUP BY CAR_TYPE
+ORDER BY CAR_TYPE ASC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기]]></summary></entry><entry><title type="html">프로세스(Process)와 스레드(Thread)</title><link href="http://localhost:4000/cs/2023/03/30/it-etc-process.html" rel="alternate" type="text/html" title="프로세스(Process)와 스레드(Thread)" /><published>2023-03-30T00:00:00+09:00</published><updated>2023-03-30T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/03/30/it-etc-process</id><content type="html" xml:base="http://localhost:4000/cs/2023/03/30/it-etc-process.html"><![CDATA[<h3 id="프로세스와-스레드">프로세스와 스레드</h3>
+
+<p>프로세스는 컴퓨터에서 실행되고 있는 프로그램을 말한다. <br />
+CPU 스케줄링의 대상이되는 작업(task)라는 용어와 거의 같은 의미로 쓰인다.   <br />
+프로세스 간에는 메모리 등의 자원을 공유하지 않는다.</p>
+
+<p>스레드는 프로세스 내 작업의 흐름을 지칭한다. <br />
+하나의 프로세스 내에 여러개의 스레드를 가질 수 있다. <br />
+한 프로세스에서 여러 스레가 자원을 공유하고 있기때문에 잘 못 구현하면 <br />
+다른 스레드에도 치명적인 영향을 미칠 수 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228850085-162630a9-c2cb-42e1-9c54-71fcff2c5769.png" alt="image" class="align-left" style="max-width: 70%" /><br />
+<a href="https://jokerkwu.tistory.com/89">그림 출처 - jokerkwu</a></p>
+
+<p><br /></p>
+
+<h4 id="프로세스의-컴파일-과정">프로세스의 컴파일 과정</h4>
+
+<p>프로세스는 프로그램이 메모리에 올라가 인스턴스화된 것을 의미한다. <br />
+예를들어 구글 크롬 프로그램 파일(chrome.exe)과 같은 실행 파일을 말하고 <br />
+이를 실행하면 구글 크롬 프로세스로 변환되는 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228852597-168cabe1-c95f-4c61-bb2c-29b47ea83e22.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p><br /></p>
+
+<p>프로그램을 만드는 과정은 만드는 언어마다 다르다. <br />
+컴파일 언어인 C언어 기반의 프로그램을 기준으로 설명하면 컴파일러가 <br />
+컴파일 과정을 통해 컴퓨터가 이해할 수 있는 기계어로 번역하여<br />
+실행할 수 있는 파일을 만들게 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228852890-28c985d2-5f1a-4cc5-aa67-d70e158edc37.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p><br /></p>
+
+<p><strong>컴파일러</strong><br />
+오류처리, 코드 최적화 작업을 하며 어셈블리어로 변환한다.</p>
+
+<p><strong>어셈블러</strong><br />
+어셈블리어는 목적코드로 변환하게 된다. 이때 확장자는 운영체제마다 다른데 <br />
+리눅스에스는 .o 이다.</p>
+
+<p><strong>라이브러리</strong><br />
+라이브러리는 정적,동적으로 나뉜다. <br />
+정적 라이브러리는 프로그램 빌드 시 라이브러리가 제공하는 모든 코드를 <br />
+실행파일에 넣는 방식으로 라이브러리를 쓰는 방법이다.</p>
+
+<p>동적 라이브러리는 프로그램 실행 시 필요할 때만 DLL이라는 함수 정보를 통해 <br />
+참조하여 라이브러리를 쓰는 방법이다.</p>
+
+<p><strong>링커</strong><br />
+프로그램 내에 있는 라이브러리 함수 또는 다른 파일들과 목적코드를 결합하여  <br />
+실행 파일을 만든다. 실행파일의 확장자는 .exe또는 .out라는 확장자를 가진다.</p>
+
+<p><br /></p>
+
+<h4 id="프로세스의-상태">프로세스의 상태</h4>
+
+<p>프로세스의 상태는 여러 가지 상태 값을 가진다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228858836-5aab51f2-fa03-40f7-9746-58b83ed7765c.png" alt="image" class="align-left" style="max-width: 70%" /> <br />
+<a href="https://many258.github.io/study/os-process/">그림 출처 - many258</a></p>
+
+<p><strong>New (생성상태)</strong> <br />
+프로세스가 생성된 상태를 의미하며, fork() 또는 exec() <br />
+함수를 통해 생성한다. 이때 PCB가 할당된다.</p>
+
+<p><strong><em>fork()</em></strong> <br />
+부모 프로세스의 주소 공간을 그대로 복사하며, 새로운 자식 프로세스를 생성하는 <br />
+한수이다. 주소 공간만 복사할 뿐이지 부모 프로세스의 비동기 작업 등을 상속하지 않는다.</p>
+
+<p><strong><em>exec()</em></strong> <br />
+새롭게 프로세스를 생성하는 하수이다.</p>
+
+<p><strong>Ready (대기 상태)</strong><br />
+메모리 공간이 충분하면 메모리를 할당받고 아니면 아닌 상태로 <br />
+대기하고 있으며 CPU 스케줄러부터 CPU 소유권이 넘어오기 기다리는 상태이다.</p>
+
+<p><strong>Suspended Ready (대기중단 상태)</strong><br />
+메모리 부족으로 일시 중단된 상태이다.</p>
+
+<p><strong>Running (실행 상태)</strong><br />
+CPU 소유권과 메모리를 할당받고 인스트럭션을 수행 중인 상태를 의미한다. <br />
+CPU burst가 일어났다고도 표현합니다.</p>
+
+<p><strong>Blocked Suspended (중단 상태)</strong> <br />
+어떤 이벤트가 발생한 이후 기다리며 프로세스가 차단된 상태이다. <br />
+I/O 디바이스에 의한 인터럽트로 이런 현상이 많이 발생하기도 한다. <br />
+예를 들어 프린트 인쇄버튼을 눌렀을때 프로세스가 잠깐 멈춘들할때의 상태와 비슷하다.</p>
+
+<p><strong>Wait or Block (일시 중단 상태)</strong> <br />
+대기 중단과 유사하다. 중단된 상태에서 프로세스가 실행되려고 <br />
+했지만 메모리 부족으로 일시 중단된 상태이다.</p>
+
+<p><strong>Exit (종료 상태)</strong><br />
+메모리와 CPU 소유권을 모두 놓고 가는 상태를 말한다. <br />
+종료는 자연스럽게 종료되는 것도 있지만 부모 프로세스가 자식 프로세스를 <br />
+강제시키는 비자발적 종료로 종료되는 것도 있다. 자식 프로세스에 할당된 자원의 <br />
+한계치를 넘어서거나 부모 프로세스가 종료되거나 사용자 process.kill 등 여러 명령어로 <br />
+프로세스를 종료할 때 발생합니다.</p>
+
+<p><br /></p>
+
+<h4 id="프로세스의-메모리-구조">프로세스의 메모리 구조</h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/228995206-be46f534-0057-476a-87f6-045fc07c69ef.png" alt="image" class="align-left" style="max-width: 70%" /> <br />
+<a href="https://minhamina.tistory.com/235">그림 출처 - minhamina</a></p>
+
+<p>스택, 힙, 데이터 영역, 코드영역으로 나뉘어 진다.  <br />
+스택은 위 주소부터 할당되고 힙은 아래 주소부터 할당된다.</p>
+
+<p><br /></p>
+
+<p><strong>스택과 힙</strong> <br />
+스택과 힙은 동적 할당이 되며, 동적 할당은 런타임 단계에서 메모리 할당받는 것을 말한다.</p>
+
+<p><strong>스택</strong>은 지역변수, 매개변수, 실행되는 항숨에 의해 늘어들거나 줄어드는 메모리 영역이다. <br />
+함수가 호출될 때마다 호출될 때의 환경 등 특정 정보가 스택에 계속해서 저장된다.</p>
+
+<p><strong>힙</strong>은 동적으로 할당되는 변수를 담는다.</p>
+
+<p><br /></p>
+
+<p><strong>데이터 영역과 코드영역</strong><br />
+이 영역은 정적 할당되는 영역이다. 정적 할당은 컴파일 단계에서 메모리를 할당하는 것을 말한다. <br />
+데이터 영역은 BSS segment, Data segmenet, code/text segment로 나뉘어서 저장된다.</p>
+
+<p>BSS segment : 전역변수 또는 static, const로 선언되고 있고 0으로 초기화 또는 초기화 되지 않은 변수들 <br />
+Data segment : 전역변수 또는 static, const로 선언되어 있고 0이 아닌 값으로 초기화된 변수들 <br />
+code segment : 프로그램의 코드가 들어간다.</p>
+
+<p><br /></p>
+
+<h4 id="pcb">PCB</h4>
+
+<p>Process Controler Block의 약자로 운영체제에서 프로세스에 대한 메타데이터를 <br />
+저장한 데이터를 말한다. 프로세스 제어 블록이라고도한다. 프로세스가 생성되면  <br />
+운영체제는 해당 PCB를 생성한다.</p>
+
+<p>프로그램이 실행되면 프로세스가 생성되고<br />
+프로세스 주소 값들에 스택,힙 등의 구조를 기반으로 메로리가 할당된다. <br />
+그리고 프로세스의 메타데이터들이 PCB에 저장되어 관리된다.</p>
+
+<p><strong><em>메타데이터?</em></strong><br />
+데이터에 관한 구조화된 데이터이자 데이터를 설명하는 작은 데이터, 대량의 정보 가운데에서<br />
+ 찾고 있는 정보를 효율적으로 찾아내서 이용하기 위해 일정한 규칙에 따라 콘텐츠에 대해 부여되는 데이터이다.</p>
+
+<p><br /></p>
+
+<p><strong>프로세스의 구조</strong></p>
+<ul>
+  <li>프로세스 스케쥴링 상태 : ‘준비’, ‘일시중단’ 프로세스가 CPU에 대한 소유권을 얻은 이후 상태</li>
+  <li>프로세스 ID : 프로세스 ID, 해당 프로세스의 자식 프로세스 ID</li>
+  <li>프로세스 권한 : 컴퓨터 자원 또는 I/O 디바이스에 대한 권한 정보</li>
+  <li>프로그램 카운터 : 프로세스에서 실행해야 할 다음 명령어의 주소에 대한 포인터</li>
+  <li>CPU 레지스터 : 프로세스를 실행하기 위해 저장해야 할 레지스터에 대한 정보</li>
+  <li>CPU 스케줄링 정보 : CPU 스케줄러에 의해 중단된 시간 등에 대한 정보</li>
+  <li>계정 정보 : 프로세스 실행에 사용된 CPU 사용량, 실행한 유저의 정보</li>
+  <li>I/O 상태 정보 : 프로세스에 할당된 I/O 디바이스 목록</li>
+</ul>
+
+<p><br /></p>
+
+<p><strong>컨텍스트 스위칭</strong><br />
+PCB를 교환하는 과정이다. 프로세스에 할당된 시간이 끝나거나 인터럽트에 의해 발생한다. <br />
+컴퓨터는 많은 프로그램을 동시에 실행하는 것처럼 보이지만 어떠한 시점에서 실행되고 있는 <br />
+프로세스는 단 한 개이며, 많은 프로세스가 동시에 구동되는 것처럼 보이는 것은 다른 프로세스와의 <br />
+컨텍스트 스위칭이 아주 빠른 속도로 실해오디기 때문이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229003391-f5f43410-e6c3-4536-aa2c-ced269d579e9.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>프로세스 A를 실행 <br />
+-&gt; 프로세스 A의 PCB를 저장<br />
+-&gt; 프로세스 B의 PCB를 로드 <br />
+-&gt; 프로세스 B를 실행    <br />
+-&gt; 프로세스 B의 PCB를 저장 <br />
+-&gt; 프로세스 A의 PCB를 저장 <br />
+-&gt; 프로세스 A를 싱행</p>
+
+<p>2개의 프로세스에서 컨텍스트 스위칭이 발생하는 과정이다.  <br />
+컨텍스트 스위칭이 일어날 때 유휴시간이 발생하고, 이뿐만이 아니라  <br />
+캐시미스라는 비용도 발생하게 된다.</p>
+
+<p><br /></p>
+
+<p><strong>캐시미스</strong> <br />
+컨텍스트 스위칭이 일어날 때 프로세스가 가지고 있는 메모리 주소가 그대로 있으면 <br />
+잘못된 주소 변환이 생기므로 캐시클리어 과정을 겪게 되고 이 때문에 캐시미스가 발생한다.</p>
+
+<p><strong>스레드에서의 컨텍스트 스위칭</strong><br />
+컨텍스트 스위칭은 프로세스만이 아닌 스레드에서도 일어난다. 스레드는 스택 영역을 제외한 <br />
+모든 메모리를 공유하기 때문에 스레드 컨텍스트 스위칭의 경우 비용이 더 적고 시간도 <br />
+더 적게 걸린다고 한다.</p>
+
+<p><br /></p>
+
+<h4 id="멀티-프로세싱">멀티 프로세싱</h4>
+
+<p>여러개의 ‘프로세스’, 즉 멀티프로세스를 통해 2가지 이상의 일을 수행할 수 있는 것을 말한다.  <br />
+이를 통해 하나 이상의 일을 병렬로 처리할 수 있으며 특정 프로세스의 메모리, 프로세스 중  <br />
+일부에 문제가 발생되더라도 다른 프로세스를 이용해 처리할 수 있으므로 신뢰성을 높일 수 있다고한다.</p>
+
+<p><br /></p>
+
+<p><strong>웹 브라우저</strong> <br />
+웹 브라우저는 멀티프로세스 구조를 가지고 있다.</p>
+
+<ol>
+  <li>브라우저 프로세스 : 주소표시줄, 북마크 막대, 뒤로가기버튼 등 네트워크 요청이나 파일접근 같은 권한을 담당</li>
+  <li>렌더러 프로세스 : 웹 사이트가 보이는 부분의 모든것을 제어</li>
+  <li>플러그인 프로세스 : 웹 사이트에서 사용하는 플러그인을 제어</li>
+  <li>GPU 프로세스 : GPU를 이용해서 화면을 그리는 부분을 제어</li>
+</ol>
+
+<p><br /></p>
+
+<p><strong>IPC</strong> <br />
+Inter Process Communication의 약자로 프로세스끼리 데이터를 <br />
+주고받고 공유 데이터를 관리하는 매커니즘을 뜻한다.</p>
+
+<p>IPC의 종류로는 공유메모리, 파일, 소켓, 익명 파이프, 명명 파이프, 메시지 큐가 있다. <br />
+이들은 모두 메모리가 완전히 공유되는 스레드보다는 속도가 떨어진다.</p>
+
+<p><br /></p>
+
+<p><em><strong>공유 메모리</strong></em><br />
+여러 프로세스에 동일한 메모리 블록에 대한 접근 권한이 부여되어 프로세스가 서로 통신할 수 있도록 <br />
+공유 메모리를 생성해서 통신하는 것을 말한다.</p>
+
+<p><em><strong>파일</strong></em> <br />
+파일은 디스크에 저장된 데이터 또는 파일 서버에서 제공한 데이터를 의미하고, 이를 기반으로 <br />
+프로세스 간 통신을 한다.</p>
+
+<p><em><strong>익명 파이프</strong></em><br />
+프로세스 간에 FIFO 방식을로 읽히는 임시 공간인 파이프를 기반으로 데이터를 주고 받는다. <br />
+단방향 방식의 읽기 전용, 쓰기 전용 파이프를 만들어서 작동하는 방식</p>
+
+<p><em><strong>명명 파이프</strong></em> <br />
+파이프 서버와 하나 이상의 파이프 클라이언트 간의 통신을 위한 명명된 단방향 또는 양방향 파이프를 말한다.</p>
+
+<p><em><strong>메시지 큐</strong></em> <br />
+메시지를 큐 데이터 구조형태로 관리하는 것을 의미한다. 이는 커널의 전역변수 형탱 등 커널에서 <br />
+전역적으로 관리되며 다른 IPC 방식에 비해서 사용방법이 매우 직관적이고 간단하며 다른 코드의 <br />
+수정 없이 단지 몇 줄의 코드를 추가시켜 간단하게 메시지 큐에 접근할 수 있는 장점이 있다.</p>
+
+<p><br /></p>
+
+<h4 id="스레드와-멀티스레딩">스레드와 멀티스레딩</h4>
+
+<p><strong>스레드</strong><br />
+스레드는 프로세스의 실행 가능한 가장 작은 단위이다. <br />
+프로세스는 여러 스레드를 가질 수 있다.</p>
+
+<p><strong>멀티스레딩</strong> <br />
+멀티스레딩은 프로세스 내 작업을 여러개의 스레드, 멀티스레드로 처리하는 기법을 말한다. <br />
+스레드끼리 서로 자원을 공유하기 때문에 효율성이 높다. 예를 들어 웹 요청을 처리할 때 <br />
+새 프로세스를 생성하는 대신 스레드를 사용하는 웹 서버의 경우 훨씬 적은 리소스를 소비한다. <br />
+동시성에 큰장점이 있지만, 한 스레드에 문제가 생기면 다른 스레드에 영향을 끼칠 수 있는 단점이 있다.</p>
+
+<p><br /></p>
+
+<h4 id="공유-자원과-임계-영역">공유 자원과 임계 영역</h4>
+
+<p><strong>공유 자원</strong> <br />
+공유 자원은 시스템 안에서 각 프로세스, 스레드가 함께 접근할 수 있는  <br />
+모니터,프린터,메모리,파일,데이터 등의 자원이나 변수 등을 의미한다.</p>
+
+<p>이 공유 자원을 두개 이상의 프로세스가 동시에 읽거나 쓰는 상황을 경재상태라고 한다. <br />
+동시에 접근을 시도할 때 접근의 타이밍이나 순서 등이 결과값에 영향을 줄 수 있다.</p>
+
+<p><strong>임계 영역</strong> <br />
+둘 이상의 프로세스, 스레드가 공유 자원에 접근할 때 순서 등의 이유로 결과가 달라지는 코드 영역을 말한다.  <br />
+임계 영역을 해결하기 위한 방법은 크게 뮤텍스, 세마포어, 모니터 세가지를 가지고 있다.</p>
+
+<p><em>뮤텍스</em><br />
+프로세스나 스레드가 공유자원을 lock()을 통해 잠금 설정하고 사용한 후에는 <br />
+unlock()을 통해 잠금 해제를 하는 객체가 뮤텍스이다. 잠금이 설정되면 다른 프로세스나 스레드는 <br />
+잠긴 코드 영역에 접근할 수 없고 해제는 그와 반대이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229030044-7ab70e96-2347-4035-8dc8-69108411abb3.png" alt="image" class="align-left" style="max-width: 70%" /><br />
+<a href="https://dis.dankook.ac.kr/lectures/ds19/author/kpark/page/2/">그림 출처 - dankook</a></p>
+
+<p><br /></p>
+
+<p><em>세마포어</em> <br />
+일반화된 뮤텍스이다. 간단한 정수 값과 두 가지 함수 wait(), signal()로  <br />
+공유자원에 접근을 처리해준다.</p>
+
+<p>wait() : 자신의 차례가 올때까지 기다리는 함수 <br />
+signal() : 다음 프로세스로 순서를 넘겨주는 함수</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229030071-83893073-7749-4d38-ba9d-edb608d9f154.png" alt="image" class="align-left" style="max-width: 70%" /><br />
+<a href="https://dis.dankook.ac.kr/lectures/ds19/author/kpark/page/2/">그림 출처 - dankook</a></p>
+
+<p><br /></p>
+
+<p><em>모니터</em> <br />
+둘 이상의 스레드나 프로세스가 공유 자원에 안전하게 접근할 수 있도록 <br />
+공유 자원을 숨기고 해당 접근에 대해 인터페이스만 제공한다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229030765-45342170-053f-4989-8fec-d8373fbeecf5.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>그림과 같이 모니터큐를 통해 공유 자원에 대한 작업들을 순차적으로 처리한다.</p>
+
+<p><br /></p>
+
+<h4 id="교착-상태">교착 상태</h4>
+
+<p>교착 상태는 두 개 이상의 프로세스들이 서로가 가진 자원을 기다리며 중단된 상태를 말한다.</p>
+
+<p>예를 들어 A프로세스가 B프로세스의 어떤 자원을 요청할 때 <br />
+B프로세스에서도 A프로세스의 자원을 요청하는 상황일때이다.</p>
+
+<p><br /></p>
+
+<p><strong>교착 상태의 원인</strong></p>
+
+<ol>
+  <li>상호 배제 : 한 프로세스가 자원을 독점하고 있으며, 다른 프로세스들은 접근이 불가능한 상태</li>
+  <li>점유 대기 : 특정 프로세스가 점유한 자원을 다른 프로세스가 요청하는 상태</li>
+  <li>비선점 : 다른 프로세스의 자원을 강제적으로 가져올 수 없는 상태</li>
+  <li>환형 대기 : 서로가 자원을 요구하는 상태</li>
+</ol>
+
+<p><br /></p>
+
+<p><strong>교착 상태의 해결 방법</strong></p>
+
+<ol>
+  <li>자원을 할당할 때 애초에 조건이 성립되지 않도록 설계</li>
+  <li>교착 상태 가능성이 없을 때만 자원이 할당되며, 프로세스당 요청할 자원들의 최대치를 통해 자원 할당 가능 여부를 파악하는 은행원 알고리즘을 사용</li>
+  <li>교착 상태가 발생하면 사이클이 있는지 찾아보고 이에 관련된 프로세스를 한 개씩 지운다.</li>
+  <li>교착 상태는 매우 드믈게 일어나기 때문에 이를 처리하는 비용이 더 커서 교착 상태가 발생하면 사용자가 작업을 종료한다. 현대 운영체제는 이 방법을 채택했다. (ex: 응답없음이라고 발생하는 경우)</li>
+</ol>
+
+<p><em>은행원 알고리즘?</em> <br />
+안정상태를 유지할 수 있는 요구만 수락하고 불안전 상태를 초래할 수 있는 사용자의 요구는 <br />
+나중에 만족할 수 있을 때까지 계속 거절한다.</p>
+
+<p>ex) A: $60, B: $40, C $50 달러가 필요한 상태 <br />
+은행은 $100의 자본을 가지고 있고
+은행에서 A: $20, B: $30, C: $30 을 빌려주었을 경우 $20달러를 보유.</p>
+
+<p>이상태에서 B에게 먼저 빌려준 후 상황을 해결한 다음 빌린돈을 받고 <br />
+다음 고객들의 문제들을 해결할 수 있음. <br />
+A에게 빌려줄 경우 셋다 아무도 해결해줄 수 없는 상황이기 때문.</p>
+
+<p><br /></p>
+
+<h3 id="cpu-스케줄링-알고리즘">CPU 스케줄링 알고리즘</h3>
+
+<p>CPU 스케줄러는 CPU 스케줄링 알고리즘에 따라 프로세스에서 해야 하는 일을 <br />
+스레드 단위로 CPU에 할당한다.</p>
+
+<p>프로그램이 실행될 때는 CPU 스케줄링 알고리즘이 어떤 프로그램에 CPU 소유권을 줄 것인지 결정한다.</p>
+
+<p><br /></p>
+
+<p><strong>비선점형 방식</strong><br />
+프로세스가 스스로 CPU 소유권을 포기하는 방식으로 강제로 프로세스를 중지하지 않는다. <br />
+따라서 컨텍스트 스위칭으로 인한 부하가 적다. (FCFS, SJF, 우선순위 등)</p>
+
+<p><strong>선점형 방식</strong><br />
+현대 운영체제가 쓰는 방식으로 지금 사용하고 있는 프로세스를 알고리즘에 의해 중단시켜 버리고 <br />
+강제로 다른 프로세스에 CPU 소유권을 할당하는 방식을 말한다. (라운드 로빈, SRF, 다단계 큐 등)</p>
+
+<p><br /><br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="CS" /><category term="ComputerScience" /><summary type="html"><![CDATA[프로세스와 스레드]]></summary></entry><entry><title type="html">[Programmers] 이름이 있는 동물의 아이디 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/23/sql-animalname.html" rel="alternate" type="text/html" title="[Programmers] 이름이 있는 동물의 아이디 (MySQL)" /><published>2023-03-23T00:00:00+09:00</published><updated>2023-03-23T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/23/sql-animalname</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/23/sql-animalname.html"><![CDATA[<h2 id="-문제--이름이-있는-동물의-아이디">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59407">이름이 있는 동물의 아이디</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -444,1147 +1980,4 @@ WHERE ADDRESS LIKE '%경기도%'
 ORDER BY w.WAREHOUSE_ID ASC;
 </code></pre>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 경기도에 위치한 식품창고 목록 출력하기]]></summary></entry><entry><title type="html">[Programmers] 나이 정보가 없는 회원 수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/20/sql-age.html" rel="alternate" type="text/html" title="[Programmers] 나이 정보가 없는 회원 수 구하기 (MySQL)" /><published>2023-03-20T00:00:00+09:00</published><updated>2023-03-20T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/20/sql-age</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/20/sql-age.html"><![CDATA[<h2 id="-문제--나이-정보가-없는-회원-수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131528">나이 정보가 없는 회원 수 구하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 의류 쇼핑몰에 가입한 회원 정보를 담은 <code>USER_INFO</code> 테이블입니다. <code>USER_INFO</code> 테이블은 아래와 같은 구조로 되어있으며, <code>USER_ID</code>, <code>GENDER</code>, <code>AGE</code>, <code>JOINED</code>는 각각 회원 ID, 성별, 나이, 가입일을 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>USER_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>GENDER</td>
-<td>TINYINT(1)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>AGE</td>
-<td>INTEGER</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>JOINED</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p><code>GENDER</code> 컬럼은 비어있거나 0 또는 1의 값을 가지며 0인 경우 남자를, 1인 경우는 여자를 나타냅니다.</p>
-
-<hr />
-
-<h5>문제</h5>
-
-<p><code>USER_INFO</code> 테이블에서 나이 정보가 없는 회원이 몇 명인지 출력하는 SQL문을 작성해주세요. 이때 컬럼명은 USERS로 지정해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>USER_INFO</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>USER_ID</th>
-<th>GENDER</th>
-<th>AGE</th>
-<th>JOINED</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>26</td>
-<td>2021-06-01</td>
-</tr>
-<tr>
-<td>2</td>
-<td>NULL</td>
-<td>NULL</td>
-<td>2021-07-25</td>
-</tr>
-<tr>
-<td>3</td>
-<td>1</td>
-<td>NULL</td>
-<td>2021-07-30</td>
-</tr>
-<tr>
-<td>4</td>
-<td>0</td>
-<td>31</td>
-<td>2021-08-03</td>
-</tr>
-</tbody>
-      </table>
-<p>나이 정보가 없는 회원은 2명 이므로, 다음과 같은 결과가 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>USERS</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>2</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<p>문제의 요구사항은 나이가 없는 회원의 수를 세우 표시해주는 문재이다.</p>
-
-<pre><code class="language-RoomSql">-- 코드를 입력하세요
-SELECT COUNT(*) AS USERS 
-FROM USER_INFO u
-WHERE u.age is null;
-</code></pre>
-
-<p>COUNT를 이용해 숫자를 집계하고, is null을 이용해 <br />
-나이의 null값이 들어가있는 항목들을 찾아냈다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 나이 정보가 없는 회원 수 구하기]]></summary></entry><entry><title type="html">[Programmers] 조건에 맞는 회원수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/19/sql-member.html" rel="alternate" type="text/html" title="[Programmers] 조건에 맞는 회원수 구하기 (MySQL)" /><published>2023-03-19T00:00:00+09:00</published><updated>2023-03-19T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/19/sql-member</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/19/sql-member.html"><![CDATA[<h2 id="-문제--조건에-맞는-회원수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131535">조건에 맞는 회원수 구하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 의류 쇼핑몰에 가입한 회원 정보를 담은 <code>USER_INFO</code> 테이블입니다. <code>USER_INFO</code> 테이블은 아래와 같은 구조로 되어있으며 <code>USER_ID</code>, <code>GENDER</code>, <code>AGE</code>, <code>JOINED</code>는 각각 회원 ID, 성별, 나이, 가입일을 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>USER_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>GENDER</td>
-<td>TINYINT(1)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>AGE</td>
-<td>INTEGER</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>JOINED</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p><code>GENDER</code> 컬럼은 비어있거나 0 또는 1의 값을 가지며 0인 경우 남자를, 1인 경우는 여자를 나타냅니다.</p>
-
-<hr />
-
-<h5>문제</h5>
-
-<p><code>USER_INFO</code> 테이블에서 2021년에 가입한 회원 중 나이가 20세 이상 29세 이하인 회원이 몇 명인지 출력하는 SQL문을 작성해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>USER_INFO</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>USER_ID</th>
-<th>GENDER</th>
-<th>AGE</th>
-<th>JOINED</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>26</td>
-<td>2021-10-05</td>
-</tr>
-<tr>
-<td>2</td>
-<td>0</td>
-<td>NULL</td>
-<td>2021-11-25</td>
-</tr>
-<tr>
-<td>3</td>
-<td>1</td>
-<td>22</td>
-<td>2021-11-30</td>
-</tr>
-<tr>
-<td>4</td>
-<td>0</td>
-<td>31</td>
-<td>2021-12-03</td>
-</tr>
-<tr>
-<td>5</td>
-<td>0</td>
-<td>28</td>
-<td>2021-12-16</td>
-</tr>
-<tr>
-<td>6</td>
-<td>1</td>
-<td>24</td>
-<td>2022-01-03</td>
-</tr>
-<tr>
-<td>7</td>
-<td>1</td>
-<td>NULL</td>
-<td>2022-01-09</td>
-</tr>
-</tbody>
-      </table>
-<p>2021년에 가입한 회원 중 나이가 20세 이상 29세 이하인 회원은 <code>USER_ID</code> 가 1, 3, 5 인 회원들 이므로, 다음과 같이 결과가 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>USERS</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>3</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<p>문제 풀이는 주어지는 유저정보에서</p>
-<ul>
-  <li>나이 = 20~29세 사이</li>
-  <li>가입일 = 2021년도만</li>
-</ul>
-
-<p>으로 값을 뽑아 최종 몇개의 row가 있는지 확인하는 문제이다.</p>
-
-<pre><code class="language-RoomSql">SELECT COUNT(USER_ID) AS USERS 
-FROM USER_INFO
-WHERE AGE &gt;= '20' AND AGE &lt;= '29'
-AND DATE_FORMAT(JOINED,'%Y-%m-%d') 
-BETWEEN '2021-01-01' AND '2021-12-31';
-</code></pre>
-
-<p>COUNT를 이용해 행에 대한 총개수를 AS USERS로 표현하엿고 <br />
-WHERE절을 이용해 나이와 날짜를 필터링하였다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 조건에 맞는 회원수 구하기]]></summary></entry><entry><title type="html">[Programmers] 12세 이하인 여자 환자 목록 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/18/sql-doctor.html" rel="alternate" type="text/html" title="[Programmers] 12세 이하인 여자 환자 목록 출력하기 (MySQL)" /><published>2023-03-18T00:00:00+09:00</published><updated>2023-03-18T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/18/sql-doctor</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/18/sql-doctor.html"><![CDATA[<h2 id="-문제--12세-이하인-여자-환자-목록-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/132201">12세 이하인 여자 환자 목록 출력하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 종합병원에 등록된 환자정보를 담은 <code>PATIENT</code> 테이블입니다. <code>PATIENT</code> 테이블은 다음과 같으며 <code>PT_NO</code>, <code>PT_NAME</code>, <code>GEND_CD</code>, <code>AGE</code>, <code>TLNO</code>는 각각 환자번호, 환자이름, 성별코드, 나이, 전화번호를 의미합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>PT_NO</td>
-<td>VARCHAR(10)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>PT_NAME</td>
-<td>VARCHAR(20)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>GEND_CD</td>
-<td>VARCHAR(1)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>AGE</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>TLNO</td>
-<td>VARCHAR(50)</td>
-<td>TRUE</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>문제</h5>
-
-<p><code>PATIENT</code> 테이블에서 12세 이하인 여자환자의 환자이름, 환자번호, 성별코드, 나이, 전화번호를 조회하는 SQL문을 작성해주세요. 이때 전화번호가 없는 경우, 'NONE'으로 출력시켜 주시고 결과는 나이를 기준으로 내림차순 정렬하고, 나이 같다면 환자이름을 기준으로 오름차순 정렬해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p><code>PATIENT</code> 테이블이 다음과 같을 때</p>
-<table class="table">
-        <thead><tr>
-<th>PT_NO</th>
-<th>PT_NAME</th>
-<th>GEND_CD</th>
-<th>AGE</th>
-<th>TLNO</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>PT22000003</td>
-<td>브라운</td>
-<td>M</td>
-<td>18</td>
-<td>01031246641</td>
-</tr>
-<tr>
-<td>PT22000004</td>
-<td>크롱</td>
-<td>M</td>
-<td>7</td>
-<td>NULL</td>
-</tr>
-<tr>
-<td>PT22000006</td>
-<td>뽀뽀</td>
-<td>W</td>
-<td>8</td>
-<td>NULL</td>
-</tr>
-<tr>
-<td>PT22000009</td>
-<td>한나</td>
-<td>W</td>
-<td>12</td>
-<td>01032323117</td>
-</tr>
-<tr>
-<td>PT22000012</td>
-<td>뿡뿡이</td>
-<td>M</td>
-<td>5</td>
-<td>NULL</td>
-</tr>
-<tr>
-<td>PT22000013</td>
-<td>크리스</td>
-<td>M</td>
-<td>30</td>
-<td>01059341192</td>
-</tr>
-<tr>
-<td>PT22000014</td>
-<td>토프</td>
-<td>W</td>
-<td>22</td>
-<td>01039458213</td>
-</tr>
-<tr>
-<td>PT22000018</td>
-<td>안나</td>
-<td>W</td>
-<td>11</td>
-<td>NULL</td>
-</tr>
-<tr>
-<td>PT22000019</td>
-<td>바라</td>
-<td>W</td>
-<td>10</td>
-<td>01079068799</td>
-</tr>
-<tr>
-<td>PT22000021</td>
-<td>릴로</td>
-<td>W</td>
-<td>33</td>
-<td>01023290767</td>
-</tr>
-</tbody>
-      </table>
-<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>PT_NAME</th>
-<th>PT_NO</th>
-<th>GEND_CD</th>
-<th>AGE</th>
-<th>TLNO</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>한나</td>
-<td>PT22000009</td>
-<td>W</td>
-<td>12</td>
-<td>01032323117</td>
-</tr>
-<tr>
-<td>안나</td>
-<td>PT22000018</td>
-<td>W</td>
-<td>11</td>
-<td>NONE</td>
-</tr>
-<tr>
-<td>바라</td>
-<td>PT22000019</td>
-<td>W</td>
-<td>10</td>
-<td>01079068799</td>
-</tr>
-<tr>
-<td>뽀뽀</td>
-<td>PT22000006</td>
-<td>W</td>
-<td>8</td>
-<td>NONE</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<p>전화번호가 null값이면 ‘NONE’으로 만들고 <br />
-12살 이하인 여성회원만 조회하는 문제이다.</p>
-
-<pre><code class="language-RoomSql">SELECT p.PT_NAME,
-    p.PT_NO,
-    p.GEND_CD,
-    p.AGE,  
-    CASE WHEN p.TLNO is null THEN 'NONE' 
-    ELSE p.TLNO
-    END AS TLNO
-FROM PATIENT p
-WHERE p.AGE &lt;= 12 AND p.GEND_CD = 'W'
-ORDER BY p.AGE DESC, p.PT_NAME ASC;
-</code></pre>
-
-<p>CASE WHEN 문법을 사용하였지만</p>
-
-<p>아래의 코드와 같이</p>
-
-<pre><code class="language-RoomSql">SELECT p.PT_NAME,
-    p.PT_NO,
-    p.GEND_CD,
-    p.AGE,
-    IFNULL(p.TLNO, 'NONE')
-FROM PATIENT p
-WHERE p.AGE &lt;= 12 AND p.GEND_CD = 'W'
-ORDER BY p.AGE DESC, p.PT_NAME ASC;
-</code></pre>
-<p>IFNULL(칼럼명, ‘대체할값’)을 사용하여도 무방하다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 12세 이하인 여자 환자 목록 출력하기]]></summary></entry><entry><title type="html">[Programmers] 조건에 부합하는 중고거래 상태 조회하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/17/sql-trade.html" rel="alternate" type="text/html" title="[Programmers] 조건에 부합하는 중고거래 상태 조회하기 (MySQL)" /><published>2023-03-17T00:00:00+09:00</published><updated>2023-03-17T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/17/sql-trade</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/17/sql-trade.html"><![CDATA[<h2 id="-문제--조건에-부합하는-중고거래-상태-조회하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/164672">조건에 부합하는 중고거래 상태 조회하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 중고거래 게시판 정보를 담은 <code>USED_GOODS_BOARD</code> 테이블입니다. <code>USED_GOODS_BOARD</code> 테이블은 다음과 같으며 <code>BOARD_ID</code>, <code>WRITER_ID</code>, <code>TITLE</code>, <code>CONTENTS</code>, <code>PRICE</code>, <code>CREATED_DATE</code>, <code>STATUS</code>, <code>VIEWS</code>은 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>BOARD_ID</td>
-<td>VARCHAR(5)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>WRITER_ID</td>
-<td>VARCHAR(50)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>TITLE</td>
-<td>VARCHAR(100)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>CONTENTS</td>
-<td>VARCHAR(1000)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>PRICE</td>
-<td>NUMBER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>CREATED_DATE</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>STATUS</td>
-<td>VARCHAR(10)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>VIEWS</td>
-<td>NUMBER</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>문제</h5>
-
-<p><code>USED_GOODS_BOARD</code> 테이블에서 2022년 10월 5일에 등록된 중고거래 게시물의 게시글 ID, 작성자 ID, 게시글 제목, 가격, 거래상태를 조회하는 SQL문을 작성해주세요. 거래상태가 SALE 이면 판매중, RESERVED이면 예약중, DONE이면 거래완료 분류하여 출력해주시고, 결과는 게시글 ID를 기준으로 내림차순 정렬해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p><code>USED_GOODS_BOARD</code> 테이블이 다음과 같을 때</p>
-<table class="table">
-        <thead><tr>
-<th>BOARD_ID</th>
-<th>WRITER_ID</th>
-<th>TITLE</th>
-<th>CONTENTS</th>
-<th>PRICE</th>
-<th>CREATED_DATE</th>
-<th>STATUS</th>
-<th>VIEWS</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>B0007</td>
-<td>s2s2123</td>
-<td>커피글라인더</td>
-<td>새상품처럼 깨끗합니다.</td>
-<td>7000</td>
-<td>2022-10-04</td>
-<td>DONE</td>
-<td>210</td>
-</tr>
-<tr>
-<td>B0008</td>
-<td>hong02</td>
-<td>자전거 판매합니다</td>
-<td>출퇴근용으로 구매했다가 사용하지 않아서 내놔요</td>
-<td>40000</td>
-<td>2022-10-04</td>
-<td>SALE</td>
-<td>301</td>
-</tr>
-<tr>
-<td>B0009</td>
-<td>yawoong67</td>
-<td>선반 팝니다</td>
-<td>6단 선반. 환불 반품 안됩니다.</td>
-<td>12000</td>
-<td>2022-10-05</td>
-<td>DONE</td>
-<td>202</td>
-</tr>
-<tr>
-<td>B0010</td>
-<td>keel1990</td>
-<td>철제선반5단</td>
-<td>철제선반 5단 조립식 팜</td>
-<td>10000</td>
-<td>2022-10-05</td>
-<td>SALE</td>
-<td>194</td>
-</tr>
-</tbody>
-      </table>
-<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>BOARD_ID</th>
-<th>WRITER_ID</th>
-<th>TITLE</th>
-<th>PRICE</th>
-<th>STATUS</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>B0010</td>
-<td>keel1990</td>
-<td>철제선반5단</td>
-<td>10000</td>
-<td>판매중</td>
-</tr>
-<tr>
-<td>B0009</td>
-<td>yawoong67</td>
-<td>선반 팝니다</td>
-<td>12000</td>
-<td>거래완료</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<p>문제에서 거래상태를 한글로 변경해줘야한다.</p>
-<ul>
-  <li>SALE = 판매중</li>
-  <li>RESERVED = 예약중</li>
-  <li>DONE = 거래완료</li>
-</ul>
-
-<p>그리고 날짜를 YYYY-MM-DD 형태로 변경하고 22년 10월5일에만 <br />
-등록된 상태를 ID기준으로 내림차순하는 문제이다.</p>
-
-<pre><code class="language-RoomSql">SELECT 
-    B.BOARD_ID, 
-    B.WRITER_ID, 
-    B.TITLE, 
-    B.PRICE, 
-    CASE WHEN B.STATUS = 'SALE' THEN '판매중'
-    WHEN B.STATUS = 'RESERVED' THEN '예약중'
-    ELSE '거래완료' END AS STATUS
-FROM USED_GOODS_BOARD B
-WHERE DATE_FORMAT(B.CREATED_DATE,'%Y-%m-%d') = '2022-10-05'
-ORDER BY B.BOARD_ID DESC;
-</code></pre>
-
-<p>CASE WHEN THEN 문법을 사용하였고 <br />
-IF문처럼 사용하면 된다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 조건에 부합하는 중고거래 상태 조회하기]]></summary></entry><entry><title type="html">[Programmers] 가장 비싼 상품 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/17/sql-maxproduct.html" rel="alternate" type="text/html" title="[Programmers] 가장 비싼 상품 구하기 (MySQL)" /><published>2023-03-17T00:00:00+09:00</published><updated>2023-03-17T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/17/sql-maxproduct</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/17/sql-maxproduct.html"><![CDATA[<h2 id="-문제--가장-비싼-상품-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131697">가장 비싼 상품 구하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 의류 쇼핑몰에서 판매 중인 상품들의 정보를 담은 <code>PRODUCT</code> 테이블입니다. <code>PRODUCT</code> 테이블은 아래와 같은 구조로 되어있으며, <code>PRODUCT_ID</code>, <code>PRODUCT_CODE</code>, <code>PRICE</code>는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>PRODUCT_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>PRODUCT_CODE</td>
-<td>VARCHAR(8)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>PRICE</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>상품 별로 중복되지 않는 8자리 상품코드 값을 가지며, 앞 2자리는 카테고리 코드를 의미합니다.</p>
-
-<hr />
-
-<h5>문제</h5>
-
-<p><code>PRODUCT</code> 테이블에서 판매 중인 상품 중 가장 높은 판매가를 출력하는 SQL문을 작성해주세요. 이때 컬럼명은 MAX_PRICE로 지정해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>PRODUCT</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>PRODUCT_ID</th>
-<th>PRODUCT_CODE</th>
-<th>PRICE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>A1000001</td>
-<td>10000</td>
-</tr>
-<tr>
-<td>2</td>
-<td>A2000005</td>
-<td>9000</td>
-</tr>
-<tr>
-<td>3</td>
-<td>C1000006</td>
-<td>22000</td>
-</tr>
-</tbody>
-      </table>
-<p>가장 높은 판매가는 22,000 원 이므로, 다음과 같은 결과가 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>MAX_PRICE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>22000</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<p><code class="language-plaintext highlighter-rouge">PRODUCT</code> 테이블의 <code class="language-plaintext highlighter-rouge">PRICE</code> 칼럼에서 가장 큰 값을 <br />
-출력하는 SQL을 작성하면 해결되는 문제이다.</p>
-
-<pre><code class="language-RoomSql">SELECT MAX(P.PRICE) AS MAX_PRICE 
-FROM PRODUCT P;
-</code></pre>
-
-<p><code class="language-plaintext highlighter-rouge">MAX(칼럼명)</code>을 입력하게되면 칼럼에서 가장큰 값을 찾아주고<br />
-<code class="language-plaintext highlighter-rouge">AS</code>를 이용해 <code class="language-plaintext highlighter-rouge">MAX_PRICE</code>로 변경해 출력해주게 되면된다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 가장 비싼 상품 구하기]]></summary></entry><entry><title type="html">[Programmers] 인기있는 아이스크림 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/17/sql-icecream.html" rel="alternate" type="text/html" title="[Programmers] 인기있는 아이스크림 (MySQL)" /><published>2023-03-17T00:00:00+09:00</published><updated>2023-03-17T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/17/sql-icecream</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/17/sql-icecream.html"><![CDATA[<h2 id="-문제--인기있는-아이스크림">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/133024">인기있는 아이스크림</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p><code>FIRST_HALF</code> 테이블은 아이스크림 가게의 상반기 주문 정보를 담은 테이블입니다.<code>FIRST_HALF</code> 테이블 구조는 다음과 같으며, <code>SHIPMENT_ID</code>, <code>FLAVOR</code>, <code>TOTAL_ORDER</code>는 각각 아이스크림 공장에서 아이스크림 가게까지의 출하 번호, 아이스크림 맛, 상반기 아이스크림 총주문량을 나타냅니다. </p>
-<table class="table">
-        <thead><tr>
-<th style="text-align: left">NAME</th>
-<th style="text-align: left">TYPE</th>
-<th>NULLABLE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td style="text-align: left">SHIPMENT_ID</td>
-<td style="text-align: left">INT(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td style="text-align: left">FLAVOR</td>
-<td style="text-align: left">VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td style="text-align: left">TOTAL_ORDER</td>
-<td style="text-align: left">INT(N)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>문제</h5>
-
-<p>상반기에 판매된 아이스크림의 맛을 총주문량을 기준으로 내림차순 정렬하고 총주문량이 같다면 출하 번호를 기준으로 오름차순 정렬하여 조회하는 SQL 문을 작성해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>FIRST_HALF</code> 테이블이 다음과 같을 때 </p>
-<table class="table">
-        <thead><tr>
-<th>SHIPMENT_ID</th>
-<th>FLAVOR</th>
-<th>TOTAL_ORDER</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>101</td>
-<td>chocolate</td>
-<td>3200</td>
-</tr>
-<tr>
-<td>102</td>
-<td>vanilla</td>
-<td>2800</td>
-</tr>
-<tr>
-<td>103</td>
-<td>mint_chocolate</td>
-<td>1700</td>
-</tr>
-<tr>
-<td>104</td>
-<td>caramel</td>
-<td>2600</td>
-</tr>
-<tr>
-<td>105</td>
-<td>white_chocolate</td>
-<td>3100</td>
-</tr>
-<tr>
-<td>106</td>
-<td>peach</td>
-<td>2450</td>
-</tr>
-<tr>
-<td>107</td>
-<td>watermelon</td>
-<td>2150</td>
-</tr>
-<tr>
-<td>108</td>
-<td>mango</td>
-<td>2900</td>
-</tr>
-<tr>
-<td>109</td>
-<td>strawberry</td>
-<td>3100</td>
-</tr>
-<tr>
-<td>110</td>
-<td>melon</td>
-<td>3150</td>
-</tr>
-<tr>
-<td>111</td>
-<td>orange</td>
-<td>2900</td>
-</tr>
-<tr>
-<td>112</td>
-<td>pineapple</td>
-<td>2900</td>
-</tr>
-</tbody>
-      </table>
-<p>상반기 아이스크림 맛을 총주문량을 기준으로 내림차순 정렬하고 총주문량이 같은 경우 출하 번호를 기준으로 오름차순 정렬하면 chocolate, melon, white_chocolate, strawberry, mango, orange, pineapple, vanilla, caramel, peach, watermelon, mint_chocolate 순서대로 조회되어야 합니다. 따라서 SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
-<table class="table">
-        <thead><tr>
-<th>FLAVOR</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>chocolate</td>
-</tr>
-<tr>
-<td>melon</td>
-</tr>
-<tr>
-<td>white_chocolate</td>
-</tr>
-<tr>
-<td>strawberry</td>
-</tr>
-<tr>
-<td>mango</td>
-</tr>
-<tr>
-<td>orange</td>
-</tr>
-<tr>
-<td>pineapple</td>
-</tr>
-<tr>
-<td>vanilla</td>
-</tr>
-<tr>
-<td>caramel</td>
-</tr>
-<tr>
-<td>peach</td>
-</tr>
-<tr>
-<td>watermelon</td>
-</tr>
-<tr>
-<td>mint_chocolate</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<p>문제는 현재 <code class="language-plaintext highlighter-rouge">FIRST_HALF</code> 테이블에서 총주문량이 큰값을 내림차순으로 정렬하고 <br />
-총주문량이 같다면 출하번호 기준으로 오름차순으로 정렬하는 문제이다.</p>
-
-<pre><code class="language-RoomSql">SELECT F.FLAVOR FROM FIRST_HALF F
-ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID ASC;
-</code></pre>
-
-<p>ORDER BY를 통해 내림,오름차순 정렬을 해주면 되는데 <br />
-여기서 정렬조건은 2개이다. 총 주문량(<code class="language-plaintext highlighter-rouge">TOTAL_ORDER</code>)을 기준으로 내림차순을 하고 <br />
-만약 총주문량이 같을 경우 출하번호 (<code class="language-plaintext highlighter-rouge">SHIPMENT_ID</code>)를 기준으로 오름차순 정렬을 해야한다.</p>
-
-<p>ORDER BY 문법에 첫번째 정렬값이 같다면 콤마(,)로 다음 조건을 적어주면 <br />
-해당 기준으로 정렬을 진행해준다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 인기있는 아이스크림]]></summary></entry><entry><title type="html">[Programmers] 흉부외과 또는 일반외과 의사 목록 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/03/17/sql-doctor.html" rel="alternate" type="text/html" title="[Programmers] 흉부외과 또는 일반외과 의사 목록 출력하기 (MySQL)" /><published>2023-03-17T00:00:00+09:00</published><updated>2023-03-17T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/03/17/sql-doctor</id><content type="html" xml:base="http://localhost:4000/sql/2023/03/17/sql-doctor.html"><![CDATA[<h2 id="-문제--흉부외과-또는-일반외과-의사-목록-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/132203">흉부외과 또는 일반외과 의사 목록 출력하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 종합병원에 속한 의사 정보를 담은<code>DOCTOR</code> 테이블입니다. <code>DOCTOR</code> 테이블은 다음과 같으며 <code>DR_NAME</code>, <code>DR_ID</code>, <code>LCNS_NO</code>, <code>HIRE_YMD</code>, <code>MCDP_CD</code>, <code>TLNO</code>는 각각 의사이름, 의사ID, 면허번호, 고용일자, 진료과코드, 전화번호를 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>DR_NAME</td>
-<td>VARCHAR(20)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>DR_ID</td>
-<td>VARCHAR(10)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>LCNS_NO</td>
-<td>VARCHAR(30)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>HIRE_YMD</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>MCDP_CD</td>
-<td>VARCHAR(6)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>TLNO</td>
-<td>VARCHAR(50)</td>
-<td>TRUE</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>문제</h5>
-
-<p><code>DOCTOR</code> 테이블에서 진료과가 흉부외과(CS)이거나 일반외과(GS)인 의사의 이름, 의사ID, 진료과, 고용일자를 조회하는 SQL문을 작성해주세요. 이때 결과는 고용일자를 기준으로 내림차순 정렬하고, 고용일자가 같다면 이름을 기준으로 오름차순 정렬해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p><code>DOCTOR</code> 테이블이 다음과 같을 때</p>
-<table class="table">
-        <thead><tr>
-<th>DR_NAME</th>
-<th>DR_ID</th>
-<th>LCNS_NO</th>
-<th>HIRE_YMD</th>
-<th>MCDP_CD</th>
-<th>TLNO</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>루피</td>
-<td>DR20090029</td>
-<td>LC00010001</td>
-<td>2009-03-01</td>
-<td>CS</td>
-<td>01085482011</td>
-</tr>
-<tr>
-<td>패티</td>
-<td>DR20090001</td>
-<td>LC00010901</td>
-<td>2009-07-01</td>
-<td>CS</td>
-<td>01085220122</td>
-</tr>
-<tr>
-<td>뽀로로</td>
-<td>DR20170123</td>
-<td>LC00091201</td>
-<td>2017-03-01</td>
-<td>GS</td>
-<td>01034969210</td>
-</tr>
-<tr>
-<td>티거</td>
-<td>DR20100011</td>
-<td>LC00011201</td>
-<td>2010-03-01</td>
-<td>NP</td>
-<td>01034229818</td>
-</tr>
-<tr>
-<td>품바</td>
-<td>DR20090231</td>
-<td>LC00011302</td>
-<td>2015-11-01</td>
-<td>OS</td>
-<td>01049840278</td>
-</tr>
-<tr>
-<td>티몬</td>
-<td>DR20090112</td>
-<td>LC00011162</td>
-<td>2010-03-01</td>
-<td>FM</td>
-<td>01094622190</td>
-</tr>
-<tr>
-<td>니모</td>
-<td>DR20200012</td>
-<td>LC00911162</td>
-<td>2020-03-01</td>
-<td>CS</td>
-<td>01089483921</td>
-</tr>
-<tr>
-<td>오로라</td>
-<td>DR20100031</td>
-<td>LC00010327</td>
-<td>2010-11-01</td>
-<td>OS</td>
-<td>01098428957</td>
-</tr>
-<tr>
-<td>자스민</td>
-<td>DR20100032</td>
-<td>LC00010192</td>
-<td>2010-03-01</td>
-<td>GS</td>
-<td>01023981922</td>
-</tr>
-<tr>
-<td>벨</td>
-<td>DR20100039</td>
-<td>LC00010562</td>
-<td>2010-07-01</td>
-<td>GS</td>
-<td>01058390758</td>
-</tr>
-</tbody>
-      </table>
-<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>DR_NAME</th>
-<th>DR_ID</th>
-<th>MCDP_CD</th>
-<th>HIRE_YMD</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>니모</td>
-<td>DR20200012</td>
-<td>CS</td>
-<td>2020-03-01</td>
-</tr>
-<tr>
-<td>뽀로로</td>
-<td>DR20170123</td>
-<td>GS</td>
-<td>2017-03-01</td>
-</tr>
-<tr>
-<td>벨</td>
-<td>DR20100039</td>
-<td>GS</td>
-<td>2010-07-01</td>
-</tr>
-<tr>
-<td>자스민</td>
-<td>DR20100032</td>
-<td>GS</td>
-<td>2010-03-01</td>
-</tr>
-<tr>
-<td>패티</td>
-<td>DR20090001</td>
-<td>CS</td>
-<td>2009-07-01</td>
-</tr>
-<tr>
-<td>루피</td>
-<td>DR20090029</td>
-<td>CS</td>
-<td>2009-03-01</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>주의사항</h5>
-
-<p>날짜 포맷은 예시와 동일하게 나와야합니다.</p>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<p>문제는 현재 <code class="language-plaintext highlighter-rouge">FIRST_HALF</code> 테이블에서 총주문량이 큰값을 내림차순으로 정렬하고 <br />
-총주문량이 같다면 출하번호 기준으로 오름차순으로 정렬하는 문제이다.</p>
-
-<pre><code class="language-RoomSql">SELECT 
-    D.DR_NAME, 
-    D.DR_ID, 
-    D.MCDP_CD, 
-    DATE_FORMAT(D.HIRE_YMD, '%Y-%m-%d') AS HIRE_YMD
-FROM DOCTOR D
-WHERE D.MCDP_CD = 'CS' OR D.MCDP_CD = 'GS'
-ORDER BY HIRE_YMD DESC, DR_NAME ASC;
-</code></pre>
-
-<p>DATE_FORMAT을 이용해 날짜형식을 변경해준다. <br />
-그리고 흉부외과(CS), 일반외과(GS)인 경우만 걸러내야하기 때문에 <br />
-WHERE절을 이용해 조건을걸어 값을 필터링해주자</p>
-
-<p>ORDER BY를 통해 내림,오름차순 정렬을 해주면 되는데 <br />
-여기서 정렬조건은 2개이다. 고용날짜(<code class="language-plaintext highlighter-rouge">HIRE_YMD</code>)를 기준으로 내림차순을 하고 <br />
-만약 고용날짜가 같을 경우 의사이름(<code class="language-plaintext highlighter-rouge">DR_NAME</code>)을 기준으로 오름차순 정렬을 해야한다.</p>
-
-<p>ORDER BY 문법에 첫번째 정렬값이 같다면 콤마(,)로 다음 조건을 적어주면 <br />
-해당 기준으로 정렬을 진행해준다.</p>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 흉부외과 또는 일반외과 의사 목록 출력하기]]></summary></entry></feed>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 경기도에 위치한 식품창고 목록 출력하기]]></summary></entry></feed>

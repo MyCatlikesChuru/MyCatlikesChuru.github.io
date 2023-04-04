@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기"
-subtitle: 
+subtitle: 실전! Querydsl 김영한님 강의 정리
 categories: Spring
 tags: [Spring, QueryDSL]
 comments: true
