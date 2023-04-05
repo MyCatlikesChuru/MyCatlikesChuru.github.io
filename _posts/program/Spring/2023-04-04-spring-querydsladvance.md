@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Spring] QueryDSL 사용하기"
+title: "[Spring] QueryDSL 기본문법 사용하기"
 subtitle: 실전! Querydsl 김영한님 강의 정리
 categories: Spring
 tags: [Spring, QueryDSL]
@@ -9,6 +9,44 @@ published: true
 ---
 
 ## QueryDSL   
+
+### 테스트 코드   
+
+이전에 작성했던 [QueryDSL 기초설정 및 JPQL과 비교해보기]에서   
+이어서 작업을 진행하였다. 동일하게 테스트코드는
+
+```java
+public class QuerydslBasicTestPractice {
+
+   @Autowired
+   EntityManager em;
+
+   JPAQueryFactory queryFactory;
+
+   @BeforeEach
+   public void before() {
+      queryFactory = new JPAQueryFactory(em);
+      Team teamA = new Team("teamA");
+      Team teamB = new Team("teamB");
+      em.persist(teamA);
+      em.persist(teamB);
+
+      Member member1 = new Member("member1", 10, teamA);
+      Member member2 = new Member("member2", 20, teamA);
+      Member member3 = new Member("member3", 30, teamB);
+      Member member4 = new Member("member4", 40, teamB);
+      em.persist(member1);
+      em.persist(member2);
+      em.persist(member3);
+      em.persist(member4);
+   }
+}
+```
+
+Team 객체 2개와 Member 객체 4개를 만들어서 테스트를 진행했다.   
+아래의 코드는 위의 @BeforeEach를 통해 만들어진 객체를 기준으로 생각하면된다.  
+
+<br/>
 
 ### Q타입 활용   
 
@@ -231,4 +269,175 @@ select
 
 ### 정렬  
 
+이번에는 정렬을 이용해보자   
+`orderBy()` 메서드를 통해서 정렬을 사용할 수 있다.   
+오름차순 = `asc()` / 내림차순 = `desc()`
 
+정렬 조건을 정해보자   
+멤버 3명을 추가할 것이다.    
+usename이 null인 멤버 하나와, member5~6으로된 멤버 둘   
+나이가 100살로 설정하고 해당 나이에서 정렬을 해보자   
+
+1. 나이순으로 내림차순 
+2. 이름순으로 오름차순
+3. 이름이 null인 경우를 마지막으로 정렬
+
+```java
+    @Test
+    public void sort() {
+        em.persist(new Member(null, 100));
+        em.persist(new Member("member5", 100));
+        em.persist(new Member("member6", 100));
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.eq(100))
+                .orderBy(member.age.desc(), member.username.asc().nullsLast())
+                .fetch();
+
+        Member member5 = result.get(0);
+        Member member6 = result.get(1);
+        Member memberNull = result.get(2);
+
+        assertThat(member5.getUsername()).isEqualTo("member5");
+        assertThat(member6.getUsername()).isEqualTo("member6");
+        assertThat(memberNull.getUsername()).isNull();
+    }
+```
+
+`fetch()`로 반환하여 List형태로 3개의 Member 객체를 받을 수 있다.   
+정렬순서대로 get(0)~get(2)하여 검증을 해보면    
+이름순으로 정렬되고 마지막이 null로 찍힌 모습을 확인할 수 있다.   
+
+`nullsLast()`를 하지않게된다면 첫번째가 null인 객체를 받게되어진다.   
+
+<br/>   
+
+### 페이징   
+
+첫번쨰로 `offset()`,`limit()`를 이용해 원하는 항목만큼 가져올 수 있다.
+
+```java
+    @Test
+    public void paging1() {
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetch();
+        assertThat(result.size()).isEqualTo(2);
+    }
+```
+member1~4까지 객체가 등록되어있고    
+username으로 내림차순으로 설정해두었다.   
+offset이 1이기 때문에 시작지점은 첫번째부터 시작하고 limit가 2이기 때문에   
+2개의 데이터만 뽑아서 `fetch()`를 하게되면 List형태로 추출하게된다.   
+
+Member(id=5, username=member3, age=30)   
+Member(id=4, username=member2, age=20)   
+
+객체를 출력하게되면 이렇게 나오게되어진다.
+
+<br/>   
+
+두번쨰로는 `fetchResults()`를 결과로 뽑아내는 방법이다.
+
+```java
+    @Test
+    public void paging2() {
+        QueryResults<Member> queryResults = queryFactory
+                .selectFrom(member)
+                .orderBy(member.username.desc())
+                .offset(1)
+                .limit(2)
+                .fetchResults();
+
+        assertThat(queryResults.getTotal()).isEqualTo(4);
+        assertThat(queryResults.getLimit()).isEqualTo(2);
+        assertThat(queryResults.getOffset()).isEqualTo(1);
+        assertThat(queryResults.getResults()).isEqualTo(2);
+    }
+```
+
+위와 동일한 방식이지만 결과를 `fetchResults()` 통해서 객체를 받았다.    
+`.getTotal()`을 이용하면 총 4개의 객체가 나오기 떄문에 = `4`   
+`.getLimit()`를 이용하면 2개로 설정하였기에 = `2`   
+(여기서 limit를 설정하지 않았다면, Long타입의 최대값 9223372036854775807L이 표시된다.)   
+`.getOffset()`를 이용하면 1로 설정하였기 때문에 = `1`   
+`.getResults()`를 이용하면 최종적으로 반환된 행의 내용들이 표시되기 때문에 = `2` 가 되어진다.   
+
+
+실제 출력쿼리를 확인해보면 아래와 같이 확인할 수 있다.
+
+```roomsql
+select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  order by
+      member0_.username desc limit ? offset ?
+```
+limit, offset 파라미터 바인딩된 모습을 볼 수 있다.   
+
+<br/>  
+
+### 집합 
+
+[//]: # ()
+[//]: # ()
+[//]: # (첫번째로는 select)
+
+[//]: # ()
+[//]: # (```java)
+
+[//]: # (    @Test)
+
+[//]: # (    public void aggregation&#40;&#41; {)
+
+[//]: # (        List<Tuple> result = queryFactory)
+
+[//]: # (                .select&#40;)
+
+[//]: # (                        member.count&#40;&#41;,)
+
+[//]: # (                        member.age.sum&#40;&#41;,)
+
+[//]: # (                        member.age.avg&#40;&#41;,)
+
+[//]: # (                        member.age.max&#40;&#41;,)
+
+[//]: # (                        member.age.min&#40;&#41;)
+
+[//]: # (                &#41;)
+
+[//]: # (                .from&#40;member&#41;)
+
+[//]: # (                .fetch&#40;&#41;;)
+
+[//]: # ()
+[//]: # (        Tuple tuple = result.get&#40;0&#41;;)
+
+[//]: # (        assertThat&#40;tuple.get&#40;member.count&#40;&#41;&#41;&#41;.isEqualTo&#40;4&#41;;)
+
+[//]: # (        assertThat&#40;tuple.get&#40;member.age.sum&#40;&#41;&#41;&#41;.isEqualTo&#40;100&#41;;)
+
+[//]: # (        assertThat&#40;tuple.get&#40;member.age.avg&#40;&#41;&#41;&#41;.isEqualTo&#40;25&#41;;)
+
+[//]: # (        assertThat&#40;tuple.get&#40;member.age.max&#40;&#41;&#41;&#41;.isEqualTo&#40;40&#41;;)
+
+[//]: # (        assertThat&#40;tuple.get&#40;member.age.min&#40;&#41;&#41;&#41;.isEqualTo&#40;10&#41;;)
+
+[//]: # (    })
+
+[//]: # (```)
+
+
+
+
+<br/>
+
+[QueryDSL 기초설정 및 JPQL과 비교해보기]: https://mycatlikeschuru.github.io/spring/2023/04/04/spring-querydsl.html
