@@ -218,11 +218,8 @@ published: true
 
 ## 🗝 문제 풀이
 
-1. SUM을 이용해 (가격 * 수량)을 곱한 값 행의 합계를 SALES 컬럼으로 지정한다.
-2. LEFT JOIN하여 PRODUCT_ID가 같은 것을 찾기
-3. PRODUCT_CODE를 그룹핑
-4. 최종적으로 SALES 컬럼, SUM되어진 가격*수량 값을 기준으로 내림차순 정렬
-5. 만약 컬럼의 값이 같다면 PRODUCT_CODE를 오름차순하여 정렬
+1. SUM을 이용해 TOTAL_ORDER 의 값을 집계한다, GROUP BY는 INGREDIENT_TYPE 기준으로  
+2. LEFT JOIN하여 FLAVOR이 같은 것을 찾기
 
 ```RoomSql
 SELECT i.INGREDIENT_TYPE,
