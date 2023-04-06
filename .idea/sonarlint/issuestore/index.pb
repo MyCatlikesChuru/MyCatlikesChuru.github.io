@@ -418,3 +418,5 @@ _
 /_posts/codingtest/sql/2023-04-01-sql-carrent.md,d/d/dd83d8b5b5bd180f3861ac0f2e810bba7a251485
 _
 /_posts/codingtest/sql/2023-04-01-sql-cartype.md,c/b/cb29760dd39e20a7f50f5be414dadf734d5e1621
+b
+2_posts/codingtest/sql/2023-04-04-sql-productsum.md,e/3/e30b5d8baa02c61698159ab1e7851717fb7b7284
