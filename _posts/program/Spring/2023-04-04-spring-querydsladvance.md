@@ -267,7 +267,7 @@ select
 
 <br/>
 
-### 정렬  
+### 정렬 (ORDER BY)
 
 이번에는 정렬을 이용해보자   
 `orderBy()` 메서드를 통해서 정렬을 사용할 수 있다.   
@@ -385,56 +385,267 @@ limit, offset 파라미터 바인딩된 모습을 볼 수 있다.
 
 <br/>  
 
-### 집합 
+### 집합 (GROUP BY)
 
-[//]: # ()
-[//]: # ()
-[//]: # (첫번째로는 select)
+SQL GROUP BY와 같은 역할을하는 기능이다.    
+SUN(), AVG(), MAX(), MIN(), COUNT() 등 다양한 집계 함수를 지원한다.  
 
-[//]: # ()
-[//]: # (```java)
+첫번쨰 예제를 살펴보자.
 
-[//]: # (    @Test)
+```java
+    @Test
+    public void aggregation() {
+        List<Tuple> result = queryFactory
+                .select(
+                        member.count(),
+                        member.age.sum(),
+                        member.age.avg(),
+                        member.age.max(),
+                        member.age.min()
+                )
+                .from(member)
+                .fetch();
 
-[//]: # (    public void aggregation&#40;&#41; {)
+        Tuple tuple = result.get(0);
+        
+        assertThat(tuple.get(member.count())).isEqualTo(4);
+        assertThat(tuple.get(member.age.sum())).isEqualTo(100);
+        assertThat(tuple.get(member.age.avg())).isEqualTo(25);
+        assertThat(tuple.get(member.age.max())).isEqualTo(40);
+        assertThat(tuple.get(member.age.min())).isEqualTo(10);
+    }
 
-[//]: # (        List<Tuple> result = queryFactory)
+```
 
-[//]: # (                .select&#40;)
+집계함수를 이용해 값을 가져왔다.   
+`List<Tuple> result` 사이즈는 `1`이다.   
 
-[//]: # (                        member.count&#40;&#41;,)
+현재 총 4개의 Member가 저장되어 있고 나이는 10,20,30,40으로 들어가 있다.    
+즉, Count = 4 / sum = 100 / avg = 25 / max = 40 / min = 10 이 나와야한다.   
 
-[//]: # (                        member.age.sum&#40;&#41;,)
+<br/>   
 
-[//]: # (                        member.age.avg&#40;&#41;,)
+이제 GROUP BY를 이용하여 보자
 
-[//]: # (                        member.age.max&#40;&#41;,)
+```java
+    @Test
+    public void group() {
+        List<Tuple> result = queryFactory
+                .select(
+                        team.name,
+                        member.age.avg()
+                )
+                .from(member)
+                .join(member.team, team)
+                .groupBy(team.name)
+                .fetch();
 
-[//]: # (                        member.age.min&#40;&#41;)
+        Tuple teamA = result.get(0);
+        Tuple teamB = result.get(1);
 
-[//]: # (                &#41;)
+        assertThat(teamA.get(team.name)).isEqualTo("teamA");
+        assertThat(teamA.get(member.age.avg())).isEqualTo(15); // (10+20) / 2
 
-[//]: # (                .from&#40;member&#41;)
+        assertThat(teamB.get(team.name)).isEqualTo("teamB");
+        assertThat(teamB.get(member.age.avg())).isEqualTo(35); // (30+40) / 2
+```
 
-[//]: # (                .fetch&#40;&#41;;)
+team.name을 기준으로 GroupBy를 하였다.    
+현재 Team은 2개가 있고, teamA, teamB라는 이름으로 저장되어있다.    
+그리고 Member는 4개가 있고, member1, member2가 teamA에 속하고   
+member3,member4가 teamB에 속한다. 나이는 첫번째 예제와 같이 10~40까지이다.   
 
-[//]: # ()
-[//]: # (        Tuple tuple = result.get&#40;0&#41;;)
+join은 아래에서 배우겠지만 member테이블에서 같은 Team의 이름을 조인하여   
+테이블을 가져왔고 team.name으로 GroupBy하였기 때문에 총 2개의 행을 가져오게된다.   
+즉, `List<Tuple> reulst`의 값은 2개가 존재하게 된다.   
 
-[//]: # (        assertThat&#40;tuple.get&#40;member.count&#40;&#41;&#41;&#41;.isEqualTo&#40;4&#41;;)
+당연하게도 `.having()`문법도 사용가능하다.   
+```java
+    -
+     .groupBy(item.price)
+     .having(item.price.gt(1000))
+    -
+```
+아이템 가격이 1000 초과인 것들만 가져오는 문법
 
-[//]: # (        assertThat&#40;tuple.get&#40;member.age.sum&#40;&#41;&#41;&#41;.isEqualTo&#40;100&#41;;)
+<br/>   
 
-[//]: # (        assertThat&#40;tuple.get&#40;member.age.avg&#40;&#41;&#41;&#41;.isEqualTo&#40;25&#41;;)
+### Join - 기본
 
-[//]: # (        assertThat&#40;tuple.get&#40;member.age.max&#40;&#41;&#41;&#41;.isEqualTo&#40;40&#41;;)
+- join , leftJoin, rightJoin 등이 있다.
 
-[//]: # (        assertThat&#40;tuple.get&#40;member.age.min&#40;&#41;&#41;&#41;.isEqualTo&#40;10&#41;;)
+Join 하는 방법을 작성해보자
 
-[//]: # (    })
+**1). 연관관계가 있는 Join**
 
-[//]: # (```)
+```java
+    @Test
+    public void join() {
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .join(member.team, team)
+                .where(team.name.eq("teamA"))
+                .fetch();
 
+        assertThat(result)
+                .extracting("username")
+                .containsExactly("member1","member2");
+
+    }
+```
+
+위와 같이 InnerJoin을 통해서 teamA에 소속된   
+Member들을 List로 받아왔다.
+
+
+
+JPQL 문법은 아래와 같이 만들어진다.
+
+```roomsql
+select
+     member1 
+ from
+     Member member1   
+ inner join
+     member1.team as team 
+ where
+```
+
+<br/>   
+
+**2). 연관관계가 없는 Join**
+
+연관관계가 없을때 조인하는것을 세타(theta)조인이라고 한다.   
+관계가 정의되어 있지 않아도 Join하여 사용이 가능하다.     
+   
+현재 `member`의 `username`과 `team`과는 연관 관계가 정의되어 있지않다.      
+username을 강제로 team.name과 같도록 `em.persist`하여 테스트해보자.  
+아래의 예제를 살펴보자  
+
+```java
+    @Test
+    public void theta_join() {
+        em.persist(new Member("teamA"));
+        em.persist(new Member("teamB"));
+
+        List<Member> result = queryFactory
+                .select(member)
+                .from(member, team)
+                .where(member.username.eq(team.name))
+                .fetch();
+
+        assertThat(result)
+                .extracting("username")
+                .containsExactly("teamA", "teamB");
+    }
+```
+현재 team은 총 2개의 행이 들어가 있고 각각 teamA, teamB라는 name을 가지고 있다.  
+이제 member에서 연관관계가 없는 username을 통해 Join을 할 경우에는   
+
+from절에서 Qmember, QTeam을 두개를 불러온다.   
+이전에 관계가 있는 join과는 다른 모습을 볼 수 있다.
+
+JPQL은 아래와 같이 생성된다.
+
+```roomsql
+select
+     member1 
+ from
+     Member member1,
+     Team team 
+ where
+     member1.username = team.name
+```
+
+실제로 SQL이 나가는 것은   
+
+```roomsql
+select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ cross 
+  join
+      team team1_ 
+  where
+      member0_.username=team1_.name
+```
+위오 ㅏ같이 join이 이루어진 것을 볼 수 있다.
+
+<br/>  
+
+### Join - on절   
+
+on절을 활용한 조인은 JPA 2.1부터 지원한다.
+
+- 조인 대상 필터링
+- 연관관계 없는 엔티티 외부 조인
+
+on절과 where절은 모두 결과를 반환하기위한 조건을 걸기위해 사용하는 조건이지만
+Join할 대상의 범위가 달라지기도 한다.   
+Inner Join을 할경우 on, where을 사용해도 동일한 결과를 볼 수 있지만  
+Left Join을 사용할 경우에는 차이를 볼 수 있다.      
+
+on절 = 테이블에 join할 떄 범위를 정해줌    
+where = 결과값이 나온것을 가지고 조건을줘서 범위를 정해줌  
+
+예제를 살펴보자   
+
+**1). left join시 on절을 사용하였을 경우**
+```java
+    @Test
+    public void join_on_filtering() {
+        List<Tuple> result = queryFactory
+                .select(member, team)
+                .from(member)
+                .leftJoin(member.team, team)
+                .on(team.name.eq("teamA")) // <- on절을 사용
+                .fetch();
+
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+    
+// 출력 결과
+tuple = [Member(id=3, username=member1, age=10), Team(id=1, name=teamA)]
+tuple = [Member(id=4, username=member2, age=20), Team(id=1, name=teamA)]
+tuple = [Member(id=5, username=member3, age=30), null]
+tuple = [Member(id=6, username=member4, age=40), null]    
+```
+
+team.naem = 'teamA'와 같은 것들을 필터링하게 하였다.   
+Join할때 범위를 정해주기 때문에 4개의 객체 모두 출력되고   
+on절로 지정한 teamA와 같은 객체는 표시되고 없는 것들은 null로 반환되었다.  
+
+<br/>
+
+**2). left join시 where절을 사용하였을 경우**
+
+```java
+    @Test
+    public void join_on_filtering() {
+        List<Tuple> result = queryFactory
+                .select(member, team)
+                .from(member)
+                .leftJoin(member.team, team)
+                .where(team.name.eq("teamA"))
+                .fetch();
+
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+    
+// 출력 결과
+tuple = [Member(id=3, username=member1, age=10), Team(id=1, name=teamA)]
+tuple = [Member(id=4, username=member2, age=20), Team(id=1, name=teamA)]
+```
+
+where절을 사용하였을 경우는 Join을 완료한다음에 범위를 필터링 하기 때문에   
+4개의 객체에서 teamA로 되어있는 2개만 표시되는 모습이다.
 
 
 
