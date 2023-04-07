@@ -9,7 +9,7 @@ published: true
 ---
 
 MySQL Foreign Key를 설정하는 방법을 적어보려한다.   
-간단하게 아래와 같은 테이블을 준비했다.  
+간단하게 아래와 같은 테이블을 준비했다.
 
 스키마 이름은 sqlpractice로 설정하였다.
 
@@ -43,7 +43,7 @@ FOREIGN KEY를 설정하기전에 관계를 살펴보자
 
 1 : N : 1 관계의 테이블이고   
 POSTS_TAG가 연관관계의 주인이며 POSTS의 PK를 FK로 가지고 있고   
-TAG의 PK를 FK로 가지고 있는 상태이다.  
+TAG의 PK를 FK로 가지고 있는 상태이다.
 
 FOREIGN KEY 설정 문법은 아래와 같다
 ```roomsql
@@ -54,7 +54,7 @@ FOREIGN KEY (컬럼명) REFERENCES 대상 테이블명 (컬럼명);
 <br/>
 
 
-위의 관계도처럼 POSTS_TAG 테이블에 FOREIGN KEY를 설정하려면 아래와 같이 입력하면된다.   
+위의 관계도처럼 POSTS_TAG 테이블에 FOREIGN KEY를 설정하려면 아래와 같이 입력하면된다.
 
 ```roomsql
 ALTER TABLE sqlpractice.posts_tag ADD 
