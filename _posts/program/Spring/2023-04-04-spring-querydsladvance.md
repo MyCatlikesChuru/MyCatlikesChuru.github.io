@@ -583,7 +583,7 @@ on절을 활용한 조인은 JPA 2.1부터 지원한다.
 - 조인 대상 필터링
 - 연관관계 없는 엔티티 외부 조인
 
-on절과 where절은 모두 결과를 반환하기위한 조건을 걸기위해 사용하는 조건이지만
+on절과 where절은 모두 결과를 반환하기위한 조건을 걸기위해 사용하는 조건이지만  
 Join할 대상의 범위가 달라지기도 한다.   
 Inner Join을 할경우 on, where을 사용해도 동일한 결과를 볼 수 있지만  
 Left Join을 사용할 경우에는 차이를 볼 수 있다.      
@@ -646,6 +646,418 @@ tuple = [Member(id=4, username=member2, age=20), Team(id=1, name=teamA)]
 
 where절을 사용하였을 경우는 Join을 완료한다음에 범위를 필터링 하기 때문에   
 4개의 객체에서 teamA로 되어있는 2개만 표시되는 모습이다.
+
+<br/>
+
+### fetchJoin   
+
+fetchJoin은 SQL에서 제공하는 기능은 아니다.   
+SQL Join을 활용해 연관된 Entity를 한번에 조회하는기능이다.  
+주로 성능 최적화에 사용하는 방법이다. (ex: N+1 문제)  
+
+아래에서 차이를 비교해보자.  
+
+**1). fetchJoin을 사용하지 않을 때**
+
+```java
+    @PersistenceUnit
+    EntityManagerFactory emf;
+
+    @Test
+    public void fetchJoinNo() {
+        em.flush();
+        em.clear();
+
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .where(member.username.eq("member1"))
+                .fetchOne();
+
+        // 영속성 컨텍스트에 Team이 Load되었는지 확인하는 메서드
+        // Load되었다면 = true, 아니라면 = false
+        boolean loaded = emf.getPersistenceUnitUtil().isLoaded(findMember.getTeam());
+        assertThat(loaded).as("패치 조인 미적용").isFalse();
+    }
+```
+
+제대로된 테스트를 위해 우선 영속성 컨텍스트의 내용을 비우고 시작해야한다. (`em.flush()`, `em.claer()`)    
+또한 알아둬야할 것은 Member 클래스 Team FK가 지연로딩(`@ManyToOne(fetch = FetchType.LAZY)`)로 설정되어있다.    
+즉, Member 객체를 로딩할때 Team 객체는 바로 로딩되어지지 않는다.
+
+`EntityManagerFactory`를 이용해 로딩되었는지 확인할 수 있다.    
+위와 같이 쿼리를 입력하였을 경우 실제로 Team 객체는 로딩되어지지 않고   
+`loaded`라는 불리언값으로 `false`가 나오면 영속성 컨텍스트에 로딩되지 않았다는 뜻이다.   
+
+실제 출력된 SQL을 확인해보면
+```roomsql
+select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  where
+      member0_.username=?
+```
+Member 객체만 쿼리가 발생한 것을 알 수 있다.   
+Team에 대한 쿼리는 찾아 볼 수 없다.    
+
+만약 여기서 중간에 `findMember.getTeam.getName()`를 코드를 추가하여  
+실행하게 된다면 LAZY 정책으로 인해 쿼리가 2번 발생한다.   
+
+```roomsql
+// fetchOne(); 진행시
+select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  where
+      member0_.username=?
+
+// findMember.getTeam.getName(); 메서드 실행시
+select
+      team0_.id as id1_2_0_,
+      team0_.name as name2_2_0_ 
+   from
+      team team0_ 
+   where
+      team0_.id=?
+```
+
+위처럼 Member 쪽 쿼리와 getTeam() 메서드 실행시 쿼리까지 총 2개의 쿼리가 발생하게된다.      
+여기서 우리는 fetchJoin()을 이용해 하나의 쿼리문으로 작성할 수 있다.   
+
+<br/>  
+
+2). fetchJoin을 사용할 떄
+
+Member, Team을 Join한후 `.fetchJoin()`을 사용하게 된다면   
+위에서 쿼리가 2번나오게되는 것을 한방에 나오게 할 수 있다.   
+
+```java
+    @Test
+    public void fetchJoinUse() {
+        em.flush();
+        em.clear();
+
+        Member findMember = queryFactory
+                .selectFrom(member)
+                .join(member.team, team).fetchJoin()
+                .where(member.username.eq("member1"))
+                .fetchOne();
+
+        // 영속성 컨텍스트에 Team이 Load되었는지 확인하는 메서드
+        // Load되었다면 = true, 아니라면 = false
+        boolean loaded = emf.getPersistenceUnitUtil().isLoaded(findMember.getTeam());
+        assertThat(loaded).as("패치 조인 적용").isTrue();
+    }
+```
+
+위와 같이 코드를 변경하고   
+
+<br/>  
+
+실제로 쿼리문을 확인해보면
+
+```roomsql
+select
+      member0_.member_id as member_i1_1_0_,
+      team1_.id as id1_2_1_,
+      member0_.age as age2_1_0_,
+      member0_.team_id as team_id4_1_0_,
+      member0_.username as username3_1_0_,
+      team1_.name as name2_2_1_ 
+  from
+      member member0_ 
+  inner join
+      team team1_ 
+          on member0_.team_id=team1_.id 
+  where
+      member0_.username=?
+```
+
+member, team을 한번에 가져오는 모습을 확인할 수 있다.   
+
+<br/>  
+
+### 서브쿼리 (SubQuery)
+
+서브쿼리는 SQL문 안에 또 다른 SQL문을 말한다.   
+
+**1). where절에서 서브쿼리 사용**  
+
+```java
+    @Test
+    public void subQuery() {
+
+        QMember membeSub = new QMember("membeSub");
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.eq(
+                        JPAExpressions
+                                .select(membeSub.age.max())
+                                .from(membeSub)
+                ))
+                .fetch();
+
+        assertThat(result)
+                .extracting("age")
+                .containsExactly(40);
+    }
+```
+
+첫번째 쿼리 where절안에 `memberSub`라는 Q타입 객체를 만들어   
+`JPAExpressions`를 통해서 안에 또다른 쿼리문을 작성한 예제이다.   
+최종 적으로 `where(member.age.eq(40))`이라는 값으로 바뀌게 되어지고   
+회원의 나이가 40살인 값을 찾아오는 쿼리 예제이다.  
+
+
+실제 SQL문을 확인해보면
+
+```roomsql
+select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  where
+      member0_.age=(
+          select
+              max(member1_.age) 
+          from
+              member member1_
+      )
+```
+where 절안에 쿼리가 작성되어 있는 모습을 볼 수 있다.   
+
+<br/>  
+
+**2). IN절을 이용한 서브쿼리 예제**  
+
+IN절을 잠깐 얘기하고 가자면   
+OR절과 동일한데 코드를 간략하게 줄여준다고 생각하면 된다.   
+
+ex) `WHERE age = 20 OR age = 30` = `WHERE age IN (20,30)`
+
+```java
+    @Test
+    public void subQueryIn() {
+
+        QMember membeSub = new QMember("membeSub");
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .where(member.age.in(
+                        JPAExpressions
+                                .select(membeSub.age)
+                                .from(membeSub)
+                                .where(membeSub.age.gt(10))
+                ))
+                .fetch();
+
+        assertThat(result)
+                .extracting("age")
+                .containsExactly(20,30,40);
+    }
+```
+
+위와 같은 코드로 보면 나이가 10이상인 멤버들을 서브쿼리에서 가져오며   
+in절을 사용했기때문에 메인 쿼리에서 20,30,40과 같은 나이를 가진   
+회원을 조회하게되어 총 3개의 행이 출력되게 되어진다.  
+
+<br/>  
+
+**3). select절에서 사용한 서브쿼리**    
+
+
+```java
+    @Test
+    public void selectQuery() {
+
+        QMember memberSub = new QMember("memberSub");
+
+        List<Tuple> result = queryFactory
+                .select(
+                        member.username,
+                        JPAExpressions
+                                .select(memberSub.age.avg())
+                                .from(memberSub)
+                )
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+    
+// 출력 내용  
+tuple = [member1, 25.0]
+tuple = [member2, 25.0]
+tuple = [member3, 25.0]
+tuple = [member4, 25.0]
+```
+
+select 구문안에 사용ㅎ란 subQuery 예제이다.    
+member 객체의 10,20,30,40이라는 나이가 들어가 있고 평균은 25가 된다.   
+즉, 출력 내용과 같이 4개의 Tuple이 출력되게 되어진다.   
+
+<br/>  
+
+마지막으로 JPA, JPQL 서브쿼리의 한계점으로 from 절의 서브쿼리는 지원하지 않는다.   
+그러므로 Querydsl도 당연히 지원하지 않는다.   
+
+<br/>  
+
+### CASE 문   
+
+SQL에서 사용하는 CASE, WHEN, THEN, ELSE 에 대한 문법이다.   
+예제를 통해서 살펴보자   
+
+```java
+    @Test
+    public void basicCase() {
+        List<String> result = queryFactory
+                .select(
+                        member.age
+                                .when(10).then("열살")
+                                .when(20).then("스무살")
+                                .otherwise("기타")
+                )
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+    
+// 출력 내용
+s = 열살
+s = 스무살
+s = 기타
+s = 기타
+```
+10살일 경우 = 열살로 / 20살일 경우 = 스무살로   
+그외일 경우 = 기타로 표시하는 방법이다.   
+
+<br/>   
+
+다른 예제를 살펴보자   
+
+```java
+    @Test
+    public void complexCase() {
+        List<String> result = queryFactory
+                .select(new CaseBuilder()
+                        .when(member.age.between(0, 20)).then("0~20살")
+                        .when(member.age.between(21, 30)).then("21~30살")
+                        .otherwise("기타")
+                )
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+```
+위와 같이 `new CaseBuilder()`를 이용하여 사용할 수도 있다.  
+
+<br/>   
+
+### 상수,문자 더하기   
+
+상수랑 문자더하기에 대한 예제를 알아보자  
+
+
+**1). 상수를 넣는법**  
+
+`Expressions`라는 인터페이스를 이용해 `.constant`메서드를   
+이용하면 상수를 넣어줄 수 있다.
+
+```java
+    @Test
+    public void constant() {
+        List<Tuple> result = queryFactory
+                .select(member.username, Expressions.constant("A"))
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : result) {
+            System.out.println("tuple = " + tuple);
+        }
+    }
+    
+// 출력 내용
+tuple = [member1, A]
+tuple = [member2, A]
+tuple = [member3, A]
+tuple = [member4, A]
+```    
+
+select에 "A"라는 상수 값을 넣어 출력하였다.    
+기존에 4개의 객체를 가지고 있기때문에 4개의 Tuple이 출력된 모습이다.
+
+<br/>
+
+**2). 문자열 붙이는법**
+
+`.concat` 메서드를 활용해 사용이 가능하다.
+
+```java
+    @Test
+    public void concat() {
+
+        // username_age 와 같은 형태로 만들기
+        // username, age가 타입이 다름
+        List<String> result = queryFactory
+                .select(member.username.concat("_").concat(member.age.stringValue()))
+                .from(member)
+                .where(member.username.eq("member1"))
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+    
+// 출력 내용
+s = member1_10
+```
+출력할때 `username_age`와 같은 형태로 표시하려한다. ex) `member2_20`    
+select 구절에서 `.concat("_")`을 이용해 언더바를 붙여주었고   
+뒤에 한번더 age를 붙여주도록 메서드를 사용하였다. 여기서 age가 username과 타입이 다르기 때문에    
+타입을 변환해주는 `.stringValue()`를 사용해주어야한다.   
+
+최종적으로 쿼리가 나가는 모습을 보면   
+```roomsql
+select
+      ((member0_.username||?)||cast(member0_.age as character varying)) as col_0_0_ 
+  from
+      member member0_ 
+  where
+      member0_.username=?
+```
+와 같이 쿼리가 나가는 모습을 볼 수 있는데   
+여기서 확인할 수 있는점은 cast()가 되어 타입을 맞춰주고 있다는 점이다.  
+
+<br/>  
+<br/>   
+
+---   
+
+여기까지 QueryDsl의 기본 문법들을 알아보았다.   
+JPQL,SQL 문법을 자세히 알면 어느정도 학습하기 괜찮은 수준인 것 같다.  
+(하지만 JPQL,SQL 문법을 잘몰라 공부하느라 시간이 꽤 걸렷다...)
+
 
 
 

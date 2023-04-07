@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>[Spring] QueryDSL 사용하기 | LeeJellan</title>
+<title>[Spring] QueryDSL 기본문법 사용하기 | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
-<meta property="og:title" content="[Spring] QueryDSL 사용하기">
+<meta property="og:title" content="[Spring] QueryDSL 기본문법 사용하기">
 <meta name="author" content="LEE JAEHYEOK">
 <meta property="og:locale" content="en_US">
 <meta name="description" content="QueryDSL">
@@ -20,9 +20,9 @@
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2023-04-04T00:00:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="[Spring] QueryDSL 사용하기">
+<meta property="twitter:title" content="[Spring] QueryDSL 기본문법 사용하기">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-04-04T00:00:00+09:00","datePublished":"2023-04-04T00:00:00+09:00","description":"QueryDSL","headline":"[Spring] QueryDSL 사용하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html"},"url":"http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-04-04T00:00:00+09:00","datePublished":"2023-04-04T00:00:00+09:00","description":"QueryDSL","headline":"[Spring] QueryDSL 기본문법 사용하기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html"},"url":"http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="/assets/images/favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">[Spring] QueryDSL 사용하기</h1>
+  <h1 class="post-title p-name" itemprop="name headline">[Spring] QueryDSL 기본문법 사용하기</h1>
   <h2 class="post-subtitle">실전! Querydsl 김영한님 강의 정리</h2>
 
   <p class="post-meta">
@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 33 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
@@ -686,6 +686,43 @@ document.addEventListener('DOMContentLoaded', function(event) {
     <div class="post-content e-content" itemprop="articleBody">
 
       <h2 id="querydsl">QueryDSL</h2>
+
+<h3 id="테스트-코드">테스트 코드</h3>
+
+<p>이전에 작성했던 <a href="https://mycatlikeschuru.github.io/spring/2023/04/04/spring-querydsl.html">QueryDSL 기초설정 및 JPQL과 비교해보기</a>에서 <br>
+이어서 작업을 진행하였다. 동일하게 테스트코드는</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
+
+   <span class="nd">@Autowired</span>
+   <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+   <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span><span class="o">;</span>
+
+   <span class="nd">@BeforeEach</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
+      <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
+      <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
+
+      <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+      <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+      <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+      <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Team 객체 2개와 Member 객체 4개를 만들어서 테스트를 진행했다. <br>
+아래의 코드는 위의 @BeforeEach를 통해 만들어진 객체를 기준으로 생각하면된다.</p>
+
+<p><br></p>
 
 <h3 id="q타입-활용">Q타입 활용</h3>
 
@@ -903,7 +940,770 @@ findMember를 통해 접근이 가능하다.</p>
 
 <p><br></p>
 
-<h3 id="정렬">정렬</h3>
+<h3 id="정렬-order-by">정렬 (ORDER BY)</h3>
+
+<p>이번에는 정렬을 이용해보자 <br>
+<code class="language-plaintext highlighter-rouge">orderBy()</code> 메서드를 통해서 정렬을 사용할 수 있다. <br>
+오름차순 = <code class="language-plaintext highlighter-rouge">asc()</code> / 내림차순 = <code class="language-plaintext highlighter-rouge">desc()</code></p>
+
+<p>정렬 조건을 정해보자 <br>
+멤버 3명을 추가할 것이다.  <br>
+usename이 null인 멤버 하나와, member5~6으로된 멤버 둘 <br>
+나이가 100살로 설정하고 해당 나이에서 정렬을 해보자</p>
+
+<ol>
+  <li>나이순으로 내림차순</li>
+  <li>이름순으로 오름차순</li>
+  <li>이름이 null인 경우를 마지막으로 정렬</li>
+</ol>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sort</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="mi">100</span><span class="o">));</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member5"</span><span class="o">,</span> <span class="mi">100</span><span class="o">));</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member6"</span><span class="o">,</span> <span class="mi">100</span><span class="o">));</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="mi">100</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">orderBy</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">desc</span><span class="o">(),</span> <span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">asc</span><span class="o">().</span><span class="na">nullsLast</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="nc">Member</span> <span class="n">member5</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member6</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">memberNull</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">member5</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member5"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">member6</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member6"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">memberNull</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isNull</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">fetch()</code>로 반환하여 List형태로 3개의 Member 객체를 받을 수 있다. <br>
+정렬순서대로 get(0)~get(2)하여 검증을 해보면  <br>
+이름순으로 정렬되고 마지막이 null로 찍힌 모습을 확인할 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">nullsLast()</code>를 하지않게된다면 첫번째가 null인 객체를 받게되어진다.</p>
+
+<p><br></p>
+
+<h3 id="페이징">페이징</h3>
+
+<p>첫번쨰로 <code class="language-plaintext highlighter-rouge">offset()</code>,<code class="language-plaintext highlighter-rouge">limit()</code>를 이용해 원하는 항목만큼 가져올 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">paging1</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">orderBy</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">desc</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">offset</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">size</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>member1~4까지 객체가 등록되어있고  <br>
+username으로 내림차순으로 설정해두었다. <br>
+offset이 1이기 때문에 시작지점은 첫번째부터 시작하고 limit가 2이기 때문에 <br>
+2개의 데이터만 뽑아서 <code class="language-plaintext highlighter-rouge">fetch()</code>를 하게되면 List형태로 추출하게된다.</p>
+
+<p>Member(id=5, username=member3, age=30) <br>
+Member(id=4, username=member2, age=20)</p>
+
+<p>객체를 출력하게되면 이렇게 나오게되어진다.</p>
+
+<p><br></p>
+
+<p>두번쨰로는 <code class="language-plaintext highlighter-rouge">fetchResults()</code>를 결과로 뽑아내는 방법이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">paging2</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">QueryResults</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">queryResults</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">orderBy</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">desc</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">offset</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">limit</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetchResults</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">queryResults</span><span class="o">.</span><span class="na">getTotal</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">queryResults</span><span class="o">.</span><span class="na">getLimit</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">queryResults</span><span class="o">.</span><span class="na">getOffset</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">queryResults</span><span class="o">.</span><span class="na">getResults</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 동일한 방식이지만 결과를 <code class="language-plaintext highlighter-rouge">fetchResults()</code> 통해서 객체를 받았다.  <br>
+<code class="language-plaintext highlighter-rouge">.getTotal()</code>을 이용하면 총 4개의 객체가 나오기 떄문에 = <code class="language-plaintext highlighter-rouge">4</code> <br>
+<code class="language-plaintext highlighter-rouge">.getLimit()</code>를 이용하면 2개로 설정하였기에 = <code class="language-plaintext highlighter-rouge">2</code> <br>
+(여기서 limit를 설정하지 않았다면, Long타입의 최대값 9223372036854775807L이 표시된다.) <br>
+<code class="language-plaintext highlighter-rouge">.getOffset()</code>를 이용하면 1로 설정하였기 때문에 = <code class="language-plaintext highlighter-rouge">1</code> <br>
+<code class="language-plaintext highlighter-rouge">.getResults()</code>를 이용하면 최종적으로 반환된 행의 내용들이 표시되기 때문에 = <code class="language-plaintext highlighter-rouge">2</code> 가 되어진다.</p>
+
+<p>실제 출력쿼리를 확인해보면 아래와 같이 확인할 수 있다.</p>
+
+<pre><code class="language-roomsql">select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  order by
+      member0_.username desc limit ? offset ?
+</code></pre>
+<p>limit, offset 파라미터 바인딩된 모습을 볼 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="집합-group-by">집합 (GROUP BY)</h3>
+
+<p>SQL GROUP BY와 같은 역할을하는 기능이다.  <br>
+SUN(), AVG(), MAX(), MIN(), COUNT() 등 다양한 집계 함수를 지원한다.</p>
+
+<p>첫번쨰 예제를 살펴보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">aggregation</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Tuple</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">count</span><span class="o">(),</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">sum</span><span class="o">(),</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">avg</span><span class="o">(),</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">max</span><span class="o">(),</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">min</span><span class="o">()</span>
+                <span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="nc">Tuple</span> <span class="n">tuple</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">tuple</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">count</span><span class="o">())).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">tuple</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">sum</span><span class="o">())).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">tuple</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">avg</span><span class="o">())).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">25</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">tuple</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">max</span><span class="o">())).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">40</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">tuple</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">min</span><span class="o">())).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+    <span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>집계함수를 이용해 값을 가져왔다. <br>
+<code class="language-plaintext highlighter-rouge">List&lt;Tuple&gt; result</code> 사이즈는 <code class="language-plaintext highlighter-rouge">1</code>이다.</p>
+
+<p>현재 총 4개의 Member가 저장되어 있고 나이는 10,20,30,40으로 들어가 있다.  <br>
+즉, Count = 4 / sum = 100 / avg = 25 / max = 40 / min = 10 이 나와야한다.</p>
+
+<p><br></p>
+
+<p>이제 GROUP BY를 이용하여 보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">group</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Tuple</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span>
+                        <span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">avg</span><span class="o">()</span>
+                <span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">team</span><span class="o">,</span> <span class="n">team</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">groupBy</span><span class="o">(</span><span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="nc">Tuple</span> <span class="n">teamA</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+        <span class="nc">Tuple</span> <span class="n">teamB</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">teamA</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">)).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">teamA</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">avg</span><span class="o">())).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">15</span><span class="o">);</span> <span class="c1">// (10+20) / 2</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">teamB</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">)).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">teamB</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">avg</span><span class="o">())).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="mi">35</span><span class="o">);</span> <span class="c1">// (30+40) / 2</span>
+</code></pre></div></div>
+
+<p>team.name을 기준으로 GroupBy를 하였다.  <br>
+현재 Team은 2개가 있고, teamA, teamB라는 이름으로 저장되어있다.  <br>
+그리고 Member는 4개가 있고, member1, member2가 teamA에 속하고 <br>
+member3,member4가 teamB에 속한다. 나이는 첫번째 예제와 같이 10~40까지이다.</p>
+
+<p>join은 아래에서 배우겠지만 member테이블에서 같은 Team의 이름을 조인하여 <br>
+테이블을 가져왔고 team.name으로 GroupBy하였기 때문에 총 2개의 행을 가져오게된다. <br>
+즉, <code class="language-plaintext highlighter-rouge">List&lt;Tuple&gt; reulst</code>의 값은 2개가 존재하게 된다.</p>
+
+<p>당연하게도 <code class="language-plaintext highlighter-rouge">.having()</code>문법도 사용가능하다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">-</span>
+     <span class="o">.</span><span class="na">groupBy</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">price</span><span class="o">)</span>
+     <span class="o">.</span><span class="na">having</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">price</span><span class="o">.</span><span class="na">gt</span><span class="o">(</span><span class="mi">1000</span><span class="o">))</span>
+    <span class="o">-</span>
+</code></pre></div></div>
+<p>아이템 가격이 1000 초과인 것들만 가져오는 문법</p>
+
+<p><br></p>
+
+<h3 id="join---기본">Join - 기본</h3>
+
+<ul>
+  <li>join , leftJoin, rightJoin 등이 있다.</li>
+</ul>
+
+<p>Join 하는 방법을 작성해보자</p>
+
+<p><strong>1). 연관관계가 있는 Join</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">join</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">team</span><span class="o">,</span> <span class="n">team</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">extracting</span><span class="o">(</span><span class="s">"username"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">containsExactly</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span><span class="s">"member2"</span><span class="o">);</span>
+
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 InnerJoin을 통해서 teamA에 소속된 <br>
+Member들을 List로 받아왔다.</p>
+
+<p>JPQL 문법은 아래와 같이 만들어진다.</p>
+
+<pre><code class="language-roomsql">select
+     member1 
+ from
+     Member member1   
+ inner join
+     member1.team as team 
+ where
+</code></pre>
+
+<p><br></p>
+
+<p><strong>2). 연관관계가 없는 Join</strong></p>
+
+<p>연관관계가 없을때 조인하는것을 세타(theta)조인이라고 한다. <br>
+관계가 정의되어 있지 않아도 Join하여 사용이 가능하다.</p>
+
+<p>현재 <code class="language-plaintext highlighter-rouge">member</code>의 <code class="language-plaintext highlighter-rouge">username</code>과 <code class="language-plaintext highlighter-rouge">team</code>과는 연관 관계가 정의되어 있지않다.    <br>
+username을 강제로 team.name과 같도록 <code class="language-plaintext highlighter-rouge">em.persist</code>하여 테스트해보자.<br>
+아래의 예제를 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">theta_join</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">));</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">));</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">team</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">extracting</span><span class="o">(</span><span class="s">"username"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">containsExactly</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">,</span> <span class="s">"teamB"</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>현재 team은 총 2개의 행이 들어가 있고 각각 teamA, teamB라는 name을 가지고 있다.<br>
+이제 member에서 연관관계가 없는 username을 통해 Join을 할 경우에는</p>
+
+<p>from절에서 Qmember, QTeam을 두개를 불러온다. <br>
+이전에 관계가 있는 join과는 다른 모습을 볼 수 있다.</p>
+
+<p>JPQL은 아래와 같이 생성된다.</p>
+
+<pre><code class="language-roomsql">select
+     member1 
+ from
+     Member member1,
+     Team team 
+ where
+     member1.username = team.name
+</code></pre>
+
+<p>실제로 SQL이 나가는 것은</p>
+
+<pre><code class="language-roomsql">select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ cross 
+  join
+      team team1_ 
+  where
+      member0_.username=team1_.name
+</code></pre>
+<p>위오 ㅏ같이 join이 이루어진 것을 볼 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="join---on절">Join - on절</h3>
+
+<p>on절을 활용한 조인은 JPA 2.1부터 지원한다.</p>
+
+<ul>
+  <li>조인 대상 필터링</li>
+  <li>연관관계 없는 엔티티 외부 조인</li>
+</ul>
+
+<p>on절과 where절은 모두 결과를 반환하기위한 조건을 걸기위해 사용하는 조건이지만<br>
+Join할 대상의 범위가 달라지기도 한다. <br>
+Inner Join을 할경우 on, where을 사용해도 동일한 결과를 볼 수 있지만<br>
+Left Join을 사용할 경우에는 차이를 볼 수 있다.</p>
+
+<p>on절 = 테이블에 join할 떄 범위를 정해줌  <br>
+where = 결과값이 나온것을 가지고 조건을줘서 범위를 정해줌</p>
+
+<p>예제를 살펴보자</p>
+
+<p><strong>1). left join시 on절을 사용하였을 경우</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">join_on_filtering</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Tuple</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">team</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">team</span><span class="o">,</span> <span class="n">team</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">on</span><span class="o">(</span><span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">))</span> <span class="c1">// &lt;- on절을 사용</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Tuple</span> <span class="n">tuple</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"tuple = "</span> <span class="o">+</span> <span class="n">tuple</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+<span class="c1">// 출력 결과</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">3</span><span class="o">,</span> <span class="n">username</span><span class="o">=</span><span class="n">member1</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">10</span><span class="o">),</span> <span class="nc">Team</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="n">teamA</span><span class="o">)]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">4</span><span class="o">,</span> <span class="n">username</span><span class="o">=</span><span class="n">member2</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="o">),</span> <span class="nc">Team</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="n">teamA</span><span class="o">)]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">5</span><span class="o">,</span> <span class="n">username</span><span class="o">=</span><span class="n">member3</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="o">),</span> <span class="kc">null</span><span class="o">]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">6</span><span class="o">,</span> <span class="n">username</span><span class="o">=</span><span class="n">member4</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">40</span><span class="o">),</span> <span class="kc">null</span><span class="o">]</span>    
+</code></pre></div></div>
+
+<p>team.naem = ‘teamA’와 같은 것들을 필터링하게 하였다. <br>
+Join할때 범위를 정해주기 때문에 4개의 객체 모두 출력되고 <br>
+on절로 지정한 teamA와 같은 객체는 표시되고 없는 것들은 null로 반환되었다.</p>
+
+<p><br></p>
+
+<p><strong>2). left join시 where절을 사용하였을 경우</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">join_on_filtering</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Tuple</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">member</span><span class="o">,</span> <span class="n">team</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">team</span><span class="o">,</span> <span class="n">team</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">team</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Tuple</span> <span class="n">tuple</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"tuple = "</span> <span class="o">+</span> <span class="n">tuple</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+<span class="c1">// 출력 결과</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">3</span><span class="o">,</span> <span class="n">username</span><span class="o">=</span><span class="n">member1</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">10</span><span class="o">),</span> <span class="nc">Team</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="n">teamA</span><span class="o">)]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="nc">Member</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">4</span><span class="o">,</span> <span class="n">username</span><span class="o">=</span><span class="n">member2</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="o">),</span> <span class="nc">Team</span><span class="o">(</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="n">teamA</span><span class="o">)]</span>
+</code></pre></div></div>
+
+<p>where절을 사용하였을 경우는 Join을 완료한다음에 범위를 필터링 하기 때문에 <br>
+4개의 객체에서 teamA로 되어있는 2개만 표시되는 모습이다.</p>
+
+<p><br></p>
+
+<h3 id="fetchjoin">fetchJoin</h3>
+
+<p>fetchJoin은 SQL에서 제공하는 기능은 아니다. <br>
+SQL Join을 활용해 연관된 Entity를 한번에 조회하는기능이다.<br>
+주로 성능 최적화에 사용하는 방법이다. (ex: N+1 문제)</p>
+
+<p>아래에서 차이를 비교해보자.</p>
+
+<p><strong>1). fetchJoin을 사용하지 않을 때</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@PersistenceUnit</span>
+    <span class="nc">EntityManagerFactory</span> <span class="n">emf</span><span class="o">;</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fetchJoinNo</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="c1">// 영속성 컨텍스트에 Team이 Load되었는지 확인하는 메서드</span>
+        <span class="c1">// Load되었다면 = true, 아니라면 = false</span>
+        <span class="kt">boolean</span> <span class="n">loaded</span> <span class="o">=</span> <span class="n">emf</span><span class="o">.</span><span class="na">getPersistenceUnitUtil</span><span class="o">().</span><span class="na">isLoaded</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getTeam</span><span class="o">());</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">loaded</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="s">"패치 조인 미적용"</span><span class="o">).</span><span class="na">isFalse</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>제대로된 테스트를 위해 우선 영속성 컨텍스트의 내용을 비우고 시작해야한다. (<code class="language-plaintext highlighter-rouge">em.flush()</code>, <code class="language-plaintext highlighter-rouge">em.claer()</code>)  <br>
+또한 알아둬야할 것은 Member 클래스 Team FK가 지연로딩(<code class="language-plaintext highlighter-rouge">@ManyToOne(fetch = FetchType.LAZY)</code>)로 설정되어있다.  <br>
+즉, Member 객체를 로딩할때 Team 객체는 바로 로딩되어지지 않는다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">EntityManagerFactory</code>를 이용해 로딩되었는지 확인할 수 있다.  <br>
+위와 같이 쿼리를 입력하였을 경우 실제로 Team 객체는 로딩되어지지 않고 <br>
+<code class="language-plaintext highlighter-rouge">loaded</code>라는 불리언값으로 <code class="language-plaintext highlighter-rouge">false</code>가 나오면 영속성 컨텍스트에 로딩되지 않았다는 뜻이다.</p>
+
+<p>실제 출력된 SQL을 확인해보면</p>
+<pre><code class="language-roomsql">select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  where
+      member0_.username=?
+</code></pre>
+<p>Member 객체만 쿼리가 발생한 것을 알 수 있다. <br>
+Team에 대한 쿼리는 찾아 볼 수 없다.</p>
+
+<p>만약 여기서 중간에 <code class="language-plaintext highlighter-rouge">findMember.getTeam.getName()</code>를 코드를 추가하여<br>
+실행하게 된다면 LAZY 정책으로 인해 쿼리가 2번 발생한다.</p>
+
+<pre><code class="language-roomsql">// fetchOne(); 진행시
+select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  where
+      member0_.username=?
+
+// findMember.getTeam.getName(); 메서드 실행시
+select
+      team0_.id as id1_2_0_,
+      team0_.name as name2_2_0_ 
+   from
+      team team0_ 
+   where
+      team0_.id=?
+</code></pre>
+
+<p>위처럼 Member 쪽 쿼리와 getTeam() 메서드 실행시 쿼리까지 총 2개의 쿼리가 발생하게된다.    <br>
+여기서 우리는 fetchJoin()을 이용해 하나의 쿼리문으로 작성할 수 있다.</p>
+
+<p><br></p>
+
+<p>2). fetchJoin을 사용할 떄</p>
+
+<p>Member, Team을 Join한후 <code class="language-plaintext highlighter-rouge">.fetchJoin()</code>을 사용하게 된다면 <br>
+위에서 쿼리가 2번나오게되는 것을 한방에 나오게 할 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fetchJoinUse</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">team</span><span class="o">,</span> <span class="n">team</span><span class="o">).</span><span class="na">fetchJoin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="c1">// 영속성 컨텍스트에 Team이 Load되었는지 확인하는 메서드</span>
+        <span class="c1">// Load되었다면 = true, 아니라면 = false</span>
+        <span class="kt">boolean</span> <span class="n">loaded</span> <span class="o">=</span> <span class="n">emf</span><span class="o">.</span><span class="na">getPersistenceUnitUtil</span><span class="o">().</span><span class="na">isLoaded</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getTeam</span><span class="o">());</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">loaded</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="s">"패치 조인 적용"</span><span class="o">).</span><span class="na">isTrue</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같이 코드를 변경하고</p>
+
+<p><br></p>
+
+<p>실제로 쿼리문을 확인해보면</p>
+
+<pre><code class="language-roomsql">select
+      member0_.member_id as member_i1_1_0_,
+      team1_.id as id1_2_1_,
+      member0_.age as age2_1_0_,
+      member0_.team_id as team_id4_1_0_,
+      member0_.username as username3_1_0_,
+      team1_.name as name2_2_1_ 
+  from
+      member member0_ 
+  inner join
+      team team1_ 
+          on member0_.team_id=team1_.id 
+  where
+      member0_.username=?
+</code></pre>
+
+<p>member, team을 한번에 가져오는 모습을 확인할 수 있다.</p>
+
+<p><br></p>
+
+<h3 id="서브쿼리-subquery">서브쿼리 (SubQuery)</h3>
+
+<p>서브쿼리는 SQL문 안에 또 다른 SQL문을 말한다.</p>
+
+<p><strong>1). where절에서 서브쿼리 사용</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">subQuery</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nc">QMember</span> <span class="n">membeSub</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QMember</span><span class="o">(</span><span class="s">"membeSub"</span><span class="o">);</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span>
+                        <span class="nc">JPAExpressions</span>
+                                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">membeSub</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">max</span><span class="o">())</span>
+                                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">membeSub</span><span class="o">)</span>
+                <span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">extracting</span><span class="o">(</span><span class="s">"age"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">containsExactly</span><span class="o">(</span><span class="mi">40</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>첫번째 쿼리 where절안에 <code class="language-plaintext highlighter-rouge">memberSub</code>라는 Q타입 객체를 만들어 <br>
+<code class="language-plaintext highlighter-rouge">JPAExpressions</code>를 통해서 안에 또다른 쿼리문을 작성한 예제이다. <br>
+최종 적으로 <code class="language-plaintext highlighter-rouge">where(member.age.eq(40))</code>이라는 값으로 바뀌게 되어지고 <br>
+회원의 나이가 40살인 값을 찾아오는 쿼리 예제이다.</p>
+
+<p>실제 SQL문을 확인해보면</p>
+
+<pre><code class="language-roomsql">select
+      member0_.member_id as member_i1_1_,
+      member0_.age as age2_1_,
+      member0_.team_id as team_id4_1_,
+      member0_.username as username3_1_ 
+  from
+      member member0_ 
+  where
+      member0_.age=(
+          select
+              max(member1_.age) 
+          from
+              member member1_
+      )
+</code></pre>
+<p>where 절안에 쿼리가 작성되어 있는 모습을 볼 수 있다.</p>
+
+<p><br></p>
+
+<p><strong>2). IN절을 이용한 서브쿼리 예제</strong></p>
+
+<p>IN절을 잠깐 얘기하고 가자면 <br>
+OR절과 동일한데 코드를 간략하게 줄여준다고 생각하면 된다.</p>
+
+<p>ex) <code class="language-plaintext highlighter-rouge">WHERE age = 20 OR age = 30</code> = <code class="language-plaintext highlighter-rouge">WHERE age IN (20,30)</code></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">subQueryIn</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nc">QMember</span> <span class="n">membeSub</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QMember</span><span class="o">(</span><span class="s">"membeSub"</span><span class="o">);</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">in</span><span class="o">(</span>
+                        <span class="nc">JPAExpressions</span>
+                                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">membeSub</span><span class="o">.</span><span class="na">age</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">membeSub</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">membeSub</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">gt</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
+                <span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">extracting</span><span class="o">(</span><span class="s">"age"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">containsExactly</span><span class="o">(</span><span class="mi">20</span><span class="o">,</span><span class="mi">30</span><span class="o">,</span><span class="mi">40</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>위와 같은 코드로 보면 나이가 10이상인 멤버들을 서브쿼리에서 가져오며 <br>
+in절을 사용했기때문에 메인 쿼리에서 20,30,40과 같은 나이를 가진 <br>
+회원을 조회하게되어 총 3개의 행이 출력되게 되어진다.</p>
+
+<p><br></p>
+
+<p><strong>3). select절에서 사용한 서브쿼리</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">selectQuery</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nc">QMember</span> <span class="n">memberSub</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QMember</span><span class="o">(</span><span class="s">"memberSub"</span><span class="o">);</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Tuple</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">,</span>
+                        <span class="nc">JPAExpressions</span>
+                                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">memberSub</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">avg</span><span class="o">())</span>
+                                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">memberSub</span><span class="o">)</span>
+                <span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Tuple</span> <span class="n">tuple</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"tuple = "</span> <span class="o">+</span> <span class="n">tuple</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+<span class="c1">// 출력 내용  </span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member1</span><span class="o">,</span> <span class="mf">25.0</span><span class="o">]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member2</span><span class="o">,</span> <span class="mf">25.0</span><span class="o">]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member3</span><span class="o">,</span> <span class="mf">25.0</span><span class="o">]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member4</span><span class="o">,</span> <span class="mf">25.0</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>select 구문안에 사용ㅎ란 subQuery 예제이다.  <br>
+member 객체의 10,20,30,40이라는 나이가 들어가 있고 평균은 25가 된다. <br>
+즉, 출력 내용과 같이 4개의 Tuple이 출력되게 되어진다.</p>
+
+<p><br></p>
+
+<p>마지막으로 JPA, JPQL 서브쿼리의 한계점으로 from 절의 서브쿼리는 지원하지 않는다. <br>
+그러므로 Querydsl도 당연히 지원하지 않는다.</p>
+
+<p><br></p>
+
+<h3 id="case-문">CASE 문</h3>
+
+<p>SQL에서 사용하는 CASE, WHEN, THEN, ELSE 에 대한 문법이다. <br>
+예제를 통해서 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">basicCase</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span>
+                                <span class="o">.</span><span class="na">when</span><span class="o">(</span><span class="mi">10</span><span class="o">).</span><span class="na">then</span><span class="o">(</span><span class="s">"열살"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">when</span><span class="o">(</span><span class="mi">20</span><span class="o">).</span><span class="na">then</span><span class="o">(</span><span class="s">"스무살"</span><span class="o">)</span>
+                                <span class="o">.</span><span class="na">otherwise</span><span class="o">(</span><span class="s">"기타"</span><span class="o">)</span>
+                <span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"s = "</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+<span class="c1">// 출력 내용</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">열살</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">스무살</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">기타</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">기타</span>
+</code></pre></div></div>
+<p>10살일 경우 = 열살로 / 20살일 경우 = 스무살로 <br>
+그외일 경우 = 기타로 표시하는 방법이다.</p>
+
+<p><br></p>
+
+<p>다른 예제를 살펴보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">complexCase</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="k">new</span> <span class="nc">CaseBuilder</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">when</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">20</span><span class="o">)).</span><span class="na">then</span><span class="o">(</span><span class="s">"0~20살"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">when</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="mi">21</span><span class="o">,</span> <span class="mi">30</span><span class="o">)).</span><span class="na">then</span><span class="o">(</span><span class="s">"21~30살"</span><span class="o">)</span>
+                        <span class="o">.</span><span class="na">otherwise</span><span class="o">(</span><span class="s">"기타"</span><span class="o">)</span>
+                <span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"s = "</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>위와 같이 <code class="language-plaintext highlighter-rouge">new CaseBuilder()</code>를 이용하여 사용할 수도 있다.</p>
+
+<p><br></p>
+
+<h3 id="상수문자-더하기">상수,문자 더하기</h3>
+
+<p>상수랑 문자더하기에 대한 예제를 알아보자</p>
+
+<p><strong>1). 상수를 넣는법</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">Expressions</code>라는 인터페이스를 이용해 <code class="language-plaintext highlighter-rouge">.constant</code>메서드를 <br>
+이용하면 상수를 넣어줄 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">constant</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Tuple</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">,</span> <span class="nc">Expressions</span><span class="o">.</span><span class="na">constant</span><span class="o">(</span><span class="s">"A"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Tuple</span> <span class="n">tuple</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"tuple = "</span> <span class="o">+</span> <span class="n">tuple</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+<span class="c1">// 출력 내용</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member1</span><span class="o">,</span> <span class="no">A</span><span class="o">]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member2</span><span class="o">,</span> <span class="no">A</span><span class="o">]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member3</span><span class="o">,</span> <span class="no">A</span><span class="o">]</span>
+<span class="n">tuple</span> <span class="o">=</span> <span class="o">[</span><span class="n">member4</span><span class="o">,</span> <span class="no">A</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>select에 “A”라는 상수 값을 넣어 출력하였다.  <br>
+기존에 4개의 객체를 가지고 있기때문에 4개의 Tuple이 출력된 모습이다.</p>
+
+<p><br></p>
+
+<p><strong>2). 문자열 붙이는법</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">.concat</code> 메서드를 활용해 사용이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">concat</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">// username_age 와 같은 형태로 만들기</span>
+        <span class="c1">// username, age가 타입이 다름</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">concat</span><span class="o">(</span><span class="s">"_"</span><span class="o">).</span><span class="na">concat</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">stringValue</span><span class="o">()))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"s = "</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+<span class="c1">// 출력 내용</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">member1_10</span>
+</code></pre></div></div>
+<p>출력할때 <code class="language-plaintext highlighter-rouge">username_age</code>와 같은 형태로 표시하려한다. ex) <code class="language-plaintext highlighter-rouge">member2_20</code>  <br>
+select 구절에서 <code class="language-plaintext highlighter-rouge">.concat("_")</code>을 이용해 언더바를 붙여주었고 <br>
+뒤에 한번더 age를 붙여주도록 메서드를 사용하였다. 여기서 age가 username과 타입이 다르기 때문에  <br>
+타입을 변환해주는 <code class="language-plaintext highlighter-rouge">.stringValue()</code>를 사용해주어야한다.</p>
+
+<p>최종적으로 쿼리가 나가는 모습을 보면</p>
+<pre><code class="language-roomsql">select
+      ((member0_.username||?)||cast(member0_.age as character varying)) as col_0_0_ 
+  from
+      member member0_ 
+  where
+      member0_.username=?
+</code></pre>
+<p>와 같이 쿼리가 나가는 모습을 볼 수 있는데 <br>
+여기서 확인할 수 있는점은 cast()가 되어 타입을 맞춰주고 있다는 점이다.</p>
+
+<p><br><br>
+<br></p>
+
+<hr>
+
+<p>여기까지 QueryDsl의 기본 문법들을 알아보았다. <br>
+JPQL,SQL 문법을 자세히 알면 어느정도 학습하기 괜찮은 수준인 것 같다.<br>
+(하지만 JPQL,SQL 문법을 잘몰라 공부하느라 시간이 꽤 걸렷다…)</p>
+
+<p><br></p>
 
 
 
@@ -911,15 +1711,15 @@ findMember를 통해 접근이 가능하다.</p>
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/spring/2023/04/04/spring-querydsl.html" title="[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기">[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기...</a><span></span>
+<a class="previous" href="/spring/2023/04/04/spring-querydsl.html" title="[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기">[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기...</a><a class="next" href="/sql/2023/04/05/sql-icecream.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[Programmers] 성분으로 구분한 아이스크림 총 주문량...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/08/22/til.html" title="">[TIL] 개발환경 셋팅하기</a></li>
-<li><a class="post-link" href="/sql/2023/04/03/sql-bookauthor.html" title="">[Programmers] 조건에 맞는 도서와 저자 리스트 출력하기 (MySQL)</a></li>
-<li><a class="post-link" href="/til/2022/12/13/til.html" title="">[TIL] Ngrok 사용하여 로컬에서 서버 실행</a></li>
-<li><a class="post-link" href="/sql/2023/03/22/sql-gangwon.html" title="">[Programmers] 강원도에 위치한 생산공장 목록 출력하기 (MySQL)</a></li>
+        <li><a class="post-link" href="/til/2022/10/07/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] DB RDMBS 3</a></li>
+<li><a class="post-link" href="/til/2022/09/20/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] Java 재귀</a></li>
+<li><a class="post-link" href="/til/2022/09/13/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
+<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
 </ul>
     </div>
 <div class="post-comments">
