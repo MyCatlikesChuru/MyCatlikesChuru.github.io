@@ -420,3 +420,5 @@ _
 /_posts/codingtest/sql/2023-04-01-sql-cartype.md,c/b/cb29760dd39e20a7f50f5be414dadf734d5e1621
 b
 2_posts/codingtest/sql/2023-04-04-sql-productsum.md,e/3/e30b5d8baa02c61698159ab1e7851717fb7b7284
+b
+2_posts/codingtest/sql/2023-04-03-sql-bookauthor.md,a/b/ab95c8d9abb7d8987060345739f667a21c8e8dde
