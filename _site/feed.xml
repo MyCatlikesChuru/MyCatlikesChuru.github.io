@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-07T17:33:57+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL Foreign key 설정하기</title><link href="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html" rel="alternate" type="text/html" title="MySQL Foreign key 설정하기" /><published>2023-04-07T00:00:00+09:00</published><updated>2023-04-07T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/04/07/db-mysqlforeign</id><content type="html" xml:base="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html"><![CDATA[<p>MySQL Foreign Key를 설정하는 방법을 적어보려한다. <br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-07T21:14:45+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL Foreign key 설정하기</title><link href="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html" rel="alternate" type="text/html" title="MySQL Foreign key 설정하기" /><published>2023-04-07T00:00:00+09:00</published><updated>2023-04-07T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/04/07/db-mysqlforeign</id><content type="html" xml:base="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html"><![CDATA[<p>MySQL Foreign Key를 설정하는 방법을 적어보려한다. <br />
 간단하게 아래와 같은 테이블을 준비했다.</p>
 
 <p>스키마 이름은 sqlpractice로 설정하였다.</p>
@@ -664,6 +664,9 @@ GROUP BY i.INGREDIENT_TYPE;
 
    <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span><span class="o">;</span>
 
+   <span class="nd">@PersistenceUnit</span>
+   <span class="nc">EntityManagerFactory</span> <span class="n">emf</span><span class="o">;</span>
+
    <span class="nd">@BeforeEach</span>
    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
       <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
@@ -1286,10 +1289,7 @@ SQL Join을 활용해 연관된 Entity를 한번에 조회하는기능이다.<br
 
 <p><strong>1). fetchJoin을 사용하지 않을 때</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@PersistenceUnit</span>
-    <span class="nc">EntityManagerFactory</span> <span class="n">emf</span><span class="o">;</span>
-
-    <span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fetchJoinNo</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">em</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
         <span class="n">em</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>

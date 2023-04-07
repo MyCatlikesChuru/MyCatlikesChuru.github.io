@@ -699,6 +699,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
    <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span><span class="o">;</span>
 
+   <span class="nd">@PersistenceUnit</span>
+   <span class="nc">EntityManagerFactory</span> <span class="n">emf</span><span class="o">;</span>
+
    <span class="nd">@BeforeEach</span>
    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
       <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
@@ -1321,10 +1324,7 @@ SQL Join을 활용해 연관된 Entity를 한번에 조회하는기능이다.<br
 
 <p><strong>1). fetchJoin을 사용하지 않을 때</strong></p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@PersistenceUnit</span>
-    <span class="nc">EntityManagerFactory</span> <span class="n">emf</span><span class="o">;</span>
-
-    <span class="nd">@Test</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fetchJoinNo</span><span class="o">()</span> <span class="o">{</span>
         <span class="n">em</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
         <span class="n">em</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
@@ -1716,10 +1716,10 @@ JPQL,SQL 문법을 자세히 알면 어느정도 학습하기 괜찮은 수준�
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/10/07/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] DB RDMBS 3</a></li>
-<li><a class="post-link" href="/til/2022/09/20/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] Java 재귀</a></li>
-<li><a class="post-link" href="/til/2022/09/13/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
-<li><a class="post-link" href="/jekyll/2022/10/22/it-jekyll-comment&amp;favicon.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">Jekyll GitHub Page 댓글, 파비콘 꾸미기</a></li>
+        <li><a class="post-link" href="/til/2022/11/23/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] JWT 기초</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] Spring AOP 1</a></li>
+<li><a class="post-link" href="/sql/2023/04/07/sql-duplicationproduct.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[Programmers] 재구매가 일어난 상품과 회원 리스트 구하기 (MySQL)</a></li>
+<li><a class="post-link" href="/til/2022/12/07/til.html" title="[Programmers] 성분으로 구분한 아이스크림 총 주문량 (MySQL)">[TIL] 배포 자동화 AWS Pipeline</a></li>
 </ul>
     </div>
 <div class="post-comments">

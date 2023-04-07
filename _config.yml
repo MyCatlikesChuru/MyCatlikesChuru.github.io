@@ -179,7 +179,7 @@ translate_langs: [] #언어 기능 제거 하는법
 # excerpt_size: 350`
 
 # Pagination setting
-# paginate: 5
+paginate: 10
 
 # Disqus comments
 #disqus:

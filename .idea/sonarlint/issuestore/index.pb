@@ -17,8 +17,6 @@ _
 /_posts/Program/Spring/2022-12-12-spring-cors.md,3/c/3c648878842476127dfe42060799e25e1b07c616
 ]
 -_posts/TIL/BootCamp/2022-11/2022-11-15-til.md,3/f/3ff9f3c5843e23f56b97e8b63e5fc27cea1b23c7
-D
-assets/css/main.scss,3/9/39a50fefad724cd0aa7b6ec792325957ea1751b3
 F
 assets/css/origin.scss,a/e/ae102cc1298054d620ba61def297e62c0ef47e5c
 B
@@ -366,8 +364,6 @@ Z
 -_posts/til/BootCamp/2022-12/2022-12-07-til.md,9/7/9731043c6ce0628aa3f9b928c4f9fc848d8e8adc
 X
 (_includes/extensions/code-highlight.html,6/5/65756496fbf7270fd4a4225857fa71c13677a0ca
-;
-_config.yml,c/d/cd089ae45ce870c45e434019e8f1ed4f066cd425
 _
 /_posts/codingtest/sql/2023-03-14-sql-carlist.md,3/8/3829c2931b2082544a644205ec604945d4a033e2
 _
