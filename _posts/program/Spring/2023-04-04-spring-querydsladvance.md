@@ -23,6 +23,9 @@ public class QuerydslBasicTestPractice {
 
    JPAQueryFactory queryFactory;
 
+   @PersistenceUnit
+   EntityManagerFactory emf;
+
    @BeforeEach
    public void before() {
       queryFactory = new JPAQueryFactory(em);
@@ -660,9 +663,6 @@ SQL Join을 활용해 연관된 Entity를 한번에 조회하는기능이다.
 **1). fetchJoin을 사용하지 않을 때**
 
 ```java
-    @PersistenceUnit
-    EntityManagerFactory emf;
-
     @Test
     public void fetchJoinNo() {
         em.flush();
