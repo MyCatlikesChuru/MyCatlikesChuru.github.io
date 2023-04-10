@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 6 of 15 for Home | LeeJellan</title>
+<title>Page 6 of 16 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -712,6 +712,400 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/linux/unix/2022/12/29/server-NginX.html">
+          AWS EC2 NginX 클라이언트 배포
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 29, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/linux/unix/2022/12/29/server-NginX.html">
+        <p>
+        ✅ NGINX 이용하여 클라이언트 배포하기
+
+클라우딩 컴퓨터 배포 참고레퍼런스를 토대로
+공부하고 테스트해본 기록을 적어보려한다.
+
+우리 코스에 한분이 작성하신 글이고
+헤매고있는 나에게 빛줄기를 내려주셨다…🥹
+
+우선 우리팀에서 생각한 아키텍처이다.
+정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.
+
+
+
+AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만… 
+프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아
+꼼꼼히 홈페이지 사양을 읽어보긴했지만,,, 아직 미숙한 우리들에게 사고를
+미연에 방지하고자 EC2만 빌린다음에 진행하려고한다.
+
+
+
+📌 작업 환경... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html">
+          MySQL EC2에 설치후 WorkBench 접속하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 28, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/db/2022/12/28/db-mysqlEC2.html">
+        <p>
+        EC2에 MySQL을 설치한다음
+WorkBench로 접속하려는데 설정한 내용을 정리해보려한다.
+MySQL 설치과정은 생략하겠다.
+
+
+
+📌 yml 파일 설정
+
+우선 EC2에 배포한 스프링 .yml 파일 설정이다.
+기존과 동일하게 localhost:3306으로 설정을 해주었고
+
+스키마 이름은 stackover라는 이름으로지 지정했다.
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul # 포트넘버, 스키마이름
+   ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html">
+          [Spring] Security Test 코드 작성시 UserDetails 설정
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 27, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2022/12/27/spring-JunitSecure.html">
+        <p>
+        오늘 겪은 문제를 정리해보려한다.
+Spring Security + JWT + OAuth2 인증,인가를 사용하여
+정상적으로 API 작동까지 Postman으로 마친 상태이다.
+
+문제는 Rest Docs를 적용하기 위해
+Test 코드를 작성중 Spring Security 문제와 부딪히게 된 것 !!
+
+
+
+📌 문제 발생 (403 Forbidden)
+
+기존과 동일하게 POST 요청을 보내 보았다.
+    @Test
+    @DisplayName("질문 작성 API : createQuestion")
+    void createQuestion() throws Exception {
+
+        QuestionPostDto q... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#JUnit">#JUnit</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/git/2022/12/27/git-rebase.html">
+          Git pull rebase 사용해 병합하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 27, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/git/2022/12/27/git-rebase.html">
+        <p>
+        자주 사용하는 git pull --rebase에 대해 정리해보려한다.
+
+협업을 같이하다보면 지속적으로 업데이트를 하기 위해서
+pull을 하거나 remote를 가져오기위해 fetch를 진행한다.
+
+dev/back 이라는 브랜치가 백엔드끼리
+통합을 해서 사용하는 브랜치라고 가정하자.
+
+내가 작업하는 브랜치는 feat/BE/security라고 하였을때
+누군가 dev/back에 작업을 하고 Pull Reqeust하여 Merge를 했다고
+가정을 해보면. 현재 dev/back 브랜치의 프로그램이 가장 최신본이다.
+
+내가 작업하고있는 브랜치를 최신화 시키고 싶을때
+dev/back에 있는 브랜치를 Pull해오면 된다.
+
+
+
+❓ ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/db/2022/12/19/db-mysqlEER.html">
           MySQL EER 다이어그램 만드는법
         </a>
@@ -1255,416 +1649,6 @@ Ngrok은 네트워크 설정을 하지 않아도
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
 </div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2022/12/12/spring-cors.html">
-          [Spring] CORS 설정하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 12, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2022/12/12/spring-cors.html">
-        <p>
-        오늘은 CORS에 대한 내용을 간단하게 적어보려한다.
-
-
-
-TODO List 연습 클라이언트를 이용해 로컬톰켓서버와
-연결 시 CORS문제가 발생해 해결했던 코드를 올려 본다.
-
-1). 어노테이션으로 설정하는 방법
-@CrossOrigin(origins = "https://todobackend.com")
-@RestController
-public class TodoListController {
-    ...
-}
-
-
-
-
-2). 빈 객체를 만들어 설정하는 방법
-
-@SpringBootApplication
-public class TodolistApplication {
-
-	public static void main(String[... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#cors">#cors</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/09/til.html">
-          [TIL] Cloud 운영 전략
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 09, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/09/til.html">
-        <p>
-        Proxy Server
-
-프록시 서버는 클라이언트가 서버와 소통할 때
-서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록
-해주는 대리 서버라고 생각하면 간단하다.
-
-1). Forward Proxy
-
-클라이언트 가까이에 위치한 프록시 서버다.
-클라이언트를 대신해 서버에 요청을 전달해준다.
-
-
-
-장점
-
-  캐싱을 통해 빠른 서비스 이용이 가능하다
-  보안 (서버에서 프록시서버 IP를 받기때문에 클라이언트 IP를 숨길 수 있다)
-
-
-
-
-2). Reverse Proxy
-
-서버 가까이에 위치한 프록시 서버다.
-서버를 대신해서 클라이언트에 응답을 제공해준다.
-
-
-
-
-  분산처리 (여러대의 서버로 요청을 나누어 전... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/08/til.html">
-          [TIL] 배포 자동화 GitHub Actions
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 08, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/08/til.html">
-        <p>
-        Github Action
-
-오늘은 GitHub Actions라는 빌드, 테스트 및 배포 파이프라인을
-자동화할 수 있는 CI/CD 플랫폼을 배워보려한다.
-
-Pull Request나 push 같은 이벤트를 트리거로 Workflow를 구성할 수 있다.
-Workflow는 하나 이상의 작업이 실행되는 자동화 프로세스로, 각 작업은 자체 가상 머신
-또는 컨테이너 내부에서 실행된다.
-
-
-
-Github Actions를 통한 자동화 배포 Flow
-
-
-
-
-  레포지토리에 변화가 생기면 Github Actions 작동
-  프로젝트 빌드 결과물(.jar) S3로 전송 및 저장
-  CodeDeploy로 배포 명령
-  프로젝트 빌드 결과물... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/07/til.html">
-          [TIL] 배포 자동화 AWS Pipeline
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/07/til.html">
-        <p>
-        배포 자동화
-말그대로 배포 자동화란 기존에 배포를 위한 복잡한 작업을
-클릭 혹은 명령어 입력을 통해 전체 배포 과정을 자동으로 진행하는 과정이다.
-
-배포 자동화 파이프 라인
-파이프 라인이라하면, 이전에 Stream API 공부할 때
-들어보았었다. 무언가 연결해준다는 의미를 가지고 있었다.
-배포 자동화에서 파이프 라인은 소스 코드의 관리부터 실제 서비스로의
-배포 과정을 연결하는 구조를 뜻한다. 파이프라인은 전체 배포 과정을
-여러 Stage(단계)로 분리한다. 가장 많이 쓰이는 3가지를 알아보자
-
-
-
-
-  Source 단계
-원격 저장소에 관리되고 있는 소스 코드에 변경 사항이 일어날 경우
-이를 감지하고 다음 단계로 전... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1677,7 +1661,7 @@ Github Actions를 통한 자동화 배포 Flow
     
     </span>
 
-    <span class="indicator"> 6/15</span>
+    <span class="indicator"> 6/16</span>
 
     <span class="next">
     
@@ -1717,7 +1701,7 @@ Github Actions를 통한 자동화 배포 Flow
   <ul>
     <li>
       <a href="/index.html">
-        All<span>147</span>
+        All<span>151</span>
       </a>
     </li>
 
@@ -1736,7 +1720,7 @@ Github Actions를 통한 자동화 배포 Flow
     
       <li>
         <a href="/categories.html#h-DB">
-          DB <span>8</span>
+          DB <span>9</span>
         </a>
       </li>
     
@@ -1766,7 +1750,7 @@ Github Actions를 통한 자동화 배포 Flow
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>22</span>
+          SQL <span>24</span>
         </a>
       </li>
     
@@ -1778,7 +1762,7 @@ Github Actions를 통한 자동화 배포 Flow
     
       <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>10</span>
+          Spring <span>11</span>
         </a>
       </li>
     

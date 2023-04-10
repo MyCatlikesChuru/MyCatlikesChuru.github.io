@@ -1,4 +1,471 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-07T21:14:45+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">MySQL Foreign key 설정하기</title><link href="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html" rel="alternate" type="text/html" title="MySQL Foreign key 설정하기" /><published>2023-04-07T00:00:00+09:00</published><updated>2023-04-07T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/04/07/db-mysqlforeign</id><content type="html" xml:base="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html"><![CDATA[<p>MySQL Foreign Key를 설정하는 방법을 적어보려한다. <br />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-10T22:17:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[DB] Join의 종류</title><link href="http://localhost:4000/db/2023/04/10/db-join.html" rel="alternate" type="text/html" title="[DB] Join의 종류" /><published>2023-04-10T00:00:00+09:00</published><updated>2023-04-10T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/04/10/db-join</id><content type="html" xml:base="http://localhost:4000/db/2023/04/10/db-join.html"><![CDATA[<h3 id="join-이란">Join 이란?</h3>
+
+<p>조인(Join)이란 하나의 테이블이 아닌 두 개 이상의 테이블을 묶어서 하나의 결과물을 만드는 <br />
+것을 얘기한다. MySQL에서는 JOIN이라는 쿼리로, MongoDB에서는 lookup이라는 쿼리로 이를 처리한다.</p>
+
+<p>참고로 RDBMS보다 DBMS가 조인연산에 대해 성능이 떨어진다고 벤치마크 테스트에서 알려져 있다. <br />
+즉, MongoDB에서는 되도록 lookup을 사용하지 말아야한다. 여러 테이블을 조인하는 작업이 많을 경우 <br />
+에는 관계형 데이터베이스를 사용하는게 적합하다.</p>
+
+<p><br /></p>
+
+<h3 id="join의-종류">Join의 종류</h3>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230895141-c489f559-205c-41e3-8589-d1912b913dc5.png" alt="image" class="align-left" style="max-width: 100%" />   <br />
+<a href="https://server-dev.tistory.com/35">그림 출처 - 소찾나님</a></p>
+
+<p>Join의 종류는 위와 같다.</p>
+
+<p>가장 대표적으로 많이 사용하는 조인은 3가지가 있다. (위에 그림에서 상위 3개)</p>
+<ul>
+  <li>LEFT OUTER JOIN : 왼쪽 테이블의 모든 행이 결과 테이블에 표기된다.</li>
+  <li>INNER JOIN : 왼쪽 테이블과 오른쪽 테이블의 두 행이 모두 일치하는 행이 있는 부분만 표기된다.</li>
+  <li>RIGHT OUTER JOIN : 오른쪽 테이블의 모든 행이 결과 테이블에 표기된다.</li>
+</ul>
+
+<p><br /></p>
+
+<p>테이블을 실제로 만들어서 예제를 적용시켜 보자. <br />
+MYSQL을 기준으로 작성을 해본다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230901387-9a835c93-ab3c-4819-9c68-bdabdf04d4d5.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>Member 테이블에는 아래와 같은 정보를 삽입 하였고 (3개)</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230901520-8a76578c-ae85-4ffb-acd4-a5b6c9772c90.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<p>POSTS 테이블에는 아래와 같은 정보를 넣어 두었다. (4걔)</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230901523-b5ec05c4-799e-4e08-8551-4d59c0db526f.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<h4 id="1-left-join">1. LEFT JOIN</h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230900044-2aaddb97-ca1b-482c-96a8-fc370aa38e02.png" alt="image" class="align-left" style="max-width: 60%" /></p>
+
+<p>LEFT JOIN은 LEFT OUTER JOIN과 동일한 말이다. <br />
+MEMBER를 A라고 기준을 두고 POST를 B라고 가정하고 SQL을 작성해보자</p>
+
+<pre><code class="language-roomsql">SELECT * 
+FROM member m
+LEFT JOIN posts p 
+ON m.id = p.id;
+</code></pre>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230901518-ce0b6cd7-70b4-4631-a1b0-8ec71125076b.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>실행결과는 위와 같이 나온다. member 테이블의 id와 posts id가 같은걸  <br />
+LEFT JOIN을 실행하는 구문이다. member 테이블을 기준으로 조회하기 때문에 <br />
+총 3개의 레코드가 표현되어진 것을 볼 수 있다.</p>
+
+<p>반대로 posts 테이블을 A로 두고 SQL문을 작성한다면</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230902997-d95c55d5-93fc-40e1-80aa-049b183b03ea.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>위와 같이 posts 테이블을 기준으로 member를 가져오고 <br />
+데이터가 없는 자리에는 null이라는 값으로 채워진다.</p>
+
+<p><br /></p>
+
+<h4 id="2-inner-join">2. INNER JOIN</h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230900146-f2c10db6-3b72-4319-8300-abbf44867bf5.png" alt="image" class="align-left" style="max-width: 60%" /></p>
+
+<p>INNER JOIN의 특성은 교집합의 데이터만 가져온다는 것이다.</p>
+
+<pre><code class="language-roomsql">SELECT * 
+FROM posts p
+JOIN member m
+ON m.id = p.id;
+</code></pre>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230903795-8103881d-6769-405c-b045-2d738c1c76f3.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>이번에는 posts를 A로 두고 INNER JOIN을 실행시켜 보았다. <br />
+LEFT JOIN에서는 값이 null로 들어왔지만, INNER JOIN에서는 <br />
+같은 값만 가져오기 때문에 4번의 행을 가져오지 않은 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<h4 id="3-right-join">3. RIGHT JOIN</h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230900188-d3e84cae-6bbd-46a1-a303-7c4506a2df73.png" alt="image" class="align-left" style="max-width: 60%" /></p>
+
+<p>RIGHT JOIN은 사실상 LEFT JOIN의 반대 개념이기 떄문에 이해하기가 쉽다.</p>
+
+<pre><code class="language-roomsql">SELECT * 
+FROM member m
+RIGHT JOIN posts p
+ON m.id = p.id;
+</code></pre>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230904125-cc4cc4da-499d-49ca-aee2-90de90f2a20d.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>member를 A로 두고 RIGHT JOIN을 시켰을때 위와 같이 <br />
+4번째행의 데이터가 없기 때문에 null로 표현되고 posts의 데이터를 <br />
+전부 가져온 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<h4 id="4-합집합-join-full-join">4. 합집합 JOIN (FULL JOIN)</h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230905128-d3585cfb-d792-443e-8822-283eb6da9547.png" alt="image" class="align-left" style="max-width: 60%" /></p>
+
+<p>FULL OUTER JOIN이라고도 부른다. MySQL에서는 해당 조인 기능을 지원하지 않는다. <br />
+대시 LEFT,RIGHT JOIN과 UNION을 이용해 FULL JOIN처럼 사용이 가능하다.   <br />
+(UNION은 여러 테이블에 존재하는 같은 성격의 값을 한번의 쿼리로 출력하도록 돕는 연산자이다.)</p>
+
+<pre><code class="language-roomsql">SELECT * 
+FROM member 
+LEFT JOIN posts ON member.id = posts.id
+UNION
+SELECT * 
+FROM member
+RIGHT JOIN posts ON member.id = posts.id;
+</code></pre>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230906403-88cb0235-7570-4e22-84c7-907cf101b0d6.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>최종적으로 출력해보면 모든 테이블의 데이터를 가져오는 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<h4 id="5-차집합-join">5. 차집합 JOIN</h4>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230905008-e3ca460b-bb24-4077-8a0c-5667dee6a097.png" alt="image" class="align-left" style="max-width: 60%" /></p>
+
+<p>차집합을 구하는 LEFT, RIGHT JOIN이 있다.  <br />
+사실 LEFT, RIGHT JOIN의 개념만 알고 있으면 유추가 가능한 <br />
+부분이므로 간단하게 설명하고 넘어가겠다.</p>
+
+<pre><code class="language-roomsql">SELECT * 
+FROM posts p
+LEFT JOIN member m
+ON m.id = p.id WHERE m.id IS NULL;
+</code></pre>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230905244-6dc18827-fcde-49b1-b373-9f99c0a79c01.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>현재 차집합을 테스트해보려면 수량이 많은 posts 테이블을 A로 두어야했다.<br />
+따라서 member 테이블을 B로 두었다.   <br />
+LEFT JOIN에서 추가된 코드는 <code class="language-plaintext highlighter-rouge">m.id IS NULL</code>만 추가되었다.<br />
+member 테이블의 id가 null인 값들만 가져오게하는 구문이다. <br />
+말은 즉슨, A만 가지고 있는 값만 표시하겠다라는 의미와 동일하고 그래서 출력이 4번만 나온 것이다.</p>
+
+<p><br /></p>
+
+<h3 id="join-원리">JOIN 원리</h3>
+
+<p><img src="" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /><br />
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="DB" /><category term="DB" /><summary type="html"><![CDATA[Join 이란?]]></summary></entry><entry><title type="html">[Programmers] 카테고리 별 상품 개수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/10/sql-productcode.html" rel="alternate" type="text/html" title="[Programmers] 카테고리 별 상품 개수 구하기 (MySQL)" /><published>2023-04-10T00:00:00+09:00</published><updated>2023-04-10T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/10/sql-productcode</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/10/sql-productcode.html"><![CDATA[<h2 id="-문제--카테고리-별-상품-개수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131529">카테고리 별 상품 개수 구하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 의류 쇼핑몰에서 판매중인 상품들의 정보를 담은 <code>PRODUCT</code> 테이블입니다. <code>PRODUCT</code> 테이블은 아래와 같은 구조로 되어있으며, <code>PRODUCT_ID</code>, <code>PRODUCT_CODE</code>, <code>PRICE</code>는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>PRODUCT_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRODUCT_CODE</td>
+<td>VARCHAR(8)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRICE</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>상품 별로 중복되지 않는 8자리 상품코드 값을 가지며, 앞 2자리는 카테고리 코드를 의미합니다.</p>
+
+<hr />
+
+<h5>문제</h5>
+
+<p><code>PRODUCT</code> 테이블에서 상품 카테고리 코드(<code>PRODUCT_CODE</code> 앞 2자리) 별 상품 개수를 출력하는 SQL문을 작성해주세요. 결과는 상품 카테고리 코드를 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>PRODUCT</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>PRODUCT_ID</th>
+<th>PRODUCT_CODE</th>
+<th>PRICE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>A1000011</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A1000045</td>
+<td>9000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C3000002</td>
+<td>22000</td>
+</tr>
+<tr>
+<td>4</td>
+<td>C3000006</td>
+<td>15000</td>
+</tr>
+<tr>
+<td>5</td>
+<td>C3000010</td>
+<td>30000</td>
+</tr>
+<tr>
+<td>6</td>
+<td>K1000023</td>
+<td>17000</td>
+</tr>
+</tbody>
+      </table>
+<p>상품 카테고리 코드 별 상품은 아래와 같으므로,</p>
+
+<ul>
+<li><code>A1</code>: <code>PRODUCT_ID</code>가 1, 2 인 상품</li>
+<li><code>C3</code>: <code>PRODUCT_ID</code>가 3, 4, 5 인 상품</li>
+<li><code>K1</code>: <code>PRODUCT_ID</code>가 6 인 상품</li>
+</ul>
+
+<p>다음과 같은 결과가 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>CATEGORY</th>
+<th>PRODUCTS</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>K1</td>
+<td>1</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>LEFT를 이용해 문자열을 자른다.</li>
+  <li>COUNT를 이용해 자른 PRODUCT_CODE를 집계한다.</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT LEFT(PRODUCT_CODE,2) AS CATEGORY,
+    COUNT(PRODUCT_CODE) AS PRODUCTS
+FROM PRODUCT
+GROUP BY CATEGORY
+ORDER BY CATEGORY ASC;
+</code></pre>
+
+<p>여기서 알아야할 문법은 LEFT 문법이다. <br />
+유사 문법으로는 RIGHT, SUBSTRING 등이 있으니 참고하자</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 카테고리 별 상품 개수 구하기]]></summary></entry><entry><title type="html">[Programmers] 가격대 별 상품 개수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/09/sql-priceproduct.html" rel="alternate" type="text/html" title="[Programmers] 가격대 별 상품 개수 구하기 (MySQL)" /><published>2023-04-09T00:00:00+09:00</published><updated>2023-04-09T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/09/sql-priceproduct</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/09/sql-priceproduct.html"><![CDATA[<h2 id="-문제--가격대-별-상품-개수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131530">가격대 별 상품 개수 구하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 의류 쇼핑몰에서 판매중인 상품들의 정보를 담은 <code>PRODUCT</code> 테이블입니다. <code>PRODUCT</code> 테이블은 아래와 같은 구조로 되어있으며, <code>PRODUCT_ID</code>, <code>PRODUCT_CODE</code>, <code>PRICE</code>는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>PRODUCT_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRODUCT_CODE</td>
+<td>VARCHAR(8)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRICE</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>상품 별로 중복되지 않는 8자리 상품코드 값을 가지며 앞 2자리는 카테고리 코드를 나타냅니다.</p>
+
+<hr />
+
+<h5>문제</h5>
+
+<p><code>PRODUCT</code> 테이블에서 만원 단위의 가격대 별로 상품 개수를 출력하는 SQL 문을 작성해주세요. 이때 컬럼명은 각각 컬럼명은 PRICE_GROUP, PRODUCTS로 지정해주시고 가격대 정보는 각 구간의 최소금액(10,000원 이상 ~ 20,000 미만인 구간인 경우 10,000)으로 표시해주세요. 결과는 가격대를 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>PRODUCT</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>PRODUCT_ID</th>
+<th>PRODUCT_CODE</th>
+<th>PRICE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>A1000011</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A1000045</td>
+<td>9000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C3000002</td>
+<td>22000</td>
+</tr>
+<tr>
+<td>4</td>
+<td>C3000006</td>
+<td>15000</td>
+</tr>
+<tr>
+<td>5</td>
+<td>C3000010</td>
+<td>30000</td>
+</tr>
+<tr>
+<td>6</td>
+<td>K1000023</td>
+<td>17000</td>
+</tr>
+</tbody>
+      </table>
+<p>만원 단위의 가격대 별로 상품을 나누면</p>
+
+<ul>
+<li>가격대가 0원 ~ 1만원 미만인 상품은 <code>PRODUCT_ID</code> 가 2인 상품 1개,</li>
+<li>가격대가 1만원 이상 ~ 2만원 미만인 상품들은 <code>PRODUCT_ID</code> 가 1, 4, 6인 상품 3개,</li>
+<li>가격대가 2만원 이상 ~ 3만원 미만인 상품은 <code>PRODUCT_ID</code> 가 3인 상품 1개,</li>
+<li>가격대가 3만원 이상 ~ 4만원 미만인 상품은 <code>PRODUCT_ID</code> 가 5인 상품 1개,</li>
+</ul>
+
+<p>에 각각 해당하므로 다음과 같이 결과가 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>PRICE_GROUP</th>
+<th>PRODUCTS</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>3</td>
+</tr>
+<tr>
+<td>20000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>30000</td>
+<td>1</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>CASE WHEN을 이용하여 가격별 집계를 할 수 있도록 만들어준다.</li>
+  <li>PRICE의 수량을 PRODUCTS 컬럼으로 묶어준다.</li>
+  <li>GROUP BY를 이용해 집계를 한다.</li>
+  <li>PRICE_GROUP 오름차순으로 정렬한다.</li>
+</ol>
+
+<pre><code class="language-RoomSql">SELECT CASE 
+WHEN PRICE BETWEEN 0 AND 9999 THEN 0
+WHEN PRICE BETWEEN 10000 AND 19999 THEN 10000
+WHEN PRICE BETWEEN 20000 AND 29999 THEN 20000
+WHEN PRICE BETWEEN 30000 AND 39999 THEN 30000
+WHEN PRICE BETWEEN 40000 AND 49999 THEN 40000
+WHEN PRICE BETWEEN 50000 AND 59999 THEN 50000
+WHEN PRICE BETWEEN 60000 AND 69999 THEN 60000
+WHEN PRICE BETWEEN 70000 AND 79999 THEN 70000
+WHEN PRICE BETWEEN 80000 AND 89999 THEN 80000
+END AS PRICE_GROUP, 
+COUNT(PRICE) AS PRODUCTS
+FROM PRODUCT
+GROUP BY PRICE_GROUP
+ORDER BY PRICE_GROUP ASC;
+</code></pre>
+
+<p>문제에서는 0~4만원까지 밖에 없어서 4만원까지 풀이했다가 왜 안풀리지 하고 헷갈렸다.. <br />
+<code class="language-plaintext highlighter-rouge">SELECT * FROM PRODUCT</code> 를 해보니 9만원까지 나와서 9만원까지 집계하였다.</p>
+
+<p><br /></p>
+
+<p>또 다른 풀이 방법으로는</p>
+
+<pre><code class="language-roomsql">SELECT  FLOOR(PRICE/10000)*10000 AS PRICE_GROUP,
+        COUNT(*) AS PRODUCTS
+  FROM  product
+ GROUP 
+    BY  PRICE_GROUP
+ ORDER
+    BY  PRICE_GROUP ASC
+</code></pre>
+<p>과 같이 소수점을 제거하는 함수인 <code class="language-plaintext highlighter-rouge">FLOOR</code>를 이용한 풀이를 할 수 있다.    <br />
+가격을 만원 단위로 나눠서 소수점을 버리고 만원씩 곱해주면  <br />
+CASE 문법보다 훨씬 깔끔하게 풀이가 가능하다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 가격대 별 상품 개수 구하기]]></summary></entry><entry><title type="html">MySQL Foreign key 설정하기</title><link href="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html" rel="alternate" type="text/html" title="MySQL Foreign key 설정하기" /><published>2023-04-07T00:00:00+09:00</published><updated>2023-04-07T00:00:00+09:00</updated><id>http://localhost:4000/db/2023/04/07/db-mysqlforeign</id><content type="html" xml:base="http://localhost:4000/db/2023/04/07/db-mysqlforeign.html"><![CDATA[<p>MySQL Foreign Key를 설정하는 방법을 적어보려한다. <br />
 간단하게 아래와 같은 테이블을 준비했다.</p>
 
 <p>스키마 이름은 sqlpractice로 설정하였다.</p>
@@ -208,7 +675,270 @@ HAVING COUNT(PRODUCT_ID) &gt;= 2
 ORDER BY USER_ID ASC, PRODUCT_ID DESC;
 </code></pre>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 재구매가 일어난 상품과 회원 리스트 구하기]]></summary></entry><entry><title type="html">[Programmers] 진료과별 총 예약 횟수 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/06/sql-resevecount.html" rel="alternate" type="text/html" title="[Programmers] 진료과별 총 예약 횟수 출력하기 (MySQL)" /><published>2023-04-06T00:00:00+09:00</published><updated>2023-04-06T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/06/sql-resevecount</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/06/sql-resevecount.html"><![CDATA[<h2 id="-문제--진료과별-총-예약-횟수-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/132202">진료과별 총 예약 횟수 출력하기</a></h2>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 재구매가 일어난 상품과 회원 리스트 구하기]]></summary></entry><entry><title type="html">[Spring] QueryDSL DTO 조회 방법</title><link href="http://localhost:4000/spring/2023/04/07/spring-querydsladvance.html" rel="alternate" type="text/html" title="[Spring] QueryDSL DTO 조회 방법" /><published>2023-04-07T00:00:00+09:00</published><updated>2023-04-07T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/07/spring-querydsladvance</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/07/spring-querydsladvance.html"><![CDATA[<h2 id="querydsl">QueryDSL</h2>
+
+<h3 id="테스트-코드">테스트 코드</h3>
+
+<p>이전에 작성했던 <a href="https://mycatlikeschuru.github.io/spring/2023/04/04/spring-querydsl.html">QueryDSL 기초설정 및 JPQL과 비교해보기</a>에서 <br />
+이어서 작업을 진행하였다. 클래스와 테스트코드는 동일하게 사용했고</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
+
+   <span class="nd">@Autowired</span>
+   <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+   <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span><span class="o">;</span>
+
+   <span class="nd">@PersistenceUnit</span>
+   <span class="nc">EntityManagerFactory</span> <span class="n">emf</span><span class="o">;</span>
+
+   <span class="nd">@BeforeEach</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
+      <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
+      <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
+
+      <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+      <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+      <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+      <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
+      <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Team 객체 2개와 Member 객체 4개를 만들어서 테스트를 진행했다. <br />
+아래의 코드는 위의 @BeforeEach를 통해 만들어진 객체를 기준으로 생각하면된다.</p>
+
+<p><br /></p>
+
+<h3 id="dto-클래스-작성">DTO 클래스 작성</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Data</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberDto</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">username</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MemberDto</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>DTO클래스는 위와 같이 작성했다.</p>
+
+<p><br /></p>
+
+<h3 id="프로젝션과-결과-반환---dto-조회">프로젝션과 결과 반환 - DTO 조회</h3>
+
+<h4 id="jpql을-이용한-방법">JPQL을 이용한 방법</h4>
+
+<p>먼저 QueryDsl 사용 이전에 어떻게 사용하였는지?<br />
+순수 JPA에서 DTO를 조회할때 사용하는 방법이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findDtoByJPQL</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MemberDto</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">"select new study.querydsl.dto.MemberDto(m.username, m.age) from Member m"</span><span class="o">,</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">getResultList</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">MemberDto</span> <span class="n">memberDto</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"memberDto = "</span> <span class="o">+</span> <span class="n">memberDto</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>new 명령어를 이용해 패키지 이름을 적어줘야해서 지저분해지는 코드고 <br />
+패지키이름을 매번적기에 상당히 번거롭다.</p>
+
+<p><br /></p>
+
+<h4 id="querydsl을-이용한-방법">QueryDsl을 이용한 방법</h4>
+
+<p>결과를 DTO로 반환할 떄 사용하는 방법은 총 3가지가 있다.</p>
+
+<ol>
+  <li>프로퍼티 접근</li>
+  <li>필드 직접 접근</li>
+  <li>생성자 사용</li>
+</ol>
+
+<p>예제를 통해 살펴보자</p>
+
+<p><br /></p>
+
+<p><strong>1). 프로퍼티 접근방식</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">getter</code>, <code class="language-plaintext highlighter-rouge">setter</code>를 이용한 값을 주입하는 방법이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findDtoBySetter</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MemberDto</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">Projections</span><span class="o">.</span><span class="na">bean</span><span class="o">(</span>
+                        <span class="nc">MemberDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">MemberDto</span> <span class="n">memberDto</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"memberDto = "</span> <span class="o">+</span> <span class="n">memberDto</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+<span class="c1">// 출력 내용</span>
+<span class="n">memberDto</span> <span class="o">=</span> <span class="nc">MemberDto</span><span class="o">(</span><span class="n">username</span><span class="o">=</span><span class="n">member1</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">10</span><span class="o">)</span>
+<span class="n">memberDto</span> <span class="o">=</span> <span class="nc">MemberDto</span><span class="o">(</span><span class="n">username</span><span class="o">=</span><span class="n">member2</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="o">)</span>
+<span class="n">memberDto</span> <span class="o">=</span> <span class="nc">MemberDto</span><span class="o">(</span><span class="n">username</span><span class="o">=</span><span class="n">member3</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="o">)</span>
+<span class="n">memberDto</span> <span class="o">=</span> <span class="nc">MemberDto</span><span class="o">(</span><span class="n">username</span><span class="o">=</span><span class="n">member4</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">40</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Projections.bean()</code>을 이용해 Dto타입을 지정해주고<br />
+저장할 데이터를 지정해주면 된다. 여기서 중요한점은</p>
+
+<p><code class="language-plaintext highlighter-rouge">getter</code>, <code class="language-plaintext highlighter-rouge">setter</code> 가 있어야 가능하다. <br />
+(MemberDto에는 <code class="language-plaintext highlighter-rouge">@Data</code>가 있어서 getter,setter를 사용함)</p>
+
+<p>또한 기본생성자가 존재해야 가능하다.</p>
+
+<p><br /></p>
+
+<p><strong>2). 필드 직접 접근방식</strong></p>
+
+<p>위의 코드와 동일하지만 <code class="language-plaintext highlighter-rouge">Projections.fields()</code>만 변경 되었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findDtoByField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MemberDto</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">Projections</span><span class="o">.</span><span class="na">fields</span><span class="o">(</span>
+                        <span class="nc">MemberDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">MemberDto</span> <span class="n">memberDto</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"memberDto = "</span> <span class="o">+</span> <span class="n">memberDto</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>1번과의 차이점은 <code class="language-plaintext highlighter-rouge">getter</code>, <code class="language-plaintext highlighter-rouge">setter</code>가 없어도 가능하다는 점이다. <br />
+필드에 바로 데이터를 삽입을 해준다. 여기서도 기본생성자는 있어야한다.</p>
+
+<p><br /></p>
+
+<p><strong>3). 생성자 사용방식</strong></p>
+
+<p>생성자 사용방식도 위의 코드와 동일하지만 <code class="language-plaintext highlighter-rouge">Projections.constructor()</code>만 변경 되었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findDtoByConstructor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MemberDto</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">Projections</span><span class="o">.</span><span class="na">constructor</span><span class="o">(</span>
+                        <span class="nc">MemberDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">MemberDto</span> <span class="n">memberDto</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"memberDto = "</span> <span class="o">+</span> <span class="n">memberDto</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>생성자를 이용하는방법이 <code class="language-plaintext highlighter-rouge">MemberDto</code> 클래스의 생성자를 이용해서 값을 넣어준다. <br />
+이와 같은 경우는 기본생성자가 없어도 가능하고</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="nf">MemberDto</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"나호출됨"</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>와 같은 생성자가 존재하는데 위에 생성자가 직접 호출되기 때문에  <br />
+생성자 안에 출력을 넣어 <code class="language-plaintext highlighter-rouge">System.out.println("나호출됨");</code> 테스트를 실행하면</p>
+
+<p><code class="language-plaintext highlighter-rouge">나호출됨</code>이라는 출력문이 4번 출력된 것을 확인할 수 있다. <br />
+(member 테이블에 4개가 있기 떄문에)</p>
+
+<p><br /></p>
+
+<p><strong>❗️필드 접근방식에서 Q타입 객체와 Dto의 이름이 다를경우</strong></p>
+
+<p>예를 들어 <code class="language-plaintext highlighter-rouge">Member</code> 클래스의 <code class="language-plaintext highlighter-rouge">이름이 = username</code> 으로 지정되어 있고 <br />
+<code class="language-plaintext highlighter-rouge">UserDto</code>의 <code class="language-plaintext highlighter-rouge">이름이 = name</code> 으로 지정되어 있다고 가정해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Data</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserDto</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">UserDto</code> 클래스가 이렇게 지정되어 있다고 가정하고 <br />
+2번 방법인 필드 직접 접근방식을 사용해서 작성해보면</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findUserDtoByField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">UserDto</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">Projections</span><span class="o">.</span><span class="na">fields</span><span class="o">(</span>
+                        <span class="nc">UserDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">UserDto</span> <span class="n">userDto</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"userDto = "</span> <span class="o">+</span> <span class="n">userDto</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> 
+<span class="c1">// 출력 내용  </span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="kc">null</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">10</span><span class="o">)</span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="kc">null</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="o">)</span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="kc">null</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="o">)</span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="kc">null</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">40</span><span class="o">)</span>
+</code></pre></div></div>
+<p>와 같은 방법으로 쿼리를 작성할 수 있다. 하지만 위와 같이 name은 null로 <br />
+표현되는 모습을 볼 수 있다. 이유는 같은 이름이 매칭이 안되기 때문이다.</p>
+
+<p>이를 해결하기 위해서 우리는 별칭(AS)를 붙여 해결이 가능하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">findUserDtoByField</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">UserDto</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="nc">Projections</span><span class="o">.</span><span class="na">fields</span><span class="o">(</span>
+                        <span class="nc">UserDto</span><span class="o">.</span><span class="na">class</span><span class="o">,</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="s">"name"</span><span class="o">),</span> <span class="c1">// &lt;- Alias 붙인곳</span>
+                        <span class="n">member</span><span class="o">.</span><span class="na">age</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">member</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="nc">UserDto</span> <span class="n">userDto</span> <span class="o">:</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"userDto = "</span> <span class="o">+</span> <span class="n">userDto</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="c1">// 출력 내용 </span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="n">member1</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">10</span><span class="o">)</span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="n">member2</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="o">)</span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="n">member3</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="o">)</span>
+<span class="n">userDto</span> <span class="o">=</span> <span class="nc">UserDto</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="n">member4</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">40</span><span class="o">)</span>
+</code></pre></div></div>
+<p>와 같이 <code class="language-plaintext highlighter-rouge">.as()</code>를 이용해 Dto이름과 Entity의 이름이 상이해도 해결이 가능하다.</p>
+
+<p>서브쿼리의 별칭을 붙여야할 경우에는</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ExpressionUtils</span><span class="o">.</span><span class="na">as</span><span class="o">(</span><span class="nc">JPAExpressions</span>
+        <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">memberSub</span><span class="o">.</span><span class="na">age</span><span class="o">.</span><span class="na">max</span><span class="o">())</span>
+        <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">memberSub</span><span class="o">),</span> <span class="s">"age"</span><span class="o">)</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">ExpressionUtils.as(서브쿼리, 별칭)</code>과 같은 방식으로 사용할 수 있다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[QueryDSL]]></summary></entry><entry><title type="html">[Programmers] 진료과별 총 예약 횟수 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/06/sql-resevecount.html" rel="alternate" type="text/html" title="[Programmers] 진료과별 총 예약 횟수 출력하기 (MySQL)" /><published>2023-04-06T00:00:00+09:00</published><updated>2023-04-06T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/06/sql-resevecount</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/06/sql-resevecount.html"><![CDATA[<h2 id="-문제--진료과별-총-예약-횟수-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/132202">진료과별 총 예약 횟수 출력하기</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -650,7 +1380,315 @@ ON i.FLAVOR = f.FLAVOR
 GROUP BY i.INGREDIENT_TYPE;
 </code></pre>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 성분으로 구분한 아이스크림 총 주문량]]></summary></entry><entry><title type="html">[Spring] QueryDSL 기본문법 사용하기</title><link href="http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html" rel="alternate" type="text/html" title="[Spring] QueryDSL 기본문법 사용하기" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/04/spring-querydsladvance</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html"><![CDATA[<h2 id="querydsl">QueryDSL</h2>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 성분으로 구분한 아이스크림 총 주문량]]></summary></entry><entry><title type="html">[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기</title><link href="http://localhost:4000/spring/2023/04/04/spring-querydsl.html" rel="alternate" type="text/html" title="[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/04/spring-querydsl</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/04/spring-querydsl.html"><![CDATA[<h2 id="querydsl">QueryDSL</h2>
+
+<h3 id="querydsl-너는-뭐니">QueryDSL 너는 뭐니?🤔</h3>
+
+<p>Query Domain Specific Language의 약자이다.  <br />
+JPQL을 Java 코드로 작성할 수 있도록 하는 라이브러리이다.</p>
+
+<p>JPQL과 다르게 사용함으로써 얻을 수 있는 이점은</p>
+<ol>
+  <li>문자가 아닌 코드로 쿼리를 작성함으로써, 컴파일 시점에 문법 오류를 확인할 수 있다.</li>
+  <li>자동 완성 등 IDE의 도움을 받을 수 있다.</li>
+  <li>동적인 쿼리 작성이 편하다.</li>
+</ol>
+
+<p>*동적쿼리? <br />
+파라미터가 어떻게 오는지에 따라 조건이 변경되어지는 쿼리를 말한다.</p>
+
+<p><br /></p>
+
+<h3 id="설정하기">설정하기</h3>
+
+<p><strong>gradle 설정</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">buildscript</span> <span class="o">{</span> <span class="c1">// Spring Boot 2.6 이상일 경우</span>
+	<span class="n">ext</span> <span class="o">{</span>
+		<span class="n">queryDslVersion</span> <span class="o">=</span> <span class="s">"5.0.0"</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">plugins</span> <span class="o">{</span>
+	<span class="n">id</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="err">'</span> <span class="n">version</span> <span class="err">'</span><span class="mf">2.7</span><span class="o">.</span><span class="mi">7</span><span class="err">'</span>
+	<span class="n">id</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">dependency</span><span class="o">-</span><span class="n">management</span><span class="err">'</span> <span class="n">version</span> <span class="err">'</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">15</span><span class="o">.</span><span class="na">RELEASE</span><span class="err">'</span>
+	<span class="c1">//querydsl 추가</span>
+	<span class="n">id</span> <span class="s">"com.ewerk.gradle.plugins.querydsl"</span> <span class="n">version</span> <span class="s">"1.0.10"</span>
+	<span class="n">id</span> <span class="err">'</span><span class="n">java</span><span class="err">'</span>
+<span class="o">}</span>
+
+<span class="n">group</span> <span class="o">=</span> <span class="err">'</span><span class="n">study</span><span class="err">'</span>
+<span class="n">version</span> <span class="o">=</span> <span class="err">'</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="err">'</span>
+<span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="err">'</span><span class="mi">11</span><span class="err">'</span>
+
+<span class="n">configurations</span> <span class="o">{</span>
+	<span class="n">compileOnly</span> <span class="o">{</span>
+		<span class="n">extendsFrom</span> <span class="n">annotationProcessor</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="n">repositories</span> <span class="o">{</span>
+	<span class="n">mavenCentral</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="n">dependencies</span> <span class="o">{</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">jpa</span><span class="err">'</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span>
+
+	<span class="c1">//querydsl 추가</span>
+	<span class="n">implementation</span> <span class="s">"com.querydsl:querydsl-jpa:${queryDslVersion}"</span>
+	<span class="n">implementation</span> <span class="s">"com.querydsl:querydsl-apt:${queryDslVersion}"</span>
+
+	<span class="c1">// 쿼리를 이쁘게 출력해주는 라이브러리</span>
+	<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">gavlyukovskiy</span><span class="o">:</span><span class="n">p6spy</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="nl">starter:</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">8</span><span class="err">'</span>
+
+	<span class="n">compileOnly</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
+	<span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span><span class="err">'</span>
+	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
+	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
+<span class="o">}</span>
+
+<span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="err">'</span><span class="n">test</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
+	<span class="n">useJUnitPlatform</span><span class="o">()</span>
+<span class="o">}</span>
+
+<span class="c1">//querydsl 추가 시작</span>
+<span class="n">def</span> <span class="n">querydslDir</span> <span class="o">=</span> <span class="s">"$buildDir/generated/querydsl"</span>
+
+<span class="n">querydsl</span> <span class="o">{</span>
+	<span class="n">jpa</span> <span class="o">=</span> <span class="kc">true</span>
+	<span class="n">querydslSourcesDir</span> <span class="o">=</span> <span class="n">querydslDir</span>
+<span class="o">}</span>
+<span class="n">sourceSets</span> <span class="o">{</span>
+	<span class="n">main</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">srcDir</span> <span class="n">querydslDir</span>
+<span class="o">}</span>
+<span class="n">compileQuerydsl</span><span class="o">{</span>
+	<span class="n">options</span><span class="o">.</span><span class="na">annotationProcessorPath</span> <span class="o">=</span> <span class="n">configurations</span><span class="o">.</span><span class="na">querydsl</span>
+<span class="o">}</span>
+<span class="n">configurations</span> <span class="o">{</span>
+	<span class="n">compileOnly</span> <span class="o">{</span>
+		<span class="n">extendsFrom</span> <span class="n">annotationProcessor</span>
+	<span class="o">}</span>
+	<span class="n">querydsl</span><span class="o">.</span><span class="na">extendsFrom</span> <span class="n">compileClasspath</span>
+<span class="o">}</span>
+<span class="c1">//querydsl 추가 끝</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Gradle &gt; Tasks &gt; other &gt; compileQuerydsl</code>을 눌러 빌드하면</p>
+
+<p><code class="language-plaintext highlighter-rouge">def querydslDir = "$buildDir/generated/querydsl"</code>에 의해서     <br />
+build &gt; generated 패지키에 Q타입 클래스가 생긴다.</p>
+
+<p><br /></p>
+
+<p><strong>❗️ 주의점 ❗️</strong><br />
+generated된 파일들은 git에 올리면 안된다. <br />
+즉, gitignore처리를 해줘야한다. 보통 build파일을 gitignore하기 때문에 <br />
+build 패키지안에 generated 폴더를 넣어주면된다. (gradle에서 설정)</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/229707216-aece56b0-bc8c-4619-a4ec-24454e83486d.png" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p><br /></p>
+
+<h3 id="사용하기">사용하기</h3>
+
+<p>Member, Team을 이용한 예제를 작성해보려한다.</p>
+
+<p><strong>Member.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span> 
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+<span class="nd">@ToString</span><span class="o">(</span><span class="n">of</span> <span class="o">=</span> <span class="o">{</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"username"</span><span class="o">,</span> <span class="s">"age"</span><span class="o">})</span> <span class="c1">// team은 넣을경우 무한루프돔</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"member_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">username</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"team_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Team</span> <span class="n">team</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">age</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="nc">Team</span> <span class="n">team</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">team</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="n">changeTeam</span><span class="o">(</span><span class="n">team</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeTeam</span><span class="o">(</span><span class="nc">Team</span> <span class="n">team</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">team</span> <span class="o">=</span> <span class="n">team</span><span class="o">;</span>
+        <span class="n">team</span><span class="o">.</span><span class="na">getMembers</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>Team.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="nd">@Getter</span> 
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+<span class="nd">@ToString</span><span class="o">(</span><span class="n">of</span> <span class="o">=</span> <span class="o">{</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"name"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Team</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"team"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">public</span> <span class="nf">Team</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>빌드하여 QTeam, QMember 클래스가 생성되었다면 <br />
+테스트코드를 통해 JPQL과 Querydsl을 비교해보자</p>
+
+<p><strong>1). JPQL로 작성한 테스트 코드</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+    <span class="nd">@BeforeEach</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
+        <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startJPQL</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">"select m from Member m where m.username = :username"</span><span class="o">,</span> <span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span> <span class="s">"member1"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">getSingleResult</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>팀 객체를 2개 만들었다. (teamA, teamB) <br />
+그리고 멤버를 4개 만들어 teamA, teamB에 속하도록 하였다.</p>
+
+<p>이중에서 Member의 username이 <code class="language-plaintext highlighter-rouge">member1</code>로 되어있는 테이블을 조회하는 JPQL 문법이다. <br />
+파라미터 바인딩을 통해 <code class="language-plaintext highlighter-rouge">:username</code>의 <code class="language-plaintext highlighter-rouge">member1</code>을 넣어 주었다.</p>
+
+<pre><code class="language-roomsql">select
+    member0_.member_id as member_i1_1_,
+    member0_.age as age2_1_,
+    member0_.team_id as team_id4_1_,
+    member0_.username as username3_1_ 
+from
+    member member0_ 
+where
+    member0_.username=?
+</code></pre>
+<p>실제로 콘솔창에 출력되어진 쿼리를 보아도 where 절에 ?가 들어간 모습을 볼 수 있다.</p>
+
+<p><br /></p>
+
+<p><strong>2). Querydsl로 작성한 테스트 코드</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+    <span class="nd">@BeforeEach</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
+        <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">queryDsl</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
+        <span class="nc">QMember</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QMember</span><span class="o">(</span><span class="s">"m"</span><span class="o">);</span>
+
+        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
+
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위와 동일한 요구사항으로 querydsl을 이용하여 작성한 코드이다. <br />
+JPAQueryFactory 객체와 Q타입 Member객체를 만들어 작성하였다.</p>
+
+<p>그리고 where절에서 username.eq를 통해 <code class="language-plaintext highlighter-rouge">member1</code>과 같은 항목을 찾고 있다. <br />
+여기서 JPQL과 다른점은 파라미터 바인딩을 하지않았지만, 자동으로 파라미터 바인딩을 해준다.</p>
+
+<pre><code class="language-roomsql">select
+        member0_.member_id as member_i1_1_,
+        member0_.age as age2_1_,
+        member0_.team_id as team_id4_1_,
+        member0_.username as username3_1_ 
+    from
+        member member0_ 
+    where
+        member0_.username=?
+</code></pre>
+<p>위의 쿼리는 querydsl을 사용하였을 떄 출력되어진 쿼리문인데  <br />
+역시 JPQL과 동일하게 파라미터 바인딩이 되어진 모습이다.</p>
+
+<p><br /> <br />
+<br /></p>
+
+<p>여기까지가 기본적인 설정과 사용법에 대한 내용이고  <br />
+사용해본결과 정말 컴파일시 오류 확인이 정말 용이하고  <br />
+<code class="language-plaintext highlighter-rouge">.</code>을 입력해 사용가능한 문법들이 쭉 나오니깐 코드 작성할때 어시스턴스가 <br />
+정말 편하게 느껴졌다. 좀 더 사용해보면서 동적쿼리에 얼마나 편하게 작업이가능한지? <br />
+여러가지 문법이 무엇이 있는지도 배워보도록 하자 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[QueryDSL]]></summary></entry><entry><title type="html">[Spring] QueryDSL 기본문법 사용하기</title><link href="http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html" rel="alternate" type="text/html" title="[Spring] QueryDSL 기본문법 사용하기" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/04/spring-querydsladvance</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/04/spring-querydsladvance.html"><![CDATA[<h2 id="querydsl">QueryDSL</h2>
 
 <h3 id="테스트-코드">테스트 코드</h3>
 
@@ -1668,955 +2706,4 @@ select 구절에서 <code class="language-plaintext highlighter-rouge">.concat("
 JPQL,SQL 문법을 자세히 알면 어느정도 학습하기 괜찮은 수준인 것 같다.<br />
 (하지만 JPQL,SQL 문법을 잘몰라 공부하느라 시간이 꽤 걸렷다…)</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[QueryDSL]]></summary></entry><entry><title type="html">[Programmers] 상품 별 오프라인 매출 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/04/sql-productsum.html" rel="alternate" type="text/html" title="[Programmers] 상품 별 오프라인 매출 구하기 (MySQL)" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/04/sql-productsum</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/04/sql-productsum.html"><![CDATA[<h2 id="-문제--상품-별-오프라인-매출-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131533">상품 별 오프라인 매출 구하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 의류 쇼핑몰에서 판매중인 상품들의 상품 정보를 담은 <code>PRODUCT</code> 테이블과 오프라인 상품 판매 정보를 담은 <code>OFFLINE_SALE</code> 테이블 입니다. <code>PRODUCT</code> 테이블은 아래와 같은 구조로 <code>PRODUCT_ID</code>, <code>PRODUCT_CODE</code>, <code>PRICE</code>는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>PRODUCT_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>PRODUCT_CODE</td>
-<td>VARCHAR(8)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>PRICE</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>상품 별로 중복되지 않는 8자리 상품코드 값을 가지며, 앞 2자리는 카테고리 코드를 의미합니다.</p>
-
-<p><code>OFFLINE_SALE</code> 테이블은 아래와 같은 구조로 되어있으며 <code>OFFLINE_SALE_ID</code>, <code>PRODUCT_ID</code>, <code>SALES_AMOUNT</code>, <code>SALES_DATE</code>는 각각 오프라인 상품 판매 ID, 상품 ID, 판매량, 판매일을 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>OFFLINE_SALE_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>PRODUCT_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>SALES_AMOUNT</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>SALES_DATE</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>동일한 날짜, 상품 ID 조합에 대해서는 하나의 판매 데이터만 존재합니다.</p>
-
-<hr />
-
-<h5>문제</h5>
-
-<p><code>PRODUCT</code> 테이블과 <code>OFFLINE_SALE</code> 테이블에서 상품코드 별 매출액(판매가 * 판매량) 합계를 출력하는 SQL문을 작성해주세요. 결과는 매출액을 기준으로 내림차순 정렬해주시고 매출액이 같다면 상품코드를 기준으로 오름차순 정렬해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>PRODUCT</code> 테이블이 다음과 같고 </p>
-<table class="table">
-        <thead><tr>
-<th>PRODUCT_ID</th>
-<th>PRODUCT_CODE</th>
-<th>PRICE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>A1000011</td>
-<td>15000</td>
-</tr>
-<tr>
-<td>2</td>
-<td>A1000045</td>
-<td>8000</td>
-</tr>
-<tr>
-<td>3</td>
-<td>C3000002</td>
-<td>42000</td>
-</tr>
-</tbody>
-      </table>
-<p><code>OFFLINE_SALE</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>OFFLINE_SALE_ID</th>
-<th>PRODUCT_ID</th>
-<th>SALES_AMOUNT</th>
-<th>SALES_DATE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>2</td>
-<td>2022-02-21</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2022-03-02</td>
-</tr>
-<tr>
-<td>3</td>
-<td>3</td>
-<td>3</td>
-<td>2022-05-01</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>1</td>
-<td>2022-05-24</td>
-</tr>
-<tr>
-<td>5</td>
-<td>1</td>
-<td>2</td>
-<td>2022-07-14</td>
-</tr>
-<tr>
-<td>6</td>
-<td>2</td>
-<td>1</td>
-<td>2022-09-22</td>
-</tr>
-</tbody>
-      </table>
-<p>각 상품 별 총 판매량과 판매가는 다음과 같습니다.</p>
-
-<ul>
-<li><code>PRODUCT_CODE</code> 가 <code>A1000011</code>인 상품은 총 판매량이 6개, 판매가가 15,000원</li>
-<li><code>PRODUCT_CODE</code> 가 <code>A1000045</code>인 상품은 총 판매량이 2개, 판매가가 8,000원</li>
-<li><code>PRODUCT_CODE</code> 가 <code>C3000002</code>인 상품은 총 판매량이 3개, 판매가가 42,000원</li>
-</ul>
-
-<p>그러므로 각 상품 별 매출액을 계산하고 정렬하면 결과가 다음과 같이 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>PRODUCT_CODE</th>
-<th>SALES</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>C3000002</td>
-<td>126000</td>
-</tr>
-<tr>
-<td>A1000011</td>
-<td>90000</td>
-</tr>
-<tr>
-<td>A1000045</td>
-<td>16000</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>SUM을 이용해 (가격 * 수량)을 곱한 값 행의 합계를 SALES 컬럼으로 지정한다.</li>
-  <li>LEFT JOIN하여 PRODUCT_ID가 같은 것을 찾기</li>
-  <li>PRODUCT_CODE를 그룹핑</li>
-  <li>최종적으로 SALES 컬럼, SUM되어진 가격*수량 값을 기준으로 내림차순 정렬</li>
-  <li>만약 컬럼의 값이 같다면 PRODUCT_CODE를 오름차순하여 정렬</li>
-</ol>
-
-<pre><code class="language-RoomSql">SELECT p.PRODUCT_CODE,
-    SUM(p.PRICE * o.SALES_AMOUNT) AS SALES
-FROM OFFLINE_SALE o
-LEFT JOIN PRODUCT p 
-ON p.PRODUCT_ID = o.PRODUCT_ID
-GROUP BY p.PRODUCT_CODE
-ORDER BY SALES DESC, p.PRODUCT_CODE ASC;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 상품 별 오프라인 매출 구하기]]></summary></entry><entry><title type="html">[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기</title><link href="http://localhost:4000/spring/2023/04/04/spring-querydsl.html" rel="alternate" type="text/html" title="[Spring] QueryDSL 기초설정 및 JPQL과 비교해보기" /><published>2023-04-04T00:00:00+09:00</published><updated>2023-04-04T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/04/spring-querydsl</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/04/spring-querydsl.html"><![CDATA[<h2 id="querydsl">QueryDSL</h2>
-
-<h3 id="querydsl-너는-뭐니">QueryDSL 너는 뭐니?🤔</h3>
-
-<p>Query Domain Specific Language의 약자이다.  <br />
-JPQL을 Java 코드로 작성할 수 있도록 하는 라이브러리이다.</p>
-
-<p>JPQL과 다르게 사용함으로써 얻을 수 있는 이점은</p>
-<ol>
-  <li>문자가 아닌 코드로 쿼리를 작성함으로써, 컴파일 시점에 문법 오류를 확인할 수 있다.</li>
-  <li>자동 완성 등 IDE의 도움을 받을 수 있다.</li>
-  <li>동적인 쿼리 작성이 편하다.</li>
-</ol>
-
-<p>*동적쿼리? <br />
-파라미터가 어떻게 오는지에 따라 조건이 변경되어지는 쿼리를 말한다.</p>
-
-<p><br /></p>
-
-<h3 id="설정하기">설정하기</h3>
-
-<p><strong>gradle 설정</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">buildscript</span> <span class="o">{</span> <span class="c1">// Spring Boot 2.6 이상일 경우</span>
-	<span class="n">ext</span> <span class="o">{</span>
-		<span class="n">queryDslVersion</span> <span class="o">=</span> <span class="s">"5.0.0"</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-
-<span class="n">plugins</span> <span class="o">{</span>
-	<span class="n">id</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="err">'</span> <span class="n">version</span> <span class="err">'</span><span class="mf">2.7</span><span class="o">.</span><span class="mi">7</span><span class="err">'</span>
-	<span class="n">id</span> <span class="err">'</span><span class="n">io</span><span class="o">.</span><span class="na">spring</span><span class="o">.</span><span class="na">dependency</span><span class="o">-</span><span class="n">management</span><span class="err">'</span> <span class="n">version</span> <span class="err">'</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">15</span><span class="o">.</span><span class="na">RELEASE</span><span class="err">'</span>
-	<span class="c1">//querydsl 추가</span>
-	<span class="n">id</span> <span class="s">"com.ewerk.gradle.plugins.querydsl"</span> <span class="n">version</span> <span class="s">"1.0.10"</span>
-	<span class="n">id</span> <span class="err">'</span><span class="n">java</span><span class="err">'</span>
-<span class="o">}</span>
-
-<span class="n">group</span> <span class="o">=</span> <span class="err">'</span><span class="n">study</span><span class="err">'</span>
-<span class="n">version</span> <span class="o">=</span> <span class="err">'</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="err">'</span>
-<span class="n">sourceCompatibility</span> <span class="o">=</span> <span class="err">'</span><span class="mi">11</span><span class="err">'</span>
-
-<span class="n">configurations</span> <span class="o">{</span>
-	<span class="n">compileOnly</span> <span class="o">{</span>
-		<span class="n">extendsFrom</span> <span class="n">annotationProcessor</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-
-<span class="n">repositories</span> <span class="o">{</span>
-	<span class="n">mavenCentral</span><span class="o">()</span>
-<span class="o">}</span>
-
-<span class="n">dependencies</span> <span class="o">{</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">jpa</span><span class="err">'</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="err">'</span>
-
-	<span class="c1">//querydsl 추가</span>
-	<span class="n">implementation</span> <span class="s">"com.querydsl:querydsl-jpa:${queryDslVersion}"</span>
-	<span class="n">implementation</span> <span class="s">"com.querydsl:querydsl-apt:${queryDslVersion}"</span>
-
-	<span class="c1">// 쿼리를 이쁘게 출력해주는 라이브러리</span>
-	<span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">github</span><span class="o">.</span><span class="na">gavlyukovskiy</span><span class="o">:</span><span class="n">p6spy</span><span class="o">-</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="nl">starter:</span><span class="mf">1.5</span><span class="o">.</span><span class="mi">8</span><span class="err">'</span>
-
-	<span class="n">compileOnly</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
-	<span class="n">runtimeOnly</span> <span class="err">'</span><span class="n">com</span><span class="o">.</span><span class="na">h2database</span><span class="o">:</span><span class="n">h2</span><span class="err">'</span>
-	<span class="n">annotationProcessor</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">projectlombok</span><span class="o">:</span><span class="n">lombok</span><span class="err">'</span>
-	<span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">test</span><span class="err">'</span>
-<span class="o">}</span>
-
-<span class="n">tasks</span><span class="o">.</span><span class="na">named</span><span class="o">(</span><span class="err">'</span><span class="n">test</span><span class="err">'</span><span class="o">)</span> <span class="o">{</span>
-	<span class="n">useJUnitPlatform</span><span class="o">()</span>
-<span class="o">}</span>
-
-<span class="c1">//querydsl 추가 시작</span>
-<span class="n">def</span> <span class="n">querydslDir</span> <span class="o">=</span> <span class="s">"$buildDir/generated/querydsl"</span>
-
-<span class="n">querydsl</span> <span class="o">{</span>
-	<span class="n">jpa</span> <span class="o">=</span> <span class="kc">true</span>
-	<span class="n">querydslSourcesDir</span> <span class="o">=</span> <span class="n">querydslDir</span>
-<span class="o">}</span>
-<span class="n">sourceSets</span> <span class="o">{</span>
-	<span class="n">main</span><span class="o">.</span><span class="na">java</span><span class="o">.</span><span class="na">srcDir</span> <span class="n">querydslDir</span>
-<span class="o">}</span>
-<span class="n">compileQuerydsl</span><span class="o">{</span>
-	<span class="n">options</span><span class="o">.</span><span class="na">annotationProcessorPath</span> <span class="o">=</span> <span class="n">configurations</span><span class="o">.</span><span class="na">querydsl</span>
-<span class="o">}</span>
-<span class="n">configurations</span> <span class="o">{</span>
-	<span class="n">compileOnly</span> <span class="o">{</span>
-		<span class="n">extendsFrom</span> <span class="n">annotationProcessor</span>
-	<span class="o">}</span>
-	<span class="n">querydsl</span><span class="o">.</span><span class="na">extendsFrom</span> <span class="n">compileClasspath</span>
-<span class="o">}</span>
-<span class="c1">//querydsl 추가 끝</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">Gradle &gt; Tasks &gt; other &gt; compileQuerydsl</code>을 눌러 빌드하면</p>
-
-<p><code class="language-plaintext highlighter-rouge">def querydslDir = "$buildDir/generated/querydsl"</code>에 의해서     <br />
-build &gt; generated 패지키에 Q타입 클래스가 생긴다.</p>
-
-<p><br /></p>
-
-<p><strong>❗️ 주의점 ❗️</strong><br />
-generated된 파일들은 git에 올리면 안된다. <br />
-즉, gitignore처리를 해줘야한다. 보통 build파일을 gitignore하기 때문에 <br />
-build 패키지안에 generated 폴더를 넣어주면된다. (gradle에서 설정)</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/229707216-aece56b0-bc8c-4619-a4ec-24454e83486d.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p><br /></p>
-
-<h3 id="사용하기">사용하기</h3>
-
-<p>Member, Team을 이용한 예제를 작성해보려한다.</p>
-
-<p><strong>Member.java</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
-<span class="nd">@Getter</span> 
-<span class="nd">@Setter</span>
-<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
-<span class="nd">@ToString</span><span class="o">(</span><span class="n">of</span> <span class="o">=</span> <span class="o">{</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"username"</span><span class="o">,</span> <span class="s">"age"</span><span class="o">})</span> <span class="c1">// team은 넣을경우 무한루프돔</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
-
-    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
-    <span class="nd">@Column</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"member_id"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">username</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-
-    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
-    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"team_id"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">Team</span> <span class="n">team</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">(</span><span class="n">username</span><span class="o">,</span> <span class="n">age</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">,</span> <span class="nc">Team</span> <span class="n">team</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">team</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
-            <span class="n">changeTeam</span><span class="o">(</span><span class="n">team</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">changeTeam</span><span class="o">(</span><span class="nc">Team</span> <span class="n">team</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">team</span> <span class="o">=</span> <span class="n">team</span><span class="o">;</span>
-        <span class="n">team</span><span class="o">.</span><span class="na">getMembers</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
-    <span class="o">}</span>
-
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>Team.java</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
-<span class="nd">@Getter</span> 
-<span class="nd">@Setter</span>
-<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
-<span class="nd">@ToString</span><span class="o">(</span><span class="n">of</span> <span class="o">=</span> <span class="o">{</span><span class="s">"id"</span><span class="o">,</span> <span class="s">"name"</span><span class="o">})</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Team</span> <span class="o">{</span>
-
-    <span class="nd">@Id</span> <span class="nd">@GeneratedValue</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
-
-    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"team"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
-
-    <span class="kd">public</span> <span class="nf">Team</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>빌드하여 QTeam, QMember 클래스가 생성되었다면 <br />
-테스트코드를 통해 JPQL과 Querydsl을 비교해보자</p>
-
-<p><strong>1). JPQL로 작성한 테스트 코드</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
-<span class="nd">@Transactional</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
-
-    <span class="nd">@Autowired</span>
-    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
-
-    <span class="nd">@BeforeEach</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
-        <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
-
-        <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
-        <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
-        <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
-        <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startJPQL</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="na">createQuery</span><span class="o">(</span><span class="s">"select m from Member m where m.username = :username"</span><span class="o">,</span> <span class="nc">Member</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">setParameter</span><span class="o">(</span><span class="s">"username"</span><span class="o">,</span> <span class="s">"member1"</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">getSingleResult</span><span class="o">();</span>
-
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>팀 객체를 2개 만들었다. (teamA, teamB) <br />
-그리고 멤버를 4개 만들어 teamA, teamB에 속하도록 하였다.</p>
-
-<p>이중에서 Member의 username이 <code class="language-plaintext highlighter-rouge">member1</code>로 되어있는 테이블을 조회하는 JPQL 문법이다. <br />
-파라미터 바인딩을 통해 <code class="language-plaintext highlighter-rouge">:username</code>의 <code class="language-plaintext highlighter-rouge">member1</code>을 넣어 주었다.</p>
-
-<pre><code class="language-roomsql">select
-    member0_.member_id as member_i1_1_,
-    member0_.age as age2_1_,
-    member0_.team_id as team_id4_1_,
-    member0_.username as username3_1_ 
-from
-    member member0_ 
-where
-    member0_.username=?
-</code></pre>
-<p>실제로 콘솔창에 출력되어진 쿼리를 보아도 where 절에 ?가 들어간 모습을 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p><strong>2). Querydsl로 작성한 테스트 코드</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
-<span class="nd">@Transactional</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">QuerydslBasicTestPractice</span> <span class="o">{</span>
-
-    <span class="nd">@Autowired</span>
-    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
-
-    <span class="nd">@BeforeEach</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">Team</span> <span class="n">teamA</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamA"</span><span class="o">);</span>
-        <span class="nc">Team</span> <span class="n">teamB</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Team</span><span class="o">(</span><span class="s">"teamB"</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamA</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">teamB</span><span class="o">);</span>
-
-        <span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member1"</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
-        <span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member2"</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="n">teamA</span><span class="o">);</span>
-        <span class="nc">Member</span> <span class="n">member3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member3"</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
-        <span class="nc">Member</span> <span class="n">member4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">(</span><span class="s">"member4"</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="n">teamB</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member1</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member2</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member3</span><span class="o">);</span>
-        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">member4</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">queryDsl</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
-        <span class="nc">QMember</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">QMember</span><span class="o">(</span><span class="s">"m"</span><span class="o">);</span>
-
-        <span class="nc">Member</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">queryFactory</span>
-                <span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">m</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">m</span><span class="o">.</span><span class="na">username</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="s">"member1"</span><span class="o">))</span>
-                <span class="o">.</span><span class="na">fetchOne</span><span class="o">();</span>
-
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">findMember</span><span class="o">.</span><span class="na">getUsername</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"member1"</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>위와 동일한 요구사항으로 querydsl을 이용하여 작성한 코드이다. <br />
-JPAQueryFactory 객체와 Q타입 Member객체를 만들어 작성하였다.</p>
-
-<p>그리고 where절에서 username.eq를 통해 <code class="language-plaintext highlighter-rouge">member1</code>과 같은 항목을 찾고 있다. <br />
-여기서 JPQL과 다른점은 파라미터 바인딩을 하지않았지만, 자동으로 파라미터 바인딩을 해준다.</p>
-
-<pre><code class="language-roomsql">select
-        member0_.member_id as member_i1_1_,
-        member0_.age as age2_1_,
-        member0_.team_id as team_id4_1_,
-        member0_.username as username3_1_ 
-    from
-        member member0_ 
-    where
-        member0_.username=?
-</code></pre>
-<p>위의 쿼리는 querydsl을 사용하였을 떄 출력되어진 쿼리문인데  <br />
-역시 JPQL과 동일하게 파라미터 바인딩이 되어진 모습이다.</p>
-
-<p><br /> <br />
-<br /></p>
-
-<p>여기까지가 기본적인 설정과 사용법에 대한 내용이고  <br />
-사용해본결과 정말 컴파일시 오류 확인이 정말 용이하고  <br />
-<code class="language-plaintext highlighter-rouge">.</code>을 입력해 사용가능한 문법들이 쭉 나오니깐 코드 작성할때 어시스턴스가 <br />
-정말 편하게 느껴졌다. 좀 더 사용해보면서 동적쿼리에 얼마나 편하게 작업이가능한지? <br />
-여러가지 문법이 무엇이 있는지도 배워보도록 하자 !!</p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[QueryDSL]]></summary></entry><entry><title type="html">[Programmers] 조건에 맞는 도서와 저자 리스트 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/03/sql-bookauthor.html" rel="alternate" type="text/html" title="[Programmers] 조건에 맞는 도서와 저자 리스트 출력하기 (MySQL)" /><published>2023-04-03T00:00:00+09:00</published><updated>2023-04-03T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/03/sql-bookauthor</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/03/sql-bookauthor.html"><![CDATA[<h2 id="-문제--조건에-맞는-도서와-저자-리스트-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/144854">조건에 맞는 도서와 저자 리스트 출력하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 한 서점에서 판매중인 도서들의 도서 정보(<code>BOOK</code>) 테이블입니다.</p>
-
-<p><code>BOOK</code> 테이블은 각 도서의 정보를 담은 테이블로 아래와 같은 구조로 되어있습니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-<th>Description</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>BOOK_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-<td>도서 ID</td>
-</tr>
-<tr>
-<td>CATEGORY</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-<td>카테고리 (경제, 인문, 소설, 생활, 기술)</td>
-</tr>
-<tr>
-<td>AUTHOR_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-<td>저자 ID</td>
-</tr>
-<tr>
-<td>PRICE</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-<td>판매가 (원)</td>
-</tr>
-<tr>
-<td>PUBLISHED_DATE</td>
-<td>DATE</td>
-<td>FALSE</td>
-<td>출판일</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>문제</h5>
-
-<p><code>BOOK</code> 테이블에서 <code>2021년</code>에 출판된 <code>'인문'</code> 카테고리에 속하는 도서 리스트를 찾아서 도서 ID(<code>BOOK_ID</code>), 출판일 (<code>PUBLISHED_DATE</code>)을 출력하는 SQL문을 작성해주세요. <br />
-결과는 출판일을 기준으로 오름차순 정렬해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>BOOK</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>BOOK_ID</th>
-<th>CATEGORY</th>
-<th>AUTHOR_ID</th>
-<th>PRICE</th>
-<th>PUBLISHED_DATE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>인문</td>
-<td>1</td>
-<td>10000</td>
-<td>2020-01-01</td>
-</tr>
-<tr>
-<td>2</td>
-<td>경제</td>
-<td>2</td>
-<td>9000</td>
-<td>2021-02-05</td>
-</tr>
-<tr>
-<td>3</td>
-<td>인문</td>
-<td>2</td>
-<td>11000</td>
-<td>2021-04-11</td>
-</tr>
-<tr>
-<td>4</td>
-<td>인문</td>
-<td>3</td>
-<td>10000</td>
-<td>2021-03-15</td>
-</tr>
-<tr>
-<td>5</td>
-<td>생활</td>
-<td>1</td>
-<td>12000</td>
-<td>2021-01-10</td>
-</tr>
-</tbody>
-      </table>
-<p>조건에 속하는 도서는 도서 ID 가 3, 4인 도서이므로 다음과 같습니다.</p>
-<table class="table">
-        <thead><tr>
-<th>BOOK_ID</th>
-<th>PUBLISHED_DATE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>3</td>
-<td>2021-04-11</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2021-03-15</td>
-</tr>
-</tbody>
-      </table>
-<p>그리고 출판일 오름차순으로 정렬하여야 하므로 다음과 같은 결과가 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>BOOK_ID</th>
-<th>PUBLISHED_DATE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>4</td>
-<td>2021-03-15</td>
-</tr>
-<tr>
-<td>3</td>
-<td>2021-04-11</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>주의사항</h5>
-
-<p><code>PUBLISHED_DATE</code>의 데이트 포맷이 예시와 동일해야 정답처리 됩니다.</p>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>DATE_FORMAT을 이용한 발행시간 형식 변경</li>
-  <li>LEFT JOIN으로 AUTHOR_ID가 같을때 JOIN</li>
-  <li>카테고리 = ‘경제’인 것들만 찾기</li>
-  <li>발행일 기준으로 오름차순</li>
-</ol>
-
-<pre><code class="language-RoomSql">SELECT b.BOOK_ID,
-    a.AUTHOR_NAME,
-    DATE_FORMAT(b.PUBLISHED_DATE,'%Y-%m-%d')
-FROM BOOK b 
-LEFT JOIN AUTHOR a
-ON b.AUTHOR_ID = a.AUTHOR_ID
-WHERE b.category = '경제'
-ORDER BY b.PUBLISHED_DATE ASC;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 조건에 맞는 도서와 저자 리스트 출력하기]]></summary></entry><entry><title type="html">[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/01/sql-carrent.html" rel="alternate" type="text/html" title="[Programmers] 자동차 평균 대여 기간 구하기 (MySQL)" /><published>2023-04-01T00:00:00+09:00</published><updated>2023-04-01T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/01/sql-carrent</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/01/sql-carrent.html"><![CDATA[<h2 id="-문제--자동차-평균-대여-기간-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/157342">자동차 평균 대여 기간 구하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블입니다. <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블은 아래와 같은 구조로 되어있으며, <code>HISTORY_ID</code>, <code>CAR_ID</code>, <code>START_DATE</code>, <code>END_DATE</code> 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>HISTORY_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>CAR_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>START_DATE</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>END_DATE</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>문제</h5>
-
-<p><code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블에서 평균 대여 기간이 7일 이상인 자동차들의 자동차 ID와 평균 대여 기간(컬럼명: <code>AVERAGE_DURATION</code>) 리스트를 출력하는 SQL문을 작성해주세요. 평균 대여 기간은 소수점 두번째 자리에서 반올림하고, 결과는 평균 대여 기간을 기준으로 내림차순 정렬해주시고, 평균 대여 기간이 같으면 자동차 ID를 기준으로 내림차순 정렬해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>HISTORY_ID</th>
-<th>CAR_ID</th>
-<th>START_DATE</th>
-<th>END_DATE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>2022-09-27</td>
-<td>2022-10-01</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1</td>
-<td>2022-10-03</td>
-<td>2022-11-04</td>
-</tr>
-<tr>
-<td>3</td>
-<td>2</td>
-<td>2022-09-05</td>
-<td>2022-09-05</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>2022-09-08</td>
-<td>2022-09-10</td>
-</tr>
-<tr>
-<td>5</td>
-<td>3</td>
-<td>2022-09-16</td>
-<td>2022-10-15</td>
-</tr>
-<tr>
-<td>6</td>
-<td>1</td>
-<td>2022-11-07</td>
-<td>2022-12-06</td>
-</tr>
-</tbody>
-      </table>
-<p>자동차 별 평균 대여 기간은</p>
-
-<ul>
-<li>자동차 ID가 1인 자동차의 경우, 대여 기간이 각각 5일, 33일, 30일인 기록이 존재하므로 평균 22.7일</li>
-<li>자동차 ID가 2인 자동차의 경우, 대여 기간이 각각 1일, 3일인 기록이 존재하므로 평균 2일</li>
-<li>자동차 ID가 3인 자동차의 경우, 대여 기간이 30일인 기록만 존재하므로 평균 30일
-입니다. 평균 대여 기간이 7일 이상인 자동차는 자동차 ID가 1, 3인 자동차이고, 평균 대여 기간 내림차순 및 자동차 ID를 기준으로 내림차순 정렬하면 다음과 같이 나와야 합니다.</li>
-</ul>
-<table class="table">
-        <thead><tr>
-<th>CAR_ID</th>
-<th>AVERAGE_DURATION</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>3</td>
-<td>30.0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>22.7</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>ROUND를 이용해 소수점 두번쨰 자리에서 반올림</li>
-  <li>DATEDIFF를 이용한 날짜의 차이를 계산</li>
-  <li>AVG를 이용한 평균 계산</li>
-  <li>GROUP BY를 이용한 집계</li>
-</ol>
-
-<pre><code class="language-RoomSql">SELECT c.CAR_ID,
-    ROUND(AVG(DATEDIFF(c.END_DATE, c.START_DATE)+1),1)
-    AS AVERAGE_DURATION
-    FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY c
-GROUP BY CAR_ID
-HAVING AVERAGE_DURATION &gt;= '7'
-ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 자동차 평균 대여 기간 구하기]]></summary></entry><entry><title type="html">[Programmers] 자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/01/sql-cartype.html" rel="alternate" type="text/html" title="[Programmers] 자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기 (MySQL)" /><published>2023-04-01T00:00:00+09:00</published><updated>2023-04-01T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/01/sql-cartype</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/01/sql-cartype.html"><![CDATA[<h2 id="-문제--자동차-종류-별-특정-옵션이-포함된-자동차-수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/151137">자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 자동차 대여 회사에서 대여중인 자동차들의 정보를 담은 <code>CAR_RENTAL_COMPANY_CAR</code> 테이블입니다. <code>CAR_RENTAL_COMPANY_CAR</code> 테이블은 아래와 같은 구조로 되어있으며, <code>CAR_ID</code>, <code>CAR_TYPE</code>, <code>DAILY_FEE</code>, <code>OPTIONS</code> 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>CAR_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>CAR_TYPE</td>
-<td>VARCHAR(255)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>DAILY_FEE</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>OPTIONS</td>
-<td>VARCHAR(255)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>자동차 종류는 '세단', 'SUV', '승합차', '트럭', '리무진' 이 있습니다. 자동차 옵션 리스트는 콤마(',')로 구분된 키워드 리스트(옵션 리스트 값 예시: '열선시트', '스마트키', '주차감지센서')로 되어있으며, 키워드 종류는 '주차감지센서', '스마트키', '네비게이션', '통풍시트', '열선시트', '후방카메라', '가죽시트' 가 있습니다.</p>
-
-<hr />
-
-<h5>문제</h5>
-
-<p><code>CAR_RENTAL_COMPANY_CAR</code> 테이블에서 '통풍시트', '열선시트', '가죽시트' 중 하나 이상의 옵션이 포함된 자동차가 자동차 종류 별로 몇 대인지 출력하는 SQL문을 작성해주세요. 이때 자동차 수에 대한 컬럼명은 <code>CARS</code>로 지정하고, 결과는 자동차 종류를 기준으로 오름차순 정렬해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>CAR_RENTAL_COMPANY_CAR</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>CAR_ID</th>
-<th>CAR_TYPE</th>
-<th>DAILY_FEE</th>
-<th>OPTIONS</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>세단</td>
-<td>16000</td>
-<td>가죽시트,열선시트,후방카메라</td>
-</tr>
-<tr>
-<td>2</td>
-<td>SUV</td>
-<td>14000</td>
-<td>스마트키,네비게이션,열선시트</td>
-</tr>
-<tr>
-<td>3</td>
-<td>SUV</td>
-<td>22000</td>
-<td>주차감지센서,후방카메라</td>
-</tr>
-<tr>
-<td>4</td>
-<td>트럭</td>
-<td>35000</td>
-<td>주차감지센서,네비게이션,열선시트</td>
-</tr>
-<tr>
-<td>5</td>
-<td>SUV</td>
-<td>16000</td>
-<td>가죽시트,네비게이션,열선시트,후방카메라,주차감지센서</td>
-</tr>
-</tbody>
-      </table>
-<p>'통풍시트', '열선시트', '가죽시트' 중 하나 이상의 옵션이 포함된 자동차는 자동차 ID가 1, 2, 4, 5인 자동차이고, 자동차 종류 별로 몇 대인지 구하고 자동차 종류를 기준으로 오름차순 정렬하면 다음과 같은 결과가 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>CAR_TYPE</th>
-<th>CARS</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>SUV</td>
-<td>2</td>
-</tr>
-<tr>
-<td>세단</td>
-<td>1</td>
-</tr>
-<tr>
-<td>트럭</td>
-<td>1</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>COUNT를 이용한 CAR_TYPE 수량 집계</li>
-  <li>WHERE절을 이용한 특정 조건 찾기</li>
-  <li>GROUP BY를 이용한 집계</li>
-</ol>
-
-<pre><code class="language-RoomSql">SELECT CAR_TYPE,
-    COUNT(CAR_TYPE) AS CARS
-FROM CAR_RENTAL_COMPANY_CAR
-WHERE OPTIONS LIKE '%통풍시트%' OR
-    OPTIONS LIKE '%열선시트%' OR
-    OPTIONS LIKE '%가죽시트%'
-GROUP BY CAR_TYPE
-ORDER BY CAR_TYPE ASC;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 자동차 종류 별 특정 옵션이 포함된 자동차 수 구하기]]></summary></entry></feed>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[QueryDSL]]></summary></entry></feed>

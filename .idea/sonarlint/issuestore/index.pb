@@ -139,15 +139,9 @@ f
 6_posts/Program/Spring/2022-11-25-spring-environment.md,2/b/2b8f6cd4e26b8df73c881491d10b1b1c581c37b7
 b
 2_posts/Program/Spring/2022-11-16-spring-servlet.md,1/c/1cc6ecb94834cb0541915562d5cef8de0f7c5a92
-]
--_posts/database/2023-01-08-db-redissetting.md,6/7/678f30f17b0b334d6c217ca9cac77c5ba28a8404
-Y
-)_posts/database/2022-12-28-db-mysqlEC2.md,1/2/12ec4ee9409f76b0c5e58d43f16bacb2f8a59960
 :
 
 robots.txt,3/7/377f6a321ea49092ae656938a73989aed62ca738
-V
-&_posts/database/2023-01-14-db-redis.md,3/2/320df682f07c8b52c69fa55ef6de41b4d0bc3231
 K
 googleaff559603f186e89.html,a/5/a55c596ec5fa672042051b38d52b88e48358168e
 8
@@ -156,8 +150,6 @@ Z
 *_posts/example/2015-02-28-test-markdown.md,4/5/45810d4aff86311a5c010666cdd728a218e9585e
 A
 sitemapsmaple.xml,a/b/ab1c7477bc2b94bc81fd85314839f46e7671193d
-V
-&_posts/database/2022-11-15-db-mysql.md,c/7/c74477dac7bd989c6067bbd13efcd485e81bbe4c
 _
 /_posts/program/Spring/2022-08-03-spring-port.md,1/8/182b27226899515bd5d43236c45e258bd8ee9a5b
 b
@@ -422,8 +414,6 @@ c
 3_posts/codingtest/sql/2023-04-06-sql-resevecount.md,3/2/321703bc282efabf1ecc7091bd632a3de2965928
 _
 /_posts/program/Spring/2023-02-17-spring-test.md,5/c/5cc852746974b312e4db3ce5d8dd2e29ad38b077
-]
--_posts/database/2023-02-09-db-mysqlreplace.md,9/8/985e5087e6fceab11112badbedf41390f0ab8f4a
 `
 0_posts/program/Spring/2023-01-21-spring-email.md,b/a/ba860215d26f3c63ab04b9cfd9af2de7308cf80c
 e
@@ -444,9 +434,5 @@ O
 _includes/views/site-brand.html,8/3/83be69d63b2d984f4c05504e54dc71e525274846
 c
 3_posts/program/Spring/2023-04-04-spring-querydsl.md,2/4/2400e17647cd6ab96e385e68a06b321eae843f77
-]
--_posts/database/2023-04-07-db-mysqlforeign.md,c/d/cd81537cfbf1149cd4e7911281202ca2efba2966
-]
--_posts/database/2023-04-08-db-joinpractice.md,7/7/772195c84d7fddd89c8c994221907ae61d8117ad
 G
 _site/page10/index.html,3/b/3bc64583739f0d6b087e9fe975fa1cd45359558b

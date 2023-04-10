@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 5 of 15 for Home | LeeJellan</title>
+<title>Page 5 of 16 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -712,6 +712,428 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/server/2023/01/27/server-oraclesetting.html">
+          Oracle Cloud 외부 접속 설정
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 27, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/server/2023/01/27/server-oraclesetting.html">
+        <p>
+        오늘은 Oracle Cloud 서버에
+nginx에 클라이언트를 배포해 외부에서 접속하고
+WorkBench를 이용해 mysql을 접속하려한다.
+
+외부접속관련해 설정을 정리해보려한다.
+
+
+
+📌 UFW vs iptables
+
+iptables를 이용해 방화벽 설정을 할 수 있다.
+
+sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
+
+와 같이 입력해주면 설정이 가능하다. 
+UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고
+수준높은 방화벽 구성에는 iptables를 사용해야한다.
+
+
+
+📌 UFW 활성/비활성
+
+1). UFW 활성화
+
+sudo ufw enable
+
+
+
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2023/01/21/spring-email.html">
+          [Spring] MailAuthenticationException 문제 해결
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 21, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2023/01/21/spring-email.html">
+        <p>
+        오늘은 회원가입시 이메일 전송 로직을 확인중
+org.springframework.mail.MailAuthenticationException와 같은
+예외를 만났고 해당관련 해결방법을 적어가보려한다.
+
+
+
+✅ 작업환경
+
+Spring Boot 2.7.7  
+Java 11 
+macOs Monterey 12.6 버전 
+로컬환경에서 테스트 진행
+
+
+
+
+📌 에러 확인 및 해결
+
+첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. 
+메일을 보내는 주체는 Google의 gmail을 이용하려한다.
+
+implementation 'org.springframework.boot:spring-boot-starter-mail... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#email">#email</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2023/01/15/spring-fileupload.html">
+          [Spring] AWS S3 FileUpload 하여 URL로 관리하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2023/01/15/spring-fileupload.html">
+        <p>
+        오늘은 AWS S3에 파일 업로드를 하는
+예제를 다뤄보려한다.
+
+구글에서 여러가지 블로그를 돌아다니며 학습했고
+순서와 코드에 대해 정리해보려한다. 
+내가 작성한 코드는 GitHub 레포지토리로 공유해본다.
+
+
+
+✅ 작업 환경
+
+AWS S3 버킷
+Spring Boot 2.7.7  
+Java 11 
+macOs Monterey 12.6 버전 
+로컬환경에서 테스트 진행
+
+
+
+
+📌 작업 순서 및 준비
+
+내가 구상하려고 생각하는 아키텍처를 그려보았다.
+순서를 간단히 짚고 넘어가자
+
+
+
+1). 클라이언트에서 이미지파일을 업로드 요청
+-&gt; multipart/form-data 타입으로 요청
+-&gt; Key=file / va... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#S3">#S3</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/db/2023/01/14/db-redis.html">
+          Redis JWT Refresh Token 관리 및 재발행
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 14, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
+      </div>
+      <a class="post-excerpt" href="/db/2023/01/14/db-redis.html">
+        <p>
+        Redis에 대한 간단한 CS지식과 
+Redis 설치 및 CLI 사용법을 알아보았었다.
+
+오늘은 이제 나의 사용 목적인 프로젝트에 도입을 해보려한다. 
+JWT Refresh Token관리와 좋아요,조회수 등 
+빈번히 update가 일어나는 항목에 대해서 관리하는 차원에서 
+캐시서버인 Redis를 사용해보려한다.
+
+그 중에서도 Redis 사용에 대한 코드와
+JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해
+초점을 두고 작성했기에 많은 코드들이 생략되어 있다는점 참고 부탁드린다.
+
+✅ 작업환경
+
+Spring Boot 2.7.7
+java 11 
+macOS Ventura 13.1
+로컬 환경에서 테스트 진행
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/git/2023/01/12/git-commitmessage.html">
           Git 이전 Commit Message 수정하기
         </a>
@@ -1283,400 +1705,6 @@ VCN 이름을 설정하고 다음 클릭
 <a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
 </div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/linux/unix/2022/12/29/server-NginX.html">
-          AWS EC2 NginX 클라이언트 배포
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 29, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/linux/unix/2022/12/29/server-NginX.html">
-        <p>
-        ✅ NGINX 이용하여 클라이언트 배포하기
-
-클라우딩 컴퓨터 배포 참고레퍼런스를 토대로
-공부하고 테스트해본 기록을 적어보려한다.
-
-우리 코스에 한분이 작성하신 글이고
-헤매고있는 나에게 빛줄기를 내려주셨다…🥹
-
-우선 우리팀에서 생각한 아키텍처이다.
-정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.
-
-
-
-AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만… 
-프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아
-꼼꼼히 홈페이지 사양을 읽어보긴했지만,,, 아직 미숙한 우리들에게 사고를
-미연에 방지하고자 EC2만 빌린다음에 진행하려고한다.
-
-
-
-📌 작업 환경... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html">
-          MySQL EC2에 설치후 WorkBench 접속하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 28, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/db/2022/12/28/db-mysqlEC2.html">
-        <p>
-        EC2에 MySQL을 설치한다음
-WorkBench로 접속하려는데 설정한 내용을 정리해보려한다.
-MySQL 설치과정은 생략하겠다.
-
-
-
-📌 yml 파일 설정
-
-우선 EC2에 배포한 스프링 .yml 파일 설정이다.
-기존과 동일하게 localhost:3306으로 설정을 해주었고
-
-스키마 이름은 stackover라는 이름으로지 지정했다.
-
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul # 포트넘버, 스키마이름
-   ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html">
-          [Spring] Security Test 코드 작성시 UserDetails 설정
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2022/12/27/spring-JunitSecure.html">
-        <p>
-        오늘 겪은 문제를 정리해보려한다.
-Spring Security + JWT + OAuth2 인증,인가를 사용하여
-정상적으로 API 작동까지 Postman으로 마친 상태이다.
-
-문제는 Rest Docs를 적용하기 위해
-Test 코드를 작성중 Spring Security 문제와 부딪히게 된 것 !!
-
-
-
-📌 문제 발생 (403 Forbidden)
-
-기존과 동일하게 POST 요청을 보내 보았다.
-    @Test
-    @DisplayName("질문 작성 API : createQuestion")
-    void createQuestion() throws Exception {
-
-        QuestionPostDto q... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#JUnit">#JUnit</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/git/2022/12/27/git-rebase.html">
-          Git pull rebase 사용해 병합하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/git/2022/12/27/git-rebase.html">
-        <p>
-        자주 사용하는 git pull --rebase에 대해 정리해보려한다.
-
-협업을 같이하다보면 지속적으로 업데이트를 하기 위해서
-pull을 하거나 remote를 가져오기위해 fetch를 진행한다.
-
-dev/back 이라는 브랜치가 백엔드끼리
-통합을 해서 사용하는 브랜치라고 가정하자.
-
-내가 작업하는 브랜치는 feat/BE/security라고 하였을때
-누군가 dev/back에 작업을 하고 Pull Reqeust하여 Merge를 했다고
-가정을 해보면. 현재 dev/back 브랜치의 프로그램이 가장 최신본이다.
-
-내가 작업하고있는 브랜치를 최신화 시키고 싶을때
-dev/back에 있는 브랜치를 Pull해오면 된다.
-
-
-
-❓ ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
-</div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1689,7 +1717,7 @@ dev/back에 있는 브랜치를 Pull해오면 된다.
     
     </span>
 
-    <span class="indicator"> 5/15</span>
+    <span class="indicator"> 5/16</span>
 
     <span class="next">
     
@@ -1729,7 +1757,7 @@ dev/back에 있는 브랜치를 Pull해오면 된다.
   <ul>
     <li>
       <a href="/index.html">
-        All<span>147</span>
+        All<span>151</span>
       </a>
     </li>
 
@@ -1748,7 +1776,7 @@ dev/back에 있는 브랜치를 Pull해오면 된다.
     
       <li>
         <a href="/categories.html#h-DB">
-          DB <span>8</span>
+          DB <span>9</span>
         </a>
       </li>
     
@@ -1778,7 +1806,7 @@ dev/back에 있는 브랜치를 Pull해오면 된다.
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>22</span>
+          SQL <span>24</span>
         </a>
       </li>
     
@@ -1790,7 +1818,7 @@ dev/back에 있는 브랜치를 Pull해오면 된다.
     
       <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>10</span>
+          Spring <span>11</span>
         </a>
       </li>
     

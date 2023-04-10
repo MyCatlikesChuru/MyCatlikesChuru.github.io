@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 7 of 15 for Home | LeeJellan</title>
+<title>Page 7 of 16 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -712,6 +712,416 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/spring/2022/12/12/spring-cors.html">
+          [Spring] CORS 설정하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 12, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2022/12/12/spring-cors.html">
+        <p>
+        오늘은 CORS에 대한 내용을 간단하게 적어보려한다.
+
+
+
+TODO List 연습 클라이언트를 이용해 로컬톰켓서버와
+연결 시 CORS문제가 발생해 해결했던 코드를 올려 본다.
+
+1). 어노테이션으로 설정하는 방법
+@CrossOrigin(origins = "https://todobackend.com")
+@RestController
+public class TodoListController {
+    ...
+}
+
+
+
+
+2). 빈 객체를 만들어 설정하는 방법
+
+@SpringBootApplication
+public class TodolistApplication {
+
+	public static void main(String[... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#cors">#cors</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/12/09/til.html">
+          [TIL] Cloud 운영 전략
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 09, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/12/09/til.html">
+        <p>
+        Proxy Server
+
+프록시 서버는 클라이언트가 서버와 소통할 때
+서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록
+해주는 대리 서버라고 생각하면 간단하다.
+
+1). Forward Proxy
+
+클라이언트 가까이에 위치한 프록시 서버다.
+클라이언트를 대신해 서버에 요청을 전달해준다.
+
+
+
+장점
+
+  캐싱을 통해 빠른 서비스 이용이 가능하다
+  보안 (서버에서 프록시서버 IP를 받기때문에 클라이언트 IP를 숨길 수 있다)
+
+
+
+
+2). Reverse Proxy
+
+서버 가까이에 위치한 프록시 서버다.
+서버를 대신해서 클라이언트에 응답을 제공해준다.
+
+
+
+
+  분산처리 (여러대의 서버로 요청을 나누어 전... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/12/08/til.html">
+          [TIL] 배포 자동화 GitHub Actions
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 08, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/12/08/til.html">
+        <p>
+        Github Action
+
+오늘은 GitHub Actions라는 빌드, 테스트 및 배포 파이프라인을
+자동화할 수 있는 CI/CD 플랫폼을 배워보려한다.
+
+Pull Request나 push 같은 이벤트를 트리거로 Workflow를 구성할 수 있다.
+Workflow는 하나 이상의 작업이 실행되는 자동화 프로세스로, 각 작업은 자체 가상 머신
+또는 컨테이너 내부에서 실행된다.
+
+
+
+Github Actions를 통한 자동화 배포 Flow
+
+
+
+
+  레포지토리에 변화가 생기면 Github Actions 작동
+  프로젝트 빌드 결과물(.jar) S3로 전송 및 저장
+  CodeDeploy로 배포 명령
+  프로젝트 빌드 결과물... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/12/07/til.html">
+          [TIL] 배포 자동화 AWS Pipeline
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/12/07/til.html">
+        <p>
+        배포 자동화
+말그대로 배포 자동화란 기존에 배포를 위한 복잡한 작업을
+클릭 혹은 명령어 입력을 통해 전체 배포 과정을 자동으로 진행하는 과정이다.
+
+배포 자동화 파이프 라인
+파이프 라인이라하면, 이전에 Stream API 공부할 때
+들어보았었다. 무언가 연결해준다는 의미를 가지고 있었다.
+배포 자동화에서 파이프 라인은 소스 코드의 관리부터 실제 서비스로의
+배포 과정을 연결하는 구조를 뜻한다. 파이프라인은 전체 배포 과정을
+여러 Stage(단계)로 분리한다. 가장 많이 쓰이는 3가지를 알아보자
+
+
+
+
+  Source 단계
+원격 저장소에 관리되고 있는 소스 코드에 변경 사항이 일어날 경우
+이를 감지하고 다음 단계로 전... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/til/2022/12/06/til.html">
           [TIL] 배포 컨테이너 Docker
         </a>
@@ -1249,408 +1659,6 @@ Reactive 기반 Spring Web Application을 만들때 사용하는 핵심기술이
 <a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
 </div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/11/29/til.html">
-          [TIL] Spring WebFlux Reactive 프로그래밍
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Nov 29, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/11/29/til.html">
-        <p>
-        오늘은 리액티브 프로그래밍에 대해 공부해보는 날이다.
-아마 깊은 내용은 다루지 않고, 간단한 지식들만 공부 할 것 같다.
-
-
-
-우리는 Spring MVC 기반의 애플리케이션을 사용하고있는데
-최신 기술로 Spring Reactive가 나와서 후에 어떻게
-바뀔지는 아무도 모르니 Spring MVC 이해를 마친 후
-해당 기술에 대해 깊게 공부해볼 필요가 있을 것 같다.
-
-
-
-리액티브 프로그래밍이란?
-
-기존의 명령형 프로그래밍 방식과 달리 선언형 프로그래밍 방식을 사용한다.
-클라이언트의 요청에 반응을 잘하는 시스템을 의미한다.
-리액티브 시스템 관점에서의 반응은 쓰레드의 Non-Blocking과 관련이 있다.
-클라이언트의 ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/11/28/til.html">
-          [TIL] Spring Security, JWT , OAuth 2 인증
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Nov 28, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 23 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/11/28/til.html">
-        <p>
-        다시 시작된 월요일!!
-
-
-
-드디어 프로젝트를 해야할 시간이 다가오기 시작한다.
-
-현재까지 배운 기술을 이용해 무언가 만들어본다는게 너무 설레고 기대된다.
-여태까지 배운 기술들에 대한 내용 중 크게 이해가 안되는 부분은 없었고
-Advance한 공부가 필요한 내용들이 많았다.
-
-프로젝트를 기회로 깊이 파헤쳐보는 기회가 올 것 같아 너무나 기대된다.
-오늘은 OAuth2에 대한 마지막 시간이다.
-
-그 동안 배운 Spring Security와 JWT, OAuth2를
-전부 이용해서 인증과 권한부여 코드를 작성해보는 것이다.
-
-
-
-OAuth2 인증 하기
-
-저번주에 배웠던 이론을 토대로 
-OAuth2 인증을 실제로 적용해 보자... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/macos/2022/11/27/OS-macOs-4.html">
-          [macOs] Apache 웹 서버 AH00558 Could not reliable determine the server’s fully qualified domain name ..
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Nov 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/macos/2022/11/27/OS-macOs-4.html">
-        <p>
-        오늘 공부하다가 막혔던 부분이 있어서 
-도움이 될까 싶어 적어본다.
-
-APACHE 웹 서버
-
-아파치 HTTP 서버(Apache HTTP Server)는 
-아파치 소프트웨어 재단에서 관리하는 오픈 소스, 크로스 플랫폼 HTTP 웹 서버 소프트웨어다. 
-BSD, 리눅스 등 유닉스 계열 뿐 아니라 마이크로소프트 윈도우나 노벨 넷웨어 
-같은 기종에서도 무료로 운용할 수 있다고 한다. [출처 - 위키백과]
-
-Mac 환경에서 Apache 웹서버를 사용해보려하다 오류가 발생했다.
-오류를 얘기하기전 우선 설치 과정을 아래의 사이트를 참고했다.
-[Apache 설치 방법 - 참고사이트]
-
-
-
-homebrew를 이용한 설치방법이고
-M... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags"><a class="post-tag" href="/tags.html#macOs">#macOs</a></div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/11/25/til.html">
-          [TIL] OAuth 2 인증 기초
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Nov 25, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/11/25/til.html">
-        <p>
-        
-
-이번주는 정말 게으르게 보낸 것 같다.
-
-물론 옛날에 비하면 엄청난 발전이지만… 역시 한번 쉬면
-계속 쉬고 싶은 마음이 생겨서,, 조금 게으르게 학습한 느낌을 받았다.
-
-다시한번 각성하여 Spring 세션을 잘 마무리 해보자.
-
-
-
-OAuth 2
-
-OAuth 2 란?
-
-흔히 생각해보면, 우리가 웹사이트 로그인을 할때
-소셜 로그인(구글,카카오톡 등) 인증방식을 사용해 로그인을 하는데
-이런 인증방식들은 OAuth2라는 기술을 바탕으로 구현이 된다.
-
-우리가 알고 있는 일반적인 애플리케이션은
-서비스를 이용하는 사용자에 대한 인증처리는 해당 애플리케이션이 직접했다.
-
-
-- 크리덴셜을 저장하지 않는 아키텍처 -
-
-OAu... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1663,7 +1671,7 @@ OAu... <span class="read_more">Read More</span>
     
     </span>
 
-    <span class="indicator"> 7/15</span>
+    <span class="indicator"> 7/16</span>
 
     <span class="next">
     
@@ -1703,7 +1711,7 @@ OAu... <span class="read_more">Read More</span>
   <ul>
     <li>
       <a href="/index.html">
-        All<span>147</span>
+        All<span>151</span>
       </a>
     </li>
 
@@ -1722,7 +1730,7 @@ OAu... <span class="read_more">Read More</span>
     
       <li>
         <a href="/categories.html#h-DB">
-          DB <span>8</span>
+          DB <span>9</span>
         </a>
       </li>
     
@@ -1752,7 +1760,7 @@ OAu... <span class="read_more">Read More</span>
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>22</span>
+          SQL <span>24</span>
         </a>
       </li>
     
@@ -1764,7 +1772,7 @@ OAu... <span class="read_more">Read More</span>
     
       <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>10</span>
+          Spring <span>11</span>
         </a>
       </li>
     
