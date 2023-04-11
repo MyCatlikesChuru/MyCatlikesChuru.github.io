@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
   </p>
 <div class="post-tags"><a class="post-tag" href="/tags.html#DB">#DB</a></div></header>
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
@@ -846,6 +846,42 @@ member 테이블의 id가 null인 값들만 가져오게하는 구문이다. <br
 
 <h3 id="join-원리">JOIN 원리</h3>
 
+<h4 id="1-중첩-루프-조인">1. 중첩 루프 조인</h4>
+
+<p>Nested Loop Join이라고 부르며<br>
+중첩 루프 조인은 중첩 for문과 같은 원리로 조건에 맞는 조인을 하는 방법이다. <br>
+랜덤 접근에 대한 비용이 많이 증가하므로 대용량의 테이블에서는 사용하지 않는다.</p>
+
+<p>JOIN을 할 때 먼저 액세스 되어 ACCESS PATH를 주도하는 테이블을 Driving Table이라고 하고 <br>
+나중에 엑세스 되는 테이블을 Driven Table 이라고 한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> for(i=0; i&lt;dept.length; i++) { -- driving table 
+    for(j=0; j&lt;emp.length; j++) { -- driven table
+       // Search
+    } 
+}
+</code></pre></div></div>
+
+<p><br></p>
+
+<h4 id="2-정렬-병합-조인">2. 정렬 병합 조인</h4>
+
+<p>Sort Merge Join이라고 부르며 <br>
+조회의 범위가 많을 때 주로 사용하는 조인 방법론이다. <br>
+양쪽 테이블을 각각 Access 하여 그 결과를 정렬하고 그 정렬한 결과를 차례로 <br>
+Scan 해 나가면서 연결고리의 조건으로 Merge를 하는 방식이다. 주로 칼럼에 인덱스 없거나 <br>
+출력해야할 결과 값이 많을 때 사용한다. 중첩 루프 조인의 조인 방식과 장단점이 서로 바뀌었다고 <br>
+생각하면 이해하기가 쉽다.</p>
+
+<p><br></p>
+
+<h4 id="3-해쉬-조인">3. 해쉬 조인</h4>
+
+<p>Hash Join은 두 테이블 중 하나를 해시 테이블로 선정하여 조인될 테이블의 <br>
+조인 키 값을 해시 알고리즘으로 비교하여 매치되는 결과값을 얻는 방식입니다. <br>
+주로 많은 양의 데이터를 조인해야 하는 경우 주로 사용하고    <br>
+JOIN 칼럼에 인덱스가 없어 중첩 루프 조인이 비효율적일 떄 사용한다.</p>
+
 <p><img src="" alt="image" class="align-left" style="max-width: 100%"></p>
 
 <p><br><br>
@@ -857,15 +893,15 @@ member 테이블의 id가 null인 값들만 가져오게하는 구문이다. <br
 
 </article>
 <div class="post-nav">
-<a class="previous" href="/sql/2023/04/10/sql-productcode.html" title="[Programmers] 카테고리 별 상품 개수 구하기 (MySQL)">[Programmers] 카테고리 별 상품 개수 구하기...</a><span></span>
+<a class="previous" href="/sql/2023/04/10/sql-productcode.html" title="[Programmers] 카테고리 별 상품 개수 구하기 (MySQL)">[Programmers] 카테고리 별 상품 개수 구하기...</a><a class="next" href="/sql/2023/04/11/sql-womenmarch.html" title="[Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)">[Programmers] 3월에 태어난 여성 회원 목록...</a>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/til/2022/09/30/til.html" title="">[TIL] Network Basic</a></li>
-<li><a class="post-link" href="/til/2022/10/25/til.html" title="">[TIL] Spring Exception 1</a></li>
-<li><a class="post-link" href="/til/2022/12/15/til.html" title="">[TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)</a></li>
-<li><a class="post-link" href="/til/2022/09/28/til.html" title="">[TIL] Java Algorithm 2</a></li>
+        <li><a class="post-link" href="/cs/2023/03/30/it-etc-process.html" title="[Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)">프로세스(Process)와 스레드(Thread)</a></li>
+<li><a class="post-link" href="/sql/2023/03/17/sql-maxproduct.html" title="[Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)">[Programmers] 가장 비싼 상품 구하기 (MySQL)</a></li>
+<li><a class="post-link" href="/server/2023/01/01/server-oraclesetting.html" title="[Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)">Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선</a></li>
+<li><a class="post-link" href="/til/2022/11/24/til.html" title="[Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)">[TIL] Spring Security, JWT 사용하여 인증하기</a></li>
 </ul>
     </div>
 <div class="post-comments">

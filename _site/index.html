@@ -711,13 +711,219 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/spring/2023/04/11/spring-jpanplusone.html">
+          [Spring] JPA N+1 문제 분석 (+Querydsl)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 11, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2023/04/11/spring-jpanplusone.html">
+        <p>
+        소개에 앞서 Github 레포지토리에 코드가 올라가 있습니다. 
+Querydsl 라이브러리를 사용하였고, Spring Boot 2.7.10 입니다.
+
+오늘은 Spring Data Jpa를 다루면서 발생한 N+1 문제에 대해 적어보려한다.
+
+
+
+JPA N+1 문제란?
+
+연관 관계가 설정된 엔티티를 조회할 경우에 조회된 데이터 갯수(N)만큼 연관관계의 
+조회 쿼리가 추가로 발생하여 데이터를 읽어오는 현상을 얘기한다.
+
+JPA Repository로 실행하는 첫 쿼리에서 하위 엔티티까지 한번에 가져오지 않고 
+하위 엔티티를 사용할 때 추가로 조회하기 때문에 발생한다.
+
+Fetch Type이 EAGER(즉시로딩), LAZY... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/04/11/sql-womenmarch.html">
+          [Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 11, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/04/11/sql-womenmarch.html">
+        <p>
+        📌 문제 : [카테고리 별 상품 개수 구하기]
+
+📖 문제 설명
+
+다음은 식당 리뷰 사이트의 회원 정보를 담은 MEMBER_PROFILE 테이블입니다. MEMBER_PROFILE 테이블은 다음과 같으며 MEMBER_ID, MEMBER_NAME, TLNO, GENDER, DATE_OF_BIRTH는 회원 ID, 회원 이름, 회원 연락처, 성별, 생년월일을 의미합니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+MEMBER_ID
+VARCHAR(100)
+FALSE
+
+
+MEMBER_NAME
+VARCHAR(50)
+FALSE
+
+
+TLNO
+VARCHAR(50)
+TRUE
+
+
+GENDER
+VA... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/db/2023/04/10/db-join.html">
           [DB] Join의 종류
         </a>
       </h2>
       <div class="post-meta">
         <span class="post-date"><i class="fa fa-calendar"></i> Apr 10, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
       </div>
       <a class="post-excerpt" href="/db/2023/04/10/db-join.html">
         <p>
@@ -1469,213 +1675,6 @@ FAL... <span class="read_more">Read More</span>
 <a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2023/04/04/spring-querydsladvance.html">
-          [Spring] QueryDSL 기본문법 사용하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 04, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 33 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2023/04/04/spring-querydsladvance.html">
-        <p>
-        QueryDSL
-
-테스트 코드
-
-이전에 작성했던 QueryDSL 기초설정 및 JPQL과 비교해보기에서 
-이어서 작업을 진행하였다. 동일하게 테스트코드는
-
-public class QuerydslBasicTestPractice {
-
-   @Autowired
-   EntityManager em;
-
-   JPAQueryFactory queryFactory;
-
-   @PersistenceUnit
-   EntityManagerFactory emf;
-
-   @BeforeEach
-   public void before() {
-      queryFactory = new JPAQueryFactory(em);
-      Team t... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2023/04/04/spring-querydsl.html">
-          [Spring] QueryDSL 기초설정 및 JPQL과 비교해보기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 04, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2023/04/04/spring-querydsl.html">
-        <p>
-        QueryDSL
-
-QueryDSL 너는 뭐니?🤔
-
-Query Domain Specific Language의 약자이다.  
-JPQL을 Java 코드로 작성할 수 있도록 하는 라이브러리이다.
-
-JPQL과 다르게 사용함으로써 얻을 수 있는 이점은
-
-  문자가 아닌 코드로 쿼리를 작성함으로써, 컴파일 시점에 문법 오류를 확인할 수 있다.
-  자동 완성 등 IDE의 도움을 받을 수 있다.
-  동적인 쿼리 작성이 편하다.
-
-
-*동적쿼리? 
-파라미터가 어떻게 오는지에 따라 조건이 변경되어지는 쿼리를 말한다.
-
-
-
-설정하기
-
-gradle 설정
-
-buildscript { // Spring Boot 2.6 이상일 경우
-	ext {
-... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
-</div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1728,7 +1727,7 @@ buildscript { // Spring Boot 2.6 이상일 경우
   <ul>
     <li>
       <a href="/index.html">
-        All<span>151</span>
+        All<span>153</span>
       </a>
     </li>
 
@@ -1777,7 +1776,7 @@ buildscript { // Spring Boot 2.6 이상일 경우
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>24</span>
+          SQL <span>25</span>
         </a>
       </li>
     
@@ -1789,7 +1788,7 @@ buildscript { // Spring Boot 2.6 이상일 경우
     
       <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>11</span>
+          Spring <span>12</span>
         </a>
       </li>
     

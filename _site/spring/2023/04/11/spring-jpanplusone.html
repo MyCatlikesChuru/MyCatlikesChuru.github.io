@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[Spring] JPA N+1 문제 분석 (+Querydsl) | LeeJellan</title>
+<meta name="generator" content="Jekyll v4.3.0">
+<meta property="og:title" content="[Spring] JPA N+1 문제 분석 (+Querydsl)">
+<meta name="author" content="LEE JAEHYEOK">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="소개에 앞서 Github 레포지토리에 코드가 올라가 있습니다. Querydsl 라이브러리를 사용하였고, Spring Boot 2.7.10 입니다.">
+<meta property="og:description" content="소개에 앞서 Github 레포지토리에 코드가 올라가 있습니다. Querydsl 라이브러리를 사용하였고, Spring Boot 2.7.10 입니다.">
+<link rel="canonical" href="http://localhost:4000/spring/2023/04/11/spring-jpanplusone.html">
+<meta property="og:url" content="http://localhost:4000/spring/2023/04/11/spring-jpanplusone.html">
+<meta property="og:site_name" content="LeeJellan">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2023-04-11T00:00:00+09:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="[Spring] JPA N+1 문제 분석 (+Querydsl)">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"LEE JAEHYEOK"},"dateModified":"2023-04-11T00:00:00+09:00","datePublished":"2023-04-11T00:00:00+09:00","description":"소개에 앞서 Github 레포지토리에 코드가 올라가 있습니다. Querydsl 라이브러리를 사용하였고, Spring Boot 2.7.10 입니다.","headline":"[Spring] JPA N+1 문제 분석 (+Querydsl)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/spring/2023/04/11/spring-jpanplusone.html"},"url":"http://localhost:4000/spring/2023/04/11/spring-jpanplusone.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="LeeJellan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/go.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('false' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #ff4e00;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="LeeJellan" src="/assets/images/favicon.png" onerror="this.style.display='none'">
+  LeeJellan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+<a class="page-link" href="/about.html">ABOUT</a><a class="page-link" href="/categories.html">CATEGORIES</a><a class="page-link" href="/">HOME</a>
+
+
+
+
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">Light</p>
+      <p class="dark">Dark</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<header class="post-header">
+  <h1 class="post-title p-name" itemprop="name headline">[Spring] JPA N+1 문제 분석 (+Querydsl)</h1>
+  <h2 class="post-subtitle"></h2>
+
+  <p class="post-meta">
+    <time class="dt-published" datetime="2023-04-11T00:00:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Apr 11, 2023
+    </time>
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+  </p>
+<div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
+</div></header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <p>소개에 앞서 <a href="https://github.com/MyCatlikesChuru/JavaPersisitenceAPIstudy/tree/main/jpaoneplusn">Github 레포지토리</a>에 코드가 올라가 있습니다. <br>
+<code class="language-plaintext highlighter-rouge">Querydsl</code> 라이브러리를 사용하였고, <code class="language-plaintext highlighter-rouge">Spring Boot 2.7.10</code> 입니다.</p>
+
+<p>오늘은 Spring Data Jpa를 다루면서 발생한 N+1 문제에 대해 적어보려한다.</p>
+
+<p><br></p>
+
+<h2 id="jpa-n1-문제란">JPA N+1 문제란?</h2>
+
+<p>연관 관계가 설정된 엔티티를 조회할 경우에 조회된 데이터 갯수(N)만큼 연관관계의 <br>
+조회 쿼리가 추가로 발생하여 데이터를 읽어오는 현상을 얘기한다.</p>
+
+<p>JPA Repository로 실행하는 첫 쿼리에서 하위 엔티티까지 한번에 가져오지 않고 <br>
+하위 엔티티를 사용할 때 추가로 조회하기 때문에 발생한다.</p>
+
+<p>Fetch Type이 EAGER(즉시로딩), LAZY(지연로딩) 둘 다 발생하고<br>
+쿼리가 발생하는 시점만 다를뿐이지 N+1문제는 여전하다.</p>
+
+<p><br></p>
+
+<h2 id="문제-발생-테스트">문제 발생 테스트</h2>
+
+<h3 id="테이블-설명">테이블 설명</h3>
+
+<p>문제 발생 테스트를 위해 3개의 테이블을 만들었다. <br>
+<code class="language-plaintext highlighter-rouge">POSTS(게시글)</code> - <code class="language-plaintext highlighter-rouge">POSTS_TAG(게시글 태그 관리)</code> - <code class="language-plaintext highlighter-rouge">TAG(태그)</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">1:N:1</code> 관계를 가지며, POSTS쪽에서 TAG의 데이터를 가져오기 위해서 <br>
+LEFT JOIN으로 접근하는 과정에서 발생하는 N+1 문제를 체크해볼 생각이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/230547251-d9b554a7-85a0-4430-9aa2-5b1f4548b431.png" alt="image" class="align-left" style="max-width: 100%"></p>
+
+<p><br></p>
+
+<h3 id="코드-준비">코드 준비</h3>
+
+<p>🔖 <strong>프로젝트 구조</strong></p>
+
+<p><a href="https://github.com/MyCatlikesChuru/JavaPersisitenceAPIstudy/tree/main/jpaoneplusn">Github 레포지토리</a>를 참고하시면 더 도움이 됩니다!</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── main
+│   ├── java
+│   │   └── com
+│   │       └── jpa
+│   │           └── jpaoneplusn
+│   │               ├── JpaoneplusnApplication.java
+│   │               └── domain
+│   │                   ├── config
+│   │                   │   └── QuerydslConfig.java
+│   │                   ├── entity
+│   │                   │   ├── Posts.java
+│   │                   │   ├── PostsTag.java
+│   │                   │   └── Tag.java
+│   │                   └── repository
+│   │                       ├── PostsCustomRepository.java
+│   │                       ├── PostsCustomRepositoryImpl.java
+│   │                       ├── PostsRepository.java
+│   │                       └── TagRepository.java
+│   └── resources
+│       ├── application.yml
+│       ├── static
+│       └── templates
+└── test
+    └── java
+        └── com
+            └── jpa
+                └── jpaoneplusn
+                    ├── JpaoneplusnApplicationTests.java
+                    └── test
+                        └── PostsTest.java
+
+</code></pre></div></div>
+
+<p><br></p>
+
+<p>우선 모든 클래스의 코드를 올리기에는 이해하는데 복잡할 수 있기 때문에  <br>
+주요 코드인 <code class="language-plaintext highlighter-rouge">Entity</code>와 <code class="language-plaintext highlighter-rouge">PostsCustomRepositoryImpl</code>만 올리도록 하겠습니다.</p>
+
+<p><strong>Posts.java</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Entity</span>
+<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Posts</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">mappedBy</span> <span class="o">=</span> <span class="s">"posts"</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">PERSIST</span><span class="o">,</span> <span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span> <span class="c1">// LAZY, EAGER 변경후 쿼리 시점변경</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PostsTag</span><span class="o">&gt;</span> <span class="n">postsTags</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="nd">@Builder</span>
+    <span class="kd">public</span> <span class="nf">Posts</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">title</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addPostsTag</span><span class="o">(</span><span class="nc">PostsTag</span> <span class="n">postsTag</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">postsTags</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">postsTag</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<p><strong>PostsTag.java</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Entity</span>
+<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostsTag</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"posts_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Posts</span> <span class="n">posts</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="nd">@JoinColumn</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"tag_id"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Tag</span> <span class="n">tag</span><span class="o">;</span>
+
+    <span class="nd">@Builder</span>
+    <span class="kd">public</span> <span class="nf">PostsTag</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">,</span> <span class="nc">Posts</span> <span class="n">posts</span><span class="o">,</span> <span class="nc">Tag</span> <span class="n">tag</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">posts</span> <span class="o">=</span> <span class="n">posts</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">tag</span> <span class="o">=</span> <span class="n">tag</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<p><strong>Tag.java</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Entity</span>
+<span class="nd">@NoArgsConstructor</span><span class="o">(</span><span class="n">access</span> <span class="o">=</span> <span class="nc">AccessLevel</span><span class="o">.</span><span class="na">PROTECTED</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Tag</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">type</span><span class="o">;</span>
+
+    <span class="nd">@Builder</span>
+    <span class="kd">public</span> <span class="nf">Tag</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">type</span> <span class="o">=</span> <span class="n">type</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<p><strong>PostsCustomRepositoryImpl</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Repository</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostsCustomRepositoryImpl</span> <span class="kd">implements</span> <span class="nc">PostsCustomRepository</span><span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Posts</span><span class="o">&gt;</span> <span class="nf">findAll_noFetchJoin</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">posts</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">posts</span><span class="o">.</span><span class="na">postsTags</span><span class="o">,</span> <span class="n">postsTag</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">postsTag</span><span class="o">.</span><span class="na">tag</span><span class="o">,</span> <span class="n">tag</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">posts</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">postsTag</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Posts</span><span class="o">&gt;</span> <span class="nf">findAll_useFetchJoin</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">posts</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">posts</span><span class="o">.</span><span class="na">postsTags</span><span class="o">,</span> <span class="n">postsTag</span><span class="o">).</span><span class="na">fetchJoin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">postsTag</span><span class="o">.</span><span class="na">tag</span><span class="o">,</span> <span class="n">tag</span><span class="o">).</span><span class="na">fetchJoin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">posts</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">postsTag</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br></p>
+
+<h3 id="n1-문제-테스트">N+1 문제 테스트</h3>
+
+<p>우선 <code class="language-plaintext highlighter-rouge">application.yml</code>파일에 sql을 출력할 수 있도록 설정하였다. <br>
+그리고 Test 코드를 통해 쿼리를 보면서 검증을 해보았다.</p>
+
+<p><strong>PostsTest</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@SpringBootTest</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PostsTest</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+    
+    <span class="nc">JPAQueryFactory</span> <span class="n">queryFactory</span><span class="o">;</span>
+    
+    <span class="nd">@Autowired</span>
+    <span class="nc">PostsRepository</span> <span class="n">postsRepository</span><span class="o">;</span>
+    
+    <span class="nd">@Autowired</span>
+    <span class="nc">TagRepository</span> <span class="n">tagRepository</span><span class="o">;</span>
+
+
+    <span class="nd">@BeforeEach</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">queryFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JPAQueryFactory</span><span class="o">(</span><span class="n">em</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">Posts</span> <span class="n">post</span> <span class="o">=</span> <span class="nc">Posts</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">title</span><span class="o">(</span><span class="s">"제목 "</span><span class="o">+</span><span class="n">i</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+            <span class="nc">Tag</span> <span class="n">tag</span> <span class="o">=</span> <span class="nc">Tag</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">name</span><span class="o">(</span><span class="s">"태그 "</span><span class="o">+</span><span class="n">i</span><span class="o">).</span><span class="na">type</span><span class="o">(</span><span class="s">"타입 "</span><span class="o">+</span><span class="n">i</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+            <span class="nc">PostsTag</span> <span class="n">postTag</span> <span class="o">=</span> <span class="nc">PostsTag</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">tag</span><span class="o">(</span><span class="n">tag</span><span class="o">).</span><span class="na">posts</span><span class="o">(</span><span class="n">post</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+            <span class="n">post</span><span class="o">.</span><span class="na">addPostsTag</span><span class="o">(</span><span class="n">postTag</span><span class="o">);</span>
+            <span class="n">tagRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">tag</span><span class="o">);</span>
+            <span class="n">postsRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">post</span><span class="o">);</span>
+<span class="c1">//            em.persist(tag);</span>
+<span class="c1">//            em.persist(post);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>가독성을 위해 코드를 분리해서 설명하겠다.  <br>
+첫번쨰로 @BeforeEach를 통해서 Posts, Tag, PostsTag에 정보를 넣어 주었다. <br>
+총4개씩 넣어 주었고 Repository에 <code class="language-plaintext highlighter-rouge">.save()</code>를 이용해 테이블에 저장해주었다.  <br>
+여기서 PostsTag는 casecade를 이용해 저장되기 때문에 Repository를 따로 만들지 않았다.</p>
+
+<p><br></p>
+
+<p>본격적인 테스트는 아래에서 부터 설명하겠다.</p>
+
+<h4 id="1-n1-문제-테스트">1. N+1 문제 테스트</h4>
+<p>첫번째로 영속성 컨텍스트를 초기화 해주어야한다. <br>
+초기화 시켜주지 않는다면 이미 영속화되어 있기 때문에  <br>
+문제 발생상황이 체크가 되지 않는다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="nd">@DisplayName</span><span class="o">(</span><span class="s">"N+1 문제 발생하는 테스트 케이스"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">jpaProblem</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">// 영속성 컨텍스트 초기화</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= 쿼리 시작 ============="</span><span class="o">);</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Posts</span><span class="o">&gt;</span> <span class="n">findPosts</span> <span class="o">=</span> <span class="n">postsRepository</span><span class="o">.</span><span class="na">findAll_noFetchJoin</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= PostsTag 가져오기 ============="</span><span class="o">);</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PostsTag</span><span class="o">&gt;</span> <span class="n">findPostsTag</span> <span class="o">=</span> <span class="n">findPosts</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getPostsTags</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"PostsTag id = "</span> <span class="o">+</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getId</span><span class="o">());</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= Tag 가져오기 ============="</span><span class="o">);</span>
+        <span class="nc">Tag</span> <span class="n">tag</span> <span class="o">=</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getTag</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Tag Name = "</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>그리고 프린트출력문으로 3가지 파트로 나누었고  <br>
+처음에 레포지토리에서 쿼리를 가져오고 다른 테이블에 접근하도록 나누었다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">postsRepository.findAll_noFetchJoin();</code>를 호출하여 테스트하였다.<br>
+(위에 Querydsl 코드로 작성된 클래스를 참조)</p>
+
+<p>현재 구분하기 쉽게 <code class="language-plaintext highlighter-rouge">Posts</code> 엔티티나 <code class="language-plaintext highlighter-rouge">PostsTag</code>엔티티나 FetchType을 LAZY로 설정했다.<br>
+(EAGER로 하여도 쿼리 출력 시점만 다르고 N+1문제는 발생합니다.)</p>
+
+<p><strong>LAZY 설정</strong></p>
+<pre><code class="language-roomsql">============= 쿼리 시작 =============
+Hibernate: 
+    select
+        posts0_.id as id1_0_,
+        posts0_.title as title2_0_ 
+    from
+        posts posts0_ 
+    left outer join
+        posts_tag poststags1_ 
+            on posts0_.id=poststags1_.posts_id 
+    left outer join
+        tag tag2_ 
+            on poststags1_.tag_id=tag2_.id 
+    where
+        posts0_.id=poststags1_.id
+============= PostsTag 가져오기 =============
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_ 
+    from
+        posts_tag poststags0_ 
+    where
+        poststags0_.posts_id=?
+PostsTag id = 1
+============= Tag 가져오기 =============
+Hibernate: 
+    select
+        tag0_.id as id1_2_0_,
+        tag0_.name as name2_2_0_,
+        tag0_.type as type3_2_0_ 
+    from
+        tag tag0_ 
+    where
+        tag0_.id=?
+Tag Name = 태그 1
+</code></pre>
+
+<p>실제 쿼리를 확인해보면 Hibernate로 구분을 하면 되는데 3번의 쿼리가 나오게되었다.<br>
+즉 연관관계가 설정된 엔티티를 조회하는데 쿼리가 추가로 발생하였기 때문에 <br>
+N+1문제가 발생하였다는 것이다.</p>
+
+<p><br></p>
+
+<p>만약 EAGER로 변경하게될 경우</p>
+
+<p><strong>EAGER 설정</strong></p>
+<pre><code class="language-roomsql">============= 쿼리 시작 =============
+Hibernate: 
+    select
+        posts0_.id as id1_0_,
+        posts0_.title as title2_0_ 
+    from
+        posts posts0_ 
+    left outer join
+        posts_tag poststags1_ 
+            on posts0_.id=poststags1_.posts_id 
+    left outer join
+        tag tag2_ 
+            on poststags1_.tag_id=tag2_.id 
+    where
+        posts0_.id=poststags1_.id
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_,
+        tag1_.id as id1_2_2_,
+        tag1_.name as name2_2_2_,
+        tag1_.type as type3_2_2_ 
+    from
+        posts_tag poststags0_ 
+    left outer join
+        tag tag1_ 
+            on poststags0_.tag_id=tag1_.id 
+    where
+        poststags0_.posts_id=?
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_,
+        tag1_.id as id1_2_2_,
+        tag1_.name as name2_2_2_,
+        tag1_.type as type3_2_2_ 
+    from
+        posts_tag poststags0_ 
+    left outer join
+        tag tag1_ 
+            on poststags0_.tag_id=tag1_.id 
+    where
+        poststags0_.posts_id=?
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_,
+        tag1_.id as id1_2_2_,
+        tag1_.name as name2_2_2_,
+        tag1_.type as type3_2_2_ 
+    from
+        posts_tag poststags0_ 
+    left outer join
+        tag tag1_ 
+            on poststags0_.tag_id=tag1_.id 
+    where
+        poststags0_.posts_id=?
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_,
+        tag1_.id as id1_2_2_,
+        tag1_.name as name2_2_2_,
+        tag1_.type as type3_2_2_ 
+    from
+        posts_tag poststags0_ 
+    left outer join
+        tag tag1_ 
+            on poststags0_.tag_id=tag1_.id 
+    where
+        poststags0_.posts_id=?
+============= PostsTag 가져오기 =============
+PostsTag id = 1
+============= Tag 가져오기 =============
+Tag Name = 태그 1
+</code></pre>
+
+<p>쿼리가 5번 나오게되었다. 즉시로딩이기 때문에 쿼리시작하는 부분에서 <br>
+모든 쿼리가 나오게 된 차이점만 있을뿐 N+1문제는 여전히 존재한다. <br>
+오히려 쿼리가 2개나 더나오게되었다.</p>
+
+<p><br></p>
+
+<h4 id="2-n1-해결-테스트">2. N+1 해결 테스트</h4>
+<p>이렇게 콘솔을 통해서 N+1문제가 발생하고 있다는걸 확인했다.<br>
+그러면 해결하려면 어떻게해야하는가?</p>
+
+<p>해결방법으로는 <code class="language-plaintext highlighter-rouge">fetchJoin</code>을 사용하는 방법이 있다. <br>
+<code class="language-plaintext highlighter-rouge">findAll_useFetchJoin()</code> 메서드를 참조하면된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Posts</span><span class="o">&gt;</span> <span class="nf">findAll_useFetchJoin</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">queryFactory</span>
+                <span class="o">.</span><span class="na">selectFrom</span><span class="o">(</span><span class="n">posts</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">posts</span><span class="o">.</span><span class="na">postsTags</span><span class="o">,</span> <span class="n">postsTag</span><span class="o">).</span><span class="na">fetchJoin</span><span class="o">()</span> <span class="c1">// &lt;- fetchJoin</span>
+                <span class="o">.</span><span class="na">leftJoin</span><span class="o">(</span><span class="n">postsTag</span><span class="o">.</span><span class="na">tag</span><span class="o">,</span> <span class="n">tag</span><span class="o">).</span><span class="na">fetchJoin</span><span class="o">()</span> <span class="c1">// &lt;- fetchJoin</span>
+                <span class="o">.</span><span class="na">where</span><span class="o">(</span><span class="n">posts</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">postsTag</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">fetch</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">findAll_noFetchJoin()</code> 코드에서 <code class="language-plaintext highlighter-rouge">fetchJoin()</code>을 붙여준게 끝이다.</p>
+
+<p>그럼 이메서드를 호출한 테스트 코드를 확인해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@Test</span>
+    <span class="nd">@DisplayName</span><span class="o">(</span><span class="s">"N+1 문제 해결한 테스트 케이스"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">jpaProblemSolve</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">// 영속성 컨텍스트 초기화</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= 쿼리 시작 ============="</span><span class="o">);</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Posts</span><span class="o">&gt;</span> <span class="n">findPosts</span> <span class="o">=</span> <span class="n">postsRepository</span><span class="o">.</span><span class="na">findAll_useFetchJoin</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= PostsTag 가져오기 ============="</span><span class="o">);</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PostsTag</span><span class="o">&gt;</span> <span class="n">findPostsTag</span> <span class="o">=</span> <span class="n">findPosts</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getPostsTags</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"PostsTag id = "</span> <span class="o">+</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getId</span><span class="o">());</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= Tag 가져오기 ============="</span><span class="o">);</span>
+        <span class="nc">Tag</span> <span class="n">tag</span> <span class="o">=</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getTag</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Tag Name = "</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<p>똑같은 테스트 코드에서 <code class="language-plaintext highlighter-rouge">postsRepository.findAll_useFetchJoin();</code>만 변경되었다.</p>
+
+<p>실제 SQL문을 확인해보면서 차이점을 느껴보자 <br>
+FetchType 설정은 LAZY, EAGER 똑같이 출력된다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">=============</span> <span class="n">쿼리</span> <span class="n">시작</span> <span class="o">=============</span>
+<span class="nl">Hibernate:</span> 
+    <span class="n">select</span>
+        <span class="n">posts0_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_0_0_</span><span class="o">,</span>
+        <span class="n">poststags1_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_1_1_</span><span class="o">,</span>
+        <span class="n">tag2_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_2_2_</span><span class="o">,</span>
+        <span class="n">posts0_</span><span class="o">.</span><span class="na">title</span> <span class="n">as</span> <span class="n">title2_0_0_</span><span class="o">,</span>
+        <span class="n">poststags1_</span><span class="o">.</span><span class="na">posts_id</span> <span class="n">as</span> <span class="n">posts_id2_1_1_</span><span class="o">,</span>
+        <span class="n">poststags1_</span><span class="o">.</span><span class="na">tag_id</span> <span class="n">as</span> <span class="n">tag_id3_1_1_</span><span class="o">,</span>
+        <span class="n">poststags1_</span><span class="o">.</span><span class="na">posts_id</span> <span class="n">as</span> <span class="n">posts_id2_1_0__</span><span class="o">,</span>
+        <span class="n">poststags1_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_1_0__</span><span class="o">,</span>
+        <span class="n">tag2_</span><span class="o">.</span><span class="na">name</span> <span class="n">as</span> <span class="n">name2_2_2_</span><span class="o">,</span>
+        <span class="n">tag2_</span><span class="o">.</span><span class="na">type</span> <span class="n">as</span> <span class="n">type3_2_2_</span> 
+    <span class="n">from</span>
+        <span class="n">posts</span> <span class="n">posts0_</span> 
+    <span class="n">left</span> <span class="n">outer</span> <span class="n">join</span>
+        <span class="n">posts_tag</span> <span class="n">poststags1_</span> 
+            <span class="n">on</span> <span class="n">posts0_</span><span class="o">.</span><span class="na">id</span><span class="o">=</span><span class="n">poststags1_</span><span class="o">.</span><span class="na">posts_id</span> 
+    <span class="n">left</span> <span class="n">outer</span> <span class="n">join</span>
+        <span class="n">tag</span> <span class="n">tag2_</span> 
+            <span class="n">on</span> <span class="n">poststags1_</span><span class="o">.</span><span class="na">tag_id</span><span class="o">=</span><span class="n">tag2_</span><span class="o">.</span><span class="na">id</span> 
+    <span class="n">where</span>
+        <span class="n">posts0_</span><span class="o">.</span><span class="na">id</span><span class="o">=</span><span class="n">poststags1_</span><span class="o">.</span><span class="na">id</span>
+<span class="o">=============</span> <span class="nc">PostsTag</span> <span class="n">가져오기</span> <span class="o">=============</span>
+<span class="nc">PostsTag</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="o">=============</span> <span class="nc">Tag</span> <span class="n">가져오기</span> <span class="o">=============</span>
+<span class="nc">Tag</span> <span class="nc">Name</span> <span class="o">=</span> <span class="n">태그</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>쿼리가 1개만 출력된 모습을 확인할 수 있다. <br>
+실제로 N+1 문제가 발생한 쿼리랑 차이를 느낄 수 있고 <br>
+해당 API를 만번 조회한다치면 쿼리의 양도 3배나 차이가 나게되는 것이다.</p>
+
+<p><br></p>
+
+<hr>
+
+<p>오늘은 이렇게 N+1 문제가 발생하는 이유와 해결방법을 알아보았는데 <br>
+<code class="language-plaintext highlighter-rouge">fetchJoin()</code>외에도 EntityGraph, Batch Size를 통해 해결이 가능하다고한다. <br>
+해당 방법에 대해서는 추후 포스팅을 해보도록하려하고, fetchJoin에 대한 원리 공부도 <br>
+필요하다고 느껴진다..</p>
+
+<p><br>
+<br></p>
+
+
+
+    </div>
+
+</article>
+<div class="post-nav">
+<a class="previous" href="/sql/2023/04/11/sql-womenmarch.html" title="[Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)">[Programmers] 3월에 태어난 여성 회원 목록...</a><span></span>
+</div>
+<div class="post-related">
+      <div>Related Articles</div>
+      <ul>
+        <li><a class="post-link" href="/til/2022/11/09/til.html" title="">[TIL] JUnit 2</a></li>
+<li><a class="post-link" href="/til/2022/08/23/til.html" title="">[TIL] HTML,CSS 기초</a></li>
+<li><a class="post-link" href="/sql/2023/03/16/sql-trade.html" title="">[Programmers] 조건에 부합하는 중고거래 댓글 조회하기 (MySQL)</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="">[TIL] Spring AOP 1</a></li>
+</ul>
+    </div>
+<div class="post-comments">
+<div id="utterances-placeholder"></div>
+<script>
+  const utterancesThemeFromDataTheme = () => {
+    const dataTheme = document.documentElement.getAttribute('data-theme');
+    return `github-${dataTheme}`;
+  };
+
+  const setUtterancesTheme = () => {
+    const iframe = document.querySelector('.utterances-frame');
+    if (iframe) {
+      const message = {
+        type: 'set-theme',
+        theme: utterancesThemeFromDataTheme()
+      };
+      iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+    }
+  }
+
+  // dynamic change
+  const observer = new MutationObserver((mutationsList, observer) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        setUtterancesTheme();
+      }
+    }
+  });
+  observer.observe(document.documentElement, { attributes: true, childList: false, subtree: false });
+
+  let utterancesScript = document.createElement('script');
+  utterancesScript.async = true;
+  utterancesScript.src = 'https://utteranc.es/client.js';
+  utterancesScript.crossOrigin = 'anonymous';
+  utterancesScript.setAttribute('issue-term', 'pathname');
+  utterancesScript.setAttribute('label', 'utterances comment');
+  utterancesScript.setAttribute('repo', 'MyCatlikesChuru/blogComment');
+  utterancesScript.setAttribute('theme', utterancesThemeFromDataTheme());
+
+  const placeholder = document.getElementById('utterances-placeholder');
+  placeholder.parentNode.replaceChild(utterancesScript, placeholder);
+</script>
+</div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --><style type="text/css" media="screen">
+.post-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<div class="post-menu">
+  <div class="post-menu-title">TOC</div>
+  <div class="post-menu-content"></div>
+</div>
+
+<script>
+  function generateContent() {
+    var menu = document.querySelector(".post-menu");
+    var menuContent =  menu.querySelector(".post-menu-content");
+    var headings = document.querySelector(".post-content").querySelectorAll("h2, h3, h4, h5, h6");
+
+    // Hide menu when no headings
+    if (headings.length === 0) {
+      return menu.style.display = "none";
+    }
+
+    // Generate post menu
+    var menuHTML = '';
+    for (var i = 0; i < headings.length; i++) {
+      var h = headings[i];
+      menuHTML += (
+        '<li class="h-' + h.tagName.toLowerCase() + '">'
+        + '<a href="#h-' + h.getAttribute('id') + '">' + h.textContent + '</a></li>');
+    }
+
+    menuContent.innerHTML = '<ul>' + menuHTML + '</ul>';
+
+    // The header element
+    var header = document.querySelector('header.site-header');
+
+    function doMenuCollapse(index, over_items) {
+      var items = menuContent.firstChild.children;
+
+      if (over_items == undefined) {
+        over_items = 20;
+      }
+
+      if (items.length < over_items) {
+        return;
+      }
+
+      var activeItem = items[index];
+      var beginItem = activeItem
+      var endItem = activeItem
+      var beginIndex = index;
+      var endIndex = index + 1;
+      while (beginIndex >= 0
+        && !items[beginIndex].classList.contains('h-h2')) {
+        beginIndex -= 1;
+      }
+      while (endIndex < items.length
+        && !items[endIndex].classList.contains('h-h2')) {
+        endIndex += 1;
+      }
+      for (var i = 0; i < beginIndex; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+      for (var i = beginIndex + 1; i < endIndex; i++) {
+        item = items[i]
+        // if (!item.classList.contains('h-h2')) {
+          item.style.display = '';
+        // }
+      }
+      for (var i = endIndex; i < items.length; i++) {
+        item = items[i]
+        if (!item.classList.contains('h-h2')) {
+          item.style.display = 'none';
+        }
+      }
+    }
+
+    // Init menu collapsed
+    doMenuCollapse(-1);
+
+    // Active the menu item
+    window.addEventListener('scroll', function (event) {
+      var lastActive = menuContent.querySelector('.active');
+      var changed = true;
+      var activeIndex = -1;
+      for (var i = headings.length - 1; i >= 0; i--) {
+        var h = headings[i];
+        var headingRect = h.getBoundingClientRect();
+        var headerRect = header.getBoundingClientRect();
+        var headerTop = Math.floor(headerRect.top);
+        var headerHeight = Math.floor(headerRect.height);
+        var headerHeight = headerTop + headerHeight + 20;
+        if (headingRect.top <= headerHeight) {
+          var id = 'h-' + h.getAttribute('id');
+          var a = menuContent.querySelector('a[href="#' + id  + '"]');
+          var curActive = a.parentNode;
+          if (curActive) {
+            curActive.classList.add('active');
+            activeIndex = i;
+          }
+          if (lastActive == curActive) {
+            changed = false;
+          }
+          break;
+        }
+      }
+      if (changed) {
+        if (lastActive) {
+          lastActive.classList.remove('active');
+        }
+        doMenuCollapse(activeIndex);
+      }
+      event.preventDefault();
+    });
+  }
+  generateContent();
+</script>
+</section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+<div>Unpublished Work <span class="copyleft">©</span> 2017-2023 LEE JAEHYEOK</div>
+      <div>Powered by <a title="Jekyll is a simple, blog-aware, static site
+      generator." href="https://jekyllrb.com/">Jekyll</a> &amp; <a title="Yat, yet
+      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">Yat Theme</a>.</div>
+      <div class="footer-col rss-subscribe">Subscribe <a href="/feed.xml">via RSS</a>
+</div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
