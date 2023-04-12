@@ -448,3 +448,5 @@ j
 :_posts/program/Spring/2023-04-07-spring-querydsladvance.md,a/1/a1bdb3f1bbd4aa1fb9d00e059d18799ba67869f5
 V
 &_posts/database/2023-01-14-db-redis.md,3/2/320df682f07c8b52c69fa55ef6de41b4d0bc3231
+]
+-_posts/database/2023-04-07-db-mysqlforeign.md,c/d/cd81537cfbf1149cd4e7911281202ca2efba2966
