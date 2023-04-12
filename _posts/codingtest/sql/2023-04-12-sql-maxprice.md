@@ -130,13 +130,20 @@ published: true
 
 ## 🗝 문제 풀이
 
-1. 
+1. 서브쿼리를 이용해 MAX 가격의 음식 레코드를 찾는다.
+2. 찾은 MAX값과 같은 PRICE를 WHERE절로 추출한다.
 
 ```roomsql
 SELECT *
 FROM FOOD_PRODUCT 
 WHERE PRICE = (SELECT MAX(PRICE) FROM FOOD_PRODUCT);
 ```
+
+<br/>  
+
+서브쿼리를 이용한 방법 외에도 정렬과 LIMIT(1)를 이용해   
+가장 높은 갚을 추출할 수 있다.
+
 
 
 <br/>
