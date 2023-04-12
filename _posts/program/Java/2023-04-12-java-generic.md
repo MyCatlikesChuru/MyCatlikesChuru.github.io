@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[Spring] Generic을 활용한 Class 타입 매개변수로 전달하기"
+title: "[Java] Generic을 활용한 Class 타입 매개변수로 전달하기"
 subtitle: Test 코드 리펙토링
-categories: Spring
-tags: [Spring, Java]
+categories: Java
+tags: [Java]
 comments: true
 published: true
 ---
