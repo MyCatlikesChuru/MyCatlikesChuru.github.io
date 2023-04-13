@@ -163,7 +163,6 @@ spring.graphql.graphiql.printer.enabled=true
 도움이되니 먼저 읽어보고 코드를 확인하자
 
 **@MutationMapping**  
-
 `@MutationMapping`은 Create, Update, Delete에 대응된다고 생각하면 될 것 같다.  
 graphql은 endpoint가 하나이므로 @MutationMapping 어노테이션만 지정해 주고 다른 설정은 필요 없습니다.  
 즉, @PostMapping, @PatchMapping, @DeleteMapping 등을 대신사용
@@ -171,7 +170,6 @@ graphql은 endpoint가 하나이므로 @MutationMapping 어노테이션만 지�
 <br/>
 
 **@QueryMapping**  
-
 `@QueryMapping`는 Read에 대응된다고 생각하면 될 것 같다.  
 말고도 `@SubscriptionMapping`이 있다고 한다.  
 즉, @GetMapping 을 대신 사용
