@@ -436,8 +436,6 @@ G
 _site/page10/index.html,3/b/3bc64583739f0d6b087e9fe975fa1cd45359558b
 j
 :_posts/codingtest/sql/2023-04-07-sql-duplicationproduct.md,3/6/369687667877e46f5c48698a315eb1960b7749f8
-j
-:_posts/program/Spring/2023-04-04-spring-querydsladvance.md,5/6/56899c99798985526dd444ad87f53fe9d62c37b0
 c
 3_posts/codingtest/sql/2023-04-10-sql-productcode.md,7/d/7d6651a42270462eeccb63631b8982e2659b761e
 d
