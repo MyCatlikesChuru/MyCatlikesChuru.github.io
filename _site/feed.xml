@@ -1,4 +1,237 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-26T18:26:10+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">디자인 패턴 - 전략 패턴 [Java 예제]</title><link href="http://localhost:4000/cs/2023/04/26/it-etc-pattern.html" rel="alternate" type="text/html" title="디자인 패턴 - 전략 패턴 [Java 예제]" /><published>2023-04-26T00:00:00+09:00</published><updated>2023-04-26T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/04/26/it-etc-pattern</id><content type="html" xml:base="http://localhost:4000/cs/2023/04/26/it-etc-pattern.html"><![CDATA[<h2 id="전략-패턴">전략 패턴</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-26T23:15:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">디자인 패턴 - 옵저버 패턴 [Java 예제]</title><link href="http://localhost:4000/cs/2023/04/26/it-etc-observerpattern.html" rel="alternate" type="text/html" title="디자인 패턴 - 옵저버 패턴 [Java 예제]" /><published>2023-04-26T00:00:00+09:00</published><updated>2023-04-26T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/04/26/it-etc-observerpattern</id><content type="html" xml:base="http://localhost:4000/cs/2023/04/26/it-etc-observerpattern.html"><![CDATA[<h2 id="옵저버-패턴">옵저버 패턴</h2>
+
+<p><strong>옵저버 패턴(Observer pattern)은</strong> 주체가 어떤 객체의 상태 변화를 관찰하다가 <br />
+상태 변화가 있을 때마다 메서드 등을 통해 옵저버 목록에 있는 옵저버들에게 변화를 알려주는 패턴이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/234535516-a59b6c8b-411c-43ed-ac8e-fb960590051f.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p><strong>주체</strong>란? 객체의 상태 변화를 보고 있는 관찰자이며</p>
+
+<p><strong>옵저버</strong>들이란? 이 객체의 상태 변화에 따라 전달되는 메서드 등을 기반으로 <br />
+추가 변화사항이 생기는 객체들을 의미한다.</p>
+
+<p>해당 패턴에 대해서 말로서는 이해하는건 어렵지 않았다. <br />
+하지만 코드로서 어떻게 작성을할 수 있는지?</p>
+
+<p>예제로 알아보자</p>
+
+<p><br /></p>
+
+<h3 id="옵저버-패턴-예제">옵저버 패턴 예제</h3>
+
+<p>Java에서 옵저버 패턴을 구현하는 가장 간단한 방법 중 하나는<br />
+<code class="language-plaintext highlighter-rouge">java.util.Observable</code> 클래스와 <code class="language-plaintext highlighter-rouge">java.util.Observer</code> 인터페이스를 사용하는 것이다.</p>
+
+<p>이번에는 위의 클래스,인터페이스를 사용하지 않고 직접 구현하는 것으로 해보자</p>
+
+<p><img src="https://user-images.githubusercontent.com/95069395/234568110-81338dd0-bf4d-4e99-bcb9-c2cb20333b9f.png" alt="image" class="align-left" style="max-width: 70%" /></p>
+
+<p>예제로는 주식가격이 변동이 생길때 주주(옵저버)들에게 변동사항을 알려주는 예제다.</p>
+
+<p><br /></p>
+
+<p>✅ <strong>Observer 설계</strong><br />
+우선 주주들을 정해줄 옵저버 인터페이스를 정의해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">StockObserver</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>해당 인터페이스는 주식이름, 주식가격이 update(변경)될는 것을 의미한다. <br />
+변경이 되면 주주에게 주체가 알려줘야한다.</p>
+
+<p><br /></p>
+
+<p>인터페이스를 구현한 클래스를 만들었다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConsoleStockObserver</span> <span class="kd">implements</span> <span class="nc">StockObserver</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Stock price of "</span> <span class="o">+</span> <span class="n">stockName</span> <span class="o">+</span> <span class="s">" has changed to "</span> <span class="o">+</span> <span class="n">stockPrice</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>콘솔로서 주주(옵저버)들에게 알려주는 역할을 하는 메서드이다.</p>
+
+<p><br /></p>
+
+<p>✅ <strong>Subject 설계</strong><br />
+이제 주체(Subject)인 주식시장를 구현해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StockMarket</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Double</span><span class="o">&gt;</span> <span class="n">stockPrices</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">StockObserver</span><span class="o">&gt;</span> <span class="n">observers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="c1">// Observer를 추가</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addObserver</span><span class="o">(</span><span class="nc">StockObserver</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Observer를 삭제</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeObserver</span><span class="o">(</span><span class="nc">StockObserver</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">observers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 주식가격 설정 &amp; 변동  </span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStockPrice</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">stockPrices</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">stockName</span><span class="o">,</span> <span class="n">stockPrice</span><span class="o">);</span>
+        <span class="n">notifyObservers</span><span class="o">(</span><span class="n">stockName</span><span class="o">,</span> <span class="n">stockPrice</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 옵저버에게 주식가격이 변동되었음을 알림</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">notifyObservers</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">StockObserver</span> <span class="n">observer</span> <span class="o">:</span> <span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">observer</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">stockName</span><span class="o">,</span> <span class="n">stockPrice</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>주식시장(StockMarket)이라는 주체를 만들어주었다.  <br />
+해당 주체는 주식가격(객체)이 변동이 생길때를 확인해 주주(옵저버)들에게 알려주는 역할을 한다.</p>
+
+<p><br /></p>
+
+<p>아래의 실행문을 보고 이해해보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">StockMarket</span> <span class="n">market</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StockMarket</span><span class="o">();</span> <span class="c1">// 주체 생성</span>
+        <span class="nc">ConsoleStockObserver</span> <span class="n">observer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ConsoleStockObserver</span><span class="o">();</span> <span class="c1">// 옵저버 생성</span>
+
+        <span class="n">market</span><span class="o">.</span><span class="na">addObserver</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>  <span class="c1">// 주체에 옵저버 추가</span>
+        <span class="n">market</span><span class="o">.</span><span class="na">addObserver</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>  <span class="c1">// 주체에 옵저버 추가</span>
+        
+        <span class="n">market</span><span class="o">.</span><span class="na">setStockPrice</span><span class="o">(</span><span class="s">"LG전자"</span><span class="o">,</span> <span class="mf">108400.0</span><span class="o">);</span> <span class="c1">// 가격 변동</span>
+        <span class="n">market</span><span class="o">.</span><span class="na">setStockPrice</span><span class="o">(</span><span class="s">"삼성전기"</span><span class="o">,</span> <span class="mf">139100.0</span><span class="o">);</span> <span class="c1">// 가격 변동</span>
+        <span class="c1">// 출력</span>
+        <span class="c1">// Stock price of LG전자 has changed to 108400.0</span>
+        <span class="c1">// Stock price of 삼성전기 has changed to 139100.0</span>
+
+        <span class="n">market</span><span class="o">.</span><span class="na">removeObserver</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>주체인 주식시장 인스턴스가 만들어졌고 <br />
+해당 주체에 옵저버가 추가되었다. (옵저버는 콘솔로 변동을 알려준다.)</p>
+
+<p>이제 주식시장에서 주식 2개의 변동이 생겼고 (LG전자, 삼성전기) <br />
+변동이 생길때 마다 <code class="language-plaintext highlighter-rouge">notifyObservers()</code>메서드로 인해서 저장된 옵저버들의 <br />
+구현해둔 <code class="language-plaintext highlighter-rouge">update()</code>를 통해서 콘솔을 통해 주식이름과 얼마로 가격이 변동되었는지 알릴 수 있는 것이다.</p>
+
+<p><br /></p>
+
+<h3 id="spring에서의-옵저버-패턴">Spring에서의 옵저버 패턴</h3>
+
+<p>SpringFramework에서는 <code class="language-plaintext highlighter-rouge">@EventListener</code>를 이용해 간단하게 <br />
+옵저버패턴을 구현할 수 있다. 해당 어노테이션을 사용하면 이벤트가 <br />
+발생할 때 마다 해당메서드가 자동으로 호출된다.</p>
+
+<p>간단한 예제로 주문이 생성될 때마다 Order 객체를 생성하고<br />
+이를 처리하는 리스너 클래스를 만들어주는 예제를 보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">orderId</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">customerName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">amount</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ApplicationEventPublisher</span> <span class="n">publisher</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">OrderService</span><span class="o">(</span><span class="nc">ApplicationEventPublisher</span> <span class="n">publisher</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">publisher</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createOrder</span><span class="o">(</span><span class="nc">String</span> <span class="n">orderId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">customerName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 주문 생성 코드 생략...</span>
+
+        <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span> <span class="c1">// &lt;- 주문 생성</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">setOrderId</span><span class="o">(</span><span class="n">orderId</span><span class="o">);</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">setCustomerName</span><span class="o">(</span><span class="n">customerName</span><span class="o">);</span>
+        <span class="n">order</span><span class="o">.</span><span class="na">setAmount</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+
+        <span class="nc">OrderCreatedEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrderCreatedEvent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">order</span><span class="o">);</span> <span class="c1">// &lt;- 해당주문으로 이벤트 객체생성</span>
+        <span class="n">publisher</span><span class="o">.</span><span class="na">publishEvent</span><span class="o">(</span><span class="n">event</span><span class="o">);</span> <span class="c1">// @EventListener 호출</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCreatedEvent</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Object</span> <span class="n">source</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Order</span> <span class="n">order</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">OrderCreatedEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">,</span> <span class="nc">Order</span> <span class="n">order</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">order</span> <span class="o">=</span> <span class="n">order</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">Order</span> <span class="nf">getOrder</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">order</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCreatedEventListener</span> <span class="o">{</span>
+    <span class="nd">@EventListener</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleOrderCreatedEvent</span><span class="o">(</span><span class="nc">OrderCreatedEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getOrder</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Order created: "</span> <span class="o">+</span> <span class="n">order</span><span class="o">.</span><span class="na">getOrderId</span><span class="o">()</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">order</span><span class="o">.</span><span class="na">getCustomerName</span><span class="o">()</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">order</span><span class="o">.</span><span class="na">getAmount</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">@EventListener</code>를 메서드에 붙여 정의를 해놓은 다음<br />
+해당 클래스 <code class="language-plaintext highlighter-rouge">OrderCreatedEventListener</code>를 빈으로 등록하면</p>
+
+<p><code class="language-plaintext highlighter-rouge">ApplicationEventPublisher</code>로 만든 객체로 <code class="language-plaintext highlighter-rouge">.publishEvent();</code>에 <br />
+호출할 객체를 넣어서 실행시키면 리스너측 메서드가 호출되게 되어진다.</p>
+
+<p>즉, 정리하자면</p>
+
+<blockquote>
+  <p>옵저버 = <code class="language-plaintext highlighter-rouge">handleOrderCreatedEvent() 메서드</code><br />
+주체 = <code class="language-plaintext highlighter-rouge">ApplicationEventPublisher 클래스</code>   <br />
+변경감지 = <code class="language-plaintext highlighter-rouge">publisher.publishEvent(event);</code></p>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="옵저버-패턴의-장점">옵저버 패턴의 장점</h3>
+
+<ol>
+  <li>느슨한 결합도: 옵저버 패턴은 객체 간의 결합도를 낮추는 느슨한 결합(loose coupling)을 제공합니다. 즉, Subject 객체와 Observer 객체가 서로 독립적으로 존재하며, 변경사항이 발생하더라도 서로 영향을 미치지 않습니다. 이는 객체 간의 유연성(flexibility)을 높여줍니다.</li>
+  <li>확장성: 옵저버 패턴은 새로운 Observer 클래스를 추가하거나 기존 Observer 클래스를 수정하지 않고도 Subject 객체의 동작을 확장할 수 있습니다. 이는 애플리케이션의 확장성을 높여줍니다.</li>
+  <li>이벤트 기반 시스템 구현에 용이: 옵저버 패턴은 이벤트 기반(event-driven) 시스템의 구현에 용이합니다. 이는 애플리케이션에서 발생하는 이벤트에 대해 Subject 객체가 이벤트를 발행하고, 이를 구독한 Observer 객체가 이벤트를 수신하면서 처리할 수 있기 때문입니다.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="옵저버-패턴의-단점">옵저버 패턴의 단점</h3>
+
+<ol>
+  <li>오버헤드: 옵저버 패턴은 객체 간의 통신이 빈번하게 일어나기 때문에, 불필요한 오버헤드가 발생할 수 있습니다. 이는 대규모 시스템에서 성능 저하를 초래할 수 있습니다.</li>
+  <li>디버깅의 어려움: 옵저버 패턴은 객체 간의 상호작용이 많이 일어나기 때문에, 디버깅이 어려울 수 있습니다. 이는 Observer 객체들 간의 상호작용이 복잡해지면서, 버그를 찾기 어려워지기 때문입니다.</li>
+</ol>
+
+<p><br /><br />
+<br /></p>
+
+<hr />
+
+<p>✨ 참고한 자료</p>
+<ul>
+  <li><a href="https://chat.openai.com/">ChatGPT 선생님</a></li>
+  <li><a href="https://pjh3749.tistory.com/266">pjh3749님의 블로그</a></li>
+  <li><a href="http://www.yes24.com/Product/Goods/108887922">면접을 위한 CS 전공지식 노트</a></li>
+</ul>
+
+<p><br /> 
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="CS" /><category term="ComputerScience" /><summary type="html"><![CDATA[옵저버 패턴]]></summary></entry><entry><title type="html">디자인 패턴 - 전략 패턴 [Java 예제]</title><link href="http://localhost:4000/cs/2023/04/26/it-etc-strategypattern.html" rel="alternate" type="text/html" title="디자인 패턴 - 전략 패턴 [Java 예제]" /><published>2023-04-26T00:00:00+09:00</published><updated>2023-04-26T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/04/26/it-etc-strategypattern</id><content type="html" xml:base="http://localhost:4000/cs/2023/04/26/it-etc-strategypattern.html"><![CDATA[<h2 id="전략-패턴">전략 패턴</h2>
 
 <p><strong>전략 패턴(strategy pattern)은</strong> 정책 패턴(policy pattern)이라고도 하며 <br />
 객체의 행위를 바꾸고 싶은 경우 직접 수정하지 않고 전략이라고 부르는 캡슐화한 알고리즘을 <br />
@@ -115,7 +348,7 @@
 
 <p><br /></p>
 
-<h3 id="spring에서-전략패턴">Spring에서 전략패턴?</h3>
+<h3 id="spring에서의-전략패턴">Spring에서의 전략패턴?</h3>
 
 <p>그럼 Java 진영에서 사용하는 프레임워크인 <br />
 SpringFramework에서는 어떤걸 전략패턴이라고 할 수 있을까?</p>
@@ -174,9 +407,9 @@ SpringFramework에서는 어떤걸 전략패턴이라고 할 수 있을까?</p>
 <p><code class="language-plaintext highlighter-rouge">CustomUserDetailsService</code>라는 우리가 만든 클래스는 <br />
 위와 같이 데이터베이스에서 사용자정보를 이용한 전략을 가지고 있지만</p>
 
-<p>만약 데이터베이스가 아니라 다른 전략이 생긴다고 가정하면
-<code class="language-plaintext highlighter-rouge">UserDetailsService</code>를 상속받아 클래스를 만들어 코드를 작성해
-<code class="language-plaintext highlighter-rouge">CustomUserDetails</code>를 반환해주면 다른 전략을 사용할 수 있게된다.  ㄴ</p>
+<p>만약 데이터베이스가 아니라 다른 전략이 생긴다고 가정하면<br />
+<code class="language-plaintext highlighter-rouge">UserDetailsService</code>를 상속받아 클래스를 만들어 코드를 작성해<br />
+<code class="language-plaintext highlighter-rouge">CustomUserDetails</code>를 반환해주면 다른 전략을 사용할 수 있게된다.</p>
 
 <p>즉, 전략패턴이 적용된 예제로 코드의 재사용성과 유연성을 높일 수 있게된다.</p>
 
@@ -1721,97 +1954,4 @@ id,name,age를 반환받는다고 보면 될 것 같다.</p>
 </ul>
 
 <p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[오늘은 REST API와 조금 다룬 GraphQL에 대해서 기본적인 개념와 실습을 위해 프로젝트를 하나파서 만들어봤다.]]></summary></entry><entry><title type="html">[Java] Generic을 활용한 Class 타입 매개변수로 전달하기</title><link href="http://localhost:4000/java/2023/04/12/java-generic.html" rel="alternate" type="text/html" title="[Java] Generic을 활용한 Class 타입 매개변수로 전달하기" /><published>2023-04-12T00:00:00+09:00</published><updated>2023-04-12T00:00:00+09:00</updated><id>http://localhost:4000/java/2023/04/12/java-generic</id><content type="html" xml:base="http://localhost:4000/java/2023/04/12/java-generic.html"><![CDATA[<h3 id="generic---class-타입을-매개변수로-전달">Generic - Class 타입을 매개변수로 전달</h3>
-
-<h4 id="리펙토링-배경">리펙토링 배경</h4>
-
-<p>테스트 코드를 작성 중 Jackson 라이브러리 ObjectMapper를 사용하여 <br />
-객체를 직렬화, 역직렬화를 진행하였다.</p>
-
-<p>해당 부분은 자주 사용하는 부분이기 때문에 Utils라는 클래스로 만들어 <br />
-관리하면 어떨까? 하는 생각에 클래스를 만들었고</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ObjectMapperUtils</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
-
-    <span class="c1">// 코드 생략 ...</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">LoginResponse</span> <span class="nf">actionsSingleResponseToLoginDto</span><span class="o">(</span><span class="nc">ResultActions</span> <span class="n">actions</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">resultActionsToResponseAsString</span><span class="o">(</span><span class="n">actions</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">response</span><span class="o">,</span> <span class="nc">LoginResponse</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Response</span> <span class="nf">actionsSingleResponseToMemberDto</span><span class="o">(</span><span class="nc">ResultActions</span> <span class="n">actions</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">resultActionsToResponseAsString</span><span class="o">(</span><span class="n">actions</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">registerModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">JavaTimeModule</span><span class="o">()).</span><span class="na">readValue</span><span class="o">(</span><span class="n">response</span><span class="o">,</span> <span class="nc">MemberDto</span><span class="o">.</span><span class="na">Response</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-    <span class="o">}</span>
-        
-    <span class="c1">// 코드 생략 ...</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>대략 위와 같은 형식으로 코드를 작성하였다.   <br />
-코드에서 주요 핵심 포인트는 <code class="language-plaintext highlighter-rouge">.readValue(response, 클래스타입);</code> 메서드 부분이다. <br />
-메서드가 2개가 존재하는데 actions를 매개변수로 넘겨 String값 response를 받고 <br />
-ObjectMapper를 이용해 역직렬화를 시켜주는 동일한 기능의 메서드들이다.</p>
-
-<p>여기서 <code class="language-plaintext highlighter-rouge">LoginResponse.class</code>과 <code class="language-plaintext highlighter-rouge">MemberDto.Response.class</code> 부분과  <br />
-반환 타입 <code class="language-plaintext highlighter-rouge">LoginResponse</code>과 <code class="language-plaintext highlighter-rouge">MemberDto.Response</code> 부분만 통일화 시켜주면 <br />
-메서드 하나로 리펙토링이 가능하다고 생각했다.</p>
-
-<p><br /></p>
-
-<h4 id="리펙토링-진행">리펙토링 진행</h4>
-
-<p>위와 같은 이유로 Class타입을 매개변수로 넘겨주고, 매개변수와 반환값을 제너릭으로 <br />
-어떤 타입이든 메서드 호출시 정하도록 해주면 되겠다고 생각하여 아래와 같이 리펙토링 하였다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ObjectMapperUtils</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
-
-    <span class="c1">// 코드 생략 ...</span>
-    
-    <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">actionsSingleToDto</span><span class="o">(</span><span class="nc">ResultActions</span> <span class="n">actions</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">responseClass</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">response</span> <span class="o">=</span> <span class="n">resultActionsToResponseAsString</span><span class="o">(</span><span class="n">actions</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">registerModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">JavaTimeModule</span><span class="o">()).</span><span class="na">readValue</span><span class="o">(</span><span class="n">response</span><span class="o">,</span> <span class="n">responseClass</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 코드 생략 ...</span>
-    
-<span class="o">}</span>
-</code></pre></div></div>
-<p>코드에서 보면 알 수 있듯이 <code class="language-plaintext highlighter-rouge">Class&lt;T&gt;</code>를 이용해 매겨변수를 타입으로 넘겨주었고 <br />
-반환타입을 <code class="language-plaintext highlighter-rouge">&lt;T&gt; T</code>로 지정하여 매개변수를 넘길때 클래스의 타입을 반환하게 하였다.</p>
-
-<p><br /></p>
-
-<p>실제로 메서드를 호출하는 테스트 코드는 아래와 같이 작성하였다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Slf4j</span>
-<span class="kd">class</span> <span class="nc">BuddyRecruitmentIntegrationTest</span> <span class="kd">extends</span> <span class="nc">BaseIntegrationTest</span> <span class="o">{</span>
-    
-    <span class="c1">// 코드 생략 ...</span>
-    
-    <span class="nd">@Test</span>
-    <span class="nd">@DisplayName</span><span class="o">(</span><span class="s">"동행 작성 테스트"</span><span class="o">)</span>
-    <span class="kt">void</span> <span class="nf">BuddyRecruitmentIntegrationTest1</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-       
-        <span class="c1">// ... 코드 생략 </span>
-        
-        <span class="nc">BuddyDto</span><span class="o">.</span><span class="na">ResponseRecruitment</span> <span class="n">response</span> <span class="o">=</span> <span class="nc">ObjectMapperUtils</span><span class="o">.</span><span class="na">actionsSingleToDto</span><span class="o">(</span><span class="n">actions</span><span class="o">,</span>
-                <span class="nc">BuddyDto</span><span class="o">.</span><span class="na">ResponseRecruitment</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-        
-        <span class="c1">// ... 코드 생략 </span>
-    <span class="o">}</span>
-
-    <span class="c1">// 코드 생략 ...</span>
-    
-<span class="o">}</span>
-</code></pre></div></div>
-<p>여기서 주목할 곳은 아래의 2번쨰 매개변수를 <br />
-<code class="language-plaintext highlighter-rouge">BuddyDto.ResponseRecruitment.class</code> 클래스 타입으로<br />
-전달하게된다는 점이다. 이렇게 여러개의 메서드를 계속 늘려나갈 상황이 생겼는데  <br />
-제너릭을 활용해 하나의 메서드로 Utils 클래스의 불필요한 중복 메서드를 제거하였다.</p>
-
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Java" /><category term="Java" /><summary type="html"><![CDATA[Generic - Class 타입을 매개변수로 전달]]></summary></entry></feed>
+<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[오늘은 REST API와 조금 다룬 GraphQL에 대해서 기본적인 개념와 실습을 위해 프로젝트를 하나파서 만들어봤다.]]></summary></entry></feed>

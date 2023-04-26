@@ -711,7 +711,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/cs/2023/04/26/it-etc-pattern.html">
+        <a class="post-link" href="/cs/2023/04/26/it-etc-strategypattern.html">
           디자인 패턴 - 전략 패턴 [Java 예제]
         </a>
       </h2>
@@ -719,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         <span class="post-date"><i class="fa fa-calendar"></i> Apr 26, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
-      <a class="post-excerpt" href="/cs/2023/04/26/it-etc-pattern.html">
+      <a class="post-excerpt" href="/cs/2023/04/26/it-etc-strategypattern.html">
         <p>
         전략 패턴
 
@@ -746,6 +746,107 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 public class Main {
     public static void main(S... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/cs/2023/04/26/it-etc-observerpattern.html">
+          디자인 패턴 - 옵저버 패턴 [Java 예제]
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 26, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+      </div>
+      <a class="post-excerpt" href="/cs/2023/04/26/it-etc-observerpattern.html">
+        <p>
+        옵저버 패턴
+
+옵저버 패턴(Observer pattern)은 주체가 어떤 객체의 상태 변화를 관찰하다가 
+상태 변화가 있을 때마다 메서드 등을 통해 옵저버 목록에 있는 옵저버들에게 변화를 알려주는 패턴이다.
+
+
+
+주체란? 객체의 상태 변화를 보고 있는 관찰자이며
+
+옵저버들이란? 이 객체의 상태 변화에 따라 전달되는 메서드 등을 기반으로 
+추가 변화사항이 생기는 객체들을 의미한다.
+
+해당 패턴에 대해서 말로서는 이해하는건 어렵지 않았다. 
+하지만 코드로서 어떻게 작성을할 수 있는지?
+
+예제로 알아보자
+
+
+
+옵저버 패턴 예제
+
+Java에서 옵저버 패턴을 구현하는 가장 간단한 방법 중 하나는
+java.util.Obser... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
@@ -1582,100 +1683,6 @@ GraphQL 은 클라이언트 단일 요청에서 여... <span class="read_more">R
 <a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
 </div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/java/2023/04/12/java-generic.html">
-          [Java] Generic을 활용한 Class 타입 매개변수로 전달하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 12, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/java/2023/04/12/java-generic.html">
-        <p>
-        Generic - Class 타입을 매개변수로 전달
-
-리펙토링 배경
-
-테스트 코드를 작성 중 Jackson 라이브러리 ObjectMapper를 사용하여 
-객체를 직렬화, 역직렬화를 진행하였다.
-
-해당 부분은 자주 사용하는 부분이기 때문에 Utils라는 클래스로 만들어 
-관리하면 어떨까? 하는 생각에 클래스를 만들었고
-
-public class ObjectMapperUtils {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    // 코드 생략 ...
-
-    public static LoginResponse actionsSing... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags"><a class="post-tag" href="/tags.html#Java">#Java</a></div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1728,7 +1735,7 @@ public class ObjectMapperUtils {
   <ul>
     <li>
       <a href="/index.html">
-        All<span>164</span>
+        All<span>165</span>
       </a>
     </li>
 
@@ -1741,7 +1748,7 @@ public class ObjectMapperUtils {
     
       <li>
         <a href="/categories.html#h-CS">
-          CS <span>4</span>
+          CS <span>5</span>
         </a>
       </li>
     

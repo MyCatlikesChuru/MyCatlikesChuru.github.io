@@ -123,7 +123,7 @@ public class Main {
 
 <br/>   
 
-### Spring에서 전략패턴?
+### Spring에서의 전략패턴?
 
 
 그럼 Java 진영에서 사용하는 프레임워크인   
@@ -185,9 +185,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 `CustomUserDetailsService`라는 우리가 만든 클래스는   
 위와 같이 데이터베이스에서 사용자정보를 이용한 전략을 가지고 있지만   
 
-만약 데이터베이스가 아니라 다른 전략이 생긴다고 가정하면
-`UserDetailsService`를 상속받아 클래스를 만들어 코드를 작성해
-`CustomUserDetails`를 반환해주면 다른 전략을 사용할 수 있게된다.  ㄴ
+만약 데이터베이스가 아니라 다른 전략이 생긴다고 가정하면  
+`UserDetailsService`를 상속받아 클래스를 만들어 코드를 작성해  
+`CustomUserDetails`를 반환해주면 다른 전략을 사용할 수 있게된다.  
 
 즉, 전략패턴이 적용된 예제로 코드의 재사용성과 유연성을 높일 수 있게된다.   
 
