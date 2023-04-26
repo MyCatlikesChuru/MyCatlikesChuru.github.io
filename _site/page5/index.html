@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 5 of 16 for Home | LeeJellan</title>
+<title>Page 5 of 17 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -122,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -713,33 +712,144 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2023/02/09/db-mysqlreplace.html">
-          MySQL replace 함수사용하여 일괄 변경하기
+        <a class="post-link" href="/algorithm/2023/03/16/algo-prime.html">
+          [Programmers] 소수 찾기 (Java)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Feb 09, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 16, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/algorithm/2023/03/16/algo-prime.html">
+        <p>
+        📌 문제 : 소수 찾기
+
+📖 문제 설명
+
+한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.
+
+각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.
+
+제한사항
+
+
+numbers는 길이 1 이상 7 이하인 문자열입니다.
+numbers는 0~9까지 숫자만으로 이루어져 있습니다.
+"013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
+
+
+입출력 예
+
+
+        
+numbers
+return
+
+
+       ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/03/15/sql-carrent.html">
+          [Programmers] 자동차 대여 기록에서 장기/단기 대여 구분하기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 15, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2023/02/09/db-mysqlreplace.html">
+      <a class="post-excerpt" href="/sql/2023/03/15/sql-carrent.html">
         <p>
-        예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서  
-MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…
+        📌 문제 : 자동차 대여 기록에서 장기/단기 대여 구분하기
+
+📖 문제 설명
+
+다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블입니다. CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블은 아래와 같은 구조로 되어있으며, HISTORY_ID, CAR_ID, START_DATE, END_DATE 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.
+
+        
+Column name
+Type
+Nullable
 
 
+        
+HISTORY_ID
+INTEGER
+FALSE
 
-OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서
-사진주소를 가져와서 DB에 저장하기때문에 남아있고
-일반으로 회원가입한 유저는 위에 12가지 기본이미지를 랜덤으로 배정받게되는데
-보는거처럼 사진 원본파일이 구글드라이브에서 날라가서 표시가안되는 모습이다.
 
-처음했던 프로젝트이기도하고 사진관리하는 방법이 너무 miss인 것 같다. 
-우선 데이터베이스에 회원으로 가입되어있는 멤버가 100명정도 가입되어있는데 
-해당 데이터를 조작하기위해서 Replace... <span class="read_more">Read More</span>
+CAR_I... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -806,31 +916,44 @@ OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html">
-          Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.
+        <a class="post-link" href="/sql/2023/03/14/sql-carlist.html">
+          [Programmers] 특정 옵션이 포함된 자동차 리스트 구하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 28, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 14, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/linux/unix/2023/01/28/server-nginxerror.html">
+      <a class="post-excerpt" href="/sql/2023/03/14/sql-carlist.html">
         <p>
-        https 관련 설정을 만지다가
-nginx를 실행하는데 아래와 같은 에러가 발생했다.
-$ sudo service nginx start
-Job for nginx.service failed because the control process exited with error code.
-See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+        📌 문제 : 특정 옵션이 포함된 자동차 리스트 구하기
 
-터미널에 나온대로 systemctl status nginx.service를 
-입력하여 로그를 확인해봤다.
+📖 문제 설명
 
-$ systemctl status nginx.service
-× nginx.ser... <span class="read_more">Read More</span>
+다음은 어느 자동차 대여 회사에서 대여중인 자동차들의 정보를 담은 CAR_RENTAL_COMPANY_CAR 테이블입니다. CAR_RENTAL_COMPANY_CAR 테이블은 아래와 같은 구조로 되어있으며, CAR_ID, CAR_TYPE, DAILY_FEE, OPTIONS 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+CAR_ID
+INTEGER
+FALSE
+
+
+CAR_TYPE
+VARCHAR(255)
+FALSE
+
+
+DAI... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -897,471 +1020,61 @@ $ systemctl status nginx.service
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/server/2023/01/27/server-oraclesetting.html">
-          Oracle Cloud 외부 접속 설정
+        <a class="post-link" href="/sql/2023/03/14/sql-book.html">
+          [Programmers] 조건에 맞는 도서 리스트 출력하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 27, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-      </div>
-      <a class="post-excerpt" href="/server/2023/01/27/server-oraclesetting.html">
-        <p>
-        오늘은 Oracle Cloud 서버에
-nginx에 클라이언트를 배포해 외부에서 접속하고
-WorkBench를 이용해 mysql을 접속하려한다.
-
-외부접속관련해 설정을 정리해보려한다.
-
-
-
-📌 UFW vs iptables
-
-iptables를 이용해 방화벽 설정을 할 수 있다.
-
-sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
-
-와 같이 입력해주면 설정이 가능하다. 
-UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고
-수준높은 방화벽 구성에는 iptables를 사용해야한다.
-
-
-
-📌 UFW 활성/비활성
-
-1). UFW 활성화
-
-sudo ufw enable
-
-
-
-
-... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2023/01/21/spring-email.html">
-          [Spring] MailAuthenticationException 문제 해결
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 21, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2023/01/21/spring-email.html">
-        <p>
-        오늘은 회원가입시 이메일 전송 로직을 확인중
-org.springframework.mail.MailAuthenticationException와 같은
-예외를 만났고 해당관련 해결방법을 적어가보려한다.
-
-
-
-✅ 작업환경
-
-Spring Boot 2.7.7  
-Java 11 
-macOs Monterey 12.6 버전 
-로컬환경에서 테스트 진행
-
-
-
-
-📌 에러 확인 및 해결
-
-첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. 
-메일을 보내는 주체는 Google의 gmail을 이용하려한다.
-
-implementation 'org.springframework.boot:spring-boot-starter-mail... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#email">#email</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2023/01/15/spring-fileupload.html">
-          [Spring] AWS S3 FileUpload 하여 URL로 관리하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 15, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2023/01/15/spring-fileupload.html">
-        <p>
-        오늘은 AWS S3에 파일 업로드를 하는
-예제를 다뤄보려한다.
-
-구글에서 여러가지 블로그를 돌아다니며 학습했고
-순서와 코드에 대해 정리해보려한다. 
-내가 작성한 코드는 GitHub 레포지토리로 공유해본다.
-
-
-
-✅ 작업 환경
-
-AWS S3 버킷
-Spring Boot 2.7.7  
-Java 11 
-macOs Monterey 12.6 버전 
-로컬환경에서 테스트 진행
-
-
-
-
-📌 작업 순서 및 준비
-
-내가 구상하려고 생각하는 아키텍처를 그려보았다.
-순서를 간단히 짚고 넘어가자
-
-
-
-1). 클라이언트에서 이미지파일을 업로드 요청
--&gt; multipart/form-data 타입으로 요청
--&gt; Key=file / va... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#S3">#S3</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/db/2023/01/14/db-redis.html">
-          Redis JWT Refresh Token 관리 및 재발행
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 14, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
-      </div>
-      <a class="post-excerpt" href="/db/2023/01/14/db-redis.html">
-        <p>
-        Redis에 대한 간단한 CS지식과 
-Redis 설치 및 CLI 사용법을 알아보았었다.
-
-오늘은 이제 나의 사용 목적인 프로젝트에 도입을 해보려한다. 
-JWT Refresh Token관리와 좋아요,조회수 등 
-빈번히 update가 일어나는 항목에 대해서 관리하는 차원에서 
-캐시서버인 Redis를 사용해보려한다.
-
-그 중에서도 Redis 사용에 대한 코드와
-JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해
-초점을 두고 작성했기에 많은 코드들이 생략되어 있다는점 참고 부탁드린다.
-
-✅ 작업환경
-
-Spring Boot 2.7.7
-java 11 
-macOS Ventura 13.1
-로컬 환경에서 테스트 진행
-
-... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/git/2023/01/12/git-commitmessage.html">
-          Git 이전 Commit Message 수정하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 14, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
       </div>
-      <a class="post-excerpt" href="/git/2023/01/12/git-commitmessage.html">
+      <a class="post-excerpt" href="/sql/2023/03/14/sql-book.html">
         <p>
-        📌 CLI로 변경
+        📌 문제 : 조건에 맞는 도서 리스트 출력하기
 
-만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우
+📖 문제 설명
 
-git rebase -i HEAD~3        
+다음은 어느 한 서점에서 판매중인 도서들의 도서 정보(BOOK) 테이블입니다.
 
-를 입력해서 커밋메세지가 수정이 가능하다. 
-~3은 가장최신부터 수정하고자하는 커밋 수량이다
+BOOK 테이블은 각 도서의 정보를 담은 테이블로 아래와 같은 구조로 되어있습니다.
 
-Pick이라고 되어있는 부분을 reword로 변경한 다음 
-커밋메세지를 수정해주면 반영된다.
-
-
-
-📌 IntelliJ로 변경
-
-IDE를 사용하면 vi,nano 편집기를 이용하는 것보다
-훨씬 수월하게 작업할 수 있다.
-
-하단의 Git 탭에서 커밋메세지를 변경하고자하는
-커밋을 눌러 오른쪽 클릭을하자
+        
+Column name
+Type
+Nullable
+Description
 
 
+        
+BOOK_ID
+INTEGER
+FALSE
+도서 ID
 
-Interactively Rebase from Here를 눌러주자
+
+CATEGORY
+VARCHAR(N)
+FALSE
+카테고리 (경제, 인문, 소설, 생활, 기술)
 
 
+AUTHOR_ID
+INTEGER
+FALSE
+저자 ID
 
-그러면 Rebasing ... <span class="read_more">Read More</span>
+
+PRICE
+INTEGER
+FALSE
+판매가 (원)
+
+
+PUBLISHED_DATE... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -1428,46 +1141,39 @@ Interactively Rebase from Here를 눌러주자
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/git/2023/01/12/git-cherrypick.html">
-          Git Cherry-Pick으로 Commit 옮기기
+        <a class="post-link" href="/cs/2023/03/08/it-etc-network.html">
+          네트워크 기초와 TCP/IP 4계층 모델
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 08, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
       </div>
-      <a class="post-excerpt" href="/git/2023/01/12/git-cherrypick.html">
+      <a class="post-excerpt" href="/cs/2023/03/08/it-etc-network.html">
         <p>
-        📌 Cherry-Pick
+        네트워크 기초
 
-작업을 하던중 다른 브랜치에 Commit을 해버렸다…
+네트워크란?
 
-팀원 모두가 개발 중인 브랜치 : develop
-현재 내가 개발하는 브랜치 : feat/BE/ljh
-
-이렇게 두가지로 운영중이었다.
-
-
-
-사진에서 볼 수 있듯이… develop 브랜치에 커밋을 두개나 해버린상황
-#14, #3 으로된 제목의 커밋이다..
-feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
-
-해당 커밋을 복사해서 옮길 수 있는 방법이 Cherry-Pick이다.
-본격적으로 사용법을 알아보자
+노드(node)와 링크(link)가 서로 연결되어 있거나 연결되어 있으며
+리소스를 공유하는 집합을 의미한다. 여기서 노드란 서버,라우터,스위치 등 네트워크 
+장치를 의미하고 링크는 유선 또는 무선을 의미한다.
 
 
 
-📌 Commit Hash 값
+처리량
 
-첫번째로 내가 잘못올릴 커밋의 해쉬값을 알아야한다.
+네트워크를 구축할 때는 ‘좋은’ 네트워크로 만드는 것이 중요하다. 
+조은 네트워크란 많은 처리량을 처리할 수 있으며 지연 시간이 짧고 장애 빈도가 
+적으며 좋은 보안을 갖춘 네트워크를 말한다.
 
-내가 커밋을 잘못올린 브랜치(deve... <span class="read_more">Read More</span>
+처리량(throughput)은 링크 내에서 성공적으로 전달된 데이터의 양을 말하고
+보통 얼만큼의 트래픽을 처리했는지를 나타낸다.
+
+많은 트래픽을 처리한다 = 많은 처리량을 ... <span class="read_more">Read More</span>
         </p>
       </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
-</div>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
     </li>
 <li>
       
@@ -1533,38 +1239,35 @@ feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2023/01/08/db-redissetting.html">
-          Redis CLI 설치 및 사용방법
+        <a class="post-link" href="/algorithm/2023/03/08/algo-knumber.html">
+          [Programmers] K 번째수 (Java)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 08, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 08, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2023/01/08/db-redissetting.html">
+      <a class="post-excerpt" href="/algorithm/2023/03/08/algo-knumber.html">
         <p>
-        Redis는 Remote Dictionary Server의 약자로 
-key:value로 값을 저장하는 NoSQL이다. 
-인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..
+        📌 문제 : K 번째수
+
+📖 문제 설명
+
+배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.
+
+예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면
 
 
-
-비관계형 데이터 베이스 관리 시스템(DBMS)이며
-캐시서버로 많이 이용된다.  
-캐시는 한번 읽어온 데이터를 임의의 공간에 저장하여
-다음에 읽을 때는 빠르게 결과값을 받을 수 있도록 도와주는 공간이다.
+array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.
+1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.
+2에서 나온 배열의 3번째 숫자는 5입니다.
 
 
-
-학습의 목적은 JWT Refresh Token 관리 목적과
-좋아요,혹은 조회수 같은 자주 업데이트가 일어나는 데이터를
-RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.
-
-본격적으로 알아보기전에 CLI를 통해 ... <span class="read_more">Read More</span>
+배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -1631,39 +1334,324 @@ RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html">
-          Jekyll Github IO 블로그 코드 하이라이트
+        <a class="post-link" href="/cs/2023/03/07/it-etc-paradigm.html">
+          함수형 프로그래밍이란? - Java
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 02, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 07, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
       </div>
-      <a class="post-excerpt" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html">
+      <a class="post-excerpt" href="/cs/2023/03/07/it-etc-paradigm.html">
         <p>
-        현재 내가 운영중인 Github.io 블로그의
-테마는 YAT 이라는 테마이다.
+        프로그래밍 패러다임
 
-이전에 YAT 테마 댓글 기능, 파비콘 추가하는 방법까지 알아보았다.
-이제 기본으로 제공하는 Code Highlight(코드 하이라이트) 
-변경하는 법을 알아보려한다.
+프로그래머에게 프로그래밍의 관점을 갖게 해주는 역할을 하는 개발 방법론이다.
+어떤 언어는 특정한 패러다임을 지원한다. (ex: 자바=객체지향, 하스켈=함수형) 
+여러 패러다임을 지원하는 언어도 존재한다. (ex: 파이썬, C++, 자바스크립트)
+자바는 jdk 1.8부터 함수형 프로그래밍 패러다임을 지원하기 위해 람다식, 생성자 레퍼런스
+메서드 레퍼런스를 도입했고, 선언형 프로그래밍을 위해 스트림 같은 표준 API들도 추가하였다.
+
+프로그래밍 패러다임은 크게 아래와 같이 나뉜다.
+
+선언형 -&gt; 함수형
+명령형 -&gt; 객체지향형, 절차지향형
 
 
 
-Jekyll 코드 하이라이트 적용
+함수형 프로그래밍
 
-코드 하이라이트 적용은 매우 간단하다.
+함수형 프로그래밍의 특징... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
+    </li>
+<li>
+      
 
-나와 같은 경우에는 highlight.js demo 사이트에서 
-마음에 드는 코드하이라이트의 이름만 설정해주면 된다.
 
-_includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
 
-해당 경로의 code-highlight.html... <span class="read_more">Read More</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html">
+          [Programmers] 주식가격 (Java)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 22, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/algorithm/2023/02/22/algo-stockprice.html">
+        <p>
+        📌 문제 : 주식가격
+
+📖 문제 설명
+
+초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.
+
+제한사항
+
+
+prices의 각 가격은 1 이상 10,000 이하인 자연수입니다.
+prices의 길이는 2 이상 100,000 이하입니다.
+
+
+입출력 예
+
+        
+prices
+return
+
+
+        
+[1, 2, 3, 2, 3]
+[4, 3, 1, 1, 0]
+
+
+      
+
+입출력 예 설명
+
+
+1초 시점의 ₩1은 끝까지 가격이 떨어지지 않았습니다.
+2초 시점의 ₩2은 끝까지 가격이 떨어지지... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#Jekyll">#Jekyll</a><a class="post-tag" href="/tags.html#yat">#yat</a><a class="post-tag" href="/tags.html#%ED%85%8C%EB%A7%88%EC%A0%81%EC%9A%A9">#테마적용</a><a class="post-tag" href="/tags.html#GitHub%20Pages">#GitHub Pages</a>
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/algorithm/2023/02/19/algo-printer.html">
+          [Programmers] 프린터 (Java)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 19, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/algorithm/2023/02/19/algo-printer.html">
+        <p>
+        📌 문제 : 프린터
+
+📖 문제 설명
+
+일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.
+1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.
+2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.
+3. 그렇지 않으면 J를 인쇄합니다.
+
+예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2023/02/17/spring-test.html">
+          [Spring] 단위 테스트 JPA metamodel must not be empty!
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/spring/2023/02/17/spring-test.html">
+        <p>
+        ✅ 문제발생 및 원인
+
+Controller 단위 테스트를 진행하려고 @WebMvcTest
+어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreation... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#JUnit">#JUnit</a>
 </div>
     </li>
 </ul>
@@ -1678,7 +1666,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
     
     </span>
 
-    <span class="indicator"> 5/16</span>
+    <span class="indicator"> 5/17</span>
 
     <span class="next">
     
@@ -1718,7 +1706,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
   <ul>
     <li>
       <a href="/index.html">
-        All<span>153</span>
+        All<span>164</span>
       </a>
     </li>
 
@@ -1731,7 +1719,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
     
       <li>
         <a href="/categories.html#h-CS">
-          CS <span>3</span>
+          CS <span>4</span>
         </a>
       </li>
     
@@ -1754,6 +1742,12 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
       </li>
     
       <li>
+        <a href="/categories.html#h-Java">
+          Java <span>1</span>
+        </a>
+      </li>
+    
+      <li>
         <a href="/categories.html#h-Jekyll">
           Jekyll <span>2</span>
         </a>
@@ -1767,7 +1761,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>25</span>
+          SQL <span>33</span>
         </a>
       </li>
     
@@ -1779,7 +1773,7 @@ _includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
     
       <li>
         <a href="/categories.html#h-Spring">
-          Spring <span>12</span>
+          Spring <span>13</span>
         </a>
       </li>
     
