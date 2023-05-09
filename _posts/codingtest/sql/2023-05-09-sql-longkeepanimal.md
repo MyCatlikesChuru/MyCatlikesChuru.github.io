@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "[Programmers] 오랜 기간 보호한 동물(2) (MySQL)"
