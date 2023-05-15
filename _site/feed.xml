@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-05-15T16:05:56+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers] 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/15/sql-rentcost.html" rel="alternate" type="text/html" title="[Programmers] 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기 (MySQL)" /><published>2023-05-15T00:00:00+09:00</published><updated>2023-05-15T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/15/sql-rentcost</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/15/sql-rentcost.html"><![CDATA[<h2 id="-문제--특정-기간동안-대여-가능한-자동차들의-대여비용-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/157339">특정 기간동안 대여 가능한 자동차들의 대여비용 구하기</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-05-15T18:20:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers] 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/15/sql-rentcost.html" rel="alternate" type="text/html" title="[Programmers] 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기 (MySQL)" /><published>2023-05-15T00:00:00+09:00</published><updated>2023-05-15T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/15/sql-rentcost</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/15/sql-rentcost.html"><![CDATA[<h2 id="-문제--특정-기간동안-대여-가능한-자동차들의-대여비용-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/157339">특정 기간동안 대여 가능한 자동차들의 대여비용 구하기</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -328,7 +328,176 @@ ORDER BY FEE DESC, c.CAR_TYPE ASC, c.CAR_ID DESC;
 <p>서브쿼리를 사용한다는 발상이 자꾸 안떠오르는게 문제풀이하는데 조금 시간을 더 소요하는 것 같다. <br />
 또한 WHERE절과 HAVING절의 차이를 이번 문제로 이해가 좀더 된 것 같다.</p>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기]]></summary></entry><entry><title type="html">[Programmers] 없어진 기록 찾기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/14/sql-lostrecord.html" rel="alternate" type="text/html" title="[Programmers] 없어진 기록 찾기 (MySQL)" /><published>2023-05-14T00:00:00+09:00</published><updated>2023-05-14T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/14/sql-lostrecord</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/14/sql-lostrecord.html"><![CDATA[<h2 id="-문제--없어진-기록-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59042">없어진 기록 찾기</a></h2>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기]]></summary></entry><entry><title type="html">Code Deploy 에러해결 : An error occurred (AccessDeniedException) when calling the CreateDeployment operation</title><link href="http://localhost:4000/aws/2023/05/15/aws-codedeploy.html" rel="alternate" type="text/html" title="Code Deploy 에러해결 : An error occurred (AccessDeniedException) when calling the CreateDeployment operation" /><published>2023-05-15T00:00:00+09:00</published><updated>2023-05-15T00:00:00+09:00</updated><id>http://localhost:4000/aws/2023/05/15/aws-codedeploy</id><content type="html" xml:base="http://localhost:4000/aws/2023/05/15/aws-codedeploy.html"><![CDATA[<h3 id="-에러-상황">🐞 에러 상황</h3>
+
+<p>Git Actions를 이용한 CI/CD 구성중 만난 에러다. <br />
+에러 내용은 아래와 같다.</p>
+
+<p><img src="https://github.com/MyCatlikesChuru/MyCatlikesChuru.github.io/assets/95069395/31ea0235-3684-45f4-a9c1-ddcbe7ee9c4a" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Run aws deploy create-deployment --application-name *** --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name *** --s3-location bucket=***,bundleType=zip,key=travel-with-me-build.zip
+
+An error occurred (AccessDeniedException) when calling the CreateDeployment operation: User: arn:aws:iam::***:user/s3-user is not authorized to perform: codedeploy:CreateDeployment on resource: arn:aws:codedeploy:ap-northeast-2:***:deploymentgroup:***/*** because no identity-based policy allows the codedeploy:CreateDeployment action
+Error: Process completed with exit code 254.
+</code></pre></div></div>
+
+<p>에러 내용으로만 보았을때는 내가 생성한 사용자 IAM <code class="language-plaintext highlighter-rouge">s3-user</code>에 권한이 없어서 동작이 안되는 모습이다.  <br />
+(참고로 s3-user는 내가 생성한 IAM의 이름이다.)</p>
+
+<p><code class="language-plaintext highlighter-rouge">AmazonEC2RoleforAWSCodeDeploy</code>과 <code class="language-plaintext highlighter-rouge">AWSCodeDeployRole</code> 권한 정책이 추가되어있는데 <br />
+Git Actions 실행시 왜 위와 같은 에러가 발생하는걸까?</p>
+
+<p>몇시간의 삽질 끝에 필자가 해결했던 방법을 올려본다.</p>
+
+<p><br /></p>
+
+<h3 id="-해결-방법">📌 해결 방법</h3>
+
+<p>우선 현재 내가 구성한 CI/CD 구조는</p>
+
+<p>GitActions -&gt; S3 -&gt; Code Deploy -&gt; EC2로 빌드된 파일을 <br />
+알집으로 전송하고 해당 알집파일을 EC2에서 다운받고 실행시키는 구조이다.</p>
+
+<p>여기서 문제가 되는 부분은 S3까지는 정상적으로 알집파일이 전송된다. <br />
+하지만 Code Deploy에서 S3의 알집파일을 EC2로 전송해야하는데  <br />
+위와 같은 권한이 없는 에러가 발생한 것이다.</p>
+
+<p>우선 내가 작성한 <code class="language-plaintext highlighter-rouge">gradle.yml</code> 파일을 공유해본다.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Java CI with Gradle</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span> <span class="s2">"</span><span class="s">main"</span> <span class="pi">]</span>
+    <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">travel-with-me/**</span> <span class="c1"># 해당 폴더 변경 감지시</span>
+      <span class="pi">-</span> <span class="s">.github/**</span> <span class="c1"># github 하위 변경 감지시</span>
+      
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">contents</span><span class="pi">:</span> <span class="s">read</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    
+    <span class="na">defaults</span><span class="pi">:</span>
+      <span class="na">run</span><span class="pi">:</span>
+        <span class="na">working-directory</span><span class="pi">:</span> <span class="s">./travel-with-me</span> <span class="c1">#폴더 경로 추가</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="c1"># submodule을 사용하기 위한 토큰 추가 </span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">token</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">submodules</span><span class="pi">:</span> <span class="no">true</span>
+
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Set up JDK </span><span class="m">11</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/setup-java@v3</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">java-version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">11'</span>
+          <span class="na">distribution</span><span class="pi">:</span> <span class="s1">'</span><span class="s">temurin'</span>
+
+      <span class="c1"># ~/gradlew' is not executable. 문제해결</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Add permission</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">chmod +x ./gradlew</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Build with Gradle</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">arguments</span><span class="pi">:</span> <span class="s">build</span>
+          <span class="na">build-root-directory</span><span class="pi">:</span> <span class="s">./travel-with-me</span> <span class="c1">#폴더 경로 추가</span>
+
+      <span class="c1"># build 후 압축하는 과정</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Make zip file</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">zip -r ./travel-with-me-build.zip .</span>
+        <span class="na">shell</span><span class="pi">:</span> <span class="s">bash</span>
+
+      <span class="c1"># AWS 사용정보 입력</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Configure AWS credentials</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">aws-actions/configure-aws-credentials@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">aws-access-key-id</span><span class="pi">:</span> <span class="s">$</span> <span class="c1"># IAM 권한 만들때 만든 엑세스키</span>
+          <span class="na">aws-secret-access-key</span><span class="pi">:</span> <span class="s">$</span> <span class="c1"># IAM 권한 만들때 만든 시크릿키</span>
+          <span class="na">aws-region</span><span class="pi">:</span> <span class="s">ap-northeast-2</span> <span class="c1"># 서울리전</span>
+
+      <span class="c1"># 압축파일 AWS S3 버킷에 업로드(전달)</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Upload to S3</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">aws s3 cp --region ap-northeast-2 ./travel-with-me-build.zip s3://$/travel-with-me-build.zip</span>
+
+      <span class="c1"># AWS Code Deploy 설정 및 실행</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Code Deploy</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">&gt;</span>
+          <span class="s">aws deploy create-deployment --application-name $</span>
+          <span class="s">--deployment-config-name CodeDeployDefault.AllAtOnce</span>
+          <span class="s">--deployment-group-name $</span>
+          <span class="s">--s3-location bucket=$,bundleType=zip,key=travel-with-me-build.zip</span>
+</code></pre></div></div>
+
+<p>중요한 정보들은 Github Secret으로 감추어두었으니 참고부탁드린다.</p>
+
+<p>여기서 이제 궁극적으로 해결한 방법을 적어보자면 <br />
+<code class="language-plaintext highlighter-rouge">AWS</code> -&gt; <code class="language-plaintext highlighter-rouge">IAM</code> -&gt; <code class="language-plaintext highlighter-rouge">사용자</code> -&gt; <code class="language-plaintext highlighter-rouge">내가 만든 사용자</code> -&gt; <code class="language-plaintext highlighter-rouge">권한</code> <br />
+까지 이동을하면 아래와 같은 권한 정책을 설정할 수 있는 화면이 나온다.<br />
+<strong><em>(당연하게도 IAM 계정 만드는 것이 선행되어야합니다.)</em></strong></p>
+
+<p><img src="https://github.com/MyCatlikesChuru/MyCatlikesChuru.github.io/assets/95069395/77fc1dfb-857e-4bad-a73a-0b74825fc167" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>현재 5개의 권한이 보이지만 원래는 맨아래에 있는 <br />
+<code class="language-plaintext highlighter-rouge">CreateDeployMent</code>라는 정책은 없었다.</p>
+
+<p>2개는 S3에 대한 권한 설정, 2개는 Code Deploy에 해당하는 권한정책 설정이다. <br />
+여기서 에러가 발생해 <code class="language-plaintext highlighter-rouge">인라인 정책 생성</code>을 통해서 <code class="language-plaintext highlighter-rouge">CreateDeployMent</code>라는 정책을 만들었다.</p>
+
+<p><br /></p>
+
+<p><code class="language-plaintext highlighter-rouge">인라인 정책 생성</code> 버튼을 누르면 아래와 같은 화면으로 넘어온다. <br />
+(JSON 탭을 누르시면 같은 화면으로 넘어옵니다.)</p>
+
+<p><img src="https://github.com/MyCatlikesChuru/MyCatlikesChuru.github.io/assets/95069395/20eff7d9-f775-4bba-9543-27a661904b10" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>해당 정책 편집 페이지에서 위와 같이</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"codedeploy:*"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"arn:aws:codedeploy:ap-northeast-2:계정ID:*"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>정책을 입력해주면 된다. 여기서 <code class="language-plaintext highlighter-rouge">codedeploy:*</code> 로 전체권한을 와일드카드로 허용시켜주고 <br />
+Resource부분에서도 와일드카드를 사용해 자원에 접근한다는 것을 명시해주었다.</p>
+
+<p>여기서 환경마다 다를 수 있는 점은 <br />
+<code class="language-plaintext highlighter-rouge">ap-northeast-2</code>부분과 <code class="language-plaintext highlighter-rouge">계정ID</code> 부분이다.</p>
+
+<p>만약 서울이면 위와 같이 <code class="language-plaintext highlighter-rouge">ap-northeast-2</code> 사용하면되고 각자 환경에 맞는 리전을 선택하면된다. <br />
+또한 계정 ID는 본인 계정의 12자리 계정 ID를 뜻한다.</p>
+
+<p>맨우측 상단에 본인 계정을 눌러보면 탭으로 계정 ID 12자리가 <br />
+<code class="language-plaintext highlighter-rouge">xxxx-xxxx-xxxx</code>와 같은 번호형태로 되어있을 것이다. <br />
+해당 번호를 계정ID자리에 쭉 12자리를 나열하면된다.</p>
+
+<p><br /></p>
+
+<p>해당 정책을 설정하고 다시 Git Actions를 실행시키면</p>
+
+<p><img src="https://github.com/MyCatlikesChuru/MyCatlikesChuru.github.io/assets/95069395/48ba44fd-97c6-4d6e-8452-5ec9db922ff2" alt="image" class="align-left" style="max-width: 100%" /></p>
+
+<p>정상적으로 에러없이 통과되는 모습을 볼 수 있다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="AWS" /><category term="AWS" /><category term="Code Deploy" /><summary type="html"><![CDATA[🐞 에러 상황]]></summary></entry><entry><title type="html">[Programmers] 없어진 기록 찾기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/14/sql-lostrecord.html" rel="alternate" type="text/html" title="[Programmers] 없어진 기록 찾기 (MySQL)" /><published>2023-05-14T00:00:00+09:00</published><updated>2023-05-14T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/14/sql-lostrecord</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/14/sql-lostrecord.html"><![CDATA[<h2 id="-문제--없어진-기록-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59042">없어진 기록 찾기</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -1910,217 +2079,4 @@ GROUP BY b.CATEGORY
 ORDER BY b.CATEGORY ASC;
 </code></pre>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 카테고리 별 도서 판매량 집계하기]]></summary></entry><entry><title type="html">[Programmers] 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/03/sql-carrentcount.html" rel="alternate" type="text/html" title="[Programmers] 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기 (MySQL)" /><published>2023-05-03T00:00:00+09:00</published><updated>2023-05-03T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/03/sql-carrentcount</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/03/sql-carrentcount.html"><![CDATA[<h2 id="-문제--대여-횟수가-많은-자동차들의-월별-대여-횟수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/151139">대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p>다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블입니다. <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블은 아래와 같은 구조로 되어있으며, <code>HISTORY_ID</code>, <code>CAR_ID</code>, <code>START_DATE</code>, <code>END_DATE</code> 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>Column name</th>
-<th>Type</th>
-<th>Nullable</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>HISTORY_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>CAR_ID</td>
-<td>INTEGER</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>START_DATE</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>END_DATE</td>
-<td>DATE</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<h5>문제</h5>
-
-<p><code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블에서 대여 시작일을 기준으로 2022년 8월부터 2022년 10월까지 총 대여 횟수가 5회 이상인 자동차들에 대해서 해당 기간 동안의 월별 자동차 ID 별 총 대여 횟수(컬럼명: <code>RECORDS</code>) 리스트를 출력하는 SQL문을 작성해주세요. 결과는 월을 기준으로 오름차순 정렬하고, 월이 같다면 자동차 ID를 기준으로 내림차순 정렬해주세요. 특정 월의 총 대여 횟수가 0인 경우에는 결과에서 제외해주세요.</p>
-
-<hr />
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>HISTORY_ID</th>
-<th>CAR_ID</th>
-<th>START_DATE</th>
-<th>END_DATE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>2022-07-27</td>
-<td>2022-08-02</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1</td>
-<td>2022-08-03</td>
-<td>2022-08-04</td>
-</tr>
-<tr>
-<td>3</td>
-<td>2</td>
-<td>2022-08-05</td>
-<td>2022-08-05</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2</td>
-<td>2022-08-09</td>
-<td>2022-08-12</td>
-</tr>
-<tr>
-<td>5</td>
-<td>3</td>
-<td>2022-09-16</td>
-<td>2022-10-15</td>
-</tr>
-<tr>
-<td>6</td>
-<td>1</td>
-<td>2022-08-24</td>
-<td>2022-08-30</td>
-</tr>
-<tr>
-<td>7</td>
-<td>3</td>
-<td>2022-10-16</td>
-<td>2022-10-19</td>
-</tr>
-<tr>
-<td>8</td>
-<td>1</td>
-<td>2022-09-03</td>
-<td>2022-09-07</td>
-</tr>
-<tr>
-<td>9</td>
-<td>1</td>
-<td>2022-09-18</td>
-<td>2022-09-19</td>
-</tr>
-<tr>
-<td>10</td>
-<td>2</td>
-<td>2022-09-08</td>
-<td>2022-09-10</td>
-</tr>
-<tr>
-<td>11</td>
-<td>2</td>
-<td>2022-10-16</td>
-<td>2022-10-19</td>
-</tr>
-<tr>
-<td>12</td>
-<td>1</td>
-<td>2022-09-29</td>
-<td>2022-10-06</td>
-</tr>
-<tr>
-<td>13</td>
-<td>2</td>
-<td>2022-10-30</td>
-<td>2022-11-01</td>
-</tr>
-<tr>
-<td>14</td>
-<td>2</td>
-<td>2022-11-05</td>
-<td>2022-11-05</td>
-</tr>
-<tr>
-<td>15</td>
-<td>3</td>
-<td>2022-11-11</td>
-<td>2022-11-11</td>
-</tr>
-</tbody>
-      </table>
-<p>대여 시작일을 기준으로 총 대여 횟수가 5회 이상인 자동차는 자동차 ID가 1, 2인 자동차입니다. 월 별 자동차 ID별 총 대여 횟수를 구하고 월 오름차순, 자동차 ID 내림차순으로 정렬하면 다음과 같이 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>MONTH</th>
-<th>CAR_ID</th>
-<th>RECORDS</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>8</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>8</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>9</td>
-<td>2</td>
-<td>1</td>
-</tr>
-<tr>
-<td>9</td>
-<td>1</td>
-<td>3</td>
-</tr>
-<tr>
-<td>10</td>
-<td>2</td>
-<td>2</td>
-</tr>
-</tbody>
-      </table>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>날짜의 형식이 월만 표시되기 떄문에 MONTH() 함수를 이용한다.</li>
-  <li>RECORDS 열은 2022-08 ~ 2022-10 사이에 총 5회 이상 대여된 수량을 표시하는 행이다. 해당 열을 수량을 표시하기 COUNT를 사용하였다.</li>
-  <li>2번에 헤당하는 수량을 세기 기준을 정하기 위해서는 GROUP BY를 이용해 그룹핑시켜줘야한다. MONTH(날짜)와 CAR_ID를 기준으로 GROUP BY를 진행하였다. (즉, 같은 날짜와 같은 ID를 가진행의 수량을 RECORDS 열에 표시해준다.)</li>
-  <li>WHERE절을 이용해 2번에 해당하는 날짜와 총5회 이상 대여된 항목을 필터링하여야한다. CAR_ID를 기준으로 SUB쿼리를 이용해 값을 도출해야한다.</li>
-</ol>
-
-<pre><code class="language-roomsql">SELECT 
-    MONTH(START_DATE) AS MONTH,
-    CAR_ID,
-    COUNT(*) AS RECORDS
-FROM 
-    CAR_RENTAL_COMPANY_RENTAL_HISTORY
-WHERE 
-    CAR_ID IN(SELECT CAR_ID 
-              FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
-              WHERE MONTH(START_DATE) BETWEEN 8 AND 10
-              GROUP BY CAR_ID
-              HAVING COUNT(*)&gt;=5)
-    AND MONTH(START_DATE) BETWEEN 8 AND 10 
-GROUP BY MONTH ,CAR_ID
-ORDER BY MONTH ASC, CAR_ID DESC
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기]]></summary></entry></feed>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 카테고리 별 도서 판매량 집계하기]]></summary></entry></feed>

@@ -798,6 +798,96 @@ CAR_RENTAL_COMPANY_CAR 테이블은 아래와 같은 구조로 되어있으며, 
 
 
 <h2 class="post-title">
+        <a class="post-link" href="/aws/2023/05/15/aws-codedeploy.html">
+          Code Deploy 에러해결 : An error occurred (AccessDeniedException) when calling the CreateDeployment operation
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> May 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+      </div>
+      <a class="post-excerpt" href="/aws/2023/05/15/aws-codedeploy.html">
+        <p>
+        🐞 에러 상황
+
+Git Actions를 이용한 CI/CD 구성중 만난 에러다. 
+에러 내용은 아래와 같다.
+
+
+
+Run aws deploy create-deployment --application-name *** --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name *** --s3-location bucket=***,bundleType=zip,key=travel-with-me-build.zip
+
+An error occurred (AccessDeniedException) when calling the CreateDeployment o... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#AWS">#AWS</a><a class="post-tag" href="/tags.html#Code%20Deploy">#Code Deploy</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
         <a class="post-link" href="/sql/2023/05/14/sql-lostrecord.html">
           [Programmers] 없어진 기록 찾기 (MySQL)
         </a>
@@ -1586,105 +1676,6 @@ FALSE
 <a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/sql/2023/05/03/sql-carrentcount.html">
-          [Programmers] 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기 (MySQL)
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> May 03, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-      </div>
-      <a class="post-excerpt" href="/sql/2023/05/03/sql-carrentcount.html">
-        <p>
-        📌 문제 : 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기
-
-📖 문제 설명
-
-다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블입니다. CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블은 아래와 같은 구조로 되어있으며, HISTORY_ID, CAR_ID, START_DATE, END_DATE 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.
-
-        
-Column name
-Type
-Nullable
-
-
-        
-HISTORY_ID
-INTEGER
-FALSE
-
-
-CA... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
-</div>
-    </li>
 </ul>
 
   <!-- Pagination links -->
@@ -1697,7 +1688,7 @@ CA... <span class="read_more">Read More</span>
     
     </span>
 
-    <span class="indicator"> 1/18</span>
+    <span class="indicator"> 1/19</span>
 
     <span class="next">
     
@@ -1737,10 +1728,16 @@ CA... <span class="read_more">Read More</span>
   <ul>
     <li>
       <a href="/index.html">
-        All<span>180</span>
+        All<span>181</span>
       </a>
     </li>
 
+    
+      <li>
+        <a href="/categories.html#h-AWS">
+          AWS <span>1</span>
+        </a>
+      </li>
     
       <li>
         <a href="/categories.html#h-Algorithm">
