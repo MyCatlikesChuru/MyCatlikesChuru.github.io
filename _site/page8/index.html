@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 8 of 17 for Home | LeeJellan</title>
+<title>Page 8 of 18 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -712,134 +712,42 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/15/til.html">
-          [TIL] PreProject 진행, 팀장일지 (22.12.15 ~ 23.01.02)
+        <a class="post-link" href="/spring/2023/01/21/spring-email.html">
+          [Spring] MailAuthenticationException 문제 해결
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 15, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 49 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/15/til.html">
-        <p>
-        모든 교육이 끝나고 프리 프로젝트를 시작했다.
-프로젝트에 대한 기대가 너무 컸고, 얼른 내가 알고있는 기술들을
-사용해보면서 구현을 해보고 싶었다.
-
-그런 마음에서 그런지 이번 프리프로젝트에서는 무조건 팀장을 해야겠다고 
-생각했었고, 프론트엔드 쪽에서 진행되는 상황이나 팀적으로 
-어떻게 프로세스를 진행해야 원할할지에 대한 고민을 많이해보고 싶었다.
-
-프리프로젝트가 끝나고는 메인프로젝트에서는 기능개발의
-중점을 두어 팀원으로 새로 모르는 기술에 대한 탐구와 적용에 대한
-고민을 주로 해볼 것 같다.
-
-
-
-다행히 팀원들에 동의를 받아
-이번 프로젝트는 내가 팀장으로 진행하게 되었다.
-부담감은 물론있다. 하지만 그만큼 열심히해... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/14/til.html">
-          [TIL] 네달차 회고
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 14, 2022</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 21, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
       </div>
-      <a class="post-excerpt" href="/til/2022/12/14/til.html">
+      <a class="post-excerpt" href="/spring/2023/01/21/spring-email.html">
         <p>
-        4달 동안의 교육과정이 끝났다. 
-아직 2달이라는 프로젝트 기간이 남았지만
-코드스테이츠의 정식적인 교육 기간은 종료되었다.
+        오늘은 회원가입시 이메일 전송 로직을 확인중
+org.springframework.mail.MailAuthenticationException와 같은
+예외를 만났고 해당관련 해결방법을 적어가보려한다.
 
 
 
-길면 길었고 짧으면 짧았지만 4개월간 새로운 내용들을
-계속해서 배워가고 찾아보고 공부하는 과정이 정말 즐거웠다.
+✅ 작업환경
 
-평일,주말 가릴 것 없이 수업 진도를 따라가기 위해서
-거의 점심,저녁 먹는 시간을 제외하고는
-계속 공부했던 것 같다. 주말에는 조금 더쉬긴 했지만
-공부하는 습관이 길들여진게 가장 중요한 것 같다.
+Spring Boot 2.7.7  
+Java 11 
+macOs Monterey 12.6 버전 
+로컬환경에서 테스트 진행
 
-아직 배울 것도 까마득하고.. 시간이 모자라다는 생각이 정말 많이 들었다. 
-프로젝트에 앞서 어떤 기술을 배웠는지 회고해보고
-어떻게 이용할 수 있을지? 공부를 앞으로 어떻게 할지를... <span class="read_more">Read More</span>
+
+
+
+📌 에러 확인 및 해결
+
+첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. 
+메일을 보내는 주체는 Google의 gmail을 이용하려한다.
+
+implementation 'org.springframework.boot:spring-boot-starter-mail... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#email">#email</a>
 </div>
     </li>
 <li>
@@ -906,34 +814,50 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/13/til.html">
-          [TIL] Ngrok 사용하여 로컬에서 서버 실행
+        <a class="post-link" href="/spring/2023/01/15/spring-fileupload.html">
+          [Spring] AWS S3 FileUpload 하여 URL로 관리하기
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 13, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 15, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
       </div>
-      <a class="post-excerpt" href="/til/2022/12/13/til.html">
+      <a class="post-excerpt" href="/spring/2023/01/15/spring-fileupload.html">
         <p>
-        오늘은 어제 만들었던 TODO List 프로젝트를
-로컬환경에 띄우고 외부에서 접속할 수 있도록 하려한다.
-AWS EC2같은 클라우딩 서비스에 배포를 하지 않아도
-외부에서 접속이가능하니 프론트엔드쪽과 협업할때 매우 좋을 것 같다.
+        오늘은 AWS S3에 파일 업로드를 하는
+예제를 다뤄보려한다.
 
-Ngrok 설치 및 사용
+구글에서 여러가지 블로그를 돌아다니며 학습했고
+순서와 코드에 대해 정리해보려한다. 
+내가 작성한 코드는 GitHub 레포지토리로 공유해본다.
 
-우리가 사용중인 네트워크 방화벽과 NAT를 손보면
-외부IP에서 우리의 로컬환경에 접속이 가능하다. 하지만 그렇게 될 경우
-보안적으로는 매우 위험할 것이고, 이러한 상황에 Ngrok라는 툴을 사용하면
-상대적으로 안전하게 개발환경을 구축할 수 있다.
 
-Ngrok은 네트워크 설정을 하지 않아도
-방화벽을 넘어 외부에서 로컬 환경에 접근할 수 있게 해주는 터널링 프로그램... <span class="read_more">Read More</span>
+
+✅ 작업 환경
+
+AWS S3 버킷
+Spring Boot 2.7.7  
+Java 11 
+macOs Monterey 12.6 버전 
+로컬환경에서 테스트 진행
+
+
+
+
+📌 작업 순서 및 준비
+
+내가 구상하려고 생각하는 아키텍처를 그려보았다.
+순서를 간단히 짚고 넘어가자
+
+
+
+1). 클라이언트에서 이미지파일을 업로드 요청
+-&gt; multipart/form-data 타입으로 요청
+-&gt; Key=file / va... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#S3">#S3</a>
 </div>
     </li>
 <li>
@@ -1000,653 +924,776 @@ Ngrok은 네트워크 설정을 하지 않아도
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/12/til.html">
-          [TIL] 프로젝트 연습, 준비
+        <a class="post-link" href="/db/2023/01/14/db-redis.html">
+          Redis JWT Refresh Token 관리 및 재발행
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 12, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 11 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 14, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
       </div>
-      <a class="post-excerpt" href="/til/2022/12/12/til.html">
+      <a class="post-excerpt" href="/db/2023/01/14/db-redis.html">
         <p>
-        드디어 정규과정이 다 끝이 났다.
-4개월이란 짧은 시간에 정말 많은 것을 배웠고
-모든 기술을 구현할 수 있는 능력은 없지만
-작은 프로젝트부터 시작해 경험을 이제 쌓아올려보려한다.
-
-프로젝트때 내가 중점적으로 적용하고 공부해보려는 것은
-
-  Spring MVC
-  Spring AOP
-  Spring JPA
-  Spring Security(JWT, OAuth2)
-  계층별 테스트코드 작성
-  API 문서 자동화
-  배포 자동화
-  docker를 이용한 배포환경 통일화
-
-
-이렇게 8개 정도를 정말 숙달할 정도로 연습해보려한다.
-현재 1번~4번까지는 어느정도 연습이 되어있지만
-자세한 계층구조를 파악하는 목적을 두고 있다.... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2022/12/12/spring-cors.html">
-          [Spring] CORS 설정하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 12, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2022/12/12/spring-cors.html">
-        <p>
-        오늘은 CORS에 대한 내용을 간단하게 적어보려한다.
-
-
-
-TODO List 연습 클라이언트를 이용해 로컬톰켓서버와
-연결 시 CORS문제가 발생해 해결했던 코드를 올려 본다.
-
-1). 어노테이션으로 설정하는 방법
-@CrossOrigin(origins = "https://todobackend.com")
-@RestController
-public class TodoListController {
-    ...
-}
-
-
-
-
-2). 빈 객체를 만들어 설정하는 방법
-
-@SpringBootApplication
-public class TodolistApplication {
-
-	public static void main(String[... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#cors">#cors</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/09/til.html">
-          [TIL] Cloud 운영 전략
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 09, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/09/til.html">
-        <p>
-        Proxy Server
-
-프록시 서버는 클라이언트가 서버와 소통할 때
-서버에 바로 접근하지 않고 자신을 통해 서버에 접근할 수 있도록
-해주는 대리 서버라고 생각하면 간단하다.
-
-1). Forward Proxy
-
-클라이언트 가까이에 위치한 프록시 서버다.
-클라이언트를 대신해 서버에 요청을 전달해준다.
-
-
-
-장점
-
-  캐싱을 통해 빠른 서비스 이용이 가능하다
-  보안 (서버에서 프록시서버 IP를 받기때문에 클라이언트 IP를 숨길 수 있다)
-
-
-
-
-2). Reverse Proxy
-
-서버 가까이에 위치한 프록시 서버다.
-서버를 대신해서 클라이언트에 응답을 제공해준다.
-
-
-
-
-  분산처리 (여러대의 서버로 요청을 나누어 전... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/08/til.html">
-          [TIL] 배포 자동화 GitHub Actions
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 08, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/08/til.html">
-        <p>
-        Github Action
-
-오늘은 GitHub Actions라는 빌드, 테스트 및 배포 파이프라인을
-자동화할 수 있는 CI/CD 플랫폼을 배워보려한다.
-
-Pull Request나 push 같은 이벤트를 트리거로 Workflow를 구성할 수 있다.
-Workflow는 하나 이상의 작업이 실행되는 자동화 프로세스로, 각 작업은 자체 가상 머신
-또는 컨테이너 내부에서 실행된다.
-
-
-
-Github Actions를 통한 자동화 배포 Flow
-
-
-
-
-  레포지토리에 변화가 생기면 Github Actions 작동
-  프로젝트 빌드 결과물(.jar) S3로 전송 및 저장
-  CodeDeploy로 배포 명령
-  프로젝트 빌드 결과물... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/07/til.html">
-          [TIL] 배포 자동화 AWS Pipeline
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 07, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/07/til.html">
-        <p>
-        배포 자동화
-말그대로 배포 자동화란 기존에 배포를 위한 복잡한 작업을
-클릭 혹은 명령어 입력을 통해 전체 배포 과정을 자동으로 진행하는 과정이다.
-
-배포 자동화 파이프 라인
-파이프 라인이라하면, 이전에 Stream API 공부할 때
-들어보았었다. 무언가 연결해준다는 의미를 가지고 있었다.
-배포 자동화에서 파이프 라인은 소스 코드의 관리부터 실제 서비스로의
-배포 과정을 연결하는 구조를 뜻한다. 파이프라인은 전체 배포 과정을
-여러 Stage(단계)로 분리한다. 가장 많이 쓰이는 3가지를 알아보자
-
-
-
-
-  Source 단계
-원격 저장소에 관리되고 있는 소스 코드에 변경 사항이 일어날 경우
-이를 감지하고 다음 단계로 전... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/06/til.html">
-          [TIL] 배포 컨테이너 Docker
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 06, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/06/til.html">
-        <p>
-        Docker
-
-실제 선박의 컨테이너라함은 여러가지 물자들은 하나의 컨테이너에 싦어
-부피,인력,물자 이동 등 엄청난 장점을 가져왔다.
-
-소프트웨어 측면에서도 배포하는 과정을 편하게 사용하고 여러 장점을 가지기 위해
-애플리케이션을 컨테이너화할 수 있는 도커가 등장했다.
-즉, 컨테이너 방식의 애플리케이션이라는 뜻은 실행환경에 
-구애받지 않고 실행시킬 수 있다는 뜻이다.
-
-가장 많이 듣는 용어를 적어본다.
-
-
-  
-    컨테이너
-애플리케이션이 의존성, 네트워크 환경, 파일 시스템에 구애받지 않고
-도커라는 기술 위에 실행될 수 있도록 만든 애플리케이션 상자이다.
-즉, 도커에 의해 관리/제공되는 애플리케이션 단위이다.
-  ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/12/05/til.html">
-          [TIL] Cloud 운영 환경 구성 2
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 05, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/12/05/til.html">
-        <p>
-        저번주에는 기본적인
-Cloud 운영 환경에 대한 구성들을 배워 보았다.
-이번 공부에서는 3티어 아키텍처 형태로 배포하는 방법을
-배울 것이고, 저번주에 EC2에 서버를 배포해보는 것까지 해봤었다.
-
-
-
-그 중에서도 우리는 EC2 인스턴스에
-우리가 만든 Spring 프로젝트를 build하여
-서버에 배포해보는 것까지 진행 했었다.
-
-오늘은 클라이언트(S3) 측과 데이터베이스(RDS) 측을 알아보자
-
-
-
-클라이언트 배포
-
-우선 클라이언트의 프로젝트를 build하는 방법이
-여러가지가 있는 것 같다. (java와 마찬가지로)
-
-그 중 터미널의 node를 이용해 build하는 작업을 진행해보자
-(참고로 MacOS를 사용중)
+        Redis에 대한 간단한 CS지식과 
+Redis 설치 및 CLI 사용법을 알아보았었다.
+
+오늘은 이제 나의 사용 목적인 프로젝트에 도입을 해보려한다. 
+JWT Refresh Token관리와 좋아요,조회수 등 
+빈번히 update가 일어나는 항목에 대해서 관리하는 차원에서 
+캐시서버인 Redis를 사용해보려한다.
+
+그 중에서도 Redis 사용에 대한 코드와
+JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해
+초점을 두고 작성했기에 많은 코드들이 생략되어 있다는점 참고 부탁드린다.
+
+✅ 작업환경
+
+Spring Boot 2.7.7
+java 11 
+macOS Ventura 13.1
+로컬 환경에서 테스트 진행
 
 ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/git/2023/01/12/git-commitmessage.html">
+          Git 이전 Commit Message 수정하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/git/2023/01/12/git-commitmessage.html">
+        <p>
+        📌 CLI로 변경
+
+만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우
+
+git rebase -i HEAD~3        
+
+를 입력해서 커밋메세지가 수정이 가능하다. 
+~3은 가장최신부터 수정하고자하는 커밋 수량이다
+
+Pick이라고 되어있는 부분을 reword로 변경한 다음 
+커밋메세지를 수정해주면 반영된다.
+
+
+
+📌 IntelliJ로 변경
+
+IDE를 사용하면 vi,nano 편집기를 이용하는 것보다
+훨씬 수월하게 작업할 수 있다.
+
+하단의 Git 탭에서 커밋메세지를 변경하고자하는
+커밋을 눌러 오른쪽 클릭을하자
+
+
+
+Interactively Rebase from Here를 눌러주자
+
+
+
+그러면 Rebasing ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/git/2023/01/12/git-cherrypick.html">
+          Git Cherry-Pick으로 Commit 옮기기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/git/2023/01/12/git-cherrypick.html">
+        <p>
+        📌 Cherry-Pick
+
+작업을 하던중 다른 브랜치에 Commit을 해버렸다…
+
+팀원 모두가 개발 중인 브랜치 : develop
+현재 내가 개발하는 브랜치 : feat/BE/ljh
+
+이렇게 두가지로 운영중이었다.
+
+
+
+사진에서 볼 수 있듯이… develop 브랜치에 커밋을 두개나 해버린상황
+#14, #3 으로된 제목의 커밋이다..
+feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
+
+해당 커밋을 복사해서 옮길 수 있는 방법이 Cherry-Pick이다.
+본격적으로 사용법을 알아보자
+
+
+
+📌 Commit Hash 값
+
+첫번째로 내가 잘못올릴 커밋의 해쉬값을 알아야한다.
+
+내가 커밋을 잘못올린 브랜치(deve... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/db/2023/01/08/db-redissetting.html">
+          Redis CLI 설치 및 사용방법
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 08, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/db/2023/01/08/db-redissetting.html">
+        <p>
+        Redis는 Remote Dictionary Server의 약자로 
+key:value로 값을 저장하는 NoSQL이다. 
+인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..
+
+
+
+비관계형 데이터 베이스 관리 시스템(DBMS)이며
+캐시서버로 많이 이용된다.  
+캐시는 한번 읽어온 데이터를 임의의 공간에 저장하여
+다음에 읽을 때는 빠르게 결과값을 받을 수 있도록 도와주는 공간이다.
+
+
+
+학습의 목적은 JWT Refresh Token 관리 목적과
+좋아요,혹은 조회수 같은 자주 업데이트가 일어나는 데이터를
+RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.
+
+본격적으로 알아보기전에 CLI를 통해 ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html">
+          Jekyll Github IO 블로그 코드 하이라이트
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 02, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html">
+        <p>
+        현재 내가 운영중인 Github.io 블로그의
+테마는 YAT 이라는 테마이다.
+
+이전에 YAT 테마 댓글 기능, 파비콘 추가하는 방법까지 알아보았다.
+이제 기본으로 제공하는 Code Highlight(코드 하이라이트) 
+변경하는 법을 알아보려한다.
+
+
+
+Jekyll 코드 하이라이트 적용
+
+코드 하이라이트 적용은 매우 간단하다.
+
+나와 같은 경우에는 highlight.js demo 사이트에서 
+마음에 드는 코드하이라이트의 이름만 설정해주면 된다.
+
+_includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
+
+해당 경로의 code-highlight.html... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Jekyll">#Jekyll</a><a class="post-tag" href="/tags.html#yat">#yat</a><a class="post-tag" href="/tags.html#%ED%85%8C%EB%A7%88%EC%A0%81%EC%9A%A9">#테마적용</a><a class="post-tag" href="/tags.html#GitHub%20Pages">#GitHub Pages</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/server/2023/01/01/server-oraclesetting.html">
+          Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/server/2023/01/01/server-oraclesetting.html">
+        <p>
+        Oracle Cloud Free Tier 무료 인스턴스 생성과 접속을 통해서
+오라클 평생 무료 인스턴스를 직접 만들어 보았다.
+
+하지만 인스턴스를 만들면서 느낀건데 램이 1GB로
+여러가지 설치를하고 사용하기에는 너무 무리가 있어보이는 사양을 확인할 수가 있다.
+
+AMD 기반으로 만들었기 때문에 사양이 낮은 무료 인스턴스를 사용하고 있지만
+몇 가지 설정을 통해 시스템을 원할히 돌아가게 셋팅을할 수가 있다.
+
+한번 알아보자
+
+📌 현재 인스턴스 사양
+
+이미지 : Ubuntu 22.04
+구성 : (AMD) VM.Standard.E2.1.Micro / 1 core OCPU, 1GB Memory
+
+
+
+
+📌 기초 셋팅
+
+sud... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/server/2023/01/01/server-oraclecloud.html">
+          Oracle Cloud Free Tier 무료 인스턴스 생성과 접속
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/server/2023/01/01/server-oraclecloud.html">
+        <p>
+        오늘은 Oracle Cloud 무료 서버를 생성해보려한다.
+
+회원 가입과 카드 등록은 되어있다 가정하고
+인스턴스 생성전에 구획생성과 VCN 네트워크 생성
+그리고 인스턴스를 생성하는 과정을 적어보려한다.
+Oracle 무료 인스턴스 참고 레퍼런스를 토대로 작업하였습니다.
+
+
+
+📌 구획 생성
+
+VM 생성 전에 구획을 먼저 생성해야한다.
+구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.
+
+
+
+
+
+📌 VCN 네트워크 생성
+
+
+
+먼저 아까 생성한 구획을 먼저 선택한다음
+VCN 마법사를 시작한다.
+
+
+
+
+
+VCN 마법사 시작 클릭
+
+
+
+
+
+VCN 이름을 설정하고 다음 클릭
+
+
+
+
+
+생성 버튼을 눌러 리소스 생성을... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/linux/unix/2022/12/29/server-NginX.html">
+          AWS EC2 NginX 클라이언트 배포
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Dec 29, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/linux/unix/2022/12/29/server-NginX.html">
+        <p>
+        ✅ NGINX 이용하여 클라이언트 배포하기
+
+클라우딩 컴퓨터 배포 참고레퍼런스를 토대로
+공부하고 테스트해본 기록을 적어보려한다.
+
+우리 코스에 한분이 작성하신 글이고
+헤매고있는 나에게 빛줄기를 내려주셨다…🥹
+
+우선 우리팀에서 생각한 아키텍처이다.
+정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.
+
+
+
+AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만… 
+프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아
+꼼꼼히 홈페이지 사양을 읽어보긴했지만,,, 아직 미숙한 우리들에게 사고를
+미연에 방지하고자 EC2만 빌린다음에 진행하려고한다.
+
+
+
+📌 작업 환경... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
 </div>
     </li>
 </ul>
@@ -1661,7 +1708,7 @@ Cloud 운영 환경에 대한 구성들을 배워 보았다.
     
     </span>
 
-    <span class="indicator"> 8/17</span>
+    <span class="indicator"> 8/18</span>
 
     <span class="next">
     
@@ -1701,7 +1748,7 @@ Cloud 운영 환경에 대한 구성들을 배워 보았다.
   <ul>
     <li>
       <a href="/index.html">
-        All<span>165</span>
+        All<span>180</span>
       </a>
     </li>
 
@@ -1756,7 +1803,7 @@ Cloud 운영 환경에 대한 구성들을 배워 보았다.
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>33</span>
+          SQL <span>48</span>
         </a>
       </li>
     

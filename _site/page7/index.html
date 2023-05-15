@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 7 of 17 for Home | LeeJellan</title>
+<title>Page 7 of 18 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -122,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
+<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -712,38 +713,133 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2023/01/08/db-redissetting.html">
-          Redis CLI 설치 및 사용방법
+        <a class="post-link" href="/cs/2023/03/08/it-etc-network.html">
+          네트워크 기초와 TCP/IP 4계층 모델
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 08, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 08, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 15 mins</span>
+      </div>
+      <a class="post-excerpt" href="/cs/2023/03/08/it-etc-network.html">
+        <p>
+        네트워크 기초
+
+네트워크란?
+
+노드(node)와 링크(link)가 서로 연결되어 있거나 연결되어 있으며
+리소스를 공유하는 집합을 의미한다. 여기서 노드란 서버,라우터,스위치 등 네트워크 
+장치를 의미하고 링크는 유선 또는 무선을 의미한다.
+
+
+
+처리량
+
+네트워크를 구축할 때는 ‘좋은’ 네트워크로 만드는 것이 중요하다. 
+조은 네트워크란 많은 처리량을 처리할 수 있으며 지연 시간이 짧고 장애 빈도가 
+적으며 좋은 보안을 갖춘 네트워크를 말한다.
+
+처리량(throughput)은 링크 내에서 성공적으로 전달된 데이터의 양을 말하고
+보통 얼만큼의 트래픽을 처리했는지를 나타낸다.
+
+많은 트래픽을 처리한다 = 많은 처리량을 ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/algorithm/2023/03/08/algo-knumber.html">
+          [Programmers] K 번째수 (Java)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 08, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2023/01/08/db-redissetting.html">
+      <a class="post-excerpt" href="/algorithm/2023/03/08/algo-knumber.html">
         <p>
-        Redis는 Remote Dictionary Server의 약자로 
-key:value로 값을 저장하는 NoSQL이다. 
-인-메모리(In-Memory) 데이터베이스로 메모리에 데이터가 저장된다..
+        📌 문제 : K 번째수
+
+📖 문제 설명
+
+배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.
+
+예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면
 
 
-
-비관계형 데이터 베이스 관리 시스템(DBMS)이며
-캐시서버로 많이 이용된다.  
-캐시는 한번 읽어온 데이터를 임의의 공간에 저장하여
-다음에 읽을 때는 빠르게 결과값을 받을 수 있도록 도와주는 공간이다.
+array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.
+1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.
+2에서 나온 배열의 3번째 숫자는 5입니다.
 
 
-
-학습의 목적은 JWT Refresh Token 관리 목적과
-좋아요,혹은 조회수 같은 자주 업데이트가 일어나는 데이터를
-RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.
-
-본격적으로 알아보기전에 CLI를 통해 ... <span class="read_more">Read More</span>
+배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -810,555 +906,320 @@ RDBMS에서 계속 쿼리를 날리고 싶지 않기때문이였다.
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html">
-          Jekyll Github IO 블로그 코드 하이라이트
+        <a class="post-link" href="/cs/2023/03/07/it-etc-paradigm.html">
+          함수형 프로그래밍이란? - Java
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 02, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 07, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+      </div>
+      <a class="post-excerpt" href="/cs/2023/03/07/it-etc-paradigm.html">
+        <p>
+        프로그래밍 패러다임
+
+프로그래머에게 프로그래밍의 관점을 갖게 해주는 역할을 하는 개발 방법론이다.
+어떤 언어는 특정한 패러다임을 지원한다. (ex: 자바=객체지향, 하스켈=함수형) 
+여러 패러다임을 지원하는 언어도 존재한다. (ex: 파이썬, C++, 자바스크립트)
+자바는 jdk 1.8부터 함수형 프로그래밍 패러다임을 지원하기 위해 람다식, 생성자 레퍼런스
+메서드 레퍼런스를 도입했고, 선언형 프로그래밍을 위해 스트림 같은 표준 API들도 추가하였다.
+
+프로그래밍 패러다임은 크게 아래와 같이 나뉜다.
+
+선언형 -&gt; 함수형
+명령형 -&gt; 객체지향형, 절차지향형
+
+
+
+함수형 프로그래밍
+
+함수형 프로그래밍의 특징... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/algorithm/2023/02/22/algo-stockprice.html">
+          [Programmers] 주식가격 (Java)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 22, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/algorithm/2023/02/22/algo-stockprice.html">
+        <p>
+        📌 문제 : 주식가격
+
+📖 문제 설명
+
+초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.
+
+제한사항
+
+
+prices의 각 가격은 1 이상 10,000 이하인 자연수입니다.
+prices의 길이는 2 이상 100,000 이하입니다.
+
+
+입출력 예
+
+        
+prices
+return
+
+
+        
+[1, 2, 3, 2, 3]
+[4, 3, 1, 1, 0]
+
+
+      
+
+입출력 예 설명
+
+
+1초 시점의 ₩1은 끝까지 가격이 떨어지지 않았습니다.
+2초 시점의 ₩2은 끝까지 가격이 떨어지지... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/algorithm/2023/02/19/algo-printer.html">
+          [Programmers] 프린터 (Java)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 19, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/algorithm/2023/02/19/algo-printer.html">
+        <p>
+        📌 문제 : 프린터
+
+📖 문제 설명
+
+일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.
+1. 인쇄 대기목록의 가장 앞에 있는 문서(J)를 대기목록에서 꺼냅니다.
+2. 나머지 인쇄 대기목록에서 J보다 중요도가 높은 문서가 한 개라도 존재하면 J를 대기목록의 가장 마지막에 넣습니다.
+3. 그렇지 않으면 J를 인쇄합니다.
+
+예를 들어, 4개의 문서(A, B, C, D)가 순서대로 인쇄 대기목록에 있... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/spring/2023/02/17/spring-test.html">
+          [Spring] 단위 테스트 JPA metamodel must not be empty!
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 17, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
       </div>
-      <a class="post-excerpt" href="/jekyll/2023/01/02/it-jekyll-codehighlight.html">
+      <a class="post-excerpt" href="/spring/2023/02/17/spring-test.html">
         <p>
-        현재 내가 운영중인 Github.io 블로그의
-테마는 YAT 이라는 테마이다.
+        ✅ 문제발생 및 원인
 
-이전에 YAT 테마 댓글 기능, 파비콘 추가하는 방법까지 알아보았다.
-이제 기본으로 제공하는 Code Highlight(코드 하이라이트) 
-변경하는 법을 알아보려한다.
+Controller 단위 테스트를 진행하려고 @WebMvcTest
+어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.
 
-
-
-Jekyll 코드 하이라이트 적용
-
-코드 하이라이트 적용은 매우 간단하다.
-
-나와 같은 경우에는 highlight.js demo 사이트에서 
-마음에 드는 코드하이라이트의 이름만 설정해주면 된다.
-
-_includes -&gt; extensions -&gt; comments -&gt; code-highlight.html
-
-해당 경로의 code-highlight.html... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Jekyll">#Jekyll</a><a class="post-tag" href="/tags.html#yat">#yat</a><a class="post-tag" href="/tags.html#%ED%85%8C%EB%A7%88%EC%A0%81%EC%9A%A9">#테마적용</a><a class="post-tag" href="/tags.html#GitHub%20Pages">#GitHub Pages</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/server/2023/01/01/server-oraclesetting.html">
-          Oracle Cloud Ubuntu 22.04 1GB 램 성능 개선
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 01, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-      </div>
-      <a class="post-excerpt" href="/server/2023/01/01/server-oraclesetting.html">
-        <p>
-        Oracle Cloud Free Tier 무료 인스턴스 생성과 접속을 통해서
-오라클 평생 무료 인스턴스를 직접 만들어 보았다.
-
-하지만 인스턴스를 만들면서 느낀건데 램이 1GB로
-여러가지 설치를하고 사용하기에는 너무 무리가 있어보이는 사양을 확인할 수가 있다.
-
-AMD 기반으로 만들었기 때문에 사양이 낮은 무료 인스턴스를 사용하고 있지만
-몇 가지 설정을 통해 시스템을 원할히 돌아가게 셋팅을할 수가 있다.
-
-한번 알아보자
-
-📌 현재 인스턴스 사양
-
-이미지 : Ubuntu 22.04
-구성 : (AMD) VM.Standard.E2.1.Micro / 1 core OCPU, 1GB Memory
-
-
-
-
-📌 기초 셋팅
-
-sud... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/server/2023/01/01/server-oraclecloud.html">
-          Oracle Cloud Free Tier 무료 인스턴스 생성과 접속
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 01, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-      </div>
-      <a class="post-excerpt" href="/server/2023/01/01/server-oraclecloud.html">
-        <p>
-        오늘은 Oracle Cloud 무료 서버를 생성해보려한다.
-
-회원 가입과 카드 등록은 되어있다 가정하고
-인스턴스 생성전에 구획생성과 VCN 네트워크 생성
-그리고 인스턴스를 생성하는 과정을 적어보려한다.
-Oracle 무료 인스턴스 참고 레퍼런스를 토대로 작업하였습니다.
-
-
-
-📌 구획 생성
-
-VM 생성 전에 구획을 먼저 생성해야한다.
-구획은 리소스를 포함하고 관리할 수 있는 가상의 공간/영역이다.
-
-
-
-
-
-📌 VCN 네트워크 생성
-
-
-
-먼저 아까 생성한 구획을 먼저 선택한다음
-VCN 마법사를 시작한다.
-
-
-
-
-
-VCN 마법사 시작 클릭
-
-
-
-
-
-VCN 이름을 설정하고 다음 클릭
-
-
-
-
-
-생성 버튼을 눌러 리소스 생성을... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/linux/unix/2022/12/29/server-NginX.html">
-          AWS EC2 NginX 클라이언트 배포
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 29, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/linux/unix/2022/12/29/server-NginX.html">
-        <p>
-        ✅ NGINX 이용하여 클라이언트 배포하기
-
-클라우딩 컴퓨터 배포 참고레퍼런스를 토대로
-공부하고 테스트해본 기록을 적어보려한다.
-
-우리 코스에 한분이 작성하신 글이고
-헤매고있는 나에게 빛줄기를 내려주셨다…🥹
-
-우선 우리팀에서 생각한 아키텍처이다.
-정확히 맞는지는 모르겠지만, 우리가 아는 지식을 모아 그려봤다.
-
-
-
-AWS 클라우딩 컴퓨터를 이용한 S3 - EC2 - RDS를 운용하고 싶었지만… 
-프리티어를 사용하는 우리에게 혹시나 비용문제가 걸림돌이 될 수 있을 것 같아
-꼼꼼히 홈페이지 사양을 읽어보긴했지만,,, 아직 미숙한 우리들에게 사고를
-미연에 방지하고자 EC2만 빌린다음에 진행하려고한다.
-
-
-
-📌 작업 환경... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/db/2022/12/28/db-mysqlEC2.html">
-          MySQL EC2에 설치후 WorkBench 접속하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 28, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/db/2022/12/28/db-mysqlEC2.html">
-        <p>
-        EC2에 MySQL을 설치한다음
-WorkBench로 접속하려는데 설정한 내용을 정리해보려한다.
-MySQL 설치과정은 생략하겠다.
-
-
-
-📌 yml 파일 설정
-
-우선 EC2에 배포한 스프링 .yml 파일 설정이다.
-기존과 동일하게 localhost:3306으로 설정을 해주었고
-
-스키마 이름은 stackover라는 이름으로지 지정했다.
-
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/stackover?serverTimezone=Asia/Seoul # 포트넘버, 스키마이름
-   ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2022/12/27/spring-JunitSecure.html">
-          [Spring] Security Test 코드 작성시 UserDetails 설정
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2022/12/27/spring-JunitSecure.html">
-        <p>
-        오늘 겪은 문제를 정리해보려한다.
-Spring Security + JWT + OAuth2 인증,인가를 사용하여
-정상적으로 API 작동까지 Postman으로 마친 상태이다.
-
-문제는 Rest Docs를 적용하기 위해
-Test 코드를 작성중 Spring Security 문제와 부딪히게 된 것 !!
-
-
-
-📌 문제 발생 (403 Forbidden)
-
-기존과 동일하게 POST 요청을 보내 보았다.
-    @Test
-    @DisplayName("질문 작성 API : createQuestion")
-    void createQuestion() throws Exception {
-
-        QuestionPostDto q... <span class="read_more">Read More</span>
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreation... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1429,38 +1290,28 @@ Test 코드를 작성중 Spring Security 문제와 부딪히게 된 것 !!
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/git/2022/12/27/git-rebase.html">
-          Git pull rebase 사용해 병합하기
+        <a class="post-link" href="/algorithm/2023/02/11/algo-ponketmon.html">
+          [Programmers] 폰켓몬 (Java)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 27, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 11, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
       </div>
-      <a class="post-excerpt" href="/git/2022/12/27/git-rebase.html">
+      <a class="post-excerpt" href="/algorithm/2023/02/11/algo-ponketmon.html">
         <p>
-        자주 사용하는 git pull --rebase에 대해 정리해보려한다.
+        📌 문제 : 폰켓몬
 
-협업을 같이하다보면 지속적으로 업데이트를 하기 위해서
-pull을 하거나 remote를 가져오기위해 fetch를 진행한다.
+2023-02-11 기준 풀이
 
-dev/back 이라는 브랜치가 백엔드끼리
-통합을 해서 사용하는 브랜치라고 가정하자.
+📖 문제 설명
 
-내가 작업하는 브랜치는 feat/BE/security라고 하였을때
-누군가 dev/back에 작업을 하고 Pull Reqeust하여 Merge를 했다고
-가정을 해보면. 현재 dev/back 브랜치의 프로그램이 가장 최신본이다.
-
-내가 작업하고있는 브랜치를 최신화 시키고 싶을때
-dev/back에 있는 브랜치를 Pull해오면 된다.
-
-
-
-❓ ... <span class="read_more">Read More</span>
+당신은 폰켓몬을 잡기 위한 오랜 여행 끝에, 홍 박사님의 연구실에 도착했습니다. 홍 박사님은 당신에게 자신의 연구실에 있는 총 N 마리의 폰켓몬 중에서 N/2마리를 가져가도 좋다고 했습니다.
+홍 박사님 연구실의 폰켓몬은 종류에 따라 번호를 붙여 구분합니다. 따라서 같은 종류의 폰켓몬은 같은 번호를 가지고 있습니다. 예를 들어 연구실에 총 4마리의 폰켓몬이 있고, 각 폰켓몬의 종류 번호가 [3번, 1번, 2번, 3번]이라면 이는 3번 폰켓몬 두 마리, 1번 폰켓몬 한 마리, 2번 폰켓몬 한 마리가 있음을 나타냅니다. 이때, 4마리의 폰켓몬 중 2마... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+<a class="post-tag" href="/tags.html#Algorithm">#Algorithm</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -1527,54 +1378,29 @@ dev/back에 있는 브랜치를 Pull해오면 된다.
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2022/12/19/db-mysqlEER.html">
-          MySQL EER 다이어그램 만드는법
+        <a class="post-link" href="/db/2023/02/09/db-mysqlreplace.html">
+          MySQL replace 함수사용하여 일괄 변경하기
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 19, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Feb 09, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2022/12/19/db-mysqlEER.html">
+      <a class="post-excerpt" href="/db/2023/02/09/db-mysqlreplace.html">
         <p>
-        mysql을 로컬로 연결한 다음
-연관관계 맵핑이 제대로 되어진지 확인을 하고 싶어
-EER 다이어 그램을 그려주는 기능을 사용해보려한다.
+        예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서  
+MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…
 
 
 
-워크 밴치에서 Database -&gt; Reverse Engineer를 클릭해준다.
+OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서
+사진주소를 가져와서 DB에 저장하기때문에 남아있고
+일반으로 회원가입한 유저는 위에 12가지 기본이미지를 랜덤으로 배정받게되는데
+보는거처럼 사진 원본파일이 구글드라이브에서 날라가서 표시가안되는 모습이다.
 
-
-
-설정을 진행한 다음에 continue를 눌러준다.
-
-
-
-쭉쭉 진행
-
-
-
-EER 다이어그램으로 표시하고 싶은
-스키마를 선택해줍니다.
-
-
-
-계속 진행해주시면 됩니다.
-
-
-
-Excute를 눌러줍니다.
-
-
-
-Continue 버튼을 눌러줍니다.
-
-
-
-그러면 최종적으로 EER Diagram 화면이 표시되는 모습을 볼 수 있습니다.
-@ManyToOne, @OneToMany 등으로 연관관계 맵핑을
-제... <span class="read_more">Read More</span>
+처음했던 프로젝트이기도하고 사진관리하는 방법이 너무 miss인 것 같다. 
+우선 데이터베이스에 회원으로 가입되어있는 멤버가 100명정도 가입되어있는데 
+해당 데이터를 조작하기위해서 Replace... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1645,41 +1471,141 @@ Continue 버튼을 눌러줍니다.
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2022/12/19/db-h2setting.html">
-          H2 Database 다운로드 및 실행
+        <a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html">
+          Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Dec 19, 2022</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 28, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2022/12/19/db-h2setting.html">
+      <a class="post-excerpt" href="/linux/unix/2023/01/28/server-nginxerror.html">
         <p>
-        오늘은 로컬에서 테스트할때 자주 사용하는
-H2 Database를 다운받아 설정해보려한다.
+        https 관련 설정을 만지다가
+nginx를 실행하는데 아래와 같은 에러가 발생했다.
+$ sudo service nginx start
+Job for nginx.service failed because the control process exited with error code.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
 
-h2 database 홈페이지에 접속하면
+터미널에 나온대로 systemctl status nginx.service를 
+입력하여 로그를 확인해봤다.
+
+$ systemctl status nginx.service
+× nginx.ser... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
+</div>
+    </li>
+<li>
+      
 
 
 
-위와 같은 화면이 나오는데
-나는 MacOS를 쓰고있어 All Platforms를 눌러주면된다.
-그럼 zip파일 하나가 다운받아진다. 
-여기서 버젼확인을 꼭해주자. 의존라이브러리를 추가할때 해당버젼과 일치해야한다.
 
-Gradle의 경우
-runtimeOnly 'com.h2database:h2:2.1.214'
 
-와 같이 설정해 줄 수있다. 일반적으로 버전을 제외하고
-runtimeOnly 'com.h2database:h2
 
-로 설정하면 자동으로 가장 최신의 버전이 추가되는 것 같다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/server/2023/01/27/server-oraclesetting.html">
+          Oracle Cloud 외부 접속 설정
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Jan 27, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/server/2023/01/27/server-oraclesetting.html">
+        <p>
+        오늘은 Oracle Cloud 서버에
+nginx에 클라이언트를 배포해 외부에서 접속하고
+WorkBench를 이용해 mysql을 접속하려한다.
+
+외부접속관련해 설정을 정리해보려한다.
+
+
+
+📌 UFW vs iptables
+
+iptables를 이용해 방화벽 설정을 할 수 있다.
+
+sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
+
+와 같이 입력해주면 설정이 가능하다. 
+UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고
+수준높은 방화벽 구성에는 iptables를 사용해야한다.
+
+
+
+📌 UFW 활성/비활성
+
+1). UFW 활성화
+
+sudo ufw enable
+
+
+
 
 ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#H2">#H2</a>
+<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
 </div>
     </li>
 </ul>
@@ -1694,7 +1620,7 @@ runtimeOnly 'com.h2database:h2
     
     </span>
 
-    <span class="indicator"> 7/17</span>
+    <span class="indicator"> 7/18</span>
 
     <span class="next">
     
@@ -1734,7 +1660,7 @@ runtimeOnly 'com.h2database:h2
   <ul>
     <li>
       <a href="/index.html">
-        All<span>165</span>
+        All<span>180</span>
       </a>
     </li>
 
@@ -1789,7 +1715,7 @@ runtimeOnly 'com.h2database:h2
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>33</span>
+          SQL <span>48</span>
         </a>
       </li>
     

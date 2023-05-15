@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 2 of 17 for Home | LeeJellan</title>
+<title>Page 2 of 18 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -712,115 +712,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/java/2023/04/12/java-generic.html">
-          [Java] Generic을 활용한 Class 타입 매개변수로 전달하기
+        <a class="post-link" href="/sql/2023/05/01/sql-rentsperate.html">
+          [Programmers] 자동차 대여 기록에서 대여중 / 대여 가능 여부 구분하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 12, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> May 01, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/java/2023/04/12/java-generic.html">
+      <a class="post-excerpt" href="/sql/2023/05/01/sql-rentsperate.html">
         <p>
-        Generic - Class 타입을 매개변수로 전달
-
-리펙토링 배경
-
-테스트 코드를 작성 중 Jackson 라이브러리 ObjectMapper를 사용하여 
-객체를 직렬화, 역직렬화를 진행하였다.
-
-해당 부분은 자주 사용하는 부분이기 때문에 Utils라는 클래스로 만들어 
-관리하면 어떨까? 하는 생각에 클래스를 만들었고
-
-public class ObjectMapperUtils {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    // 코드 생략 ...
-
-    public static LoginResponse actionsSing... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags"><a class="post-tag" href="/tags.html#Java">#Java</a></div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/sql/2023/04/12/sql-maxprice.html">
-          [Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 12, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/sql/2023/04/12/sql-maxprice.html">
-        <p>
-        📌 문제 : 가격이 제일 비싼 식품의 정보 출력하기
+        📌 문제 : 자동차 대여 기록에서 대여중 / 대여 가능 여부 구분하기
 
 📖 문제 설명
 
-다음은 식품의 정보를 담은 FOOD_PRODUCT 테이블입니다. FOOD_PRODUCT 테이블은 다음과 같으며 PRODUCT_ID, PRODUCT_NAME, PRODUCT_CD, CATEGORY, PRICE는 식품 ID, 식품 이름, 식품 코드, 식품분류, 식품 가격을 의미합니다.
+다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블입니다. CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블은 아래와 같은 구조로 되어있으며, HISTORY_ID, CAR_ID, START_DATE, END_DATE 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.
 
         
 Column name
@@ -829,22 +735,10 @@ Nullable
 
 
         
-PRODUCT_ID
-VARCHAR(10)
+HISTORY_ID
+INTEGER
 FALSE
 
-
-PRODUCT_NAME
-VARCHAR(50)
-FALSE
-
-
-PRODUCT_CD
-VARCHAR(10)
-TRUE
-
-
-CATEGORY
 ... <span class="read_more">Read More</span>
         </p>
       </a>
@@ -916,434 +810,21 @@ CATEGORY
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/spring/2023/04/11/spring-jpanplusone.html">
-          [Spring] JPA N+1 문제 분석 (+Querydsl)
+        <a class="post-link" href="/sql/2023/04/30/sql-rentlist.html">
+          [Programmers] 대여 기록이 존재하는 자동차 리스트 구하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 11, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2023/04/11/spring-jpanplusone.html">
-        <p>
-        소개에 앞서 Github 레포지토리에 코드가 올라가 있습니다. 
-Querydsl 라이브러리를 사용하였고, Spring Boot 2.7.10 입니다.
-
-오늘은 Spring Data Jpa를 다루면서 발생한 N+1 문제에 대해 적어보려한다.
-
-
-
-JPA N+1 문제란?
-
-연관 관계가 설정된 엔티티를 조회할 경우에 조회된 데이터 갯수(N)만큼 연관관계의 
-조회 쿼리가 추가로 발생하여 데이터를 읽어오는 현상을 얘기한다.
-
-JPA Repository로 실행하는 첫 쿼리에서 하위 엔티티까지 한번에 가져오지 않고 
-하위 엔티티를 사용할 때 추가로 조회하기 때문에 발생한다.
-
-Fetch Type이 EAGER(즉시로딩), LAZY... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/sql/2023/04/11/sql-womenmarch.html">
-          [Programmers] 3월에 태어난 여성 회원 목록 출력하기 (MySQL)
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 11, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/sql/2023/04/11/sql-womenmarch.html">
-        <p>
-        📌 문제 : [카테고리 별 상품 개수 구하기]
-
-📖 문제 설명
-
-다음은 식당 리뷰 사이트의 회원 정보를 담은 MEMBER_PROFILE 테이블입니다. MEMBER_PROFILE 테이블은 다음과 같으며 MEMBER_ID, MEMBER_NAME, TLNO, GENDER, DATE_OF_BIRTH는 회원 ID, 회원 이름, 회원 연락처, 성별, 생년월일을 의미합니다.
-
-        
-Column name
-Type
-Nullable
-
-
-        
-MEMBER_ID
-VARCHAR(100)
-FALSE
-
-
-MEMBER_NAME
-VARCHAR(50)
-FALSE
-
-
-TLNO
-VARCHAR(50)
-TRUE
-
-
-GENDER
-VA... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/db/2023/04/10/db-join.html">
-          [DB] Join의 종류
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 10, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-      </div>
-      <a class="post-excerpt" href="/db/2023/04/10/db-join.html">
-        <p>
-        Join 이란?
-
-조인(Join)이란 하나의 테이블이 아닌 두 개 이상의 테이블을 묶어서 하나의 결과물을 만드는 
-것을 얘기한다. MySQL에서는 JOIN이라는 쿼리로, MongoDB에서는 lookup이라는 쿼리로 이를 처리한다.
-
-참고로 RDBMS보다 DBMS가 조인연산에 대해 성능이 떨어진다고 벤치마크 테스트에서 알려져 있다. 
-즉, MongoDB에서는 되도록 lookup을 사용하지 말아야한다. 여러 테이블을 조인하는 작업이 많을 경우 
-에는 관계형 데이터베이스를 사용하는게 적합하다.
-
-
-
-Join의 종류
-
-   
-그림 출처 - 소찾나님
-
-Join의 종류는 위와 같다.
-
-가장 대표적으로 많이 사용하는 조인은 3... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags"><a class="post-tag" href="/tags.html#DB">#DB</a></div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/sql/2023/04/10/sql-productcode.html">
-          [Programmers] 카테고리 별 상품 개수 구하기 (MySQL)
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 10, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/sql/2023/04/10/sql-productcode.html">
-        <p>
-        📌 문제 : 카테고리 별 상품 개수 구하기
-
-📖 문제 설명
-
-다음은 어느 의류 쇼핑몰에서 판매중인 상품들의 정보를 담은 PRODUCT 테이블입니다. PRODUCT 테이블은 아래와 같은 구조로 되어있으며, PRODUCT_ID, PRODUCT_CODE, PRICE는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.
-
-        
-Column name
-Type
-Nullable
-
-
-        
-PRODUCT_ID
-INTEGER
-FALSE
-
-
-PRODUCT_CODE
-VARCHAR(8)
-FALSE
-
-
-PRICE
-INTEGER
-FALSE
-
-
-      
-상품 별로 중복되지 않는 8자리 상품코드 값을 가지며, 앞 2자리는... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/sql/2023/04/09/sql-priceproduct.html">
-          [Programmers] 가격대 별 상품 개수 구하기 (MySQL)
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 09, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 30, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/sql/2023/04/09/sql-priceproduct.html">
+      <a class="post-excerpt" href="/sql/2023/04/30/sql-rentlist.html">
         <p>
-        📌 문제 : 가격대 별 상품 개수 구하기
+        📌 문제 : 대여 기록이 존재하는 자동차 리스트 구하기
 
 📖 문제 설명
 
-다음은 어느 의류 쇼핑몰에서 판매중인 상품들의 정보를 담은 PRODUCT 테이블입니다. PRODUCT 테이블은 아래와 같은 구조로 되어있으며, PRODUCT_ID, PRODUCT_CODE, PRICE는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.
+다음은 어느 자동차 대여 회사에서 대여 중인 자동차들의 정보를 담은 CAR_RENTAL_COMPANY_CAR 테이블과 자동차 대여 기록 정보를 담은 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블입니다. CAR_RENTAL_COMPANY_CAR 테이블은 아래와 같은 구조로 되어있으며, CAR_ID, CAR_TYPE, DAILY_FEE, OPTIONS 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.
 
         
 Column name
@@ -1351,24 +832,7 @@ Type
 Nullable
 
 
-        
-PRODUCT_ID
-INTEGER
-FALSE
-
-
-PRODUCT_CODE
-VARCHAR(8)
-FALSE
-
-
-PRICE
-INTEGER
-FALSE
-
-
-      
-상품 별로 중복되지 않는 8자리 상품코드 값을 가지며 앞 2자리는 카... <span class="read_more">Read More</span>
+       ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1439,220 +903,21 @@ FALSE
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/spring/2023/04/07/spring-querydsladvance.html">
-          [Spring] QueryDSL DTO 조회 방법
+        <a class="post-link" href="/sql/2023/04/29/sql-totalprice.html">
+          [Programmers] 조건에 맞는 사용자와 총 거래금액 조회하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 07, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 9 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 29, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/spring/2023/04/07/spring-querydsladvance.html">
+      <a class="post-excerpt" href="/sql/2023/04/29/sql-totalprice.html">
         <p>
-        QueryDSL
-
-테스트 코드
-
-이전에 작성했던 QueryDSL 기초설정 및 JPQL과 비교해보기에서 
-이어서 작업을 진행하였다. 클래스와 테스트코드는 동일하게 사용했고
-
-public class QuerydslBasicTestPractice {
-
-   @Autowired
-   EntityManager em;
-
-   JPAQueryFactory queryFactory;
-
-   @PersistenceUnit
-   EntityManagerFactory emf;
-
-   @BeforeEach
-   public void before() {
-      queryFactory = new JPAQueryFactory(em);
-  ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/db/2023/04/07/db-mysqlforeign.html">
-          MySQL Foreign key 설정하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 07, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/db/2023/04/07/db-mysqlforeign.html">
-        <p>
-        MySQL Foreign Key를 설정하는 방법을 적어보려한다. 
-간단하게 아래와 같은 테이블을 준비했다.
-
-스키마 이름은 sqlpractice로 설정하였다.
-
-
-
-SQL문은 아래와 같이 작성하면 테이블이 생성되고
-
-CREATE TABLE sqlpractice.posts (
-    id BIGINT NOT NULL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE sqlpractice.tag (
-    id BIGINT NOT NULL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    type VARCHAR(255) ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/sql/2023/04/07/sql-duplicationproduct.html">
-          [Programmers] 재구매가 일어난 상품과 회원 리스트 구하기 (MySQL)
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Apr 07, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
-      </div>
-      <a class="post-excerpt" href="/sql/2023/04/07/sql-duplicationproduct.html">
-        <p>
-        📌 문제 : 재구매가 일어난 상품과 회원 리스트 구하기
+        📌 문제 : 조건에 맞는 사용자와 총 거래금액 조회하기
 
 📖 문제 설명
 
-다음은 어느 의류 쇼핑몰의 온라인 상품 판매 정보를 담은 ONLINE_SALE 테이블 입니다. ONLINE_SALE 테이블은 아래와 같은 구조로 되어있으며 ONLINE_SALE_ID, USER_ID, PRODUCT_ID, SALES_AMOUNT, SALES_DATE는 각각 온라인 상품 판매 ID, 회원 ID, 상품 ID, 판매량, 판매일을 나타냅니다.
+다음은 중고 거래 게시판 정보를 담은 USED_GOODS_BOARD 테이블과 중고 거래 게시판 첨부파일 정보를 담은 USED_GOODS_FILE 테이블입니다. USED_GOODS_BOARD 테이블은 다음과 같으며 BOARD_ID, WRITER_ID, TITLE, CONTENTS, PRICE, CREATED_DATE, STATUS, VIEWS는 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
 
         
 Column name
@@ -1661,17 +926,711 @@ Nullable
 
 
         
-ONLINE_SALE_ID
-INTEGER
+BOARD_I... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/04/28/sql-userinfo.html">
+          [Programmers] 조건에 맞는 사용자 정보 조회하기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 28, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/04/28/sql-userinfo.html">
+        <p>
+        📌 문제 : 조건에 맞는 사용자 정보 조회하기
+
+📖 문제 설명
+
+다음은 중고 거래 게시판 정보를 담은 USED_GOODS_BOARD 테이블과 중고 거래 게시판 첨부파일 정보를 담은 USED_GOODS_FILE 테이블입니다. USED_GOODS_BOARD 테이블은 다음과 같으며 BOARD_ID, WRITER_ID, TITLE, CONTENTS, PRICE, CREATED_DATE, STATUS, VIEWS는 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+BOARD_ID
+VAR... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/04/27/sql-oldtrade.html">
+          [Programmers] 조회수가 가장 많은 중고거래 게시판의 첨부파일 조회하기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 27, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/04/27/sql-oldtrade.html">
+        <p>
+        📌 문제 : 조회수가 가장 많은 중고거래 게시판의 첨부파일 조회하기
+
+📖 문제 설명
+
+다음은 중고거래 게시판 정보를 담은 USED_GOODS_BOARD 테이블과 중고거래 게시판 첨부파일 정보를 담은 USED_GOODS_FILE 테이블입니다. USED_GOODS_BOARD 테이블은 다음과 같으며 BOARD_ID, WRITER_ID, TITLE, CONTENTS, PRICE, CREATED_DATE, STATUS, VIEWS은 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+BO... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/cs/2023/04/26/it-etc-strategypattern.html">
+          디자인 패턴 - 전략 패턴 [Java 예제]
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 26, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/cs/2023/04/26/it-etc-strategypattern.html">
+        <p>
+        전략 패턴
+
+전략 패턴(strategy pattern)은 정책 패턴(policy pattern)이라고도 하며 
+객체의 행위를 바꾸고 싶은 경우 직접 수정하지 않고 전략이라고 부르는 캡슐화한 알고리즘을 
+컨택스트 안에서 바꿔주면서 상호 교체가 가능하게 만드는 패턴이다.
+
+
+  컨택스트?
+  
+    프로그래밍에서의 컨텍스트는 상황, 맥락, 문맥을 의미한다.  
+개발자가 어떠한 작업을 완료하는 데 필요한 모든 관련 정보를 말한다.
+  
+
+
+
+
+
+
+정의로만 보면 이해하기가 쉽지 않다.  
+예제를 통해 살펴보자
+
+전략 패턴 적용 ❌
+
+public class Main {
+    public static void main(S... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/cs/2023/04/26/it-etc-observerpattern.html">
+          디자인 패턴 - 옵저버 패턴 [Java 예제]
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 26, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 8 mins</span>
+      </div>
+      <a class="post-excerpt" href="/cs/2023/04/26/it-etc-observerpattern.html">
+        <p>
+        옵저버 패턴
+
+옵저버 패턴(Observer pattern)은 주체가 어떤 객체의 상태 변화를 관찰하다가 
+상태 변화가 있을 때마다 메서드 등을 통해 옵저버 목록에 있는 옵저버들에게 변화를 알려주는 패턴이다.
+
+
+
+주체란? 객체의 상태 변화를 보고 있는 관찰자이며
+
+옵저버들이란? 이 객체의 상태 변화에 따라 전달되는 메서드 등을 기반으로 
+추가 변화사항이 생기는 객체들을 의미한다.
+
+해당 패턴에 대해서 말로서는 이해하는건 어렵지 않았다. 
+하지만 코드로서 어떻게 작성을할 수 있는지?
+
+예제로 알아보자
+
+
+
+옵저버 패턴 예제
+
+Java에서 옵저버 패턴을 구현하는 가장 간단한 방법 중 하나는
+java.util.Obser... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags"><a class="post-tag" href="/tags.html#ComputerScience">#ComputerScience</a></div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/04/24/sql-samename.html">
+          [Programmers] 동명 동물 수 찾기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 24, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/04/24/sql-samename.html">
+        <p>
+        📌 문제 : 동명 동물 수 찾기
+
+📖 문제 설명
+
+ANIMAL_INS 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. ANIMAL_INS 테이블 구조는 다음과 같으며, ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.
+
+        
+NAME
+TYPE
+NULLABLE
+
+
+        
+ANIMAL_ID
+VARCHAR(N)
 FALSE
 
 
-USER_ID
-INTEGER
+ANIMAL_TYPE
+VARCHAR(N)
 FALSE
 
 
-PRODUC... <span class="read_more">Read More</span>
+DATETIM... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/04/23/sql-lucyorella.html">
+          [Programmers] 루시와 엘라 찾기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 23, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/04/23/sql-lucyorella.html">
+        <p>
+        📌 문제 : 루시와 엘라 찾기
+
+📖 문제 설명
+
+ANIMAL_INS 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. ANIMAL_INS 테이블 구조는 다음과 같으며, ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.
+
+        
+NAME
+TYPE
+NULLABLE
+
+
+        
+ANIMAL_ID
+VARCHAR(N)
+FALSE
+
+
+ANIMAL_TYPE
+VARCHAR(N)
+FALSE
+
+
+DATETIME... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/04/22/sql-dogname.html">
+          [Programmers] 이름에 el이 들어가는 동물 찾기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Apr 22, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/04/22/sql-dogname.html">
+        <p>
+        📌 문제 : 이름에 el이 들어가는 동물 찾기
+
+📖 문제 설명
+
+ANIMAL_INS 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. ANIMAL_INS 테이블 구조는 다음과 같으며, ANIMAL_ID, ANIMAL_TYPE, DATETIME, INTAKE_CONDITION, NAME, SEX_UPON_INTAKE는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.
+
+        
+NAME
+TYPE
+NULLABLE
+
+
+        
+ANIMAL_ID
+VARCHAR(N)
+FALSE
+
+
+ANIMAL_TYPE
+VARCHAR(N)
+FALSE
+
+... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1690,7 +1649,7 @@ PRODUC... <span class="read_more">Read More</span>
     
     </span>
 
-    <span class="indicator"> 2/17</span>
+    <span class="indicator"> 2/18</span>
 
     <span class="next">
     
@@ -1730,7 +1689,7 @@ PRODUC... <span class="read_more">Read More</span>
   <ul>
     <li>
       <a href="/index.html">
-        All<span>165</span>
+        All<span>180</span>
       </a>
     </li>
 
@@ -1785,7 +1744,7 @@ PRODUC... <span class="read_more">Read More</span>
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>33</span>
+          SQL <span>48</span>
         </a>
       </li>
     

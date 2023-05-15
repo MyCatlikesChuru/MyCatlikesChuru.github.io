@@ -1,1149 +1,291 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-04-26T23:15:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">디자인 패턴 - 옵저버 패턴 [Java 예제]</title><link href="http://localhost:4000/cs/2023/04/26/it-etc-observerpattern.html" rel="alternate" type="text/html" title="디자인 패턴 - 옵저버 패턴 [Java 예제]" /><published>2023-04-26T00:00:00+09:00</published><updated>2023-04-26T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/04/26/it-etc-observerpattern</id><content type="html" xml:base="http://localhost:4000/cs/2023/04/26/it-etc-observerpattern.html"><![CDATA[<h2 id="옵저버-패턴">옵저버 패턴</h2>
-
-<p><strong>옵저버 패턴(Observer pattern)은</strong> 주체가 어떤 객체의 상태 변화를 관찰하다가 <br />
-상태 변화가 있을 때마다 메서드 등을 통해 옵저버 목록에 있는 옵저버들에게 변화를 알려주는 패턴이다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/234535516-a59b6c8b-411c-43ed-ac8e-fb960590051f.png" alt="image" class="align-left" style="max-width: 70%" /></p>
-
-<p><strong>주체</strong>란? 객체의 상태 변화를 보고 있는 관찰자이며</p>
-
-<p><strong>옵저버</strong>들이란? 이 객체의 상태 변화에 따라 전달되는 메서드 등을 기반으로 <br />
-추가 변화사항이 생기는 객체들을 의미한다.</p>
-
-<p>해당 패턴에 대해서 말로서는 이해하는건 어렵지 않았다. <br />
-하지만 코드로서 어떻게 작성을할 수 있는지?</p>
-
-<p>예제로 알아보자</p>
-
-<p><br /></p>
-
-<h3 id="옵저버-패턴-예제">옵저버 패턴 예제</h3>
-
-<p>Java에서 옵저버 패턴을 구현하는 가장 간단한 방법 중 하나는<br />
-<code class="language-plaintext highlighter-rouge">java.util.Observable</code> 클래스와 <code class="language-plaintext highlighter-rouge">java.util.Observer</code> 인터페이스를 사용하는 것이다.</p>
-
-<p>이번에는 위의 클래스,인터페이스를 사용하지 않고 직접 구현하는 것으로 해보자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/234568110-81338dd0-bf4d-4e99-bcb9-c2cb20333b9f.png" alt="image" class="align-left" style="max-width: 70%" /></p>
-
-<p>예제로는 주식가격이 변동이 생길때 주주(옵저버)들에게 변동사항을 알려주는 예제다.</p>
-
-<p><br /></p>
-
-<p>✅ <strong>Observer 설계</strong><br />
-우선 주주들을 정해줄 옵저버 인터페이스를 정의해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">StockObserver</span> <span class="o">{</span>
-    <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>해당 인터페이스는 주식이름, 주식가격이 update(변경)될는 것을 의미한다. <br />
-변경이 되면 주주에게 주체가 알려줘야한다.</p>
-
-<p><br /></p>
-
-<p>인터페이스를 구현한 클래스를 만들었다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConsoleStockObserver</span> <span class="kd">implements</span> <span class="nc">StockObserver</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Stock price of "</span> <span class="o">+</span> <span class="n">stockName</span> <span class="o">+</span> <span class="s">" has changed to "</span> <span class="o">+</span> <span class="n">stockPrice</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>콘솔로서 주주(옵저버)들에게 알려주는 역할을 하는 메서드이다.</p>
-
-<p><br /></p>
-
-<p>✅ <strong>Subject 설계</strong><br />
-이제 주체(Subject)인 주식시장를 구현해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StockMarket</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Double</span><span class="o">&gt;</span> <span class="n">stockPrices</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
-    <span class="kd">private</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">StockObserver</span><span class="o">&gt;</span> <span class="n">observers</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
-
-    <span class="c1">// Observer를 추가</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addObserver</span><span class="o">(</span><span class="nc">StockObserver</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">observers</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Observer를 삭제</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeObserver</span><span class="o">(</span><span class="nc">StockObserver</span> <span class="n">observer</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">observers</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 주식가격 설정 &amp; 변동  </span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setStockPrice</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">stockPrices</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">stockName</span><span class="o">,</span> <span class="n">stockPrice</span><span class="o">);</span>
-        <span class="n">notifyObservers</span><span class="o">(</span><span class="n">stockName</span><span class="o">,</span> <span class="n">stockPrice</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 옵저버에게 주식가격이 변동되었음을 알림</span>
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">notifyObservers</span><span class="o">(</span><span class="nc">String</span> <span class="n">stockName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">stockPrice</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="nc">StockObserver</span> <span class="n">observer</span> <span class="o">:</span> <span class="n">observers</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">observer</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">stockName</span><span class="o">,</span> <span class="n">stockPrice</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p>주식시장(StockMarket)이라는 주체를 만들어주었다.  <br />
-해당 주체는 주식가격(객체)이 변동이 생길때를 확인해 주주(옵저버)들에게 알려주는 역할을 한다.</p>
-
-<p><br /></p>
-
-<p>아래의 실행문을 보고 이해해보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">StockMarket</span> <span class="n">market</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StockMarket</span><span class="o">();</span> <span class="c1">// 주체 생성</span>
-        <span class="nc">ConsoleStockObserver</span> <span class="n">observer</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ConsoleStockObserver</span><span class="o">();</span> <span class="c1">// 옵저버 생성</span>
-
-        <span class="n">market</span><span class="o">.</span><span class="na">addObserver</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>  <span class="c1">// 주체에 옵저버 추가</span>
-        <span class="n">market</span><span class="o">.</span><span class="na">addObserver</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>  <span class="c1">// 주체에 옵저버 추가</span>
-        
-        <span class="n">market</span><span class="o">.</span><span class="na">setStockPrice</span><span class="o">(</span><span class="s">"LG전자"</span><span class="o">,</span> <span class="mf">108400.0</span><span class="o">);</span> <span class="c1">// 가격 변동</span>
-        <span class="n">market</span><span class="o">.</span><span class="na">setStockPrice</span><span class="o">(</span><span class="s">"삼성전기"</span><span class="o">,</span> <span class="mf">139100.0</span><span class="o">);</span> <span class="c1">// 가격 변동</span>
-        <span class="c1">// 출력</span>
-        <span class="c1">// Stock price of LG전자 has changed to 108400.0</span>
-        <span class="c1">// Stock price of 삼성전기 has changed to 139100.0</span>
-
-        <span class="n">market</span><span class="o">.</span><span class="na">removeObserver</span><span class="o">(</span><span class="n">observer</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>주체인 주식시장 인스턴스가 만들어졌고 <br />
-해당 주체에 옵저버가 추가되었다. (옵저버는 콘솔로 변동을 알려준다.)</p>
-
-<p>이제 주식시장에서 주식 2개의 변동이 생겼고 (LG전자, 삼성전기) <br />
-변동이 생길때 마다 <code class="language-plaintext highlighter-rouge">notifyObservers()</code>메서드로 인해서 저장된 옵저버들의 <br />
-구현해둔 <code class="language-plaintext highlighter-rouge">update()</code>를 통해서 콘솔을 통해 주식이름과 얼마로 가격이 변동되었는지 알릴 수 있는 것이다.</p>
-
-<p><br /></p>
-
-<h3 id="spring에서의-옵저버-패턴">Spring에서의 옵저버 패턴</h3>
-
-<p>SpringFramework에서는 <code class="language-plaintext highlighter-rouge">@EventListener</code>를 이용해 간단하게 <br />
-옵저버패턴을 구현할 수 있다. 해당 어노테이션을 사용하면 이벤트가 <br />
-발생할 때 마다 해당메서드가 자동으로 호출된다.</p>
-
-<p>간단한 예제로 주문이 생성될 때마다 Order 객체를 생성하고<br />
-이를 처리하는 리스너 클래스를 만들어주는 예제를 보자</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">orderId</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">customerName</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">double</span> <span class="n">amount</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="nd">@Service</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderService</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ApplicationEventPublisher</span> <span class="n">publisher</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">OrderService</span><span class="o">(</span><span class="nc">ApplicationEventPublisher</span> <span class="n">publisher</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">publisher</span> <span class="o">=</span> <span class="n">publisher</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">createOrder</span><span class="o">(</span><span class="nc">String</span> <span class="n">orderId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">customerName</span><span class="o">,</span> <span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 주문 생성 코드 생략...</span>
-
-        <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Order</span><span class="o">();</span> <span class="c1">// &lt;- 주문 생성</span>
-        <span class="n">order</span><span class="o">.</span><span class="na">setOrderId</span><span class="o">(</span><span class="n">orderId</span><span class="o">);</span>
-        <span class="n">order</span><span class="o">.</span><span class="na">setCustomerName</span><span class="o">(</span><span class="n">customerName</span><span class="o">);</span>
-        <span class="n">order</span><span class="o">.</span><span class="na">setAmount</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
-
-        <span class="nc">OrderCreatedEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OrderCreatedEvent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">order</span><span class="o">);</span> <span class="c1">// &lt;- 해당주문으로 이벤트 객체생성</span>
-        <span class="n">publisher</span><span class="o">.</span><span class="na">publishEvent</span><span class="o">(</span><span class="n">event</span><span class="o">);</span> <span class="c1">// @EventListener 호출</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCreatedEvent</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Object</span> <span class="n">source</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Order</span> <span class="n">order</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">OrderCreatedEvent</span><span class="o">(</span><span class="nc">Object</span> <span class="n">source</span><span class="o">,</span> <span class="nc">Order</span> <span class="n">order</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">order</span> <span class="o">=</span> <span class="n">order</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">Order</span> <span class="nf">getOrder</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">order</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderCreatedEventListener</span> <span class="o">{</span>
-    <span class="nd">@EventListener</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handleOrderCreatedEvent</span><span class="o">(</span><span class="nc">OrderCreatedEvent</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="na">getOrder</span><span class="o">();</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Order created: "</span> <span class="o">+</span> <span class="n">order</span><span class="o">.</span><span class="na">getOrderId</span><span class="o">()</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">order</span><span class="o">.</span><span class="na">getCustomerName</span><span class="o">()</span> <span class="o">+</span> <span class="s">", "</span> <span class="o">+</span> <span class="n">order</span><span class="o">.</span><span class="na">getAmount</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">@EventListener</code>를 메서드에 붙여 정의를 해놓은 다음<br />
-해당 클래스 <code class="language-plaintext highlighter-rouge">OrderCreatedEventListener</code>를 빈으로 등록하면</p>
-
-<p><code class="language-plaintext highlighter-rouge">ApplicationEventPublisher</code>로 만든 객체로 <code class="language-plaintext highlighter-rouge">.publishEvent();</code>에 <br />
-호출할 객체를 넣어서 실행시키면 리스너측 메서드가 호출되게 되어진다.</p>
-
-<p>즉, 정리하자면</p>
-
-<blockquote>
-  <p>옵저버 = <code class="language-plaintext highlighter-rouge">handleOrderCreatedEvent() 메서드</code><br />
-주체 = <code class="language-plaintext highlighter-rouge">ApplicationEventPublisher 클래스</code>   <br />
-변경감지 = <code class="language-plaintext highlighter-rouge">publisher.publishEvent(event);</code></p>
-</blockquote>
-
-<p><br /></p>
-
-<h3 id="옵저버-패턴의-장점">옵저버 패턴의 장점</h3>
-
-<ol>
-  <li>느슨한 결합도: 옵저버 패턴은 객체 간의 결합도를 낮추는 느슨한 결합(loose coupling)을 제공합니다. 즉, Subject 객체와 Observer 객체가 서로 독립적으로 존재하며, 변경사항이 발생하더라도 서로 영향을 미치지 않습니다. 이는 객체 간의 유연성(flexibility)을 높여줍니다.</li>
-  <li>확장성: 옵저버 패턴은 새로운 Observer 클래스를 추가하거나 기존 Observer 클래스를 수정하지 않고도 Subject 객체의 동작을 확장할 수 있습니다. 이는 애플리케이션의 확장성을 높여줍니다.</li>
-  <li>이벤트 기반 시스템 구현에 용이: 옵저버 패턴은 이벤트 기반(event-driven) 시스템의 구현에 용이합니다. 이는 애플리케이션에서 발생하는 이벤트에 대해 Subject 객체가 이벤트를 발행하고, 이를 구독한 Observer 객체가 이벤트를 수신하면서 처리할 수 있기 때문입니다.</li>
-</ol>
-
-<p><br /></p>
-
-<h3 id="옵저버-패턴의-단점">옵저버 패턴의 단점</h3>
-
-<ol>
-  <li>오버헤드: 옵저버 패턴은 객체 간의 통신이 빈번하게 일어나기 때문에, 불필요한 오버헤드가 발생할 수 있습니다. 이는 대규모 시스템에서 성능 저하를 초래할 수 있습니다.</li>
-  <li>디버깅의 어려움: 옵저버 패턴은 객체 간의 상호작용이 많이 일어나기 때문에, 디버깅이 어려울 수 있습니다. 이는 Observer 객체들 간의 상호작용이 복잡해지면서, 버그를 찾기 어려워지기 때문입니다.</li>
-</ol>
-
-<p><br /><br />
-<br /></p>
-
-<hr />
-
-<p>✨ 참고한 자료</p>
-<ul>
-  <li><a href="https://chat.openai.com/">ChatGPT 선생님</a></li>
-  <li><a href="https://pjh3749.tistory.com/266">pjh3749님의 블로그</a></li>
-  <li><a href="http://www.yes24.com/Product/Goods/108887922">면접을 위한 CS 전공지식 노트</a></li>
-</ul>
-
-<p><br /> 
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="CS" /><category term="ComputerScience" /><summary type="html"><![CDATA[옵저버 패턴]]></summary></entry><entry><title type="html">디자인 패턴 - 전략 패턴 [Java 예제]</title><link href="http://localhost:4000/cs/2023/04/26/it-etc-strategypattern.html" rel="alternate" type="text/html" title="디자인 패턴 - 전략 패턴 [Java 예제]" /><published>2023-04-26T00:00:00+09:00</published><updated>2023-04-26T00:00:00+09:00</updated><id>http://localhost:4000/cs/2023/04/26/it-etc-strategypattern</id><content type="html" xml:base="http://localhost:4000/cs/2023/04/26/it-etc-strategypattern.html"><![CDATA[<h2 id="전략-패턴">전략 패턴</h2>
-
-<p><strong>전략 패턴(strategy pattern)은</strong> 정책 패턴(policy pattern)이라고도 하며 <br />
-객체의 행위를 바꾸고 싶은 경우 직접 수정하지 않고 전략이라고 부르는 캡슐화한 알고리즘을 <br />
-컨택스트 안에서 바꿔주면서 상호 교체가 가능하게 만드는 패턴이다.</p>
-
-<blockquote>
-  <p>컨택스트?</p>
-  <blockquote>
-    <p>프로그래밍에서의 컨텍스트는 상황, 맥락, 문맥을 의미한다.  <br />
-개발자가 어떠한 작업을 완료하는 데 필요한 모든 관련 정보를 말한다.</p>
-  </blockquote>
-</blockquote>
-
-<p><br /></p>
-
-<hr />
-
-<p>정의로만 보면 이해하기가 쉽지 않다.  <br />
-예제를 통해 살펴보자</p>
-
-<h3 id="전략-패턴-적용-">전략 패턴 적용 ❌</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
-
-        <span class="c1">// 오름차순 정렬</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">sortedData</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">sorted</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sortedData</span><span class="o">);</span> <span class="c1">// Output: [1, 2, 3, 4, 5]</span>
-
-        <span class="c1">// 내림차순 정렬</span>
-        <span class="n">sortedData</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="nc">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sortedData</span><span class="o">);</span> <span class="c1">// Output: [5, 4, 3, 2, 1]</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>해당 코드는 정렬을 진행하는 코드이다.  <br />
-정렬이라는 전략에 오름차순과 내림차순이 있지만 캡슐화가되어있지도 않고<br />
-정렬이라는 행위를 바꾸기위해서는 해당 코드를 복사해 붙여넣어줘야하므로 <br />
-다른 메서드에서 사용한다면 중복된 정렬 알고리즘 코드가 들어가게될 것 이다.</p>
-
-<p><br /></p>
-
-<h3 id="전략-패턴-적용-️">전략 패턴 적용 ⭕️</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">SortingStrategy</span> <span class="o">{</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">sort</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">AscendingSortingStrategy</span> <span class="kd">implements</span> <span class="nc">SortingStrategy</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">sort</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">data</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="nl">Integer:</span><span class="o">:</span><span class="n">compareTo</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">data</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">DescendingSortingStrategy</span> <span class="kd">implements</span> <span class="nc">SortingStrategy</span> <span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">sort</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">data</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="nl">Integer:</span><span class="o">:</span><span class="n">compareTo</span><span class="o">);</span>
-        <span class="nc">Collections</span><span class="o">.</span><span class="na">reverse</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">data</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">Sorter</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">SortingStrategy</span> <span class="n">sortingStrategy</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSortingStrategy</span><span class="o">(</span><span class="nc">SortingStrategy</span> <span class="n">sortingStrategy</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">sortingStrategy</span> <span class="o">=</span> <span class="n">sortingStrategy</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="nf">sort</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">sortingStrategy</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
-        <span class="nc">Sorter</span> <span class="n">sorter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Sorter</span><span class="o">();</span>
-
-        <span class="c1">// 오름차순 정렬</span>
-        <span class="n">sorter</span><span class="o">.</span><span class="na">setSortingStrategy</span><span class="o">(</span><span class="k">new</span> <span class="nc">AscendingSortingStrategy</span><span class="o">());</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">sortedData</span> <span class="o">=</span> <span class="n">sorter</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sortedData</span><span class="o">);</span> <span class="c1">// Output: [1, 2, 3, 4, 5]</span>
-
-        <span class="c1">// 내림차순 정렬</span>
-        <span class="n">sorter</span><span class="o">.</span><span class="na">setSortingStrategy</span><span class="o">(</span><span class="k">new</span> <span class="nc">DescendingSortingStrategy</span><span class="o">());</span>
-        <span class="n">sortedData</span> <span class="o">=</span> <span class="n">sorter</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sortedData</span><span class="o">);</span> <span class="c1">// Output: [5, 4, 3, 2, 1]</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>해당 코드에서는 오름차순과 내림차순이라는 전략을 클래스로 구현하였고 <br />
-<code class="language-plaintext highlighter-rouge">SortingStrategy</code>라는 인터페이스를 상속하여 <code class="language-plaintext highlighter-rouge">sort()</code>메서드를 구현하고 있다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">Sorter</code> 클래스에서 <code class="language-plaintext highlighter-rouge">setSortingStrategy()</code>에 매개변수로 전략을 담은 <br />
-<code class="language-plaintext highlighter-rouge">SortingStrategy</code> 구현체를 담아주게되면 해당 구현체에 따라 오름차순,내림차순 정렬 정책이 정해진다.</p>
-
-<p>또한 <code class="language-plaintext highlighter-rouge">private SortingStrategy sortingStrategy;</code>으로 정렬전략은 캡슐화가 되어있다.</p>
-
-<p>최종적으로 Main 메서드에서 <code class="language-plaintext highlighter-rouge">Sorter</code> 인스턴스를 생성해 <code class="language-plaintext highlighter-rouge">.setSortingStrategy()</code>를 통해 <br />
-오름차순, 내림차순 클래스를 전략에 맞게 생성해준다면 전략패턴이 적용된 코드라고 할 수 있다.</p>
-
-<hr />
-
-<p><br /></p>
-
-<h3 id="spring에서의-전략패턴">Spring에서의 전략패턴?</h3>
-
-<p>그럼 Java 진영에서 사용하는 프레임워크인 <br />
-SpringFramework에서는 어떤걸 전략패턴이라고 할 수 있을까?</p>
-
-<p>우리가 자주 구현한 Spring Security에서 <code class="language-plaintext highlighter-rouge">UserDetailsService</code>를 예로 들을 수 있을 것이다.</p>
-
-<ul>
-  <li><strong>예제</strong></li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserDetailsService</span> <span class="o">{</span>
-
-    <span class="cm">/**
-     * Locates the user based on the username. In the actual implementation, the search
-     * may possibly be case sensitive, or case insensitive depending on how the
-     * implementation instance is configured. In this case, the &lt;code&gt;UserDetails&lt;/code&gt;
-     * object that comes back may have a username that is of a different case than what
-     * was actually requested..
-     * @param username the username identifying the user whose data is required.
-     * @return a fully populated user record (never &lt;code&gt;null&lt;/code&gt;)
-     * @throws UsernameNotFoundException if the user could not be found or the user has no
-     * GrantedAuthority
-     */</span>
-    <span class="nc">UserDetails</span> <span class="nf">loadUserByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">UsernameNotFoundException</span><span class="o">;</span>
-
-<span class="o">}</span>
-
-</code></pre></div></div>
-
-<p>해당 인터페이스를 가지고 사용자 이름을 기반으로 사용자 정보를 가져오는 <br />
-<code class="language-plaintext highlighter-rouge">loadUserByUsername</code>메서드를 정의하여 사용한다.</p>
-
-<p>해당 인터페이스를 상속받아 구현하여, 각기 다른 방식으로 <br />
-사용자 인증을 처리하는 전략 클래스를 만들 수있다.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomUserDetailsService</span> <span class="kd">implements</span> <span class="nc">UserDetailsService</span> <span class="o">{</span>
-
-    <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="nc">UserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">UserDetails</span> <span class="nf">loadUserByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">username</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">UsernameNotFoundException</span> <span class="o">{</span>
-        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="n">user</span> <span class="o">=</span> <span class="n">userRepository</span><span class="o">.</span><span class="na">findByUsername</span><span class="o">(</span><span class="n">username</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(!</span><span class="n">user</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">UsernameNotFoundException</span><span class="o">(</span><span class="s">"User not found"</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nf">CustomUserDetails</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>위의 예제로는 <code class="language-plaintext highlighter-rouge">loadUserByUsername</code> 메서드는 사용자의 이름을 기반으로 <br />
-데이터베이스에서 사용자정보를 가져와 <code class="language-plaintext highlighter-rouge">CustomUserDetails</code> 객체로 반환하게된다.</p>
-
-<p><code class="language-plaintext highlighter-rouge">CustomUserDetailsService</code>라는 우리가 만든 클래스는 <br />
-위와 같이 데이터베이스에서 사용자정보를 이용한 전략을 가지고 있지만</p>
-
-<p>만약 데이터베이스가 아니라 다른 전략이 생긴다고 가정하면<br />
-<code class="language-plaintext highlighter-rouge">UserDetailsService</code>를 상속받아 클래스를 만들어 코드를 작성해<br />
-<code class="language-plaintext highlighter-rouge">CustomUserDetails</code>를 반환해주면 다른 전략을 사용할 수 있게된다.</p>
-
-<p>즉, 전략패턴이 적용된 예제로 코드의 재사용성과 유연성을 높일 수 있게된다.</p>
-
-<p><br /></p>
-
-<h3 id="전략패턴의-장점">전략패턴의 장점</h3>
-
-<p>위에서 볼 수 있듯이 전략패턴을 적용하게되면 새로운 전략이 추가된다고 가정할때 <br />
-OCP(개방 폐쇠의 원칙)을 지키면서 설계가 가능해진다. 또한 다른 서비스에서 정렬을 사용한다면 <br />
-<code class="language-plaintext highlighter-rouge">Sorter</code>클래스 <code class="language-plaintext highlighter-rouge">.setSortingStrategy()</code>를 이용해서 정렬전략을 사용하기 떄문에 <br />
-캡슐화한 알고리즘이 컨택스트 안에서 바뀌게되어 중복된 알고리즘을 작성할 필요가 없게된다.</p>
-
-<blockquote>
-  <p>OCP (개방 폐쇠의 원칙)</p>
-  <blockquote>
-    <p>기존의 코드를 변경하지 않으면서, 기능을 추가할 수 있도록 설계가 되어야 한다는 원칙</p>
-  </blockquote>
-</blockquote>
-
-<p><br /></p>
-
-<h3 id="전략패턴의-단점">전략패턴의 단점</h3>
-
-<p>디자인 패턴에 익숙하다면 전략패턴의 코드가 편하겠지만, 일반적으로 짧은 코드에서는 <br />
-전략패턴을 적용하지않은 코드가 보기 편할 수 있다.</p>
-
-<p>즉, 모든 상황에서 전략패턴이 사용되는 것은 유용하지 않다. 컨텍스트에 적용되는 알고리즘이<br />
-하나이거나 두개인 경우는 분기를 타는 것이 편한 경우도 있다. 그러나 요구사항의 변경으로 <br />
-변경될 여지가 있고 변화의 형태가 다양함이 어느정도 보장될 때 전략패턴을 고려해보는 것이 좋을 것 같다.</p>
-
-<p><br /><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="CS" /><category term="ComputerScience" /><summary type="html"><![CDATA[전략 패턴]]></summary></entry><entry><title type="html">[Programmers] 동명 동물 수 찾기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/24/sql-samename.html" rel="alternate" type="text/html" title="[Programmers] 동명 동물 수 찾기 (MySQL)" /><published>2023-04-24T00:00:00+09:00</published><updated>2023-04-24T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/24/sql-samename</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/24/sql-samename.html"><![CDATA[<h2 id="-문제--동명-동물-수-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59041">동명 동물 수 찾기</a></h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-05-15T16:05:56+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">LeeJellan</title><subtitle>안녕하세요!🙂 IT,여행,기타 등 기록을 남기기위한 블로그 입니다 !</subtitle><author><name>LEE JAEHYEOK</name></author><entry><title type="html">[Programmers] 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/15/sql-rentcost.html" rel="alternate" type="text/html" title="[Programmers] 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기 (MySQL)" /><published>2023-05-15T00:00:00+09:00</published><updated>2023-05-15T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/15/sql-rentcost</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/15/sql-rentcost.html"><![CDATA[<h2 id="-문제--특정-기간동안-대여-가능한-자동차들의-대여비용-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/157339">특정 기간동안 대여 가능한 자동차들의 대여비용 구하기</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
-<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
+<p>다음은 어느 자동차 대여 회사에서 대여 중인 자동차들의 정보를 담은 <code>CAR_RENTAL_COMPANY_CAR</code> 테이블과 자동차 대여 기록 정보를 담은 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블과 자동차 종류 별 대여 기간 종류 별 할인 정책 정보를 담은 <code>CAR_RENTAL_COMPANY_DISCOUNT_PLAN</code> 테이블 입니다.</p>
+
+<p><code>CAR_RENTAL_COMPANY_CAR</code> 테이블은 아래와 같은 구조로 되어있으며, <code>CAR_ID</code>, <code>CAR_TYPE</code>, <code>DAILY_FEE</code>, <code>OPTIONS</code> 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.</p>
 <table class="table">
         <thead><tr>
-<th>NAME</th>
-<th>TYPE</th>
-<th>NULLABLE</th>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>ANIMAL_ID</td>
-<td>VARCHAR(N)</td>
+<td>CAR_ID</td>
+<td>INTEGER</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>ANIMAL_TYPE</td>
-<td>VARCHAR(N)</td>
+<td>CAR_TYPE</td>
+<td>VARCHAR(255)</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>DATETIME</td>
-<td>DATETIME</td>
+<td>DAILY_FEE</td>
+<td>INTEGER</td>
 <td>FALSE</td>
 </tr>
 <tr>
-<td>INTAKE_CONDITION</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>NAME</td>
-<td>VARCHAR(N)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>SEX_UPON_INTAKE</td>
-<td>VARCHAR(N)</td>
+<td>OPTIONS</td>
+<td>VARCHAR(255)</td>
 <td>FALSE</td>
 </tr>
 </tbody>
       </table>
-<p>동물 보호소에 들어온 동물 이름 중 두 번 이상 쓰인 이름과 해당 이름이 쓰인 횟수를 조회하는 SQL문을 작성해주세요. 이때 결과는 이름이 없는 동물은 집계에서 제외하며, 결과는 이름 순으로 조회해주세요. </p>
+<p>자동차 종류는 '세단', 'SUV', '승합차', '트럭', '리무진' 이 있습니다. 자동차 옵션 리스트는 콤마(',')로 구분된 키워드 리스트(예: ''열선시트,스마트키,주차감지센서'')로 되어있으며, 키워드 종류는 '주차감지센서', '스마트키', '네비게이션', '통풍시트', '열선시트', '후방카메라', '가죽시트' 가 있습니다.</p>
+
+<p><code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블은 아래와 같은 구조로 되어있으며, <code>HISTORY_ID</code>, <code>CAR_ID</code>, <code>START_DATE</code>, <code>END_DATE</code> 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>HISTORY_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CAR_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>START_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>END_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p><code>CAR_RENTAL_COMPANY_DISCOUNT_PLAN</code> 테이블은 아래와 같은 구조로 되어있으며, <code>PLAN_ID</code>, <code>CAR_TYPE</code>, <code>DURATION_TYPE</code>, <code>DISCOUNT_RATE</code> 는 각각 요금 할인 정책 ID, 자동차 종류, 대여 기간 종류, 할인율(%)을 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>PLAN_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CAR_TYPE</td>
+<td>VARCHAR(255)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DURATION_TYPE</td>
+<td>VARCHAR(255)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DISCOUNT_RATE</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>할인율이 적용되는 대여 기간 종류로는 '7일 이상' (대여 기간이 7일 이상 30일 미만인 경우), '30일 이상' (대여 기간이 30일 이상 90일 미만인 경우), '90일 이상' (대여 기간이 90일 이상인 경우) 이 있습니다. 대여 기간이 7일 미만인 경우 할인정책이 없습니다.</p>
+
+<hr />
+
+<h5>문제</h5>
+
+<p><code>CAR_RENTAL_COMPANY_CAR</code> 테이블과 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블과 <code>CAR_RENTAL_COMPANY_DISCOUNT_PLAN</code> 테이블에서 자동차 종류가 '세단' 또는 'SUV' 인 자동차 중 2022년 11월 1일부터 2022년 11월 30일까지 대여 가능하고 30일간의 대여 금액이 50만원 이상 200만원 미만인 자동차에 대해서 자동차 ID, 자동차 종류, 대여 금액(컬럼명: <code>FEE</code>) 리스트를 출력하는 SQL문을 작성해주세요. 결과는 대여 금액을 기준으로 내림차순 정렬하고, 대여 금액이 같은 경우 자동차 종류를 기준으로 오름차순 정렬, 자동차 종류까지 같은 경우 자동차 ID를 기준으로 내림차순 정렬해주세요.</p>
+
+<hr />
 
 <h5>예시</h5>
 
-<p>예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
+<p>예를 들어 <code>CAR_RENTAL_COMPANY_CAR</code> 테이블과 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블과 <code>CAR_RENTAL_COMPANY_DISCOUNT_PLAN</code> 테이블이 다음과 같다면</p>
 <table class="table">
         <thead><tr>
-<th>ANIMAL_ID</th>
-<th>ANIMAL_TYPE</th>
-<th>DATETIME</th>
-<th>INTAKE_CONDITION</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
+<th>CAR_ID</th>
+<th>CAR_TYPE</th>
+<th>DAILY_FEE</th>
+<th>OPTIONS</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>A396810</td>
-<td>Dog</td>
-<td>2016-08-22 16:13:00</td>
-<td>Injured</td>
-<td>Raven</td>
-<td>Spayed Female</td>
+<td>1</td>
+<td>SUV</td>
+<td>25000</td>
+<td>가죽시트,열선시트,후방카메라</td>
 </tr>
 <tr>
-<td>A377750</td>
-<td>Dog</td>
-<td>2017-10-25 17:17:00</td>
-<td>Normal</td>
-<td>Lucy</td>
-<td>Spayed Female</td>
+<td>2</td>
+<td>세단</td>
+<td>14000</td>
+<td>스마트키,네비게이션,열선시트</td>
 </tr>
 <tr>
-<td>A355688</td>
-<td>Dog</td>
-<td>2014-01-26 13:48:00</td>
-<td>Normal</td>
-<td>Shadow</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A399421</td>
-<td>Dog</td>
-<td>2015-08-25 14:08:00</td>
-<td>Normal</td>
-<td>Lucy</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A400680</td>
-<td>Dog</td>
-<td>2017-06-17 13:29:00</td>
-<td>Normal</td>
-<td>Lucy</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A410668</td>
-<td>Cat</td>
-<td>2015-11-19 13:41:00</td>
-<td>Normal</td>
-<td>Raven</td>
-<td>Spayed Female</td>
-</tr>
-</tbody>
-      </table>
-<ul>
-<li>Raven 이름은 2번 쓰였습니다.</li>
-<li>Lucy 이름은 3번 쓰였습니다</li>
-<li>Shadow 이름은 1번 쓰였습니다.</li>
-</ul>
-
-<p>따라서 SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
-<table class="table">
-        <thead><tr>
-<th>NAME</th>
-<th>COUNT</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>Lucy</td>
 <td>3</td>
+<td>트럭</td>
+<td>32000</td>
+<td>주차감지센서,후방카메라,가죽시트</td>
 </tr>
 <tr>
-<td>Raven</td>
+<td>4</td>
+<td>세단</td>
+<td>12000</td>
+<td>열선시트,후방카메라</td>
+</tr>
+<tr>
+<td>5</td>
+<td>세단</td>
+<td>22000</td>
+<td>스마트키,주차감지센서</td>
+</tr>
+</tbody>
+      </table>
+<table class="table">
+        <thead><tr>
+<th>HISTORY_ID</th>
+<th>CAR_ID</th>
+<th>START_DATE</th>
+<th>END_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>2022-08-27</td>
+<td>2022-09-02</td>
+</tr>
+<tr>
 <td>2</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>GROUP BY를 이용한 이름별 COUNT</li>
-  <li>HAVING절을 이용해 2개 이상인 것들만 필터링</li>
-  <li>이름 순으로 정렬</li>
-</ol>
-
-<pre><code class="language-roomsql">SELECT NAME,
-    COUNT(NAME) AS COUNT
-FROM ANIMAL_INS
-GROUP BY NAME
-HAVING COUNT &gt; 1
-ORDER BY NAME ASC;
-
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 동명 동물 수 찾기]]></summary></entry><entry><title type="html">[Programmers] 루시와 엘라 찾기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/23/sql-lucyorella.html" rel="alternate" type="text/html" title="[Programmers] 루시와 엘라 찾기 (MySQL)" /><published>2023-04-23T00:00:00+09:00</published><updated>2023-04-23T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/23/sql-lucyorella</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/23/sql-lucyorella.html"><![CDATA[<h2 id="-문제--루시와-엘라-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59046">루시와 엘라 찾기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>NAME</th>
-<th>TYPE</th>
-<th>NULLABLE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>ANIMAL_ID</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
+<td>1</td>
+<td>2022-10-03</td>
+<td>2022-10-04</td>
 </tr>
 <tr>
-<td>ANIMAL_TYPE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>DATETIME</td>
-<td>DATETIME</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>INTAKE_CONDITION</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>NAME</td>
-<td>VARCHAR(N)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>SEX_UPON_INTAKE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>동물 보호소에 들어온 동물 중 이름이 Lucy, Ella, Pickle, Rogan, Sabrina, Mitty인 동물의 아이디와 이름, 성별 및 중성화 여부를 조회하는 SQL 문을 작성해주세요. </p>
-
-<h5>예시</h5>
-
-<p>이때 결과는 아이디 순으로 조회해주세요. 예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>ANIMAL_TYPE</th>
-<th>DATETIME</th>
-<th>INTAKE_CONDITION</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A373219</td>
-<td>Cat</td>
-<td>2014-07-29 11:43:00</td>
-<td>Normal</td>
-<td>Ella</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A377750</td>
-<td>Dog</td>
-<td>2017-10-25 17:17:00</td>
-<td>Normal</td>
-<td>Lucy</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A353259</td>
-<td>Dog</td>
-<td>2016-05-08 12:57:00</td>
-<td>Injured</td>
-<td>Bj</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A354540</td>
-<td>Cat</td>
-<td>2014-12-11 11:48:00</td>
-<td>Normal</td>
-<td>Tux</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A354597</td>
-<td>Cat</td>
-<td>2014-05-02 12:16:00</td>
-<td>Normal</td>
-<td>Ariel</td>
-<td>Spayed Female</td>
-</tr>
-</tbody>
-      </table>
-<p>SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A373219</td>
-<td>Ella</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A377750</td>
-<td>Lucy</td>
-<td>Spayed Female</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>WHERE IN절을 이용해 이름 찾기</li>
-  <li>ID순으로 오름차순 정렬</li>
-</ol>
-
-<pre><code class="language-roomsql">SELECT ANIMAL_ID,
-    NAME,
-    SEX_UPON_INTAKE
-FROM ANIMAL_INS
-WHERE NAME IN ('Lucy','Ella','Pickle','Rogan','Sabrina','Mitty')
-ORDER BY ANIMAL_ID ASC;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 루시와 엘라 찾기]]></summary></entry><entry><title type="html">[Programmers] 이름에 el이 들어가는 동물 찾기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/22/sql-dogname.html" rel="alternate" type="text/html" title="[Programmers] 이름에 el이 들어가는 동물 찾기 (MySQL)" /><published>2023-04-22T00:00:00+09:00</published><updated>2023-04-22T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/22/sql-dogname</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/22/sql-dogname.html"><![CDATA[<h2 id="-문제--이름에-el이-들어가는-동물-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59047#">이름에 el이 들어가는 동물 찾기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>NAME</th>
-<th>TYPE</th>
-<th>NULLABLE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>ANIMAL_ID</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>ANIMAL_TYPE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>DATETIME</td>
-<td>DATETIME</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>INTAKE_CONDITION</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>NAME</td>
-<td>VARCHAR(N)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>SEX_UPON_INTAKE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>보호소에 돌아가신 할머니가 기르던 개를 찾는 사람이 찾아왔습니다. 이 사람이 말하길 할머니가 기르던 개는 이름에 'el'이 들어간다고 합니다. 동물 보호소에 들어온 동물 이름 중, 이름에 "EL"이 들어가는 개의 아이디와 이름을 조회하는 SQL문을 작성해주세요. 이때 결과는 이름 순으로 조회해주세요. 단, 이름의 대소문자는 구분하지 않습니다.</p>
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>ANIMAL_TYPE</th>
-<th>DATETIME</th>
-<th>INTAKE_CONDITION</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A355753</td>
-<td>Dog</td>
-<td>2015-09-10 13:14:00</td>
-<td>Normal</td>
-<td>Elijah</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A352872</td>
-<td>Dog</td>
-<td>2015-07-09 17:51:00</td>
-<td>Aged</td>
-<td>Peanutbutter</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A353259</td>
-<td>Dog</td>
-<td>2016-05-08 12:57:00</td>
-<td>Injured</td>
-<td>Bj</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A373219</td>
-<td>Cat</td>
-<td>2014-07-29 11:43:00</td>
-<td>Normal</td>
-<td>Ella</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A382192</td>
-<td>Dog</td>
-<td>2015-03-13 13:14:00</td>
-<td>Normal</td>
-<td>Maxwell 2</td>
-<td>Intact Male</td>
-</tr>
-</tbody>
-      </table>
-<ul>
-<li>이름에 'el'이 들어가는 동물은 Elijah, Ella, Maxwell 2입니다.</li>
-<li>이 중, 개는 Elijah, Maxwell 2입니다.</li>
-</ul>
-
-<p>따라서 SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>NAME</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A355753</td>
-<td>Elijah</td>
-</tr>
-<tr>
-<td>A382192</td>
-<td>Maxwell 2</td>
-</tr>
-</tbody>
-      </table>
-<hr />
-
-<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>Dog로된 동물타입만 찾기위해 WHERE절을 이용해 필터링</li>
-  <li>LIKE절을 이용해 el만 포함된 이름을 찾기</li>
-  <li>NAME 오름차순으로 정렬</li>
-</ol>
-
-<pre><code class="language-roomsql">SELECT ANIMAL_ID,
-    NAME
-FROM ANIMAL_INS
-WHERE ANIMAL_TYPE = 'Dog' AND
-NAME LIKE '%el%'
-ORDER BY NAME ASC;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 이름에 el이 들어가는 동물 찾기]]></summary></entry><entry><title type="html">[Programmers] 중복 제거하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/18/sql-namedistinct.html" rel="alternate" type="text/html" title="[Programmers] 중복 제거하기 (MySQL)" /><published>2023-04-18T00:00:00+09:00</published><updated>2023-04-18T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/18/sql-namedistinct</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/18/sql-namedistinct.html"><![CDATA[<h2 id="-문제--중복-제거하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59408">중복 제거하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
-<table class="table">
-        <thead><tr>
-<th>NAME</th>
-<th>TYPE</th>
-<th>NULLABLE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>ANIMAL_ID</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>ANIMAL_TYPE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>DATETIME</td>
-<td>DATETIME</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>INTAKE_CONDITION</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td>NAME</td>
-<td>VARCHAR(N)</td>
-<td>TRUE</td>
-</tr>
-<tr>
-<td>SEX_UPON_INTAKE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
-</tr>
-</tbody>
-      </table>
-<p>동물 보호소에 들어온 동물의 이름은 몇 개인지 조회하는 SQL 문을 작성해주세요. 이때 이름이 NULL인 경우는 집계하지 않으며 중복되는 이름은 하나로 칩니다. </p>
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>ANIMAL_TYPE</th>
-<th>DATETIME</th>
-<th>INTAKE_CONDITION</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A562649</td>
-<td>Dog</td>
-<td>2014-03-20 18:06:00</td>
-<td>Sick</td>
-<td>NULL</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A412626</td>
-<td>Dog</td>
-<td>2016-03-13 11:17:00</td>
-<td>Normal</td>
-<td>*Sam</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A563492</td>
-<td>Dog</td>
-<td>2014-10-24 14:45:00</td>
-<td>Normal</td>
-<td>*Sam</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A513956</td>
-<td>Dog</td>
-<td>2017-06-14 11:54:00</td>
-<td>Normal</td>
-<td>*Sweetie</td>
-<td>Spayed Female</td>
-</tr>
-</tbody>
-      </table>
-<p>보호소에 들어온 동물의 이름은 NULL(없음), <code>*Sam</code>, <code>*Sam</code>, <code>*Sweetie</code>입니다. 이 중 NULL과 중복되는 이름을 고려하면, 보호소에 들어온 동물 이름의 수는 2입니다. 따라서 SQL문을 실행하면 다음과 같이 나와야 합니다.</p>
-<table class="table">
-        <thead><tr>
-<th>count</th>
-</tr>
-</thead>
-        <tbody><tr>
+<td>3</td>
 <td>2</td>
+<td>2022-10-05</td>
+<td>2022-10-20</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>2022-10-10</td>
+<td>2022-11-12</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>2022-10-16</td>
+<td>2022-10-17</td>
 </tr>
 </tbody>
       </table>
-<p>※ 컬럼 이름(위 예제에서는 count)은 일치하지 않아도 됩니다.</p>
-
-<hr />
-
-<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>COUNT를 이용한 이름 집계</li>
-  <li>DISTINCT를 이용한 중복제거</li>
-  <li>WHERE절을 이용해 NAME의 Null이 아닌값을 필터링</li>
-</ol>
-
-<pre><code class="language-roomsql">SELECT COUNT(DISTINCT(NAME)) AS count
-FROM ANIMAL_INS
-WHERE NAME is not null;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 중복 제거하기]]></summary></entry><entry><title type="html">[Programmers] 중성화 여부 파악하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/16/sql-animalsex.html" rel="alternate" type="text/html" title="[Programmers] 중성화 여부 파악하기 (MySQL)" /><published>2023-04-16T00:00:00+09:00</published><updated>2023-04-16T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/16/sql-animalsex</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/16/sql-animalsex.html"><![CDATA[<h2 id="-문제--중성화-여부-파악하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59409">중성화 여부 파악하기</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
 <table class="table">
         <thead><tr>
-<th>NAME</th>
-<th>TYPE</th>
-<th>NULLABLE</th>
+<th>PLAN_ID</th>
+<th>CAR_TYPE</th>
+<th>DURATION_TYPE</th>
+<th>DISCOUNT_RATE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>ANIMAL_ID</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
+<td>1</td>
+<td>트럭</td>
+<td>7일 이상</td>
+<td>5%</td>
 </tr>
 <tr>
-<td>ANIMAL_TYPE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
+<td>2</td>
+<td>트럭</td>
+<td>30일 이상</td>
+<td>7%</td>
 </tr>
 <tr>
-<td>DATETIME</td>
-<td>DATETIME</td>
-<td>FALSE</td>
+<td>3</td>
+<td>트럭</td>
+<td>90일 이상</td>
+<td>10%</td>
 </tr>
 <tr>
-<td>INTAKE_CONDITION</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
+<td>4</td>
+<td>세단</td>
+<td>7일 이상</td>
+<td>5%</td>
 </tr>
 <tr>
-<td>NAME</td>
-<td>VARCHAR(N)</td>
-<td>TRUE</td>
+<td>5</td>
+<td>세단</td>
+<td>30일 이상</td>
+<td>10%</td>
 </tr>
 <tr>
-<td>SEX_UPON_INTAKE</td>
-<td>VARCHAR(N)</td>
-<td>FALSE</td>
+<td>6</td>
+<td>세단</td>
+<td>90일 이상</td>
+<td>15%</td>
+</tr>
+<tr>
+<td>7</td>
+<td>SUV</td>
+<td>7일 이상</td>
+<td>3%</td>
+</tr>
+<tr>
+<td>8</td>
+<td>SUV</td>
+<td>30일 이상</td>
+<td>8%</td>
+</tr>
+<tr>
+<td>9</td>
+<td>SUV</td>
+<td>90일 이상</td>
+<td>12%</td>
 </tr>
 </tbody>
       </table>
-<p>보호소의 동물이 중성화되었는지 아닌지 파악하려 합니다. 중성화된 동물은 <code>SEX_UPON_INTAKE</code> 컬럼에 'Neutered' 또는 'Spayed'라는 단어가 들어있습니다. 동물의 아이디와 이름, 중성화 여부를 아이디 순으로 조회하는 SQL문을 작성해주세요. 이때 중성화가 되어있다면 'O', 아니라면 'X'라고 표시해주세요.</p>
+<p>자동차 종류가 '세단' 또는 'SUV' 인 자동차 중 2022년 11월 1일 부터 2022년 11월 30일까지 대여가능한 자동차는 자동차 ID가 1, 4, 5인 자동차입니다.</p>
 
-<h5>예시</h5>
+<p>일일 대여 요금에 자동차 종류 별 대여기간이 30일 이상인 경우의 할인율을 적용하여 30일간의 대여 금액을 구하면,</p>
 
-<p>예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>ANIMAL_TYPE</th>
-<th>DATETIME</th>
-<th>INTAKE_CONDITION</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A355753</td>
-<td>Dog</td>
-<td>2015-09-10 13:14:00</td>
-<td>Normal</td>
-<td>Elijah</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A373219</td>
-<td>Cat</td>
-<td>2014-07-29 11:43:00</td>
-<td>Normal</td>
-<td>Ella</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A382192</td>
-<td>Dog</td>
-<td>2015-03-13 13:14:00</td>
-<td>Normal</td>
-<td>Maxwell 2</td>
-<td>Intact Male</td>
-</tr>
-</tbody>
-      </table>
 <ul>
-<li>중성화한 동물: Elijah, Ella</li>
-<li>중성화하지 않은 동물: Maxwell 2</li>
+<li>자동차 ID가 1인 경우, 일일 대여 금액 25,000원에서 8% 할인율을 적용하고 30일을 곱하면 총 대여 금액은 690,000원</li>
+<li>자동차 ID가 4인 경우, 일일 대여 금액 12,000원에서 10% 할인율을 적용하고 30일을 곱하면 총 대여 금액은 324,000원</li>
+<li>자동차 ID가 5인 경우, 일일 대여 금액 22,000원에서 10% 할인율을 적용하고 30일을 곱하면 총 대여 금액은 621,000원이고, 대여 금액이 50만원 이상 200만원 미만인 경우에 대해서 대여 금액을 기준으로 내림차순, 자동차 종류를 기준으로 오름차순 및 자동차 ID를 기준으로 내림차순 정렬하면 다음과 같아야 합니다.</li>
 </ul>
-
-<p>따라서 SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
 <table class="table">
         <thead><tr>
-<th>ANIMAL_ID</th>
-<th>NAME</th>
-<th>중성화</th>
+<th>CAR_ID</th>
+<th>CAR_TYPE</th>
+<th>FEE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>A355753</td>
-<td>Elijah</td>
-<td>O</td>
+<td>5</td>
+<td>세단</td>
+<td>690000</td>
 </tr>
 <tr>
-<td>A373219</td>
-<td>Ella</td>
-<td>O</td>
-</tr>
-<tr>
-<td>A382192</td>
-<td>Maxwell 2</td>
-<td>X</td>
+<td>1</td>
+<td>SUV</td>
+<td>621000</td>
 </tr>
 </tbody>
       </table>
-<p>※ 컬럼 이름은 일치하지 않아도 됩니다.</p>
-
 <hr />
 
-<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
+<h5>주의사항</h5>
+
+<p><code>FEE</code>의 경우 예시처럼 정수부분만 출력되어야 합니다.</p>
 
 <blockquote>
   <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
@@ -1154,21 +296,39 @@ WHERE NAME is not null;
 <h2 id="-문제-풀이">🗝 문제 풀이</h2>
 
 <ol>
-  <li>특정 단어를 포함하는 것을 찾기 위해 LIKE를 사용</li>
-  <li>CASE WHEN THEN 문법으로 구분하여 O, X 출력</li>
-  <li>동물 ID순으로 오름차순 정렬</li>
+  <li>LEFT JOIN을 통한 CAR 테이블과 DISCOUNT PLAN 테이블을 조인한다.</li>
+  <li>WHERE절을 이용한 조건문 필터링 한다 <br />
+ 1). 세단, SUV만 필터링<br />
+ 2). START_DATE, END_DATE 날짜가 2022-11-01 ~ 2022-11-30 안에 존재하면 필터링<br />
+ 3). 30일 이상으로된 할인정책을 사용하기위해 필터링</li>
+  <li>HAVING절을 이용해 계산완료된 FEE값에 50만원이상 ~ 200만원 미만 범위로 필터링한다.</li>
+  <li>마지막으로 FEE를 내림차순 같으면 종류를 오름차순으로 같으면 ID를 내림차순으로 정렬한다.</li>
 </ol>
 
-<pre><code class="language-roomsql">SELECT ANIMAL_ID,
-    NAME,
-    CASE WHEN (SEX_UPON_INTAKE LIKE '%Neutered%' 
-    OR SEX_UPON_INTAKE LIKE '%Spayed%') THEN 'O'
-    ELSE 'X' END AS '중성화'
-FROM ANIMAL_INS
-ORDER BY ANIMAL_ID ASC;
+<pre><code class="language-roomsql">SELECT c.CAR_ID,
+    c.CAR_TYPE,
+    (c.DAILY_FEE - ROUND(c.DAILY_FEE / 100 * p.DISCOUNT_RATE)) * 30 AS FEE
+FROM CAR_RENTAL_COMPANY_CAR c
+LEFT JOIN CAR_RENTAL_COMPANY_DISCOUNT_PLAN p
+    ON c.CAR_TYPE = p.CAR_TYPE 
+WHERE c.CAR_TYPE IN ('세단','SUV') 
+    AND c.CAR_ID NOT IN (
+        SELECT CAR_ID
+        FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+        WHERE END_DATE &gt;= '2022-11-01' AND START_DATE &lt;= '2022-11-30'
+    )
+    AND p.DURATION_TYPE = '30일 이상'
+HAVING FEE &gt;= 500000 AND FEE &lt; 2000000
+ORDER BY FEE DESC, c.CAR_TYPE ASC, c.CAR_ID DESC;
 </code></pre>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 중성화 여부 파악하기]]></summary></entry><entry><title type="html">[Programmers] NULL 처리하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/04/15/sql-animalnull.html" rel="alternate" type="text/html" title="[Programmers] NULL 처리하기 (MySQL)" /><published>2023-04-15T00:00:00+09:00</published><updated>2023-04-15T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/15/sql-animalnull</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/15/sql-animalnull.html"><![CDATA[<h2 id="-문제--null-처리하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59410">NULL 처리하기</a></h2>
+<p>풀면서 느낀점은 <code class="language-plaintext highlighter-rouge">CAR_RENTAL_COMPANY_RENTAL_HISTORY</code>를 조인해서 풀려고 했지만 <br />
+사실상 날짜를 확인하여 필터링만하면 되기때문에 JOIN을 하지 않아도 되었다는 점.</p>
+
+<p>서브쿼리를 사용한다는 발상이 자꾸 안떠오르는게 문제풀이하는데 조금 시간을 더 소요하는 것 같다. <br />
+또한 WHERE절과 HAVING절의 차이를 이번 문제로 이해가 좀더 된 것 같다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 특정 기간동안 대여 가능한 자동차들의 대여비용 구하기]]></summary></entry><entry><title type="html">[Programmers] 없어진 기록 찾기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/14/sql-lostrecord.html" rel="alternate" type="text/html" title="[Programmers] 없어진 기록 찾기 (MySQL)" /><published>2023-05-14T00:00:00+09:00</published><updated>2023-05-14T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/14/sql-lostrecord</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/14/sql-lostrecord.html"><![CDATA[<h2 id="-문제--없어진-기록-찾기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59042">없어진 기록 찾기</a></h2>
 
 <h3 id="-문제-설명">📖 문제 설명</h3>
 
@@ -1212,104 +372,7 @@ ORDER BY ANIMAL_ID ASC;
 </tr>
 </tbody>
       </table>
-<p>입양 게시판에 동물 정보를 게시하려 합니다. 동물의 생물 종, 이름, 성별 및 중성화 여부를 아이디 순으로 조회하는 SQL문을 작성해주세요. 이때 프로그래밍을 모르는 사람들은 NULL이라는 기호를 모르기 때문에, 이름이 없는 동물의 이름은 "No name"으로 표시해 주세요.</p>
-
-<h5>예시</h5>
-
-<p>예를 들어 <code>ANIMAL_INS</code> 테이블이 다음과 같다면</p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_ID</th>
-<th>ANIMAL_TYPE</th>
-<th>DATETIME</th>
-<th>INTAKE_CONDITION</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>A350276</td>
-<td>Cat</td>
-<td>2017-08-13 13:50:00</td>
-<td>Normal</td>
-<td>Jewel</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>A350375</td>
-<td>Cat</td>
-<td>2017-03-06 15:01:00</td>
-<td>Normal</td>
-<td>Meo</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>A368930</td>
-<td>Dog</td>
-<td>2014-06-08 13:20:00</td>
-<td>Normal</td>
-<td>NULL</td>
-<td>Spayed Female</td>
-</tr>
-</tbody>
-      </table>
-<p>마지막 줄의 개는 이름이 없기 때문에, 이 개의 이름은 "No name"으로 표시합니다. 따라서 SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
-<table class="table">
-        <thead><tr>
-<th>ANIMAL_TYPE</th>
-<th>NAME</th>
-<th>SEX_UPON_INTAKE</th>
-</tr>
-</thead>
-        <tbody><tr>
-<td>Cat</td>
-<td>Jewel</td>
-<td>Spayed Female</td>
-</tr>
-<tr>
-<td>Cat</td>
-<td>Meo</td>
-<td>Neutered Male</td>
-</tr>
-<tr>
-<td>Dog</td>
-<td>No name</td>
-<td>Spayed Female</td>
-</tr>
-</tbody>
-      </table>
-<p>※ 컬럼 이름은 일치하지 않아도 됩니다.</p>
-
-<hr />
-
-<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
-
-<blockquote>
-  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
-</blockquote>
-
-<hr />
-
-<h2 id="-문제-풀이">🗝 문제 풀이</h2>
-
-<ol>
-  <li>동물이름 중 Null로된 이름을 ‘No name’으로 변경하는 문제</li>
-  <li>IFNULL을 이용해 처리하기</li>
-  <li>ANIMAL_ID로 오름차순</li>
-</ol>
-
-<pre><code class="language-roomsql">SELECT ANIMAL_TYPE,
-     IFNULL(NAME,'No name') AS NAME,
-     SEX_UPON_INTAKE
-FROM ANIMAL_INS
-ORDER BY ANIMAL_ID ASC;
-</code></pre>
-
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : NULL 처리하기]]></summary></entry><entry><title type="html">[Programmers] 입양 시각 구하기(1) (MySQL)</title><link href="http://localhost:4000/sql/2023/04/14/sql-animaltime.html" rel="alternate" type="text/html" title="[Programmers] 입양 시각 구하기(1) (MySQL)" /><published>2023-04-14T00:00:00+09:00</published><updated>2023-04-14T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/04/14/sql-animaltime</id><content type="html" xml:base="http://localhost:4000/sql/2023/04/14/sql-animaltime.html"><![CDATA[<h2 id="-문제--입양-시각-구하기1">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59412">입양 시각 구하기(1)</a></h2>
-
-<h3 id="-문제-설명">📖 문제 설명</h3>
-
-<p><code>ANIMAL_OUTS</code> 테이블은 동물 보호소에서 입양 보낸 동물의 정보를 담은 테이블입니다. <code>ANIMAL_OUTS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>NAME</code>, <code>SEX_UPON_OUTCOME</code>는 각각 동물의 아이디, 생물 종, 입양일, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
+<p><code>ANIMAL_OUTS</code> 테이블은 동물 보호소에서 입양 보낸 동물의 정보를 담은 테이블입니다. <code>ANIMAL_OUTS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>NAME</code>, <code>SEX_UPON_OUTCOME</code>는 각각 동물의 아이디, 생물 종, 입양일, 이름, 성별 및 중성화 여부를 나타냅니다. <code>ANIMAL_OUTS</code> 테이블의 <code>ANIMAL_ID</code>는 <code>ANIMAL_INS</code>의 <code>ANIMAL_ID</code>의 외래 키입니다.</p>
 <table class="table">
         <thead><tr>
 <th>NAME</th>
@@ -1344,60 +407,96 @@ ORDER BY ANIMAL_ID ASC;
 </tr>
 </tbody>
       </table>
-<p>보호소에서는 몇 시에 입양이 가장 활발하게 일어나는지 알아보려 합니다. 09:00부터 19:59까지, 각 시간대별로 입양이 몇 건이나 발생했는지 조회하는 SQL문을 작성해주세요. 이때 결과는 시간대 순으로 정렬해야 합니다.</p>
+<p>천재지변으로 인해 일부 데이터가 유실되었습니다. 입양을 간 기록은 있는데, 보호소에 들어온 기록이 없는 동물의 ID와 이름을 ID 순으로 조회하는 SQL문을 작성해주세요. </p>
 
 <h5>예시</h5>
 
-<p>SQL문을 실행하면 다음과 같이 나와야 합니다.</p>
+<p>예를 들어, <code>ANIMAL_INS</code> 테이블과 <code>ANIMAL_OUTS</code> 테이블이 다음과 같다면</p>
+
+<p><code>ANIMAL_INS</code></p>
 <table class="table">
         <thead><tr>
-<th>HOUR</th>
-<th>COUNT</th>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>INTAKE_CONDITION</th>
+<th>NAME</th>
+<th>SEX_UPON_INTAKE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td>9</td>
-<td>1</td>
+<td>A352713</td>
+<td>Cat</td>
+<td>2017-04-13 16:29:00</td>
+<td>Normal</td>
+<td>Gia</td>
+<td>Spayed Female</td>
 </tr>
 <tr>
-<td>10</td>
-<td>2</td>
+<td>A350375</td>
+<td>Cat</td>
+<td>2017-03-06 15:01:00</td>
+<td>Normal</td>
+<td>Meo</td>
+<td>Neutered Male</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code></p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>NAME</th>
+<th>SEX_UPON_OUTCOME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A349733</td>
+<td>Dog</td>
+<td>2017-09-27 19:09:00</td>
+<td>Allie</td>
+<td>Spayed Female</td>
 </tr>
 <tr>
-<td>11</td>
-<td>13</td>
+<td>A352713</td>
+<td>Cat</td>
+<td>2017-04-25 12:25:00</td>
+<td>Gia</td>
+<td>Spayed Female</td>
 </tr>
 <tr>
-<td>12</td>
-<td>10</td>
+<td>A349990</td>
+<td>Cat</td>
+<td>2018-02-02 14:18:00</td>
+<td>Spice</td>
+<td>Spayed Female</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code> 테이블에서</p>
+
+<ul>
+<li>Allie의 ID는 <code>ANIMAL_INS</code>에 없으므로, Allie의 데이터는 유실되었습니다.</li>
+<li>Gia의 ID는 <code>ANIMAL_INS</code>에 있으므로, Gia의 데이터는 유실되지 않았습니다.</li>
+<li>Spice의 ID는 <code>ANIMAL_INS</code>에 없으므로, Spice의 데이터는 유실되었습니다.</li>
+</ul>
+
+<p>따라서 SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>NAME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A349733</td>
+<td>Allie</td>
 </tr>
 <tr>
-<td>13</td>
-<td>14</td>
-</tr>
-<tr>
-<td>14</td>
-<td>9</td>
-</tr>
-<tr>
-<td>15</td>
-<td>7</td>
-</tr>
-<tr>
-<td>16</td>
-<td>10</td>
-</tr>
-<tr>
-<td>17</td>
-<td>12</td>
-</tr>
-<tr>
-<td>18</td>
-<td>16</td>
-</tr>
-<tr>
-<td>19</td>
-<td>2</td>
+<td>A349990</td>
+<td>Spice</td>
 </tr>
 </tbody>
       </table>
@@ -1414,544 +513,1614 @@ ORDER BY ANIMAL_ID ASC;
 <h2 id="-문제-풀이">🗝 문제 풀이</h2>
 
 <ol>
-  <li>HOUR함수를 이용해 DATETIME의 시간만 추출한다</li>
-  <li>DATETIME을 COUNT 함수로 집계한다.</li>
-  <li>WHERE절로 09~19에 해당하는 데이터만 필터링한다.</li>
-  <li>GROUP BY로 시간별로 집계하도록 해준다.</li>
+  <li>LEFT JOIN을 통해 두개의 테이블을 합친다.</li>
+  <li>ANIMAL_INS 테이블의 값이 null인것이 없어진 기록이다.</li>
+  <li>WHERE절을 이용해 없어진 기록들만 필터링한다.</li>
+  <li>ANIMAL_ID 기준으로 오름차순 정렬한다.</li>
 </ol>
 
-<pre><code class="language-roomsql">SELECT HOUR(DATETIME) AS HOUR,
-    COUNT(DATETIME) AS COUNT
-FROM ANIMAL_OUTS
-WHERE HOUR(DATETIME) BETWEEN '09' AND '19'
-GROUP BY HOUR
-ORDER BY HOUR ASC;
+<pre><code class="language-roomsql">SELECT o.ANIMAL_ID,
+    o.NAME
+FROM ANIMAL_OUTS o
+LEFT JOIN ANIMAL_INS i
+ON i.ANIMAL_ID = o.ANIMAL_ID
+WHERE i.ANIMAL_ID is null
+ORDER BY o.ANIMAL_ID ASC;
 </code></pre>
 
-<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 입양 시각 구하기(1)]]></summary></entry><entry><title type="html">[Spring] GraphQL 이란? 실습해보기</title><link href="http://localhost:4000/spring/2023/04/13/spring-graphql.html" rel="alternate" type="text/html" title="[Spring] GraphQL 이란? 실습해보기" /><published>2023-04-13T00:00:00+09:00</published><updated>2023-04-13T00:00:00+09:00</updated><id>http://localhost:4000/spring/2023/04/13/spring-graphql</id><content type="html" xml:base="http://localhost:4000/spring/2023/04/13/spring-graphql.html"><![CDATA[<p>오늘은 REST API와 조금 다룬 GraphQL에 대해서  <br />
-기본적인 개념와 실습을 위해 프로젝트를 하나파서 만들어봤다.</p>
-
-<p>내가 만든 <a href="https://github.com/MyCatlikesChuru/graphql-practice">GitHub 레포지토리</a>를 참고하면 가장 기초적인 셋팅과 <br />
-사용법을 볼 수 있으니 참고바란다.</p>
-
-<p><br /></p>
-
-<h2 id="graphql">GraphQL</h2>
-
-<h3 id="graphql-이란">GraphQL 이란?</h3>
-
-<p>GraphQL은 REST API의 대안으로 페이스북에서 제시한 새로운 Web API 컨셉이라고한다.</p>
-
-<p><strong><span style="color:#F04965">REST API</span></strong> 는 우리가 알듯이 다양한 HTTP Method가 서버에 존재하는 리소스와 대응되어서 동작한다.  <br />
-클라이언트의 요청사항과 리소스가 잘 들어맞지 않는다면 성능 문제가 발생할 수 있다.</p>
-
-<p><strong><span style="color:#F04965">GraphQL</span></strong> 은 클라이언트 단일 요청에서 여러 하위 자원 탐색을 포함하여 원하는 <br />
-데이터만 정확하게 지정할 수 있다.</p>
-
-<p><br /></p>
-
-<p>이로서 얻을 수 있는 장점은 아래와 같다.</p>
-
-<ul>
-  <li>
-    <p><strong>Overfetching</strong><br />
-기존의 Rest Api에선 api 호출 시 필요 이상의 정보를 전달받는 문제가 있었다.<br />
-GraphQL은 client에서 필요한 데이터만을 요청하므로 overfetching이 해결 된다.</p>
-  </li>
-  <li>
-    <p><strong>Endpoint</strong><br />
-Rest Api는 각 api마다 다른 endpoint가 있어서 이름을 짓거나 관련성이 있는 것들끼리 묶는 등의 관리가 어렵다.<br />
-GraphQL은 단 하나의 endpoint가 있어서 요청 주소가 매우 간단해진다.</p>
-  </li>
-</ul>
-
-<p><br /></p>
-
-<h3 id="graphql-적용해보기">GraphQL 적용해보기</h3>
-
-<h4 id="프로젝트-개요">프로젝트 개요</h4>
-
-<p>이제 대략적인 개념을 이해했으니 서버에서 구현하여 테스트해보자</p>
-
-<p>Java 진영에서는 Spring 프레임워크를 이용하면 손쉽게 구현이 가능하다. <br />
-기존에 MVC 개발하듯 진행할 수 있다.</p>
-
-<p>SpringBoot + Spring Data JPA + GraphQL을 이용한 프로젝트다.<br />
-Spring for GraphQL은 Spring Boot 2.7.0 버전 이상부터 지원한다고한다.</p>
-
-<p><br /></p>
-
-<p>GraphQL을 통해 요청을 보낸다음 <br />
-Spring data JPA로 임베디드 H2 데이터베이스에 접근하여 <br />
-데이터를 조회하고 저장하는 테스트를 진행할 것이다.</p>
-
-<p><br /></p>
-
-<h4 id="프로젝트-셋팅">프로젝트 셋팅</h4>
-
-<p>셋팅에 앞서 모든 셋팅을 다올리진 않을 것이다. <br />
-글의 가독성 측면이나 현재 GraphQL 설명에 집중하기 위해서이다. <br />
-<em>(프로젝트 생성에 다른 정보가 필요하다면 <a href="https://github.com/MyCatlikesChuru/graphql-practice">GitHub 레포지토리</a>를 참고하자)</em></p>
-
-<p><br /></p>
-
-<p><strong>프로젝트 구조</strong></p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── main
-│   ├── java
-│   │   └── com
-│   │       └── prac
-│   │           └── graphql
-│   │               ├── GraphqlApplication.java
-│   │               ├── domain
-│   │               │   ├── controller
-│   │               │   │   └── MemberController.java
-│   │               │   ├── dto
-│   │               │   │   └── MemberResponseDto.java
-│   │               │   ├── entity
-│   │               │   │   └── Member.java
-│   │               │   ├── mapper
-│   │               │   │   └── MemberMapper.java
-│   │               │   ├── repository
-│   │               │   │   └── MemberRepository.java
-│   │               │   └── service
-│   │               │       └── MemberService.java
-│   │               └── global
-│   │                   └── exception
-│   │                       ├── BusinessLogicException.java
-│   │                       ├── ExceptionCode.java
-│   │                       └── handler
-│   │                           └── GraphQLExceptionHandler.java
-│   └── resources
-│       ├── application.yml
-│       ├── data.sql
-│       ├── graphql
-│       │   └── schema.graphqls
-│       ├── static
-│       └── templates
-└── test
-    └── java
-        └── com
-            └── prac
-                └── graphql
-                    └── GraphqlApplicationTests.java
-
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>build.gradle</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span>
-        <span class="c1">// ... 생략</span>
-        
-        <span class="n">implementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">boot</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">graphql</span><span class="err">'</span> <span class="c1">// &lt;- graphql</span>
-        <span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">webflux</span><span class="err">'</span> <span class="c1">// &lt;- graphql</span>
-        <span class="n">testImplementation</span> <span class="err">'</span><span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">graphql</span><span class="o">:</span><span class="n">spring</span><span class="o">-</span><span class="n">graphql</span><span class="o">-</span><span class="n">test</span><span class="err">'</span> <span class="c1">// &lt;- graphql</span>
-        
-        <span class="c1">// ... 생략</span>
-<span class="o">}</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">Spring for GraphQL</code> dependencies를 추가하면 옆에 주석처리해둔 3가지가 생긴다.</p>
-
-<p><br /></p>
-
-<p><strong>application.yml</strong></p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
-  <span class="na">graphql</span><span class="pi">:</span>
-    <span class="na">graphiql</span><span class="pi">:</span>
-      <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span> <span class="c1"># Graphql 테스트가 가능해진다. localhost:8080/graphiql 에 접속해서 가능 </span>
-      <span class="na">printer</span><span class="pi">:</span> 
-        <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span> <span class="c1"># JPA에 Show-sql과 같이 Graphql 쿼리를 출력해준다.</span>
-</code></pre></div></div>
-
-<p><strong>application.properties</strong></p>
-
-<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring.graphql.graphiql.enabled</span><span class="p">=</span><span class="s">true</span>
-<span class="py">spring.graphql.graphiql.printer.enabled</span><span class="p">=</span><span class="s">true</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">.yml</code>,<code class="language-plaintext highlighter-rouge">properties</code>파일 셋팅 방법이다.  <br />
-나는 <code class="language-plaintext highlighter-rouge">.yml</code>파일을 사용하였고 이외에 H2, Spring data JPA 관련 설정은 <br />
-위에 올려둔 깃허브 레포지토리를 참고하자</p>
-
-<p><br /></p>
-
-<p>코드를 보기전에 아래의 3개 어노테이션의 용도를 알고있으면 <br />
-도움이되니 먼저 읽어보고 코드를 확인하자</p>
-
-<p><strong>@MutationMapping</strong><br />
-<code class="language-plaintext highlighter-rouge">@MutationMapping</code>은 Create, Update, Delete에 대응된다고 생각하면 될 것 같다.<br />
-graphql은 endpoint가 하나이므로 @MutationMapping 어노테이션만 지정해 주고 다른 설정은 필요 없습니다.<br />
-즉, @PostMapping, @PatchMapping, @DeleteMapping 등을 대신사용</p>
-
-<p><br /></p>
-
-<p><strong>@QueryMapping</strong><br />
-<code class="language-plaintext highlighter-rouge">@QueryMapping</code>는 Read에 대응된다고 생각하면 될 것 같다.<br />
-말고도 <code class="language-plaintext highlighter-rouge">@SubscriptionMapping</code>이 있다고 한다.<br />
-즉, @GetMapping 을 대신 사용</p>
-
-<p><br /></p>
-
-<p><strong>@SchemaMapping</strong> <br />
-위의 두개의 어노테이션을 통용해서 쓰는듯한 느낌이다. <br />
-typeName(Query, Mutation)을 설정하여 사용이 가능하다.</p>
-
-<p><br /></p>
-
-<p>또한 <code class="language-plaintext highlighter-rouge">spring-boot-starter-graphql</code>를 사용하는 경우 default로 설정된  <br />
-Schema 파일 위치는 <code class="language-plaintext highlighter-rouge">classpath:graphql/**/</code> 으로 <code class="language-plaintext highlighter-rouge">/src/main/resources/graphql/</code>  <br />
-경로에 <code class="language-plaintext highlighter-rouge">schema.graphqls</code> 파일을 만들어 사용할 수 있다. (graphql가 아닌 graphqls이다)</p>
-
-<p><strong>schema.graphqls</strong></p>
-
-<div class="language-graphql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span><span class="w"> </span><span class="n">Member</span><span class="p">{</span><span class="w">
-    </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">ID</span><span class="p">!</span><span class="w">
-    </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">!</span><span class="w">
-    </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">!</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span><span class="k">type</span><span class="w"> </span><span class="n">MemberResponseDto</span><span class="p">{</span><span class="w">
-    </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">ID</span><span class="p">!</span><span class="w">
-    </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">!</span><span class="w">
-    </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">!</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span><span class="c"># @QueryMapping 메서드 이름과 동일</span><span class="w">
-</span><span class="c"># value 속성을 통해서 이름을 정해줄 수 있음</span><span class="w">
-</span><span class="k">type</span><span class="w"> </span><span class="n">Query</span><span class="p">{</span><span class="w">
-    </span><span class="n">getMember</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">ID</span><span class="p">!):</span><span class="w"> </span><span class="n">Member</span><span class="w">
-    </span><span class="n">getMembers</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Member</span><span class="p">]</span><span class="w">
-
-    </span><span class="n">getMemberResponseDto</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">ID</span><span class="p">!):</span><span class="w"> </span><span class="n">MemberResponseDto</span><span class="w">
-    </span><span class="n">getMembersResponseDto</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">MemberResponseDto</span><span class="p">]</span><span class="w">
-
-    </span><span class="n">getMemberBySchema</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">ID</span><span class="p">!):</span><span class="w"> </span><span class="n">Member</span><span class="w">
-    </span><span class="n">getMembersBySchema</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Member</span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span><span class="c"># @MutationMapping 메서드 이름과 동일</span><span class="w">
-</span><span class="c"># value 속성을 통해서 이름을 정해줄 수 있음</span><span class="w">
-</span><span class="k">type</span><span class="w"> </span><span class="n">Mutation</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">postMember</span><span class="p">(</span><span class="w">
-        </span><span class="n">id</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w">
-        </span><span class="n">name</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w">
-        </span><span class="n">age</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w">
-    </span><span class="p">):</span><span class="w"> </span><span class="n">Member</span><span class="w">
-    </span><span class="n">postMemberByMutation</span><span class="p">(</span><span class="w">
-        </span><span class="n">id</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w">
-        </span><span class="n">name</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w">
-        </span><span class="n">age</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="w">
-    </span><span class="p">):</span><span class="w"> </span><span class="n">Member</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>Member.java</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
-<span class="nd">@Builder</span>
-<span class="nd">@Getter</span>
-<span class="nd">@Setter</span>
-<span class="nd">@NoArgsConstructor</span>
-<span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
-    <span class="nd">@Id</span>
-    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">age</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>MemberService.java</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Service</span>
-<span class="nd">@Transactional</span>
-<span class="nd">@RequiredArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">findMemberById</span><span class="o">(</span><span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">findMember</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">findMember</span><span class="o">.</span><span class="na">orElseThrow</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nc">BusinessLogicException</span><span class="o">(</span><span class="nc">ExceptionCode</span><span class="o">.</span><span class="na">MEMBER_NOT_FOUND</span><span class="o">));</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">findAllMember</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">saveMember</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-    <span class="o">}</span>
-
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>MemberRepository.java</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">MemberRepository</span> <span class="kd">extends</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">,</span> <span class="nc">Long</span><span class="o">&gt;</span> <span class="o">{</span>
-<span class="o">}</span>
-
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p><strong>MemberMapper.java</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberMapper</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">MemberResponseDto</span> <span class="nf">memberToMemberResponseDto</span><span class="o">(</span><span class="nc">Member</span> <span class="n">member</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="nc">MemberResponseDto</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getId</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">name</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getName</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">age</span><span class="o">(</span><span class="n">member</span><span class="o">.</span><span class="na">getAge</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MemberResponseDto</span><span class="o">&gt;</span> <span class="nf">memberListToMemberResponseDtoList</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">members</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">members</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">member</span> <span class="o">-&gt;</span> <span class="o">{</span>
-                    <span class="k">return</span> <span class="nf">memberToMemberResponseDto</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-                <span class="o">})</span>
-                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Member</span> <span class="nf">toEntity</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Integer</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">Member</span> <span class="n">newMember</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Member</span><span class="o">();</span>
-        <span class="n">newMember</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
-        <span class="n">newMember</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="n">age</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">newMember</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<p>위에까지는 REST API와 별반 다르지 않은 계층의 코드이다. <br />
-Repository - Service 계층이고 Mapper를 이용해 맵핑을 도와주는 클래스다.  <br />
-Controller 부터는 조금 달라진 모습을 볼 수 있을 것이다.</p>
-
-<p><strong>MemberController.java</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
-* EndPoint : http://localhost:8080/graphql
-* Test 접속 URL : http://localhost:8080/graphiql 에 쿼리를 입력
-* */</span>
-<span class="nd">@Controller</span>
-<span class="nd">@RequiredArgsConstructor</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberController</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MemberMapper</span> <span class="n">memberMapper</span><span class="o">;</span>
-
-    <span class="cm">/*
-    * @QueryMapping
-    * -&gt; 주로 Read에 사용됩니다. (REST API @GetMapping과 대응)
-    * */</span>
-
-    <span class="nd">@QueryMapping</span>
-    <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">getMember</span><span class="o">(</span><span class="nd">@Argument</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">){</span>
-        <span class="k">return</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findMemberById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@QueryMapping</span>
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">getMembers</span><span class="o">(){</span>
-        <span class="k">return</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findAllMember</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="nd">@QueryMapping</span>
-    <span class="kd">public</span> <span class="nc">MemberResponseDto</span> <span class="nf">getMemberResponseDto</span><span class="o">(</span><span class="nd">@Argument</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">){</span>
-        <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findMemberById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">memberMapper</span><span class="o">.</span><span class="na">memberToMemberResponseDto</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@QueryMapping</span>
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">MemberResponseDto</span><span class="o">&gt;</span> <span class="nf">getMembersResponseDto</span><span class="o">(){</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="n">allMember</span> <span class="o">=</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findAllMember</span><span class="o">();</span>
-        <span class="k">return</span> <span class="n">memberMapper</span><span class="o">.</span><span class="na">memberListToMemberResponseDtoList</span><span class="o">(</span><span class="n">allMember</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="cm">/*
-    * @MutationMapping
-    * -&gt; 주로 Create, Update, Delete에 사용됩니다.
-    * */</span>
-    <span class="nd">@MutationMapping</span>
-    <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">postMember</span><span class="o">(</span><span class="nd">@Argument</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span>
-                             <span class="nd">@Argument</span> <span class="nc">Integer</span> <span class="n">age</span><span class="o">){</span>
-
-        <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberMapper</span><span class="o">.</span><span class="na">toEntity</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">memberService</span><span class="o">.</span><span class="na">saveMember</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="cm">/*
-    * @SchemaMapping
-    * -&gt; @QueryMapping, @MutationMapping 를 선택하여 사용할 수 있음.
-    * */</span>
-    <span class="nd">@SchemaMapping</span><span class="o">(</span><span class="n">typeName</span> <span class="o">=</span> <span class="s">"Query"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">getMemberBySchema</span><span class="o">(</span><span class="nd">@Argument</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findMemberById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="nd">@SchemaMapping</span><span class="o">(</span><span class="n">typeName</span> <span class="o">=</span> <span class="s">"Query"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Member</span><span class="o">&gt;</span> <span class="nf">getMembersBySchema</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">memberService</span><span class="o">.</span><span class="na">findAllMember</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="nd">@SchemaMapping</span><span class="o">(</span><span class="n">typeName</span> <span class="o">=</span> <span class="s">"Mutation"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">Member</span> <span class="nf">postMemberByMutation</span><span class="o">(</span><span class="nd">@Argument</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span>
-                                       <span class="nd">@Argument</span> <span class="nc">Integer</span> <span class="n">age</span><span class="o">){</span>
-        <span class="nc">Member</span> <span class="n">member</span> <span class="o">=</span> <span class="n">memberMapper</span><span class="o">.</span><span class="na">toEntity</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">memberService</span><span class="o">.</span><span class="na">saveMember</span><span class="o">(</span><span class="n">member</span><span class="o">);</span>
-    <span class="o">}</span>
-
-<span class="o">}</span>
-</code></pre></div></div>
-<p>첫번쨰로 어노테이션들이 기존에 사용하던 Mapping어노테이션과는 다르고 <br />
-@ReqeustBody와 같은 어노테이션도 사용하지 않는 모습이다. <br />
-반환타입도 <code class="language-plaintext highlighter-rouge">schema.graphqls</code>에 지정되어있는 클래스들을 반환 타입으로 사용하였고</p>
-
-<p>메서드 이름을 통해 Query,Mutation에 접근하는 형태를 가지고있다. <br />
-value라는 속성값을 이용하면 ex) @MutationMapping(value = “postMember”) <br />
-메서드 이름이아닌 지정한대로 변경도 가능하다.</p>
-
-<p>REST API와 어노테이션과 반환형식만 다르지 <br />
-크게 코드적으로 어렵게 작성해야하는 부분은 없다.  <br />
-이런 기능을 제공해주는 Spring에게 감사를,,,</p>
-
-<p><br /></p>
-
-<h4 id="테스트-진행">테스트 진행</h4>
-
-<p>이제 위와 같이 프로젝트 셋팅이 끝났으면 <br />
-Controller에 작성한 API를 검증할 수 있다.</p>
-
-<p>Spring Boot를 실행하면</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/231749021-722b6320-da74-4163-b506-09102951b10b.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위 사진과 같이 GraphQL endpoint가 표시되면 정상적으로 실행된 것이다. <br />
-로컬환경에서 API 요청시 <code class="language-plaintext highlighter-rouge">localhost:8080/graphql</code>로 요청을 진행하면된다.</p>
-
-<p><br /></p>
-
-<p>실제 API를 테스트하는 방법은 2가지 정도 있다.</p>
-
-<p><strong>1). Postman을 통한 요청</strong></p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/231749779-9bdc4a6d-7094-44cb-b6f5-90718bce5139.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>포스트맨으로 위에 앤드포인트로 요청하면  <br />
-위와 같이 정상적으로 작동하는지 확인이 가능하다.</p>
-
-<p>문법 자동완성이되지 않아 2번방법을 추천한다.</p>
-
-<p><br /></p>
-
-<p><strong>2). graphiql을 통한 요청</strong></p>
-
-<p>브라우저에 <code class="language-plaintext highlighter-rouge">localhost:8080/graphiql</code>를 접속하면된다. <br />
-<code class="language-plaintext highlighter-rouge">i</code>가 추가되었으니 이점을 꼭 참고하자</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/231749144-a022257c-8461-4fcf-958c-52b63ec70b0b.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>접속하게되면 위와 같이 쿼리를 입력하고 오른쪽에는 출력이된 화면이 표시된다.</p>
-
-<p>실제로 요청 쿼리를 만들어 보냈을 경우</p>
-
-<p><img src="https://user-images.githubusercontent.com/95069395/231749203-7dd0f47b-d09e-4ed5-afec-9f5efa09089d.png" alt="image" class="align-left" style="max-width: 100%" /></p>
-
-<p>위에 처럼 확인이 가능한 모습을 볼 수 있다. <br />
-프론트쪽에서 원하는 데이터를 요청하는 것들만 만들어서 <br />
-반환하는 특성을 확인해 볼 수 있다.</p>
-
-<p><br /></p>
-
-<p>그럼 실제로 우리가 위에서 만든 Controller를 테스트하기 위해서 <br />
-아래와 같은 쿼리문이 필요하다.</p>
-
-<pre><code class="language-roomsql">query{
-    getMember(id:1) {
-      id
-      name
-      age
-    }
-    getMembers {
-      id
-      name
-    }
-    getMemberResponseDto(id :1) {
-      id
-      name
-      age
-    }
-    getMembersResponseDto {
-      id
-      name
-    }
-    getMemberBySchema(id :1) {
-      id
-      name
-      age
-    }
-    getMembersBySchema {
-      id
-      name
-    }
-}
-</code></pre>
-
-<p>총 6개 API를 호출하는 테스트이다.</p>
-
-<p><br /></p>
-
-<p>또한 POST를 해보기 위해서 <br />
-mutation를 만들어서 실제로 Database에 저장되는지도 확인해보았다.</p>
-
-<pre><code class="language-roomsql">mutation{
-    postMember(name:"미노이", age:18){
-        id
-        name
-        age
-    }
-    postMemberByMutation(name:"김채원", age:19){
-        id
-        name
-        age
-    }
-}
-</code></pre>
-<p><code class="language-plaintext highlighter-rouge">@Argument</code>로 받을 매개변수 설정(name, age)하여 <br />
-id,name,age를 반환받는다고 보면 될 것 같다.</p>
-
-<p><br /></p>
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 없어진 기록 찾기]]></summary></entry><entry><title type="html">[Programmers] 있었는데요 없었습니다 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/13/sql-have.html" rel="alternate" type="text/html" title="[Programmers] 있었는데요 없었습니다 (MySQL)" /><published>2023-05-13T00:00:00+09:00</published><updated>2023-05-13T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/13/sql-have</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/13/sql-have.html"><![CDATA[<h2 id="-문제--있었는데요-없었습니다">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59043">있었는데요 없었습니다</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ANIMAL_ID</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>ANIMAL_TYPE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>INTAKE_CONDITION</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR(N)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>SEX_UPON_INTAKE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code> 테이블은 동물 보호소에서 입양 보낸 동물의 정보를 담은 테이블입니다. <code>ANIMAL_OUTS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>NAME</code>, <code>SEX_UPON_OUTCOME</code>는 각각 동물의 아이디, 생물 종, 입양일, 이름, 성별 및 중성화 여부를 나타냅니다. <code>ANIMAL_OUTS</code> 테이블의 <code>ANIMAL_ID</code>는 <code>ANIMAL_INS</code>의 <code>ANIMAL_ID</code>의 외래 키입니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ANIMAL_ID</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>ANIMAL_TYPE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR(N)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>SEX_UPON_OUTCOME</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>관리자의 실수로 일부 동물의 입양일이 잘못 입력되었습니다. 보호 시작일보다 입양일이 더 빠른 동물의 아이디와 이름을 조회하는 SQL문을 작성해주세요. 이때 결과는 보호 시작일이 빠른 순으로 조회해야합니다. </p>
+
+<h5>예시</h5>
+
+<p>예를 들어, <code>ANIMAL_INS</code> 테이블과 <code>ANIMAL_OUTS</code> 테이블이 다음과 같다면</p>
+
+<p><code>ANIMAL_INS</code></p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>INTAKE_CONDITION</th>
+<th>NAME</th>
+<th>SEX_UPON_INTAKE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A350276</td>
+<td>Cat</td>
+<td>2017-08-13 13:50:00</td>
+<td>Normal</td>
+<td>Jewel</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A381217</td>
+<td>Dog</td>
+<td>2017-07-08 09:41:00</td>
+<td>Sick</td>
+<td>Cherokee</td>
+<td>Neutered Male</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code></p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>NAME</th>
+<th>SEX_UPON_OUTCOME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A350276</td>
+<td>Cat</td>
+<td>2018-01-28 17:51:00</td>
+<td>Jewel</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A381217</td>
+<td>Dog</td>
+<td>2017-06-09 18:51:00</td>
+<td>Cherokee</td>
+<td>Neutered Male</td>
+</tr>
+</tbody>
+      </table>
+<p>SQL문을 실행하면 다음과 같이 나와야 합니다. </p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>NAME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A381217</td>
+<td>Cherokee</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
 
 <hr />
 
-<p>이렇게 오늘은 REST API대신에 GraphQL이라는 새로운 방식을 <br />
-공부해보았다. 처음에 생소해서 공식문서랑 여러 블로그를 뒤져가면서 공부했는데  <br />
-직접 코드를 작성하면서 체득하는 것이 확실히 이해하는데 빠른 것 같다.</p>
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
 
-<p><br />
-<br /></p>
+<ol>
+  <li>LEFT JOIN을 통해 두개의 테이블을 합친다.</li>
+  <li>보호시작일(i.DATETIME) &gt; 입양일(o.DATETIME)이 되어야 입양일이 더빠른 조건식이다.</li>
+  <li>WHERE절을 이용해 입양일이 보호시작일보다 빠른 데이터만 필터링한다.</li>
+  <li>보호시작일 기준으로 오름차순 정렬한다.</li>
+</ol>
 
-<p><strong>✨ 참고 블로그</strong></p>
+<pre><code class="language-roomsql">SELECT o.ANIMAL_ID,
+    o.NAME
+FROM ANIMAL_OUTS o
+LEFT JOIN ANIMAL_INS i
+ON o.ANIMAL_ID = i.ANIMAL_ID
+WHERE i.DATETIME &gt; o.DATETIME
+ORDER BY i.DATETIME ASC;
+</code></pre>
 
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 있었는데요 없었습니다]]></summary></entry><entry><title type="html">[Programmers] 오랜 기간 보호한 동물(1) (MySQL)</title><link href="http://localhost:4000/sql/2023/05/12/sql-longkeepanimal.html" rel="alternate" type="text/html" title="[Programmers] 오랜 기간 보호한 동물(1) (MySQL)" /><published>2023-05-12T00:00:00+09:00</published><updated>2023-05-12T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/12/sql-longkeepanimal</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/12/sql-longkeepanimal.html"><![CDATA[<h2 id="-문제--오랜-기간-보호한-동물1">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59044">오랜 기간 보호한 동물(1)</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ANIMAL_ID</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>ANIMAL_TYPE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>INTAKE_CONDITION</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR(N)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>SEX_UPON_INTAKE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code> 테이블은 동물 보호소에서 입양 보낸 동물의 정보를 담은 테이블입니다. <code>ANIMAL_OUTS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>NAME</code>, <code>SEX_UPON_OUTCOME</code>는 각각 동물의 아이디, 생물 종, 입양일, 이름, 성별 및 중성화 여부를 나타냅니다. <code>ANIMAL_OUTS</code> 테이블의 <code>ANIMAL_ID</code>는 <code>ANIMAL_INS</code>의 <code>ANIMAL_ID</code>의 외래 키입니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ANIMAL_ID</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>ANIMAL_TYPE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR(N)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>SEX_UPON_OUTCOME</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>아직 입양을 못 간 동물 중, 가장 오래 보호소에 있었던 동물 3마리의 이름과 보호 시작일을 조회하는 SQL문을 작성해주세요. 이때 결과는 보호 시작일 순으로 조회해야 합니다.</p>
+
+<h5>예시</h5>
+
+<p>예를 들어, <code>ANIMAL_INS</code> 테이블과 <code>ANIMAL_OUTS</code> 테이블이 다음과 같다면</p>
+
+<p><code>ANIMAL_INS</code></p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>INTAKE_CONDITION</th>
+<th>NAME</th>
+<th>SEX_UPON_INTAKE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A354597</td>
+<td>Cat</td>
+<td>2014-05-02 12:16:00</td>
+<td>Normal</td>
+<td>Ariel</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A373687</td>
+<td>Dog</td>
+<td>2014-03-20 12:31:00</td>
+<td>Normal</td>
+<td>Rosie</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A412697</td>
+<td>Dog</td>
+<td>2016-01-03 16:25:00</td>
+<td>Normal</td>
+<td>Jackie</td>
+<td>Neutered Male</td>
+</tr>
+<tr>
+<td>A413789</td>
+<td>Dog</td>
+<td>2016-04-19 13:28:00</td>
+<td>Normal</td>
+<td>Benji</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A414198</td>
+<td>Dog</td>
+<td>2015-01-29 15:01:00</td>
+<td>Normal</td>
+<td>Shelly</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A368930</td>
+<td>Dog</td>
+<td>2014-06-08 13:20:00</td>
+<td>Normal</td>
+<td></td>
+<td>Spayed Female</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code></p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>NAME</th>
+<th>SEX_UPON_OUTCOME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A354597</td>
+<td>Cat</td>
+<td>2014-05-02 12:16:00</td>
+<td>Ariel</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A373687</td>
+<td>Dog</td>
+<td>2014-03-20 12:31:00</td>
+<td>Rosie</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A368930</td>
+<td>Dog</td>
+<td>2014-06-13 15:52:00</td>
+<td></td>
+<td>Spayed Female</td>
+</tr>
+</tbody>
+      </table>
+<p>SQL문을 실행하면 다음과 같이 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>DATETIME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>Shelly</td>
+<td>2015-01-29 15:01:00</td>
+</tr>
+<tr>
+<td>Jackie</td>
+<td>2016-01-03 16:25:00</td>
+</tr>
+<tr>
+<td>Benji</td>
+<td>2016-04-19 13:28:00</td>
+</tr>
+</tbody>
+      </table>
+<p>※ 입양을 가지 못한 동물이 3마리 이상인 경우만 입력으로 주어집니다.</p>
+
+<hr />
+
+<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>ORDER BY의 기준을 오래된 입양순이기 때문에 ANIMAL_INS 테이블에서 DATETIME을 기준으로 오름차순 정렬한다.</li>
+  <li>입양 여부를 파악하기 위해서 JOIN을 한다.</li>
+  <li>여기서 보호가 가장 오래된 동물은 아직 입양되지 않은 동물이기 때문에 is null로 찾아준다.</li>
+  <li>3마리만 표시해야하기 때문에 LIMIT를 사용</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT i.NAME,
+    i.DATETIME
+FROM ANIMAL_INS i
+LEFT JOIN ANIMAL_OUTS o
+ON o.ANIMAL_ID = i.ANIMAL_ID
+WHERE o.DATETIME is null
+ORDER BY i.DATETIME ASC
+LIMIT 3;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 오랜 기간 보호한 동물(1)]]></summary></entry><entry><title type="html">[Programmers] 오랜 기간 보호한 동물(2) (MySQL)</title><link href="http://localhost:4000/sql/2023/05/09/sql-longkeepanimal.html" rel="alternate" type="text/html" title="[Programmers] 오랜 기간 보호한 동물(2) (MySQL)" /><published>2023-05-09T00:00:00+09:00</published><updated>2023-05-09T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/09/sql-longkeepanimal</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/09/sql-longkeepanimal.html"><![CDATA[<h2 id="-문제--오랜-기간-보호한-동물2">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/59411">오랜 기간 보호한 동물(2)</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p><code>ANIMAL_INS</code> 테이블은 동물 보호소에 들어온 동물의 정보를 담은 테이블입니다. <code>ANIMAL_INS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>INTAKE_CONDITION</code>, <code>NAME</code>, <code>SEX_UPON_INTAKE</code>는 각각 동물의 아이디, 생물 종, 보호 시작일, 보호 시작 시 상태, 이름, 성별 및 중성화 여부를 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ANIMAL_ID</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>ANIMAL_TYPE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>INTAKE_CONDITION</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR(N)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>SEX_UPON_INTAKE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code> 테이블은 동물 보호소에서 입양 보낸 동물의 정보를 담은 테이블입니다. <code>ANIMAL_OUTS</code> 테이블 구조는 다음과 같으며, <code>ANIMAL_ID</code>, <code>ANIMAL_TYPE</code>, <code>DATETIME</code>, <code>NAME</code>, <code>SEX_UPON_OUTCOME</code>는 각각 동물의 아이디, 생물 종, 입양일, 이름, 성별 및 중성화 여부를 나타냅니다. <code>ANIMAL_OUTS</code> 테이블의 <code>ANIMAL_ID</code>는 <code>ANIMAL_INS</code>의 <code>ANIMAL_ID</code>의 외래 키입니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>TYPE</th>
+<th>NULLABLE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ANIMAL_ID</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>ANIMAL_TYPE</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>DATETIME</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR(N)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>SEX_UPON_OUTCOME</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<p>입양을 간 동물 중, 보호 기간이 가장 길었던 동물 두 마리의 아이디와 이름을 조회하는 SQL문을 작성해주세요. 이때 결과는 보호 기간이 긴 순으로 조회해야 합니다.</p>
+
+<h5>예시</h5>
+
+<p>예를 들어, <code>ANIMAL_INS</code> 테이블과 <code>ANIMAL_OUTS</code> 테이블이 다음과 같다면</p>
+
+<p><code>ANIMAL_INS</code></p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>INTAKE_CONDITION</th>
+<th>NAME</th>
+<th>SEX_UPON_INTAKE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A354597</td>
+<td>Cat</td>
+<td>2014-05-02 12:16:00</td>
+<td>Normal</td>
+<td>Ariel</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A362707</td>
+<td>Dog</td>
+<td>2016-01-27 12:27:00</td>
+<td>Sick</td>
+<td>Girly Girl</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A370507</td>
+<td>Cat</td>
+<td>2014-10-27 14:43:00</td>
+<td>Normal</td>
+<td>Emily</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A414513</td>
+<td>Dog</td>
+<td>2016-06-07 09:17:00</td>
+<td>Normal</td>
+<td>Rocky</td>
+<td>Neutered Male</td>
+</tr>
+</tbody>
+      </table>
+<p><code>ANIMAL_OUTS</code></p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>ANIMAL_TYPE</th>
+<th>DATETIME</th>
+<th>NAME</th>
+<th>SEX_UPON_OUTCOME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A354597</td>
+<td>Cat</td>
+<td>2014-06-03 12:30:00</td>
+<td>Ariel</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A362707</td>
+<td>Dog</td>
+<td>2017-01-10 10:44:00</td>
+<td>Girly Girl</td>
+<td>Spayed Female</td>
+</tr>
+<tr>
+<td>A370507</td>
+<td>Cat</td>
+<td>2015-08-15 09:24:00</td>
+<td>Emily</td>
+<td>Spayed Female</td>
+</tr>
+</tbody>
+      </table>
+<p>SQL문을 실행하면 다음과 같이 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>ANIMAL_ID</th>
+<th>NAME</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>A362707</td>
+<td>Girly Girl</td>
+</tr>
+<tr>
+<td>A370507</td>
+<td>Emily</td>
+</tr>
+</tbody>
+      </table>
+<p>※ 입양을 간 동물이 2마리 이상인 경우만 입력으로 주어집니다.</p>
+
+<hr />
+
+<p>본 문제는 <a href="https://www.kaggle.com/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes" target="_blank" rel="noopener">Kaggle의 "Austin Animal Center Shelter Intakes and Outcomes"</a>에서 제공하는 데이터를 사용하였으며 <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank" rel="noopener">ODbL</a>의 적용을 받습니다.</p>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>ORDER BY의 기준을 시간차이로 내림차순 정렬한다.</li>
+  <li>보호기간을 확인하기 위해서는 두개의 테이블을 JOIN하여 확인해야한다.</li>
+  <li>LIMIT를 이용해 가장 높은 값의 2개를 필터링한다.</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT o.ANIMAL_ID,
+    o.NAME
+FROM ANIMAL_INS o
+LEFT JOIN ANIMAL_OUTS i
+ON o.ANIMAL_ID = i.ANIMAL_ID
+ORDER BY TIMESTAMPDIFF(SECOND, o.DATETIME, i.DATETIME) DESC
+LIMIT 2;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 오랜 기간 보호한 동물(2)]]></summary></entry><entry><title type="html">[Programmers] 헤비 유저가 소유한 장소 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/08/sql-heavyuser.html" rel="alternate" type="text/html" title="[Programmers] 헤비 유저가 소유한 장소 (MySQL)" /><published>2023-05-08T00:00:00+09:00</published><updated>2023-05-08T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/08/sql-heavyuser</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/08/sql-heavyuser.html"><![CDATA[<h2 id="-문제--헤비-유저가-소유한-장소">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/77487">헤비 유저가 소유한 장소</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p><code>PLACES</code> 테이블은 공간 임대 서비스에 등록된 공간의 정보를 담은 테이블입니다. <code>PLACES</code> 테이블의 구조는 다음과 같으며 <code>ID</code>, <code>NAME</code>, <code>HOST_ID</code>는 각각 공간의 아이디, 이름, 공간을 소유한 유저의 아이디를 나타냅니다. <code>ID</code>는 기본키입니다.</p>
+<table class="table">
+        <thead><tr>
+<th>NAME</th>
+<th>TYPE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ID</td>
+<td>INT</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>VARCHAR</td>
+</tr>
+<tr>
+<td>HOST_ID</td>
+<td>INT</td>
+</tr>
+</tbody>
+      </table>
+<h5>문제</h5>
+
+<p>이 서비스에서는 공간을 둘 이상 등록한 사람을 "헤비 유저"라고 부릅니다. 헤비 유저가 등록한 공간의 정보를 아이디 순으로 조회하는 SQL문을 작성해주세요.</p>
+
+<h5>예시</h5>
+
+<p>예를 들어, <code>PLACES</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>ID</th>
+<th>NAME</th>
+<th>HOST_ID</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>4431977</td>
+<td>BOUTIQUE STAYS - Somerset Terrace, Pet Friendly</td>
+<td>760849</td>
+</tr>
+<tr>
+<td>5194998</td>
+<td>BOUTIQUE STAYS - Elwood Beaches 3, Pet Friendly</td>
+<td>760849</td>
+</tr>
+<tr>
+<td>16045624</td>
+<td>Urban Jungle in the Heart of Melbourne</td>
+<td>30900122</td>
+</tr>
+<tr>
+<td>17810814</td>
+<td>Stylish Bayside Retreat with a Luscious Garden</td>
+<td>760849</td>
+</tr>
+<tr>
+<td>22740286</td>
+<td>FREE PARKING - The Velvet Lux in Melbourne CBD</td>
+<td>30900122</td>
+</tr>
+<tr>
+<td>22868779</td>
+<td>★ Fresh Fitzroy Pad with City Views! ★</td>
+<td>21058208</td>
+</tr>
+</tbody>
+      </table>
 <ul>
-  <li><a href="https://www.graphql-java.com/tutorials/getting-started-with-spring-boot">graphql 공식문서</a></li>
-  <li><a href="https://hahahoho5915.tistory.com/56">hahahoho5915님 블로그 - 깃레포참고</a></li>
-  <li><a href="https://danawalab.github.io/spring/2022/06/06/Spring-for-GraphQL.html">danawalab님 블로그</a></li>
-  <li><a href="https://siyoon210.tistory.com/153">siyoon210님 블로그</a></li>
-  <li><a href="https://velog.io/@jyleedev/Spring-GraphQL-Postman-%EC%98%88%EC%A0%9C-%EC%8B%A4%EC%8A%B5">jyleedev님 블로그</a></li>
-  <li><a href="https://kotlinworld.com/330">kotlinworld님 블로그</a></li>
+<li>760849번 유저는 공간을 3개 등록했으므로 이 유저는 헤비유저입니다. </li>
+<li>30900122번 유저는 공간을 2개 등록했으므로 이 유저는 헤비유저입니다.</li>
+<li>21058208번 유저는 공간을 1개 등록했으므로 이 유저는 헤비유저가 아닙니다.</li>
 </ul>
 
-<p><br />
-<br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="Spring" /><category term="Spring" /><category term="QueryDSL" /><summary type="html"><![CDATA[오늘은 REST API와 조금 다룬 GraphQL에 대해서 기본적인 개념와 실습을 위해 프로젝트를 하나파서 만들어봤다.]]></summary></entry></feed>
+<p>따라서 SQL 문을 실행하면 다음과 같이 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>ID</th>
+<th>NAME</th>
+<th>HOST_ID</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>4431977</td>
+<td>BOUTIQUE STAYS - Somerset Terrace, Pet Friendly</td>
+<td>760849</td>
+</tr>
+<tr>
+<td>5194998</td>
+<td>BOUTIQUE STAYS - Elwood Beaches 3, Pet Friendly</td>
+<td>760849</td>
+</tr>
+<tr>
+<td>16045624</td>
+<td>Urban Jungle in the Heart of Melbourne</td>
+<td>30900122</td>
+</tr>
+<tr>
+<td>17810814</td>
+<td>Stylish Bayside Retreat with a Luscious Garden</td>
+<td>760849</td>
+</tr>
+<tr>
+<td>22740286</td>
+<td>FREE PARKING - The Velvet Lux in Melbourne CBD</td>
+<td>30900122</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>HOST_ID가 2개 이상인 데이터들만 추출하면되는 간단한 문제이다.</li>
+  <li>SUB 쿼리를 이용하여 HOST_ID를 GROUP BY하여 일치한 값만 추출한다.</li>
+  <li>ID 기준으로 오름차순 정렬</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT *
+FROM PLACES
+WHERE HOST_ID IN (
+    SELECT HOST_ID
+    FROM PLACES
+    GROUP BY HOST_ID
+    HAVING COUNT(HOST_ID) &gt;= 2
+)
+ORDER BY ID ASC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 헤비 유저가 소유한 장소]]></summary></entry><entry><title type="html">[Programmers] 조건별로 분류하여 주문상태 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/06/sql-orderseparate.html" rel="alternate" type="text/html" title="[Programmers] 조건별로 분류하여 주문상태 출력하기 (MySQL)" /><published>2023-05-06T00:00:00+09:00</published><updated>2023-05-06T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/06/sql-orderseparate</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/06/sql-orderseparate.html"><![CDATA[<h2 id="-문제--조건별로-분류하여-주문상태-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131113">조건별로 분류하여 주문상태 출력하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 식품공장의 주문정보를 담은 <code>FOOD_ORDER</code> 테이블입니다. <code>FOOD_ORDER</code> 테이블은 다음과 같으며 <code>ORDER_ID</code>, <code>PRODUCT_ID</code>, <code>AMOUNT</code>, <code>PRODUCE_DATE</code>, <code>IN_DATE</code>,<code>OUT_DATE</code>,<code>FACTORY_ID</code>, <code>WAREHOUSE_ID</code>는 각각 주문 ID, 제품 ID, 주문양, 생산일자, 입고일자, 출고일자, 공장 ID, 창고 ID를 의미합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>ORDER_ID</td>
+<td>VARCHAR(10)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRODUCT_ID</td>
+<td>VARCHAR(5)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>AMOUNT</td>
+<td>NUMBER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>PRODUCE_DATE</td>
+<td>DATE</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>IN_DATE</td>
+<td>DATE</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>OUT_DATE</td>
+<td>DATE</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>FACTORY_ID</td>
+<td>VARCHAR(10)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>WAREHOUSE_ID</td>
+<td>VARCHAR(10)</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>FOOD_ORDER</code> 테이블에서 5월 1일을 기준으로 주문 ID, 제품 ID, 출고일자, 출고여부를 조회하는 SQL문을 작성해주세요. 출고여부는 5월 1일까지 출고완료로 이 후 날짜는 출고 대기로 미정이면 출고미정으로 출력해주시고, 결과는 주문 ID를 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p><code>FOOD_ORDER</code> 테이블이 다음과 같을 때</p>
+<table class="table">
+        <thead><tr>
+<th>ORDER_ID</th>
+<th>PRODUCT_ID</th>
+<th>AMOUNT</th>
+<th>PRODUCE_DATE</th>
+<th>IN_DATE</th>
+<th>OUT_DATE</th>
+<th>FACTORY_ID</th>
+<th>WAREHOUSE_ID</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>OD00000051</td>
+<td>P0002</td>
+<td>4000</td>
+<td>2022-04-01</td>
+<td>2022-04-21</td>
+<td>2022-04-21</td>
+<td>FT19970003</td>
+<td>WH0005</td>
+</tr>
+<tr>
+<td>OD00000052</td>
+<td>P0003</td>
+<td>2500</td>
+<td>2022-04-10</td>
+<td>2022-04-27</td>
+<td>2022-04-27</td>
+<td>FT19970003</td>
+<td>WH0006</td>
+</tr>
+<tr>
+<td>OD00000053</td>
+<td>P0005</td>
+<td>6200</td>
+<td>2022-04-15</td>
+<td>2022-04-30</td>
+<td>2022-05-01</td>
+<td>FT19940003</td>
+<td>WH0003</td>
+</tr>
+<tr>
+<td>OD00000054</td>
+<td>P0006</td>
+<td>1000</td>
+<td>2022-04-21</td>
+<td>2022-04-30</td>
+<td>NULL</td>
+<td>FT19940003</td>
+<td>WH0009</td>
+</tr>
+<tr>
+<td>OD00000055</td>
+<td>P0008</td>
+<td>1500</td>
+<td>2022-04-25</td>
+<td>2022-05-11</td>
+<td>2022-05-11</td>
+<td>FT19980003</td>
+<td>WH0009</td>
+</tr>
+</tbody>
+      </table>
+<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>ORDER_ID</th>
+<th>PRODUCT_ID</th>
+<th>OUT_DATE</th>
+<th>출고여부</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>OD00000051</td>
+<td>P0002</td>
+<td>2022-04-21</td>
+<td>출고완료</td>
+</tr>
+<tr>
+<td>OD00000052</td>
+<td>P0003</td>
+<td>2022-04-27</td>
+<td>출고완료</td>
+</tr>
+<tr>
+<td>OD00000053</td>
+<td>P0005</td>
+<td>2022-05-01</td>
+<td>출고완료</td>
+</tr>
+<tr>
+<td>OD00000054</td>
+<td>P0006</td>
+<td></td>
+<td>출고미정</td>
+</tr>
+<tr>
+<td>OD00000055</td>
+<td>P0008</td>
+<td>2022-05-11</td>
+<td>출고대기</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>DATE_FORMAT을 이용한 날짜의 형태를 변경</li>
+  <li>CASE WHEN THEN문을 이용한 날짜에 따른 출고 여부 표시하기</li>
+  <li>ORDER_ID 오름차순 정렬</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT ORDER_ID,
+    PRODUCT_ID,
+    DATE_FORMAT(OUT_DATE,'%Y-%m-%d') AS OUT_DATE,
+    CASE WHEN DATE_FORMAT(OUT_DATE,'%Y-%m-%d') &lt;= '2022-05-01' THEN '출고완료'
+    WHEN DATE_FORMAT(OUT_DATE,'%Y-%m-%d') &gt; '2022-05-01' THEN '출고대기'
+    ELSE '출고미정'
+    END AS 출고여부
+FROM FOOD_ORDER
+ORDER BY ORDER_ID ASC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 조건별로 분류하여 주문상태 출력하기]]></summary></entry><entry><title type="html">[Programmers] 즐겨찾기가 가장 많은 식당 정보 출력하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/05/sql-favorites.html" rel="alternate" type="text/html" title="[Programmers] 즐겨찾기가 가장 많은 식당 정보 출력하기 (MySQL)" /><published>2023-05-05T00:00:00+09:00</published><updated>2023-05-05T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/05/sql-favorites</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/05/sql-favorites.html"><![CDATA[<h2 id="-문제--즐겨찾기가-가장-많은-식당-정보-출력하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131123">즐겨찾기가 가장 많은 식당 정보 출력하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 식당의 정보를 담은 <code>REST_INFO</code> 테이블입니다. <code>REST_INFO</code> 테이블은 다음과 같으며 <code>REST_ID</code>, <code>REST_NAME</code>, <code>FOOD_TYPE</code>, <code>VIEWS</code>, <code>FAVORITES</code>, <code>PARKING_LOT</code>, <code>ADDRESS</code>, <code>TEL</code>은 식당 ID, 식당 이름, 음식 종류, 조회수, 즐겨찾기수, 주차장 유무, 주소, 전화번호를 의미합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>REST_ID</td>
+<td>VARCHAR(5)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>REST_NAME</td>
+<td>VARCHAR(50)</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>FOOD_TYPE</td>
+<td>VARCHAR(20)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>VIEWS</td>
+<td>NUMBER</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>FAVORITES</td>
+<td>NUMBER</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>PARKING_LOT</td>
+<td>VARCHAR(1)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>ADDRESS</td>
+<td>VARCHAR(100)</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td>TEL</td>
+<td>VARCHAR(100)</td>
+<td>TRUE</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>REST_INFO</code> 테이블에서 음식종류별로 즐겨찾기수가 가장 많은 식당의 음식 종류, ID, 식당 이름, 즐겨찾기수를 조회하는 SQL문을 작성해주세요. 이때 결과는 음식 종류를 기준으로 내림차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p><code>REST_INFO</code> 테이블이 다음과 같을 때</p>
+<table class="table">
+        <thead><tr>
+<th>REST_ID</th>
+<th>REST_NAME</th>
+<th>FOOD_TYPE</th>
+<th>VIEWS</th>
+<th>FAVORITES</th>
+<th>PARKING_LOT</th>
+<th>ADDRESS</th>
+<th>TEL</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>00001</td>
+<td>은돼지식당</td>
+<td>한식</td>
+<td>1150345</td>
+<td>734</td>
+<td>N</td>
+<td>서울특별시 중구 다산로 149</td>
+<td>010-4484-8751</td>
+</tr>
+<tr>
+<td>00002</td>
+<td>하이가쯔네</td>
+<td>일식</td>
+<td>120034</td>
+<td>112</td>
+<td>N</td>
+<td>서울시 중구 신당동 375-21</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>00003</td>
+<td>따띠따띠뜨</td>
+<td>양식</td>
+<td>1234023</td>
+<td>102</td>
+<td>N</td>
+<td>서울시 강남구 신사동 627-3 1F</td>
+<td>02-6397-1023</td>
+</tr>
+<tr>
+<td>00004</td>
+<td>스시사카우스</td>
+<td>일식</td>
+<td>1522074</td>
+<td>230</td>
+<td>N</td>
+<td>서울시 서울시 강남구 신사동 627-27</td>
+<td>010-9394-2554</td>
+</tr>
+<tr>
+<td>00005</td>
+<td>코슌스</td>
+<td>일식</td>
+<td>15301</td>
+<td>123</td>
+<td>N</td>
+<td>서울특별시 강남구 언주로153길</td>
+<td>010-1315-8729</td>
+</tr>
+</tbody>
+      </table>
+<p>SQL을 실행하면 다음과 같이 출력되어야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>FOOD_TYPE</th>
+<th>REST_ID</th>
+<th>REST_NAME</th>
+<th>FAVORITES</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>한식</td>
+<td>00001</td>
+<td>은돼지식당</td>
+<td>734</td>
+</tr>
+<tr>
+<td>일식</td>
+<td>00004</td>
+<td>스시사카우스</td>
+<td>230</td>
+</tr>
+<tr>
+<td>양식</td>
+<td>00003</td>
+<td>따띠따띠뜨</td>
+<td>102</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>가장 많은 즐겨찾기를 받은 음식종류를 찾기위해 SUB쿼리를 이용</li>
+  <li>음식종류로 GROUP BY</li>
+  <li>음식종류로 내림차순 진행</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT FOOD_TYPE,
+    REST_ID,
+    REST_NAME,
+    FAVORITES
+FROM REST_INFO
+WHERE FAVORITES IN (SELECT MAX(FAVORITES)
+                    FROM REST_INFO
+                    GROUP BY FOOD_TYPE)
+GROUP BY FOOD_TYPE
+ORDER BY FOOD_TYPE DESC;
+</code></pre>
+
+<p>여기서 조금 헷갈려하는 부분이 있어 참고차 적어본다. <br />
+우선 위에 코드에서는 즐겨찾기 수량을 SUB쿼리를 이용해 <br />
+최대값을 가진 음식종류의 행과 일치하는 즐겨찾기를 찾는 방법이다.</p>
+
+<p><br /></p>
+
+<p>아래와 같은 방식으로 푼 사람도 있을 것 같다.</p>
+
+<p><strong>오답</strong></p>
+
+<pre><code class="language-roomsql">SELECT FOOD_TYPE, 
+    REST_ID, 
+    REST_NAME, 
+    MAX(FAVORITES) 
+FROM REST_INFO
+GROUP BY FOOD_TYPE
+ORDER BY FOOD_TYPE DESC
+</code></pre>
+<p>위의 코드를 실행하면 결과는 동일하게 나오는 것 처럼 보일 것이다. <br />
+해당처럼 실행하면 각 그룹의 FAVORITES 최댓값을 가져온다. <br />
+하지만 행(튜플) 전체를 가져오진 않아서 첫 번째 행에 각 그룹의 <br />
+FAVORITES 최댓값만 덮어써진 형태이게된다.</p>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 즐겨찾기가 가장 많은 식당 정보 출력하기]]></summary></entry><entry><title type="html">[Programmers] 카테고리 별 도서 판매량 집계하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/04/sql-categorybook.html" rel="alternate" type="text/html" title="[Programmers] 카테고리 별 도서 판매량 집계하기 (MySQL)" /><published>2023-05-04T00:00:00+09:00</published><updated>2023-05-04T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/04/sql-categorybook</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/04/sql-categorybook.html"><![CDATA[<h2 id="-문제--카테고리-별-도서-판매량-집계하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/144855">카테고리 별 도서 판매량 집계하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 한 서점에서 판매중인 도서들의 도서 정보(<code>BOOK</code>), 판매 정보(<code>BOOK_SALES</code>) 테이블입니다.</p>
+
+<p><code>BOOK</code> 테이블은 각 도서의 정보를 담은 테이블로 아래와 같은 구조로 되어있습니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+<th>Description</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>BOOK_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>도서 ID</td>
+</tr>
+<tr>
+<td>CATEGORY</td>
+<td>VARCHAR(N)</td>
+<td>FALSE</td>
+<td>카테고리 (경제, 인문, 소설, 생활, 기술)</td>
+</tr>
+<tr>
+<td>AUTHOR_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>저자 ID</td>
+</tr>
+<tr>
+<td>PRICE</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>판매가 (원)</td>
+</tr>
+<tr>
+<td>PUBLISHED_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+<td>출판일</td>
+</tr>
+</tbody>
+      </table>
+<p><code>BOOK_SALES</code> 테이블은 각 도서의 날짜 별 판매량 정보를 담은 테이블로 아래와 같은 구조로 되어있습니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+<th>Description</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>BOOK_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>도서 ID</td>
+</tr>
+<tr>
+<td>SALES_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+<td>판매일</td>
+</tr>
+<tr>
+<td>SALES</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+<td>판매량</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>2022년 1월</code>의 카테고리 별 도서 판매량을 합산하고, 카테고리(<code>CATEGORY</code>), 총 판매량(<code>TOTAL_SALES</code>) 리스트를 출력하는 SQL문을 작성해주세요. <br />
+결과는 카테고리명을 기준으로 오름차순 정렬해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>BOOK</code> 테이블과 <code>BOOK_SALES</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>BOOK_ID</th>
+<th>CATEGORY</th>
+<th>AUTHOR_ID</th>
+<th>PRICE</th>
+<th>PUBLISHED_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>인문</td>
+<td>1</td>
+<td>10000</td>
+<td>2020-01-01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>경제</td>
+<td>1</td>
+<td>9000</td>
+<td>2021-02-05</td>
+</tr>
+<tr>
+<td>3</td>
+<td>경제</td>
+<td>2</td>
+<td>9000</td>
+<td>2021-03-11</td>
+</tr>
+</tbody>
+      </table>
+<table class="table">
+        <thead><tr>
+<th>BOOK_ID</th>
+<th>SALES_DATE</th>
+<th>SALES</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>2022-01-01</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2022-01-02</td>
+<td>3</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2022-01-05</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2022-01-20</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2022-01-21</td>
+<td>6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2022-01-22</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2022-02-11</td>
+<td>3</td>
+</tr>
+</tbody>
+      </table>
+<p>2022년 1월의 도서 별 총 판매량은 도서 ID 가 1 인 도서가 총 3권, 도서 ID 가 2 인 도서가 총 14권 이고, 도서 ID 가 3 인 도서가 총 2권 입니다.</p>
+
+<p>카테고리 별로 판매량을 집계한 결과는 다음과 같습니다.</p>
+<table class="table">
+        <thead><tr>
+<th>CATEGORY</th>
+<th>TOTAL_SALES</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>인문</td>
+<td>3</td>
+</tr>
+<tr>
+<td>경제</td>
+<td>16</td>
+</tr>
+</tbody>
+      </table>
+<p>카테고리명을 오름차순으로 정렬하면 다음과 같이 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>CATEGORY</th>
+<th>TOTAL_SALES</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>경제</td>
+<td>16</td>
+</tr>
+<tr>
+<td>인문</td>
+<td>3</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>판매된 수량을 집계해야하므로 SALES의 수량을 SUM() 함수를 이용해 총합을 더해줘야한다. COUNT와 헷갈리면 안된다.</li>
+  <li>BOOK_SALES 기준으로 LEFT JOIN을 하여 테이블을 합쳐준다.</li>
+  <li>GROUP BY를 카테고리 기준으로 진행한다.</li>
+  <li>WHERE절을 이용해 판매일이 2022-01에 해당하는 데이터만 필터링한다.</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT 
+    b.CATEGORY,
+    SUM(s.SALES) AS TOTAL_SALES
+FROM BOOK_SALES s
+LEFT JOIN BOOK b
+ON s.BOOK_ID = b.BOOK_ID
+WHERE SALES_DATE LIKE '2022-01%'
+GROUP BY b.CATEGORY
+ORDER BY b.CATEGORY ASC;
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 카테고리 별 도서 판매량 집계하기]]></summary></entry><entry><title type="html">[Programmers] 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기 (MySQL)</title><link href="http://localhost:4000/sql/2023/05/03/sql-carrentcount.html" rel="alternate" type="text/html" title="[Programmers] 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기 (MySQL)" /><published>2023-05-03T00:00:00+09:00</published><updated>2023-05-03T00:00:00+09:00</updated><id>http://localhost:4000/sql/2023/05/03/sql-carrentcount</id><content type="html" xml:base="http://localhost:4000/sql/2023/05/03/sql-carrentcount.html"><![CDATA[<h2 id="-문제--대여-횟수가-많은-자동차들의-월별-대여-횟수-구하기">📌 문제 : <a href="https://school.programmers.co.kr/learn/courses/30/lessons/151139">대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기</a></h2>
+
+<h3 id="-문제-설명">📖 문제 설명</h3>
+
+<p>다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블입니다. <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블은 아래와 같은 구조로 되어있으며, <code>HISTORY_ID</code>, <code>CAR_ID</code>, <code>START_DATE</code>, <code>END_DATE</code> 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.</p>
+<table class="table">
+        <thead><tr>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>HISTORY_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>CAR_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>START_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td>END_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
+</tr>
+</tbody>
+      </table>
+<hr />
+
+<h5>문제</h5>
+
+<p><code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블에서 대여 시작일을 기준으로 2022년 8월부터 2022년 10월까지 총 대여 횟수가 5회 이상인 자동차들에 대해서 해당 기간 동안의 월별 자동차 ID 별 총 대여 횟수(컬럼명: <code>RECORDS</code>) 리스트를 출력하는 SQL문을 작성해주세요. 결과는 월을 기준으로 오름차순 정렬하고, 월이 같다면 자동차 ID를 기준으로 내림차순 정렬해주세요. 특정 월의 총 대여 횟수가 0인 경우에는 결과에서 제외해주세요.</p>
+
+<hr />
+
+<h5>예시</h5>
+
+<p>예를 들어 <code>CAR_RENTAL_COMPANY_RENTAL_HISTORY</code> 테이블이 다음과 같다면</p>
+<table class="table">
+        <thead><tr>
+<th>HISTORY_ID</th>
+<th>CAR_ID</th>
+<th>START_DATE</th>
+<th>END_DATE</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>2022-07-27</td>
+<td>2022-08-02</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2022-08-03</td>
+<td>2022-08-04</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>2022-08-05</td>
+<td>2022-08-05</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>2022-08-09</td>
+<td>2022-08-12</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>2022-09-16</td>
+<td>2022-10-15</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>2022-08-24</td>
+<td>2022-08-30</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>2022-10-16</td>
+<td>2022-10-19</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1</td>
+<td>2022-09-03</td>
+<td>2022-09-07</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1</td>
+<td>2022-09-18</td>
+<td>2022-09-19</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2</td>
+<td>2022-09-08</td>
+<td>2022-09-10</td>
+</tr>
+<tr>
+<td>11</td>
+<td>2</td>
+<td>2022-10-16</td>
+<td>2022-10-19</td>
+</tr>
+<tr>
+<td>12</td>
+<td>1</td>
+<td>2022-09-29</td>
+<td>2022-10-06</td>
+</tr>
+<tr>
+<td>13</td>
+<td>2</td>
+<td>2022-10-30</td>
+<td>2022-11-01</td>
+</tr>
+<tr>
+<td>14</td>
+<td>2</td>
+<td>2022-11-05</td>
+<td>2022-11-05</td>
+</tr>
+<tr>
+<td>15</td>
+<td>3</td>
+<td>2022-11-11</td>
+<td>2022-11-11</td>
+</tr>
+</tbody>
+      </table>
+<p>대여 시작일을 기준으로 총 대여 횟수가 5회 이상인 자동차는 자동차 ID가 1, 2인 자동차입니다. 월 별 자동차 ID별 총 대여 횟수를 구하고 월 오름차순, 자동차 ID 내림차순으로 정렬하면 다음과 같이 나와야 합니다.</p>
+<table class="table">
+        <thead><tr>
+<th>MONTH</th>
+<th>CAR_ID</th>
+<th>RECORDS</th>
+</tr>
+</thead>
+        <tbody><tr>
+<td>8</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>9</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>10</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody>
+      </table>
+
+<blockquote>
+  <p>출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-문제-풀이">🗝 문제 풀이</h2>
+
+<ol>
+  <li>날짜의 형식이 월만 표시되기 떄문에 MONTH() 함수를 이용한다.</li>
+  <li>RECORDS 열은 2022-08 ~ 2022-10 사이에 총 5회 이상 대여된 수량을 표시하는 행이다. 해당 열을 수량을 표시하기 COUNT를 사용하였다.</li>
+  <li>2번에 헤당하는 수량을 세기 기준을 정하기 위해서는 GROUP BY를 이용해 그룹핑시켜줘야한다. MONTH(날짜)와 CAR_ID를 기준으로 GROUP BY를 진행하였다. (즉, 같은 날짜와 같은 ID를 가진행의 수량을 RECORDS 열에 표시해준다.)</li>
+  <li>WHERE절을 이용해 2번에 해당하는 날짜와 총5회 이상 대여된 항목을 필터링하여야한다. CAR_ID를 기준으로 SUB쿼리를 이용해 값을 도출해야한다.</li>
+</ol>
+
+<pre><code class="language-roomsql">SELECT 
+    MONTH(START_DATE) AS MONTH,
+    CAR_ID,
+    COUNT(*) AS RECORDS
+FROM 
+    CAR_RENTAL_COMPANY_RENTAL_HISTORY
+WHERE 
+    CAR_ID IN(SELECT CAR_ID 
+              FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+              WHERE MONTH(START_DATE) BETWEEN 8 AND 10
+              GROUP BY CAR_ID
+              HAVING COUNT(*)&gt;=5)
+    AND MONTH(START_DATE) BETWEEN 8 AND 10 
+GROUP BY MONTH ,CAR_ID
+ORDER BY MONTH ASC, CAR_ID DESC
+</code></pre>
+
+<p><br /></p>]]></content><author><name>LEE JAEHYEOK</name></author><category term="SQL" /><category term="SQL" /><category term="Programmers" /><summary type="html"><![CDATA[📌 문제 : 대여 횟수가 많은 자동차들의 월별 대여 횟수 구하기]]></summary></entry></feed>

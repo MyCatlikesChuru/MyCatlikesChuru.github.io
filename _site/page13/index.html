@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 13 of 17 for Home | LeeJellan</title>
+<title>Page 13 of 18 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -712,42 +712,37 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/17/til.html">
-          [TIL] Spring AOP 1
+        <a class="post-link" href="/til/2022/11/03/til.html">
+          [TIL] Spring JPA 3 (다대다 / @ManyToOne,@OneToMany)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 17, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 03, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 12 mins</span>
       </div>
-      <a class="post-excerpt" href="/til/2022/10/17/til.html">
+      <a class="post-excerpt" href="/til/2022/11/03/til.html">
         <p>
-        스펙타클한 주말이었다.
-물론 나는 아니지만 카카오 서버가 죽어버리는 일이 생겼다…
+        오랜만에 시간가는지 모르고 공부한 것 같다.
+
+어제 다대다 관계에 대한
+서로의 객체 참조가 이해가지 않아 새벽 3시까지
+밤을 새워가며 공부를 했다.
+졸리기도 했지만 알고자하는 마음에 집중이 오랜만에 엄청 된 것 같다.
+
+어제 공부했더 다대다(N:M) 관계에 대해 공부해보자
 
 
 
-
-화재로 인해 전기를 내려서 서버가 죽었고
-장애가 생겨 거의 하루종일 서비스 이용이 안되고
-어떤사람은 전동킥보드를 빌렸는데 서비스장애로
-돈이 10만원 넘게 청구되었단다 ㅋㅋㅋㅋ
-
-뭔가 남일 같지만은 않은…
-나중에 내가 어떤회사의 서비스를 맡고 저런일이 생긴다면
-정말 힘든 나날이 될 것 같다…
+다대다 관계 (N:M)
+다대다 관계는 N:N관계라고 한다.
+예젠에 RDBMS에서 공부 했던 것 처럼 중간에 테이블을 한개
+더 만들어서 1 : N : 1 로 만들어주는 방법이다.
 
 
 
-여하튼 오늘은 AOP에 대해 공부하는 날이다.
-AOP는 이론은 정말 간단 한거 같은데
-어떻게 스프링을 이용해 적용하는지가 가장 궁금하다.
-공부를 시작해보자
-
-AOP
-
-Aspect Oriented Programming의 약자이다.
-이전에... <span class="read_more">Read More</span>
+위와 같이 간단한 예제로 손님과, 주문을 다대다 관계로 맵핑하고 싶을 경우
+중간에 Customer_Order라는 테이블에 각자의 외래키를 두어
+참조할 수 있게 ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -818,40 +813,38 @@ Aspect Oriented Programming의 약자이다.
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/14/til.html">
-          [TIL] Spring DI 2
+        <a class="post-link" href="/til/2022/11/02/til.html">
+          [TIL] Spring JPA 2 (다대일, 일대다 / @ManyToOne,@OneToMany)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 14, 2022</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 02, 2022</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
-      <a class="post-excerpt" href="/til/2022/10/14/til.html">
+      <a class="post-excerpt" href="/til/2022/11/02/til.html">
         <p>
-        오늘도 스프링 공부를 시작하자
-금요일이기 때문에 좀더 열심히 ㅎ…
-
-주말에 개념공부 조금 더해서 다음주에 차질없도록해야겠다!
-
+        일어났는데 날씨가 화창하다 !
+공부하기 딱 좋은 날이다.
+바람도 선선하니 창문을 보니 기분도 좋아지고
 
 
 
-스프링이 나에게도 주입됐으면…
+여유롭게 커피마시면서 이렇게 공부한게 얼마마인가
+소소한 것에 행복을 느껴본다.
 
 
 
-@Configuration
+어제는 JPA에 대해 알아보았다.
+영속성 컨텍스트와 Entity 맵핑에 대해 알아보았고
+오늘은 Entity의 연관관계를 맵핑하는 방법을 알아보자 !
 
-이 어노테이션을 단 클래스는
-빈 설정을 담당하는 클래스가 된다. 담당된 클래스 안에서
-@Bean 어노테이션을 메소드에 선언해주면
-그 매소드의 반환된 객체를 통해 빈을 정의하고 생명주기를 설정하게된다.
+연관 관계 Mapping
 
-@Configuration
-public class AppConfig {
-    @Bean
-    public MemberService memberService (){
-        return new MemberServic... <span class="read_more">Read More</span>
+연관 관계 맵핑은 이전에 Spring data JDBC 학습을 했을 때
+사용해봤던 경험이 있다. 그리고 RDBMS 공부 할 떄 1:1, 1:N, N:N 등
+Entity간의 연관관계를 정해 데이터를 참조할 수 있었다.
+
+테스트를 위한 간단한 정의를 해보았... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -922,468 +915,42 @@ public class AppConfig {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/13/til.html">
-          [TIL] Spring DI 1
+        <a class="post-link" href="/til/2022/11/01/til.html">
+          [TIL] Spring JPA 1 (영속성 컨택스트, Entity Mapping)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 13, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Nov 01, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
       </div>
-      <a class="post-excerpt" href="/til/2022/10/13/til.html">
-        <p>
-        이번주 화요일 부터 오늘까지는
-스프링과 친숙해지는 시간이 시작되었다.
-
-프레임워크란? 라이브러리란? POJO 원칙에 대한 내용들
-아키텍처란? 등등 여러가지 스프링 프레임워크를 사용하기 위한
-내용에 대한 전반 적인 학습이 이루어졌다.
-
-이해했다고 하면 거짓말이고, 어느정도 이런 것이구나?
-라는 개념은 잡혔다. 이제 본격적으로 맛보고 즐기면서
-스프링에 대해 탐구해보자
-
-
-
-오늘은 어그제 배웠던 POJO의
-DI 의존성 주입에 대한 내용을 좀 더 파고들어보자
-
-
-
-
-
-DI
-
-Dependency Injection
-의존성 주입. 어제 포스팅에서 간단하게 설명했기에 넘어가겠다.
-객체간의 강한 결합 (new 키워드를 사용해 만든... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/12/til.html">
-          [TIL] Spring Basic 2
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 12, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/10/12/til.html">
-        <p>
-        봐도봐도 미궁으로 빠지는 스프링..
-
-
-
-
-
-내가 모르는부분이 가렵기만하고 해결되지 않는 기분이다.
-그걸 해결하기위해서 인프런 강의도 듣고
-수업 컨텐츠도 정독하면서 쭉 복습하고 있다.
-
-아마 한번에 얻기는 힘들 것 같고 어느순간 사용해보고
-깨닫는 순간이 올거라 믿는다.
-
-지금은 머리속에 들어와도 통과되는 느낌..
-억지로 우겨넣고 나중에 꺼냈을때 빛을 바라길 간절히 기도해본다…
-
-
-
-어제는 스프링의 특징인 POJO에 대해 공부했다.
-IoC,DI,AOP,PSA 삼각형을 잊지 않고 기억하고 있다.
-제어의 역전과 의존성 주입에 관한 얘기는
-여러번들어서 어느정도 이해가 되었지만, 외부 객체를 주입해서
-어떤식으로 활용하는지가... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/11/til.html">
-          [TIL] Spring Basic 1
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 11, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/10/11/til.html">
-        <p>
-        2주에 걸친 연휴가 끝났다. 
-한글날과 개천절 3일씩 2주간 놀기만 한 것 같다.
-공부하기로 다짐했지만… 마지막 주말이라 생각해버리고
-쉰 것 같다. 약간의 반성을하며
-
-다시 일상으로 돌아와보려한다.
-
-
-
-
-
-
-
-오늘은 대망의 Spring Framework를 배우는 단계이다.
-스프링을 배우기위해서 Java문법 부터 웹관련 공부까지
-거의 2달이라는 시간이 된 것 같다.
-
-오늘부터 본격적으로 스프링 공부를 시작해보자!
-우선 스프링을 이해하기전에
-
-Framework와 Library의 차이를 알아보자
-
-
-
-Framework vs Library
-프레임워크와 라이브러리의 다른점을 알아보자
-프레임워크는 프로그래밍을 하기 위한 어... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/07/til.html">
-          [TIL] DB RDMBS 3
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 07, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/10/07/til.html">
-        <p>
-        벌써 금요일이다.
-어제 공부를 열심히한 덕인가?
-내용이 머릿속에서 정리가 된 상태로 일어났다.
-
-
-
-
-
-정신이 맑으니 오늘은 퐈이팅해서 공부열심히하고
-주말에 천천히 복습하면서 쉬어야겠다.
-
-
-
-오늘도 ERD관련해서 공부를 진행한다.
-어제와 다른점은 ERD Cloud를 이용해서 그렸다면
-이번엔 SQL 문법으로 테이블을 만들고
-레코드값 넣고 타입정하고 이런 것들을 쿼리를 날려
-최종적으로 어제 했던 것과 같이 ERD를 완성시키는 날이다.
-
-우선 MySQL WorkBench를 이용해
-문법을 이용해 만들어 보는 연습을 해보았다.
-
-
-
-MYSQL WorkBench 연습
-
-테이블 생성
-
-기본적인 문법으로 Database를 만들... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/06/til.html">
-          [TIL] DB RDMBS 2
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 06, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/10/06/til.html">
+      <a class="post-excerpt" href="/til/2022/11/01/til.html">
         <p>
         
 
 
+날씨가 벌써 쌀쌀해졌다.
+아침에 일어나면 으슬으슬하다…
+이제 진짜 가을은 얼마 없고 바로 겨울이되는 느낌
 
-요즘 페어활동 하는 시간이 재밌다.
-적극적이신분들을 많이 매칭되서 그런가
-페어할때 서로 의견을 나누고
-모르는 부분에 대해서 알아갈때 같이 알아가는 재미가 쏠쏠하다.
+어제는 처음으로 게임을 한번도안했다.
+나에게는 엄청난 성과다 그 시간에 공부를 했으니..
+
+이 마음가짐으로 쭉 열심히 공부해보자 !
 
 
 
-오늘은 관계형 데이터베이스의
-설계를 배우는 날이다.
+JPA
 
-어제까지 관계형 데이터 베이가 무엇인지와
-간단한 SQL 문법을 배웠다.
-개발자 뿐만아니라 SQL은 금융종사자들이나
-회계쪽도 많이 사용하는듯 보인다.
+Java Persistence API의 약자다. 
+현재는 Jakarta Persistence 라고도 부른다고한다.
 
-설계를 배우기전 먼저 어제 배웠던 내용을 로커환경에서
-작업하며 복습해보자
+JPA는 Java 진영에서 사용하는
+ORM(Object-Relational Mapping) 기술의 표준 사양이다.
+즉, JPA는 Java의 인터페이스로 사양이 정의가 되어있어
+구현하는 구현체가 따로 있다.
 
-MySQL 터미널로 작업하기
-
-어제 공부했던 문법들을 실제로 써보는 시간이 왔다.
-먼저 brew를 이용해 mysql을 사용할 수 있게 만들어줘야한다.
-
-brew in... <span class="read_more">Read More</span>
+Hibernate ORM
+JPA의 구현... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1454,253 +1021,655 @@ brew in... <span class="read_more">Read More</span>
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/05/til.html">
-          [TIL] DB RDMBS 1
+        <a class="post-link" href="/til/2022/10/31/til.html">
+          [TIL] Spring Data JDBC Pagination
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 05, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/10/05/til.html">
-        <p>
-        요즘들어 안좋은 얘기들 많으 들어서 그런지
-조금 우울한 하루들이 계속 되고있다.
-
-아무래도 정신적인 문제는 공부에 집중에 저하가 되는 것 같다.
-당분간은 속이 괜찮아질때까지 쉬엄쉬엄
-페이스조절하면서 공부를 해보려한다.
-처음 설정했던 목표를 위해서, 오늘도 화이팅!
-
-
-
-
-
-
-
-오늘은 데이터 베이스에 관련된 내용을 공부했다.
-크게보면 RDBMS(관계형 데이터베이스)의 주제로
-안에 있는 내용들을 들여다 보려한다.
-
-DB의 필요성
-DB는 DataBase의 약자로 줄여서 부른다.
-우리는 데이터베이스가 왜 필요한지 생각해봐야한다.
-
-In-Memory
--&gt; 우리가 프로그램 내에 데이터를 저장하려면, 프로그램이 실행되는 ... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/10/04/til.html">
-          [TIL] Network HTTP
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Oct 04, 2022</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/til/2022/10/04/til.html">
-        <p>
-        연휴가 끝났다…
-연휴까진 아니지만 공휴일이 겹쳐있어
-하루를 더쉬었더니 몸이 돌아오질 않는다….
-
-
-
-물론 나만의 약속인
-1일1커밋과 1일1알고리즘은 지키고있다.
-
-공부를 더했었어야하는데 역시 쉽지가 않다는걸 느꼈다.
-사람의 마음이 이렇게 간사할 줄이야…
-
-복습하지 못했던부분을 평일을 이용해 다시 공부해보자!
-
-
-
-오늘은 Postman 사용법에 대해 공부했다.
-이전에 공부했던 Json형식으로 http 프로토콜을 통해 보내는 방식을
-편하게 이용할 수 있고 사용하는 툴이다.
-
-HTTP message
-요청과 응답의 유형이 있고, 우리가 자주사용하는 CRUD 메서드를 이용할 수있다.
-
-
-
-구조는 위의 사진과 같이 나누어진다... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/til/2022/09/30/til.html">
-          [TIL] Network Basic
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Sep 30, 2022</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 31, 2022</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
       </div>
-      <a class="post-excerpt" href="/til/2022/09/30/til.html">
+      <a class="post-excerpt" href="/til/2022/10/31/til.html">
         <p>
-        벌써 금요일
-특히 이번주는 더욱 더 빨리 간 것 같다.
-다른 날보다 이번주의 공부량이 엄청나게 많았다.
-알고리즘 문제를 풀고자하는 집착? 때문일까나…
+        한 주가 지나고 새로운 주가 찾아왔다.
+내가 공부하고 있는 와중에도
+세상은 돌아가고 있다.
+
+누군가의 시간은 느리게 가고 누군가의 시간은 빠르게 갈 것 같다.
+시간을 어떻게 써야 잘 썻지? 라는 물음이 요즘 자꾸 생긴다.
+
+공부를 효율적으로 하기에는 의지가 가장 중요한 것 같다.
+주말동안 여러가지 자극을 받으면서, 다시한번 공부에 대한 의지와
+내가 목표로가진 내용을 상기하면서 이번주부터 다시 임해보려한다.
 
 
 
-오늘은 드디어 웹에 대해서 공부해보는 날이다.
-나중에 볼 수 있도록 꼼꼼히 정리해둬야겠다.
+
+
+오늘도 Spring data JDBC를 연습해보는 날이다.
+마지막으로 연습해보는 날이고
+내일부터는 본격적으로 JPA에 대해 공부해보는 시간이다.
+
+사실 JDBC사용 방법보다는 객체간 이동
+Mapper, ... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
 
 
 
-오늘 배울 것은
-네트워크를 만드는 기술과, 웹을 구성하는 기술들에
-대해서 학습할 예정이다.
-
-두루뭉술하게 알고 있던 내용들을 차근차근 정리해보자!!
-
-TCP/IP
-인터넷에서 컴퓨터들이 정보를 주고받는데 쓰이는
-프로토콜(통신규약) 모음이다.
-
-Transmission Control Protocol / Internet Protocol의 약자이다.
 
 
 
-위의 사진으로 알 수... <span class="read_more">Read More</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/28/til.html">
+          [TIL] Spring JDBC 기반 액세스 계층 2
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 28, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/28/til.html">
+        <p>
+        어느새 벌써 한주가 끝났다.
+
+코드스테이츠 시작 전부터 5개월 동안
+제대로 쉬지 못하고 공부를 지속하다보니 살짝 번아웃이
+오긴하는 것 같다.. 공부는 즐겁고 얼른 이 기술을 습득해
+적용하고 싶지만,, 너무 오랫동안 여행을 가지 못해서
+어디론가 훌쩍 떠나고 싶다.
+
+
+
+
+
+그래도 목표에 도달하기위해 열심히 해보자 !!
+
+
+
+어제는 Spring data JDBC를 사용하는 연습을 해보았다.
+
+몇일전까지는 이해가 되서 재밌었는데,,
+급격한 난이도 상승으로 인한  즐거움과 어지러움이 공존했다.
+
+요는 JDBC 사용법이 어려웠던 것 보다는
+Database, Service, Dto, Mapper, Controller의 연동과... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/27/til.html">
+          [TIL] Spring JDBC 기반 액세스 계층 1
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 27, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/27/til.html">
+        <p>
+        한주 한주가 정말 빠르게 지나간다.
+생각보다 공부를 많이한 것 같지만 복습하면서 뒤돌아보면
+그렇게 많은 양을 공부한 것도 아니다.
+
+얼른 지식을 익히고 프로젝트를 해보고 싶다 ㅠㅠ
+그날을 위해서 열심히 지식 축척을 !!
+
+
+
+
+
+
+
+Spring JDBC 기반 액세스 계층
+
+JDBC
+
+JDBC는 Java Database Connectivity 약자로
+Java 레벨에서 데이터를 데이터베이스에 저장 및 업데이트 하거나
+데이터베이스에 저장된 데이터를 Java 레벨에서 사용할 수 있도록
+Java에서 제공해주는 표준 사양 이다.
+
+JDBC의 API를 우리가 직접 사용할 일은 없다고한다.
+후에 Spring Data JDBC,J... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/26/til.html">
+          [TIL] Spring Exception 2
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 26, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 4 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/26/til.html">
+        <p>
+        요즘 스프링 공부하는게 너무 재밌다.
+
+처음에 이해가 가지않았을 때는 이게 뭔가 싶기도하고,,
+학습의지가 떨어졌는데 어느 순간 깨달음을 얻고 나서는
+다음 학습이 기대되고 얼른 더 다른걸 해보고 싶다.
+
+어제는 클라이언트에서 받은 데이터를 예외처리하는
+여러가지 방법을 알아보았다.
+
+오늘은 예외 던지기에 대해 공부해 보는 날이다.
+
+
+
+
+
+
+
+
+
+어제는 @Vaild, @Vaildated 유효설 실패에 대한
+예외처리를 하는 프로그램을 공부 했다.
+오늘은 다른 예외들의 예외처리하는 프로그램을 공부해 보자.
+
+1). 예외처리를 매개변수로 받기
+
+@ExceptionHandler
+@ResponseStatus(HttpStatus... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/25/til.html">
+          [TIL] Spring Exception 1
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 25, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 7 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/25/til.html">
+        <p>
+        매일 매일 다짐하지만
+잠자는 수면패턴 바꾸는건 쉽지가 않은 것 같다 ㅎ..
+
+
+
+
+
+
+어제까지 Spring Service 계층에 대해 공부했다.
+오늘은 Spring Exception에 대해 공부하는 날이다.
+총 2일로 잡혀있고, 2일이 잡혀있다는 것에 약간 어떤 내용이 있을지
+벌써 겁이나기 시작한다 ㅠㅠ..
+
+그래도 차근차근 학습해보자
+
+Spring Exception
+
+클라이언트가 전달 받는 Response Body는
+애플리케이션에서 예외가 발생했을 때, 내부적으로 Spring에서
+에러 응답 메세지를 전송해준다.
+ex) Postman API 요청시, 400 Bad Requset
+
+하지만 이렇게 보내주면 Respon... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#TIL">#TIL</a><a class="post-tag" href="/tags.html#%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84">#부트캠프</a><a class="post-tag" href="/tags.html#%EC%BD%94%EB%93%9C%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%B8%A0">#코드스테이츠</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/etc/2022/10/25/it-etc-imageurl.html">
+          구글 드라이브로 이미지 url 적용하기
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 25, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/etc/2022/10/25/it-etc-imageurl.html">
+        <p>
+        이미지 url 적용하기
+네이버 블로그나 Tistory 등…
+타 플랫폼의 블로그를 작성하시는 분들은 사진을 통해서
+올리기 때문에 해당 플랫폼이 알아서 관리를 해준다.
+
+하지만… 나와 같이 GitHub Page를 사용한다거나
+개인 블로그를 운영중인 분들은
+이미지를 올리기 위해 다른 방법을 찾아야한다.
+
+
+  GitHub에 사진을 같이 올리고 , 경로로 사진표시
+-&gt; 해당 방법은 GitHub 저장소가 초과하면 애매해진다..
+  이미지를 url로 변경 시켜 관리하기
+-&gt; 이미지를 url로 변경시키고 저장을 유지시켜주는 안전한 플랫폼이 필요
+
+
+이렇게 떠올리게되어 나는 2번을 선택하게 되었고
+
+처음에는 다른 사람... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#Etc">#Etc</a><a class="post-tag" href="/tags.html#%EC%9D%B4%EB%AF%B8%EC%A7%80%20url">#이미지 url</a><a class="post-tag" href="/tags.html#%EA%B5%AC%EA%B8%80%20%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B8%8C">#구글 드라이브</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/til/2022/10/24/til.html">
+          [TIL] Spring MVC Serivce 계층
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Oct 24, 2022</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 10 mins</span>
+      </div>
+      <a class="post-excerpt" href="/til/2022/10/24/til.html">
+        <p>
+        주말이 지나고 월요일이 왔다.
+
+
+
+
+주말동안 정규식 복습과 블로그 개설 준비를했다.
+오늘 부터는 GitHub Page로 만든 블로그로 포스팅을 할려고한다.
+하려고하려고 했는데, 드디어 개설할 수 있어서
+포스팅하는 맛이 날 것 같다 ㅎㅎ
+
+
+
+Service
+
+저번주에 API 계층에 대해서 공부 했었다.
+Controller의 핸들러 메서드를 통해서
+클라이언트의 요청을 어떻게 전달 받을 수 있는지?까지 파악해보았고
+
+이번 시간부터는 Service 계층을 공부해볼 시간이다.
+
+  DI를 사용해 API 계층과 Service 계층을 연동하기
+  API 계층의 DTO클래스와 Service 계층의 Entity 클래스를 매핑하기... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -1719,7 +1688,7 @@ Transmission Control Protocol / Internet Protocol의 약자이다.
     
     </span>
 
-    <span class="indicator"> 13/17</span>
+    <span class="indicator"> 13/18</span>
 
     <span class="next">
     
@@ -1759,7 +1728,7 @@ Transmission Control Protocol / Internet Protocol의 약자이다.
   <ul>
     <li>
       <a href="/index.html">
-        All<span>165</span>
+        All<span>180</span>
       </a>
     </li>
 
@@ -1814,7 +1783,7 @@ Transmission Control Protocol / Internet Protocol의 약자이다.
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>33</span>
+          SQL <span>48</span>
         </a>
       </li>
     

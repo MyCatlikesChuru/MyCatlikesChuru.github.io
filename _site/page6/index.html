@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 6 of 17 for Home | LeeJellan</title>
+<title>Page 6 of 18 for Home | LeeJellan</title>
 <meta name="generator" content="Jekyll v4.3.0">
 <meta property="og:title" content="Home">
 <meta name="author" content="LEE JAEHYEOK">
@@ -122,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     display: none;
   }
 </style>
-<script>MathJax={"tex":{"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"svg":{"fontCache":"global"}}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -713,26 +712,41 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/spring/2023/02/17/spring-test.html">
-          [Spring] 단위 테스트 JPA metamodel must not be empty!
+        <a class="post-link" href="/sql/2023/03/17/sql-trade.html">
+          [Programmers] 조건에 부합하는 중고거래 상태 조회하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Feb 17, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/spring/2023/02/17/spring-test.html">
+      <a class="post-excerpt" href="/sql/2023/03/17/sql-trade.html">
         <p>
-        ✅ 문제발생 및 원인
+        📌 문제 : 조건에 부합하는 중고거래 상태 조회하기
 
-Controller 단위 테스트를 진행하려고 @WebMvcTest
-어노테이션을 실행 시켰더니 아래와 같은 에러가 발생했다.
+📖 문제 설명
 
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaAuditingHandler': Cannot resolve reference to bean 'jpaMappingContext' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreation... <span class="read_more">Read More</span>
+다음은 중고거래 게시판 정보를 담은 USED_GOODS_BOARD 테이블입니다. USED_GOODS_BOARD 테이블은 다음과 같으며 BOARD_ID, WRITER_ID, TITLE, CONTENTS, PRICE, CREATED_DATE, STATUS, VIEWS은 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+BOARD_ID
+VARCHAR(5)
+FALSE
+
+
+WRITER_ID
+VARCHAR(50)
+FAL... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#JUnit">#JUnit</a>
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -799,24 +813,572 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/algorithm/2023/02/11/algo-ponketmon.html">
-          [Programmers] 폰켓몬 (Java)
+        <a class="post-link" href="/sql/2023/03/17/sql-maxproduct.html">
+          [Programmers] 가장 비싼 상품 구하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Feb 11, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
       </div>
-      <a class="post-excerpt" href="/algorithm/2023/02/11/algo-ponketmon.html">
+      <a class="post-excerpt" href="/sql/2023/03/17/sql-maxproduct.html">
         <p>
-        📌 문제 : 폰켓몬
-
-2023-02-11 기준 풀이
+        📌 문제 : 가장 비싼 상품 구하기
 
 📖 문제 설명
 
-당신은 폰켓몬을 잡기 위한 오랜 여행 끝에, 홍 박사님의 연구실에 도착했습니다. 홍 박사님은 당신에게 자신의 연구실에 있는 총 N 마리의 폰켓몬 중에서 N/2마리를 가져가도 좋다고 했습니다.
-홍 박사님 연구실의 폰켓몬은 종류에 따라 번호를 붙여 구분합니다. 따라서 같은 종류의 폰켓몬은 같은 번호를 가지고 있습니다. 예를 들어 연구실에 총 4마리의 폰켓몬이 있고, 각 폰켓몬의 종류 번호가 [3번, 1번, 2번, 3번]이라면 이는 3번 폰켓몬 두 마리, 1번 폰켓몬 한 마리, 2번 폰켓몬 한 마리가 있음을 나타냅니다. 이때, 4마리의 폰켓몬 중 2마... <span class="read_more">Read More</span>
+다음은 어느 의류 쇼핑몰에서 판매 중인 상품들의 정보를 담은 PRODUCT 테이블입니다. PRODUCT 테이블은 아래와 같은 구조로 되어있으며, PRODUCT_ID, PRODUCT_CODE, PRICE는 각각 상품 ID, 상품코드, 판매가를 나타냅니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+PRODUCT_ID
+INTEGER
+FALSE
+
+
+PRODUCT_CODE
+VARCHAR(8)
+FALSE
+
+
+PRICE
+INTEGER
+FALSE
+
+
+      
+상품 별로 중복되지 않는 8자리 상품코드 값을 가지며, 앞 2자리는 카테... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/03/17/sql-icecream.html">
+          [Programmers] 인기있는 아이스크림 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/03/17/sql-icecream.html">
+        <p>
+        📌 문제 : 인기있는 아이스크림
+
+📖 문제 설명
+
+FIRST_HALF 테이블은 아이스크림 가게의 상반기 주문 정보를 담은 테이블입니다.FIRST_HALF 테이블 구조는 다음과 같으며, SHIPMENT_ID, FLAVOR, TOTAL_ORDER는 각각 아이스크림 공장에서 아이스크림 가게까지의 출하 번호, 아이스크림 맛, 상반기 아이스크림 총주문량을 나타냅니다. 
+
+        
+NAME
+TYPE
+NULLABLE
+
+
+        
+SHIPMENT_ID
+INT(N)
+FALSE
+
+
+FLAVOR
+VARCHAR(N)
+FALSE
+
+
+TOTAL_ORDER
+INT(N)
+FALSE
+
+
+      
+
+
+문제
+
+상반기에 판매된 아이... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/03/17/sql-doctor.html">
+          [Programmers] 흉부외과 또는 일반외과 의사 목록 출력하기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 17, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/03/17/sql-doctor.html">
+        <p>
+        📌 문제 : 흉부외과 또는 일반외과 의사 목록 출력하기
+
+📖 문제 설명
+
+다음은 종합병원에 속한 의사 정보를 담은DOCTOR 테이블입니다. DOCTOR 테이블은 다음과 같으며 DR_NAME, DR_ID, LCNS_NO, HIRE_YMD, MCDP_CD, TLNO는 각각 의사이름, 의사ID, 면허번호, 고용일자, 진료과코드, 전화번호를 나타냅니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+DR_NAME
+VARCHAR(20)
+FALSE
+
+
+DR_ID
+VARCHAR(10)
+FALSE
+
+
+LCNS_NO
+VARCHAR(30)
+FALSE
+
+
+HIRE_YMD
+DATE
+FALSE
+
+
+M... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/03/16/sql-trade.html">
+          [Programmers] 조건에 부합하는 중고거래 댓글 조회하기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 16, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/03/16/sql-trade.html">
+        <p>
+        📌 문제 : 조건에 부합하는 중고거래 댓글 조회하기
+
+📖 문제 설명
+
+다음은 중고거래 게시판 정보를 담은 USED_GOODS_BOARD 테이블과 중고거래 게시판 첨부파일 정보를 담은 USED_GOODS_REPLY 테이블입니다. USED_GOODS_BOARD 테이블은 다음과 같으며 BOARD_ID, WRITER_ID, TITLE, CONTENTS, PRICE, CREATED_DATE, STATUS, VIEWS은 게시글 ID, 작성자 ID, 게시글 제목, 게시글 내용, 가격, 작성일, 거래상태, 조회수를 의미합니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+BOARD_ID
+V... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/sql/2023/03/16/sql-icecream.html">
+          [Programmers] 과일로 만든 아이스크림 고르기 (MySQL)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 16, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
+      </div>
+      <a class="post-excerpt" href="/sql/2023/03/16/sql-icecream.html">
+        <p>
+        📌 문제 : 과일로 만든 아이스크림 고르기
+
+📖 문제 설명
+
+다음은 아이스크림 가게의 상반기 주문 정보를 담은 FIRST_HALF 테이블과 아이스크림 성분에 대한 정보를 담은 ICECREAM_INFO 테이블입니다. FIRST_HALF 테이블 구조는 다음과 같으며, SHIPMENT_ID, FLAVOR, TOTAL_ORDER 는 각각 아이스크림 공장에서 아이스크림 가게까지의 출하 번호, 아이스크림 맛, 상반기 아이스크림 총주문량을 나타냅니다. FIRST_HALF 테이블의 기본 키는 FLAVOR입니다.
+
+        
+NAME
+TYPE
+NULLABLE
+
+
+        
+SHIPMENT_ID
+INT(N)
+FALSE
+
+... <span class="read_more">Read More</span>
+        </p>
+      </a>
+      <div class="post-tags">
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
+</div>
+    </li>
+<li>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="post-title">
+        <a class="post-link" href="/algorithm/2023/03/16/algo-prime.html">
+          [Programmers] 소수 찾기 (Java)
+        </a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 16, 2023</span>
+        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 6 mins</span>
+      </div>
+      <a class="post-excerpt" href="/algorithm/2023/03/16/algo-prime.html">
+        <p>
+        📌 문제 : 소수 찾기
+
+📖 문제 설명
+
+한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.
+
+각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.
+
+제한사항
+
+
+numbers는 길이 1 이상 7 이하인 문자열입니다.
+numbers는 0~9까지 숫자만으로 이루어져 있습니다.
+"013"은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.
+
+
+입출력 예
+
+
+        
+numbers
+return
+
+
+       ... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
@@ -887,33 +1449,39 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/db/2023/02/09/db-mysqlreplace.html">
-          MySQL replace 함수사용하여 일괄 변경하기
+        <a class="post-link" href="/sql/2023/03/15/sql-carrent.html">
+          [Programmers] 자동차 대여 기록에서 장기/단기 대여 구분하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Feb 09, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 15, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/db/2023/02/09/db-mysqlreplace.html">
+      <a class="post-excerpt" href="/sql/2023/03/15/sql-carrent.html">
         <p>
-        예전에 작업했던 이미지 사진이 날라가버렸다… 구글 드라이브에 이미지를 넣어 주소를 뽑아서  
-MySQL 테이블에 주소값으로 넣어두었는데 사진이 날라가버렸다…
+        📌 문제 : 자동차 대여 기록에서 장기/단기 대여 구분하기
+
+📖 문제 설명
+
+다음은 어느 자동차 대여 회사의 자동차 대여 기록 정보를 담은 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블입니다. CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블은 아래와 같은 구조로 되어있으며, HISTORY_ID, CAR_ID, START_DATE, END_DATE 는 각각 자동차 대여 기록 ID, 자동차 ID, 대여 시작일, 대여 종료일을 나타냅니다.
+
+        
+Column name
+Type
+Nullable
 
 
+        
+HISTORY_ID
+INTEGER
+FALSE
 
-OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서
-사진주소를 가져와서 DB에 저장하기때문에 남아있고
-일반으로 회원가입한 유저는 위에 12가지 기본이미지를 랜덤으로 배정받게되는데
-보는거처럼 사진 원본파일이 구글드라이브에서 날라가서 표시가안되는 모습이다.
 
-처음했던 프로젝트이기도하고 사진관리하는 방법이 너무 miss인 것 같다. 
-우선 데이터베이스에 회원으로 가입되어있는 멤버가 100명정도 가입되어있는데 
-해당 데이터를 조작하기위해서 Replace... <span class="read_more">Read More</span>
+CAR_I... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#MySQL">#MySQL</a>
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -980,31 +1548,44 @@ OAuth2.0으로 회원가입을 진행한 회원들은 해당 벤더에서
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/linux/unix/2023/01/28/server-nginxerror.html">
-          Nginx 에러 조치 , Failed to start A high performance web server and a reverse proxy server.
+        <a class="post-link" href="/sql/2023/03/14/sql-carlist.html">
+          [Programmers] 특정 옵션이 포함된 자동차 리스트 구하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 28, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 14, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
       </div>
-      <a class="post-excerpt" href="/linux/unix/2023/01/28/server-nginxerror.html">
+      <a class="post-excerpt" href="/sql/2023/03/14/sql-carlist.html">
         <p>
-        https 관련 설정을 만지다가
-nginx를 실행하는데 아래와 같은 에러가 발생했다.
-$ sudo service nginx start
-Job for nginx.service failed because the control process exited with error code.
-See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+        📌 문제 : 특정 옵션이 포함된 자동차 리스트 구하기
 
-터미널에 나온대로 systemctl status nginx.service를 
-입력하여 로그를 확인해봤다.
+📖 문제 설명
 
-$ systemctl status nginx.service
-× nginx.ser... <span class="read_more">Read More</span>
+다음은 어느 자동차 대여 회사에서 대여중인 자동차들의 정보를 담은 CAR_RENTAL_COMPANY_CAR 테이블입니다. CAR_RENTAL_COMPANY_CAR 테이블은 아래와 같은 구조로 되어있으며, CAR_ID, CAR_TYPE, DAILY_FEE, OPTIONS 는 각각 자동차 ID, 자동차 종류, 일일 대여 요금(원), 자동차 옵션 리스트를 나타냅니다.
+
+        
+Column name
+Type
+Nullable
+
+
+        
+CAR_ID
+INTEGER
+FALSE
+
+
+CAR_TYPE
+VARCHAR(255)
+FALSE
+
+
+DAI... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#Linux">#Linux</a><a class="post-tag" href="/tags.html#Unix">#Unix</a>
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 <li>
@@ -1071,576 +1652,61 @@ $ systemctl status nginx.service
 
 
 <h2 class="post-title">
-        <a class="post-link" href="/server/2023/01/27/server-oraclesetting.html">
-          Oracle Cloud 외부 접속 설정
+        <a class="post-link" href="/sql/2023/03/14/sql-book.html">
+          [Programmers] 조건에 맞는 도서 리스트 출력하기 (MySQL)
         </a>
       </h2>
       <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 27, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 2 mins</span>
-      </div>
-      <a class="post-excerpt" href="/server/2023/01/27/server-oraclesetting.html">
-        <p>
-        오늘은 Oracle Cloud 서버에
-nginx에 클라이언트를 배포해 외부에서 접속하고
-WorkBench를 이용해 mysql을 접속하려한다.
-
-외부접속관련해 설정을 정리해보려한다.
-
-
-
-📌 UFW vs iptables
-
-iptables를 이용해 방화벽 설정을 할 수 있다.
-
-sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
-
-와 같이 입력해주면 설정이 가능하다. 
-UFW는 이를 좀더 쉽게m 설정할 수 있도록 해주는 명령어이고
-수준높은 방화벽 구성에는 iptables를 사용해야한다.
-
-
-
-📌 UFW 활성/비활성
-
-1). UFW 활성화
-
-sudo ufw enable
-
-
-
-
-... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Server">#Server</a><a class="post-tag" href="/tags.html#Oracle">#Oracle</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2023/01/21/spring-email.html">
-          [Spring] MailAuthenticationException 문제 해결
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 21, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 5 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2023/01/21/spring-email.html">
-        <p>
-        오늘은 회원가입시 이메일 전송 로직을 확인중
-org.springframework.mail.MailAuthenticationException와 같은
-예외를 만났고 해당관련 해결방법을 적어가보려한다.
-
-
-
-✅ 작업환경
-
-Spring Boot 2.7.7  
-Java 11 
-macOs Monterey 12.6 버전 
-로컬환경에서 테스트 진행
-
-
-
-
-📌 에러 확인 및 해결
-
-첫번째로 Spring 에서 지원하는 mail 서비스를 이용해보려한다. 
-메일을 보내는 주체는 Google의 gmail을 이용하려한다.
-
-implementation 'org.springframework.boot:spring-boot-starter-mail... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#email">#email</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/spring/2023/01/15/spring-fileupload.html">
-          [Spring] AWS S3 FileUpload 하여 URL로 관리하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 15, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 13 mins</span>
-      </div>
-      <a class="post-excerpt" href="/spring/2023/01/15/spring-fileupload.html">
-        <p>
-        오늘은 AWS S3에 파일 업로드를 하는
-예제를 다뤄보려한다.
-
-구글에서 여러가지 블로그를 돌아다니며 학습했고
-순서와 코드에 대해 정리해보려한다. 
-내가 작성한 코드는 GitHub 레포지토리로 공유해본다.
-
-
-
-✅ 작업 환경
-
-AWS S3 버킷
-Spring Boot 2.7.7  
-Java 11 
-macOs Monterey 12.6 버전 
-로컬환경에서 테스트 진행
-
-
-
-
-📌 작업 순서 및 준비
-
-내가 구상하려고 생각하는 아키텍처를 그려보았다.
-순서를 간단히 짚고 넘어가자
-
-
-
-1). 클라이언트에서 이미지파일을 업로드 요청
--&gt; multipart/form-data 타입으로 요청
--&gt; Key=file / va... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#S3">#S3</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/db/2023/01/14/db-redis.html">
-          Redis JWT Refresh Token 관리 및 재발행
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 14, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
-      </div>
-      <a class="post-excerpt" href="/db/2023/01/14/db-redis.html">
-        <p>
-        Redis에 대한 간단한 CS지식과 
-Redis 설치 및 CLI 사용법을 알아보았었다.
-
-오늘은 이제 나의 사용 목적인 프로젝트에 도입을 해보려한다. 
-JWT Refresh Token관리와 좋아요,조회수 등 
-빈번히 update가 일어나는 항목에 대해서 관리하는 차원에서 
-캐시서버인 Redis를 사용해보려한다.
-
-그 중에서도 Redis 사용에 대한 코드와
-JWT 토큰을 Redis에 어떻게 관리하고 재발급받는지에 대해
-초점을 두고 작성했기에 많은 코드들이 생략되어 있다는점 참고 부탁드린다.
-
-✅ 작업환경
-
-Spring Boot 2.7.7
-java 11 
-macOS Ventura 13.1
-로컬 환경에서 테스트 진행
-
-... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#DB">#DB</a><a class="post-tag" href="/tags.html#redis">#redis</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/git/2023/01/12/git-commitmessage.html">
-          Git 이전 Commit Message 수정하기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
+        <span class="post-date"><i class="fa fa-calendar"></i> Mar 14, 2023</span>
         <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 1 min</span>
       </div>
-      <a class="post-excerpt" href="/git/2023/01/12/git-commitmessage.html">
+      <a class="post-excerpt" href="/sql/2023/03/14/sql-book.html">
         <p>
-        📌 CLI로 변경
+        📌 문제 : 조건에 맞는 도서 리스트 출력하기
 
-만약 이전에 커밋메세지를 실수로 잘못 올렸다고할 경우
+📖 문제 설명
 
-git rebase -i HEAD~3        
+다음은 어느 한 서점에서 판매중인 도서들의 도서 정보(BOOK) 테이블입니다.
 
-를 입력해서 커밋메세지가 수정이 가능하다. 
-~3은 가장최신부터 수정하고자하는 커밋 수량이다
+BOOK 테이블은 각 도서의 정보를 담은 테이블로 아래와 같은 구조로 되어있습니다.
 
-Pick이라고 되어있는 부분을 reword로 변경한 다음 
-커밋메세지를 수정해주면 반영된다.
-
-
-
-📌 IntelliJ로 변경
-
-IDE를 사용하면 vi,nano 편집기를 이용하는 것보다
-훨씬 수월하게 작업할 수 있다.
-
-하단의 Git 탭에서 커밋메세지를 변경하고자하는
-커밋을 눌러 오른쪽 클릭을하자
+        
+Column name
+Type
+Nullable
+Description
 
 
+        
+BOOK_ID
+INTEGER
+FALSE
+도서 ID
 
-Interactively Rebase from Here를 눌러주자
+
+CATEGORY
+VARCHAR(N)
+FALSE
+카테고리 (경제, 인문, 소설, 생활, 기술)
 
 
+AUTHOR_ID
+INTEGER
+FALSE
+저자 ID
 
-그러면 Rebasing ... <span class="read_more">Read More</span>
+
+PRICE
+INTEGER
+FALSE
+판매가 (원)
+
+
+PUBLISHED_DATE... <span class="read_more">Read More</span>
         </p>
       </a>
       <div class="post-tags">
-<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
-</div>
-    </li>
-<li>
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="post-title">
-        <a class="post-link" href="/git/2023/01/12/git-cherrypick.html">
-          Git Cherry-Pick으로 Commit 옮기기
-        </a>
-      </h2>
-      <div class="post-meta">
-        <span class="post-date"><i class="fa fa-calendar"></i> Jan 12, 2023</span>
-        <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 3 mins</span>
-      </div>
-      <a class="post-excerpt" href="/git/2023/01/12/git-cherrypick.html">
-        <p>
-        📌 Cherry-Pick
-
-작업을 하던중 다른 브랜치에 Commit을 해버렸다…
-
-팀원 모두가 개발 중인 브랜치 : develop
-현재 내가 개발하는 브랜치 : feat/BE/ljh
-
-이렇게 두가지로 운영중이었다.
-
-
-
-사진에서 볼 수 있듯이… develop 브랜치에 커밋을 두개나 해버린상황
-#14, #3 으로된 제목의 커밋이다..
-feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
-
-해당 커밋을 복사해서 옮길 수 있는 방법이 Cherry-Pick이다.
-본격적으로 사용법을 알아보자
-
-
-
-📌 Commit Hash 값
-
-첫번째로 내가 잘못올릴 커밋의 해쉬값을 알아야한다.
-
-내가 커밋을 잘못올린 브랜치(deve... <span class="read_more">Read More</span>
-        </p>
-      </a>
-      <div class="post-tags">
-<a class="post-tag" href="/tags.html#GIT">#GIT</a><a class="post-tag" href="/tags.html#GITHUB">#GITHUB</a>
+<a class="post-tag" href="/tags.html#SQL">#SQL</a><a class="post-tag" href="/tags.html#Programmers">#Programmers</a>
 </div>
     </li>
 </ul>
@@ -1655,7 +1721,7 @@ feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
     
     </span>
 
-    <span class="indicator"> 6/17</span>
+    <span class="indicator"> 6/18</span>
 
     <span class="next">
     
@@ -1695,7 +1761,7 @@ feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
   <ul>
     <li>
       <a href="/index.html">
-        All<span>165</span>
+        All<span>180</span>
       </a>
     </li>
 
@@ -1750,7 +1816,7 @@ feat/BE/ljh  브랜치로 커밋을 옮겨야하는 상황이다.
     
       <li>
         <a href="/categories.html#h-SQL">
-          SQL <span>33</span>
+          SQL <span>48</span>
         </a>
       </li>
     
