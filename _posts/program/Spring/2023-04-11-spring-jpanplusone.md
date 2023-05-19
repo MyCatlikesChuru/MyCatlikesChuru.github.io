@@ -282,16 +282,26 @@ public class PostsTest {
         List<Posts> findPosts = postsRepository.findAll_noFetchJoin();
 
         System.out.println("============= PostsTag 가져오기 =============");
-        List<PostsTag> findPostsTag = findPosts.get(0).getPostsTags();
-        System.out.println("PostsTag id = " + findPostsTag.get(0).getId());
+        
+        // post 4개를 가져왔지만 Select 쿼리는 한개만 나감.
+        // 하지만 postTag를 조회시 조회할때마다 쿼리가 나가는 N+1문제 발생
+        for (Posts findPost : findPosts) {
+            for (PostsTag postsTag : findPost.getPostsTags()) {
+               System.out.println("PostsTag id = " + postsTag.getId());
+            }
+        }
 
         System.out.println("============= Tag 가져오기 =============");
-        Tag tag = findPostsTag.get(0).getTag();
-        System.out.println("Tag Name = " + tag.getName());
+        for (Posts findPost : findPosts) {
+            for (PostsTag postsTag : findPost.getPostsTags()) {
+               System.out.println("Tag Name = " + postsTag.getTag().getName());
+            }
+        }
     }
 ```
 
 그리고 프린트출력문으로 3가지 파트로 나누었고    
+For문을 이용해 가져온 모든 Post를 순회하고 PostTags, Tag를 순회하도록하였다.  
 처음에 레포지토리에서 쿼리를 가져오고 다른 테이블에 접근하도록 나누었다.   
 
 `postsRepository.findAll_noFetchJoin();`를 호출하여 테스트하였다.  
@@ -330,6 +340,42 @@ Hibernate:
     where
         poststags0_.posts_id=?
 PostsTag id = 1
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_ 
+    from
+        posts_tag poststags0_ 
+    where
+        poststags0_.posts_id=?
+PostsTag id = 2
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_ 
+    from
+        posts_tag poststags0_ 
+    where
+        poststags0_.posts_id=?
+PostsTag id = 3
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_ 
+    from
+        posts_tag poststags0_ 
+    where
+        poststags0_.posts_id=?
+PostsTag id = 4
 ============= Tag 가져오기 =============
 Hibernate: 
     select
@@ -341,11 +387,42 @@ Hibernate:
     where
         tag0_.id=?
 Tag Name = 태그 1
+Hibernate: 
+    select
+        tag0_.id as id1_2_0_,
+        tag0_.name as name2_2_0_,
+        tag0_.type as type3_2_0_ 
+    from
+        tag tag0_ 
+    where
+        tag0_.id=?
+Tag Name = 태그 2
+Hibernate: 
+    select
+        tag0_.id as id1_2_0_,
+        tag0_.name as name2_2_0_,
+        tag0_.type as type3_2_0_ 
+    from
+        tag tag0_ 
+    where
+        tag0_.id=?
+Tag Name = 태그 3
+Hibernate: 
+    select
+        tag0_.id as id1_2_0_,
+        tag0_.name as name2_2_0_,
+        tag0_.type as type3_2_0_ 
+    from
+        tag tag0_ 
+    where
+        tag0_.id=?
+Tag Name = 태그 4
 ```
 
-실제 쿼리를 확인해보면 Hibernate로 구분을 하면 되는데 3번의 쿼리가 나오게되었다.  
-즉 연관관계가 설정된 엔티티를 조회하는데 쿼리가 추가로 발생하였기 때문에   
-N+1문제가 발생하였다는 것이다.
+실제 쿼리를 확인해보면 Hibernate로 구분을 하면 되는데    
+총4개인 Post를 Select하는 쿼리는 1개만 출력되었지만   
+Post랑 연관관계가 N인 PostTags의 데이터를 가져올때는 4개의 쿼리가 발생한 것을 볼 수 있다.   
+마찬가지로 Tag를 가져올 때도 총4개의 쿼리가 발생한 것을 볼 수 있다.  
 
 <br/>
 
@@ -359,15 +436,7 @@ Hibernate:
         posts0_.id as id1_0_,
         posts0_.title as title2_0_ 
     from
-        posts posts0_ 
-    left outer join
-        posts_tag poststags1_ 
-            on posts0_.id=poststags1_.posts_id 
-    left outer join
-        tag tag2_ 
-            on poststags1_.tag_id=tag2_.id 
-    where
-        posts0_.id=poststags1_.id
+        posts posts0_
 Hibernate: 
     select
         poststags0_.posts_id as posts_id2_1_0_,
@@ -436,15 +505,30 @@ Hibernate:
             on poststags0_.tag_id=tag1_.id 
     where
         poststags0_.posts_id=?
+제목 1
+제목 2
+제목 3
+제목 4
 ============= PostsTag 가져오기 =============
 PostsTag id = 1
+PostsTag id = 2
+PostsTag id = 3
+PostsTag id = 4
 ============= Tag 가져오기 =============
 Tag Name = 태그 1
+Tag Name = 태그 2
+Tag Name = 태그 3
+Tag Name = 태그 4
+
 ```
 
-쿼리가 5번 나오게되었다. 즉시로딩이기 때문에 쿼리시작하는 부분에서   
-모든 쿼리가 나오게 된 차이점만 있을뿐 N+1문제는 여전히 존재한다.   
-오히려 쿼리가 2개나 더나오게되었다.   
+쿼리가 5번 나오게되었다. 즉시로딩이기 때문에 객체를 가져올때 쿼리가 발생한 모습을 볼 수 있고,  
+Post Selcet 쿼리 1개와 PostTags & Tag쪽 쿼리가 4개가 출력된걸 확인할 수 있다.   
+
+LAZY, EAGER 로딩일때 쿼리의 수량에 차이는 보이긴 하지만   
+근본적으로 PostTags, Tag를 참조할때 저장한 수량인 4개만큼 쿼리가 더 발생했고   
+여전히 N+1 문제가 확인되는 모습을 볼 수있다.
+
 
 <br/>  
 
@@ -483,21 +567,27 @@ Tag Name = 태그 1
         List<Posts> findPosts = postsRepository.findAll_useFetchJoin();
 
         System.out.println("============= PostsTag 가져오기 =============");
-        List<PostsTag> findPostsTag = findPosts.get(0).getPostsTags();
-        System.out.println("PostsTag id = " + findPostsTag.get(0).getId());
+        for (Posts findPost : findPosts) {
+            for (PostsTag postsTag : findPost.getPostsTags()) {
+                 System.out.println("PostsTag id = " + postsTag.getId());
+            }
+        }
 
         System.out.println("============= Tag 가져오기 =============");
-        Tag tag = findPostsTag.get(0).getTag();
-        System.out.println("Tag Name = " + tag.getName());
+        for (Posts findPost : findPosts) {
+            for (PostsTag postsTag : findPost.getPostsTags()) {
+                System.out.println("Tag Name = " + postsTag.getTag().getName());
+            }
+        }
     }
 ```
 똑같은 테스트 코드에서 `postsRepository.findAll_useFetchJoin();`만 변경되었다.   
 
 실제 SQL문을 확인해보면서 차이점을 느껴보자   
-FetchType 설정은 LAZY, EAGER 똑같이 출력된다.
+FetchType 설정은 LAZY, EAGER 똑같이 출력된다.   
  
 
-```java
+```roomsql
 ============= 쿼리 시작 =============
 Hibernate: 
     select
@@ -522,14 +612,19 @@ Hibernate:
     where
         posts0_.id=poststags1_.id
 ============= PostsTag 가져오기 =============
-PostsTag id = 5
+PostsTag id = 1
+PostsTag id = 2
+PostsTag id = 3
+PostsTag id = 4
 ============= Tag 가져오기 =============
 Tag Name = 태그 1
+Tag Name = 태그 2
+Tag Name = 태그 3
+Tag Name = 태그 4
 ```
-
-쿼리가 1개만 출력된 모습을 확인할 수 있다.   
+객체를 가져오는 순간 쿼리가 1개만 출력된 모습을 확인할 수 있다.   
 실제로 N+1 문제가 발생한 쿼리랑 차이를 느낄 수 있고   
-해당 API를 만번 조회한다치면 쿼리의 양도 3배나 차이가 나게되는 것이다.   
+해당 API를 만번 조회한다치면 쿼리의 양도 N배나 차이가 나게되는 것이다.   
 
 <br/>   
 
