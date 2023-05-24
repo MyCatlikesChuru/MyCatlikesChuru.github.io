@@ -12,7 +12,7 @@ published: true
 
 - Intergration 테스트 코드 작성 중 Dto객체의 담긴 데이터를 검증 진행중 한글 깨짐 현상을 발견
 
-```
+```text
 expected: "ë°íë§ ë°°í¸ ëí êµ¬í´ì"
 but was: "바하마 배편 동행 구해요"
 ```

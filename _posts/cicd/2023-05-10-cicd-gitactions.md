@@ -32,7 +32,8 @@ travel-with-me라는 폴더안에 build파일들이 존재하기 때문에 발�
 
 ## 해결  
 
-- 기존 초기 생성 yml 파일
+- 기존 초기 생성 yml 파일  
+
 ```yaml
 name: Java CI with Gradle
 
@@ -51,16 +52,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: build
 ```
 
 <br/>
@@ -103,5 +104,3 @@ jobs:
         arguments: build
         build-root-directory: ./travel-with-me #폴더 경로 추가
 ```
-
-- 기존 초기 생성 yml 파일
