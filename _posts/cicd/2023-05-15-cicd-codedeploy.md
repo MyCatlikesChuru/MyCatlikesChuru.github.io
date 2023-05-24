@@ -2,7 +2,7 @@
 layout: post
 title: "Code Deploy 에러해결 : An error occurred (AccessDeniedException) when calling the CreateDeployment operation"
 subtitle: 
-categories: AWS
+categories: CI/CD
 tags: [AWS, Code Deploy]
 comments: true
 published: true

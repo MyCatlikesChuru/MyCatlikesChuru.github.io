@@ -3,7 +3,7 @@ layout: post
 title: "[Java] Generic을 활용한 Class 타입 매개변수로 전달하기"
 subtitle: Test 코드 리펙토링
 categories: Java
-tags: [Java]
+tags: [Java, TestCode]
 comments: true
 published: true
 ---

@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 
 
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 14 mins</span>
+    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> About 16 mins</span>
   </p>
 <div class="post-tags">
 <a class="post-tag" href="/tags.html#Spring">#Spring</a><a class="post-tag" href="/tags.html#QueryDSL">#QueryDSL</a>
@@ -948,16 +948,26 @@ LEFT JOIN으로 접근하는 과정에서 발생하는 N+1 문제를 체크해�
         <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Posts</span><span class="o">&gt;</span> <span class="n">findPosts</span> <span class="o">=</span> <span class="n">postsRepository</span><span class="o">.</span><span class="na">findAll_noFetchJoin</span><span class="o">();</span>
 
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= PostsTag 가져오기 ============="</span><span class="o">);</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PostsTag</span><span class="o">&gt;</span> <span class="n">findPostsTag</span> <span class="o">=</span> <span class="n">findPosts</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getPostsTags</span><span class="o">();</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"PostsTag id = "</span> <span class="o">+</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getId</span><span class="o">());</span>
+        
+        <span class="c1">// post 4개를 가져왔지만 Select 쿼리는 한개만 나감.</span>
+        <span class="c1">// 하지만 postTag를 조회시 조회할때마다 쿼리가 나가는 N+1문제 발생</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Posts</span> <span class="n">findPost</span> <span class="o">:</span> <span class="n">findPosts</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="nc">PostsTag</span> <span class="n">postsTag</span> <span class="o">:</span> <span class="n">findPost</span><span class="o">.</span><span class="na">getPostsTags</span><span class="o">())</span> <span class="o">{</span>
+               <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"PostsTag id = "</span> <span class="o">+</span> <span class="n">postsTag</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
 
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= Tag 가져오기 ============="</span><span class="o">);</span>
-        <span class="nc">Tag</span> <span class="n">tag</span> <span class="o">=</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getTag</span><span class="o">();</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Tag Name = "</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Posts</span> <span class="n">findPost</span> <span class="o">:</span> <span class="n">findPosts</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="nc">PostsTag</span> <span class="n">postsTag</span> <span class="o">:</span> <span class="n">findPost</span><span class="o">.</span><span class="na">getPostsTags</span><span class="o">())</span> <span class="o">{</span>
+               <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Tag Name = "</span> <span class="o">+</span> <span class="n">postsTag</span><span class="o">.</span><span class="na">getTag</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
     <span class="o">}</span>
 </code></pre></div></div>
 
 <p>그리고 프린트출력문으로 3가지 파트로 나누었고  <br>
+For문을 이용해 가져온 모든 Post를 순회하고 PostTags, Tag를 순회하도록하였다.<br>
 처음에 레포지토리에서 쿼리를 가져오고 다른 테이블에 접근하도록 나누었다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">postsRepository.findAll_noFetchJoin();</code>를 호출하여 테스트하였다.<br>
@@ -995,6 +1005,42 @@ Hibernate:
     where
         poststags0_.posts_id=?
 PostsTag id = 1
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_ 
+    from
+        posts_tag poststags0_ 
+    where
+        poststags0_.posts_id=?
+PostsTag id = 2
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_ 
+    from
+        posts_tag poststags0_ 
+    where
+        poststags0_.posts_id=?
+PostsTag id = 3
+Hibernate: 
+    select
+        poststags0_.posts_id as posts_id2_1_0_,
+        poststags0_.id as id1_1_0_,
+        poststags0_.id as id1_1_1_,
+        poststags0_.posts_id as posts_id2_1_1_,
+        poststags0_.tag_id as tag_id3_1_1_ 
+    from
+        posts_tag poststags0_ 
+    where
+        poststags0_.posts_id=?
+PostsTag id = 4
 ============= Tag 가져오기 =============
 Hibernate: 
     select
@@ -1006,11 +1052,42 @@ Hibernate:
     where
         tag0_.id=?
 Tag Name = 태그 1
+Hibernate: 
+    select
+        tag0_.id as id1_2_0_,
+        tag0_.name as name2_2_0_,
+        tag0_.type as type3_2_0_ 
+    from
+        tag tag0_ 
+    where
+        tag0_.id=?
+Tag Name = 태그 2
+Hibernate: 
+    select
+        tag0_.id as id1_2_0_,
+        tag0_.name as name2_2_0_,
+        tag0_.type as type3_2_0_ 
+    from
+        tag tag0_ 
+    where
+        tag0_.id=?
+Tag Name = 태그 3
+Hibernate: 
+    select
+        tag0_.id as id1_2_0_,
+        tag0_.name as name2_2_0_,
+        tag0_.type as type3_2_0_ 
+    from
+        tag tag0_ 
+    where
+        tag0_.id=?
+Tag Name = 태그 4
 </code></pre>
 
-<p>실제 쿼리를 확인해보면 Hibernate로 구분을 하면 되는데 3번의 쿼리가 나오게되었다.<br>
-즉 연관관계가 설정된 엔티티를 조회하는데 쿼리가 추가로 발생하였기 때문에 <br>
-N+1문제가 발생하였다는 것이다.</p>
+<p>실제 쿼리를 확인해보면 Hibernate로 구분을 하면 되는데  <br>
+총4개인 Post를 Select하는 쿼리는 1개만 출력되었지만 <br>
+Post랑 연관관계가 N인 PostTags의 데이터를 가져올때는 4개의 쿼리가 발생한 것을 볼 수 있다. <br>
+마찬가지로 Tag를 가져올 때도 총4개의 쿼리가 발생한 것을 볼 수 있다.</p>
 
 <p><br></p>
 
@@ -1023,15 +1100,7 @@ Hibernate:
         posts0_.id as id1_0_,
         posts0_.title as title2_0_ 
     from
-        posts posts0_ 
-    left outer join
-        posts_tag poststags1_ 
-            on posts0_.id=poststags1_.posts_id 
-    left outer join
-        tag tag2_ 
-            on poststags1_.tag_id=tag2_.id 
-    where
-        posts0_.id=poststags1_.id
+        posts posts0_
 Hibernate: 
     select
         poststags0_.posts_id as posts_id2_1_0_,
@@ -1100,15 +1169,29 @@ Hibernate:
             on poststags0_.tag_id=tag1_.id 
     where
         poststags0_.posts_id=?
+제목 1
+제목 2
+제목 3
+제목 4
 ============= PostsTag 가져오기 =============
 PostsTag id = 1
+PostsTag id = 2
+PostsTag id = 3
+PostsTag id = 4
 ============= Tag 가져오기 =============
 Tag Name = 태그 1
+Tag Name = 태그 2
+Tag Name = 태그 3
+Tag Name = 태그 4
+
 </code></pre>
 
-<p>쿼리가 5번 나오게되었다. 즉시로딩이기 때문에 쿼리시작하는 부분에서 <br>
-모든 쿼리가 나오게 된 차이점만 있을뿐 N+1문제는 여전히 존재한다. <br>
-오히려 쿼리가 2개나 더나오게되었다.</p>
+<p>쿼리가 5번 나오게되었다. 즉시로딩이기 때문에 객체를 가져올때 쿼리가 발생한 모습을 볼 수 있고,<br>
+Post Selcet 쿼리 1개와 PostTags &amp; Tag쪽 쿼리가 4개가 출력된걸 확인할 수 있다.</p>
+
+<p>LAZY, EAGER 로딩일때 쿼리의 수량에 차이는 보이긴 하지만 <br>
+근본적으로 PostTags, Tag를 참조할때 저장한 수량인 4개만큼 쿼리가 더 발생했고 <br>
+여전히 N+1 문제가 확인되는 모습을 볼 수있다.</p>
 
 <p><br></p>
 
@@ -1145,12 +1228,18 @@ Tag Name = 태그 1
         <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Posts</span><span class="o">&gt;</span> <span class="n">findPosts</span> <span class="o">=</span> <span class="n">postsRepository</span><span class="o">.</span><span class="na">findAll_useFetchJoin</span><span class="o">();</span>
 
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= PostsTag 가져오기 ============="</span><span class="o">);</span>
-        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">PostsTag</span><span class="o">&gt;</span> <span class="n">findPostsTag</span> <span class="o">=</span> <span class="n">findPosts</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getPostsTags</span><span class="o">();</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"PostsTag id = "</span> <span class="o">+</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getId</span><span class="o">());</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Posts</span> <span class="n">findPost</span> <span class="o">:</span> <span class="n">findPosts</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="nc">PostsTag</span> <span class="n">postsTag</span> <span class="o">:</span> <span class="n">findPost</span><span class="o">.</span><span class="na">getPostsTags</span><span class="o">())</span> <span class="o">{</span>
+                 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"PostsTag id = "</span> <span class="o">+</span> <span class="n">postsTag</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
 
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= Tag 가져오기 ============="</span><span class="o">);</span>
-        <span class="nc">Tag</span> <span class="n">tag</span> <span class="o">=</span> <span class="n">findPostsTag</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">getTag</span><span class="o">();</span>
-        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Tag Name = "</span> <span class="o">+</span> <span class="n">tag</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Posts</span> <span class="n">findPost</span> <span class="o">:</span> <span class="n">findPosts</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="nc">PostsTag</span> <span class="n">postsTag</span> <span class="o">:</span> <span class="n">findPost</span><span class="o">.</span><span class="na">getPostsTags</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Tag Name = "</span> <span class="o">+</span> <span class="n">postsTag</span><span class="o">.</span><span class="na">getTag</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
     <span class="o">}</span>
 </code></pre></div></div>
 <p>똑같은 테스트 코드에서 <code class="language-plaintext highlighter-rouge">postsRepository.findAll_useFetchJoin();</code>만 변경되었다.</p>
@@ -1158,38 +1247,43 @@ Tag Name = 태그 1
 <p>실제 SQL문을 확인해보면서 차이점을 느껴보자 <br>
 FetchType 설정은 LAZY, EAGER 똑같이 출력된다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">=============</span> <span class="n">쿼리</span> <span class="n">시작</span> <span class="o">=============</span>
-<span class="nl">Hibernate:</span> 
-    <span class="n">select</span>
-        <span class="n">posts0_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_0_0_</span><span class="o">,</span>
-        <span class="n">poststags1_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_1_1_</span><span class="o">,</span>
-        <span class="n">tag2_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_2_2_</span><span class="o">,</span>
-        <span class="n">posts0_</span><span class="o">.</span><span class="na">title</span> <span class="n">as</span> <span class="n">title2_0_0_</span><span class="o">,</span>
-        <span class="n">poststags1_</span><span class="o">.</span><span class="na">posts_id</span> <span class="n">as</span> <span class="n">posts_id2_1_1_</span><span class="o">,</span>
-        <span class="n">poststags1_</span><span class="o">.</span><span class="na">tag_id</span> <span class="n">as</span> <span class="n">tag_id3_1_1_</span><span class="o">,</span>
-        <span class="n">poststags1_</span><span class="o">.</span><span class="na">posts_id</span> <span class="n">as</span> <span class="n">posts_id2_1_0__</span><span class="o">,</span>
-        <span class="n">poststags1_</span><span class="o">.</span><span class="na">id</span> <span class="n">as</span> <span class="n">id1_1_0__</span><span class="o">,</span>
-        <span class="n">tag2_</span><span class="o">.</span><span class="na">name</span> <span class="n">as</span> <span class="n">name2_2_2_</span><span class="o">,</span>
-        <span class="n">tag2_</span><span class="o">.</span><span class="na">type</span> <span class="n">as</span> <span class="n">type3_2_2_</span> 
-    <span class="n">from</span>
-        <span class="n">posts</span> <span class="n">posts0_</span> 
-    <span class="n">left</span> <span class="n">outer</span> <span class="n">join</span>
-        <span class="n">posts_tag</span> <span class="n">poststags1_</span> 
-            <span class="n">on</span> <span class="n">posts0_</span><span class="o">.</span><span class="na">id</span><span class="o">=</span><span class="n">poststags1_</span><span class="o">.</span><span class="na">posts_id</span> 
-    <span class="n">left</span> <span class="n">outer</span> <span class="n">join</span>
-        <span class="n">tag</span> <span class="n">tag2_</span> 
-            <span class="n">on</span> <span class="n">poststags1_</span><span class="o">.</span><span class="na">tag_id</span><span class="o">=</span><span class="n">tag2_</span><span class="o">.</span><span class="na">id</span> 
-    <span class="n">where</span>
-        <span class="n">posts0_</span><span class="o">.</span><span class="na">id</span><span class="o">=</span><span class="n">poststags1_</span><span class="o">.</span><span class="na">id</span>
-<span class="o">=============</span> <span class="nc">PostsTag</span> <span class="n">가져오기</span> <span class="o">=============</span>
-<span class="nc">PostsTag</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="o">=============</span> <span class="nc">Tag</span> <span class="n">가져오기</span> <span class="o">=============</span>
-<span class="nc">Tag</span> <span class="nc">Name</span> <span class="o">=</span> <span class="n">태그</span> <span class="mi">1</span>
-</code></pre></div></div>
-
-<p>쿼리가 1개만 출력된 모습을 확인할 수 있다. <br>
+<pre><code class="language-roomsql">============= 쿼리 시작 =============
+Hibernate: 
+    select
+        posts0_.id as id1_0_0_,
+        poststags1_.id as id1_1_1_,
+        tag2_.id as id1_2_2_,
+        posts0_.title as title2_0_0_,
+        poststags1_.posts_id as posts_id2_1_1_,
+        poststags1_.tag_id as tag_id3_1_1_,
+        poststags1_.posts_id as posts_id2_1_0__,
+        poststags1_.id as id1_1_0__,
+        tag2_.name as name2_2_2_,
+        tag2_.type as type3_2_2_ 
+    from
+        posts posts0_ 
+    left outer join
+        posts_tag poststags1_ 
+            on posts0_.id=poststags1_.posts_id 
+    left outer join
+        tag tag2_ 
+            on poststags1_.tag_id=tag2_.id 
+    where
+        posts0_.id=poststags1_.id
+============= PostsTag 가져오기 =============
+PostsTag id = 1
+PostsTag id = 2
+PostsTag id = 3
+PostsTag id = 4
+============= Tag 가져오기 =============
+Tag Name = 태그 1
+Tag Name = 태그 2
+Tag Name = 태그 3
+Tag Name = 태그 4
+</code></pre>
+<p>객체를 가져오는 순간 쿼리가 1개만 출력된 모습을 확인할 수 있다. <br>
 실제로 N+1 문제가 발생한 쿼리랑 차이를 느낄 수 있고 <br>
-해당 API를 만번 조회한다치면 쿼리의 양도 3배나 차이가 나게되는 것이다.</p>
+해당 API를 만번 조회한다치면 쿼리의 양도 N배나 차이가 나게되는 것이다.</p>
 
 <p><br></p>
 
@@ -1214,10 +1308,10 @@ FetchType 설정은 LAZY, EAGER 똑같이 출력된다.</p>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/sql/2023/04/14/sql-animaltime.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">[Programmers] 입양 시각 구하기(1) (MySQL)</a></li>
-<li><a class="post-link" href="/til/2022/09/20/til.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">[TIL] Java 재귀</a></li>
-<li><a class="post-link" href="/git/2023/01/12/git-commitmessage.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">Git 이전 Commit Message 수정하기</a></li>
-<li><a class="post-link" href="/til/2022/09/13/til.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">[TIL] Java 열거형, 제너렉, 예외처리, 컬렉션</a></li>
+        <li><a class="post-link" href="/til/2022/10/27/til.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">[TIL] Spring JDBC 기반 액세스 계층 1</a></li>
+<li><a class="post-link" href="/sql/2023/05/01/sql-rentsperate.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">[Programmers] 자동차 대여 기록에서 대여중 / 대여 가능 여부 구분하기 (MySQL)</a></li>
+<li><a class="post-link" href="/sql/2023/05/14/sql-lostrecord.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">[Programmers] 없어진 기록 찾기 (MySQL)</a></li>
+<li><a class="post-link" href="/til/2022/10/17/til.html" title="[Programmers] 가격이 제일 비싼 식품의 정보 출력하기 (MySQL)">[TIL] Spring AOP 1</a></li>
 </ul>
     </div>
 <div class="post-comments">

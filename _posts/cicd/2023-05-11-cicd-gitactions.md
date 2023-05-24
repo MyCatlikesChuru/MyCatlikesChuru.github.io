@@ -2,8 +2,8 @@
 layout: post
 title: "Git Actions 자동배포 : Build With Gradle 오류 - submodule yaml 설정방법"
 subtitle: 
-categories: AWS
-tags: [AWS, Code Deploy]
+categories: CI/CD
+tags: [Git Actions]
 comments: true
 published: true
 ---
