@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "[Programmers] 보호소에서 중성화한 동물 (MySQL)"
