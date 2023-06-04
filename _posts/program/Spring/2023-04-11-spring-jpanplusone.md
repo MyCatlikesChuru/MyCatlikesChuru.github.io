@@ -167,11 +167,18 @@ public class Tag {
 
     private String type;
 
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<PostsTag> postsTags = new ArrayList<>();
+
     @Builder
     public Tag(Long id, String name, String type) {
         this.id = id;
         this.name = name;
         this.type = type;
+    }
+
+    public void addPostsTag(PostsTag postsTag) {
+        this.postsTags.add(postsTag);
     }
 }
 ```
@@ -179,7 +186,6 @@ public class Tag {
 <br/>  
 
 **PostsCustomRepositoryImpl**
-
 
 ```java
 @Repository
@@ -189,23 +195,23 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Posts> findAll_noFetchJoin() {
+    public Posts findPost_noFetchJoin(Long id) {
         return queryFactory
                 .selectFrom(posts)
                 .leftJoin(posts.postsTags, postsTag)
                 .leftJoin(postsTag.tag, tag)
-                .where(posts.id.eq(postsTag.id))
-                .fetch();
+                .where(posts.id.eq(id))
+                .fetchOne();
     }
 
     @Override
-    public List<Posts> findAll_useFetchJoin() {
+    public Posts findPost_useFetchJoin(Long id) {
         return queryFactory
                 .selectFrom(posts)
                 .leftJoin(posts.postsTags, postsTag).fetchJoin()
                 .leftJoin(postsTag.tag, tag).fetchJoin()
-                .where(posts.id.eq(postsTag.id))
-                .fetch();
+                .where(posts.id.eq(id))
+                .fetchOne();
     }
 }
 ```
@@ -227,29 +233,31 @@ public class PostsTest {
 
     @Autowired
     EntityManager em;
-    
     JPAQueryFactory queryFactory;
-    
     @Autowired
     PostsRepository postsRepository;
-    
     @Autowired
     TagRepository tagRepository;
+
+    private static Long POST_ID;
 
 
     @BeforeEach
     public void setUp() {
         queryFactory = new JPAQueryFactory(em);
+        Posts post = Posts.builder().title("계절별 강수량 조사 게시글 입니다.").build();
+        Posts savedPost = postsRepository.save(post);
+        POST_ID = savedPost.getId();
 
+        // 1개의 게시글, 4개의 태그
+        // 중간테이블 postTag = 1개의 게시글에 각각 태그를 연결해놓은 상황
         for (long i = 1; i <= 4; i++) {
-            Posts post = Posts.builder().title("제목 "+i).build();
-            Tag tag = Tag.builder().name("태그 "+i).type("타입 "+i).build();
+            String[] seasons = new String[]{"봄", "여름", "가을", "겨울"};
+            String season = seasons[(int) (i - 1L)];
+            Tag tag = Tag.builder().name(season).type("계절").build();
             PostsTag postTag = PostsTag.builder().tag(tag).posts(post).build();
-            post.addPostsTag(postTag);
+            tag.addPostsTag(postTag);
             tagRepository.save(tag);
-            postsRepository.save(post);
-//            em.persist(tag);
-//            em.persist(post);
         }
     }
 }
@@ -258,7 +266,10 @@ public class PostsTest {
 가독성을 위해 코드를 분리해서 설명하겠다.    
 첫번쨰로 @BeforeEach를 통해서 Posts, Tag, PostsTag에 정보를 넣어 주었다.   
 총4개씩 넣어 주었고 Repository에 `.save()`를 이용해 테이블에 저장해주었다.    
-여기서 PostsTag는 casecade를 이용해 저장되기 때문에 Repository를 따로 만들지 않았다.   
+여기서 PostsTag는 casecade를 이용해 저장되기 때문에 Repository를 따로 만들지 않았다.     
+
+|      ||      |
+|:----:|:----:|:----:|
 
 <br/>  
 
@@ -267,44 +278,39 @@ public class PostsTest {
 #### 1. N+1 문제 테스트   
 첫번째로 영속성 컨텍스트를 초기화 해주어야한다.   
 초기화 시켜주지 않는다면 이미 영속화되어 있기 때문에    
-문제 발생상황이 체크가 되지 않는다.
+문제 발생상황이 제대로 체크가 되지 않을 수 있다.
 
 ```java
     @Test
     @DisplayName("N+1 문제 발생하는 테스트 케이스")
     public void jpaProblem() {
-
+    
         // 영속성 컨텍스트 초기화
         em.flush();
         em.clear();
 
         System.out.println("============= 쿼리 시작 =============");
-        List<Posts> findPosts = postsRepository.findAll_noFetchJoin();
+        Posts findPost = postsRepository.findPost_noFetchJoin(POST_ID);
+
 
         System.out.println("============= PostsTag 가져오기 =============");
-        
-        // post 4개를 가져왔지만 Select 쿼리는 한개만 나감.
-        // 하지만 postTag를 조회시 조회할때마다 쿼리가 나가는 N+1문제 발생
-        for (Posts findPost : findPosts) {
-            for (PostsTag postsTag : findPost.getPostsTags()) {
-               System.out.println("PostsTag id = " + postsTag.getId());
-            }
+        for (PostsTag postsTag : findPost.getPostsTags()) {
+            System.out.println("PostsTag id = " + postsTag.getId());
         }
 
+        // Tag정보를 가져올때 N+1문제가 발생하는 모습!!
         System.out.println("============= Tag 가져오기 =============");
-        for (Posts findPost : findPosts) {
-            for (PostsTag postsTag : findPost.getPostsTags()) {
-               System.out.println("Tag Name = " + postsTag.getTag().getName());
-            }
+        for (PostsTag postsTag : findPost.getPostsTags()) {
+            System.out.println("Tag Name = " + postsTag.getTag().getName());
         }
     }
 ```
 
 그리고 프린트출력문으로 3가지 파트로 나누었고    
-For문을 이용해 가져온 모든 Post를 순회하고 PostTags, Tag를 순회하도록하였다.  
+For문을 Post의 PostTags, Tag를 순회하도록하였다.  
 처음에 레포지토리에서 쿼리를 가져오고 다른 테이블에 접근하도록 나누었다.   
 
-`postsRepository.findAll_noFetchJoin();`를 호출하여 테스트하였다.  
+`postsRepository.findPost_noFetchJoin(Long id);`를 호출하여 테스트하였다.  
 (위에 Querydsl 코드로 작성된 클래스를 참조)
 
 현재 구분하기 쉽게 `Posts` 엔티티나 `PostsTag`엔티티나 FetchType을 LAZY로 설정했다.  
@@ -326,7 +332,7 @@ Hibernate:
         tag tag2_ 
             on poststags1_.tag_id=tag2_.id 
     where
-        posts0_.id=poststags1_.id
+        posts0_.id=?
 ============= PostsTag 가져오기 =============
 Hibernate: 
     select
@@ -340,41 +346,8 @@ Hibernate:
     where
         poststags0_.posts_id=?
 PostsTag id = 1
-Hibernate: 
-    select
-        poststags0_.posts_id as posts_id2_1_0_,
-        poststags0_.id as id1_1_0_,
-        poststags0_.id as id1_1_1_,
-        poststags0_.posts_id as posts_id2_1_1_,
-        poststags0_.tag_id as tag_id3_1_1_ 
-    from
-        posts_tag poststags0_ 
-    where
-        poststags0_.posts_id=?
 PostsTag id = 2
-Hibernate: 
-    select
-        poststags0_.posts_id as posts_id2_1_0_,
-        poststags0_.id as id1_1_0_,
-        poststags0_.id as id1_1_1_,
-        poststags0_.posts_id as posts_id2_1_1_,
-        poststags0_.tag_id as tag_id3_1_1_ 
-    from
-        posts_tag poststags0_ 
-    where
-        poststags0_.posts_id=?
 PostsTag id = 3
-Hibernate: 
-    select
-        poststags0_.posts_id as posts_id2_1_0_,
-        poststags0_.id as id1_1_0_,
-        poststags0_.id as id1_1_1_,
-        poststags0_.posts_id as posts_id2_1_1_,
-        poststags0_.tag_id as tag_id3_1_1_ 
-    from
-        posts_tag poststags0_ 
-    where
-        poststags0_.posts_id=?
 PostsTag id = 4
 ============= Tag 가져오기 =============
 Hibernate: 
@@ -386,7 +359,7 @@ Hibernate:
         tag tag0_ 
     where
         tag0_.id=?
-Tag Name = 태그 1
+Tag Name = 봄
 Hibernate: 
     select
         tag0_.id as id1_2_0_,
@@ -396,7 +369,7 @@ Hibernate:
         tag tag0_ 
     where
         tag0_.id=?
-Tag Name = 태그 2
+Tag Name = 여름
 Hibernate: 
     select
         tag0_.id as id1_2_0_,
@@ -406,7 +379,7 @@ Hibernate:
         tag tag0_ 
     where
         tag0_.id=?
-Tag Name = 태그 3
+Tag Name = 가을
 Hibernate: 
     select
         tag0_.id as id1_2_0_,
@@ -416,13 +389,14 @@ Hibernate:
         tag tag0_ 
     where
         tag0_.id=?
-Tag Name = 태그 4
+Tag Name = 겨울
 ```
 
-실제 쿼리를 확인해보면 Hibernate로 구분을 하면 되는데    
-총4개인 Post를 Select하는 쿼리는 1개만 출력되었지만   
-Post랑 연관관계가 N인 PostTags의 데이터를 가져올때는 4개의 쿼리가 발생한 것을 볼 수 있다.   
-마찬가지로 Tag를 가져올 때도 총4개의 쿼리가 발생한 것을 볼 수 있다.  
+실제 쿼리를 확인해보면 Hibernate로 구분을 하면 되는데      
+Post와 PostTags Select하는 쿼리는 1개만 출력되었지만     
+PostTags에서 Tag로 접근을할때 보면 4개의 쿼리가 발생한 것을 볼 수 있다.  
+즉, 하위 엔티티까지 하번에 가져오지 않고 조회할때 추가로 조회 쿼리가 발생하고  
+이것이 태그의 수량 4개만큼 발생하여 N+1문제가 발생한 것을 확인할 수 있다.
 
 <br/>
 
@@ -436,7 +410,15 @@ Hibernate:
         posts0_.id as id1_0_,
         posts0_.title as title2_0_ 
     from
-        posts posts0_
+        posts posts0_ 
+    left outer join
+        posts_tag poststags1_ 
+            on posts0_.id=poststags1_.posts_id 
+    left outer join
+        tag tag2_ 
+            on poststags1_.tag_id=tag2_.id 
+    where
+        posts0_.id=?
 Hibernate: 
     select
         poststags0_.posts_id as posts_id2_1_0_,
@@ -454,80 +436,21 @@ Hibernate:
             on poststags0_.tag_id=tag1_.id 
     where
         poststags0_.posts_id=?
-Hibernate: 
-    select
-        poststags0_.posts_id as posts_id2_1_0_,
-        poststags0_.id as id1_1_0_,
-        poststags0_.id as id1_1_1_,
-        poststags0_.posts_id as posts_id2_1_1_,
-        poststags0_.tag_id as tag_id3_1_1_,
-        tag1_.id as id1_2_2_,
-        tag1_.name as name2_2_2_,
-        tag1_.type as type3_2_2_ 
-    from
-        posts_tag poststags0_ 
-    left outer join
-        tag tag1_ 
-            on poststags0_.tag_id=tag1_.id 
-    where
-        poststags0_.posts_id=?
-Hibernate: 
-    select
-        poststags0_.posts_id as posts_id2_1_0_,
-        poststags0_.id as id1_1_0_,
-        poststags0_.id as id1_1_1_,
-        poststags0_.posts_id as posts_id2_1_1_,
-        poststags0_.tag_id as tag_id3_1_1_,
-        tag1_.id as id1_2_2_,
-        tag1_.name as name2_2_2_,
-        tag1_.type as type3_2_2_ 
-    from
-        posts_tag poststags0_ 
-    left outer join
-        tag tag1_ 
-            on poststags0_.tag_id=tag1_.id 
-    where
-        poststags0_.posts_id=?
-Hibernate: 
-    select
-        poststags0_.posts_id as posts_id2_1_0_,
-        poststags0_.id as id1_1_0_,
-        poststags0_.id as id1_1_1_,
-        poststags0_.posts_id as posts_id2_1_1_,
-        poststags0_.tag_id as tag_id3_1_1_,
-        tag1_.id as id1_2_2_,
-        tag1_.name as name2_2_2_,
-        tag1_.type as type3_2_2_ 
-    from
-        posts_tag poststags0_ 
-    left outer join
-        tag tag1_ 
-            on poststags0_.tag_id=tag1_.id 
-    where
-        poststags0_.posts_id=?
-제목 1
-제목 2
-제목 3
-제목 4
 ============= PostsTag 가져오기 =============
 PostsTag id = 1
 PostsTag id = 2
 PostsTag id = 3
 PostsTag id = 4
 ============= Tag 가져오기 =============
-Tag Name = 태그 1
-Tag Name = 태그 2
-Tag Name = 태그 3
-Tag Name = 태그 4
-
+Tag Name = 봄
+Tag Name = 여름
+Tag Name = 가을
+Tag Name = 겨울
 ```
+현재 위의 예제에서는 POST를 1개만 조회하기 때문에  
+EAGER로 변경시 JOIN이 이루어져 1번만 더 쿼리가 발생한 것을 볼 수있다.   
 
-쿼리가 5번 나오게되었다. 즉시로딩이기 때문에 객체를 가져올때 쿼리가 발생한 모습을 볼 수 있고,  
-Post Selcet 쿼리 1개와 PostTags & Tag쪽 쿼리가 4개가 출력된걸 확인할 수 있다.   
-
-LAZY, EAGER 로딩일때 쿼리의 수량에 차이는 보이긴 하지만   
-근본적으로 PostTags, Tag를 참조할때 저장한 수량인 4개만큼 쿼리가 더 발생했고   
-여전히 N+1 문제가 확인되는 모습을 볼 수있다.
+예를들어 List로 여러개의 POST를 받게될 경우 N+1 문제가 발생할 것이다.  
 
 
 <br/>  
@@ -537,20 +460,20 @@ LAZY, EAGER 로딩일때 쿼리의 수량에 차이는 보이긴 하지만
 그러면 해결하려면 어떻게해야하는가?
 
 해결방법으로는 `fetchJoin`을 사용하는 방법이 있다.   
-`findAll_useFetchJoin()` 메서드를 참조하면된다.
+`findPost_useFetchJoin(Long id)` 현재 프로젝트에서 메서드를 참고하면된다.
 ```java
     @Override
-    public List<Posts> findAll_useFetchJoin() {
+    public Posts findPost_useFetchJoin(Long id) {
         return queryFactory
-                .selectFrom(posts)
-                .leftJoin(posts.postsTags, postsTag).fetchJoin() // <- fetchJoin
-                .leftJoin(postsTag.tag, tag).fetchJoin() // <- fetchJoin
-                .where(posts.id.eq(postsTag.id))
-                .fetch();
+            .selectFrom(posts)
+            .leftJoin(posts.postsTags, postsTag).fetchJoin()
+            .leftJoin(postsTag.tag, tag).fetchJoin()
+            .where(posts.id.eq(id))
+            .fetchOne();
     }
 ```
 
-`findAll_noFetchJoin()` 코드에서 `fetchJoin()`을 붙여준게 끝이다.   
+`findPost_useFetchJoin(Long id)` 코드에서 `fetchJoin()`을 붙여준게 끝이다.   
 
 그럼 이메서드를 호출한 테스트 코드를 확인해보자
 
@@ -564,24 +487,20 @@ LAZY, EAGER 로딩일때 쿼리의 수량에 차이는 보이긴 하지만
         em.clear();
 
         System.out.println("============= 쿼리 시작 =============");
-        List<Posts> findPosts = postsRepository.findAll_useFetchJoin();
+        Posts findPost = postsRepository.findPost_useFetchJoin(POST_ID);
 
         System.out.println("============= PostsTag 가져오기 =============");
-        for (Posts findPost : findPosts) {
-            for (PostsTag postsTag : findPost.getPostsTags()) {
-                 System.out.println("PostsTag id = " + postsTag.getId());
-            }
+        for (PostsTag postsTag : findPost.getPostsTags()) {
+            System.out.println("PostsTag id = " + postsTag.getId());
         }
 
         System.out.println("============= Tag 가져오기 =============");
-        for (Posts findPost : findPosts) {
-            for (PostsTag postsTag : findPost.getPostsTags()) {
-                System.out.println("Tag Name = " + postsTag.getTag().getName());
-            }
+        for (PostsTag postsTag : findPost.getPostsTags()) {
+            System.out.println("Tag Name = " + postsTag.getTag().getName());
         }
     }
 ```
-똑같은 테스트 코드에서 `postsRepository.findAll_useFetchJoin();`만 변경되었다.   
+똑같은 테스트 코드에서 `postsRepository.findPost_useFetchJoin(Long id);`만 변경되었다.   
 
 실제 SQL문을 확인해보면서 차이점을 느껴보자   
 FetchType 설정은 LAZY, EAGER 똑같이 출력된다.   
@@ -610,17 +529,17 @@ Hibernate:
         tag tag2_ 
             on poststags1_.tag_id=tag2_.id 
     where
-        posts0_.id=poststags1_.id
+        posts0_.id=?
 ============= PostsTag 가져오기 =============
 PostsTag id = 1
 PostsTag id = 2
 PostsTag id = 3
 PostsTag id = 4
 ============= Tag 가져오기 =============
-Tag Name = 태그 1
-Tag Name = 태그 2
-Tag Name = 태그 3
-Tag Name = 태그 4
+Tag Name = 봄
+Tag Name = 여름
+Tag Name = 가을
+Tag Name = 겨울
 ```
 객체를 가져오는 순간 쿼리가 1개만 출력된 모습을 확인할 수 있다.   
 실제로 N+1 문제가 발생한 쿼리랑 차이를 느낄 수 있고   
