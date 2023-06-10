@@ -80,6 +80,7 @@ LEFT JOIN으로 접근하는 과정에서 발생하는 N+1 문제를 체크해�
                 └── jpaoneplusn
                     ├── JpaoneplusnApplicationTests.java
                     └── test
+                        ├── PostTest.java
                         └── PostsTest.java
 
 ``` 
@@ -224,18 +225,21 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
 우선 `application.yml`파일에 sql을 출력할 수 있도록 설정하였다.   
 그리고 Test 코드를 통해 쿼리를 보면서 검증을 해보았다.
 
-**PostsTest**
+**PostTest**
 
 ```java
 @SpringBootTest
 @Transactional
-public class PostsTest {
+public class PostTest {
 
     @Autowired
     EntityManager em;
+    
     JPAQueryFactory queryFactory;
+    
     @Autowired
     PostsRepository postsRepository;
+    
     @Autowired
     TagRepository tagRepository;
 
@@ -266,10 +270,7 @@ public class PostsTest {
 가독성을 위해 코드를 분리해서 설명하겠다.    
 첫번쨰로 @BeforeEach를 통해서 Posts, Tag, PostsTag에 정보를 넣어 주었다.   
 총4개씩 넣어 주었고 Repository에 `.save()`를 이용해 테이블에 저장해주었다.    
-여기서 PostsTag는 casecade를 이용해 저장되기 때문에 Repository를 따로 만들지 않았다.     
-
-|      ||      |
-|:----:|:----:|:----:|
+여기서 PostsTag는 casecade를 이용해 저장되기 때문에 Repository를 따로 만들지 않았다.
 
 <br/>  
 
